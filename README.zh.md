@@ -25,6 +25,13 @@
 > 已形式化的是：定义、初等归约，以及“若将来出现 `θ < 1/2` 的结果，则大 `n`
 > 的勒让德猜想成立”这一精确条件化桥梁。
 
+> [!TIP]
+> **Layer 1 核心已完成形式化。** `Legendre/ExplicitBounds.lean` 证明了区间谓词
+> `HasPrimeIn`、显式短区间定理“对每个 `x ≥ 1`，`(x, 2x]` 中有素数”、
+> Chebyshev 桥 `θ(x) < θ(y) ⇒ (x, y] 中有素数`，以及 `θ`、`ψ`、`π` 的显式
+> 上下界。Nagura/Dusart 型更强常数**尚未**形式化；见
+> [docs/formalization-roadmap.md](docs/formalization-roadmap.md)。
+
 ## 历史进展总览
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
@@ -76,6 +83,11 @@
 | `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | 文献风格的指数结果包装 | **已证明** | **[Conditional.lean L45](Legendre/Conditional.lean#L45)** |
 | `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | 论文中 `+ε` 形式的同一推论 | **已证明** | **[Conditional.lean L54](Legendre/Conditional.lean#L54)** |
 | `Legendre.bertrand` / `bertrand_gap_le` | Bertrand 公设（复用 mathlib） | mathlib 证明 | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** · **[Bertrand.lean L33](Legendre/Bertrand.lean#L33)** |
+| `Legendre.HasPrimeIn` / `hasPrimeIn_self` | 显式区间谓词；对每个 `x ≥ 1`，`(x, 2x]` 中有素数 | **已证明** | **[ExplicitBounds.lean L38](Legendre/ExplicitBounds.lean#L38)** · **[L55](Legendre/ExplicitBounds.lean#L55)** |
+| `Legendre.exists_prime_of_theta_lt` / `hasPrimeIn_of_theta_gap` | `θ` 严格增加 ⇒ `(x, y]` 中有素数 | **已证明** | **[L75](Legendre/ExplicitBounds.lean#L75)** · **[L107](Legendre/ExplicitBounds.lean#L107)** |
+| `Legendre.theta_upper_explicit` / `theta_lower_explicit` | Chebyshev `θ` 显式上下界 | **已证明** | **[L118](Legendre/ExplicitBounds.lean#L118)** · **[L123](Legendre/ExplicitBounds.lean#L123)** |
+| `Legendre.psi_upper_explicit` / `psi_lower_explicit` | Chebyshev `ψ` 显式上下界 | **已证明** | **[L129](Legendre/ExplicitBounds.lean#L129)** · **[L134](Legendre/ExplicitBounds.lean#L134)** |
+| `Legendre.pi_lower_explicit` / `pi_upper_explicit` | `π` 显式上下界 | **已证明** | **[L139](Legendre/ExplicitBounds.lean#L139)** · **[L145](Legendre/ExplicitBounds.lean#L145)** |
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
@@ -131,7 +143,7 @@
 | 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.33.1 / 本仓库） |
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
-| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | Bertrand 在 mathlib，并在 **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** 复用；`Chebyshev.lean` 有 `ψ`、`θ` 与基本界；没有完整显式间隙理论 |
+| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **核心已形式化**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界；Nagura/Dusart 常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | mathlib 只有部分 ζ API；没有完整的无零点区域与零点计数 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
@@ -212,6 +224,7 @@ Legendre/
   Reduction.lean     平方区间判定、θ < 1/2 归约
   Conditional.lean   文献指数 Prop、条件化定理、P_k
   Bertrand.lean      Bertrand 公设的复用与比较
+  ExplicitBounds.lean Layer 1：区间 API、(x,2x]、Chebyshev θ/ψ/π 界
   Audit.lean         #print axioms 审计
 docs/
   literature.md      原始文献时间线与证据等级

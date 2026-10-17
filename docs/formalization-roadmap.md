@@ -40,24 +40,39 @@ layer.  Nothing here is claimed as already done unless it appears in
 for `π(x)`, `ψ(x)`, `θ(x)` strong enough to recover classical interval
 estimates.
 
-**What exists.** mathlib has `Nat.exists_prime_lt_and_le_two_mul`
-(Bertrand) and `Mathlib.NumberTheory.Chebyshev` with `ψ`, `θ`, monotonicity,
-and several elementary inequalities.  This repository re-exports Bertrand.
+**Status (2026-10-17). Core formalized.**
 
-**What is missing.**
+`Legendre/ExplicitBounds.lean` now proves:
 
-* a clean API for “there is a prime in `(x, x + h]`” with explicit `h`;
-* explicit Nagura/Dusart-type bounds;
-* a verified bridge from `ψ`/`θ` bounds to prime-gap bounds.
+* `HasPrimeIn x h`, the clean interval predicate
+  “there is a prime in `(x, x+h]`”;
+* `hasPrimeIn_self`: for every real `x ≥ 1`, `(x, 2x]` contains a prime
+  (the sharp form of Bertrand's postulate, applied to `⌊x⌋`);
+* `exists_prime_of_theta_lt` and `hasPrimeIn_of_theta_gap`: a strict increase
+  of `θ` from `x` to `y` forces a prime in `(x, y]`;
+* `theta_upper_explicit`, `theta_lower_explicit`;
+* `psi_upper_explicit`, `psi_lower_explicit`;
+* `pi_lower_explicit`, `pi_upper_explicit`.
+
+**What is still missing in Layer 1.**
+
+* Sharper explicit Nagura/Dusart-type constants (e.g. `(x, 6x/5]` for
+  `x ≥ 25`) require substantially stronger explicit Chebyshev estimates than
+  mathlib currently has.  They are **not** claimed.
+* A fully general verified bridge from arbitrary explicit `ψ`/`θ` bounds to
+  a prescribed interval length `h`; the current bridge is the logical one
+  (`θ` increase ⇒ prime), and the explicit `(x, 2x]` result comes from
+  Bertrand.
 
 **Acceptance criteria.**
 
 * a new module `Legendre/ExplicitBounds.lean` proves at least one explicit
-  short-interval statement with a named constant and range;
+  short-interval statement with a named constant and range — **met**
+  (`(x, 2x]` for `x ≥ 1`);
 * the statement is compared against the published constant in
-  `docs/literature.md`;
+  `docs/literature.md` — see the Bertrand row;
 * no `native_decide` without an explicit soundness note (or a kernel-checked
-  certificate).
+  certificate) — **met** (no `native_decide` used).
 
 ## Layer 2 — Riemann zeta foundations
 
@@ -198,8 +213,10 @@ theory in mathlib.
 ## Suggested first ten PRs
 
 1. README/roadmap maintenance and CI hardening.
-2. Explicit Chebyshev bounds from mathlib.
-3. A prime-in-interval API with explicit `h`.
+2. ✅ Explicit Chebyshev bounds from mathlib — initial version in
+   `Legendre/ExplicitBounds.lean`.
+3. ✅ A prime-in-interval API with explicit `h` — `Legendre.HasPrimeIn` and
+   `Legendre.hasPrimeIn_self`.
 4. A verified small-range interval-certificate checker.
 5. Zeta: Euler product and convergence.
 6. Zeta: analytic continuation.

@@ -15,6 +15,12 @@ formalized.  “Proved” means `lake build` checks a complete proof term.
 | 6 | same, packaged as a literature-style exponent result | `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | **proved** |
 | 7 | same for the `+ε` form | `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | **proved** |
 | 8 | Bertrand's postulate | `Legendre.bertrand`, `Legendre.bertrand_gap_le` | mathlib proof, re-exported |
+| 8a | interval predicate `(x, x+h]` | `Legendre.HasPrimeIn` | definition |
+| 8b | explicit prime in `(x, 2x]` for `x ≥ 1` | `Legendre.hasPrimeIn_self` | **proved** |
+| 8c | strict `θ` increase forces a prime in `(x, y]` | `Legendre.exists_prime_of_theta_lt`, `Legendre.hasPrimeIn_of_theta_gap` | **proved** |
+| 8d | explicit upper/lower bounds for `θ` | `Legendre.theta_upper_explicit`, `Legendre.theta_lower_explicit` | **proved** |
+| 8e | explicit upper/lower bounds for `ψ` | `Legendre.psi_upper_explicit`, `Legendre.psi_lower_explicit` | **proved** |
+| 8f | explicit lower/upper bounds for `π` | `Legendre.pi_lower_explicit`, `Legendre.pi_upper_explicit` | **proved** |
 | 9 | Bertrand's linear exponent is above `1/2` | `Legendre.bertrand_exponent_above_half` | **proved** |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel` | **statement only** |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58` | **statement only** |

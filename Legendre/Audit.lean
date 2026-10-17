@@ -6,6 +6,7 @@ module
 
 public import Legendre.Conditional
 public import Legendre.Bertrand
+public import Legendre.ExplicitBounds
 
 /-!
 # Axiom audit
@@ -48,5 +49,14 @@ namespace Legendre
 #print axioms bertrand
 #print axioms bertrand_gap_le
 #print axioms square_interval_shorter_than_linear_gap
+#print axioms hasPrimeIn_self
+#print axioms exists_prime_of_theta_lt
+#print axioms hasPrimeIn_of_theta_gap
+#print axioms theta_upper_explicit
+#print axioms theta_lower_explicit
+#print axioms psi_upper_explicit
+#print axioms psi_lower_explicit
+#print axioms pi_lower_explicit
+#print axioms pi_upper_explicit
 
 end Legendre

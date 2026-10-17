@@ -26,6 +26,14 @@
 > It formalizes the definitions, the elementary reductions, and the exact
 > conditional bridge from a future `θ < 1/2` result to Legendre's conjecture.
 
+> [!TIP]
+> **Layer 1 core is now formalized.**  `Legendre/ExplicitBounds.lean` proves the
+> interval predicate `HasPrimeIn`, the explicit short-interval theorem
+> “there is a prime in `(x, 2x]` for every `x ≥ 1`”, the Chebyshev bridge
+> `θ(x) < θ(y) ⇒ ∃ prime in (x, y]`, and explicit upper/lower bounds for
+> `θ`, `ψ`, and `π`.  Nagura/Dusart-type sharper constants are **not** yet
+> formalized; see [docs/formalization-roadmap.md](docs/formalization-roadmap.md).
+
 ## Historical progress at a glance
 
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -78,6 +86,11 @@ Legendre is separately **proved** in **[Reduction.lean L110](Legendre/Reduction.
 | `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | same, packaged as a literature-style exponent result | **proved** | **[Conditional.lean L45](Legendre/Conditional.lean#L45)** |
 | `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | same for the `+ε` form used in papers | **proved** | **[Conditional.lean L54](Legendre/Conditional.lean#L54)** |
 | `Legendre.bertrand` / `bertrand_gap_le` | Bertrand's postulate, re-exported from mathlib | mathlib proof | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** · **[Bertrand.lean L33](Legendre/Bertrand.lean#L33)** |
+| `Legendre.HasPrimeIn` / `hasPrimeIn_self` | explicit interval API; a prime in `(x, 2x]` for every `x ≥ 1` | **proved** | **[ExplicitBounds.lean L38](Legendre/ExplicitBounds.lean#L38)** · **[L55](Legendre/ExplicitBounds.lean#L55)** |
+| `Legendre.exists_prime_of_theta_lt` / `hasPrimeIn_of_theta_gap` | strict increase of `θ` forces a prime in `(x, y]` | **proved** | **[L75](Legendre/ExplicitBounds.lean#L75)** · **[L107](Legendre/ExplicitBounds.lean#L107)** |
+| `Legendre.theta_upper_explicit` / `theta_lower_explicit` | explicit Chebyshev `θ` upper/lower bounds | **proved** | **[L118](Legendre/ExplicitBounds.lean#L118)** · **[L123](Legendre/ExplicitBounds.lean#L123)** |
+| `Legendre.psi_upper_explicit` / `psi_lower_explicit` | explicit Chebyshev `ψ` upper/lower bounds | **proved** | **[L129](Legendre/ExplicitBounds.lean#L129)** · **[L134](Legendre/ExplicitBounds.lean#L134)** |
+| `Legendre.pi_lower_explicit` / `pi_upper_explicit` | explicit `π` lower/upper bounds | **proved** | **[L139](Legendre/ExplicitBounds.lean#L139)** · **[L145](Legendre/ExplicitBounds.lean#L145)** |
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | the `P₁` almost-prime square statement *is* Legendre | **proved** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` square statement ↔ Legendre | **proved** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
@@ -136,7 +149,7 @@ This table is the roadmap, not a claim that the work is done.
 | Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
-| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | Bertrand is in mathlib and re-exported in **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**; `Chebyshev.lean` has `ψ`, `θ` and basic bounds; no full explicit prime-gap development |
+| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **core formalized** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds; Nagura/Dusart constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | partial zeta API in mathlib; no complete zero-free-region / zero-counting development |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
@@ -219,6 +232,7 @@ Legendre/
   Reduction.lean     square-gap criterion, θ < 1/2 reduction
   Conditional.lean   literature exponents as Props, conditional theorems, P_k
   Bertrand.lean      Bertrand's postulate re-exported and compared
+  ExplicitBounds.lean Layer 1: interval API, (x,2x], Chebyshev θ/ψ/π bounds
   Audit.lean         #print axioms audit
 docs/
   literature.md      primary-source timeline with evidence levels
