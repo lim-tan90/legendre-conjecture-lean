@@ -1,0 +1,16 @@
+This project uses Lean 4 and mathlib4.
+
+Lean 4 is Copyright (c) 2013-2026 Microsoft Corporation and contributors,
+released under the Apache License 2.0.
+
+mathlib4 is Copyright (c) 2017-2026 The mathlib Community,
+released under the Apache License 2.0.
+
+The files under `Legendre/` in this repository were written for this project
+and are released under the Apache License 2.0 (see `LICENSE`).  The
+`Legendre.bertrand` theorem is a thin re-export of a theorem already proved in
+mathlib4 (`Nat.exists_prime_lt_and_le_two_mul`); the proof is mathlib's, not
+this project's.
+
+No paper PDFs or scans are included.  Bibliographic references and links are in
+`docs/literature.md`.

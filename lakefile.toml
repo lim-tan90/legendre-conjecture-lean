@@ -1,0 +1,11 @@
+name = "legendre-conjecture-lean"
+version = "0.1.0"
+defaultTargets = ["Legendre"]
+
+[[lean_lib]]
+name = "Legendre"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.33.1"

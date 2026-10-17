@@ -1,0 +1,26 @@
+# Build artifacts
+.lake/
+*.olean
+*.ilean
+*.c
+*.o
+*.trace
+*.hash
+
+# Local-only files
+Scratch.lean
+lake-manifest.local.json
+.dsh-acl-recovery/
+__pycache__/
+*.pyc
+
+# Copyright: never commit PDFs
+*.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+lakefile.local.toml
