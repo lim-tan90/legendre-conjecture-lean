@@ -26,6 +26,39 @@
 > It formalizes the definitions, the elementary reductions, and the exact
 > conditional bridge from a future `θ < 1/2` result to Legendre's conjecture.
 
+## Historical progress at a glance
+
+**Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
+nombres*, 2nd ed., Courcier, Paris, 1808): `θ = 1/2` (or `θ = 1/2` with
+constant `< 2`).  It is still **open** and has no formal proof.
+
+Here `θ` means the exponent in `p_{n+1} - p_n ≪ p_n^{θ+ε}`; the `+ε` is part of
+the published statements.  “Prop only” means the exact statement is encoded in
+`Legendre/Conditional.lean`, but **its proof is not formalized**.
+
+| Step (chronological) | Original literature | Exponent θ | Formalized in Lean? | Lean code |
+|---|---|---|---|---|
+| **Bertrand's postulate** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140; proof: P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **✅ Yes** — mathlib proof, re-exported | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
+| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | ❌ No — Prop only | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** |
+| Ingham 1937 (Lindelöf route) | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | ❌ No — Prop only | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** |
+| Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | ❌ No — Prop only | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** |
+| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | ❌ No — Prop only | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** |
+| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | ❌ No — Prop only | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** |
+| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | ❌ No — Prop only | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** |
+| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | ❌ No — Prop only | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** |
+| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | ❌ No — Prop only | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** |
+| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525** (current record) | ❌ No — Prop only | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** |
+| Riemann Hypothesis (conditional) | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | ❌ No — Prop only | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
+| Cramér's conjecture (conditional) | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0 (conjectural) | ❌ No — Prop only | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
+| Explicit verification `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | n/a (finite range) | ❌ No — not encoded | **[Layer 6 roadmap](docs/formalization-roadmap.md)** |
+| Chen 1975 (`P₂`, eventually) | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | n/a (`P₂`) | ❌ No — not encoded | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
+| Dudek–Johnston 2026 (`P₄`, all `n`) | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | n/a (`P₄`) | ❌ No — not encoded | **[Layer 7 roadmap](docs/formalization-roadmap.md)** |
+
+Full DOI/arXiv links and evidence levels: [docs/literature.md](docs/literature.md).
+“Prop only” rows are **not** proved; they are hypotheses/definitions for future
+work.  The formalized reduction from a hypothetical `θ < 1/2` result to
+Legendre is separately **proved** in `Legendre/Reduction.lean`.
+
 ## What is actually verified in Lean
 
 `lake build` proves the following, with no `sorry`, no `admit`, no user
