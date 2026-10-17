@@ -152,6 +152,31 @@ not proved, it must be a hypothesis of a conditional theorem, exactly as in
 5. Baker–Harman 1996, `θ = 0.535`;
 6. Baker–Harman–Pintz 2001, `θ = 0.525`.
 
+**Status (2026-10-17). Statement level formalized.**
+
+`Legendre/Layer5.lean` implements this milestone:
+
+* `HasPrimeInShortInterval θ C`, `ShortIntervalStatement θ` and
+  `PrimeGapBound θ C` encode the interval and gap conventions with explicit
+  constants and explicit “sufficiently large” thresholds
+  (`∃ X, 1 ≤ X, ∀ x ≥ X` and `∃ P, ∀ p ≥ P`);
+* `hasPrimeInShortInterval_iff_primeGapBound` proves the interval and gap
+  forms equivalent (same `θ` and `C`, for `θ ≥ 0`, `C ≥ 0`);
+* `shortIntervalStatement_iff_exponentLimit` proves the paper-exact `+ε`
+  form equivalent to the coarse exponent-limit `Prop` used by the conditional
+  reduction in `Conditional.lean`;
+* `legendre_eventually_of_shortIntervalStatement_lt_half` proves the
+  statement-level reduction: any paper-exact `θ < 1/2` statement implies
+  Legendre's conjecture for all sufficiently large `n`;
+* the nine paper-exact declarations `HoheiselPaper`, `Ingham58Paper`,
+  `Ingham577Paper`, `HuxleyPaper`, `HeathBrownIwaniecPaper`,
+  `IwaniecPintzPaper`, `MozzochiPaper`, `BakerHarmanPaper`,
+  `BakerHarmanPintzPaper` are `Prop` definitions, not theorems.  Each is
+  proved equivalent to its coarse counterpart by `*Paper_iff`.
+
+**The proofs of these nine deep analytic results remain open.**  Layer 5 is
+“statement-level done”, not “proof-level done”.
+
 **Acceptance criteria for each.**
 
 * the exact statement matches the paper's quantifiers, `+ε` convention, and
@@ -163,10 +188,15 @@ not proved, it must be a hypothesis of a conditional theorem, exactly as in
 * if the proof is incomplete, the declaration is a `Prop` definition, not a
   theorem.
 
-**A useful intermediate target.** Formalize Ingham's *statement* and prove the
-generic consequence “Ingham's hypothesis ⇒ short-interval PNT”.  This is
-already the shape of the conditional reduction, but the analytic content of
-Ingham remains open until Layer 2–4 is done.
+**Proof-level status.** None of the nine results is proved.  The declarations
+are `Prop` definitions; the only proved content is the statement-level
+infrastructure listed above.
+
+**A useful intermediate target — achieved at statement level.**  Ingham's
+statement is encoded exactly (`Ingham58Paper`, `Ingham577Paper`), and the
+generic consequence “the hypothesis implies a prime in every short interval of
+the required length” is proved via the interval/gap bridge.  The analytic
+content of Ingham remains open until Layer 2–4 is done.
 
 ## Layer 6 — Explicit finite verification
 
@@ -210,20 +240,22 @@ theory in mathlib.
   `n ≥ 1`”;
 * no claim of `P₂`/`P₃` for all `n` unless the paper actually proves it.
 
-## Suggested first ten PRs
+## Suggested PR sequence
 
 1. README/roadmap maintenance and CI hardening.
 2. ✅ Explicit Chebyshev bounds from mathlib — initial version in
    `Legendre/ExplicitBounds.lean`.
 3. ✅ A prime-in-interval API with explicit `h` — `Legendre.HasPrimeIn` and
    `Legendre.hasPrimeIn_self`.
-4. A verified small-range interval-certificate checker.
-5. Zeta: Euler product and convergence.
-6. Zeta: analytic continuation.
-7. Zeta: non-vanishing on `Re(s) = 1`.
-8. Zeta: weak zero-free region.
-9. `N(T)` and zero counting.
-10. Perron formula / truncated explicit formula.
+4. ✅ Paper-exact Layer 5 statements, the interval/gap bridge and the
+   statement-level conditional consequence — `Legendre/Layer5.lean`.
+5. A verified small-range interval-certificate checker.
+6. Zeta: Euler product and convergence.
+7. Zeta: analytic continuation.
+8. Zeta: non-vanishing on `Re(s) = 1`.
+9. Zeta: weak zero-free region.
+10. `N(T)` and zero counting.
+11. Perron formula / truncated explicit formula.
 
 Each PR must target `review` and pass `verify`.  See
 [`PR_WORKFLOW.md`](PR_WORKFLOW.md).

@@ -22,8 +22,9 @@
 > 目前最好的无条件素数间隙指数仍是 `θ = 0.525`
 > （Baker–Harman–Pintz 2001），它 **大于** `1/2`，因此不能推出勒让德猜想。
 > 本仓库**不**声称证明了该猜想，也**不**声称已经把深层解析数论论文形式化。
-> 已形式化的是：定义、初等归约，以及“若将来出现 `θ < 1/2` 的结果，则大 `n`
-> 的勒让德猜想成立”这一精确条件化桥梁。
+> 已形式化的是：定义、初等归约，九项已发表短区间结果的精确陈述级约定
+> （[Layer5.lean](Legendre/Layer5.lean)），以及“若将来出现 `θ < 1/2` 的结果，
+> 则大 `n` 的勒让德猜想成立”这一精确条件化桥梁。
 
 > [!TIP]
 > **Layer 1 核心已完成形式化。** `Legendre/ExplicitBounds.lean` 证明了区间谓词
@@ -31,6 +32,10 @@
 > Chebyshev 桥 `θ(x) < θ(y) ⇒ (x, y] 中有素数`，以及 `θ`、`ψ`、`π` 的显式
 > 上下界。Nagura/Dusart 型更强常数**尚未**形式化；见
 > [docs/formalization-roadmap.md](docs/formalization-roadmap.md)。
+>
+> **第 5 层陈述级已完成形式化。** `Legendre/Layer5.lean` 按论文原文的精确 `+ε`、
+> 常数与“充分大”约定编码了九项已发表短区间结果，并证明了区间形式、间隙形式与
+> `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 ## 历史进展总览
 
@@ -39,32 +44,36 @@
 它仍未解决，也没有形式化证明。
 
 这里的 `θ` 指 `p_{n+1} - p_n ≪ p_n^{θ+ε}` 中的指数；`+ε` 是论文陈述的一部分。
-“仅 Prop”表示精确陈述已经在 `Legendre/Conditional.lean` 中编码，但**证明没有
+“无证明”表示精确陈述已经编码（既作为 `Legendre/Conditional.lean` 中的粗粒度
+`Prop`，也作为 `Legendre/Layer5.lean` 中论文原文的精确约定），但**它的证明没有
 形式化**。
 
 | 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
 |---|---|---|---|---|
 | **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
-| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L70)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** |
-| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L74)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** |
-| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L77)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** |
-| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L80)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** |
-| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L83)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** |
-| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L86)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** |
-| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L89)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** |
-| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L92)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** |
-| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L96)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** |
-| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
-| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0（猜想） | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
+| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L289)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
+| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L302)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Layer5.lean L302](Legendre/Layer5.lean#L302)** |
+| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L315)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Layer5.lean L315](Legendre/Layer5.lean#L315)** |
+| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L328)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Layer5.lean L328](Legendre/Layer5.lean#L328)** |
+| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L340)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Layer5.lean L340](Legendre/Layer5.lean#L340)** |
+| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L353)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Layer5.lean L353](Legendre/Layer5.lean#L353)** |
+| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L366)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** · **[Layer5.lean L366](Legendre/Layer5.lean#L366)** |
+| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L380)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** · **[Layer5.lean L380](Legendre/Layer5.lean#L380)** |
+| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L395)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** · **[Layer5.lean L395](Legendre/Layer5.lean#L395)** |
+| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
+| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0（猜想） | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
 | 显式验证 `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | 不适用（有限范围） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 6 层路线图](docs/formalization-roadmap.md)** |
 | Chen 1975（`P₂`，最终） | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | 不适用（`P₂`） | **[❌ 否 — 未编码](Legendre/Conditional.lean#L146)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
 | Dudek–Johnston 2026（`P₄`，所有 `n`） | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | 不适用（`P₄`） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 7 层路线图](docs/formalization-roadmap.md)** |
 
-状态单元格本身可点击：**✅** 跳转到证明；**❌“仅 Prop”** 跳转到已编码的陈述
-（不是证明）；**❌“未编码”** 跳转到路线图。完整 DOI/arXiv 链接与证据等级见
+状态单元格本身可点击：**✅** 跳转到证明；**❌“无证明，精确陈述 ✅”** 跳转到
+[`Layer5.lean`](Legendre/Layer5.lean) 中按论文原文编码的陈述（不是证明）；
+**❌“无证明，粗粒度 `Prop`”** 跳转到粗粒度条件陈述编码；**❌“未编码”** 跳转到
+路线图。完整 DOI/arXiv 链接与证据等级见
 [docs/literature.md](docs/literature.md)。
-“仅 Prop”行**不是**已证明定理，而是供后续工作接入的定义/假设。把假设的
-`θ < 1/2` 结果化为勒让德猜想的归约本身，已在
+这九项指数结果**没有**被证明。它们的粗粒度 `Prop` 在 `Conditional.lean`，
+论文原文的 `+ε`/常数/阈值形式在 `Layer5.lean`，两者之间的等价性**已证明**。
+把假设的 `θ < 1/2` 结果化为勒让德猜想的归约本身，另行在
 **[Reduction.lean L110](Legendre/Reduction.lean#L110)** 中**证明**。
 
 ## Lean 中真正验证了什么
@@ -73,7 +82,7 @@
 `axiom`/`constant`/`opaque`，也没有 `False.elim`/`absurd` 爆炸捷径：
 
 <details>
-<summary><strong>点击展开：16 条已验证声明及源码链接</strong></summary>
+<summary><strong>点击展开：已验证声明及源码链接</strong></summary>
 
 | Lean 声明 | 数学内容 | 状态 | 代码（GitHub） |
 |---|---|---|---|
@@ -93,6 +102,11 @@
 | `Legendre.pi_lower_explicit` / `pi_upper_explicit` | `π` 显式上下界 | **已证明** | **[L139](Legendre/ExplicitBounds.lean#L139)** · **[L145](Legendre/ExplicitBounds.lean#L145)** |
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
+| `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | 论文精确陈述约定：显式指数、常数与“充分大”阈值 | 定义 | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
+| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`） | **已证明** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
+| `Legendre.shortIntervalStatement_iff_exponentLimit` | 论文精确 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
+| `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | 论文精确 `θ < 1/2` 陈述 ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
+| `Legendre.*Paper_iff`（九篇论文） | 每篇论文的精确陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -103,12 +117,13 @@
 
 ## 明确**没有**声称的内容
 
-以下内容只被写成精确的 `Prop` 定义，供后续工作接入；它们的证明**没有**在
-本仓库形式化：
+以下内容只被写成 `Prop` 定义（粗粒度形式与论文精确形式），供后续工作接入；
+它们的证明**没有**在本仓库形式化：
 
 * Hoheisel 1930、Ingham 1937（`5/8` 与 `577/925` 两条路线）、Huxley 1972、
   Heath-Brown–Iwaniec 1979、Iwaniec–Pintz 1984、Mozzochi 1986、
-  Baker–Harman 1996、Baker–Harman–Pintz 2001 — 陈述代码：
+  Baker–Harman 1996、Baker–Harman–Pintz 2001 — 粗粒度 `Prop` 与论文精确形式
+  都已编码（证明仍未形式化）；陈述代码：
   **[Hoheisel L70](Legendre/Conditional.lean#L70)** ·
   **[Ingham 5/8 L74](Legendre/Conditional.lean#L74)** ·
   **[Ingham 577/925 L77](Legendre/Conditional.lean#L77)** ·
@@ -117,7 +132,8 @@
   **[Iwaniec–Pintz L86](Legendre/Conditional.lean#L86)** ·
   **[Mozzochi L89](Legendre/Conditional.lean#L89)** ·
   **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
-  **[BHP L96](Legendre/Conditional.lean#L96)**；
+  **[BHP L96](Legendre/Conditional.lean#L96)** ·
+  **[Layer5.lean 中的论文精确形式](Legendre/Layer5.lean)**；
 * Riemann 假设下的间隙界与 Cramér 猜想 —
   **[RH gap L130](Legendre/Conditional.lean#L130)** ·
   **[Cramér L137](Legendre/Conditional.lean#L137)**；
@@ -152,7 +168,7 @@
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | mathlib 只有部分 ζ API；没有完整的无零点区域与零点计数 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
-| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **mathlib 中没有**；本仓库只有 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 的 `Prop` 陈述 |
+| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
@@ -161,7 +177,7 @@
 ```
 (0) 定义/算术                    [已完成]
         │
-(1) Bertrand + Chebyshev         [部分在 mathlib]
+(1) Bertrand + Chebyshev         [本仓库已完成；更强常数仍开放]
         │
 (2) ζ 基础                       [第一个真正的大里程碑]
         │
@@ -169,7 +185,7 @@
         │
 (4) 零密度估计
         │
-(5) Ingham → Huxley → BHP
+(5) Ingham → Huxley → BHP       [陈述级已完成；证明仍开放]
         │
 (6) 显式有限验证                 [独立，可并行]
 (7) 几乎素数/筛法路线            [独立，可并行]
@@ -177,10 +193,14 @@
 
 对本仓库而言，现实顺序是：
 
-1. **完成第 1 层**：基于 mathlib 现有 API 形式化显式 Chebyshev/π 界与
-   Bertrand 型区间估计。
-2. **第 5 层的陈述级**：已经以 `Prop` 形式存在；继续补齐每篇论文的精确
-   `+ε`、充分大范围和常数约定。
+1. ✅ **完成第 1 层（核心）——已完成。** `Legendre/ExplicitBounds.lean` 证明了
+   区间 API、`(x, 2x]` 素数定理、Chebyshev 桥，以及 `θ/ψ/π` 的显式界。
+   Nagura/Dusart 型更强常数仍然开放。
+2. ✅ **第 5 层陈述级——已完成。** `Legendre/Layer5.lean` 编码了 Hoheisel、
+   Ingham（两条路线）、Huxley、Heath-Brown–Iwaniec、Iwaniec–Pintz、Mozzochi、
+   Baker–Harman 与 Baker–Harman–Pintz 的精确 `+ε`、“充分大”和常数约定，证明
+   区间形式等价于间隙形式，并把每篇论文的精确陈述连接到其粗粒度 `Prop`。
+   解析证明仍然开放。
 3. **先做第 2–3 层**：ζ 基础与 Perron/带误差项 PNT。这是第一个真正的大型
    工程，应拆成许多 PR。
 4. **第 4–5 层**：先 Ingham，再 Huxley，最后 BHP 的筛法精化。Ingham 未完成
@@ -230,6 +250,7 @@ Legendre/
   Conditional.lean   文献指数 Prop、条件化定理、P_k
   Bertrand.lean      Bertrand 公设的复用与比较
   ExplicitBounds.lean Layer 1：区间 API、(x,2x]、Chebyshev θ/ψ/π 界
+  Layer5.lean        Layer 5：论文精确的短区间陈述与桥接
   Audit.lean         #print axioms 审计
 docs/
   literature.md      原始文献时间线与证据等级

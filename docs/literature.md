@@ -20,6 +20,14 @@ Notation: `θ` is a real number such that, for every `ε > 0`,
 `p_{k+1} - p_k ≪ p_k^{θ+ε}`; unless stated otherwise the result is for
 sufficiently large `p_k`.
 
+The exact quantifier conventions — the `+ε` form, the explicit constants and
+the “sufficiently large” threshold — are encoded in `Legendre/Layer5.lean`
+(`HoheiselPaper`, `Ingham58Paper`, `Ingham577Paper`, `HuxleyPaper`,
+`HeathBrownIwaniecPaper`, `IwaniecPintzPaper`, `MozzochiPaper`,
+`BakerHarmanPaper`, `BakerHarmanPintzPaper`), together with proved bridges to
+the coarse `Prop`s in `Legendre/Conditional.lean`.  These declarations are
+`Prop` definitions: the values below are **not proved** in this repository.
+
 | Year | Author(s) | Exact result | Evidence | Link |
 |---:|---|---|---|---|
 | 1930 | G. Hoheisel | `θ = 1 - 1/33000 = 32999/33000`; first exponent `< 1` | secondary-authoritative | [zbMATH JFM 56.0172.02](https://zbmath.org/?q=an:56.0172.02) |

@@ -4,6 +4,12 @@ This table is the honesty contract of the repository.  “Statement only” mean
 the mathematical statement is encoded as a `Prop`, but its proof is **not**
 formalized.  “Proved” means `lake build` checks a complete proof term.
 
+Rows 9a–9g record the **statement-level Layer 5** infrastructure from
+`Legendre/Layer5.lean`: the paper-exact `+ε`/constant/threshold conventions
+and the proved bridges between the interval form, the gap form and the coarse
+`Prop`s of `Conditional.lean`.  A row marked “statement only” is still
+**not a proved theorem**.
+
 | # | Literature step | Lean declaration | Formalization status |
 |---:|---|---|---|
 | 0 | Legendre's conjecture (square form) | `Legendre.LegendreAt`, `Legendre.Conjecture` | definition |
@@ -22,15 +28,22 @@ formalized.  “Proved” means `lake build` checks a complete proof term.
 | 8e | explicit upper/lower bounds for `ψ` | `Legendre.psi_upper_explicit`, `Legendre.psi_lower_explicit` | **proved** |
 | 8f | explicit lower/upper bounds for `π` | `Legendre.pi_lower_explicit`, `Legendre.pi_upper_explicit` | **proved** |
 | 9 | Bertrand's linear exponent is above `1/2` | `Legendre.bertrand_exponent_above_half` | **proved** |
-| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel` | **statement only** |
-| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58` | **statement only** |
-| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577` | **statement only** |
-| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley` | **statement only** |
-| 14 | Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε` | `Legendre.HeathBrownIwaniec` | **statement only** |
-| 15 | Iwaniec–Pintz 1984, `θ = 11/20 - 1/406 + ε` | `Legendre.IwaniecPintz` | **statement only** |
-| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi` | **statement only** |
-| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman` | **statement only** |
-| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz` | **statement only** |
+| 9a | short-interval interval form with explicit constant and threshold | `Legendre.HasPrimeInShortInterval` | definition |
+| 9b | `+ε` paper convention for short intervals | `Legendre.ShortIntervalStatement` | definition |
+| 9c | explicit-threshold gap form | `Legendre.PrimeGapBound` | definition |
+| 9d | interval form ↔ gap form (same `θ`, `C`) | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | **proved** |
+| 9e | paper-exact `+ε` form ↔ coarse exponent-limit interface | `Legendre.shortIntervalStatement_iff_exponentLimit` | **proved** |
+| 9f | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | **proved** |
+| 9g | each paper-exact statement ↔ its coarse `Prop` | `Legendre.*Paper_iff` (nine theorems) | **proved** |
+| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; exact form and `hoheiselPaper_iff` proved |
+| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; exact form and `ingham58Paper_iff` proved |
+| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; exact form and `ingham577Paper_iff` proved |
+| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley`, `Legendre.HuxleyPaper` | **statement only**; exact form and `huxleyPaper_iff` proved |
+| 14 | Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε` | `Legendre.HeathBrownIwaniec`, `Legendre.HeathBrownIwaniecPaper` | **statement only**; exact form and `heathBrownIwaniecPaper_iff` proved |
+| 15 | Iwaniec–Pintz 1984, `θ = 11/20 - 1/406 + ε` | `Legendre.IwaniecPintz`, `Legendre.IwaniecPintzPaper` | **statement only**; exact form and `iwaniecPintzPaper_iff` proved |
+| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi`, `Legendre.MozzochiPaper` | **statement only**; exact form and `mozzochiPaper_iff` proved |
+| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman`, `Legendre.BakerHarmanPaper` | **statement only**; exact form and `bakerHarmanPaper_iff` proved |
+| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz`, `Legendre.BakerHarmanPintzPaper` | **statement only**; exact form and `bakerHarmanPintzPaper_iff` proved |
 | 19 | RH gap bound `≪ √x log x` | `Legendre.RHGapBound` | **statement only** |
 | 20 | Cramér conjecture `O((log x)²)` | `Legendre.CramerGapBound` | **statement only** |
 | 21 | almost-prime `P_k` square statement | `Legendre.AlmostPrimeSquareAtMost`, `AlmostPrimeSquareEventually` | definition |
