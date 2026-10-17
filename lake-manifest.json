@@ -111,7 +111,7 @@
    "configFile": "lakefile.toml"
   }
  ],
- "name": "legendre-conjecture-lean",
+ "name": "legendre_conjecture_lean",
  "lakeDir": ".lake",
  "fixedToolchain": false
 }

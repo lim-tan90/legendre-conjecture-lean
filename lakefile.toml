@@ -1,4 +1,4 @@
-name = "legendre-conjecture-lean"
+name = "legendre_conjecture_lean"
 version = "0.1.0"
 defaultTargets = ["Legendre"]
 
