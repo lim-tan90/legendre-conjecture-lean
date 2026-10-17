@@ -49,9 +49,11 @@ nombres*, 2nd ed., Courcier, Paris, 1808): `θ = 1/2` (or `θ = 1/2` with
 constant `< 2`).  It is still **open** and has no formal proof.
 
 Here `θ` means the exponent in `p_{n+1} - p_n ≪ p_n^{θ+ε}`; the `+ε` is part of
-the published statements.  “No proof” means the exact statement is encoded
-(both as a coarse `Prop` in `Legendre/Conditional.lean` and in the paper-exact
-conventions of `Legendre/Layer5.lean`), but **its proof is not formalized**.
+the published statements.  For the nine exponent results, “No proof” means the
+exact statement is encoded (both as a coarse `Prop` in
+`Legendre/Conditional.lean` and in the paper-exact conventions of
+`Legendre/Layer5.lean`), but **its proof is not formalized**.  The RH and
+Cramér rows are coarse-`Prop` only.
 
 | Step (chronological) | Original literature | Exponent θ | Formalized in Lean? | Lean code |
 |---|---|---|---|---|
@@ -110,10 +112,10 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | the `P₁` almost-prime square statement *is* Legendre | **proved** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` square statement ↔ Legendre | **proved** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 | `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | paper-exact statement conventions with explicit exponent, constant and “sufficiently large” threshold | definition | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
-| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | interval form ↔ gap form with the same `θ` and `C` | **proved** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
+| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | interval form ↔ gap form with the same `θ` and `C` (for `θ ≥ 0`, `C ≥ 0`) | **proved** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | paper-exact `+ε` form ↔ the coarse conditional interface | **proved** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
 | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | **proved** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
-| `Legendre.*Paper_iff` (nine papers) | each paper-exact statement ↔ its coarse `Prop` | **proved** | **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
+| `Legendre.*Paper_iff` (nine results) | each paper-exact statement ↔ its coarse `Prop` | **proved** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -248,7 +250,7 @@ The audit checks:
 
 1. no `sorry` / `admit` / `axiom` / `constant` / `opaque` / `unsafe` in the
    project sources;
-2. no `False.elim` / `absurd` / `nomatch` exploration shortcuts;
+2. no `False.elim` / `absurd` / `nomatch` explosion shortcuts;
 3. every `#print axioms` line lists only the three standard axioms;
 4. no PDF files are present in the repository.
 

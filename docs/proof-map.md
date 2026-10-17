@@ -31,19 +31,19 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 9a | short-interval interval form with explicit constant and threshold | `Legendre.HasPrimeInShortInterval` | definition |
 | 9b | `+ε` paper convention for short intervals | `Legendre.ShortIntervalStatement` | definition |
 | 9c | explicit-threshold gap form | `Legendre.PrimeGapBound` | definition |
-| 9d | interval form ↔ gap form (same `θ`, `C`) | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | **proved** |
+| 9d | interval form ↔ gap form (same `θ`, `C`; `θ ≥ 0`, `C ≥ 0`) | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | **proved** |
 | 9e | paper-exact `+ε` form ↔ coarse exponent-limit interface | `Legendre.shortIntervalStatement_iff_exponentLimit` | **proved** |
 | 9f | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | **proved** |
 | 9g | each paper-exact statement ↔ its coarse `Prop` | `Legendre.*Paper_iff` (nine theorems) | **proved** |
-| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; exact form and `hoheiselPaper_iff` proved |
-| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; exact form and `ingham58Paper_iff` proved |
-| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; exact form and `ingham577Paper_iff` proved |
-| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley`, `Legendre.HuxleyPaper` | **statement only**; exact form and `huxleyPaper_iff` proved |
-| 14 | Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε` | `Legendre.HeathBrownIwaniec`, `Legendre.HeathBrownIwaniecPaper` | **statement only**; exact form and `heathBrownIwaniecPaper_iff` proved |
-| 15 | Iwaniec–Pintz 1984, `θ = 11/20 - 1/406 + ε` | `Legendre.IwaniecPintz`, `Legendre.IwaniecPintzPaper` | **statement only**; exact form and `iwaniecPintzPaper_iff` proved |
-| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi`, `Legendre.MozzochiPaper` | **statement only**; exact form and `mozzochiPaper_iff` proved |
-| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman`, `Legendre.BakerHarmanPaper` | **statement only**; exact form and `bakerHarmanPaper_iff` proved |
-| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz`, `Legendre.BakerHarmanPintzPaper` | **statement only**; exact form and `bakerHarmanPintzPaper_iff` proved |
+| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
+| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
+| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
+| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley`, `Legendre.HuxleyPaper` | **statement only**; paper-exact form encoded, `huxleyPaper_iff` proved |
+| 14 | Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε` | `Legendre.HeathBrownIwaniec`, `Legendre.HeathBrownIwaniecPaper` | **statement only**; paper-exact form encoded, `heathBrownIwaniecPaper_iff` proved |
+| 15 | Iwaniec–Pintz 1984, `θ = 11/20 - 1/406 + ε` | `Legendre.IwaniecPintz`, `Legendre.IwaniecPintzPaper` | **statement only**; paper-exact form encoded, `iwaniecPintzPaper_iff` proved |
+| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi`, `Legendre.MozzochiPaper` | **statement only**; paper-exact form encoded, `mozzochiPaper_iff` proved |
+| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman`, `Legendre.BakerHarmanPaper` | **statement only**; paper-exact form encoded, `bakerHarmanPaper_iff` proved |
+| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz`, `Legendre.BakerHarmanPintzPaper` | **statement only**; paper-exact form encoded, `bakerHarmanPintzPaper_iff` proved |
 | 19 | RH gap bound `≪ √x log x` | `Legendre.RHGapBound` | **statement only** |
 | 20 | Cramér conjecture `O((log x)²)` | `Legendre.CramerGapBound` | **statement only** |
 | 21 | almost-prime `P_k` square statement | `Legendre.AlmostPrimeSquareAtMost`, `AlmostPrimeSquareEventually` | definition |

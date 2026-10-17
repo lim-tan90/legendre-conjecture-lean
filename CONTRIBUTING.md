@@ -34,8 +34,10 @@ pwsh -File scripts/verify.ps1
 
 If you want to formalize a new paper's theorem:
 
-1. Add the exact statement as a `Prop` in `Legendre/Conditional.lean`, with the
-   paper's precise constants, range, and `+ε` convention.
+1. Add the exact statement as a `Prop` — coarse conditional form in
+   `Legendre/Conditional.lean`, and (for Layer 5 papers) the paper-exact
+   constants, range and `+ε` convention in `Legendre/Layer5.lean`; see the
+   `*Paper` definitions and their `*_iff` bridge theorems.
 2. If you have a complete proof, put it in a new module and import it from
    `Legendre.lean`.
 3. Add `#print axioms` for every new theorem in `Legendre/Audit.lean`.

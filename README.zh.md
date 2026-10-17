@@ -44,9 +44,10 @@
 它仍未解决，也没有形式化证明。
 
 这里的 `θ` 指 `p_{n+1} - p_n ≪ p_n^{θ+ε}` 中的指数；`+ε` 是论文陈述的一部分。
-“无证明”表示精确陈述已经编码（既作为 `Legendre/Conditional.lean` 中的粗粒度
-`Prop`，也作为 `Legendre/Layer5.lean` 中论文原文的精确约定），但**它的证明没有
-形式化**。
+对九项指数结果，“无证明”表示精确陈述已经编码（既作为
+`Legendre/Conditional.lean` 中的粗粒度 `Prop`，也作为 `Legendre/Layer5.lean`
+中论文原文的精确约定），但**它的证明没有形式化**。RH 与 Cramér 两行只有粗粒度
+`Prop`。
 
 | 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
 |---|---|---|---|---|
@@ -103,10 +104,10 @@
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 | `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | 论文精确陈述约定：显式指数、常数与“充分大”阈值 | 定义 | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
-| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`） | **已证明** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
+| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`，需 `θ ≥ 0`、`C ≥ 0`） | **已证明** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | 论文精确 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
 | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | 论文精确 `θ < 1/2` 陈述 ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
-| `Legendre.*Paper_iff`（九篇论文） | 每篇论文的精确陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
+| `Legendre.*Paper_iff`（九项结果） | 每项结果的精确陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
