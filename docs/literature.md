@@ -31,6 +31,7 @@ the coarse `Prop`s in `Legendre/Conditional.lean`.  These declarations are
 | Year | Author(s) | Exact result | Evidence | Link |
 |---:|---|---|---|---|
 | 1930 | G. Hoheisel | `θ = 1 - 1/33000 = 32999/33000`; first exponent `< 1` | secondary-authoritative | [zbMATH JFM 56.0172.02](https://zbmath.org/?q=an:56.0172.02) |
+| 1952 | J. Nagura | for every `x ≥ 25`, `(x, 6x/5]` contains a prime; proof via the explicit bounds `0.916x < ψ(x) < 1.086x` | primary-paper | [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) · [J-STAGE](https://www.jstage.jst.go.jp/article/pjab1945/28/4/28_4_177/_article) |
 | 1937 | A. E. Ingham | `θ = 5/8`, via `ζ(1/2+it) = O(t^{1/6})` and his general theorem | secondary-authoritative | [DOI 10.1093/qmath/os-8.1.255](https://doi.org/10.1093/qmath/os-8.1.255) · [MacTutor](https://mathshistory.st-andrews.ac.uk/Biographies/Ingham/) |
 | 1937 | A. E. Ingham | same paper, zero-density route: `θ = 577/925 + ε ≈ 0.62378` | secondary-authoritative | [Starichkova, arXiv:2411.01845](https://arxiv.org/abs/2411.01845) |
 | 1972 | M. N. Huxley | `θ = 7/12 + ε ≈ 0.58333` (strict `+ε`; `7/12` is an infimum, not attained) | secondary-authoritative | [DOI 10.1007/BF01418933](https://doi.org/10.1007/BF01418933) · [EuDML](https://eudml.org/doc/142126) |
@@ -40,6 +41,16 @@ the coarse `Prop`s in `Legendre/Conditional.lean`.  These declarations are
 | 1996 | R. C. Baker, G. Harman | `θ = 0.535` | secondary-authoritative | [DOI 10.1112/plms/s3-72.2.261](https://doi.org/10.1112/plms/s3-72.2.261) |
 | 2001 | R. C. Baker, G. Harman, J. Pintz | `θ = 0.525`; **current record** for existence of a prime in `[x - x^θ, x]` | secondary-authoritative | [DOI 10.1112/plms/83.3.532](https://doi.org/10.1112/plms/83.3.532) |
 | 2024 | L. Guth, J. Maynard | zero-density `N(σ,T) ≤ T^{30(1-σ)/13+o(1)}`; short-interval **asymptotic** PNT for `x^{17/30+o(1)}` (`17/30 ≈ 0.5667`). **Not** an improvement of the `0.525` existence record | primary (arXiv) | [arXiv:2405.20552](https://arxiv.org/abs/2405.20552) |
+
+### Nagura's explicit interval
+
+Nagura's 1952 theorem is **fully formalized in this repository** in
+`Legendre/Nagura.lean` (adapted from the MIT-licensed project
+<https://github.com/ShouqiaoW/erdos>): `nagura_hasPrimeIn` proves that every
+real `x ≥ 25` has a prime in `(x, 6x/5]`, using the explicit Chebyshev bounds
+`0.916x < ψ(x) < 1.086x` and a kernel-checked finite prime chain.  This is the
+Layer 1 explicit short-interval milestone; Dusart's later
+`x + x/(25 log²x)` bounds are *not* formalized (they need an explicit PNT).
 
 ### Notes on the two Ingham values
 
@@ -150,5 +161,7 @@ particular:
    primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562.
 9. J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's
    conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4.
+10. J. Nagura, *On the interval containing at least one prime number*,
+    Proc. Japan Acad. **28** (1952), 177--181.
 10. A. W. Dudek, D. R. Johnston, *Almost primes between all squares*,
     J. Number Theory **278** (2026), 726–745.

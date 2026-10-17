@@ -40,9 +40,9 @@ layer.  Nothing here is claimed as already done unless it appears in
 for `π(x)`, `ψ(x)`, `θ(x)` strong enough to recover classical interval
 estimates.
 
-**Status (2026-10-17). Core formalized.**
+**Status (2026-10-17). Complete for Nagura.**
 
-`Legendre/ExplicitBounds.lean` now proves:
+`Legendre/ExplicitBounds.lean` proves:
 
 * `HasPrimeIn x h`, the clean interval predicate
   “there is a prime in `(x, x+h]`”;
@@ -54,23 +54,43 @@ estimates.
 * `psi_upper_explicit`, `psi_lower_explicit`;
 * `pi_lower_explicit`, `pi_upper_explicit`.
 
+`Legendre/Nagura.lean` (with the modules in `Legendre/Nagura/`) now proves
+**Nagura's theorem** (J. Nagura, Proc. Japan Acad. **28** (1952), 177--181):
+for every real `x ≥ 25`, the interval `(x, 6x/5]` contains a prime
+(`nagura_hasPrimeIn`); equivalently there is a prime `p` with `n < p` and
+`5p < 6n` for every natural `n ≥ 25` (`nagura_prime_gap`).  The formalization
+follows Nagura's argument:
+
+* `naguraChebyshevSum_eq_log_factorial`: the Ramanujan/Nagura identity
+  `∑_{m≤n} ψ(n/m) = log n!`;
+* two-sided explicit Stirling bounds for factorials and the weighted Chebyshev
+  combinations with weights `1,2,3,7,43,1806` and `1,2,3,5,30`;
+* explicit bounds `0.916 n < ψ(n) < 1.086 n`
+  (`psi_nat_gt_0_916_mul`, `psi_nat_lt_1_086_mul`);
+* a kernel-checked finite prime chain covering `25 ≤ n < 16 000 000`;
+* the analytic tail `n ≥ 16 000 000` via the Chebyshev `ψ`/`θ` bridge.
+
+The code under `Legendre/Nagura/` is adapted from the MIT-licensed project
+<https://github.com/ShouqiaoW/erdos> at commit
+`d28713ac8245ca86a686b8c67370a8d19d81b242`.  The original MIT license is
+retained in `Legendre/Nagura/LICENSE`.
+
 **What is still missing in Layer 1.**
 
-* Sharper explicit Nagura/Dusart-type constants (e.g. `(x, 6x/5]` for
-  `x ≥ 25`) require substantially stronger explicit Chebyshev estimates than
-  mathlib currently has.  They are **not** claimed.
-* A fully general verified bridge from arbitrary explicit `ψ`/`θ` bounds to
-  a prescribed interval length `h`; the current bridge is the logical one
-  (`θ` increase ⇒ prime), and the explicit `(x, 2x]` result comes from
-  Bertrand.
+Dusart-type explicit PNT-strength bounds are **not** formalized: for example
+`ϑ(x) − x < x/36260` for all `x > 0`, `|ϑ(x) − x| ≤ 0.2 x / log²x` for
+`x ≥ 3 594 641`, and a prime in `(x, x + x/(25 log² x)]` for `x ≥ 396 738`
+(Dusart 2010).  These require a formalized explicit prime number theorem with
+a zero-free region; see Layers 2--3.
 
 **Acceptance criteria.**
 
 * a new module `Legendre/ExplicitBounds.lean` proves at least one explicit
   short-interval statement with a named constant and range — **met**
-  (`(x, 2x]` for `x ≥ 1`);
+  (`(x, 2x]` for `x ≥ 1`) — and `Legendre/Nagura.lean` proves the sharper
+  `(x, 6x/5]` for `x ≥ 25` — **met**;
 * the statement is compared against the published constant in
-  `docs/literature.md` — see the Bertrand row;
+  `docs/literature.md` — see the Bertrand and Nagura rows;
 * no `native_decide` without an explicit soundness note (or a kernel-checked
   certificate) — **met** (no `native_decide` used).
 
@@ -249,13 +269,15 @@ theory in mathlib.
    `Legendre.hasPrimeIn_self`.
 4. ✅ Paper-exact Layer 5 statements, the interval/gap bridge and the
    statement-level conditional consequence — `Legendre/Layer5.lean`.
-5. A verified small-range interval-certificate checker.
-6. Zeta: Euler product and convergence.
-7. Zeta: analytic continuation.
-8. Zeta: non-vanishing on `Re(s) = 1`.
-9. Zeta: weak zero-free region.
-10. `N(T)` and zero counting.
-11. Perron formula / truncated explicit formula.
+5. ✅ Nagura's theorem `(x, 6x/5]` for `x ≥ 25` with explicit `ψ` bounds —
+   `Legendre/Nagura.lean` (adapted from the MIT-licensed `ShouqiaoW/erdos`).
+6. A verified small-range interval-certificate checker.
+7. Zeta: Euler product and convergence.
+8. Zeta: analytic continuation.
+9. Zeta: non-vanishing on `Re(s) = 1`.
+10. Zeta: weak zero-free region.
+11. `N(T)` and zero counting.
+12. Perron formula / truncated explicit formula.
 
 Each PR must target `review` and pass `verify`.  See
 [`PR_WORKFLOW.md`](PR_WORKFLOW.md).

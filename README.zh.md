@@ -21,16 +21,21 @@
 > **当前状态（2026 年 10 月）：勒让德猜想仍未解决。**
 > 目前最好的无条件素数间隙指数仍是 `θ = 0.525`
 > （Baker–Harman–Pintz 2001），它 **大于** `1/2`，因此不能推出勒让德猜想。
-> 本仓库**不**声称证明了该猜想，也**不**声称已经把深层解析数论论文形式化。
-> 已形式化的是：定义、初等归约，九项已发表短区间结果的精确陈述级约定
-> （[Layer5.lean](Legendre/Layer5.lean)），以及“若将来出现 `θ < 1/2` 的结果，
-> 则大 `n` 的勒让德猜想成立”这一精确条件化桥梁。
+> 本仓库**不**声称证明了该猜想，也**不**声称已经形式化 Hoheisel、Ingham、
+> Huxley、Baker–Harman 或 Baker–Harman–Pintz 的深层指数结果。已形式化的是：
+> 定义、初等归约、**Nagura 1952 显式区间定理**（对每个 `x ≥ 25`，
+> `(x, 6x/5]` 中有素数，见 [`Nagura.lean`](Legendre/Nagura.lean)）、九项已发表
+> 短区间结果的精确陈述级约定（[Layer5.lean](Legendre/Layer5.lean)），以及
+> “若将来出现 `θ < 1/2` 的结果，则大 `n` 的勒让德猜想成立”这一精确条件化桥梁。
 
 > [!TIP]
-> **Layer 1 核心已完成形式化。** `Legendre/ExplicitBounds.lean` 证明了区间谓词
+> **Layer 1 已完整完成（Nagura）。** `Legendre/ExplicitBounds.lean` 证明了区间谓词
 > `HasPrimeIn`、显式短区间定理“对每个 `x ≥ 1`，`(x, 2x]` 中有素数”、
 > Chebyshev 桥 `θ(x) < θ(y) ⇒ (x, y] 中有素数`，以及 `θ`、`ψ`、`π` 的显式
-> 上下界。Nagura/Dusart 型更强常数**尚未**形式化；见
+> 上下界。**Nagura 定理现已在** [`Legendre/Nagura.lean`](Legendre/Nagura.lean)
+> **中完整证明**：对每个实数 `x ≥ 25`，区间 `(x, 6x/5]` 中有素数
+> （`nagura_hasPrimeIn`），并给出显式 Chebyshev 界 `0.916n < ψ(n) < 1.086n`。
+> Dusart 型 `x + x/(25 log²x)` 界仍未形式化；见
 > [docs/formalization-roadmap.md](docs/formalization-roadmap.md)。
 >
 > **第 5 层陈述级已完成形式化。** `Legendre/Layer5.lean` 按论文原文的精确 `+ε`、
@@ -52,6 +57,7 @@
 | 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
 |---|---|---|---|---|
 | **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | 不适用 — `(x, 6x/5]`，`x ≥ 25` | **[✅ 是 — 本仓库完整证明](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** |
 | Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L289)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
 | Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L302)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Layer5.lean L302](Legendre/Layer5.lean#L302)** |
 | Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L315)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Layer5.lean L315](Legendre/Layer5.lean#L315)** |
@@ -103,6 +109,9 @@
 | `Legendre.pi_lower_explicit` / `pi_upper_explicit` | `π` 显式上下界 | **已证明** | **[L139](Legendre/ExplicitBounds.lean#L139)** · **[L145](Legendre/ExplicitBounds.lean#L145)** |
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
+| `Legendre.nagura_hasPrimeIn` / `nagura_prime_gap` | Nagura 定理：对每个 `x ≥ 25`，`(x, 6x/5]` 中有素数 | **已证明** | **[Nagura.lean L50](Legendre/Nagura.lean#L50)** · **[L41](Legendre/Nagura.lean#L41)** |
+| `Legendre.Nagura.naguraChebyshevSum_eq_log_factorial` | Ramanujan/Nagura 恒等式 `∑_{m≤n} ψ(n/m) = log n!` | **已证明** | **[PsiBounds.lean L109](Legendre/Nagura/PsiBounds.lean#L109)** |
+| `Legendre.Nagura.psi_nat_lt_1_086_mul` / `psi_nat_gt_0_916_mul` | 显式 Chebyshev 界 `0.916n < ψ(n) < 1.086n` | **已证明** | **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** · **[L1844](Legendre/Nagura/PsiBounds.lean#L1844)** |
 | `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | 论文精确陈述约定：显式指数、常数与“充分大”阈值 | 定义 | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
 | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`，需 `θ ≥ 0`、`C ≥ 0`） | **已证明** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | 论文精确 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
@@ -135,6 +144,9 @@
   **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
   **[BHP L96](Legendre/Conditional.lean#L96)** ·
   **[Layer5.lean 中的论文精确形式](Legendre/Layer5.lean)**；
+* Dusart 型显式界（`ϑ(x) − x < x/36260`、`x ≥ 3 594 641` 时
+  `|ϑ(x) − x| ≤ 0.2x/log²x`、`x ≥ 396 738` 时 `(x, x + x/(25 log²x)]` 中有素数）
+  — 需要带无零点区域的显式素数定理，**尚未**声称（第 2–3 层）；
 * Riemann 假设下的间隙界与 Cramér 猜想 —
   **[RH gap L130](Legendre/Conditional.lean#L130)** ·
   **[Cramér L137](Legendre/Conditional.lean#L137)**；
@@ -165,7 +177,7 @@
 | 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.33.1 / 本仓库） |
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
-| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **核心已形式化**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界；Nagura/Dusart 常数仍未形式化 |
+| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | mathlib 只有部分 ζ API；没有完整的无零点区域与零点计数 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
@@ -178,7 +190,7 @@
 ```
 (0) 定义/算术                    [已完成]
         │
-(1) Bertrand + Chebyshev         [本仓库已完成；更强常数仍开放]
+(1) Bertrand + Chebyshev         [已完成；Nagura 已完成；Dusart 型仍开放]
         │
 (2) ζ 基础                       [第一个真正的大里程碑]
         │
@@ -194,9 +206,11 @@
 
 对本仓库而言，现实顺序是：
 
-1. ✅ **完成第 1 层（核心）——已完成。** `Legendre/ExplicitBounds.lean` 证明了
-   区间 API、`(x, 2x]` 素数定理、Chebyshev 桥，以及 `θ/ψ/π` 的显式界。
-   Nagura/Dusart 型更强常数仍然开放。
+1. ✅ **完成第 1 层——已完成，包含 Nagura。** `Legendre/ExplicitBounds.lean`
+   证明了区间 API、`(x, 2x]` 素数定理、Chebyshev 桥，以及 `θ/ψ/π` 的显式界。
+   `Legendre/Nagura.lean` 现在证明了 **Nagura 定理**（`nagura_hasPrimeIn`：
+   对每个 `x ≥ 25`，`(x, 6x/5]` 中有素数）以及显式 `ψ` 界
+   `0.916n < ψ(n) < 1.086n`。Dusart 型 PNT 强度常数仍然开放（第 2–3 层）。
 2. ✅ **第 5 层陈述级——已完成。** `Legendre/Layer5.lean` 编码了 Hoheisel、
    Ingham（两条路线）、Huxley、Heath-Brown–Iwaniec、Iwaniec–Pintz、Mozzochi、
    Baker–Harman 与 Baker–Harman–Pintz 的精确 `+ε`、“充分大”和常数约定，证明
@@ -252,6 +266,8 @@ Legendre/
   Bertrand.lean      Bertrand 公设的复用与比较
   ExplicitBounds.lean Layer 1：区间 API、(x,2x]、Chebyshev θ/ψ/π 界
   Layer5.lean        Layer 5：论文精确的短区间陈述与桥接
+  Nagura.lean        Layer 1：Nagura 定理，(x, 6x/5]，x >= 25
+  Nagura/            Nagura 证明：有限素数链 + 显式 psi 界
   Audit.lean         #print axioms 审计
 docs/
   literature.md      原始文献时间线与证据等级
@@ -278,7 +294,10 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 仓库不包含 PDF、扫描件或受版权保护论文的长篇逐字摘录。
 `docs/literature.md` 只包含书目信息、简短的数学陈述和出版社/arXiv 链接。
-Lean 代码以 Apache-2.0 发布。
+Lean 代码以 Apache-2.0 发布；例外是 `Legendre/Nagura/` 下的文件，它们改编自
+MIT 许可项目 <https://github.com/ShouqiaoW/erdos>（commit
+`d28713ac8245ca86a686b8c67370a8d19d81b242`），原始 MIT 许可证保留在
+[`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
 
 ## 参考文献
 
@@ -296,6 +315,9 @@ Lean 代码以 Apache-2.0 发布。
 * R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes,
   II*, Proc. London Math. Soc. **83** (2001), 532–562,
   [DOI](https://doi.org/10.1112/plms/83.3.532).
+* J. Nagura, *On the interval containing at least one prime number*,
+  Proc. Japan Acad. **28** (1952), 177–181,
+  [DOI](https://doi.org/10.3792/pja/1195570997).
 * J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's
   conjecture up to 7·10¹³*, Res. Number Theory **11** (2025),
   [DOI](https://doi.org/10.1007/s40993-024-00589-4).

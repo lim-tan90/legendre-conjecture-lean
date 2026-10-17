@@ -27,6 +27,9 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 8d | explicit upper/lower bounds for `θ` | `Legendre.theta_upper_explicit`, `Legendre.theta_lower_explicit` | **proved** |
 | 8e | explicit upper/lower bounds for `ψ` | `Legendre.psi_upper_explicit`, `Legendre.psi_lower_explicit` | **proved** |
 | 8f | explicit lower/upper bounds for `π` | `Legendre.pi_lower_explicit`, `Legendre.pi_upper_explicit` | **proved** |
+| 8g | Nagura 1952: a prime in `(x, 6x/5]` for every `x ≥ 25` | `Legendre.nagura_hasPrimeIn`, `Legendre.nagura_prime_gap` | **proved** |
+| 8h | explicit `ψ` bounds `0.916n < ψ(n) < 1.086n` (Nagura's Lemma 2) | `Legendre.Nagura.psi_nat_gt_0_916_mul`, `Legendre.Nagura.psi_nat_lt_1_086_mul` | **proved** |
+| 8i | Ramanujan/Nagura identity `∑_{m≤n} ψ(n/m) = log n!` | `Legendre.Nagura.naguraChebyshevSum_eq_log_factorial` | **proved** |
 | 9 | Bertrand's linear exponent is above `1/2` | `Legendre.bertrand_exponent_above_half` | **proved** |
 | 9a | short-interval interval form with explicit constant and threshold | `Legendre.HasPrimeInShortInterval` | definition |
 | 9b | `+ε` paper convention for short intervals | `Legendre.ShortIntervalStatement` | definition |

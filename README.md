@@ -22,19 +22,26 @@
 > The best unconditional prime-gap exponent is still `θ = 0.525`
 > (Baker–Harman–Pintz 2001), which is **above** `1/2`; it does not prove
 > Legendre's conjecture. This repository does **not** claim a proof of the
-> conjecture and does **not** claim to have formalized the deep analytic papers.
-> It formalizes the definitions, the elementary reductions, the exact
-> statement-level conventions of the nine published short-interval results
+> conjecture and does **not** claim to have formalized the deep exponent results
+> of Hoheisel, Ingham, Huxley, Baker–Harman or Baker–Harman–Pintz.  It does
+> formalize the definitions, the elementary reductions, **Nagura's 1952
+> explicit interval theorem** (a prime in `(x, 6x/5]` for `x ≥ 25`, in
+> [`Nagura.lean`](Legendre/Nagura.lean)), the exact statement-level conventions
+> of the nine published short-interval results
 > ([Layer5.lean](Legendre/Layer5.lean)), and the exact conditional bridge from a
 > future `θ < 1/2` result to Legendre's conjecture.
 
 > [!TIP]
-> **Layer 1 core is now formalized.**  `Legendre/ExplicitBounds.lean` proves the
+> **Layer 1 is now complete (Nagura).**  `Legendre/ExplicitBounds.lean` proves the
 > interval predicate `HasPrimeIn`, the explicit short-interval theorem
 > “there is a prime in `(x, 2x]` for every `x ≥ 1`”, the Chebyshev bridge
 > `θ(x) < θ(y) ⇒ ∃ prime in (x, y]`, and explicit upper/lower bounds for
-> `θ`, `ψ`, and `π`.  Nagura/Dusart-type sharper constants are **not** yet
-> formalized; see [docs/formalization-roadmap.md](docs/formalization-roadmap.md).
+> `θ`, `ψ`, and `π`.  **Nagura's theorem is now fully proved** in
+> [`Legendre/Nagura.lean`](Legendre/Nagura.lean): for every real `x ≥ 25` the
+> interval `(x, 6x/5]` contains a prime (`nagura_hasPrimeIn`), together with
+> explicit Chebyshev bounds `0.916n < ψ(n) < 1.086n`.  Dusart-type
+> `x + x/(25 log²x)` bounds remain open; see
+> [docs/formalization-roadmap.md](docs/formalization-roadmap.md).
 >
 > **Statement-level Layer 5 is now formalized.**  `Legendre/Layer5.lean`
 > encodes the nine published short-interval results with the exact `+ε`,
@@ -58,6 +65,7 @@ Cramér rows are coarse-`Prop` only.
 | Step (chronological) | Original literature | Exponent θ | Formalized in Lean? | Lean code |
 |---|---|---|---|---|
 | **Bertrand's postulate** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140; proof: P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ Yes — mathlib proof, re-exported](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | n/a — `(x, 6x/5]`, `x ≥ 25` | **[✅ Yes — fully proved here](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** |
 | Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L289)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
 | Ingham 1937 (Lindelöf route) | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L302)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Layer5.lean L302](Legendre/Layer5.lean#L302)** |
 | Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L315)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Layer5.lean L315](Legendre/Layer5.lean#L315)** |
@@ -111,6 +119,9 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.pi_lower_explicit` / `pi_upper_explicit` | explicit `π` lower/upper bounds | **proved** | **[L139](Legendre/ExplicitBounds.lean#L139)** · **[L145](Legendre/ExplicitBounds.lean#L145)** |
 | `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | the `P₁` almost-prime square statement *is* Legendre | **proved** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
 | `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` square statement ↔ Legendre | **proved** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
+| `Legendre.nagura_hasPrimeIn` / `nagura_prime_gap` | Nagura's theorem: a prime in `(x, 6x/5]` for every `x ≥ 25` | **proved** | **[Nagura.lean L50](Legendre/Nagura.lean#L50)** · **[L41](Legendre/Nagura.lean#L41)** |
+| `Legendre.Nagura.naguraChebyshevSum_eq_log_factorial` | Ramanujan/Nagura identity `∑_{m≤n} ψ(n/m) = log n!` | **proved** | **[PsiBounds.lean L109](Legendre/Nagura/PsiBounds.lean#L109)** |
+| `Legendre.Nagura.psi_nat_lt_1_086_mul` / `psi_nat_gt_0_916_mul` | explicit Chebyshev bounds `0.916n < ψ(n) < 1.086n` | **proved** | **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** · **[L1844](Legendre/Nagura/PsiBounds.lean#L1844)** |
 | `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | paper-exact statement conventions with explicit exponent, constant and “sufficiently large” threshold | definition | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
 | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | interval form ↔ gap form with the same `θ` and `C` (for `θ ≥ 0`, `C ≥ 0`) | **proved** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | paper-exact `+ε` form ↔ the coarse conditional interface | **proved** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
@@ -144,6 +155,10 @@ work can plug them in, but their proofs are **not** formalized here:
   **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
   **[BHP L96](Legendre/Conditional.lean#L96)** ·
   **[paper-exact forms in Layer5.lean](Legendre/Layer5.lean)**;
+* Dusart-type explicit bounds (`ϑ(x) − x < x/36260`, `|ϑ(x) − x| ≤ 0.2x/log²x`
+  for `x ≥ 3 594 641`, a prime in `(x, x + x/(25 log²x)]` for `x ≥ 396 738`) —
+  these require a formalized explicit prime number theorem with a zero-free
+  region and are **not** claimed (Layer 2–3);
 * the Riemann-Hypothesis gap bound and Cramér's conjecture —
   **[RH gap L130](Legendre/Conditional.lean#L130)** ·
   **[Cramér L137](Legendre/Conditional.lean#L137)**;
@@ -176,7 +191,7 @@ This table is the roadmap, not a claim that the work is done.
 | Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
-| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **core formalized** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds; Nagura/Dusart constants remain open |
+| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | partial zeta API in mathlib; no complete zero-free-region / zero-counting development |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
@@ -189,7 +204,7 @@ This table is the roadmap, not a claim that the work is done.
 ```
 (0) definitions/arithmetic        [done]
         │
-(1) Bertrand + Chebyshev          [done here; sharper constants open]
+(1) Bertrand + Chebyshev          [done; Nagura done; Dusart-type open]
         │
 (2) zeta foundations              [first hard milestone]
         │
@@ -205,9 +220,12 @@ This table is the roadmap, not a claim that the work is done.
 
 A realistic order for this repository is:
 
-1. ✅ **Finish Layer 1 (core) — done.** `Legendre/ExplicitBounds.lean` proves
-   the interval API, the `(x, 2x]` prime theorem, the Chebyshev bridge, and
-   explicit `θ/ψ/π` bounds.  Nagura/Dusart-type sharper constants remain open.
+1. ✅ **Finish Layer 1 — done, including Nagura.** `Legendre/ExplicitBounds.lean`
+   proves the interval API, the `(x, 2x]` prime theorem, the Chebyshev bridge,
+   and explicit `θ/ψ/π` bounds.  `Legendre/Nagura.lean` now proves **Nagura's
+   theorem** (`nagura_hasPrimeIn`: a prime in `(x, 6x/5]` for every `x ≥ 25`)
+   and the explicit `ψ` bounds `0.916n < ψ(n) < 1.086n`.  Dusart-type
+   PNT-strength constants remain open (Layer 2–3).
 2. ✅ **Statement-level Layer 5 — done.** `Legendre/Layer5.lean` encodes the
    exact `+ε`, “sufficiently large” and constant conventions of Hoheisel,
    Ingham (two routes), Huxley, Heath-Brown–Iwaniec, Iwaniec–Pintz, Mozzochi,
@@ -266,6 +284,8 @@ Legendre/
   Bertrand.lean      Bertrand's postulate re-exported and compared
   ExplicitBounds.lean Layer 1: interval API, (x,2x], Chebyshev θ/ψ/π bounds
   Layer5.lean        Layer 5: paper-exact short-interval statements and bridges
+  Nagura.lean        Layer 1: Nagura's theorem, (x, 6x/5] for x >= 25
+  Nagura/            Nagura's proof: finite prime chains + explicit psi bounds
   Audit.lean         #print axioms audit
 docs/
   literature.md      primary-source timeline with evidence levels
@@ -295,7 +315,11 @@ fails, it stays on `review` for fixes. See
 No PDFs, no scans, and no verbatim long excerpts of copyrighted papers are
 uploaded. `docs/literature.md` contains only bibliographic data, short
 mathematical statements, and links to the publishers/arXiv. The Lean code is
-released under Apache-2.0.
+released under Apache-2.0, except the files under `Legendre/Nagura/`, which are
+adapted from the MIT-licensed project
+<https://github.com/ShouqiaoW/erdos> (commit
+`d28713ac8245ca86a686b8c67370a8d19d81b242`); their original MIT license is
+retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
 
 ## References
 
@@ -313,6 +337,9 @@ The full bibliography, with DOI/arXiv links and evidence levels, is in
 * R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes,
   II*, Proc. London Math. Soc. **83** (2001), 532–562,
   [DOI](https://doi.org/10.1112/plms/83.3.532).
+* J. Nagura, *On the interval containing at least one prime number*,
+  Proc. Japan Acad. **28** (1952), 177–181,
+  [DOI](https://doi.org/10.3792/pja/1195570997).
 * J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's
   conjecture up to 7·10¹³*, Res. Number Theory **11** (2025),
   [DOI](https://doi.org/10.1007/s40993-024-00589-4).
