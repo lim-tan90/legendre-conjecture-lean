@@ -30,19 +30,21 @@
 `lake build` 证明以下内容，且没有 `sorry`、`admit`、自定义
 `axiom`/`constant`/`opaque`，也没有 `False.elim`/`absurd` 爆炸捷径：
 
-| Lean 声明 | 数学内容 | 状态 |
-|---|---|---|
-| `Legendre.LegendreAt` / `Legendre.Conjecture` | 猜想的平方区间形式 | 定义 |
-| `Legendre.legendreAt_iff_gapFormAt` | 两种标准表述等价 | **已证明** |
-| `Legendre.sq_interval_length` | `(n+1)^2 - n^2 = 2n+1` | **已证明** |
-| `Legendre.legendre_of_gap_lt_two_sqrt` | 每个素数间隙 `< 2√p` ⇒ 勒让德猜想 | **已证明** |
-| `Legendre.eventually_const_mul_rpow_lt` | `θ < 1/2 ⇒ C n^{2θ} < 2n`（最终） | **已证明** |
-| `Legendre.eventually_legendre_of_gap_exponent_lt_half` | 间隙指数 `θ < 1/2` ⇒ 大 `n` 的勒让德猜想 | **已证明** |
-| `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | 文献风格的指数结果包装 | **已证明** |
-| `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | 论文中 `+ε` 形式的同一推论 | **已证明** |
-| `Legendre.bertrand` / `bertrand_gap_le` | Bertrand 公设（复用 mathlib） | mathlib 证明 |
-| `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** |
-| `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** |
+| Lean 声明 | 数学内容 | 状态 | 代码（GitHub） |
+|---|---|---|---|
+| `Legendre.LegendreAt` / `Legendre.Conjecture` | 猜想的平方区间形式 | 定义 | **[Basic.lean L32](Legendre/Basic.lean#L32)** · **[Basic.lean L36](Legendre/Basic.lean#L36)** |
+| `Legendre.legendreAt_iff_gapFormAt` | 两种标准表述等价 | **已证明** | **[Basic.lean L49](Legendre/Basic.lean#L49)** |
+| `Legendre.sq_interval_length` | `(n+1)^2 - n^2 = 2n+1` | **已证明** | **[Basic.lean L62](Legendre/Basic.lean#L62)** |
+| `Legendre.legendre_of_gap_lt_two_sqrt` | 每个素数间隙 `< 2√p` ⇒ 勒让德猜想 | **已证明** | **[Reduction.lean L41](Legendre/Reduction.lean#L41)** |
+| `Legendre.eventually_const_mul_rpow_lt` | `θ < 1/2 ⇒ C n^{2θ} < 2n`（最终） | **已证明** | **[Reduction.lean L79](Legendre/Reduction.lean#L79)** |
+| `Legendre.eventually_legendre_of_gap_exponent_lt_half` | 间隙指数 `θ < 1/2` ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Reduction.lean L110](Legendre/Reduction.lean#L110)** |
+| `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | 文献风格的指数结果包装 | **已证明** | **[Conditional.lean L45](Legendre/Conditional.lean#L45)** |
+| `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | 论文中 `+ε` 形式的同一推论 | **已证明** | **[Conditional.lean L54](Legendre/Conditional.lean#L54)** |
+| `Legendre.bertrand` / `bertrand_gap_le` | Bertrand 公设（复用 mathlib） | mathlib 证明 | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** · **[Bertrand.lean L33](Legendre/Bertrand.lean#L33)** |
+| `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | 几乎素数 `P₁` 平方区间命题就是勒让德猜想 | **已证明** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
+| `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` 平方区间命题 ↔ 勒让德猜想 | **已证明** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
+
+每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
 审计通过 `#print axioms` 完成：每个被审计定理只依赖
 `propext`、`Classical.choice`、`Quot.sound`。
@@ -54,10 +56,24 @@
 
 * Hoheisel 1930、Ingham 1937（`5/8` 与 `577/925` 两条路线）、Huxley 1972、
   Heath-Brown–Iwaniec 1979、Iwaniec–Pintz 1984、Mozzochi 1986、
-  Baker–Harman 1996、Baker–Harman–Pintz 2001；
-* Riemann 假设下的间隙界与 Cramér 猜想；
-* 勒让德猜想 `n ≤ 7.05 × 10¹³` 的显式验证；
-* Chen（1975）与 Dudek–Johnston（2026）的几乎素数定理。
+  Baker–Harman 1996、Baker–Harman–Pintz 2001 — 陈述代码：
+  **[Hoheisel L70](Legendre/Conditional.lean#L70)** ·
+  **[Ingham 5/8 L74](Legendre/Conditional.lean#L74)** ·
+  **[Ingham 577/925 L77](Legendre/Conditional.lean#L77)** ·
+  **[Huxley L80](Legendre/Conditional.lean#L80)** ·
+  **[Heath-Brown–Iwaniec L83](Legendre/Conditional.lean#L83)** ·
+  **[Iwaniec–Pintz L86](Legendre/Conditional.lean#L86)** ·
+  **[Mozzochi L89](Legendre/Conditional.lean#L89)** ·
+  **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
+  **[BHP L96](Legendre/Conditional.lean#L96)**；
+* Riemann 假设下的间隙界与 Cramér 猜想 —
+  **[RH gap L130](Legendre/Conditional.lean#L130)** ·
+  **[Cramér L137](Legendre/Conditional.lean#L137)**；
+* 勒让德猜想 `n ≤ 7.05 × 10¹³` 的显式验证 —
+  **[第 6 层路线图](docs/formalization-roadmap.md)**；
+* Chen（1975）与 Dudek–Johnston（2026）的几乎素数定理 —
+  **[P_k 定义 L146](Legendre/Conditional.lean#L146)** ·
+  **[第 7 层路线图](docs/formalization-roadmap.md)**。
 
 每一步的精确状态见 [docs/literature.md](docs/literature.md) 与
 [docs/proof-map.md](docs/proof-map.md)。
@@ -67,8 +83,9 @@
 若素数 `p ≤ n²` 之后的间隙至多为 `C p^θ`，则下一个素数小于
 `n² + C n^{2θ}`。要落到 `(n+1)² = n² + 2n + 1` 以下，需要 `2θ < 1`，即
 `θ < 1/2`。当 `θ = 0.525` 时允许的间隙是 `n^{1.05}`，远大于平方区间长度
-`2n`；间隙可以直接跨过整个区间。该推理在 `Legendre/Reduction.lean` 中
-形式化，文献解释见 [docs/literature.md](docs/literature.md)。
+`2n`；间隙可以直接跨过整个区间。该推理在
+**[Reduction.lean L110](Legendre/Reduction.lean#L110)** 中形式化，文献解释见
+[docs/literature.md](docs/literature.md)。
 
 ## 完整证明级形式化需要哪些工具
 
@@ -78,14 +95,14 @@
 
 | 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.33.1 / 本仓库） |
 |---:|---|---|---|
-| 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成** |
-| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | Bertrand 在 mathlib；`Chebyshev.lean` 有 `ψ`、`θ` 与基本界；没有完整显式间隙理论 |
+| 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
+| 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | Bertrand 在 mathlib，并在 **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** 复用；`Chebyshev.lean` 有 `ψ`、`θ` 与基本界；没有完整显式间隙理论 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | mathlib 只有部分 ζ API；没有完整的无零点区域与零点计数 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
-| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **mathlib 中没有**；本仓库只有 `Prop` 陈述 |
+| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **mathlib 中没有**；本仓库只有 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 的 `Prop` 陈述 |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
-| 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法** |
+| 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
 ### 依赖顺序与现实里程碑
 
@@ -153,6 +170,8 @@ pwsh -File scripts/verify.ps1
 ## 仓库结构
 
 ```
+README.md            英文（默认）
+README.zh.md         中文版本
 Legendre/
   Basic.lean         定义、等价性、初等事实
   Reduction.lean     平方区间判定、θ < 1/2 归约

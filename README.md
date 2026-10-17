@@ -31,19 +31,22 @@
 `lake build` proves the following, with no `sorry`, no `admit`, no user
 `axiom`/`constant`/`opaque`, and no `False.elim`/`absurd` shortcuts:
 
-| Lean declaration | Mathematical content | Status |
-|---|---|---|
-| `Legendre.LegendreAt` / `Legendre.Conjecture` | square-interval form of the conjecture | definition |
-| `Legendre.legendreAt_iff_gapFormAt` | equivalence of the two standard formulations | **proved** |
-| `Legendre.sq_interval_length` | `(n+1)^2 - n^2 = 2n+1` | **proved** |
-| `Legendre.legendre_of_gap_lt_two_sqrt` | if every prime gap is `< 2√p`, then Legendre holds | **proved** |
-| `Legendre.eventually_const_mul_rpow_lt` | `θ < 1/2 ⇒ C n^{2θ} < 2n` eventually | **proved** |
-| `Legendre.eventually_legendre_of_gap_exponent_lt_half` | gap exponent `θ < 1/2` ⇒ Legendre eventually | **proved** |
-| `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | same, packaged as a literature-style exponent result | **proved** |
-| `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | same for the `+ε` form used in papers | **proved** |
-| `Legendre.bertrand` / `bertrand_gap_le` | Bertrand's postulate, re-exported from mathlib | mathlib proof |
-| `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | the `P₁` almost-prime square statement *is* Legendre | **proved** |
-| `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` square statement ↔ Legendre | **proved** |
+| Lean declaration | Mathematical content | Status | Code (GitHub) |
+|---|---|---|---|
+| `Legendre.LegendreAt` / `Legendre.Conjecture` | square-interval form of the conjecture | definition | **[Basic.lean L32](Legendre/Basic.lean#L32)** · **[Basic.lean L36](Legendre/Basic.lean#L36)** |
+| `Legendre.legendreAt_iff_gapFormAt` | equivalence of the two standard formulations | **proved** | **[Basic.lean L49](Legendre/Basic.lean#L49)** |
+| `Legendre.sq_interval_length` | `(n+1)^2 - n^2 = 2n+1` | **proved** | **[Basic.lean L62](Legendre/Basic.lean#L62)** |
+| `Legendre.legendre_of_gap_lt_two_sqrt` | if every prime gap is `< 2√p`, then Legendre holds | **proved** | **[Reduction.lean L41](Legendre/Reduction.lean#L41)** |
+| `Legendre.eventually_const_mul_rpow_lt` | `θ < 1/2 ⇒ C n^{2θ} < 2n` eventually | **proved** | **[Reduction.lean L79](Legendre/Reduction.lean#L79)** |
+| `Legendre.eventually_legendre_of_gap_exponent_lt_half` | gap exponent `θ < 1/2` ⇒ Legendre eventually | **proved** | **[Reduction.lean L110](Legendre/Reduction.lean#L110)** |
+| `Legendre.legendre_eventually_of_shortIntervalExponent_lt_half` | same, packaged as a literature-style exponent result | **proved** | **[Conditional.lean L45](Legendre/Conditional.lean#L45)** |
+| `Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half` | same for the `+ε` form used in papers | **proved** | **[Conditional.lean L54](Legendre/Conditional.lean#L54)** |
+| `Legendre.bertrand` / `bertrand_gap_le` | Bertrand's postulate, re-exported from mathlib | mathlib proof | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** · **[Bertrand.lean L33](Legendre/Bertrand.lean#L33)** |
+| `Legendre.conjecture_of_almostPrimeSquareAtMost_one` | the `P₁` almost-prime square statement *is* Legendre | **proved** | **[Conditional.lean L172](Legendre/Conditional.lean#L172)** |
+| `Legendre.almostPrimeSquareAtMost_one_iff` | `P₁` square statement ↔ Legendre | **proved** | **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
+
+Each row links directly to the exact declaration in the GitHub source; click the
+`Lnn` anchor to jump to that line.
 
 The audit works by `#print axioms`: every audited theorem depends only on
 `propext`, `Classical.choice`, `Quot.sound`.
@@ -55,10 +58,24 @@ work can plug them in, but their proofs are **not** formalized here:
 
 * Hoheisel 1930, Ingham 1937 (both `5/8` and `577/925` routes), Huxley 1972,
   Heath-Brown–Iwaniec 1979, Iwaniec–Pintz 1984, Mozzochi 1986,
-  Baker–Harman 1996, Baker–Harman–Pintz 2001;
-* the Riemann-Hypothesis gap bound and Cramér's conjecture;
-* the explicit verification of Legendre up to `n ≤ 7.05 × 10¹³`;
-* the almost-prime theorems of Chen (1975) and Dudek–Johnston (2026).
+  Baker–Harman 1996, Baker–Harman–Pintz 2001 — statement code:
+  **[Hoheisel L70](Legendre/Conditional.lean#L70)** ·
+  **[Ingham 5/8 L74](Legendre/Conditional.lean#L74)** ·
+  **[Ingham 577/925 L77](Legendre/Conditional.lean#L77)** ·
+  **[Huxley L80](Legendre/Conditional.lean#L80)** ·
+  **[Heath-Brown–Iwaniec L83](Legendre/Conditional.lean#L83)** ·
+  **[Iwaniec–Pintz L86](Legendre/Conditional.lean#L86)** ·
+  **[Mozzochi L89](Legendre/Conditional.lean#L89)** ·
+  **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
+  **[BHP L96](Legendre/Conditional.lean#L96)**;
+* the Riemann-Hypothesis gap bound and Cramér's conjecture —
+  **[RH gap L130](Legendre/Conditional.lean#L130)** ·
+  **[Cramér L137](Legendre/Conditional.lean#L137)**;
+* the explicit verification of Legendre up to `n ≤ 7.05 × 10¹³` —
+  **[Layer 6 roadmap](docs/formalization-roadmap.md)**;
+* the almost-prime theorems of Chen (1975) and Dudek–Johnston (2026) —
+  **[P_k definitions L146](Legendre/Conditional.lean#L146)** ·
+  **[Layer 7 roadmap](docs/formalization-roadmap.md)**.
 
 See [docs/literature.md](docs/literature.md) and
 [docs/proof-map.md](docs/proof-map.md) for the exact status of every step.
@@ -70,7 +87,8 @@ below `n² + C n^{2θ}`. To land below `(n+1)² = n² + 2n + 1` one needs
 `2θ < 1`, i.e. `θ < 1/2`. For `θ = 0.525` the allowed gap is `n^{1.05}`, which
 is much larger than the square interval length `2n`; a gap can jump over the
 whole interval. This is formalized in
-`Legendre/Reduction.lean` and explained in [docs/literature.md](docs/literature.md).
+**[Reduction.lean L110](Legendre/Reduction.lean#L110)** and explained in
+[docs/literature.md](docs/literature.md).
 
 ## What a full proof-level formalization would require
 
@@ -81,14 +99,14 @@ This table is the roadmap, not a claim that the work is done.
 
 | Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
 |---:|---|---|---|
-| 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here** |
-| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | Bertrand is in mathlib; `Chebyshev.lean` has `ψ`, `θ` and basic bounds; no full explicit prime-gap development |
+| 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
+| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | Bertrand is in mathlib and re-exported in **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**; `Chebyshev.lean` has `ψ`, `θ` and basic bounds; no full explicit prime-gap development |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | partial zeta API in mathlib; no complete zero-free-region / zero-counting development |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
-| 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **not in mathlib**; only `Prop` statements are encoded here |
+| 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **not in mathlib**; only `Prop` statements are encoded in **[Conditional.lean L70](Legendre/Conditional.lean#L70)** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
-| 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory** |
+| 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
 ### Dependency order and realistic milestones
 
@@ -158,6 +176,8 @@ The audit checks:
 ## Repository layout
 
 ```
+README.md            English (default)
+README.zh.md         Chinese translation
 Legendre/
   Basic.lean         definitions, equivalence, elementary facts
   Reduction.lean     square-gap criterion, θ < 1/2 reduction
