@@ -31,7 +31,7 @@ not theorems.  What *is* proved is the statement-level infrastructure:
 * the two conventions (interval and gap) are equivalent
   (`hasPrimeInShortInterval_iff_primeGapBound`);
 * the paper-exact statements are equivalent to the coarser `Prop`s of
-  `Legendre/Conditional.lean` (`hoheiselPaper_iff_hoheisel`, ...);
+  `Legendre/Conditional.lean` (`hoheiselPaper_iff`, `ingham58Paper_iff`, ...);
 * the precise statements feed the verified conditional reduction
   (`legendre_eventually_of_shortIntervalStatement_lt_half`).
 
@@ -282,7 +282,7 @@ paper-exact statement is equivalent to the corresponding coarse `Prop` in
 `Legendre/Conditional.lean`. -/
 
 /-- Hoheisel (1930): for every `ε > 0`, every sufficiently large real `x` has a
-prime in `(x, x ^ (32999/33000 + ε)]`.
+prime in `(x, x + x ^ (32999/33000 + ε)]`.
 
 Paper: G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss.
 Akad. Wiss. Berlin (1930), 580--588. -/
@@ -295,7 +295,7 @@ theorem hoheiselPaper_iff : HoheiselPaper ↔ Hoheisel := by
     (shortIntervalStatement_iff_exponentLimit (θ := 32999 / 33000) (by norm_num))
 
 /-- Ingham (1937), Lindelöf route: for every `ε > 0`, every sufficiently large
-real `x` has a prime in `(x, x ^ (5/8 + ε)]`.
+real `x` has a prime in `(x, x + x ^ (5/8 + ε)]`.
 
 Paper: A. E. Ingham, *On the difference between consecutive primes*, Quart. J.
 Math. Oxford **os-8** (1937), 255--266. -/
@@ -308,7 +308,7 @@ theorem ingham58Paper_iff : Ingham58Paper ↔ Ingham58 := by
     (shortIntervalStatement_iff_exponentLimit (θ := 5 / 8) (by norm_num))
 
 /-- Ingham (1937), zero-density route: for every `ε > 0`, every sufficiently
-large real `x` has a prime in `(x, x ^ (577/925 + ε)]`.
+large real `x` has a prime in `(x, x + x ^ (577/925 + ε)]`.
 
 Paper: same as `Ingham58Paper`; the value is reported via N. Starichkova,
 arXiv:2411.01845. -/
@@ -321,7 +321,7 @@ theorem ingham577Paper_iff : Ingham577Paper ↔ Ingham577 := by
     (shortIntervalStatement_iff_exponentLimit (θ := 577 / 925) (by norm_num))
 
 /-- Huxley (1972): for every `ε > 0`, every sufficiently large real `x` has a
-prime in `(x, x ^ (7/12 + ε)]`.
+prime in `(x, x + x ^ (7/12 + ε)]`.
 
 Paper: M. N. Huxley, *On the difference between consecutive primes*,
 Invent. Math. **15** (1972), 164--170. -/
@@ -333,7 +333,7 @@ theorem huxleyPaper_iff : HuxleyPaper ↔ Huxley := by
     (shortIntervalStatement_iff_exponentLimit (θ := 7 / 12) (by norm_num))
 
 /-- Heath-Brown--Iwaniec (1979): for every `ε > 0`, every sufficiently large
-real `x` has a prime in `(x, x ^ (13/23 + ε)]`.
+real `x` has a prime in `(x, x + x ^ (13/23 + ε)]`.
 
 Paper: D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive
 primes*, Invent. Math. **55** (1979), 49--69. -/
@@ -346,7 +346,7 @@ theorem heathBrownIwaniecPaper_iff : HeathBrownIwaniecPaper ↔ HeathBrownIwanie
     (shortIntervalStatement_iff_exponentLimit (θ := 13 / 23) (by norm_num))
 
 /-- Iwaniec--Pintz (1984): for every `ε > 0`, every sufficiently large real `x`
-has a prime in `(x, x ^ (11/20 - 1/406 + ε)]`.
+has a prime in `(x, x + x ^ (11/20 - 1/406 + ε)]`.
 
 Paper: H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math.
 **98** (1984), 115--143. -/
@@ -359,7 +359,7 @@ theorem iwaniecPintzPaper_iff : IwaniecPintzPaper ↔ IwaniecPintz := by
     (shortIntervalStatement_iff_exponentLimit (θ := 11 / 20 - 1 / 406) (by norm_num))
 
 /-- Mozzochi (1986): for every `ε > 0`, every sufficiently large real `x` has a
-prime in `(x, x ^ (11/20 - 1/384 + ε)]`.
+prime in `(x, x + x ^ (11/20 - 1/384 + ε)]`.
 
 Paper: C. J. Mozzochi, *On the difference between consecutive primes*,
 J. Number Theory **24** (1986), 181--187. -/
