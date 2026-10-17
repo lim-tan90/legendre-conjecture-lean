@@ -1,8 +1,24 @@
 # Legendre's Conjecture — Exponent Progress, Formally Audited
 
-[中文说明](#中文说明) · [English summary](#english-summary) · [Build](#build) · [PR workflow](docs/PR_WORKFLOW.md)
+**English** · [中文](README.zh.md)
 
-> **Status (2026-10): Legendre's conjecture is still open.**
+[![verify](https://github.com/lim-tan90/legendre-conjecture-lean/actions/workflows/verify.yml/badge.svg?branch=master)](https://github.com/lim-tan90/legendre-conjecture-lean/actions/workflows/verify.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
+> [!IMPORTANT]
+> **Pull requests must target the `review` branch, never `master`.**
+>
+> 1. Fork the repository and branch from `review`.
+> 2. Run `lake build` and `python3 scripts/audit.py` locally.
+> 3. Open the PR **against `review`**.
+> 4. CI must be green. The maintainer merges `review → master` only after an
+>    explicit instruction and a green audit.
+>
+> Full guide: **[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
+> PR checklist: [`.github/pull_request_template.md`](.github/pull_request_template.md)
+
+> [!NOTE]
+> **Status (October 2026): Legendre's conjecture is still open.**
 > The best unconditional prime-gap exponent is still `θ = 0.525`
 > (Baker–Harman–Pintz 2001), which is **above** `1/2`; it does not prove
 > Legendre's conjecture. This repository does **not** claim a proof of the
@@ -44,9 +60,6 @@ work can plug them in, but their proofs are **not** formalized here:
 * the explicit verification of Legendre up to `n ≤ 7.05 × 10¹³`;
 * the almost-prime theorems of Chen (1975) and Dudek–Johnston (2026).
 
-Formalizing these would require a formalized zero-density theory, the
-Riemann zeta function, sieve theory, and large computations. That is a
-multi-year project, not something this repository pretends to have done.
 See [docs/literature.md](docs/literature.md) and
 [docs/proof-map.md](docs/proof-map.md) for the exact status of every step.
 
@@ -58,6 +71,61 @@ below `n² + C n^{2θ}`. To land below `(n+1)² = n² + 2n + 1` one needs
 is much larger than the square interval length `2n`; a gap can jump over the
 whole interval. This is formalized in
 `Legendre/Reduction.lean` and explained in [docs/literature.md](docs/literature.md).
+
+## What a full proof-level formalization would require
+
+The current repository is a **verified reduction layer**, not a formalized
+analytic number theory library.  A proof-level formalization of the published
+exponent results needs the following tools, roughly in dependency order.
+This table is the roadmap, not a claim that the work is done.
+
+| Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
+|---:|---|---|---|
+| 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here** |
+| 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | Bertrand is in mathlib; `Chebyshev.lean` has `ψ`, `θ` and basic bounds; no full explicit prime-gap development |
+| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | partial zeta API in mathlib; no complete zero-free-region / zero-counting development |
+| 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
+| 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **not in mathlib**; only `Prop` statements are encoded here |
+| 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
+| 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory** |
+
+### Dependency order and realistic milestones
+
+```
+(0) definitions/arithmetic        [done]
+        │
+(1) Bertrand + Chebyshev          [partly in mathlib]
+        │
+(2) zeta foundations              [first hard milestone]
+        │
+(3) PNT with error term
+        │
+(4) zero-density estimates
+        │
+(5) Ingham → Huxley → BHP
+        │
+(6) explicit finite verification  [independent, parallel track]
+(7) almost-prime/sieve track      [independent, parallel track]
+```
+
+A realistic order for this repository is:
+
+1. **Finish Layer 1**: formalize explicit Chebyshev/π bounds and Bertrand-type
+   interval estimates from mathlib's existing API.
+2. **Statement-level Layer 5**: already present as `Prop`s; add the precise
+   `+ε`, “sufficiently large”, and constant conventions for each paper.
+3. **Layer 2–3 first**: zeta foundations and Perron/PNT with error term.  This
+   is the first genuinely large project and should be split into many PRs.
+4. **Layer 4–5**: Ingham's theorem first, then Huxley, then the BHP sieve
+   refinement.  Do not claim BHP before Ingham is complete.
+5. **Layer 6**: a verified interval-certificate checker can proceed in parallel
+   and is the most realistic way to cover the finite range.
+6. **Layer 7**: the `P₁ ↔ Legendre` equivalence is already proved; the next
+   honest target is a formalized sieve statement, not a fake `P₂` proof.
+
+Detailed acceptance criteria for each layer are in
+[docs/formalization-roadmap.md](docs/formalization-roadmap.md).
 
 ## Build
 
@@ -99,6 +167,7 @@ Legendre/
 docs/
   literature.md      primary-source timeline with evidence levels
   proof-map.md       literature step ↔ Lean declaration ↔ formalization status
+  formalization-roadmap.md  tools, dependencies and acceptance criteria
   PR_WORKFLOW.md     two-branch PR and verification workflow
 scripts/
   audit.py           no-sorry/no-axiom/no-explosion audit
@@ -124,24 +193,6 @@ No PDFs, no scans, and no verbatim long excerpts of copyrighted papers are
 uploaded. `docs/literature.md` contains only bibliographic data, short
 mathematical statements, and links to the publishers/arXiv. The Lean code is
 released under Apache-2.0.
-
-## 中文说明
-
-本仓库的目标是把勒让德猜想（Legendre's conjecture）的“指数推进”路线整理成
-**可编译、可审计** 的 Lean 4 项目，并诚实标出哪些部分真的形式化了、哪些没有。
-
-* 已经用 Lean 证明的：定义、平方区间与素数间隙的等价性、`θ < 1/2 ⇒ 大 n 的
-  勒让德猜想`、`最大间隙 < 2√p ⇒ 勒让德猜想`、Bertrand  postulate 的复用、
-  以及几乎素数 `P₁` 与勒让德猜想的等价性。
-* **没有** 用 Lean 证明的：Hoheisel、Ingham、Huxley、Baker–Harman、
-  Baker–Harman–Pintz 等深层解析数论定理。它们只被写成精确的 `Prop`，作为
-  条件化推论的输入；仓库里没有 `axiom`，也没有 `sorry` 来冒充证明。
-* 截至 2026 年 10 月，勒让德猜想仍未解决；当前最好的无条件指数是
-  `0.525 > 1/2`，因此现有指数结果不能推出它。
-
-如果将来有人给出 `θ < 1/2` 的严格结果，只需把对应的 `Prop` 实例化，
-`legendre_eventually_of_shortIntervalExponentLimit_lt_half` 就会给出大 `n`
-的勒让德猜想；再配合有限验证即可覆盖所有 `n`。
 
 ## References
 
