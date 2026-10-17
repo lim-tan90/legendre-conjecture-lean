@@ -3,4 +3,5 @@ import Legendre.Reduction
 import Legendre.Conditional
 import Legendre.Bertrand
 import Legendre.ExplicitBounds
+import Legendre.Layer5
 import Legendre.Audit

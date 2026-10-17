@@ -7,6 +7,7 @@ module
 public import Legendre.Conditional
 public import Legendre.Bertrand
 public import Legendre.ExplicitBounds
+public import Legendre.Layer5
 
 /-!
 # Axiom audit
@@ -58,5 +59,24 @@ namespace Legendre
 #print axioms psi_lower_explicit
 #print axioms pi_lower_explicit
 #print axioms pi_upper_explicit
+#print axioms primeGapBound_iff_eventuallyGapBound
+#print axioms primeGapBound_of_hasPrimeInShortInterval
+#print axioms hasPrimeInShortInterval_of_primeGapBound
+#print axioms hasPrimeInShortInterval_iff_primeGapBound
+#print axioms hasPrimeInShortInterval_mono
+#print axioms shortIntervalStatement_mono
+#print axioms shortIntervalExponentLimit_of_statement
+#print axioms statement_of_shortIntervalExponentLimit
+#print axioms shortIntervalStatement_iff_exponentLimit
+#print axioms legendre_eventually_of_shortIntervalStatement_lt_half
+#print axioms hoheiselPaper_iff
+#print axioms ingham58Paper_iff
+#print axioms ingham577Paper_iff
+#print axioms huxleyPaper_iff
+#print axioms heathBrownIwaniecPaper_iff
+#print axioms iwaniecPintzPaper_iff
+#print axioms mozzochiPaper_iff
+#print axioms bakerHarmanPaper_iff
+#print axioms bakerHarmanPintzPaper_iff
 
 end Legendre
