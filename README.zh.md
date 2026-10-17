@@ -72,6 +72,9 @@
 `lake build` 证明以下内容，且没有 `sorry`、`admit`、自定义
 `axiom`/`constant`/`opaque`，也没有 `False.elim`/`absurd` 爆炸捷径：
 
+<details>
+<summary><strong>点击展开：16 条已验证声明及源码链接</strong></summary>
+
 | Lean 声明 | 数学内容 | 状态 | 代码（GitHub） |
 |---|---|---|---|
 | `Legendre.LegendreAt` / `Legendre.Conjecture` | 猜想的平方区间形式 | 定义 | **[Basic.lean L32](Legendre/Basic.lean#L32)** · **[Basic.lean L36](Legendre/Basic.lean#L36)** |
@@ -95,6 +98,8 @@
 
 审计通过 `#print axioms` 完成：每个被审计定理只依赖
 `propext`、`Classical.choice`、`Quot.sound`。
+
+</details>
 
 ## 明确**没有**声称的内容
 

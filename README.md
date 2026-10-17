@@ -75,6 +75,9 @@ Legendre is separately **proved** in **[Reduction.lean L110](Legendre/Reduction.
 `lake build` proves the following, with no `sorry`, no `admit`, no user
 `axiom`/`constant`/`opaque`, and no `False.elim`/`absurd` shortcuts:
 
+<details>
+<summary><strong>Click to expand: 16 verified declarations and their source links</strong></summary>
+
 | Lean declaration | Mathematical content | Status | Code (GitHub) |
 |---|---|---|---|
 | `Legendre.LegendreAt` / `Legendre.Conjecture` | square-interval form of the conjecture | definition | **[Basic.lean L32](Legendre/Basic.lean#L32)** · **[Basic.lean L36](Legendre/Basic.lean#L36)** |
@@ -99,6 +102,8 @@ Each row links directly to the exact declaration in the GitHub source; click the
 
 The audit works by `#print axioms`: every audited theorem depends only on
 `propext`, `Classical.choice`, `Quot.sound`.
+
+</details>
 
 ## What is deliberately **not** claimed
 
