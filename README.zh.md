@@ -37,26 +37,28 @@
 
 | 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
 |---|---|---|---|---|
-| **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **✅ 是** — mathlib 证明，已复用 | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
-| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | ❌ 否 — 仅 Prop | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** |
-| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | ❌ 否 — 仅 Prop | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** |
-| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | ❌ 否 — 仅 Prop | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** |
-| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | ❌ 否 — 仅 Prop | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** |
-| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | ❌ 否 — 仅 Prop | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** |
-| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | ❌ 否 — 仅 Prop | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** |
-| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | ❌ 否 — 仅 Prop | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** |
-| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | ❌ 否 — 仅 Prop | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** |
-| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | ❌ 否 — 仅 Prop | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** |
-| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | ❌ 否 — 仅 Prop | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
-| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0（猜想） | ❌ 否 — 仅 Prop | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
-| 显式验证 `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | 不适用（有限范围） | ❌ 否 — 未编码 | **[第 6 层路线图](docs/formalization-roadmap.md)** |
-| Chen 1975（`P₂`，最终） | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | 不适用（`P₂`） | ❌ 否 — 未编码 | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
-| Dudek–Johnston 2026（`P₄`，所有 `n`） | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | 不适用（`P₄`） | ❌ 否 — 未编码 | **[第 7 层路线图](docs/formalization-roadmap.md)** |
+| **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
+| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L70)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** |
+| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L74)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** |
+| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L77)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** |
+| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L80)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** |
+| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L83)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** |
+| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L86)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** |
+| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L89)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** |
+| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L92)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** |
+| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L96)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** |
+| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
+| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0（猜想） | **[❌ 否 — 仅 Prop](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
+| 显式验证 `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | 不适用（有限范围） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 6 层路线图](docs/formalization-roadmap.md)** |
+| Chen 1975（`P₂`，最终） | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | 不适用（`P₂`） | **[❌ 否 — 未编码](Legendre/Conditional.lean#L146)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
+| Dudek–Johnston 2026（`P₄`，所有 `n`） | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | 不适用（`P₄`） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 7 层路线图](docs/formalization-roadmap.md)** |
 
-完整 DOI/arXiv 链接与证据等级见 [docs/literature.md](docs/literature.md)。
+状态单元格本身可点击：**✅** 跳转到证明；**❌“仅 Prop”** 跳转到已编码的陈述
+（不是证明）；**❌“未编码”** 跳转到路线图。完整 DOI/arXiv 链接与证据等级见
+[docs/literature.md](docs/literature.md)。
 “仅 Prop”行**不是**已证明定理，而是供后续工作接入的定义/假设。把假设的
-`θ < 1/2` 结果化为勒让德猜想的归约本身，已在 `Legendre/Reduction.lean` 中
-**证明**。
+`θ < 1/2` 结果化为勒让德猜想的归约本身，已在
+**[Reduction.lean L110](Legendre/Reduction.lean#L110)** 中**证明**。
 
 ## Lean 中真正验证了什么
 
