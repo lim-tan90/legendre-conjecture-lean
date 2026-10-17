@@ -12,5 +12,12 @@ and are released under the Apache License 2.0 (see `LICENSE`).  The
 mathlib4 (`Nat.exists_prime_lt_and_le_two_mul`); the proof is mathlib's, not
 this project's.
 
+The files under `Legendre/Nagura/` are adapted from the MIT-licensed Lean
+project <https://github.com/ShouqiaoW/erdos> (commit
+`d28713ac8245ca86a686b8c67370a8d19d81b242`), which formalizes J. Nagura's
+1952 proof.  The original MIT license text is retained in
+`Legendre/Nagura/LICENSE`, and those adapted files remain available under the
+MIT license; the rest of this repository remains Apache-2.0.
+
 No paper PDFs or scans are included.  Bibliographic references and links are in
 `docs/literature.md`.

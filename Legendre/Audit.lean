@@ -8,6 +8,7 @@ public import Legendre.Conditional
 public import Legendre.Bertrand
 public import Legendre.ExplicitBounds
 public import Legendre.Layer5
+public import Legendre.Nagura
 
 /-!
 # Axiom audit
@@ -78,5 +79,15 @@ namespace Legendre
 #print axioms mozzochiPaper_iff
 #print axioms bakerHarmanPaper_iff
 #print axioms bakerHarmanPintzPaper_iff
+#print axioms Legendre.Nagura.exists_prime_nagura
+#print axioms Legendre.Nagura.exists_prime_nagura_91639_to_16000000
+#print axioms Legendre.Nagura.exists_prime_nagura_analytic_tail
+#print axioms Legendre.Nagura.psi_nat_lt_1_086_mul
+#print axioms Legendre.Nagura.psi_nat_gt_0_916_mul
+#print axioms Legendre.Nagura.naguraGeneralUpperCombination_lt_1_0851_mul
+#print axioms Legendre.Nagura.naguraGeneralLowerCombination_gt_0_916_mul
+#print axioms nagura_prime_gap
+#print axioms nagura_hasPrimeIn
+#print axioms nagura_hasPrimeIn_nat
 
 end Legendre
