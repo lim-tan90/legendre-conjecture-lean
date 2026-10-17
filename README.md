@@ -42,6 +42,9 @@
 > explicit Chebyshev bounds `0.916n < ψ(n) < 1.086n`.  Dusart-type
 > `x + x/(25 log²x)` bounds remain open; see
 > [docs/formalization-roadmap.md](docs/formalization-roadmap.md).
+> The Nagura formalization is adapted from the MIT-licensed
+> [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos) project; see
+> [Reused and adapted formalizations](#reused-and-adapted-formalizations).
 >
 > **Statement-level Layer 5 is now formalized.**  `Legendre/Layer5.lean`
 > encodes the nine published short-interval results with the exact `+ε`,
@@ -309,6 +312,30 @@ after an explicit instruction; CI then runs the full Lean build and the
 axiom/explosion audit. If it passes, `review` is merged into `master`. If it
 fails, it stays on `review` for fixes. See
 [docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md).
+
+## Reused and adapted formalizations
+
+This project prefers to **adapt existing verified formalizations** instead of
+rewriting proofs from scratch.  Every ported or adapted development is recorded
+here with its upstream repository, pinned commit, license, and destination in
+this repository.
+
+* **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT License,
+  commit `d28713ac8245ca86a686b8c67370a8d19d81b242` (2026-08-02).
+  The files under [`Legendre/Nagura/`](Legendre/Nagura/) and
+  [`Legendre/Nagura.lean`](Legendre/Nagura.lean) are adapted from its
+  `Erdos390/WholePaper/Nagura*.lean` modules, which formalize J. Nagura's
+  1952 theorem.  The adaptation consists of module/namespace renaming,
+  removal of PNT-dependent auxiliary results, merging into three modules, and
+  porting to mathlib v4.33.1; the mathematical proof is the upstream one.
+  The original MIT license is retained in
+  [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
+* **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
+  Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
+  re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
+  mathlib proof is copied into this repository.
+
+No other third-party formalization code is currently vendored.
 
 ## Copyright
 

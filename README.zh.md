@@ -37,6 +37,9 @@
 > （`nagura_hasPrimeIn`），并给出显式 Chebyshev 界 `0.916n < ψ(n) < 1.086n`。
 > Dusart 型 `x + x/(25 log²x)` 界仍未形式化；见
 > [docs/formalization-roadmap.md](docs/formalization-roadmap.md)。
+> Nagura 形式化改编自 MIT 许可的
+> [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos) 项目；见
+> [复用的形式化成果](#复用的形式化成果)。
 >
 > **第 5 层陈述级已完成形式化。** `Legendre/Layer5.lean` 按论文原文的精确 `+ε`、
 > 常数与“充分大”约定编码了九项已发表短区间结果，并证明了区间形式、间隙形式与
@@ -289,6 +292,26 @@ scripts/
 收到 PR 后，维护者只有在收到明确指令时才把它合入 `review`；随后 CI 运行完整的
 Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；失败则留在
 `review` 修复。详见 [docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)。
+
+## 复用的形式化成果
+
+本项目优先**借鉴、移植已有的已验证形式化成果**，而不是从零重写。所有移植或改编
+的开发都记录在此：上游仓库、固定 commit、许可证，以及在本仓库中的位置。
+
+* **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT 许可，
+  commit `d28713ac8245ca86a686b8c67370a8d19d81b242`（2026-08-02）。
+  [`Legendre/Nagura/`](Legendre/Nagura/) 与
+  [`Legendre/Nagura.lean`](Legendre/Nagura.lean) 改编自该项目的
+  `Erdos390/WholePaper/Nagura*.lean`（Nagura 1952 定理的形式化）。改动包括：
+  重命名模块/命名空间、删除依赖 PNT 的辅助结果、合并为三个模块、适配
+  mathlib v4.33.1；数学证明本身来自上游。原始 MIT 许可证保留在
+  [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
+* **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
+  Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
+  `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
+  mathlib 的证明。
+
+目前没有收录其他第三方形式化代码。
 
 ## 版权
 

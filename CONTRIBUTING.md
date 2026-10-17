@@ -15,6 +15,11 @@ Thanks for helping with the formalization.
 4. **Update the progress table.**  Any new formalized step must be added to
    `docs/proof-map.md` and the table in `README.md`.
 5. **Target the `review` branch**, never `master`.
+6. **Record ported formalization code.**  If you port or adapt code from
+   another project, add an entry to the "Reused and adapted formalizations"
+   section of `README.md` (upstream URL, pinned commit, license, destination
+   paths), retain the upstream license text, and keep the attribution in the
+   adapted files.  This is required for every port, not only for Nagura.
 
 ## Local checks
 
@@ -43,7 +48,9 @@ If you want to formalize a new paper's theorem:
 3. Add `#print axioms` for every new theorem in `Legendre/Audit.lean`.
 4. Add the bibliographic row (with DOI/arXiv) to `docs/literature.md` and the
    proof map.
-5. Open a PR to `review`.
+5. If the step ports or adapts external formalization code, record it in the
+   "Reused and adapted formalizations" section of `README.md` (ground rule 6).
+6. Open a PR to `review`.
 
 ## Style
 
