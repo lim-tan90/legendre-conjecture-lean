@@ -1,0 +1,26 @@
+name: verify
+
+on:
+  pull_request:
+    branches: [review, master]
+  push:
+    branches: [review, master]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Lean
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: true
+          use-github-cache: true
+
+      - name: Axiom and explosion audit
+        run: python3 scripts/audit.py --skip-build
