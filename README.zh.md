@@ -301,6 +301,15 @@ scripts/
 Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；失败则留在
 `review` 修复。详见 [docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)。
 
+## 提交归属
+
+仓库历史中有少量提交由自动化编码代理以通用 git 身份 `Legendre Formalization
+<noreply@users.noreply.github.com>` 提交（例如 `8029c02`、`82bdd2a`、`a9a932b`、
+`444b384`）。GitHub 会把这类提交关联到无关的 `noreply` 账号；它们不是第三方贡献。
+相应改动已在本地通过 `lake build` 与 `python3 scripts/audit.py` 验证，并由维护者
+（`lim-tan90`）合并。仓库的 git 身份现已更正为
+`lim-tan90 <lim-tan90@users.noreply.github.com>`。
+
 ## 复用的形式化成果
 
 本项目优先**借鉴、移植已有的已验证形式化成果**，而不是从零重写。所有移植或改编
