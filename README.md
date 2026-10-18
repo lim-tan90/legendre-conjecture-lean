@@ -11,7 +11,13 @@
 > 1. Fork the repository and branch from `review`.
 > 2. Run `lake build` and `python3 scripts/audit.py` locally.
 > 3. Open the PR **against `review`**.
-> 4. CI must be green. The maintainer merges `review → master` only after an
+> 4. Formalization code in a PR should be written against the **latest stable
+>    Lean and mathlib releases**.  As of **2026-10-18** these are
+>    **Lean `v4.35.0`** and **mathlib `v4.35.0`** (the versions pinned in
+>    `lean-toolchain` and `lakefile.toml`).  If a newer stable release is out by
+>    the time you open the PR, please adapt to it and say so in the PR
+>    description.
+> 5. CI must be green. The maintainer merges `review → master` only after an
 >    explicit instruction and a green audit.
 >
 > Full guide: **[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·

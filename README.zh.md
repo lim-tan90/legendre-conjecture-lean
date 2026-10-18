@@ -11,7 +11,11 @@
 > 1. Fork 仓库，从 `review` 建工作分支。
 > 2. 本地运行 `lake build` 和 `python3 scripts/audit.py`。
 > 3. PR 目标选 **`review`**。
-> 4. CI 必须为绿色。维护者只有在收到明确指令、且审计通过后，才会把
+> 4. PR 中的形式化代码应基于**当前最新的稳定 Lean 与 mathlib 版本**编写。截至
+>    **2026-10-18**，最新稳定版本为 **Lean `v4.35.0`** 与 **mathlib `v4.35.0`**
+>    （即 `lean-toolchain` 与 `lakefile.toml` 中固定的版本）。若提交 PR 时已有更新的
+>    稳定版，请适配到该版本，并在 PR 描述中注明。
+> 5. CI 必须为绿色。维护者只有在收到明确指令、且审计通过后，才会把
 >    `review` 合入 `master`。
 >
 > 完整指南：**[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
