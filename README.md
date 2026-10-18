@@ -11,7 +11,13 @@
 > 1. Fork the repository and branch from `review`.
 > 2. Run `lake build` and `python3 scripts/audit.py` locally.
 > 3. Open the PR **against `review`**.
-> 4. CI must be green. The maintainer merges `review → master` only after an
+> 4. Formalization code in a PR should be written against the **latest stable
+>    Lean and mathlib releases**.  As of **2026-10-18** these are
+>    **Lean `v4.35.0`** and **mathlib `v4.35.0`** (the versions pinned in
+>    `lean-toolchain` and `lakefile.toml`).  If a newer stable release is out by
+>    the time you open the PR, please adapt to it and say so in the PR
+>    description.
+> 5. CI must be green. The maintainer merges `review → master` only after an
 >    explicit instruction and a green audit.
 >
 > Full guide: **[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
@@ -191,7 +197,7 @@ analytic number theory library.  A proof-level formalization of the published
 exponent results needs the following tools, roughly in dependency order.
 This table is the roadmap, not a claim that the work is done.
 
-| Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
+| Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.35.0 / this repo) |
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
@@ -250,10 +256,15 @@ Detailed acceptance criteria for each layer are in
 ## Build
 
 ```bash
-# Lean 4.33.1 + mathlib v4.33.1
+# Lean 4.35.0 + mathlib v4.35.0
 lake exe cache get
 lake build
 ```
+
+The repository is pinned to **Lean 4.35.0** and **mathlib v4.35.0** (see
+`lean-toolchain` and `lakefile.toml`).  The Lean sources were re-checked and
+adapted to that mathlib release on 2026-10-18; the public theorem statements are
+unchanged.
 
 Then run the audit:
 
@@ -327,7 +338,8 @@ this repository.
   `Erdos390/WholePaper/Nagura*.lean` modules, which formalize J. Nagura's
   1952 theorem.  The adaptation consists of module/namespace renaming,
   removal of PNT-dependent auxiliary results, merging into three modules, and
-  porting to mathlib v4.33.1; the mathematical proof is the upstream one.
+  porting to mathlib v4.33.1 (re-checked against v4.35.0 when the repository was
+  upgraded in October 2026); the mathematical proof is the upstream one.
   The original MIT license is retained in
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —

@@ -15,11 +15,11 @@ public import Legendre.Nagura.PsiBounds
 public import Mathlib.Tactic
 
 /-!
-# Nagura's theorem: a prime in `(n, 6n/5]` for every `n �?25`
+# Nagura's theorem: a prime in `(n, 6n/5]` for every `n ≥ 25`
 
 This module assembles the full unconditional proof.  The finite range
-`25 �?n < 16000000` is covered by the kernel-checked prime chains of
-`Legendre.Nagura.FiniteCertificates`; the tail `n �?16000000` is covered by
+`25 ≤ n < 16000000` is covered by the kernel-checked prime chains of
+`Legendre.Nagura.FiniteCertificates`; the tail `n ≥ 16000000` is covered by
 the explicit `ψ` bounds of `Legendre.Nagura.PsiBounds` and the Chebyshev
 bridge `hasNaguraPrime_of_psi_gap`.
 -/

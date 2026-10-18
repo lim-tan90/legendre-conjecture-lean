@@ -11,7 +11,11 @@
 > 1. Fork 仓库，从 `review` 建工作分支。
 > 2. 本地运行 `lake build` 和 `python3 scripts/audit.py`。
 > 3. PR 目标选 **`review`**。
-> 4. CI 必须为绿色。维护者只有在收到明确指令、且审计通过后，才会把
+> 4. PR 中的形式化代码应基于**当前最新的稳定 Lean 与 mathlib 版本**编写。截至
+>    **2026-10-18**，最新稳定版本为 **Lean `v4.35.0`** 与 **mathlib `v4.35.0`**
+>    （即 `lean-toolchain` 与 `lakefile.toml` 中固定的版本）。若提交 PR 时已有更新的
+>    稳定版，请适配到该版本，并在 PR 描述中注明。
+> 5. CI 必须为绿色。维护者只有在收到明确指令、且审计通过后，才会把
 >    `review` 合入 `master`。
 >
 > 完整指南：**[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
@@ -177,7 +181,7 @@
 结果做到“证明级形式化”，大致需要以下工具，按依赖顺序排列。这张表是路线图，
 不是“已完成”的声明。
 
-| 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.33.1 / 本仓库） |
+| 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.35.0 / 本仓库） |
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
@@ -233,10 +237,14 @@
 ## 构建
 
 ```bash
-# Lean 4.33.1 + mathlib v4.33.1
+# Lean 4.35.0 + mathlib v4.35.0
 lake exe cache get
 lake build
 ```
+
+本仓库固定使用 **Lean 4.35.0** 与 **mathlib v4.35.0**（见 `lean-toolchain` 与
+`lakefile.toml`）。Lean 源码已于 2026-10-18 重新校对并适配到该 mathlib 版本；
+公开定理的陈述保持不变。
 
 然后运行审计：
 
@@ -304,7 +312,8 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   [`Legendre/Nagura.lean`](Legendre/Nagura.lean) 改编自该项目的
   `Erdos390/WholePaper/Nagura*.lean`（Nagura 1952 定理的形式化）。改动包括：
   重命名模块/命名空间、删除依赖 PNT 的辅助结果、合并为三个模块、适配
-  mathlib v4.33.1；数学证明本身来自上游。原始 MIT 许可证保留在
+  mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）；数学证明
+  本身来自上游。原始 MIT 许可证保留在
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
