@@ -332,7 +332,8 @@ this repository.
   `Erdos390/WholePaper/Nagura*.lean` modules, which formalize J. Nagura's
   1952 theorem.  The adaptation consists of module/namespace renaming,
   removal of PNT-dependent auxiliary results, merging into three modules, and
-  porting to mathlib v4.33.1; the mathematical proof is the upstream one.
+  porting to mathlib v4.33.1 (re-checked against v4.35.0 when the repository was
+  upgraded in October 2026); the mathematical proof is the upstream one.
   The original MIT license is retained in
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —

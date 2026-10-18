@@ -308,7 +308,8 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   [`Legendre/Nagura.lean`](Legendre/Nagura.lean) 改编自该项目的
   `Erdos390/WholePaper/Nagura*.lean`（Nagura 1952 定理的形式化）。改动包括：
   重命名模块/命名空间、删除依赖 PNT 的辅助结果、合并为三个模块、适配
-  mathlib v4.33.1；数学证明本身来自上游。原始 MIT 许可证保留在
+  mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）；数学证明
+  本身来自上游。原始 MIT 许可证保留在
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
