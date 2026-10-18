@@ -16,10 +16,10 @@ public import Mathlib.Tactic
 /-!
 # Finite certification of Nagura's interval below sixteen million
 
-This module proves the strict Nagura statement `HasNaguraPrime n` �?there is a prime `p` with `n < p` and `5 * p < 6 * n` �?on the finite range `25 �?n < 16000000`.  The proof is a kernel-checked chain of explicit prime witnesses; each successive pair `a, b` satisfies `5 * b < 6 * a`, so the intervals cover the whole range.
+This module proves the strict Nagura statement `HasNaguraPrime n` — there is a prime `p` with `n < p` and `5 * p < 6 * n` — on the finite range `25 ≤ n < 16000000`.  The proof is a kernel-checked chain of explicit prime witnesses; each successive pair `a, b` satisfies `5 * b < 6 * a`, so the intervals cover the whole range.
 
 The finite certificate is combined in `Legendre.Nagura.Theorem` with the
-analytic tail `n �?16000000`, which follows Nagura's explicit `ψ` estimates
+analytic tail `n ≥ 16000000`, which follows Nagura's explicit `ψ` estimates
 proved in `Legendre.Nagura.PsiBounds`.
 -/
 

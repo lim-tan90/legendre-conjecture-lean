@@ -55,7 +55,7 @@ theorem legendreAt_one : LegendreAt 1 := by
 
 /-- An elementary sanity check: Legendre's conjecture holds at `n = 2`. -/
 theorem legendreAt_two : LegendreAt 2 := by
-  refine ⟨5, by norm_num, by norm_num, by norm_num⟩
+  refine ⟨5, by decide, by norm_num, by norm_num⟩
 
 /-- The square interval has length `2n+1`, so a gap bound strictly below
 `2n+1` is exactly what is needed at the scale `n^2`. -/

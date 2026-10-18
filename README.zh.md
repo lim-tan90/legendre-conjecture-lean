@@ -177,7 +177,7 @@
 结果做到“证明级形式化”，大致需要以下工具，按依赖顺序排列。这张表是路线图，
 不是“已完成”的声明。
 
-| 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.33.1 / 本仓库） |
+| 层级 | 需要形式化的工具 / 理论 | 为什么需要 | 当前状态（mathlib v4.35.0 / 本仓库） |
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
@@ -233,10 +233,14 @@
 ## 构建
 
 ```bash
-# Lean 4.33.1 + mathlib v4.33.1
+# Lean 4.35.0 + mathlib v4.35.0
 lake exe cache get
 lake build
 ```
+
+本仓库固定使用 **Lean 4.35.0** 与 **mathlib v4.35.0**（见 `lean-toolchain` 与
+`lakefile.toml`）。Lean 源码已于 2026-10-18 重新校对并适配到该 mathlib 版本；
+公开定理的陈述保持不变。
 
 然后运行审计：
 

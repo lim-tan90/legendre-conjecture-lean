@@ -24,7 +24,7 @@ public import Mathlib.Tactic
 # Explicit Chebyshev bounds `0.916 n < ψ(n) < 1.086 n`
 
 This module formalizes Nagura's Lemmas 1 and 2: the summatory identity
-`∑_{m �?n} ψ(n/m) = log(n!)`, explicit two-sided Stirling bounds for factorials,
+`∑_{m ≤ n} ψ(n/m) = log(n!)`, explicit two-sided Stirling bounds for factorials,
 the factorization identities of Ramanujan/Nagura, and the resulting explicit
 bounds `0.916 n - 2.318 < ψ(n) < 1.086 n`, in the sharpened arbitrary-endpoint
 form needed by the analytic tail.
@@ -566,9 +566,9 @@ theorem sum_dvd_indicator_eq_div (d : ℕ) (n : ℕ) :
   | succ n ih =>
       rw [Finset.sum_range_succ, ih]
       by_cases h : d ∣ n + 1
-      · rw [if_pos h, Nat.succ_div_of_dvd h]
+      · rw [ite_eq_left h, Nat.succ_div_of_dvd h]
         norm_num
-      · rw [if_neg h, Nat.succ_div_of_not_dvd h]
+      · rw [ite_eq_right h, Nat.succ_div_of_not_dvd h]
         norm_num
 
 /-- Indicator selection of the positive multiples of `d`. -/
@@ -581,7 +581,7 @@ theorem sum_dvd_indicator_apply_eq (d : ℕ)
   | succ n ih =>
       rw [Finset.sum_range_succ, ih]
       by_cases h : d ∣ n + 1
-      · rw [if_pos h, Nat.succ_div_of_dvd h, Finset.sum_range_succ]
+      · rw [ite_eq_left h, Nat.succ_div_of_dvd h, Finset.sum_range_succ]
         congr 1
         apply congrArg f
         have hCancel : (n + 1) / d * d = n + 1 := Nat.div_mul_cancel h
@@ -590,7 +590,7 @@ theorem sum_dvd_indicator_apply_eq (d : ℕ)
           n + 1 = (n + 1) / d * d := hCancel.symm
           _ = d * ((n + 1) / d) := Nat.mul_comm _ _
           _ = d * (n / d + 1) := by rw [hQuot]
-      · rw [if_neg h, Nat.succ_div_of_not_dvd h]
+      · rw [ite_eq_right h, Nat.succ_div_of_not_dvd h]
         simp
 
 /-- A finite summation-by-parts identity, written in terms of inclusive

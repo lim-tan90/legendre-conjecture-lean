@@ -191,7 +191,7 @@ analytic number theory library.  A proof-level formalization of the published
 exponent results needs the following tools, roughly in dependency order.
 This table is the roadmap, not a claim that the work is done.
 
-| Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.33.1 / this repo) |
+| Layer | Tool / theory to formalize | Why it is needed | Current state (mathlib v4.35.0 / this repo) |
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
@@ -250,10 +250,15 @@ Detailed acceptance criteria for each layer are in
 ## Build
 
 ```bash
-# Lean 4.33.1 + mathlib v4.33.1
+# Lean 4.35.0 + mathlib v4.35.0
 lake exe cache get
 lake build
 ```
+
+The repository is pinned to **Lean 4.35.0** and **mathlib v4.35.0** (see
+`lean-toolchain` and `lakefile.toml`).  The Lean sources were re-checked and
+adapted to that mathlib release on 2026-10-18; the public theorem statements are
+unchanged.
 
 Then run the audit:
 
