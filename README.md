@@ -324,6 +324,18 @@ axiom/explosion audit. If it passes, `review` is merged into `master`. If it
 fails, it stays on `review` for fixes. See
 [docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md).
 
+## Commit attribution
+
+Some commits in this repository's history were authored by an automated coding
+agent under the generic git identity `Legendre Formalization
+<noreply@users.noreply.github.com>` (for example `8029c02`, `82bdd2a`,
+`a9a932b` and `444b384`).  GitHub happens to attribute such commits to the
+unrelated `noreply` account; they are not third-party contributions.  The
+corresponding changes were verified locally (`lake build`,
+`python3 scripts/audit.py`) and merged by the maintainer (`lim-tan90`).  The
+repository's git identity has since been corrected to
+`lim-tan90 <lim-tan90@users.noreply.github.com>`.
+
 ## Reused and adapted formalizations
 
 This project prefers to **adapt existing verified formalizations** instead of
