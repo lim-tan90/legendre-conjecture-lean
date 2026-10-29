@@ -52,6 +52,8 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+已验证的 Abel/Perron 基础阶段提交: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
+
 **Abel 积分表示与带权极点系数（2026-10-30）**：新增
 [`PerronFoundation.lean`](Legendre/PerronFoundation.lean)。对 `Re(s)>1`，
 已证明 **`-ζ′/ζ(s)=s∫₁∞ψ(t)t^(-s-1)dt`**，并单独证明该积分绝对收敛。

@@ -61,6 +61,8 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+Verified Abel/Perron-foundation milestone: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
+
 **Abel representation and weighted pole coefficient (2026-10-30):**
 [`PerronFoundation.lean`](Legendre/PerronFoundation.lean) proves, for `Re(s)>1`,
 **`-ζ′/ζ(s)=s∫₁∞ψ(t)t^(-s-1)dt`**, with a separate proof of absolute
