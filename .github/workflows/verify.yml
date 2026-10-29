@@ -16,11 +16,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Lean
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: true
-          use-github-cache: true
+      # Use the pinned official binary directly, as validated locally. Keep
+      # installation, cache retrieval, build and audit separately observable.
+      - name: Install pinned Lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          toolchain="$(cat lean-toolchain)"
+          case "$toolchain" in
+            leanprover/lean4:v*) version="${toolchain#leanprover/lean4:v}" ;;
+            *) echo "Unsupported toolchain: $toolchain" >&2; exit 1 ;;
+          esac
+          curl --fail --location --retry 3 \
+            "https://releases.lean-lang.org/lean4/v${version}/lean-${version}-linux.tar.zst" \
+            --output "$RUNNER_TEMP/lean.tar.zst"
+          tar --zstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/lean-${version}-linux/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/lean-${version}-linux/bin/lean" --version
+          "$RUNNER_TEMP/lean-${version}-linux/bin/lake" --version
+
+      - name: Get pinned mathlib cache
+        run: lake exe cache get
+
+      - name: Build all proofs
+        run: lake build
 
       - name: Axiom and explosion audit
         run: python3 scripts/audit.py --skip-build
