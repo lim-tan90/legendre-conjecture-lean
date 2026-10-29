@@ -60,6 +60,16 @@
 
 ## Layer 2 progress (2026-10-29)
 
+**Multiplicity-weighted counting foundations:** [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)
+defines critical-strip `NontrivialZero`, `zeroCount` (`N(T)`), and
+`zeroDensityCount` (`N(σ,T)`). The convention is `0 < Re(s) < 1`,
+`0 < Im(s) ≤ T`, with `σ ≤ Re(s)` for the density count. Proved: finite
+analytic orders, positive multiplicity at zeros, finite counting sets,
+monotonicity, positive-count/existence equivalences, and boundary cases.
+These are multiplicity-weighted counts, not just counts of distinct zeros.
+**No counting asymptotic or zero-density estimate is proved**, and no
+classification of all zeros outside the strip is claimed.
+
 Verified formalization commit: [`63ba01a3a814`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/63ba01a3a81457bfab5b6f2d4cca378c2e7adf99).
 
 
@@ -224,7 +234,7 @@ This table is the roadmap, not a claim that the work is done.
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
-| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | foundations and a qualitative fixed-height zero-free strip integrated; quantitative region and zero-counting estimates remain open |
+| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | foundations and a qualitative fixed-height zero-free strip integrated; multiplicity-weighted counts defined with monotonicity; quantitative region and counting estimates remain open |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |

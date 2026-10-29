@@ -116,7 +116,18 @@ See [provenance](zeta-provenance.md) for exact upstream mappings.
 The first two suggested slices below are now integrated from mathlib;
 the boundary nonvanishing part of slice 3 is integrated, with a qualitative
 compact-height neighborhood. Effective zero-free regions, multiplicity-weighted
-zero counting and Perron remain open. Layer 2 acceptance is **not** fully met.
+zero-counting estimates and Perron remain open. Layer 2 acceptance is **not** fully met.
+
+**Counting foundations (2026-10-29).** `Legendre/ZetaCounting.lean` now defines
+`NontrivialZero` in the open critical strip, `zeroCount` (`N(T)`) and
+`zeroDensityCount` (`N(σ,T)`), including analytic multiplicities.
+The height convention is `0 < Im(s) ≤ T`; the density cutoff is `σ ≤ Re(s)`.
+Finite analytic orders away from the pole and positive multiplicities at
+critical-strip zeros are proved before the natural-valued sums are used.
+Finiteness, height monotonicity, antitonicity in σ, positivity/existence
+and the nonpositive-height / outside-strip boundary cases are proved.
+The definitions part of the first acceptance criterion is met; quantitative
+zero counting, the logarithmic zero-free region and Perron remain open.
 
 **Acceptance criteria.**
 

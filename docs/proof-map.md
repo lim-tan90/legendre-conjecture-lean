@@ -48,6 +48,23 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.8 | Layer 2: finitely many distinct zeros in a compact set | `Legendre.Zeta.finite_zeros_on_compact` | **proved**; mathlib result re-exported |
 | 2.9 | Layer 2: positive-width zero-free band at fixed height | `Legendre.Zeta.exists_zero_free_band` | **proved**; new deduction; no effective width estimate |
 | 2.10 | Layer 2: qualitative left-hand strip, excluding pole | `Legendre.Zeta.exists_zero_free_strip` | **proved**; new deduction; no effective width estimate |
+| 2.def | critical-strip zeros, analytic multiplicity and height/density counts | `Legendre.Zeta.NontrivialZero`, `zeroMultiplicity`, `zerosUpTo`, `zerosRightOf`, `zeroCount`, `zeroDensityCount` | definitions; `0 < Im(s) ≤ T`, `σ ≤ Re(s)` |
+| 2.11 | Layer 2 counting foundation: analytic order finite | `Legendre.Zeta.analytic_order_finite` | **proved**; no quantitative zero-counting estimate |
+| 2.12 | Layer 2 counting foundation: zeroMultiplicity cast | `Legendre.Zeta.zeroMultiplicity_cast` | **proved**; no quantitative zero-counting estimate |
+| 2.13 | Layer 2 counting foundation: zeroMultiplicity pos | `Legendre.Zeta.zeroMultiplicity_pos` | **proved**; no quantitative zero-counting estimate |
+| 2.14 | Layer 2 counting foundation: zeroMultiplicity eq zero | `Legendre.Zeta.zeroMultiplicity_eq_zero` | **proved**; no quantitative zero-counting estimate |
+| 2.15 | Layer 2 counting foundation: zerosUpTo finite | `Legendre.Zeta.zerosUpTo_finite` | **proved**; no quantitative zero-counting estimate |
+| 2.16 | Layer 2 counting foundation: zerosRightOf finite | `Legendre.Zeta.zerosRightOf_finite` | **proved**; no quantitative zero-counting estimate |
+| 2.17 | Layer 2 counting foundation: zeroCount pos iff | `Legendre.Zeta.zeroCount_pos_iff` | **proved**; no quantitative zero-counting estimate |
+| 2.18 | Layer 2 counting foundation: zeroDensityCount pos iff | `Legendre.Zeta.zeroDensityCount_pos_iff` | **proved**; no quantitative zero-counting estimate |
+| 2.19 | Layer 2 counting foundation: zerosUpTo mono | `Legendre.Zeta.zerosUpTo_mono` | **proved**; no quantitative zero-counting estimate |
+| 2.20 | Layer 2 counting foundation: zeroCount mono | `Legendre.Zeta.zeroCount_mono` | **proved**; no quantitative zero-counting estimate |
+| 2.21 | Layer 2 counting foundation: zeroDensityCount le | `Legendre.Zeta.zeroDensityCount_le` | **proved**; no quantitative zero-counting estimate |
+| 2.22 | Layer 2 counting foundation: zeroDensityCount mono height | `Legendre.Zeta.zeroDensityCount_mono_height` | **proved**; no quantitative zero-counting estimate |
+| 2.23 | Layer 2 counting foundation: zeroDensityCount antitone | `Legendre.Zeta.zeroDensityCount_antitone` | **proved**; no quantitative zero-counting estimate |
+| 2.24 | Layer 2 counting foundation: zeroCount eq zero of nonpos | `Legendre.Zeta.zeroCount_eq_zero_of_nonpos` | **proved**; no quantitative zero-counting estimate |
+| 2.25 | Layer 2 counting foundation: zeroDensityCount eq zero of one le | `Legendre.Zeta.zeroDensityCount_eq_zero_of_one_le` | **proved**; no quantitative zero-counting estimate |
+| 2.26 | Layer 2 counting foundation: zeroDensityCount eq count of nonpos | `Legendre.Zeta.zeroDensityCount_eq_count_of_nonpos` | **proved**; no quantitative zero-counting estimate |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

@@ -30,10 +30,34 @@ not a transplantation of a quantitative analytic zero-free-region proof.
 
 The intermediate band includes mathlib's nonzero junk value at the pole.
 The analytic interface and final strip explicitly exclude `s=1`.
-Finite zero sets here count distinct zeros; no multiplicity-weighted `N(T)`
-is defined or estimated. There is no claim of an effective `c/log T` width,
+The foundational compact-finiteness lemma counts distinct zeros; the new
+counting module below uses finite analytic multiplicities. There is no claim of an effective `c/log T` width,
 a Perron formula, PNT, or any of the nine deep short-interval results.
 
 Validate with `lake build` and `python3 scripts/audit.py`.
-All ten local theorems have entries in `Legendre/Audit.lean` and
+All local theorems have entries in `Legendre/Audit.lean` and
 `docs/proof-map.md`.
+
+## Multiplicity-weighted counting
+
+`Legendre/ZetaCounting.lean` is a new construction using the same fixed
+mathlib version. Analytic orders are imported from `Analysis/Analytic/Order.lean`
+(Apache-2.0, Vincent Beffara and Stefan Kebekus). The proof of finite order
+uses `AnalyticOnNhd.analyticOrderAt_ne_top_of_isPreconnected` on the connected
+punctured plane and the known nonzero value at 2. `Nat.cast_analyticOrderNatAt`
+then proves that `zeroMultiplicity` recovers the ENat-valued analytic order
+without dropping an infinite order. `ENat.toNat_pos` yields positive multiplicity
+at every critical-strip zero. No simplicity of zeta zeros is assumed.
+
+`NontrivialZero` means a zero with `0 < Re(s) < 1`; this definition is not a
+classification theorem for the entire zero set. `zerosUpTo T` further requires
+`0 < Im(s) ≤ T`; `zerosRightOf σ T` includes the boundary `σ ≤ Re(s)`.
+Both are finite subsets of zeros in the compact rectangle `[0,1] × [0,T]`.
+`zeroCount` and `zeroDensityCount` sum analytic multiplicities over these sets.
+Proofs show monotonicity in height, antitonicity in σ, domination by `zeroCount`,
+positive-count/existence equivalences, `N(T)=0` for `T≤0`, `N(σ,T)=0` for
+`σ≥1`, and `N(σ,T)=N(T)` for `σ≤0`.
+
+These definitions and proofs are original to this repository, built from
+upstream analytic-order, zero-set and finite-sum APIs. No external quantitative
+zero-counting or density theorem has been transplanted or asserted.

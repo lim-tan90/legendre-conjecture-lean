@@ -10,6 +10,7 @@ public import Legendre.ExplicitBounds
 public import Legendre.Layer5
 public import Legendre.Nagura
 public import Legendre.Zeta
+public import Legendre.ZetaCounting
 
 /-!
 # Axiom audit
@@ -103,3 +104,20 @@ end Legendre
 #print axioms Legendre.Zeta.finite_zeros_on_compact
 #print axioms Legendre.Zeta.exists_zero_free_band
 #print axioms Legendre.Zeta.exists_zero_free_strip
+
+#print axioms Legendre.Zeta.analytic_order_finite
+#print axioms Legendre.Zeta.zeroMultiplicity_cast
+#print axioms Legendre.Zeta.zeroMultiplicity_pos
+#print axioms Legendre.Zeta.zeroMultiplicity_eq_zero
+#print axioms Legendre.Zeta.zerosUpTo_finite
+#print axioms Legendre.Zeta.zerosRightOf_finite
+#print axioms Legendre.Zeta.zeroCount_pos_iff
+#print axioms Legendre.Zeta.zeroDensityCount_pos_iff
+#print axioms Legendre.Zeta.zerosUpTo_mono
+#print axioms Legendre.Zeta.zeroCount_mono
+#print axioms Legendre.Zeta.zeroDensityCount_le
+#print axioms Legendre.Zeta.zeroDensityCount_mono_height
+#print axioms Legendre.Zeta.zeroDensityCount_antitone
+#print axioms Legendre.Zeta.zeroCount_eq_zero_of_nonpos
+#print axioms Legendre.Zeta.zeroDensityCount_eq_zero_of_one_le
+#print axioms Legendre.Zeta.zeroDensityCount_eq_count_of_nonpos

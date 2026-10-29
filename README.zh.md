@@ -51,6 +51,13 @@
 
 ## Layer 2 进度（2026-10-29）
 
+**零点计数基础已完成定义和检查**：新增 [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)，
+定义临界带内的 `NontrivialZero`、按解析重数计数的 `zeroCount`（`N(T)`）和
+`zeroDensityCount`（`N(σ,T)`）。计数约定为 `0 < Re(s) < 1`、`0 < Im(s) ≤ T`，
+密度计数额外要求 `σ ≤ Re(s)`。已证明重数有限且在零点处为正、计数集合有限、
+计数的单调性、正计数与存在零点的等价性及边界情形；并非仅计不同零点。
+**尚无零点计数渐近估计或零密度估计**，也未声称证明所有零点的分类。
+
 已验证的形式化提交: [`63ba01a3a814`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/63ba01a3a81457bfab5b6f2d4cca378c2e7adf99).
 
 
@@ -202,7 +209,7 @@
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
-| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | 已接入 ζ 基础与固定高度的定性无零点带；定量区域和零点计数估计仍开放 |
+| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | 已接入 ζ 基础与固定高度的定性无零点带；已定义按重数计数并证明单调性；定量区域和计数估计仍开放 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
