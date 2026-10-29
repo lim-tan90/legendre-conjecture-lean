@@ -73,6 +73,12 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.32 | Layer 2 logarithmic derivative / counting bridge: norm logDeriv le pi sq div six | `Legendre.Zeta.norm_logDeriv_le_pi_sq_div_six` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
 | 2.33 | Layer 2 logarithmic derivative / counting bridge: zeroDensityCount eq zero of zero free | `Legendre.Zeta.zeroDensityCount_eq_zero_of_zero_free` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
 | 2.34 | Layer 2 logarithmic derivative / counting bridge: exists zero density cutoff | `Legendre.Zeta.exists_zero_density_cutoff` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.35 | Layer 2 explicit right-half-plane estimate: tsum nat rpow neg le | `Legendre.Zeta.tsum_nat_rpow_neg_le` | **proved**; no left-of-1 zero-free claim |
+| 2.36 | Layer 2 explicit right-half-plane estimate: vonMangoldt term one add two mul le | `Legendre.Zeta.vonMangoldt_term_one_add_two_mul_le` | **proved**; no left-of-1 zero-free claim |
+| 2.37 | Layer 2 explicit right-half-plane estimate: vonMangoldt majorant le | `Legendre.Zeta.vonMangoldt_majorant_le` | **proved**; no left-of-1 zero-free claim |
+| 2.38 | Layer 2 explicit right-half-plane estimate: norm logDeriv le of re ge one add | `Legendre.Zeta.norm_logDeriv_le_of_re_ge_one_add` | **proved**; no left-of-1 zero-free claim |
+| 2.39 | Layer 2 explicit right-half-plane estimate: norm logDeriv le six div sq | `Legendre.Zeta.norm_logDeriv_le_six_div_sq` | **proved**; no left-of-1 zero-free claim |
+| 2.40 | Layer 2 explicit right-half-plane estimate: norm logDeriv le re sub one | `Legendre.Zeta.norm_logDeriv_le_re_sub_one` | **proved**; no left-of-1 zero-free claim |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

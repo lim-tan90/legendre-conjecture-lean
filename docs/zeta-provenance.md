@@ -88,3 +88,30 @@ and the closed cutoff lies strictly inside the previously proved open
 zero-free strip. The width remains non-effective. This is not a quantitative
 zero-density estimate, and the explicit logarithmic-derivative bound is only
 for `Re(s)≥3`; neither result supplies the missing near-line estimates or Perron.
+
+## Explicit ε-bound on right half-planes
+
+`Legendre/ZetaHalfPlane.lean` contains six new deductions using the same
+pinned mathlib version, without transplanting a separate external proof.
+Its upstream ingredients are:
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Integral test for the tail from n=2 | `AntitoneOn.tsum_comp_add_le_integral` | `Analysis/SumIntegralComparisons.lean`, Kevin H. Wilson and Alastair Irving |
+| Improper power integral and integrability | `integral_Ioi_rpow_of_lt`, `integrableOn_Ioi_rpow_of_lt` | `Analysis/SpecialFunctions/ImproperIntegrals.lean`, David Loeffler |
+| Logarithm/power comparison | `Real.log_natCast_le_rpow_div` | `Analysis/SpecialFunctions/Pow/Real.lean` |
+| Power-series convergence | `Real.summable_nat_rpow` | `Analysis/PSeries.lean` |
+| Von Mangoldt series majorant | `Legendre.Zeta.norm_logDeriv_le_majorant` | previous local milestone, based on mathlib's convergent von Mangoldt identity |
+
+For p>1, the decreasing function x^(-p) has integral 1/(p-1) on (1,∞).
+The tail n≥2 is bounded by this integral; the terms n=0,1 contribute 0,1,
+respectively. This proves `tsum_nat_rpow_neg_le` including the endpoint terms.
+For a>0, `Λ(n)≤log n≤n^a/a` bounds the term at real part 1+2a by
+`a⁻¹ n^(-(1+a))`. Both series are proved summable before their sums are
+compared. Hence the majorant is at most `a⁻¹(1+a⁻¹)`.
+Setting a=ε/2 yields `(2/ε)(1+2/ε)` for `Re(s)≥1+ε`, independently of Im(s).
+For `0<ε≤1`, elementary ordered-field algebra gives `6/ε²`.
+The pointwise interface substitutes ε=Re(s)-1.
+
+No bound is asserted at Re(s)=1 or to its left. This is not a sharp pole
+asymptotic, a logarithmic zero-free region, a zero-counting asymptotic, or Perron.

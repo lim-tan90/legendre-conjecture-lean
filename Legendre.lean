@@ -8,4 +8,5 @@ import Legendre.Nagura
 import Legendre.Zeta
 import Legendre.ZetaCounting
 import Legendre.ZetaLogDerivative
+import Legendre.ZetaHalfPlane
 import Legendre.Audit

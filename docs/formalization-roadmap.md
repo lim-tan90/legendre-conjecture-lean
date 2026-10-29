@@ -140,6 +140,15 @@ The same module proves `∃ σ, 0<σ ∧ σ<1 ∧ N(σ,T)=0` at every fixed heig
 by moving the closed density cutoff strictly inside the earlier open
 zero-free strip. No effective dependence on T or Perron formula is proved.
 
+**Every right half-plane (2026-10-29).** `Legendre/ZetaHalfPlane.lean`
+proves `|ζ′/ζ(s)| ≤ (2/ε)(1+2/ε)` for `ε>0` and `Re(s)≥1+ε`.
+For `0<ε≤1` it also proves the simpler `6/ε²` bound. The proof uses
+`Λ(n)≤log n≤n^a/a` with `a=ε/2`, followed by an integral-test estimate
+`∑ n^(-p)≤1+1/(p-1)` for `p>1`. This is explicit control arbitrarily
+close to 1 from the right, but does not provide an effective region to the
+left of 1, the estimates on zero-counting contours, or Perron's formula.
+The previously stated `π²/6` bound remains available for `Re(s)≥3`.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /

@@ -51,6 +51,14 @@
 
 ## Layer 2 进度（2026-10-29）
 
+**右侧半平面的 ε 显式界已证明**：新增
+[`ZetaHalfPlane.lean`](Legendre/ZetaHalfPlane.lean)，对任意 `ε>0`，
+**`Re(s)≥1+ε ⇒ |ζ′/ζ(s)|≤(2/ε)(1+2/ε)`**；当 `0<ε≤1` 时，
+进一步有 **`|ζ′/ζ(s)|≤6/ε²`**。证明包括幂级数的积分比较、von Mangoldt
+系数的幂控制及合法的级数比较，均为 Lean 内核检查的推论。
+这使显式控制适用于任意靠近 `Re(s)=1` 的右侧闭半平面；没有延伸到该直线
+左侧，也没有证明定量无零点区域或 Perron 公式。
+
 已验证的对数导数阶段提交: [`2a395e71b4a8`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/2a395e71b4a8e1bff3f287a4d6253d4bfce0401f).
 
 **对数导数与计数的连接已证明**：新增

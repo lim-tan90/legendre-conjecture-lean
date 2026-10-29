@@ -60,6 +60,15 @@
 
 ## Layer 2 progress (2026-10-29)
 
+**Explicit ε-bound on every right half-plane:**
+[`ZetaHalfPlane.lean`](Legendre/ZetaHalfPlane.lean) proves, for every `ε>0`,
+**`Re(s)≥1+ε ⇒ |ζ′/ζ(s)|≤(2/ε)(1+2/ε)`**. For `0<ε≤1` this implies
+**`|ζ′/ζ(s)|≤6/ε²`**. Kernel-checked deductions include the integral-test
+power-series bound, a power majorant for the von Mangoldt coefficients,
+and summable-series comparison. The estimate reaches every closed
+half-plane strictly to the right of 1. It does not extend to the left
+of that line or establish a quantitative zero-free region or Perron formula.
+
 Verified logarithmic-derivative milestone: [`2a395e71b4a8`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/2a395e71b4a8e1bff3f287a4d6253d4bfce0401f).
 
 **Logarithmic derivative and counting bridge:**

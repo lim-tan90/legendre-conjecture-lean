@@ -12,6 +12,7 @@ public import Legendre.Nagura
 public import Legendre.Zeta
 public import Legendre.ZetaCounting
 public import Legendre.ZetaLogDerivative
+public import Legendre.ZetaHalfPlane
 
 /-!
 # Axiom audit
@@ -131,3 +132,10 @@ end Legendre
 #print axioms Legendre.Zeta.norm_logDeriv_le_pi_sq_div_six
 #print axioms Legendre.Zeta.zeroDensityCount_eq_zero_of_zero_free
 #print axioms Legendre.Zeta.exists_zero_density_cutoff
+
+#print axioms Legendre.Zeta.tsum_nat_rpow_neg_le
+#print axioms Legendre.Zeta.vonMangoldt_term_one_add_two_mul_le
+#print axioms Legendre.Zeta.vonMangoldt_majorant_le
+#print axioms Legendre.Zeta.norm_logDeriv_le_of_re_ge_one_add
+#print axioms Legendre.Zeta.norm_logDeriv_le_six_div_sq
+#print axioms Legendre.Zeta.norm_logDeriv_le_re_sub_one
