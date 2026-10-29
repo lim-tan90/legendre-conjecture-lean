@@ -60,6 +60,9 @@
 
 ## Layer 2 progress (2026-10-29)
 
+Verified formalization commit: [`63ba01a3a814`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/63ba01a3a81457bfab5b6f2d4cca378c2e7adf99).
+
+
 **Zeta foundations integrated and checked:** absolute convergence, the Euler
 product and finite-product convergence, analytic continuation away from the
 pole, the completed functional equation, nonvanishing on `Re(s) ≥ 1`

@@ -51,6 +51,9 @@
 
 ## Layer 2 进度（2026-10-29）
 
+已验证的形式化提交: [`63ba01a3a814`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/63ba01a3a81457bfab5b6f2d4cca378c2e7adf99).
+
+
 **已接入并验证 ζ 基础接口**：绝对收敛、Euler 乘积及有限乘积收敛、
 避开极点的解析延拓、完成 ζ 的函数方程、`Re(s) ≥ 1`（排除极点）非消失性，
 以及紧集内不同零点的有限性。见 [`Legendre/Zeta.lean`](Legendre/Zeta.lean)。
