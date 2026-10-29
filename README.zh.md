@@ -51,6 +51,8 @@
 
 ## Layer 2 进度（2026-10-29）
 
+已验证的极点局部结构阶段提交: [`c28a28c1a28c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/c28a28c1a28c3fc382d48e0fb4f736d4d1cb6828).
+
 **极点主部与局部增长已证明**：新增 [`ZetaPole.lean`](Legendre/ZetaPole.lean)。
 将 `H(s)=(s-1)ζ(s)` 在 `s=1` 补为 `H(1)=1` 后，已证明 H 在 1 附近解析，
 且 `ζ′/ζ(s)+1/(s-1)` 趋于有限值。由此得到 **`(s-1)ζ′/ζ(s)→-1`**，

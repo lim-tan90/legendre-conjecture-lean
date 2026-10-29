@@ -60,6 +60,8 @@
 
 ## Layer 2 progress (2026-10-29)
 
+Verified local pole-structure milestone: [`c28a28c1a28c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/c28a28c1a28c3fc382d48e0fb4f736d4d1cb6828).
+
 **Pole principal part and local growth:** [`ZetaPole.lean`](Legendre/ZetaPole.lean)
 updates `H(s)=(s-1)ζ(s)` to `H(1)=1` and proves H analytic at 1.
 `ζ′/ζ(s)+1/(s-1)` has a finite limit, so
