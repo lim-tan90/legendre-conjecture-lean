@@ -60,6 +60,16 @@
 
 ## Layer 2 progress (2026-10-29)
 
+**Logarithmic derivative and counting bridge:**
+[`ZetaLogDerivative.lean`](Legendre/ZetaLogDerivative.lean) reuses mathlib’s
+absolute convergence and von Mangoldt series identity for `-ζ′/ζ` on `Re(s)>1`.
+New deductions give a convergent-series majorant on each closed half-plane
+and the explicit bound **`Re(s) ≥ 3 ⇒ |ζ′(s)/ζ(s)| ≤ π²/6`**.
+The qualitative strip is also connected to the counting API: at each fixed
+height `T` some `0<σ<1` satisfies `N(σ,T)=0`. This cutoff is non-effective.
+No near-critical-line logarithmic-derivative estimate, `c/log T` zero-free
+region, or Perron formula is claimed.
+
 Verified counting-foundations commit: [`0c2b0574ec83`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0c2b0574ec83a787bff4e61cd07ab51ccb7c0fce).
 
 **Multiplicity-weighted counting foundations:** [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)

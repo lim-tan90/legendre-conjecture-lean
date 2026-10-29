@@ -129,6 +129,17 @@ and the nonpositive-height / outside-strip boundary cases are proved.
 The definitions part of the first acceptance criterion is met; quantitative
 zero counting, the logarithmic zero-free region and Perron remain open.
 
+**Logarithmic derivative milestone (2026-10-29).**
+`Legendre/ZetaLogDerivative.lean` reuses the proved, absolutely convergent
+von Mangoldt representation of `-ζ′/ζ` for `Re(s)>1`. It proves a
+convergent-series majorant on every closed half-plane `Re(s)≥σ>1`, then
+the explicit bound `|ζ′/ζ(s)| ≤ π²/6` for `Re(s)≥3` via `Λ(n)≤n` and the
+Basel sum. This is a bound well to the right of the critical strip, not
+the near-critical-line estimate needed for a logarithmic zero-free region.
+The same module proves `∃ σ, 0<σ ∧ σ<1 ∧ N(σ,T)=0` at every fixed height,
+by moving the closed density cutoff strictly inside the earlier open
+zero-free strip. No effective dependence on T or Perron formula is proved.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /

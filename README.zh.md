@@ -51,6 +51,14 @@
 
 ## Layer 2 进度（2026-10-29）
 
+**对数导数与计数的连接已证明**：新增
+[`ZetaLogDerivative.lean`](Legendre/ZetaLogDerivative.lean)。复用 mathlib 已证明的
+von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增整个闭半平面的
+收敛级数控制，并证明显式界 **`Re(s) ≥ 3 ⇒ |ζ′(s)/ζ(s)| ≤ π²/6`**。
+另外证明：对每个固定高度 `T`，存在 `0<σ<1` 使 `N(σ,T)=0`，把此前定性
+无零点带连接到按重数计数的接口。该 `σ` 无显式估计；这些结果不包含
+临界线附近的对数导数控制、`c/log T` 无零点区域或 Perron 公式。
+
 已验证的零点计数基础提交: [`0c2b0574ec83`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0c2b0574ec83a787bff4e61cd07ab51ccb7c0fce).
 
 **零点计数基础已完成定义和检查**：新增 [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)，

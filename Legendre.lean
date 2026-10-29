@@ -7,4 +7,5 @@ import Legendre.Layer5
 import Legendre.Nagura
 import Legendre.Zeta
 import Legendre.ZetaCounting
+import Legendre.ZetaLogDerivative
 import Legendre.Audit

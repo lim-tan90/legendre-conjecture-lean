@@ -65,6 +65,14 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.24 | Layer 2 counting foundation: zeroCount eq zero of nonpos | `Legendre.Zeta.zeroCount_eq_zero_of_nonpos` | **proved**; no quantitative zero-counting estimate |
 | 2.25 | Layer 2 counting foundation: zeroDensityCount eq zero of one le | `Legendre.Zeta.zeroDensityCount_eq_zero_of_one_le` | **proved**; no quantitative zero-counting estimate |
 | 2.26 | Layer 2 counting foundation: zeroDensityCount eq count of nonpos | `Legendre.Zeta.zeroDensityCount_eq_count_of_nonpos` | **proved**; no quantitative zero-counting estimate |
+| 2.27 | Layer 2 logarithmic derivative / counting bridge: vonMangoldt series summable | `Legendre.Zeta.vonMangoldt_series_summable` | **proved**; mathlib analytic result re-exported |
+| 2.28 | Layer 2 logarithmic derivative / counting bridge: neg logDeriv eq vonMangoldt series | `Legendre.Zeta.neg_logDeriv_eq_vonMangoldt_series` | **proved**; mathlib analytic result re-exported |
+| 2.29 | Layer 2 logarithmic derivative / counting bridge: norm logDeriv le majorant | `Legendre.Zeta.norm_logDeriv_le_majorant` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.30 | Layer 2 logarithmic derivative / counting bridge: vonMangoldt le nat | `Legendre.Zeta.vonMangoldt_le_nat` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.31 | Layer 2 logarithmic derivative / counting bridge: vonMangoldt term three le | `Legendre.Zeta.vonMangoldt_term_three_le` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.32 | Layer 2 logarithmic derivative / counting bridge: norm logDeriv le pi sq div six | `Legendre.Zeta.norm_logDeriv_le_pi_sq_div_six` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.33 | Layer 2 logarithmic derivative / counting bridge: zeroDensityCount eq zero of zero free | `Legendre.Zeta.zeroDensityCount_eq_zero_of_zero_free` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
+| 2.34 | Layer 2 logarithmic derivative / counting bridge: exists zero density cutoff | `Legendre.Zeta.exists_zero_density_cutoff` | **proved**; new deduction; explicit bound only for Re(s) ≥ 3, cutoff non-effective |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

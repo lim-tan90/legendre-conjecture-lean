@@ -61,3 +61,30 @@ positive-count/existence equivalences, `N(T)=0` for `T≤0`, `N(σ,T)=0` for
 These definitions and proofs are original to this repository, built from
 upstream analytic-order, zero-set and finite-sum APIs. No external quantitative
 zero-counting or density theorem has been transplanted or asserted.
+
+## Logarithmic derivative and counting bridge
+
+`Legendre/ZetaLogDerivative.lean` uses the same fixed mathlib commit:
+
+| Local theorem / input | Upstream declaration | Source and authors |
+|---|---|---|
+| `vonMangoldt_series_summable` | `ArithmeticFunction.LSeriesSummable_vonMangoldt` | `NumberTheory/LSeries/Dirichlet.lean`, Michael Stoll |
+| `neg_logDeriv_eq_vonMangoldt_series` | `ArithmeticFunction.LSeries_vonMangoldt_eq_deriv_riemannZeta_div` | same |
+| Half-plane norm comparison | `LSeries.norm_term_le_of_re_le_re`, summable-series norm and order APIs | `NumberTheory/LSeries/Basic.lean`, Aaron Anderson and Michael Stoll |
+| Coefficient estimate | `ArithmeticFunction.vonMangoldt_le_log`, `Real.log_le_sub_one_of_pos` | von Mangoldt and real logarithm APIs |
+| Basel sum | `hasSum_zeta_two` | `NumberTheory/ZetaValues.lean`, David Loeffler |
+
+Only the first two local theorems are interfaces to the existing analytic
+von Mangoldt identity. The remaining six are deductions here. In particular,
+`norm_logDeriv_le_pi_sq_div_six` bounds each norm by `1/n²`: for a positive
+integer n, `Λ(n) ≤ log n ≤ n`, while `Re(s)≥3` gives denominator at least
+`n³`; the zero-index term is handled separately. Summability justifies
+both the norm-of-sum comparison and the sum of termwise bounds.
+
+`zeroDensityCount_eq_zero_of_zero_free` uses positive multiplicities to
+exclude a positive count when every candidate point is nonzero.
+`exists_zero_density_cutoff` selects `σ = 1 - min(width,1)/2`, so `0<σ<1`
+and the closed cutoff lies strictly inside the previously proved open
+zero-free strip. The width remains non-effective. This is not a quantitative
+zero-density estimate, and the explicit logarithmic-derivative bound is only
+for `Re(s)≥3`; neither result supplies the missing near-line estimates or Perron.
