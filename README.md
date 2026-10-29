@@ -60,6 +60,8 @@
 
 ## Layer 2 progress (2026-10-29)
 
+Verified logarithmic-derivative milestone: [`2a395e71b4a8`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/2a395e71b4a8e1bff3f287a4d6253d4bfce0401f).
+
 **Logarithmic derivative and counting bridge:**
 [`ZetaLogDerivative.lean`](Legendre/ZetaLogDerivative.lean) reuses mathlib’s
 absolute convergence and von Mangoldt series identity for `-ζ′/ζ` on `Re(s)>1`.

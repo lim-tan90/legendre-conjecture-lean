@@ -51,6 +51,8 @@
 
 ## Layer 2 进度（2026-10-29）
 
+已验证的对数导数阶段提交: [`2a395e71b4a8`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/2a395e71b4a8e1bff3f287a4d6253d4bfce0401f).
+
 **对数导数与计数的连接已证明**：新增
 [`ZetaLogDerivative.lean`](Legendre/ZetaLogDerivative.lean)。复用 mathlib 已证明的
 von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增整个闭半平面的
