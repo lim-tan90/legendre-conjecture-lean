@@ -9,4 +9,5 @@ import Legendre.Zeta
 import Legendre.ZetaCounting
 import Legendre.ZetaLogDerivative
 import Legendre.ZetaHalfPlane
+import Legendre.ZetaPole
 import Legendre.Audit

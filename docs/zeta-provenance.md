@@ -115,3 +115,34 @@ The pointwise interface substitutes ε=Re(s)-1.
 
 No bound is asserted at Re(s)=1 or to its left. This is not a sharp pole
 asymptotic, a logarithmic zero-free region, a zero-counting asymptotic, or Perron.
+
+## Pole removal and logarithmic-derivative principal part
+
+`Legendre/ZetaPole.lean` uses the same pinned mathlib version. The updated
+product construction and its continuity argument follow the local auxiliary
+G in `NumberTheory/LSeries/Nonvanishing.lean` (Michael Stoll and David Loeffler,
+Apache-2.0). The new public interface then proves its analyticity and derives
+the logarithmic-derivative principal part and local bounds.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Zeta residue at 1 | `riemannZeta_residue_one` | `NumberTheory/LSeries/RiemannZeta.lean`, David Loeffler |
+| Continuity after replacing a single value | `continuousAt_update_same` | mathlib function-update continuity API |
+| Removable singularity | `Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt` | `Analysis/Complex/RemovableSingularity.lean`, Yury Kudryashov |
+| Analytic derivatives and quotients | `AnalyticAt.deriv`, `AnalyticAt.div` | mathlib analytic-calculus API |
+| Logarithmic product rule and local congruence | `logDeriv_fun_mul`, `logDeriv_congr_nhds` | `Analysis/Calculus/LogDeriv.lean`, Chris Birkbeck |
+
+Lean 4.35's module system requires an explicit import of the removable-singularity
+module; the private imports used in upstream auxiliary proofs are not treated
+as exported interfaces. The point update is essential: at 1 the raw product
+is 0, whereas the inserted value H(1) is 1. The residue theorem proves the
+continuity needed for removal; analytic calculus and H(1)≠0 then make `logDeriv H`
+analytic there. Local equality away from the update transfers the product rule:
+`ζ′/ζ(s)+1/(s-1)=logDeriv H(s)`, eventually off 1.
+
+The right side has a finite limit. Multiplication by (s-1) proves the coefficient
+-1 for `ζ′/ζ`, and negation proves +1 for the Perron convention `-ζ′/ζ`.
+Continuity supplies a bound on the regular part; the triangle inequality gives
+`|ζ′/ζ(s)|≤1/|s-1|+C` locally. These deductions do not evaluate the finite
+regular-part constant or provide an effective C or neighborhood radius.
+There is no assertion at the pole for ζ itself and no Perron contour identity.

@@ -13,6 +13,7 @@ public import Legendre.Zeta
 public import Legendre.ZetaCounting
 public import Legendre.ZetaLogDerivative
 public import Legendre.ZetaHalfPlane
+public import Legendre.ZetaPole
 
 /-!
 # Axiom audit
@@ -139,3 +140,17 @@ end Legendre
 #print axioms Legendre.Zeta.norm_logDeriv_le_of_re_ge_one_add
 #print axioms Legendre.Zeta.norm_logDeriv_le_six_div_sq
 #print axioms Legendre.Zeta.norm_logDeriv_le_re_sub_one
+
+#print axioms Legendre.Zeta.poleRemovedZeta_one
+#print axioms Legendre.Zeta.poleRemovedZeta_eq
+#print axioms Legendre.Zeta.poleRemovedZeta_eventuallyEq
+#print axioms Legendre.Zeta.poleRemovedZeta_differentiableAt
+#print axioms Legendre.Zeta.poleRemovedZeta_continuousAt_one
+#print axioms Legendre.Zeta.poleRemovedZeta_analyticAt_one
+#print axioms Legendre.Zeta.poleRemovedZeta_logDeriv_analyticAt_one
+#print axioms Legendre.Zeta.logDeriv_regularPart_eventuallyEq
+#print axioms Legendre.Zeta.tendsto_logDeriv_regularPart
+#print axioms Legendre.Zeta.tendsto_sub_mul_logDeriv_at_one
+#print axioms Legendre.Zeta.tendsto_sub_mul_neg_logDeriv_at_one
+#print axioms Legendre.Zeta.logDeriv_regularPart_eventually_bounded
+#print axioms Legendre.Zeta.norm_logDeriv_eventually_le_inv_add

@@ -79,6 +79,20 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.38 | Layer 2 explicit right-half-plane estimate: norm logDeriv le of re ge one add | `Legendre.Zeta.norm_logDeriv_le_of_re_ge_one_add` | **proved**; no left-of-1 zero-free claim |
 | 2.39 | Layer 2 explicit right-half-plane estimate: norm logDeriv le six div sq | `Legendre.Zeta.norm_logDeriv_le_six_div_sq` | **proved**; no left-of-1 zero-free claim |
 | 2.40 | Layer 2 explicit right-half-plane estimate: norm logDeriv le re sub one | `Legendre.Zeta.norm_logDeriv_le_re_sub_one` | **proved**; no left-of-1 zero-free claim |
+| 2.pole.def | pole-removed product with value 1 inserted at the pole | `Legendre.Zeta.poleRemovedZeta` | definition; differs from raw product at 1 |
+| 2.41 | Layer 2 local pole structure: poleRemovedZeta one | `Legendre.Zeta.poleRemovedZeta_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.42 | Layer 2 local pole structure: poleRemovedZeta eq | `Legendre.Zeta.poleRemovedZeta_eq` | **proved**; local result, no effective radius or Perron formula |
+| 2.43 | Layer 2 local pole structure: poleRemovedZeta eventuallyEq | `Legendre.Zeta.poleRemovedZeta_eventuallyEq` | **proved**; local result, no effective radius or Perron formula |
+| 2.44 | Layer 2 local pole structure: poleRemovedZeta differentiableAt | `Legendre.Zeta.poleRemovedZeta_differentiableAt` | **proved**; local result, no effective radius or Perron formula |
+| 2.45 | Layer 2 local pole structure: poleRemovedZeta continuousAt one | `Legendre.Zeta.poleRemovedZeta_continuousAt_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.46 | Layer 2 local pole structure: poleRemovedZeta analyticAt one | `Legendre.Zeta.poleRemovedZeta_analyticAt_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.47 | Layer 2 local pole structure: poleRemovedZeta logDeriv analyticAt one | `Legendre.Zeta.poleRemovedZeta_logDeriv_analyticAt_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.48 | Layer 2 local pole structure: logDeriv regularPart eventuallyEq | `Legendre.Zeta.logDeriv_regularPart_eventuallyEq` | **proved**; local result, no effective radius or Perron formula |
+| 2.49 | Layer 2 local pole structure: tendsto logDeriv regularPart | `Legendre.Zeta.tendsto_logDeriv_regularPart` | **proved**; local result, no effective radius or Perron formula |
+| 2.50 | Layer 2 local pole structure: tendsto sub mul logDeriv at one | `Legendre.Zeta.tendsto_sub_mul_logDeriv_at_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.51 | Layer 2 local pole structure: tendsto sub mul neg logDeriv at one | `Legendre.Zeta.tendsto_sub_mul_neg_logDeriv_at_one` | **proved**; local result, no effective radius or Perron formula |
+| 2.52 | Layer 2 local pole structure: logDeriv regularPart eventually bounded | `Legendre.Zeta.logDeriv_regularPart_eventually_bounded` | **proved**; local result, no effective radius or Perron formula |
+| 2.53 | Layer 2 local pole structure: norm logDeriv eventually le inv add | `Legendre.Zeta.norm_logDeriv_eventually_le_inv_add` | **proved**; local result, no effective radius or Perron formula |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

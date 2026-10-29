@@ -149,6 +149,17 @@ close to 1 from the right, but does not provide an effective region to the
 left of 1, the estimates on zero-counting contours, or Perron's formula.
 The previously stated `π²/6` bound remains available for `Re(s)≥3`.
 
+**Local pole structure (2026-10-29).** `Legendre/ZetaPole.lean` fills the
+removable singularity of `(s-1)ζ(s)` with the residue value 1, proves the
+updated function H analytic at 1, and transfers the logarithmic product rule
+off 1. The regular part `ζ′/ζ(s)+1/(s-1)` tends to `logDeriv H 1`.
+Consequently `(s-1)ζ′/ζ(s)→-1` and `(s-1)(-ζ′/ζ(s))→+1` in the
+punctured complex neighborhood. The regular part is locally bounded, giving
+`|ζ′/ζ(s)|≤1/|s-1|+C` for some C>0 and some neighborhood.
+Neither C nor the neighborhood radius is explicit. This does not extend ζ
+holomorphically through 1, evaluate the finite regular-part constant, prove
+a high-height zero-free region, or supply a Perron contour formula.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /

@@ -60,6 +60,15 @@
 
 ## Layer 2 progress (2026-10-29)
 
+**Pole principal part and local growth:** [`ZetaPole.lean`](Legendre/ZetaPole.lean)
+updates `H(s)=(s-1)ζ(s)` to `H(1)=1` and proves H analytic at 1.
+`ζ′/ζ(s)+1/(s-1)` has a finite limit, so
+**`(s-1)ζ′/ζ(s)→-1`**, or **`(s-1)(-ζ′/ζ(s))→+1`** in the Perron sign convention.
+For some `C>0`, the punctured-neighborhood bound
+`|ζ′/ζ(s)|≤1/|s-1|+C` also holds. Only H is extended at 1, not ζ itself.
+The constant and neighborhood are non-effective; no Perron contour formula
+or quantitative high-imaginary-part zero-free region is claimed.
+
 Verified explicit ε-bound milestone: [`bb75a8305f9f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bb75a8305f9fecb883d060dcbb7165c6c909738a).
 
 **Explicit ε-bound on every right half-plane:**
