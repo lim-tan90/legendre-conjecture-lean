@@ -60,6 +60,8 @@
 
 ## Layer 2 progress (2026-10-29)
 
+Verified counting-foundations commit: [`0c2b0574ec83`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0c2b0574ec83a787bff4e61cd07ab51ccb7c0fce).
+
 **Multiplicity-weighted counting foundations:** [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)
 defines critical-strip `NontrivialZero`, `zeroCount` (`N(T)`), and
 `zeroDensityCount` (`N(σ,T)`). The convention is `0 < Re(s) < 1`,

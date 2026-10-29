@@ -51,6 +51,8 @@
 
 ## Layer 2 进度（2026-10-29）
 
+已验证的零点计数基础提交: [`0c2b0574ec83`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0c2b0574ec83a787bff4e61cd07ab51ccb7c0fce).
+
 **零点计数基础已完成定义和检查**：新增 [`ZetaCounting.lean`](Legendre/ZetaCounting.lean)，
 定义临界带内的 `NontrivialZero`、按解析重数计数的 `zeroCount`（`N(T)`）和
 `zeroDensityCount`（`N(σ,T)`）。计数约定为 `0 < Re(s) < 1`、`0 < Im(s) ≤ T`，
