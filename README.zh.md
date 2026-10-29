@@ -51,6 +51,8 @@
 
 ## Layer 2 进度（2026-10-29）
 
+已验证的 ε 显式界阶段提交: [`bb75a8305f9f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bb75a8305f9fecb883d060dcbb7165c6c909738a).
+
 **右侧半平面的 ε 显式界已证明**：新增
 [`ZetaHalfPlane.lean`](Legendre/ZetaHalfPlane.lean)，对任意 `ε>0`，
 **`Re(s)≥1+ε ⇒ |ζ′/ζ(s)|≤(2/ε)(1+2/ε)`**；当 `0<ε≤1` 时，

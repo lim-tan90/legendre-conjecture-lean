@@ -60,6 +60,8 @@
 
 ## Layer 2 progress (2026-10-29)
 
+Verified explicit ε-bound milestone: [`bb75a8305f9f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bb75a8305f9fecb883d060dcbb7165c6c909738a).
+
 **Explicit ε-bound on every right half-plane:**
 [`ZetaHalfPlane.lean`](Legendre/ZetaHalfPlane.lean) proves, for every `ε>0`,
 **`Re(s)≥1+ε ⇒ |ζ′/ζ(s)|≤(2/ε)(1+2/ε)`**. For `0<ε≤1` this implies
