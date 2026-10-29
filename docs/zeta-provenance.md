@@ -2,8 +2,8 @@
 
 Validated against Lean `v4.35.0` and mathlib `v4.35.0`, commit
 [`56a005855ea17e0b0958f73ec801ae140b0a1679`](https://github.com/leanprover-community/mathlib4/tree/56a005855ea17e0b0958f73ec801ae140b0a1679),
-under Apache-2.0. The latest stable Lean release was checked as `v4.35.0`
-on 2026-10-29. No dependency pins or lockfiles were changed.
+under Apache-2.0. The latest stable Lean and mathlib releases were rechecked as `v4.35.0`
+on 2026-10-30. No dependency pins or lockfiles were changed.
 
 These are direct imports and hypothesis-preserving namespace interfaces,
 not copied analytic proofs. Module imports explicitly expose the required
@@ -146,3 +146,31 @@ Continuity supplies a bound on the regular part; the triangle inequality gives
 `|ζ′/ζ(s)|≤1/|s-1|+C` locally. These deductions do not evaluate the finite
 regular-part constant or provide an effective C or neighborhood radius.
 There is no assertion at the pole for ζ itself and no Perron contour identity.
+
+## Forward Abel integral and weighted pole coefficient
+
+`Legendre/PerronFoundation.lean` uses the same pinned mathlib commit.
+It supplies project-local identifications and growth/integrability proofs
+before specializing the upstream analytic representation.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Forward Abel representation | `LSeries_eq_mul_integral_of_nonneg` | `NumberTheory/LSeries/SumCoeff.lean`, Xavier Roblot |
+| Abel summation / integral foundation | upstream Abel summation development | `NumberTheory/AbelSummation.lean`, Xavier Roblot |
+| Linear Chebyshev bound | `Chebyshev.psi_le_const_mul_self` | `NumberTheory/Chebyshev.lean`, Alastair Irving, Terry Tao, Ruben Van de Velde |
+| ψ measurability | `Chebyshev.psi_mono` and monotone-function measurability | Chebyshev and measure-theory APIs |
+| Majorant integrability | `integrableOn_Ioi_rpow_of_lt` | `Analysis/SpecialFunctions/ImproperIntegrals.lean`, David Loeffler |
+| Complex power continuity | `Complex.continuousAt_const_cpow`, `continuousAt_ofReal_cpow_const` | `Analysis/SpecialFunctions/Pow/Continuity.lean`, Chris Hughes and coauthors |
+
+The equality of `Icc 1 floor(t)` partial sums and ψ's `Ioc 0 floor(t)`
+convention is proved explicitly, in both real and complex coefficient types.
+The bound ψ(n)≤(log 4+4)n supplies the O(n) hypothesis required by the
+upstream Abel theorem; no PNT is assumed. The integral is separately proved
+Bochner integrable on (1,∞) for Re(s)>1, by measurability and domination by
+`(log 4+4)t^(-Re(s))`. This prevents a divergent integral's default value
+from being mistaken for an integral representation.
+
+For x>0, x^s/s is continuous at 1 with value x. Combining this with the
+previously proved `(s-1)(-ζ′/ζ(s))→1` yields the local weighted coefficient x.
+No contour-integral residue theorem or inverse Mellin theorem is invoked.
+There is no Perron inversion, truncation bound, or consequent PNT claim.

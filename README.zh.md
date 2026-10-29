@@ -49,7 +49,16 @@
 > 常数与“充分大”约定编码了九项已发表短区间结果，并证明了区间形式、间隙形式与
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
-## Layer 2 进度（2026-10-29）
+<details>
+<summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
+
+**Abel 积分表示与带权极点系数（2026-10-30）**：新增
+[`PerronFoundation.lean`](Legendre/PerronFoundation.lean)。对 `Re(s)>1`，
+已证明 **`-ζ′/ζ(s)=s∫₁∞ψ(t)t^(-s-1)dt`**，并单独证明该积分绝对收敛。
+部分和的线性控制来自已证明的 Chebyshev 界，随后接入 mathlib 的 Abel 部分求和。
+对 `x>0`，带权核 `K(x,s)=(-ζ′/ζ(s))x^s/s` 满足
+**`(s-1)K(x,s)→x`**。这是前向积分表示与局部系数极限，
+**尚不是 Perron 反演或带截断误差的围道公式**。
 
 已验证的极点局部结构阶段提交: [`c28a28c1a28c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/c28a28c1a28c3fc382d48e0fb4f736d4d1cb6828).
 
@@ -104,6 +113,8 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 估计、Perron 公式或 PNT，第 2 层仍未全部完成。
 固定版本、上游作者及逐项对应见 [出处说明](docs/zeta-provenance.md)。
 适配并验证于 Lean 4.35.0 / mathlib v4.35.0；没有引入新的信任公理。
+
+</details>
 
 ## 历史进展总览
 

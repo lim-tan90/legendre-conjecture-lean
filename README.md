@@ -58,7 +58,17 @@
 > interval form, the gap form, and the coarse `Prop`s in `Conditional.lean`
 > equivalent.  The analytic proofs themselves remain **open**.
 
-## Layer 2 progress (2026-10-29)
+<details>
+<summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
+
+**Abel representation and weighted pole coefficient (2026-10-30):**
+[`PerronFoundation.lean`](Legendre/PerronFoundation.lean) proves, for `Re(s)>1`,
+**`-ζ′/ζ(s)=s∫₁∞ψ(t)t^(-s-1)dt`**, with a separate proof of absolute
+integrability. The proved Chebyshev linear bound supplies coefficient-growth
+control for mathlib’s Abel summation interface. For `x>0`, the weighted
+kernel `K(x,s)=(-ζ′/ζ(s))x^s/s` satisfies **`(s-1)K(x,s)→x`**.
+This is a forward integral representation and local coefficient limit,
+**not Perron inversion or a truncated contour formula with error bounds**.
 
 Verified local pole-structure milestone: [`c28a28c1a28c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/c28a28c1a28c3fc382d48e0fb4f736d4d1cb6828).
 
@@ -126,6 +136,8 @@ each fixed height `T` there is `δ(T) > 0` such that `ζ(s) ≠ 0` whenever
 See [provenance and upstream mapping](docs/zeta-provenance.md) for fixed
 commits and authors. Adapted and checked with Lean 4.35.0 / mathlib v4.35.0,
 with no additional trusted axioms.
+
+</details>
 
 ## Historical progress at a glance
 

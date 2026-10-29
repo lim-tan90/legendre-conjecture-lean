@@ -160,6 +160,19 @@ Neither C nor the neighborhood radius is explicit. This does not extend ζ
 holomorphically through 1, evaluate the finite regular-part constant, prove
 a high-height zero-free region, or supply a Perron contour formula.
 
+**Forward Abel and weighted kernel (2026-10-30).**
+`Legendre/PerronFoundation.lean` identifies the von Mangoldt partial sums
+with ψ, proves their O(n) bound from the existing Chebyshev inequality, and
+specializes mathlib's proved Abel representation to
+`-ζ′/ζ(s)=s∫₁∞ψ(t)t^(-s-1)dt` for `Re(s)>1`.
+The integrand's absolute integrability is proved separately, using the
+measurability of the monotone ψ function and the majorant
+`(log 4+4)t^(-Re(s))` on t>1. For x>0, the weight x^s/s is continuous at 1,
+and the weighted kernel satisfies `(s-1)(-ζ′/ζ(s))x^s/s→x`.
+These are a forward transform and a local pole-coefficient limit, not an
+inverse transform, a contour-integral evaluation or a truncation/error theorem.
+The Perron acceptance criterion remains open.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /

@@ -93,6 +93,16 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.51 | Layer 2 local pole structure: tendsto sub mul neg logDeriv at one | `Legendre.Zeta.tendsto_sub_mul_neg_logDeriv_at_one` | **proved**; local result, no effective radius or Perron formula |
 | 2.52 | Layer 2 local pole structure: logDeriv regularPart eventually bounded | `Legendre.Zeta.logDeriv_regularPart_eventually_bounded` | **proved**; local result, no effective radius or Perron formula |
 | 2.53 | Layer 2 local pole structure: norm logDeriv eventually le inv add | `Legendre.Zeta.norm_logDeriv_eventually_le_inv_add` | **proved**; local result, no effective radius or Perron formula |
+| 2.perron.def | weight x^s/s and weighted -ζ′/ζ kernel | `Legendre.Zeta.perronWeight`, `perronIntegrand` | definitions; not an inversion assertion |
+| 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
+| 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
+| 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |
+| 2.57 | Layer 2 forward Abel / weighted pole foundation: norm psi mellin integrand le | `Legendre.Zeta.norm_psi_mellin_integrand_le` | **proved**; not Perron inversion |
+| 2.58 | Layer 2 forward Abel / weighted pole foundation: psi mellin integrable | `Legendre.Zeta.psi_mellin_integrable` | **proved**; not Perron inversion |
+| 2.59 | Layer 2 forward Abel / weighted pole foundation: neg logDeriv eq psi integral | `Legendre.Zeta.neg_logDeriv_eq_psi_integral` | **proved**; not Perron inversion |
+| 2.60 | Layer 2 forward Abel / weighted pole foundation: perronWeight one | `Legendre.Zeta.perronWeight_one` | **proved**; not Perron inversion |
+| 2.61 | Layer 2 forward Abel / weighted pole foundation: perronWeight continuousAt one | `Legendre.Zeta.perronWeight_continuousAt_one` | **proved**; not Perron inversion |
+| 2.62 | Layer 2 forward Abel / weighted pole foundation: tendsto sub mul perronIntegrand at one | `Legendre.Zeta.tendsto_sub_mul_perronIntegrand_at_one` | **proved**; not Perron inversion |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

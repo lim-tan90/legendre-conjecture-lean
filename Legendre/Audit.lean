@@ -14,6 +14,7 @@ public import Legendre.ZetaCounting
 public import Legendre.ZetaLogDerivative
 public import Legendre.ZetaHalfPlane
 public import Legendre.ZetaPole
+public import Legendre.PerronFoundation
 
 /-!
 # Axiom audit
@@ -154,3 +155,13 @@ end Legendre
 #print axioms Legendre.Zeta.tendsto_sub_mul_neg_logDeriv_at_one
 #print axioms Legendre.Zeta.logDeriv_regularPart_eventually_bounded
 #print axioms Legendre.Zeta.norm_logDeriv_eventually_le_inv_add
+
+#print axioms Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi
+#print axioms Legendre.Zeta.vonMangoldt_partialSums_isBigO
+#print axioms Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi
+#print axioms Legendre.Zeta.norm_psi_mellin_integrand_le
+#print axioms Legendre.Zeta.psi_mellin_integrable
+#print axioms Legendre.Zeta.neg_logDeriv_eq_psi_integral
+#print axioms Legendre.Zeta.perronWeight_one
+#print axioms Legendre.Zeta.perronWeight_continuousAt_one
+#print axioms Legendre.Zeta.tendsto_sub_mul_perronIntegrand_at_one
