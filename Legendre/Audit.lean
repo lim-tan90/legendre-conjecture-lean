@@ -9,6 +9,7 @@ public import Legendre.Bertrand
 public import Legendre.ExplicitBounds
 public import Legendre.Layer5
 public import Legendre.Nagura
+public import Legendre.Zeta
 
 /-!
 # Axiom audit
@@ -91,3 +92,14 @@ namespace Legendre
 #print axioms nagura_hasPrimeIn_nat
 
 end Legendre
+
+#print axioms Legendre.Zeta.series_norm_summable
+#print axioms Legendre.Zeta.eq_series
+#print axioms Legendre.Zeta.euler_product
+#print axioms Legendre.Zeta.euler_product_limit
+#print axioms Legendre.Zeta.analytic_off_pole
+#print axioms Legendre.Zeta.completed_functional_equation
+#print axioms Legendre.Zeta.nonvanishing
+#print axioms Legendre.Zeta.finite_zeros_on_compact
+#print axioms Legendre.Zeta.exists_zero_free_band
+#print axioms Legendre.Zeta.exists_zero_free_strip

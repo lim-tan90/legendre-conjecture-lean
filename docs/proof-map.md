@@ -38,6 +38,16 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 9e | paper-exact `+ε` form ↔ coarse exponent-limit interface | `Legendre.shortIntervalStatement_iff_exponentLimit` | **proved** |
 | 9f | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | **proved** |
 | 9g | each paper-exact statement ↔ its coarse `Prop` | `Legendre.*Paper_iff` (nine theorems) | **proved** |
+| 2.1 | Layer 2: absolute convergence | `Legendre.Zeta.series_norm_summable` | **proved**; mathlib result re-exported |
+| 2.2 | Layer 2: convergent Dirichlet series | `Legendre.Zeta.eq_series` | **proved**; mathlib result re-exported |
+| 2.3 | Layer 2: Euler product with convergence | `Legendre.Zeta.euler_product` | **proved**; mathlib result re-exported |
+| 2.4 | Layer 2: finite Euler-product limit | `Legendre.Zeta.euler_product_limit` | **proved**; mathlib result re-exported |
+| 2.5 | Layer 2: analytic continuation away from pole | `Legendre.Zeta.analytic_off_pole` | **proved**; mathlib result re-exported |
+| 2.6 | Layer 2: completed functional equation | `Legendre.Zeta.completed_functional_equation` | **proved**; mathlib result re-exported |
+| 2.7 | Layer 2: nonvanishing on Re(s) ≥ 1, excluding pole | `Legendre.Zeta.nonvanishing` | **proved**; mathlib result re-exported |
+| 2.8 | Layer 2: finitely many distinct zeros in a compact set | `Legendre.Zeta.finite_zeros_on_compact` | **proved**; mathlib result re-exported |
+| 2.9 | Layer 2: positive-width zero-free band at fixed height | `Legendre.Zeta.exists_zero_free_band` | **proved**; new deduction; no effective width estimate |
+| 2.10 | Layer 2: qualitative left-hand strip, excluding pole | `Legendre.Zeta.exists_zero_free_strip` | **proved**; new deduction; no effective width estimate |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |

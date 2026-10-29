@@ -5,4 +5,5 @@ import Legendre.Bertrand
 import Legendre.ExplicitBounds
 import Legendre.Layer5
 import Legendre.Nagura
+import Legendre.Zeta
 import Legendre.Audit

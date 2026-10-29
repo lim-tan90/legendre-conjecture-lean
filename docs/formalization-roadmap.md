@@ -103,9 +103,20 @@ bounds for `ζ'/ζ`.
 **Why.** Every zero-density theorem and every short-interval PNT proof starts
 from these.
 
-**Current state.** mathlib has a partial `Mathlib.NumberTheory.LSeries.RiemannZeta`
-API and some zeta values, but not a complete zero-free-region and zero-counting
-development suitable for Ingham/Huxley.
+**Current state (2026-10-29).** `Legendre/Zeta.lean` integrates proved
+mathlib v4.35.0 absolute convergence, Euler products, analytic continuation,
+the completed functional equation, nonvanishing on `Re(s) ≥ 1` (excluding
+the pole), and finiteness of distinct zeros on compact sets. The new
+`exists_zero_free_strip` derives a positive-width strip at every fixed height
+by compactness of a vertical segment and closedness of the zero set.
+Its width is non-effective and height-dependent, **not** a `c/log T` estimate.
+The total function's value at 1 is not an analytic extension through the pole.
+See [provenance](zeta-provenance.md) for exact upstream mappings.
+
+The first two suggested slices below are now integrated from mathlib;
+the boundary nonvanishing part of slice 3 is integrated, with a qualitative
+compact-height neighborhood. Effective zero-free regions, multiplicity-weighted
+zero counting and Perron remain open. Layer 2 acceptance is **not** fully met.
 
 **Acceptance criteria.**
 

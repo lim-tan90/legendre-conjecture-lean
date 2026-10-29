@@ -58,6 +58,26 @@
 > interval form, the gap form, and the coarse `Prop`s in `Conditional.lean`
 > equivalent.  The analytic proofs themselves remain **open**.
 
+## Layer 2 progress (2026-10-29)
+
+**Zeta foundations integrated and checked:** absolute convergence, the Euler
+product and finite-product convergence, analytic continuation away from the
+pole, the completed functional equation, nonvanishing on `Re(s) ≥ 1`
+(excluding the pole), and finiteness of distinct zeros on compact sets.
+See [`Legendre/Zeta.lean`](Legendre/Zeta.lean). These interfaces reuse proved
+mathlib v4.35.0 results; they are not claimed as new analytic proofs.
+
+**New deduction:** `Legendre.Zeta.exists_zero_free_strip` proves that for
+each fixed height `T` there is `δ(T) > 0` such that `ζ(s) ≠ 0` whenever
+`Re(s) > 1 - δ(T)`, `|Im(s)| ≤ T`, and `s ≠ 1`. The width is non-effective.
+
+**Still open:** a quantitative `c/log T` zero-free region, multiplicity-weighted
+`N(T)` estimates, Perron, and PNT. Layer 2 is not complete.
+
+See [provenance and upstream mapping](docs/zeta-provenance.md) for fixed
+commits and authors. Adapted and checked with Lean 4.35.0 / mathlib v4.35.0,
+with no additional trusted axioms.
+
 ## Historical progress at a glance
 
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -201,7 +221,7 @@ This table is the roadmap, not a claim that the work is done.
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
-| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | partial zeta API in mathlib; no complete zero-free-region / zero-counting development |
+| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | foundations and a qualitative fixed-height zero-free strip integrated; quantitative region and zero-counting estimates remain open |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
