@@ -143,6 +143,34 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.tail.13 | symmetric integral decomposition | `Legendre.Zeta.integral_perronWeight_symmetric` | **proved** for y,σ>0 |
 | 2.tail.14 | nonendpoint scalar limit existence | `Legendre.Zeta.exists_tendsto_truncatedPerronKernel` | **proved** for y>0, y≠1, σ>0; no limit value asserted |
 | 2.tail.15 | all-positive-base scalar convergence | `Legendre.Zeta.exists_tendsto_truncatedPerronKernel_pos` | **proved** for y,σ>0, including y=1; no full Perron formula |
+| 2.shift.def | horizontal scalar contour side | `Legendre.Zeta.perronHorizontal` | definition |
+| 2.shift.1 | weight differentiability off zero | `Legendre.Zeta.perronWeight_differentiableAt` | **proved** for y>0 |
+| 2.shift.2 | positive rectangle identity | `Legendre.Zeta.perronWeight_rectangle` | **proved** for 0<σ≤ρ |
+| 2.shift.3 | endpoint maximum bounds real powers | `Legendre.Zeta.rpow_le_max_endpoints` | **proved** for y>0 |
+| 2.shift.4 | horizontal pointwise bound | `Legendre.Zeta.norm_perronWeight_horizontal_le` | **proved** at nonzero height |
+| 2.shift.5 | horizontal integral bound | `Legendre.Zeta.norm_perronHorizontal_le` | **proved**; endpoint-power maximum times width/abs(height) |
+| 2.shift.6 | positive-height side vanishes | `Legendre.Zeta.perronHorizontal_tendsto_zero` | **proved** |
+| 2.shift.7 | negative-height side vanishes | `Legendre.Zeta.perronHorizontal_neg_tendsto_zero` | **proved** |
+| 2.shift.8 | finite change of positive line | `Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal` | **proved** without crossing zero |
+| 2.shift.9 | positive-line difference vanishes | `Legendre.Zeta.tendsto_truncatedPerronKernel_sub` | **proved** |
+| 2.shift.10 | scalar limits independent of positive line | `Legendre.Zeta.perronKernel_limit_independent_line` | **proved** for any two existing limits |
+| 2.zero.1 | exact reciprocal derivative norm | `Legendre.Zeta.norm_perronReciprocalDeriv_eq` | **proved**; 1/(σ²+t²) |
+| 2.zero.2 | boundary term uniform bound | `Legendre.Zeta.norm_perronTail_boundary_le` | **proved** for y,σ>0 |
+| 2.zero.3 | symmetric remainder uniform bound | `Legendre.Zeta.norm_integral_perronTail_remainder_le` | **proved** for T≥0 |
+| 2.zero.4 | height-independent scalar kernel bound | `Legendre.Zeta.norm_truncatedPerronKernel_uniform_le` | **proved** for y>0, y≠1, σ>0, T≥0 |
+| 2.zero.5 | right-line decay below endpoint | `Legendre.Zeta.norm_truncatedPerronKernel_le_of_lt_one` | **proved** for 0<y<1 |
+| 2.zero.6 | scalar kernel limit below endpoint | `Legendre.Zeta.tendsto_truncatedPerronKernel_of_lt_one` | **proved**; limit 0 for 0<y<1, σ>0 |
+| 2.residue.def | entire regularization and endpoint step | `Legendre.Zeta.perronRegularizedWeight`, `scalarPerronValue` | definitions; latter is 0/half/1 |
+| 2.residue.1 | entire regularization | `Legendre.Zeta.perronRegularizedWeight_differentiable` | **proved** for y>0 using dslope |
+| 2.residue.2 | regularization off zero | `Legendre.Zeta.perronRegularizedWeight_eq` | **proved**; subtracts the reciprocal kernel |
+| 2.residue.3 | continuity along a curve | `Legendre.Zeta.perronWeight_continuous_comp` | **proved** for curves avoiding zero |
+| 2.residue.4 | regularized integral decomposition | `Legendre.Zeta.integral_perronRegularizedWeight_eq` | **proved** with genuine finite integrability |
+| 2.residue.5 | reflected weight identity | `Legendre.Zeta.perronWeight_neg_eq_inv` | **proved**; reciprocal base |
+| 2.residue.6 | reflected scalar kernel identity | `Legendre.Zeta.truncatedPerronKernel_neg_line` | **proved** at finite height |
+| 2.residue.7 | finite pole-crossing identity | `Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq` | **proved** by an entire regularized rectangle |
+| 2.residue.8 | limiting pole contribution comparison | `Legendre.Zeta.tendsto_truncatedPerronKernel_crossing_sub` | **proved** via horizontal-side decay |
+| 2.residue.9 | scalar kernel limit above endpoint | `Legendre.Zeta.tendsto_truncatedPerronKernel_of_one_lt` | **proved**; limit 1 for y>1, σ>0 |
+| 2.residue.10 | unified scalar Perron inversion | `Legendre.Zeta.tendsto_truncatedPerronKernel` | **proved**; 0/half/1 for all y,σ>0; no ψ reconstruction asserted |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |

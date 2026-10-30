@@ -17,4 +17,7 @@ import Legendre.PerronSeries
 import Legendre.PerronKernel
 import Legendre.PerronOscillation
 import Legendre.PerronTail
+import Legendre.PerronShift
+import Legendre.PerronZero
+import Legendre.PerronResidue
 import Legendre.Audit

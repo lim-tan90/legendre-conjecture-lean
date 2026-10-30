@@ -61,15 +61,28 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Scalar Perron inversion (2026-10-30):**
+[`PerronResidue.lean`](Legendre/PerronResidue.lean), with
+[`PerronShift.lean`](Legendre/PerronShift.lean) and
+[`PerronZero.lean`](Legendre/PerronZero.lean), proves for every y>0 and σ>0:
+**`J(y,σ,T) → 0` if y<1, `→1/2` if y=1, and `→1` if y>1**.
+Positive-line shifts, vanishing horizontal sides and a uniform finite-height
+bound give the y<1 case. An entire extension of `(y^s-1)/s` accounts for
+the pole when crossing zero and proves the y>1 case by reciprocal-base
+reflection. This evaluates the scalar kernel; passing the limit through
+the von Mangoldt series, reconstruction of ψ and full truncation-error
+bounds remain open, as does the effective logarithmic zero-free region.
+
 **Scalar kernel convergence (2026-10-30):**
+Verified source commit: [`262e64dd1d08`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/262e64dd1d081f339e63d682c4adbc42269e8b10).
 [`PerronTail.lean`](Legendre/PerronTail.lean) proves existence of the limit
 of J(y,σ,T) as T→∞ for every y>0 and σ>0. Integration by parts gives a
 vanishing boundary term and an absolutely integrable remainder on (1,∞);
 reflection by complex conjugation supplies the negative half-line. This is
 conditional convergence of the scalar kernel, not absolute integrability
-of the original infinite-line integrand. Identifying the limit as 0 for
-y<1 or 1 for y>1, and passing the limit through the von Mangoldt series,
-remain open. Layer 2 is still incomplete.
+of the original infinite-line integrand. The limit values are now identified
+in `PerronResidue.lean`; passage through the von Mangoldt series remains
+open. Layer 2 is still incomplete.
 
 **Oscillatory numerator (2026-10-30):**
 Verified source commit: [`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
@@ -77,8 +90,8 @@ Verified source commit: [`13df761e6893`](https://github.com/lim-tan90/legendre-c
 [`PerronOscillation.lean`](Legendre/PerronOscillation.lean) separates
 `y^(σ+it)=y^σ exp(it log y)` for y>0. For y≠1 it evaluates the finite
 numerator integral and bounds its norm by `2y^σ/|log y|`, uniformly in both
-height endpoints. This is an input for integration by parts with `1/(σ+it)`;
-it does not yet evaluate J(y,σ,T) or its limit away from y=1.
+height endpoints. This supplies input for integration by parts with `1/(σ+it)`;
+the scalar limit is now evaluated in `PerronResidue.lean`.
 
 **Scalar Perron endpoint (2026-10-30):**
 Verified source commit: [`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
@@ -86,8 +99,9 @@ Verified source commit: [`0baaeed095a6`](https://github.com/lim-tan90/legendre-c
 [`PerronKernel.lean`](Legendre/PerronKernel.lean) proves, for σ>0,
 `J(1,σ,T)=arctan(T/σ)/π`, hence `J(1,σ,T)→1/2` as T→∞.
 For T>0 the boundary error satisfies `|J(1,σ,T)-1/2|≤σ/(πT)`.
-This establishes the half-weight endpoint convention; evaluation and error
-bounds for y≠1 and passage through the von Mangoldt sum remain open.
+This establishes the half-weight endpoint convention. Nonendpoint values
+are now proved; their truncation errors and passage through the von Mangoldt
+sum remain open.
 
 **Finite Perron series exchange (2026-10-30):**
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) proves termwise integration
@@ -95,8 +109,9 @@ of the weighted von Mangoldt series on every finite vertical segment with
 `x>0`, `σ>1`. A height-independent summable majorant proves the exchange and
 absolute convergence of the integrated terms. The normalized integral is
 exactly `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, with J the finite scalar Perron kernel.
-Evaluating J at infinite height and proving truncation errors remain open;
-this identity alone does not identify P with ψ.
+J's infinite-height values are now proved in `PerronResidue.lean`; exchanging
+that limit with this series and proving truncation errors remain open.
+This finite identity alone does not identify P with ψ.
 
 **Finite vertical Perron integrals (2026-10-30):**
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) defines the normalized

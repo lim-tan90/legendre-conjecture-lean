@@ -309,3 +309,44 @@ The scalar normalized kernel consequently has a limit for all positive
 y≠1 and σ>0; the earlier endpoint theorem supplies y=1. This result does
 not determine the limit as 0 or 1 away from the endpoint, justify a limit
 under the von Mangoldt series, or prove a full Perron error estimate.
+
+## Scalar contour shifts and inversion
+
+`Legendre/PerronShift.lean`, `PerronZero.lean` and `PerronResidue.lean`
+contain original deductions using the same fixed mathlib commit. No
+external formalization is copied, and dependency pins are unchanged.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Rectangle Cauchy-Goursat | `Complex.integral_boundary_rect_eq_zero_of_differentiableOn` | `Analysis/Complex/CauchyIntegral.lean`, Yury Kudryashov, Apache-2.0 |
+| Entire divided difference | `Complex.differentiableOn_dslope`, `dslope_of_ne`, `slope_def_field` | `Analysis/Complex/RemovableSingularity.lean`, `Analysis/Calculus/DSlope.lean` and slope API |
+| Complex power differentiation | `DifferentiableAt.const_cpow` | `Analysis/SpecialFunctions/Pow/Deriv.lean` |
+| Endpoint power bounds | `Real.rpow_le_rpow_of_exponent_le`, `Real.rpow_le_rpow_of_exponent_ge`, `Real.rpow_le_one` | real power API |
+| Uniform remainder primitive | `integral_inv_sq_add_sq`, `Real.arctan_lt_pi_div_two` | integrals and arctangent APIs |
+| Reciprocal-base reflection | `Complex.cpow_neg`, `Complex.inv_cpow_ofReal_nonneg`, `intervalIntegral.integral_comp_neg` | complex power and interval integral APIs |
+
+A rectangle wholly to the right of zero gives an exact finite change of
+vertical line. On its horizontal sides, the denominator norm is at least
+the height and the numerator is bounded by the maximum endpoint power.
+The horizontal integrals vanish at infinite height, hence all positive-line
+limits agree.
+
+The exact reciprocal derivative norm is 1/(σ²+t²). Its symmetric finite
+integral is bounded by π/σ, while either integration-by-parts endpoint term
+is bounded by y^σ/(σ|log y|). This yields the height-independent scalar
+bound `(y^σ/|log y|)(2+π)/(2πσ)` away from y=1. For 0<y<1, y^σ≤1 and
+moving the line right forces the common limit to zero.
+
+For y>1, the divided difference `dslope (fun s => y^s) 0` is entire and
+equals `(y^s-1)/s` off zero. Applying Cauchy-Goursat to this regularization
+across zero isolates the y=1 reciprocal kernel's contribution. Every
+boundary curve avoids zero before the regularized integral is split into
+two integrals; continuity proves both finite integrals exist. Reflection
+of the negative line gives minus the kernel with reciprocal base y⁻¹,
+whose positive-line limit is already zero. The endpoint half-weights on
+opposite lines contribute 1. Together with the previous endpoint theorem,
+this proves scalar inversion with values 0, 1/2 and 1.
+
+No infinite-height limit is interchanged with the von Mangoldt series here.
+Reconstruction of ψ, full truncation-error bounds and an effective
+logarithmic zero-free region remain open.
