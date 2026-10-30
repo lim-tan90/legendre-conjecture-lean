@@ -21,6 +21,9 @@ public import Legendre.PerronSeries
 public import Legendre.PerronKernel
 public import Legendre.PerronOscillation
 public import Legendre.PerronTail
+public import Legendre.PerronShift
+public import Legendre.PerronZero
+public import Legendre.PerronResidue
 
 /-!
 # Axiom audit
@@ -222,3 +225,32 @@ end Legendre
 #print axioms Legendre.Zeta.integral_perronWeight_symmetric
 #print axioms Legendre.Zeta.exists_tendsto_truncatedPerronKernel
 #print axioms Legendre.Zeta.exists_tendsto_truncatedPerronKernel_pos
+
+#print axioms Legendre.Zeta.perronWeight_differentiableAt
+#print axioms Legendre.Zeta.perronWeight_rectangle
+#print axioms Legendre.Zeta.rpow_le_max_endpoints
+#print axioms Legendre.Zeta.norm_perronWeight_horizontal_le
+#print axioms Legendre.Zeta.norm_perronHorizontal_le
+#print axioms Legendre.Zeta.perronHorizontal_tendsto_zero
+#print axioms Legendre.Zeta.perronHorizontal_neg_tendsto_zero
+#print axioms Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_sub
+#print axioms Legendre.Zeta.perronKernel_limit_independent_line
+
+#print axioms Legendre.Zeta.norm_perronReciprocalDeriv_eq
+#print axioms Legendre.Zeta.norm_perronTail_boundary_le
+#print axioms Legendre.Zeta.norm_integral_perronTail_remainder_le
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_uniform_le
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_le_of_lt_one
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_of_lt_one
+
+#print axioms Legendre.Zeta.perronRegularizedWeight_differentiable
+#print axioms Legendre.Zeta.perronRegularizedWeight_eq
+#print axioms Legendre.Zeta.perronWeight_continuous_comp
+#print axioms Legendre.Zeta.integral_perronRegularizedWeight_eq
+#print axioms Legendre.Zeta.perronWeight_neg_eq_inv
+#print axioms Legendre.Zeta.truncatedPerronKernel_neg_line
+#print axioms Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_crossing_sub
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_of_one_lt
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel

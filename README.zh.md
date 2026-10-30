@@ -52,20 +52,30 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**标量 Perron 反演（2026-10-30）**：
+[`PerronResidue.lean`](Legendre/PerronResidue.lean) 联同
+[`PerronShift.lean`](Legendre/PerronShift.lean)、[`PerronZero.lean`](Legendre/PerronZero.lean)
+证明，对每个 y>0、σ>0：**y<1 时 J(y,σ,T)→0，y=1 时→1/2，y>1 时→1**。
+正竖直线平移、水平边趋零和与高度无关的范数界给出 y<1 的情形；
+将 `(y^s-1)/s` 在零点解析延拓，再借助倒数底数反射计入极点贡献，得到 y>1 的情形。
+这是标量核的反演；与 von Mangoldt 级数交换极限、重建 ψ、完整截断误差界
+以及有效对数型无零区域仍未完成。
+
 **标量核收敛性（2026-10-30）**：
+已验证源码提交：[`262e64dd1d08`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/262e64dd1d081f339e63d682c4adbc42269e8b10)。
 [`PerronTail.lean`](Legendre/PerronTail.lean) 证明，对每个 y>0、σ>0，
 J(y,σ,T) 在 T→∞ 时存在极限。分部积分给出趋零边界项，以及在 (1,∞)
 上绝对可积的余项；复共轭反射处理负半轴。这是标量核的条件收敛性，
-并非原无限直线被积函数的绝对可积性。y<1 时极限为 0、y>1 时为 1
-以及与 von Mangoldt 级数交换极限仍未证明。Layer 2 仍未完成。
+并非原无限直线被积函数的绝对可积性。极限值现已在 `PerronResidue.lean`
+中求出；与 von Mangoldt 级数交换极限仍未证明。Layer 2 仍未完成。
 
 **振荡分子（2026-10-30）**：
 已验证源码提交：[`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
 （verify 通过后经 review 合入 master）。
 [`PerronOscillation.lean`](Legendre/PerronOscillation.lean) 在 y>0 时证明
 `y^(σ+it)=y^σ exp(it log y)`。对 y≠1，已求出有限分子积分，并证明其范数
-不超过 `2y^σ/|log y|`，与两端高度无关。这为随后与 `1/(σ+it)` 分部积分
-提供输入；尚未求出 y≠1 时 J(y,σ,T) 的值或极限。
+不超过 `2y^σ/|log y|`，与两端高度无关。这为与 `1/(σ+it)` 分部积分
+提供输入；标量核的极限现已在 `PerronResidue.lean` 中求出。
 
 **标量 Perron 核的端点（2026-10-30）**：
 已验证源码提交：[`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
@@ -73,14 +83,14 @@ J(y,σ,T) 在 T→∞ 时存在极限。分部积分给出趋零边界项，以�
 [`PerronKernel.lean`](Legendre/PerronKernel.lean) 证明 `σ>0` 时
 `J(1,σ,T)=arctan(T/σ)/π`，因此 `T→∞` 时极限为 `1/2`；
 `T>0` 时端点误差满足 `|J(1,σ,T)-1/2|≤σ/(πT)`。
-这确立了端点的半权约定；`y≠1` 的核求值、误差界以及与 von Mangoldt 求和的极限交换仍开放。
+这确立了端点的半权约定；非端点极限值现已求出，其截断误差界以及与 von Mangoldt 求和的极限交换仍开放。
 
 **有限 Perron 积分与级数交换（2026-10-30）**：
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) 证明 `x>0`、`σ>1` 时，
 可在任意有限竖直线段上对带权 von Mangoldt 级数逐项积分。与高度无关的可求和上界
 保证交换合法，并证明积分后各项的绝对收敛性。得到精确恒等式
 `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`，其中 J 是有限标量 Perron 核。
-J 的无限高度极限和截断误差仍开放；此恒等式尚未将 P 与 ψ 等同。
+J 的无限高度极限值现已在 `PerronResidue.lean` 中求出；与该级数交换极限及截断误差仍开放，尚未将 P 与 ψ 等同。
 
 **有限竖直 Perron 积分（2026-10-30）**：
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) 定义了 `s=σ+it`
