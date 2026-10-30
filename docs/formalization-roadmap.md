@@ -200,6 +200,19 @@ For `B(σ)=(2/(σ-1))(1+2/(σ-1))`, the pointwise bounds are
 not a bound on `P-ψ`, and does not establish infinite-line convergence.
 The explicit-formula / truncated-Perron acceptance criterion remains open.
 
+**Finite series exchange (2026-10-30).** `Legendre/PerronSeries.lean`
+proves that the weighted von Mangoldt series can be integrated term by term
+on any finite vertical segment with σ>1 and x>0. The dominating sequence is
+`‖LSeries.term Λ σ n‖ x^σ/σ`, independent of height and summable in n.
+Continuity of every term gives measurability; a constant function bounds
+the sum on each finite interval. Dominated convergence proves the exchange,
+and the integrated terms are separately proved absolutely summable.
+Writing `J(y,σ,T)=(2π)⁻¹∫[-T,T]y^(σ+it)/(σ+it)dt`, the result is
+`P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, including the zero-index convention.
+The scalar kernel's infinite-height limit, its truncation error, and the
+estimates needed to pass a limit through the outer series remain open.
+The Perron acceptance criterion is still not met.
+
 **Suggested PR slicing.**
 
 1. Euler product and convergence;

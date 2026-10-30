@@ -17,6 +17,7 @@ public import Legendre.ZetaPole
 public import Legendre.PerronFoundation
 public import Legendre.PerronContour
 public import Legendre.PerronTruncated
+public import Legendre.PerronSeries
 
 /-!
 # Axiom audit
@@ -181,3 +182,13 @@ end Legendre
 #print axioms Legendre.Zeta.norm_perronIntegrand_vertical_le_div_abs
 #print axioms Legendre.Zeta.perronIntegrand_vertical_intervalIntegrable
 #print axioms Legendre.Zeta.norm_truncatedPerron_le
+
+#print axioms Legendre.Zeta.perronSeriesTerm_eq_vonMangoldt_mul_weight
+#print axioms Legendre.Zeta.perronSeriesTerm_hasSum
+#print axioms Legendre.Zeta.norm_perronWeight_vertical_le
+#print axioms Legendre.Zeta.norm_perronSeriesTerm_vertical_le
+#print axioms Legendre.Zeta.perronSeriesTerm_vertical_continuous
+#print axioms Legendre.Zeta.perronSeriesTerm_hasSum_intervalIntegral
+#print axioms Legendre.Zeta.perronSeriesTerm_integrals_norm_summable
+#print axioms Legendre.Zeta.truncatedPerron_eq_tsum_integrals
+#print axioms Legendre.Zeta.truncatedPerron_eq_tsum_kernels

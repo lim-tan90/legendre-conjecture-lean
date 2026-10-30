@@ -61,6 +61,15 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Finite Perron series exchange (2026-10-30):**
+[`PerronSeries.lean`](Legendre/PerronSeries.lean) proves termwise integration
+of the weighted von Mangoldt series on every finite vertical segment with
+`x>0`, `σ>1`. A height-independent summable majorant proves the exchange and
+absolute convergence of the integrated terms. The normalized integral is
+exactly `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, with J the finite scalar Perron kernel.
+Evaluating J at infinite height and proving truncation errors remain open;
+this identity alone does not identify P with ψ.
+
 **Finite vertical Perron integrals (2026-10-30):**
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) defines the normalized
 finite vertical integral on `s=σ+it`, proves its integrability for `x>0`,

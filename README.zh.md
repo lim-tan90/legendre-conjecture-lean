@@ -52,6 +52,13 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**有限 Perron 积分与级数交换（2026-10-30）**：
+[`PerronSeries.lean`](Legendre/PerronSeries.lean) 证明 `x>0`、`σ>1` 时，
+可在任意有限竖直线段上对带权 von Mangoldt 级数逐项积分。与高度无关的可求和上界
+保证交换合法，并证明积分后各项的绝对收敛性。得到精确恒等式
+`P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`，其中 J 是有限标量 Perron 核。
+J 的无限高度极限和截断误差仍开放；此恒等式尚未将 P 与 ψ 等同。
+
 **有限竖直 Perron 积分（2026-10-30）**：
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) 定义了 `s=σ+it`
 上的规范化有限竖直积分，证明 `x>0`、`σ>1` 时的可积性及显式有限高度范数界。

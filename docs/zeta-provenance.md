@@ -215,3 +215,31 @@ of its norm bound. The resulting O(T) bound is deliberately only a finite
 norm estimate: no ψ identification, truncation error, or infinite-line
 convergence is asserted. In particular the separate inverse-height bound
 alone is insufficient for absolute integrability over the whole line.
+
+## Finite integral / Dirichlet series exchange
+
+`Legendre/PerronSeries.lean` contains original deductions using the same
+pinned mathlib commit, without copying an external formalization.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Summable von Mangoldt series and vertical majorant | `vonMangoldt_series_summable` (local interface), `LSeries.norm_term_le_of_re_le_re` | `NumberTheory/LSeries/Dirichlet.lean` and `Basic.lean`, Michael Stoll and Aaron Anderson |
+| Positive-real quotient power | `Complex.div_cpow_ofReal_nonneg` | `Analysis/SpecialFunctions/Pow/Complex.lean`, Chris Hughes |
+| Term continuity | `Complex.continuous_const_cpow'`, `Complex.cpow_ne_zero_iff` | complex power APIs |
+| Series / interval integral exchange | `intervalIntegral.hasSum_integral_of_dominated_convergence` | `MeasureTheory/Integral/DominatedConvergence.lean`, Yury Kudryashov and coauthors |
+| Integral norm bound and constant extraction | `intervalIntegral.norm_integral_le_of_norm_le_const`, `intervalIntegral.integral_const_mul` | interval integral API |
+
+At fixed σ>1, the series `∑‖LSeries.term Λ σ n‖` converges. Multiplication
+by x^σ/σ gives a majorant for every height. Each weighted term is continuous
+on the entire real height axis, hence measurable on the integration interval.
+The sum of the majorant is constant and thus integrable on every finite
+interval. Dominated convergence then gives a HasSum statement for the
+integrated terms. A separate comparison proves absolute convergence of
+their integrals. No infinite-height limit is taken.
+
+The quotient power identity for nonnegative real bases rewrites each term
+as Λ(n)(x/n)^s/s. The case n=0 is handled separately using Λ(0)=0, so it
+does not assume a nonzero denominator there. Extracting the coefficient
+from the finite integral yields `P=∑Λ(n)J(x/n)`. There is still no scalar
+kernel evaluation, truncation error, interchange with an infinite-height
+limit, ψ reconstruction, or PNT claim.

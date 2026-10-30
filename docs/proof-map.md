@@ -108,6 +108,16 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.vertical.5 | inverse-height decay | `Legendre.Zeta.norm_perronIntegrand_vertical_le_div_abs` | **proved** for t≠0; no infinite-line integrability asserted |
 | 2.vertical.6 | finite vertical kernel integrability | `Legendre.Zeta.perronIntegrand_vertical_intervalIntegrable` | **proved** for arbitrary finite endpoints, x>0, σ>1 |
 | 2.vertical.7 | normalized finite integral bound | `Legendre.Zeta.norm_truncatedPerron_le` | **proved** for T≥0; not a truncation-error bound |
+| 2.series.def | weighted Dirichlet term and finite scalar kernel | `Legendre.Zeta.perronSeriesTerm`, `truncatedPerronKernel` | definitions; zero-index convention from LSeries |
+| 2.series.1 | classical weighted term identity | `Legendre.Zeta.perronSeriesTerm_eq_vonMangoldt_mul_weight` | **proved**; Λ(n)(x/n)^s/s, including n=0 |
+| 2.series.2 | weighted series sum | `Legendre.Zeta.perronSeriesTerm_hasSum` | **proved** for Re(s)>1 |
+| 2.series.3 | height-independent weight bound | `Legendre.Zeta.norm_perronWeight_vertical_le` | **proved** for x>0, σ>1 |
+| 2.series.4 | summable uniform term majorant | `Legendre.Zeta.norm_perronSeriesTerm_vertical_le` | **proved**; norm of the σ-term times x^σ/σ |
+| 2.series.5 | continuity of each vertical term | `Legendre.Zeta.perronSeriesTerm_vertical_continuous` | **proved** for x>0, σ>1 |
+| 2.series.6 | series / finite integral exchange | `Legendre.Zeta.perronSeriesTerm_hasSum_intervalIntegral` | **proved** by dominated convergence on arbitrary finite intervals |
+| 2.series.7 | absolute convergence after integration | `Legendre.Zeta.perronSeriesTerm_integrals_norm_summable` | **proved** for arbitrary finite height endpoints |
+| 2.series.8 | normalized termwise integral representation | `Legendre.Zeta.truncatedPerron_eq_tsum_integrals` | **proved** for every finite T |
+| 2.series.9 | scalar kernel series representation | `Legendre.Zeta.truncatedPerron_eq_tsum_kernels` | **proved**; no infinite-height limit or ψ identification |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |
