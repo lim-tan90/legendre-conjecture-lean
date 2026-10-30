@@ -20,6 +20,7 @@ public import Legendre.PerronTruncated
 public import Legendre.PerronSeries
 public import Legendre.PerronKernel
 public import Legendre.PerronOscillation
+public import Legendre.PerronTail
 
 /-!
 # Axiom audit
@@ -205,3 +206,19 @@ end Legendre
 #print axioms Legendre.Zeta.perronWeight_vertical_eq_exp
 #print axioms Legendre.Zeta.integral_cpow_vertical
 #print axioms Legendre.Zeta.norm_integral_cpow_vertical_le
+
+#print axioms Legendre.Zeta.perronVertical_ne_zero
+#print axioms Legendre.Zeta.perronOscPrimitive_hasDerivAt
+#print axioms Legendre.Zeta.norm_perronOscPrimitive
+#print axioms Legendre.Zeta.perronReciprocal_hasDerivAt
+#print axioms Legendre.Zeta.perronReciprocalDeriv_continuous
+#print axioms Legendre.Zeta.norm_perronReciprocalDeriv_le
+#print axioms Legendre.Zeta.integral_perronWeight_parts
+#print axioms Legendre.Zeta.perronTail_remainder_integrable
+#print axioms Legendre.Zeta.perronTail_boundary_tendsto_zero
+#print axioms Legendre.Zeta.tendsto_integral_perronWeight_Ioi_one
+#print axioms Legendre.Zeta.perronWeight_vertical_continuous
+#print axioms Legendre.Zeta.perronWeight_vertical_neg
+#print axioms Legendre.Zeta.integral_perronWeight_symmetric
+#print axioms Legendre.Zeta.exists_tendsto_truncatedPerronKernel
+#print axioms Legendre.Zeta.exists_tendsto_truncatedPerronKernel_pos

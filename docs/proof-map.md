@@ -127,6 +127,22 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.osc.2 | oscillatory scalar weight | `Legendre.Zeta.perronWeight_vertical_eq_exp` | **proved**; retains the reciprocal vertical factor |
 | 2.osc.3 | finite numerator primitive | `Legendre.Zeta.integral_cpow_vertical` | **proved** for y>0, y≠1; arbitrary finite endpoints |
 | 2.osc.4 | bounded numerator integrals | `Legendre.Zeta.norm_integral_cpow_vertical_le` | **proved**; bound 2y^σ/abs(log y), independent of endpoints; not a full kernel bound |
+| 2.tail.def | numerator primitive and reciprocal derivative | `Legendre.Zeta.perronOscPrimitive`, `perronReciprocalDeriv` | definitions used for integration by parts |
+| 2.tail.1 | vertical line avoids zero | `Legendre.Zeta.perronVertical_ne_zero` | **proved** for σ>0 |
+| 2.tail.2 | numerator primitive derivative | `Legendre.Zeta.perronOscPrimitive_hasDerivAt` | **proved** for y>0, y≠1 |
+| 2.tail.3 | constant primitive norm | `Legendre.Zeta.norm_perronOscPrimitive` | **proved**; y^σ/abs(log y) |
+| 2.tail.4 | reciprocal derivative | `Legendre.Zeta.perronReciprocal_hasDerivAt` | **proved** for σ>0 |
+| 2.tail.5 | reciprocal derivative continuity | `Legendre.Zeta.perronReciprocalDeriv_continuous` | **proved** for σ>0 |
+| 2.tail.6 | reciprocal derivative height bound | `Legendre.Zeta.norm_perronReciprocalDeriv_le` | **proved** for t>0; norm≤1/t² |
+| 2.tail.7 | finite scalar integration by parts | `Legendre.Zeta.integral_perronWeight_parts` | **proved** for y>0, y≠1, σ>0 and arbitrary finite endpoints |
+| 2.tail.8 | absolute integrability of the remainder | `Legendre.Zeta.perronTail_remainder_integrable` | **proved** on (1,∞); not absolute integrability of the original kernel |
+| 2.tail.9 | vanishing boundary term | `Legendre.Zeta.perronTail_boundary_tendsto_zero` | **proved** at positive infinity |
+| 2.tail.10 | conditional positive-half convergence | `Legendre.Zeta.tendsto_integral_perronWeight_Ioi_one` | **proved** with an explicit remainder-integral limit |
+| 2.tail.11 | scalar weight continuity | `Legendre.Zeta.perronWeight_vertical_continuous` | **proved** for y,σ>0 |
+| 2.tail.12 | conjugation reflection | `Legendre.Zeta.perronWeight_vertical_neg` | **proved** for y>0 |
+| 2.tail.13 | symmetric integral decomposition | `Legendre.Zeta.integral_perronWeight_symmetric` | **proved** for y,σ>0 |
+| 2.tail.14 | nonendpoint scalar limit existence | `Legendre.Zeta.exists_tendsto_truncatedPerronKernel` | **proved** for y>0, y≠1, σ>0; no limit value asserted |
+| 2.tail.15 | all-positive-base scalar convergence | `Legendre.Zeta.exists_tendsto_truncatedPerronKernel_pos` | **proved** for y,σ>0, including y=1; no full Perron formula |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |

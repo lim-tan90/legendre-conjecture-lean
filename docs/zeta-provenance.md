@@ -281,3 +281,31 @@ integral has norm at most 2y^σ/|log y| on any finite interval, independently
 of the endpoints. The reciprocal factor 1/(σ+it) has not been integrated
 by parts here, so neither the full scalar kernel limit nor its truncation
 error away from y=1 is claimed.
+
+## Conditional scalar kernel convergence
+
+`Legendre/PerronTail.lean` contains original deductions using the same
+pinned mathlib commit. No external formal proof is copied.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Real-height derivatives of complex functions | `HasDerivAt.comp_ofReal`, `HasDerivAt.inv`, exponential derivative | `Analysis/Complex/RealDeriv.lean` and calculus APIs |
+| Finite integration by parts | `intervalIntegral.integral_mul_deriv_eq_deriv_mul` | `MeasureTheory/Integral/IntervalIntegral/IntegrationByParts.lean`, Apache-2.0 |
+| Integrable majorant t^(-2) | `integrableOn_Ioi_rpow_of_lt` | `Analysis/SpecialFunctions/ImproperIntegrals.lean` |
+| Limit of finite integrals of an integrable function | `intervalIntegral_tendsto_integral_Ioi` | `MeasureTheory/Integral/IntegralEqImproper.lean` |
+| Conjugation and height reflection | `Complex.cpow_conj`, `LinearIsometry.intervalIntegral_comp_comm`, `intervalIntegral.integral_comp_neg` | complex power and interval integral APIs |
+
+For y>0 and y≠1, the primitive y^σ exp(i t log y)/(i log y) has derivative
+y^(σ+it) and norm y^σ/|log y|. For σ>0, the reciprocal vertical factor
+has derivative -i/(σ+it)², with norm at most 1/t² when t>0. Continuity and
+domination therefore prove absolute integrability of their product on
+(1,∞). Integration by parts on finite segments and decay of the boundary
+term prove positive-half convergence, without declaring the original
+oscillatory integrand Bochner integrable over the infinite half-line.
+
+Conjugation reflects the weight at negative height, and the symmetric
+finite integral is the sum of a positive-half integral and its conjugate.
+The scalar normalized kernel consequently has a limit for all positive
+y≠1 and σ>0; the earlier endpoint theorem supplies y=1. This result does
+not determine the limit as 0 or 1 away from the endpoint, justify a limit
+under the von Mangoldt series, or prove a full Perron error estimate.
