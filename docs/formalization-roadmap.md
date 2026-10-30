@@ -222,6 +222,14 @@ half-weight at a prime-power endpoint, without yet reconstructing ψ.
 The cases y<1 and y>1, their error bounds and the outer-series limit
 remain unproved, as does the full Perron acceptance criterion.
 
+**Oscillatory numerator (2026-10-30).** `Legendre/PerronOscillation.lean`
+separates the real magnitude and oscillatory exponential for y>0. For
+y≠1 the finite integral of y^(σ+it) has an explicit exponential primitive
+and norm at most `2y^σ/|log y|`, uniformly in both endpoints and for any
+real σ. This prepares an integration-by-parts argument with the reciprocal
+vertical factor; it is not a bound on the full kernel's truncation error
+and does not establish its infinite-height limit.
+
 **Suggested PR slicing.**
 
 1. Euler product and convergence;

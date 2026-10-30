@@ -263,3 +263,21 @@ After normalization, J(1,σ,T)=arctan(T/σ)/π. The arctangent limit gives 1/2.
 For T>0, the inversion identity expresses the error as arctan(σ/T)/π,
 bounded by σ/(πT). This is only the boundary kernel error, not an error
 estimate for the full ψ-Perron formula or the kernels with y≠1.
+
+## Oscillatory numerator primitives
+
+`Legendre/PerronOscillation.lean` contains original deductions, with the
+same pinned mathlib commit and no copied external proof. The inputs are
+`Complex.cpow_add`, `Complex.cpow_def_of_ne_zero`, `Complex.ofReal_cpow`,
+`Complex.ofReal_log` from the power/logarithm APIs, and
+`integral_exp_mul_complex` from `Analysis/SpecialFunctions/Integrals/Basic.lean`
+(Benjamin Davidson, Apache-2.0). `Complex.norm_exp` and the triangle inequality
+bound the difference of two unit-norm exponentials by 2.
+
+For y>0 the vertical power is y^σ exp(i t log y). The frequency i log y
+is nonzero when y≠1, which is proved before dividing by it in the
+primitive formula. Its norm is |log y|. Consequently the numerator
+integral has norm at most 2y^σ/|log y| on any finite interval, independently
+of the endpoints. The reciprocal factor 1/(σ+it) has not been integrated
+by parts here, so neither the full scalar kernel limit nor its truncation
+error away from y=1 is claimed.

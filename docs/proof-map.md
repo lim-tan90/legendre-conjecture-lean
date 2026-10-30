@@ -123,6 +123,10 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.kernel.3 | scalar endpoint evaluation | `Legendre.Zeta.truncatedPerronKernel_one` | **proved**; J(1,σ,T)=arctan(T/σ)/π |
 | 2.kernel.4 | half-weight endpoint limit | `Legendre.Zeta.tendsto_truncatedPerronKernel_one` | **proved** for σ>0; limit=1/2 |
 | 2.kernel.5 | explicit endpoint error | `Legendre.Zeta.norm_truncatedPerronKernel_one_sub_half_le` | **proved** for σ,T>0; error≤σ/(πT), only y=1 |
+| 2.osc.1 | magnitude / oscillation separation | `Legendre.Zeta.cpow_vertical_eq_exp` | **proved** for y>0 and arbitrary real σ,t |
+| 2.osc.2 | oscillatory scalar weight | `Legendre.Zeta.perronWeight_vertical_eq_exp` | **proved**; retains the reciprocal vertical factor |
+| 2.osc.3 | finite numerator primitive | `Legendre.Zeta.integral_cpow_vertical` | **proved** for y>0, y≠1; arbitrary finite endpoints |
+| 2.osc.4 | bounded numerator integrals | `Legendre.Zeta.norm_integral_cpow_vertical_le` | **proved**; bound 2y^σ/abs(log y), independent of endpoints; not a full kernel bound |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |

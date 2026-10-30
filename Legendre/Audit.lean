@@ -19,6 +19,7 @@ public import Legendre.PerronContour
 public import Legendre.PerronTruncated
 public import Legendre.PerronSeries
 public import Legendre.PerronKernel
+public import Legendre.PerronOscillation
 
 /-!
 # Axiom audit
@@ -199,3 +200,8 @@ end Legendre
 #print axioms Legendre.Zeta.truncatedPerronKernel_one
 #print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_one
 #print axioms Legendre.Zeta.norm_truncatedPerronKernel_one_sub_half_le
+
+#print axioms Legendre.Zeta.cpow_vertical_eq_exp
+#print axioms Legendre.Zeta.perronWeight_vertical_eq_exp
+#print axioms Legendre.Zeta.integral_cpow_vertical
+#print axioms Legendre.Zeta.norm_integral_cpow_vertical_le
