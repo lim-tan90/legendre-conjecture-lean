@@ -61,7 +61,16 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Oscillatory numerator (2026-10-30):**
+[`PerronOscillation.lean`](Legendre/PerronOscillation.lean) separates
+`y^(σ+it)=y^σ exp(it log y)` for y>0. For y≠1 it evaluates the finite
+numerator integral and bounds its norm by `2y^σ/|log y|`, uniformly in both
+height endpoints. This is an input for integration by parts with `1/(σ+it)`;
+it does not yet evaluate J(y,σ,T) or its limit away from y=1.
+
 **Scalar Perron endpoint (2026-10-30):**
+Verified source commit: [`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
+(PR #5 verify passed before merging to review).
 [`PerronKernel.lean`](Legendre/PerronKernel.lean) proves, for σ>0,
 `J(1,σ,T)=arctan(T/σ)/π`, hence `J(1,σ,T)→1/2` as T→∞.
 For T>0 the boundary error satisfies `|J(1,σ,T)-1/2|≤σ/(πT)`.

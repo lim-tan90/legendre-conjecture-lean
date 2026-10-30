@@ -52,7 +52,15 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**振荡分子（2026-10-30）**：
+[`PerronOscillation.lean`](Legendre/PerronOscillation.lean) 在 y>0 时证明
+`y^(σ+it)=y^σ exp(it log y)`。对 y≠1，已求出有限分子积分，并证明其范数
+不超过 `2y^σ/|log y|`，与两端高度无关。这为随后与 `1/(σ+it)` 分部积分
+提供输入；尚未求出 y≠1 时 J(y,σ,T) 的值或极限。
+
 **标量 Perron 核的端点（2026-10-30）**：
+已验证源码提交：[`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
+（PR #5 的 verify 通过后合入 review）。
 [`PerronKernel.lean`](Legendre/PerronKernel.lean) 证明 `σ>0` 时
 `J(1,σ,T)=arctan(T/σ)/π`，因此 `T→∞` 时极限为 `1/2`；
 `T>0` 时端点误差满足 `|J(1,σ,T)-1/2|≤σ/(πT)`。
