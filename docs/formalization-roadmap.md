@@ -230,6 +230,20 @@ real σ. This prepares an integration-by-parts argument with the reciprocal
 vertical factor; it is not a bound on the full kernel's truncation error
 and does not establish its infinite-height limit.
 
+**Scalar convergence (2026-10-30).** `Legendre/PerronTail.lean` uses the
+oscillatory primitive to integrate the reciprocal vertical factor by parts.
+For y>0, y≠1 and σ>0, its derivative has norm at most 1/t² at positive
+heights, and the primitive has constant norm y^σ/|log y|. Thus the remainder
+is absolutely integrable on (1,∞), while the boundary term tends to zero.
+The finite positive-half integrals converge. Conjugation symmetry gives
+convergence of J(y,σ,T); the earlier endpoint theorem handles y=1.
+The result is existence of a scalar limit for every positive y and σ,
+not evaluation of that limit away from y=1, absolute integrability of the
+original kernel, a full ψ reconstruction, or a truncation-error estimate.
+Identifying the limits as 0/1 and controlling the outer-series limit are
+the remaining Perron steps; the effective zero-free-region criterion is
+also still open.
+
 **Suggested PR slicing.**
 
 1. Euler product and convergence;

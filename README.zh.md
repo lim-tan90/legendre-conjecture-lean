@@ -52,7 +52,16 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**标量核收敛性（2026-10-30）**：
+[`PerronTail.lean`](Legendre/PerronTail.lean) 证明，对每个 y>0、σ>0，
+J(y,σ,T) 在 T→∞ 时存在极限。分部积分给出趋零边界项，以及在 (1,∞)
+上绝对可积的余项；复共轭反射处理负半轴。这是标量核的条件收敛性，
+并非原无限直线被积函数的绝对可积性。y<1 时极限为 0、y>1 时为 1
+以及与 von Mangoldt 级数交换极限仍未证明。Layer 2 仍未完成。
+
 **振荡分子（2026-10-30）**：
+已验证源码提交：[`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
+（verify 通过后经 review 合入 master）。
 [`PerronOscillation.lean`](Legendre/PerronOscillation.lean) 在 y>0 时证明
 `y^(σ+it)=y^σ exp(it log y)`。对 y≠1，已求出有限分子积分，并证明其范数
 不超过 `2y^σ/|log y|`，与两端高度无关。这为随后与 `1/(σ+it)` 分部积分
