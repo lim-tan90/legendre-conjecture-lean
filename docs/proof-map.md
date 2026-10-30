@@ -94,6 +94,39 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.52 | Layer 2 local pole structure: logDeriv regularPart eventually bounded | `Legendre.Zeta.logDeriv_regularPart_eventually_bounded` | **proved**; local result, no effective radius or Perron formula |
 | 2.53 | Layer 2 local pole structure: norm logDeriv eventually le inv add | `Legendre.Zeta.norm_logDeriv_eventually_le_inv_add` | **proved**; local result, no effective radius or Perron formula |
 | 2.perron.def | weight x^s/s and weighted -ζ′/ζ kernel | `Legendre.Zeta.perronWeight`, `perronIntegrand` | definitions; not an inversion assertion |
+| 2.contour.def | analytic numerator for the local weighted pole | `Legendre.Zeta.perronPoleNumerator` | definition; F=(1-(s-1)logDeriv H(s))x^s/s |
+| 2.contour.1 | numerator value at the pole | `Legendre.Zeta.perronPoleNumerator_one` | **proved**; F(x,1)=x |
+| 2.contour.2 | analytic Perron weight at 1 | `Legendre.Zeta.perronWeight_analyticAt_one` | **proved** for x>0 |
+| 2.contour.3 | analytic pole-cancelled numerator | `Legendre.Zeta.perronPoleNumerator_analyticAt_one` | **proved** for x>0 |
+| 2.contour.4 | local quotient representation | `Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator` | **proved** off 1 in a neighborhood |
+| 2.contour.5 | small-circle pole contribution | `Legendre.Zeta.exists_perronIntegrand_circleIntegral` | **proved**; ∃δ>0, ∀0<r<δ, integral=2πix; non-effective, no inversion or contour shift |
+| 2.vertical.def | normalized finite vertical integral | `Legendre.Zeta.truncatedPerron` | definition; not an equality with ψ |
+| 2.vertical.1 | exact norm of the Perron weight | `Legendre.Zeta.norm_perronWeight` | **proved** for x>0 |
+| 2.vertical.2 | explicit weighted right-half-plane bound | `Legendre.Zeta.norm_perronIntegrand_le` | **proved** for x>0, Re(s)>1 |
+| 2.vertical.3 | continuity of the weighted kernel | `Legendre.Zeta.perronIntegrand_continuousAt` | **proved** on Re(s)>1 for x>0 |
+| 2.vertical.4 | uniform finite-line majorant | `Legendre.Zeta.norm_perronIntegrand_vertical_le` | **proved**; B(σ)x^σ/σ for σ>1 |
+| 2.vertical.5 | inverse-height decay | `Legendre.Zeta.norm_perronIntegrand_vertical_le_div_abs` | **proved** for t≠0; no infinite-line integrability asserted |
+| 2.vertical.6 | finite vertical kernel integrability | `Legendre.Zeta.perronIntegrand_vertical_intervalIntegrable` | **proved** for arbitrary finite endpoints, x>0, σ>1 |
+| 2.vertical.7 | normalized finite integral bound | `Legendre.Zeta.norm_truncatedPerron_le` | **proved** for T≥0; not a truncation-error bound |
+| 2.series.def | weighted Dirichlet term and finite scalar kernel | `Legendre.Zeta.perronSeriesTerm`, `truncatedPerronKernel` | definitions; zero-index convention from LSeries |
+| 2.series.1 | classical weighted term identity | `Legendre.Zeta.perronSeriesTerm_eq_vonMangoldt_mul_weight` | **proved**; Λ(n)(x/n)^s/s, including n=0 |
+| 2.series.2 | weighted series sum | `Legendre.Zeta.perronSeriesTerm_hasSum` | **proved** for Re(s)>1 |
+| 2.series.3 | height-independent weight bound | `Legendre.Zeta.norm_perronWeight_vertical_le` | **proved** for x>0, σ>1 |
+| 2.series.4 | summable uniform term majorant | `Legendre.Zeta.norm_perronSeriesTerm_vertical_le` | **proved**; norm of the σ-term times x^σ/σ |
+| 2.series.5 | continuity of each vertical term | `Legendre.Zeta.perronSeriesTerm_vertical_continuous` | **proved** for x>0, σ>1 |
+| 2.series.6 | series / finite integral exchange | `Legendre.Zeta.perronSeriesTerm_hasSum_intervalIntegral` | **proved** by dominated convergence on arbitrary finite intervals |
+| 2.series.7 | absolute convergence after integration | `Legendre.Zeta.perronSeriesTerm_integrals_norm_summable` | **proved** for arbitrary finite height endpoints |
+| 2.series.8 | normalized termwise integral representation | `Legendre.Zeta.truncatedPerron_eq_tsum_integrals` | **proved** for every finite T |
+| 2.series.9 | scalar kernel series representation | `Legendre.Zeta.truncatedPerron_eq_tsum_kernels` | **proved**; no infinite-height limit or ψ identification |
+| 2.kernel.1 | continuity of the reciprocal vertical kernel | `Legendre.Zeta.perronReciprocal_vertical_continuous` | **proved** for σ>0 |
+| 2.kernel.2 | exact finite reciprocal integral | `Legendre.Zeta.integral_perronReciprocal` | **proved**; integral=2 arctan(T/σ) |
+| 2.kernel.3 | scalar endpoint evaluation | `Legendre.Zeta.truncatedPerronKernel_one` | **proved**; J(1,σ,T)=arctan(T/σ)/π |
+| 2.kernel.4 | half-weight endpoint limit | `Legendre.Zeta.tendsto_truncatedPerronKernel_one` | **proved** for σ>0; limit=1/2 |
+| 2.kernel.5 | explicit endpoint error | `Legendre.Zeta.norm_truncatedPerronKernel_one_sub_half_le` | **proved** for σ,T>0; error≤σ/(πT), only y=1 |
+| 2.osc.1 | magnitude / oscillation separation | `Legendre.Zeta.cpow_vertical_eq_exp` | **proved** for y>0 and arbitrary real σ,t |
+| 2.osc.2 | oscillatory scalar weight | `Legendre.Zeta.perronWeight_vertical_eq_exp` | **proved**; retains the reciprocal vertical factor |
+| 2.osc.3 | finite numerator primitive | `Legendre.Zeta.integral_cpow_vertical` | **proved** for y>0, y≠1; arbitrary finite endpoints |
+| 2.osc.4 | bounded numerator integrals | `Legendre.Zeta.norm_integral_cpow_vertical_le` | **proved**; bound 2y^σ/abs(log y), independent of endpoints; not a full kernel bound |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |

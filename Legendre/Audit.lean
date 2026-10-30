@@ -15,6 +15,11 @@ public import Legendre.ZetaLogDerivative
 public import Legendre.ZetaHalfPlane
 public import Legendre.ZetaPole
 public import Legendre.PerronFoundation
+public import Legendre.PerronContour
+public import Legendre.PerronTruncated
+public import Legendre.PerronSeries
+public import Legendre.PerronKernel
+public import Legendre.PerronOscillation
 
 /-!
 # Axiom audit
@@ -165,3 +170,38 @@ end Legendre
 #print axioms Legendre.Zeta.perronWeight_one
 #print axioms Legendre.Zeta.perronWeight_continuousAt_one
 #print axioms Legendre.Zeta.tendsto_sub_mul_perronIntegrand_at_one
+
+#print axioms Legendre.Zeta.perronPoleNumerator_one
+#print axioms Legendre.Zeta.perronWeight_analyticAt_one
+#print axioms Legendre.Zeta.perronPoleNumerator_analyticAt_one
+#print axioms Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator
+#print axioms Legendre.Zeta.exists_perronIntegrand_circleIntegral
+
+#print axioms Legendre.Zeta.norm_perronWeight
+#print axioms Legendre.Zeta.norm_perronIntegrand_le
+#print axioms Legendre.Zeta.perronIntegrand_continuousAt
+#print axioms Legendre.Zeta.norm_perronIntegrand_vertical_le
+#print axioms Legendre.Zeta.norm_perronIntegrand_vertical_le_div_abs
+#print axioms Legendre.Zeta.perronIntegrand_vertical_intervalIntegrable
+#print axioms Legendre.Zeta.norm_truncatedPerron_le
+
+#print axioms Legendre.Zeta.perronSeriesTerm_eq_vonMangoldt_mul_weight
+#print axioms Legendre.Zeta.perronSeriesTerm_hasSum
+#print axioms Legendre.Zeta.norm_perronWeight_vertical_le
+#print axioms Legendre.Zeta.norm_perronSeriesTerm_vertical_le
+#print axioms Legendre.Zeta.perronSeriesTerm_vertical_continuous
+#print axioms Legendre.Zeta.perronSeriesTerm_hasSum_intervalIntegral
+#print axioms Legendre.Zeta.perronSeriesTerm_integrals_norm_summable
+#print axioms Legendre.Zeta.truncatedPerron_eq_tsum_integrals
+#print axioms Legendre.Zeta.truncatedPerron_eq_tsum_kernels
+
+#print axioms Legendre.Zeta.perronReciprocal_vertical_continuous
+#print axioms Legendre.Zeta.integral_perronReciprocal
+#print axioms Legendre.Zeta.truncatedPerronKernel_one
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_one
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_one_sub_half_le
+
+#print axioms Legendre.Zeta.cpow_vertical_eq_exp
+#print axioms Legendre.Zeta.perronWeight_vertical_eq_exp
+#print axioms Legendre.Zeta.integral_cpow_vertical
+#print axioms Legendre.Zeta.norm_integral_cpow_vertical_le

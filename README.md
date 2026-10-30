@@ -61,6 +61,48 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Oscillatory numerator (2026-10-30):**
+[`PerronOscillation.lean`](Legendre/PerronOscillation.lean) separates
+`y^(σ+it)=y^σ exp(it log y)` for y>0. For y≠1 it evaluates the finite
+numerator integral and bounds its norm by `2y^σ/|log y|`, uniformly in both
+height endpoints. This is an input for integration by parts with `1/(σ+it)`;
+it does not yet evaluate J(y,σ,T) or its limit away from y=1.
+
+**Scalar Perron endpoint (2026-10-30):**
+Verified source commit: [`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
+(PR #5 verify passed before merging to review).
+[`PerronKernel.lean`](Legendre/PerronKernel.lean) proves, for σ>0,
+`J(1,σ,T)=arctan(T/σ)/π`, hence `J(1,σ,T)→1/2` as T→∞.
+For T>0 the boundary error satisfies `|J(1,σ,T)-1/2|≤σ/(πT)`.
+This establishes the half-weight endpoint convention; evaluation and error
+bounds for y≠1 and passage through the von Mangoldt sum remain open.
+
+**Finite Perron series exchange (2026-10-30):**
+[`PerronSeries.lean`](Legendre/PerronSeries.lean) proves termwise integration
+of the weighted von Mangoldt series on every finite vertical segment with
+`x>0`, `σ>1`. A height-independent summable majorant proves the exchange and
+absolute convergence of the integrated terms. The normalized integral is
+exactly `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, with J the finite scalar Perron kernel.
+Evaluating J at infinite height and proving truncation errors remain open;
+this identity alone does not identify P with ψ.
+
+**Finite vertical Perron integrals (2026-10-30):**
+[`PerronTruncated.lean`](Legendre/PerronTruncated.lean) defines the normalized
+finite vertical integral on `s=σ+it`, proves its integrability for `x>0`,
+`σ>1`, and gives an explicit finite-height norm bound. Writing
+`B(σ)=(2/(σ-1))(1+2/(σ-1))`, the kernel satisfies
+`|K(x,σ+it)|≤B(σ)x^σ/σ` and, for `t≠0`, `≤B(σ)x^σ/|t|`.
+These bounds do not prove convergence of the infinite vertical integral,
+Perron inversion, or an error estimate relative to ψ.
+
+**Local Perron contour (2026-10-30):**
+[`PerronContour.lean`](Legendre/PerronContour.lean) proves that for every
+`x>0` there is `δ>0` such that every positively oriented circle centered at
+1 with `0<r<δ` satisfies **`∮ K(x,s) ds = 2πix`**. The proof constructs an
+analytic extension of `(s-1)K(x,s)` and applies Cauchy's integral formula.
+The radius is non-effective. Rectangular contour shifts, Perron inversion
+and truncation/error bounds remain open.
+
 Verified Abel/Perron-foundation milestone: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
 **Abel representation and weighted pole coefficient (2026-10-30):**

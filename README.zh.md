@@ -52,6 +52,40 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**振荡分子（2026-10-30）**：
+[`PerronOscillation.lean`](Legendre/PerronOscillation.lean) 在 y>0 时证明
+`y^(σ+it)=y^σ exp(it log y)`。对 y≠1，已求出有限分子积分，并证明其范数
+不超过 `2y^σ/|log y|`，与两端高度无关。这为随后与 `1/(σ+it)` 分部积分
+提供输入；尚未求出 y≠1 时 J(y,σ,T) 的值或极限。
+
+**标量 Perron 核的端点（2026-10-30）**：
+已验证源码提交：[`0baaeed095a6`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0baaeed095a6b0f34cf83557858329d9a57d356b)
+（PR #5 的 verify 通过后合入 review）。
+[`PerronKernel.lean`](Legendre/PerronKernel.lean) 证明 `σ>0` 时
+`J(1,σ,T)=arctan(T/σ)/π`，因此 `T→∞` 时极限为 `1/2`；
+`T>0` 时端点误差满足 `|J(1,σ,T)-1/2|≤σ/(πT)`。
+这确立了端点的半权约定；`y≠1` 的核求值、误差界以及与 von Mangoldt 求和的极限交换仍开放。
+
+**有限 Perron 积分与级数交换（2026-10-30）**：
+[`PerronSeries.lean`](Legendre/PerronSeries.lean) 证明 `x>0`、`σ>1` 时，
+可在任意有限竖直线段上对带权 von Mangoldt 级数逐项积分。与高度无关的可求和上界
+保证交换合法，并证明积分后各项的绝对收敛性。得到精确恒等式
+`P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`，其中 J 是有限标量 Perron 核。
+J 的无限高度极限和截断误差仍开放；此恒等式尚未将 P 与 ψ 等同。
+
+**有限竖直 Perron 积分（2026-10-30）**：
+[`PerronTruncated.lean`](Legendre/PerronTruncated.lean) 定义了 `s=σ+it`
+上的规范化有限竖直积分，证明 `x>0`、`σ>1` 时的可积性及显式有限高度范数界。
+记 `B(σ)=(2/(σ-1))(1+2/(σ-1))`，核满足
+`|K(x,σ+it)|≤B(σ)x^σ/σ`，且在 `t≠0` 时满足 `≤B(σ)x^σ/|t|`。
+无限竖直积分的收敛性、Perron 反演及相对于 ψ 的截断误差仍未证明。
+
+**局部 Perron 围道积分（2026-10-30）**：
+[`PerronContour.lean`](Legendre/PerronContour.lean) 证明，对每个 `x>0`，
+存在 `δ>0`，使所有以 1 为圆心、半径满足 `0<r<δ` 的正向圆周均满足
+**`∮ K(x,s) ds = 2πix`**。证明构造了 `(s-1)K(x,s)` 在 1 的解析延拓，
+再应用 Cauchy 积分公式。半径尚非有效；矩形围道移动、Perron 反演及截断误差界仍开放。
+
 已验证的 Abel/Perron 基础阶段提交: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
 **Abel 积分表示与带权极点系数（2026-10-30）**：新增

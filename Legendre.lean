@@ -11,4 +11,9 @@ import Legendre.ZetaLogDerivative
 import Legendre.ZetaHalfPlane
 import Legendre.ZetaPole
 import Legendre.PerronFoundation
+import Legendre.PerronContour
+import Legendre.PerronTruncated
+import Legendre.PerronSeries
+import Legendre.PerronKernel
+import Legendre.PerronOscillation
 import Legendre.Audit
