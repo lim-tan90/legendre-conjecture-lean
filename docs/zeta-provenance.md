@@ -243,3 +243,23 @@ does not assume a nonzero denominator there. Extracting the coefficient
 from the finite integral yields `P=∑Λ(n)J(x/n)`. There is still no scalar
 kernel evaluation, truncation error, interchange with an infinite-height
 limit, ψ reconstruction, or PNT claim.
+
+## Scalar endpoint and its finite-height error
+
+`Legendre/PerronKernel.lean` contains original deductions with the same
+pinned mathlib commit. No external formalization is copied.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Reciprocal primitives | `integral_div_sq_add_sq`, `integral_id_div_sq_add_sq` | `Analysis/SpecialFunctions/Integrals/Basic.lean`, Benjamin Davidson |
+| Real and imaginary parts commute with integration | `ContinuousLinearMap.intervalIntegral_comp_comm` | interval integral API |
+| Arctangent at infinity and inversion | `Real.tendsto_arctan_atTop`, `Real.arctan_inv_of_pos` | `Analysis/SpecialFunctions/Trigonometric/Arctan.lean`, Chris Hughes and coauthors |
+| Elementary arctangent upper bound | `Real.arctan_le_self` | `Analysis/SpecialFunctions/Trigonometric/Bounds.lean` |
+
+For σ>0 the reciprocal 1/(σ+it) is continuous and interval-integrable.
+Its real part is σ/(σ²+t²), with arctangent primitive; the imaginary part
+is -t/(σ²+t²), whose logarithmic primitive cancels at symmetric endpoints.
+After normalization, J(1,σ,T)=arctan(T/σ)/π. The arctangent limit gives 1/2.
+For T>0, the inversion identity expresses the error as arctan(σ/T)/π,
+bounded by σ/(πT). This is only the boundary kernel error, not an error
+estimate for the full ψ-Perron formula or the kernels with y≠1.

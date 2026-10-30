@@ -61,6 +61,13 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Scalar Perron endpoint (2026-10-30):**
+[`PerronKernel.lean`](Legendre/PerronKernel.lean) proves, for σ>0,
+`J(1,σ,T)=arctan(T/σ)/π`, hence `J(1,σ,T)→1/2` as T→∞.
+For T>0 the boundary error satisfies `|J(1,σ,T)-1/2|≤σ/(πT)`.
+This establishes the half-weight endpoint convention; evaluation and error
+bounds for y≠1 and passage through the von Mangoldt sum remain open.
+
 **Finite Perron series exchange (2026-10-30):**
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) proves termwise integration
 of the weighted von Mangoldt series on every finite vertical segment with

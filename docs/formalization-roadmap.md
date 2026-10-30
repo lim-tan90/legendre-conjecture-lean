@@ -213,6 +213,15 @@ The scalar kernel's infinite-height limit, its truncation error, and the
 estimates needed to pass a limit through the outer series remain open.
 The Perron acceptance criterion is still not met.
 
+**Scalar endpoint (2026-10-30).** `Legendre/PerronKernel.lean` evaluates
+the boundary y=1 as `J(1,σ,T)=arctan(T/σ)/π` for σ>0 and every real T.
+The real and imaginary parts of the integrable reciprocal vertical kernel
+are integrated using the arctangent and logarithm primitives. Its limit
+as T→∞ is 1/2; for T>0 the error is at most σ/(πT). This supplies the
+half-weight at a prime-power endpoint, without yet reconstructing ψ.
+The cases y<1 and y>1, their error bounds and the outer-series limit
+remain unproved, as does the full Perron acceptance criterion.
+
 **Suggested PR slicing.**
 
 1. Euler product and convergence;

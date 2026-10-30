@@ -18,6 +18,7 @@ public import Legendre.PerronFoundation
 public import Legendre.PerronContour
 public import Legendre.PerronTruncated
 public import Legendre.PerronSeries
+public import Legendre.PerronKernel
 
 /-!
 # Axiom audit
@@ -192,3 +193,9 @@ end Legendre
 #print axioms Legendre.Zeta.perronSeriesTerm_integrals_norm_summable
 #print axioms Legendre.Zeta.truncatedPerron_eq_tsum_integrals
 #print axioms Legendre.Zeta.truncatedPerron_eq_tsum_kernels
+
+#print axioms Legendre.Zeta.perronReciprocal_vertical_continuous
+#print axioms Legendre.Zeta.integral_perronReciprocal
+#print axioms Legendre.Zeta.truncatedPerronKernel_one
+#print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_one
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_one_sub_half_le

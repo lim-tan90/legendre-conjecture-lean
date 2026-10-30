@@ -52,6 +52,12 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**标量 Perron 核的端点（2026-10-30）**：
+[`PerronKernel.lean`](Legendre/PerronKernel.lean) 证明 `σ>0` 时
+`J(1,σ,T)=arctan(T/σ)/π`，因此 `T→∞` 时极限为 `1/2`；
+`T>0` 时端点误差满足 `|J(1,σ,T)-1/2|≤σ/(πT)`。
+这确立了端点的半权约定；`y≠1` 的核求值、误差界以及与 von Mangoldt 求和的极限交换仍开放。
+
 **有限 Perron 积分与级数交换（2026-10-30）**：
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) 证明 `x>0`、`σ>1` 时，
 可在任意有限竖直线段上对带权 von Mangoldt 级数逐项积分。与高度无关的可求和上界

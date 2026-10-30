@@ -14,4 +14,5 @@ import Legendre.PerronFoundation
 import Legendre.PerronContour
 import Legendre.PerronTruncated
 import Legendre.PerronSeries
+import Legendre.PerronKernel
 import Legendre.Audit
