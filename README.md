@@ -61,7 +61,19 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Scalar kernel convergence (2026-10-30):**
+[`PerronTail.lean`](Legendre/PerronTail.lean) proves existence of the limit
+of J(y,σ,T) as T→∞ for every y>0 and σ>0. Integration by parts gives a
+vanishing boundary term and an absolutely integrable remainder on (1,∞);
+reflection by complex conjugation supplies the negative half-line. This is
+conditional convergence of the scalar kernel, not absolute integrability
+of the original infinite-line integrand. Identifying the limit as 0 for
+y<1 or 1 for y>1, and passing the limit through the von Mangoldt series,
+remain open. Layer 2 is still incomplete.
+
 **Oscillatory numerator (2026-10-30):**
+Verified source commit: [`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
+(merged through review to master after successful verify runs).
 [`PerronOscillation.lean`](Legendre/PerronOscillation.lean) separates
 `y^(σ+it)=y^σ exp(it log y)` for y>0. For y≠1 it evaluates the finite
 numerator integral and bounds its norm by `2y^σ/|log y|`, uniformly in both
