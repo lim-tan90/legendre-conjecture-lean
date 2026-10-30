@@ -173,6 +173,14 @@ These are a forward transform and a local pole-coefficient limit, not an
 inverse transform, a contour-integral evaluation or a truncation/error theorem.
 The Perron acceptance criterion remains open.
 
+**Local Perron contour (2026-10-30).** `Legendre/PerronContour.lean`
+constructs `F(x,s)=(1-(s-1)logDeriv H(s))x^s/s`, analytic at 1 for x>0,
+with F(x,1)=x and K(x,s)=F(x,s)/(s-1) locally off 1.
+Cauchy's integral formula then gives `∮ K(x,s) ds=2πix` on every sufficiently
+small positively oriented circle about 1. The radius is non-effective.
+This evaluates the local pole contribution; it does not move a rectangular
+contour or prove inversion, truncation errors, or the Perron acceptance criterion.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /
@@ -181,6 +189,38 @@ The Perron acceptance criterion remains open.
   `σ > 1 - c / log t` (with explicit `c` and threshold);
 * a proved explicit formula or a Perron-type truncated formula;
 * all axioms audited.
+
+**Finite vertical integrals (2026-10-30).** `Legendre/PerronTruncated.lean`
+proves continuity of K on Re(s)>1 and integrability of its parametrization
+on every finite height interval. It defines
+`P(x,σ,T)=(2π)⁻¹∫[-T,T]K(x,σ+it)dt`, with x>0 and σ>1 for the proved bounds.
+For `B(σ)=(2/(σ-1))(1+2/(σ-1))`, the pointwise bounds are
+`|K|≤B(σ)x^σ/σ` and `|K|≤B(σ)x^σ/|t|` for t≠0. For T≥0,
+`|P|≤(2π)⁻¹(B(σ)x^σ/σ)(2T)`. This is only a crude finite-height bound,
+not a bound on `P-ψ`, and does not establish infinite-line convergence.
+The explicit-formula / truncated-Perron acceptance criterion remains open.
+
+**Finite series exchange (2026-10-30).** `Legendre/PerronSeries.lean`
+proves that the weighted von Mangoldt series can be integrated term by term
+on any finite vertical segment with σ>1 and x>0. The dominating sequence is
+`‖LSeries.term Λ σ n‖ x^σ/σ`, independent of height and summable in n.
+Continuity of every term gives measurability; a constant function bounds
+the sum on each finite interval. Dominated convergence proves the exchange,
+and the integrated terms are separately proved absolutely summable.
+Writing `J(y,σ,T)=(2π)⁻¹∫[-T,T]y^(σ+it)/(σ+it)dt`, the result is
+`P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, including the zero-index convention.
+The scalar kernel's infinite-height limit, its truncation error, and the
+estimates needed to pass a limit through the outer series remain open.
+The Perron acceptance criterion is still not met.
+
+**Scalar endpoint (2026-10-30).** `Legendre/PerronKernel.lean` evaluates
+the boundary y=1 as `J(1,σ,T)=arctan(T/σ)/π` for σ>0 and every real T.
+The real and imaginary parts of the integrable reciprocal vertical kernel
+are integrated using the arctangent and logarithm primitives. Its limit
+as T→∞ is 1/2; for T>0 the error is at most σ/(πT). This supplies the
+half-weight at a prime-power endpoint, without yet reconstructing ψ.
+The cases y<1 and y>1, their error bounds and the outer-series limit
+remain unproved, as does the full Perron acceptance criterion.
 
 **Suggested PR slicing.**
 

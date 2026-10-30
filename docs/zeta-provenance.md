@@ -174,3 +174,92 @@ For x>0, x^s/s is continuous at 1 with value x. Combining this with the
 previously proved `(s-1)(-ζ′/ζ(s))→1` yields the local weighted coefficient x.
 No contour-integral residue theorem or inverse Mellin theorem is invoked.
 There is no Perron inversion, truncation bound, or consequent PNT claim.
+
+## Local Perron circle integral
+
+`Legendre/PerronContour.lean` contains original deductions using the same
+pinned mathlib commit; no proof was copied from an external project.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Analytic exponential and complex power identity | `AnalyticAt.cexp`, `Complex.cpow_def_of_ne_zero` | `Analysis/SpecialFunctions/ExpDeriv.lean`, Chris Hughes and coauthors; complex power API |
+| Analytic neighborhood | `AnalyticAt.eventually_analyticAt` | `Analysis/Analytic/ChangeOrigin.lean` |
+| Cauchy integral formula | `DifferentiableOn.circleIntegral_sub_inv_smul` | `Analysis/Complex/CauchyIntegral.lean`, Yury Kudryashov |
+| Equality on the integration circle | `circleIntegral.integral_congr` | `MeasureTheory/Integral/CircleIntegral.lean` |
+
+The numerator F(x,s)=(1-(s-1)logDeriv H(s))x^s/s is analytic at 1 for x>0
+and equals x there. The existing logarithmic-derivative principal-part
+identity gives K(x,s)=F(x,s)/(s-1) locally off 1. A neighborhood where both
+analyticity and this identity hold supplies δ>0. For each 0<r<δ, F is
+differentiable on the closed disk, and the circle excludes the pole.
+Cauchy's formula evaluates the positively oriented integral as 2πix.
+The radius is non-effective. No rectangular deformation, inverse Mellin
+formula, truncated error estimate, zero-counting asymptotic or PNT is claimed.
+
+## Finite vertical integral and kernel bounds
+
+`Legendre/PerronTruncated.lean` contains original deductions against the same
+pinned mathlib commit, with no transplanted external proof. Inputs are the
+local `norm_logDeriv_le_re_sub_one`, the complex norm inequalities
+`Complex.abs_re_le_norm` and `Complex.abs_im_le_norm`, and
+`Complex.norm_cpow_eq_rpow_re_of_pos`. Analytic derivatives and quotient
+continuity give continuity of K where Re(s)>1; nonvanishing of ζ and s is
+proved before the quotient rules are applied.
+
+The finite integral uses mathlib's `Continuous.intervalIntegrable` and
+`intervalIntegral.norm_integral_le_of_norm_le_const` from
+`MeasureTheory/Integral/IntervalIntegral/Basic.lean` (Apache-2.0).
+Its normalization is the parametrization ds=i dt of the upward vertical
+contour with factor (2πi)⁻¹. The integral's existence is proved independently
+of its norm bound. The resulting O(T) bound is deliberately only a finite
+norm estimate: no ψ identification, truncation error, or infinite-line
+convergence is asserted. In particular the separate inverse-height bound
+alone is insufficient for absolute integrability over the whole line.
+
+## Finite integral / Dirichlet series exchange
+
+`Legendre/PerronSeries.lean` contains original deductions using the same
+pinned mathlib commit, without copying an external formalization.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Summable von Mangoldt series and vertical majorant | `vonMangoldt_series_summable` (local interface), `LSeries.norm_term_le_of_re_le_re` | `NumberTheory/LSeries/Dirichlet.lean` and `Basic.lean`, Michael Stoll and Aaron Anderson |
+| Positive-real quotient power | `Complex.div_cpow_ofReal_nonneg` | `Analysis/SpecialFunctions/Pow/Complex.lean`, Chris Hughes |
+| Term continuity | `Complex.continuous_const_cpow'`, `Complex.cpow_ne_zero_iff` | complex power APIs |
+| Series / interval integral exchange | `intervalIntegral.hasSum_integral_of_dominated_convergence` | `MeasureTheory/Integral/DominatedConvergence.lean`, Yury Kudryashov and coauthors |
+| Integral norm bound and constant extraction | `intervalIntegral.norm_integral_le_of_norm_le_const`, `intervalIntegral.integral_const_mul` | interval integral API |
+
+At fixed σ>1, the series `∑‖LSeries.term Λ σ n‖` converges. Multiplication
+by x^σ/σ gives a majorant for every height. Each weighted term is continuous
+on the entire real height axis, hence measurable on the integration interval.
+The sum of the majorant is constant and thus integrable on every finite
+interval. Dominated convergence then gives a HasSum statement for the
+integrated terms. A separate comparison proves absolute convergence of
+their integrals. No infinite-height limit is taken.
+
+The quotient power identity for nonnegative real bases rewrites each term
+as Λ(n)(x/n)^s/s. The case n=0 is handled separately using Λ(0)=0, so it
+does not assume a nonzero denominator there. Extracting the coefficient
+from the finite integral yields `P=∑Λ(n)J(x/n)`. There is still no scalar
+kernel evaluation, truncation error, interchange with an infinite-height
+limit, ψ reconstruction, or PNT claim.
+
+## Scalar endpoint and its finite-height error
+
+`Legendre/PerronKernel.lean` contains original deductions with the same
+pinned mathlib commit. No external formalization is copied.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Reciprocal primitives | `integral_div_sq_add_sq`, `integral_id_div_sq_add_sq` | `Analysis/SpecialFunctions/Integrals/Basic.lean`, Benjamin Davidson |
+| Real and imaginary parts commute with integration | `ContinuousLinearMap.intervalIntegral_comp_comm` | interval integral API |
+| Arctangent at infinity and inversion | `Real.tendsto_arctan_atTop`, `Real.arctan_inv_of_pos` | `Analysis/SpecialFunctions/Trigonometric/Arctan.lean`, Chris Hughes and coauthors |
+| Elementary arctangent upper bound | `Real.arctan_le_self` | `Analysis/SpecialFunctions/Trigonometric/Bounds.lean` |
+
+For σ>0 the reciprocal 1/(σ+it) is continuous and interval-integrable.
+Its real part is σ/(σ²+t²), with arctangent primitive; the imaginary part
+is -t/(σ²+t²), whose logarithmic primitive cancels at symmetric endpoints.
+After normalization, J(1,σ,T)=arctan(T/σ)/π. The arctangent limit gives 1/2.
+For T>0, the inversion identity expresses the error as arctan(σ/T)/π,
+bounded by σ/(πT). This is only the boundary kernel error, not an error
+estimate for the full ψ-Perron formula or the kernels with y≠1.
