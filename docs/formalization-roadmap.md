@@ -209,8 +209,9 @@ the sum on each finite interval. Dominated convergence proves the exchange,
 and the integrated terms are separately proved absolutely summable.
 Writing `J(y,σ,T)=(2π)⁻¹∫[-T,T]y^(σ+it)/(σ+it)dt`, the result is
 `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, including the zero-index convention.
-The scalar kernel's infinite-height limit, its truncation error, and the
-estimates needed to pass a limit through the outer series remain open.
+The scalar kernel's infinite-height values are now proved below. Its
+truncation error and the estimates needed to pass a limit through the outer
+series remain open.
 The Perron acceptance criterion is still not met.
 
 **Scalar endpoint (2026-10-30).** `Legendre/PerronKernel.lean` evaluates
@@ -219,8 +220,9 @@ The real and imaginary parts of the integrable reciprocal vertical kernel
 are integrated using the arctangent and logarithm primitives. Its limit
 as T→∞ is 1/2; for T>0 the error is at most σ/(πT). This supplies the
 half-weight at a prime-power endpoint, without yet reconstructing ψ.
-The cases y<1 and y>1, their error bounds and the outer-series limit
-remain unproved, as does the full Perron acceptance criterion.
+The later scalar inversion milestone handles y<1 and y>1. Their truncation
+errors and the outer-series limit remain unproved, as does the full Perron
+acceptance criterion.
 
 **Oscillatory numerator (2026-10-30).** `Legendre/PerronOscillation.lean`
 separates the real magnitude and oscillatory exponential for y>0. For
@@ -240,9 +242,29 @@ convergence of J(y,σ,T); the earlier endpoint theorem handles y=1.
 The result is existence of a scalar limit for every positive y and σ,
 not evaluation of that limit away from y=1, absolute integrability of the
 original kernel, a full ψ reconstruction, or a truncation-error estimate.
-Identifying the limits as 0/1 and controlling the outer-series limit are
-the remaining Perron steps; the effective zero-free-region criterion is
-also still open.
+The scalar inversion milestone below now identifies the limits as 0/1.
+Controlling the outer-series limit and the full truncation error remain
+open, as does the effective zero-free-region criterion.
+
+**Scalar Perron inversion (2026-10-30).** `Legendre/PerronShift.lean`
+applies Cauchy-Goursat to a positive-half-plane rectangle. The horizontal
+sides have norm at most `max(y^σ,y^ρ)|ρ-σ|/|T|`, so scalar kernel limits
+are independent of the positive line. `Legendre/PerronZero.lean` bounds
+the finite kernel uniformly in T≥0 by
+`(y^σ/|log y|)(2+π)/(2πσ)` for y>0, y≠1, σ>0. If 0<y<1, moving the
+line to the right forces the limit to zero.
+
+`Legendre/PerronResidue.lean` uses the entire divided difference of y^s
+at zero to remove the pole: off zero this is `(y^s-1)/s`. A rectangle
+crossing zero therefore compares the weighted kernel with the y=1
+reciprocal kernel. Reciprocal-base reflection turns the negative line
+into the already proved y⁻¹<1 case, while the two endpoint half-weights
+give total pole contribution 1. The unified theorem proves
+`J(y,σ,T)→0,1/2,1` according as `y<1`, `y=1`, `y>1`, for every y,σ>0.
+This is scalar inversion, not yet ψ inversion. A summable uniform bound
+for the coefficient-weighted kernels, exchange of the infinite-height
+limit and von Mangoldt sum, and full truncation-error bounds remain open.
+Layer 2 acceptance is still incomplete.
 
 **Suggested PR slicing.**
 
