@@ -52,6 +52,19 @@
 <details>
 <summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
 
+**有限竖直 Perron 积分（2026-10-30）**：
+[`PerronTruncated.lean`](Legendre/PerronTruncated.lean) 定义了 `s=σ+it`
+上的规范化有限竖直积分，证明 `x>0`、`σ>1` 时的可积性及显式有限高度范数界。
+记 `B(σ)=(2/(σ-1))(1+2/(σ-1))`，核满足
+`|K(x,σ+it)|≤B(σ)x^σ/σ`，且在 `t≠0` 时满足 `≤B(σ)x^σ/|t|`。
+无限竖直积分的收敛性、Perron 反演及相对于 ψ 的截断误差仍未证明。
+
+**局部 Perron 围道积分（2026-10-30）**：
+[`PerronContour.lean`](Legendre/PerronContour.lean) 证明，对每个 `x>0`，
+存在 `δ>0`，使所有以 1 为圆心、半径满足 `0<r<δ` 的正向圆周均满足
+**`∮ K(x,s) ds = 2πix`**。证明构造了 `(s-1)K(x,s)` 在 1 的解析延拓，
+再应用 Cauchy 积分公式。半径尚非有效；矩形围道移动、Perron 反演及截断误差界仍开放。
+
 已验证的 Abel/Perron 基础阶段提交: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
 **Abel 积分表示与带权极点系数（2026-10-30）**：新增

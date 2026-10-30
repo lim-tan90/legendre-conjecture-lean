@@ -15,6 +15,8 @@ public import Legendre.ZetaLogDerivative
 public import Legendre.ZetaHalfPlane
 public import Legendre.ZetaPole
 public import Legendre.PerronFoundation
+public import Legendre.PerronContour
+public import Legendre.PerronTruncated
 
 /-!
 # Axiom audit
@@ -165,3 +167,17 @@ end Legendre
 #print axioms Legendre.Zeta.perronWeight_one
 #print axioms Legendre.Zeta.perronWeight_continuousAt_one
 #print axioms Legendre.Zeta.tendsto_sub_mul_perronIntegrand_at_one
+
+#print axioms Legendre.Zeta.perronPoleNumerator_one
+#print axioms Legendre.Zeta.perronWeight_analyticAt_one
+#print axioms Legendre.Zeta.perronPoleNumerator_analyticAt_one
+#print axioms Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator
+#print axioms Legendre.Zeta.exists_perronIntegrand_circleIntegral
+
+#print axioms Legendre.Zeta.norm_perronWeight
+#print axioms Legendre.Zeta.norm_perronIntegrand_le
+#print axioms Legendre.Zeta.perronIntegrand_continuousAt
+#print axioms Legendre.Zeta.norm_perronIntegrand_vertical_le
+#print axioms Legendre.Zeta.norm_perronIntegrand_vertical_le_div_abs
+#print axioms Legendre.Zeta.perronIntegrand_vertical_intervalIntegrable
+#print axioms Legendre.Zeta.norm_truncatedPerron_le

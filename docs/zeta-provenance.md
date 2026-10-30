@@ -174,3 +174,44 @@ For x>0, x^s/s is continuous at 1 with value x. Combining this with the
 previously proved `(s-1)(-ζ′/ζ(s))→1` yields the local weighted coefficient x.
 No contour-integral residue theorem or inverse Mellin theorem is invoked.
 There is no Perron inversion, truncation bound, or consequent PNT claim.
+
+## Local Perron circle integral
+
+`Legendre/PerronContour.lean` contains original deductions using the same
+pinned mathlib commit; no proof was copied from an external project.
+
+| Input | Upstream declaration | Source / authors |
+|---|---|---|
+| Analytic exponential and complex power identity | `AnalyticAt.cexp`, `Complex.cpow_def_of_ne_zero` | `Analysis/SpecialFunctions/ExpDeriv.lean`, Chris Hughes and coauthors; complex power API |
+| Analytic neighborhood | `AnalyticAt.eventually_analyticAt` | `Analysis/Analytic/ChangeOrigin.lean` |
+| Cauchy integral formula | `DifferentiableOn.circleIntegral_sub_inv_smul` | `Analysis/Complex/CauchyIntegral.lean`, Yury Kudryashov |
+| Equality on the integration circle | `circleIntegral.integral_congr` | `MeasureTheory/Integral/CircleIntegral.lean` |
+
+The numerator F(x,s)=(1-(s-1)logDeriv H(s))x^s/s is analytic at 1 for x>0
+and equals x there. The existing logarithmic-derivative principal-part
+identity gives K(x,s)=F(x,s)/(s-1) locally off 1. A neighborhood where both
+analyticity and this identity hold supplies δ>0. For each 0<r<δ, F is
+differentiable on the closed disk, and the circle excludes the pole.
+Cauchy's formula evaluates the positively oriented integral as 2πix.
+The radius is non-effective. No rectangular deformation, inverse Mellin
+formula, truncated error estimate, zero-counting asymptotic or PNT is claimed.
+
+## Finite vertical integral and kernel bounds
+
+`Legendre/PerronTruncated.lean` contains original deductions against the same
+pinned mathlib commit, with no transplanted external proof. Inputs are the
+local `norm_logDeriv_le_re_sub_one`, the complex norm inequalities
+`Complex.abs_re_le_norm` and `Complex.abs_im_le_norm`, and
+`Complex.norm_cpow_eq_rpow_re_of_pos`. Analytic derivatives and quotient
+continuity give continuity of K where Re(s)>1; nonvanishing of ζ and s is
+proved before the quotient rules are applied.
+
+The finite integral uses mathlib's `Continuous.intervalIntegrable` and
+`intervalIntegral.norm_integral_le_of_norm_le_const` from
+`MeasureTheory/Integral/IntervalIntegral/Basic.lean` (Apache-2.0).
+Its normalization is the parametrization ds=i dt of the upward vertical
+contour with factor (2πi)⁻¹. The integral's existence is proved independently
+of its norm bound. The resulting O(T) bound is deliberately only a finite
+norm estimate: no ψ identification, truncation error, or infinite-line
+convergence is asserted. In particular the separate inverse-height bound
+alone is insufficient for absolute integrability over the whole line.

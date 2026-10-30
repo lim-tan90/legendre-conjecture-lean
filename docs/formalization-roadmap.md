@@ -173,6 +173,14 @@ These are a forward transform and a local pole-coefficient limit, not an
 inverse transform, a contour-integral evaluation or a truncation/error theorem.
 The Perron acceptance criterion remains open.
 
+**Local Perron contour (2026-10-30).** `Legendre/PerronContour.lean`
+constructs `F(x,s)=(1-(s-1)logDeriv H(s))x^s/s`, analytic at 1 for x>0,
+with F(x,1)=x and K(x,s)=F(x,s)/(s-1) locally off 1.
+Cauchy's integral formula then gives `∮ K(x,s) ds=2πix` on every sufficiently
+small positively oriented circle about 1. The radius is non-effective.
+This evaluates the local pole contribution; it does not move a rectangular
+contour or prove inversion, truncation errors, or the Perron acceptance criterion.
+
 **Acceptance criteria.**
 
 * a definition of the nontrivial zeros and a counting function `N(T)` /
@@ -181,6 +189,16 @@ The Perron acceptance criterion remains open.
   `σ > 1 - c / log t` (with explicit `c` and threshold);
 * a proved explicit formula or a Perron-type truncated formula;
 * all axioms audited.
+
+**Finite vertical integrals (2026-10-30).** `Legendre/PerronTruncated.lean`
+proves continuity of K on Re(s)>1 and integrability of its parametrization
+on every finite height interval. It defines
+`P(x,σ,T)=(2π)⁻¹∫[-T,T]K(x,σ+it)dt`, with x>0 and σ>1 for the proved bounds.
+For `B(σ)=(2/(σ-1))(1+2/(σ-1))`, the pointwise bounds are
+`|K|≤B(σ)x^σ/σ` and `|K|≤B(σ)x^σ/|t|` for t≠0. For T≥0,
+`|P|≤(2π)⁻¹(B(σ)x^σ/σ)(2T)`. This is only a crude finite-height bound,
+not a bound on `P-ψ`, and does not establish infinite-line convergence.
+The explicit-formula / truncated-Perron acceptance criterion remains open.
 
 **Suggested PR slicing.**
 

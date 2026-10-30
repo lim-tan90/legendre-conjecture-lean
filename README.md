@@ -61,6 +61,23 @@
 <details>
 <summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
 
+**Finite vertical Perron integrals (2026-10-30):**
+[`PerronTruncated.lean`](Legendre/PerronTruncated.lean) defines the normalized
+finite vertical integral on `s=σ+it`, proves its integrability for `x>0`,
+`σ>1`, and gives an explicit finite-height norm bound. Writing
+`B(σ)=(2/(σ-1))(1+2/(σ-1))`, the kernel satisfies
+`|K(x,σ+it)|≤B(σ)x^σ/σ` and, for `t≠0`, `≤B(σ)x^σ/|t|`.
+These bounds do not prove convergence of the infinite vertical integral,
+Perron inversion, or an error estimate relative to ψ.
+
+**Local Perron contour (2026-10-30):**
+[`PerronContour.lean`](Legendre/PerronContour.lean) proves that for every
+`x>0` there is `δ>0` such that every positively oriented circle centered at
+1 with `0<r<δ` satisfies **`∮ K(x,s) ds = 2πix`**. The proof constructs an
+analytic extension of `(s-1)K(x,s)` and applies Cauchy's integral formula.
+The radius is non-effective. Rectangular contour shifts, Perron inversion
+and truncation/error bounds remain open.
+
 Verified Abel/Perron-foundation milestone: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
 **Abel representation and weighted pole coefficient (2026-10-30):**
