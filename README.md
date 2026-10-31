@@ -59,7 +59,60 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 2 progress (2026-10-30)</strong></summary>
+<summary><strong>Layer 2 complete — progress (2026-10-31)</strong></summary>
+
+**Layer 2 acceptance completed (2026-10-31):**
+Verified source commit: [`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4).
+Local validation: full `lake build` (3994 jobs) and all 310 axiom audit entries passed.
+[`ZetaZeroFree.lean`](Legendre/ZetaZeroFree.lean) proves the effective region
+**`|Im(s)|≥3` and `Re(s)>1−1/(2000000 log|Im(s)|) ⇒ ζ(s)≠0`**.
+The coefficient `c=1/2000000` and height threshold 3 are explicit.
+Local finite zero removal, Borel-Carathéodory and Cauchy estimates give a
+quantitative logarithmic-derivative bound; the sharp real-axis pole estimate
+and the 3–4–1 inequality exclude a zero in this region.
+Together with the multiplicity-weighted N(T)/N(σ,T) definitions, the proved
+truncated Perron formula below and the axiom audit, this meets all four
+[Layer 2 acceptance criteria](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations).
+Global zero-counting asymptotics, zero-density estimates and the PNT error
+terms needed for short intervals remain later work. Legendre's conjecture
+is not proved.
+
+**Truncated Perron formula with error (2026-10-31):**
+[`PerronError.lean`](Legendre/PerronError.lean) proves, for x>0, σ>1 and T>0,
+**`|P(x,σ,T)−ψ₀(x)| ≤ U(x,σ)/T`**, where ψ₀ has half weight at integers.
+The error coefficient is first proved summable, then bounded by a finite
+sum over `n≤floor(2x)` plus the closed tail bound
+`[2x^σ/(π log 2)] [2/(σ−1)] [1+2/(σ−1)]`.
+The scalar error is at most `2y^σ/(π T |log y|)` away from y=1 and
+`σ/(π T)` at y=1. This meets the Layer 2 truncated-Perron criterion.
+The constant depends on x and σ; this is not a uniform short-interval
+PNT error estimate.
+
+**Inputs toward an effective zero-free region (2026-10-31):**
+[`ZetaPositivity.lean`](Legendre/ZetaPositivity.lean) proves the 3–4–1
+logarithmic-derivative inequality on σ>1.
+[`ZetaGrowth.lean`](Legendre/ZetaGrowth.lean) proves Euler summation on
+Re(s)>0, with an absolutely convergent fractional-part remainder of norm
+at most 1/Re(s). Consequently `|ζ(s)|≤|s|/|s−1|+|s|/Re(s)` away from the
+pole, and `|ζ(s)|≥1/2` on Re(s)≥2.
+[`ZetaLocalBound.lean`](Legendre/ZetaLocalBound.lean) bounds ζ by
+`12(|t|+2)` on the radius-3/2 disk centered at 2+it when |t|≥3.
+Jensen's inequality bounds the zeros with multiplicity in its radius-5/4
+subdisk by `log(24(|t|+2))/log(6/5)`.
+The subsequent `ZetaZeroRemoval.lean`, `ZetaRegularizedBound.lean`,
+`ZetaLogDerivativeLocal.lean`, `ZetaPoleBounds.lean` and `ZetaZeroFree.lean`
+complete the effective region proof with c=1/2000000 and threshold 3.
+
+**Perron inversion for ψ (2026-10-31):**
+[`PerronInversion.lean`](Legendre/PerronInversion.lean) proves, for x>0 and σ>1,
+that the normalized finite Perron integral converges to **ψ(x)** away from
+integer endpoints and to **ψ(m)−Λ(m)/2** at a positive integer m.
+A uniform scalar bound is summable after multiplication by Λ(n): for n≥2x,
+`|log(x/n)|≥log 2`, giving a constant multiple of the absolutely convergent
+Dirichlet series. Tannery's theorem justifies the infinite-height limit
+under the series, and its finite support identifies the half-weighted ψ.
+The fixed-x truncation error is proved in `PerronError.lean`;
+`ZetaZeroFree.lean` supplies the effective logarithmic zero-free region.
 
 **Scalar Perron inversion (2026-10-30):**
 [`PerronResidue.lean`](Legendre/PerronResidue.lean), with
@@ -69,9 +122,10 @@
 Positive-line shifts, vanishing horizontal sides and a uniform finite-height
 bound give the y<1 case. An entire extension of `(y^s-1)/s` accounts for
 the pole when crossing zero and proves the y>1 case by reciprocal-base
-reflection. This evaluates the scalar kernel; passing the limit through
-the von Mangoldt series, reconstruction of ψ and full truncation-error
-bounds remain open, as does the effective logarithmic zero-free region.
+reflection. This evaluates the scalar kernel; `PerronInversion.lean` now
+passes its limit through the von Mangoldt series and reconstructs the
+half-weighted ψ. `PerronError.lean` now proves the fixed-x truncation error;
+the effective logarithmic zero-free region is now proved in `ZetaZeroFree.lean`.
 
 **Scalar kernel convergence (2026-10-30):**
 Verified source commit: [`262e64dd1d08`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/262e64dd1d081f339e63d682c4adbc42269e8b10).
@@ -81,8 +135,8 @@ vanishing boundary term and an absolutely integrable remainder on (1,∞);
 reflection by complex conjugation supplies the negative half-line. This is
 conditional convergence of the scalar kernel, not absolute integrability
 of the original infinite-line integrand. The limit values are now identified
-in `PerronResidue.lean`; passage through the von Mangoldt series remains
-open. Layer 2 is still incomplete.
+in `PerronResidue.lean`; passage through the von Mangoldt series is now
+proved in `PerronInversion.lean`; all Layer 2 acceptance criteria are now met.
 
 **Oscillatory numerator (2026-10-30):**
 Verified source commit: [`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
@@ -100,8 +154,8 @@ Verified source commit: [`0baaeed095a6`](https://github.com/lim-tan90/legendre-c
 `J(1,σ,T)=arctan(T/σ)/π`, hence `J(1,σ,T)→1/2` as T→∞.
 For T>0 the boundary error satisfies `|J(1,σ,T)-1/2|≤σ/(πT)`.
 This establishes the half-weight endpoint convention. Nonendpoint values
-are now proved; their truncation errors and passage through the von Mangoldt
-sum remain open.
+are now proved, as is passage through the von Mangoldt sum;
+the fixed-x truncation error is now proved in `PerronError.lean`.
 
 **Finite Perron series exchange (2026-10-30):**
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) proves termwise integration
@@ -109,9 +163,9 @@ of the weighted von Mangoldt series on every finite vertical segment with
 `x>0`, `σ>1`. A height-independent summable majorant proves the exchange and
 absolute convergence of the integrated terms. The normalized integral is
 exactly `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, with J the finite scalar Perron kernel.
-J's infinite-height values are now proved in `PerronResidue.lean`; exchanging
-that limit with this series and proving truncation errors remain open.
-This finite identity alone does not identify P with ψ.
+J's infinite-height values are proved in `PerronResidue.lean`;
+`PerronInversion.lean` now exchanges that limit with this series and
+identifies the limit with half-weighted ψ. The fixed-x truncation error is now proved in `PerronError.lean`.
 
 **Finite vertical Perron integrals (2026-10-30):**
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) defines the normalized
@@ -119,16 +173,16 @@ finite vertical integral on `s=σ+it`, proves its integrability for `x>0`,
 `σ>1`, and gives an explicit finite-height norm bound. Writing
 `B(σ)=(2/(σ-1))(1+2/(σ-1))`, the kernel satisfies
 `|K(x,σ+it)|≤B(σ)x^σ/σ` and, for `t≠0`, `≤B(σ)x^σ/|t|`.
-These bounds do not prove convergence of the infinite vertical integral,
-Perron inversion, or an error estimate relative to ψ.
+Perron inversion is now proved in `PerronInversion.lean`; these finite-height
+bounds alone do not give the truncation error; see `PerronError.lean` for that bound.
 
 **Local Perron contour (2026-10-30):**
 [`PerronContour.lean`](Legendre/PerronContour.lean) proves that for every
 `x>0` there is `δ>0` such that every positively oriented circle centered at
 1 with `0<r<δ` satisfies **`∮ K(x,s) ds = 2πix`**. The proof constructs an
 analytic extension of `(s-1)K(x,s)` and applies Cauchy's integral formula.
-The radius is non-effective. Rectangular contour shifts, Perron inversion
-and truncation/error bounds remain open.
+The radius is non-effective. Scalar rectangles and Perron inversion are now
+proved in subsequent modules; see `PerronError.lean` for the fixed-x truncation error.
 
 Verified Abel/Perron-foundation milestone: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
@@ -201,8 +255,9 @@ mathlib v4.35.0 results; they are not claimed as new analytic proofs.
 each fixed height `T` there is `δ(T) > 0` such that `ζ(s) ≠ 0` whenever
 `Re(s) > 1 - δ(T)`, `|Im(s)| ≤ T`, and `s ≠ 1`. The width is non-effective.
 
-**Still open:** a quantitative `c/log T` zero-free region, multiplicity-weighted
-`N(T)` estimates, Perron, and PNT. Layer 2 is not complete.
+**Now proved:** an effective logarithmic zero-free region (c=1/2000000, threshold 3)
+and a fixed-x truncated Perron formula with error. Layer 2 acceptance is complete.
+Global `N(T)` asymptotics and the needed PNT error terms remain later work.
 
 See [provenance and upstream mapping](docs/zeta-provenance.md) for fixed
 commits and authors. Adapted and checked with Lean 4.35.0 / mathlib v4.35.0,
@@ -353,8 +408,8 @@ This table is the roadmap, not a claim that the work is done.
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
-| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | foundations and a qualitative fixed-height zero-free strip integrated; multiplicity-weighted counts defined with monotonicity; quantitative region and counting estimates remain open |
-| 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | `PrimeCounting.lean` and `Chebyshev.lean` exist; no Perron formula or PNT with the needed error term |
+| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **Layer 2 acceptance complete**: zeta foundations, multiplicity-weighted count definitions, explicit c=1/2000000 zero-free region (height≥3), truncated Perron with error and axiom audit; global counting asymptotics remain later work |
+| 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | Perron inversion with half-weight endpoints is proved in `PerronInversion.lean`; a fixed-x O(1/T) truncation bound is proved; the needed PNT error term remains open |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |

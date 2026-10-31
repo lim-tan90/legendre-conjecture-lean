@@ -50,7 +50,45 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 2 进度（2026-10-30）</strong></summary>
+<summary><strong>Layer 2 验收完成 — 进度（2026-10-31）</strong></summary>
+
+**Layer 2 四项验收已完成（2026-10-31）**：
+已验证源码提交：[`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4)。
+本地完整 `lake build`（3994 项构建任务）及全部 310 项公理审计通过。
+[`ZetaZeroFree.lean`](Legendre/ZetaZeroFree.lean) 已证明有效无零区域：
+**`|Im(s)|≥3` 且 `Re(s)>1−1/(2000000·log|Im(s)|)` 时 `ζ(s)≠0`**。
+宽度系数 `c=1/2000000` 和高度阈值 3 均显式给出。局部零点按重数去除后，
+Borel-Carathéodory 与 Cauchy 估计给出对数导数界，再与实轴极点界及 `3–4–1` 正性组合排除零点。
+结合按重数计数的 N(T)、N(σ,T) 定义、带误差的截断 Perron 公式和公理审计，
+已满足 [路线图中的 Layer 2 四项验收条件](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations)。
+全局零点计数渐近、零密度估计及短区间 PNT 所需误差项仍属后续工作，尚未证明勒让德猜想。
+
+**带误差的截断 Perron 公式（2026-10-31）**：
+[`PerronError.lean`](Legendre/PerronError.lean) 证明，对 x>0、σ>1、T>0，
+**`|P(x,σ,T)−ψ₀(x)|≤U(x,σ)/T`**，其中 ψ₀ 在整数端点取半权。
+先证明误差系数可求和，再以 `n≤floor(2x)` 的有限求和加闭式尾界
+`[2x^σ/(π log 2)] [2/(σ−1)] [1+2/(σ−1)]` 上界化。
+标量核在 y≠1 时误差不超过 `2y^σ/(π T |log y|)`，y=1 时不超过 `σ/(π T)`。
+这满足 Layer 2 的截断 Perron 公式验收项。常数依赖 x、σ，尚不是短区间 PNT 的统一误差估计。
+
+**有效无零区域的输入（2026-10-31）**：
+[`ZetaPositivity.lean`](Legendre/ZetaPositivity.lean) 已证明 σ>1 上的 `3–4–1` 对数导数正性不等式。
+[`ZetaGrowth.lean`](Legendre/ZetaGrowth.lean) 通过绝对收敛的分数部分 Mellin 余项，
+将 Euler 求和延拓至 Re(s)>0，证明余项范数不超过 1/Re(s)，从而在 s≠1 时
+`|ζ(s)|≤|s|/|s−1|+|s|/Re(s)`，并证明 Re(s)≥2 时 `|ζ(s)|≥1/2`。
+[`ZetaLocalBound.lean`](Legendre/ZetaLocalBound.lean) 证明 |t|≥3 时，
+以 2+it 为中心、半径 3/2 的闭圆盘上 `|ζ|≤12(|t|+2)`；由 Jensen 不等式，
+半径 5/4 子圆盘内零点总重数不超过 `log(24(|t|+2))/log(6/5)`。
+后续 `ZetaZeroRemoval.lean`、`ZetaRegularizedBound.lean`、`ZetaLogDerivativeLocal.lean`、
+`ZetaPoleBounds.lean` 与 `ZetaZeroFree.lean` 已将这些输入组合为 c=1/2000000、高度阈值 3 的有效无零区域。
+
+**ψ 的 Perron 反演（2026-10-31）**：
+[`PerronInversion.lean`](Legendre/PerronInversion.lean) 证明：对 x>0、σ>1，
+规范化的有限 Perron 积分在非整数端点趋于 **ψ(x)**，在正整数 m 处趋于
+**ψ(m)−Λ(m)/2**。统一标量上界乘以 Λ(n) 后可求和：n≥2x 时
+`|log(x/n)|≥log 2`，可与绝对收敛的 Dirichlet 级数比较。
+Tannery 定理保证无限高度极限与级数交换，再由极限项的有限支撑识别半权 ψ。
+固定 x 的截断误差界已在 `PerronError.lean` 中证明；`ZetaZeroFree.lean` 已给出有效对数型无零区域。
 
 **标量 Perron 反演（2026-10-30）**：
 [`PerronResidue.lean`](Legendre/PerronResidue.lean) 联同
@@ -58,8 +96,8 @@
 证明，对每个 y>0、σ>0：**y<1 时 J(y,σ,T)→0，y=1 时→1/2，y>1 时→1**。
 正竖直线平移、水平边趋零和与高度无关的范数界给出 y<1 的情形；
 将 `(y^s-1)/s` 在零点解析延拓，再借助倒数底数反射计入极点贡献，得到 y>1 的情形。
-这是标量核的反演；与 von Mangoldt 级数交换极限、重建 ψ、完整截断误差界
-以及有效对数型无零区域仍未完成。
+这是标量核的反演；与 von Mangoldt 级数交换极限和半权 ψ 重建现已在
+`PerronInversion.lean` 中证明。`PerronError.lean` 已给出固定 x 的截断误差界；有效对数型无零区域现已在 `ZetaZeroFree.lean` 中证明。
 
 **标量核收敛性（2026-10-30）**：
 已验证源码提交：[`262e64dd1d08`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/262e64dd1d081f339e63d682c4adbc42269e8b10)。
@@ -67,7 +105,7 @@
 J(y,σ,T) 在 T→∞ 时存在极限。分部积分给出趋零边界项，以及在 (1,∞)
 上绝对可积的余项；复共轭反射处理负半轴。这是标量核的条件收敛性，
 并非原无限直线被积函数的绝对可积性。极限值现已在 `PerronResidue.lean`
-中求出；与 von Mangoldt 级数交换极限仍未证明。Layer 2 仍未完成。
+中求出；与 von Mangoldt 级数交换极限现已在 `PerronInversion.lean` 中证明；Layer 2 的四项验收现已完成。
 
 **振荡分子（2026-10-30）**：
 已验证源码提交：[`13df761e6893`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/13df761e689301c0acc7d6d80d15093509473e17)
@@ -83,27 +121,28 @@ J(y,σ,T) 在 T→∞ 时存在极限。分部积分给出趋零边界项，以�
 [`PerronKernel.lean`](Legendre/PerronKernel.lean) 证明 `σ>0` 时
 `J(1,σ,T)=arctan(T/σ)/π`，因此 `T→∞` 时极限为 `1/2`；
 `T>0` 时端点误差满足 `|J(1,σ,T)-1/2|≤σ/(πT)`。
-这确立了端点的半权约定；非端点极限值现已求出，其截断误差界以及与 von Mangoldt 求和的极限交换仍开放。
+这确立了端点的半权约定；非端点极限值和与 von Mangoldt 求和的极限交换均已证明，固定 x 的截断误差界现已在 `PerronError.lean` 中证明。
 
 **有限 Perron 积分与级数交换（2026-10-30）**：
 [`PerronSeries.lean`](Legendre/PerronSeries.lean) 证明 `x>0`、`σ>1` 时，
 可在任意有限竖直线段上对带权 von Mangoldt 级数逐项积分。与高度无关的可求和上界
 保证交换合法，并证明积分后各项的绝对收敛性。得到精确恒等式
 `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`，其中 J 是有限标量 Perron 核。
-J 的无限高度极限值现已在 `PerronResidue.lean` 中求出；与该级数交换极限及截断误差仍开放，尚未将 P 与 ψ 等同。
+J 的无限高度极限值已在 `PerronResidue.lean` 中求出；`PerronInversion.lean`
+现已交换该级数的极限并重建半权 ψ。固定 x 的截断误差界现已在 `PerronError.lean` 中证明。
 
 **有限竖直 Perron 积分（2026-10-30）**：
 [`PerronTruncated.lean`](Legendre/PerronTruncated.lean) 定义了 `s=σ+it`
 上的规范化有限竖直积分，证明 `x>0`、`σ>1` 时的可积性及显式有限高度范数界。
 记 `B(σ)=(2/(σ-1))(1+2/(σ-1))`，核满足
 `|K(x,σ+it)|≤B(σ)x^σ/σ`，且在 `t≠0` 时满足 `≤B(σ)x^σ/|t|`。
-无限竖直积分的收敛性、Perron 反演及相对于 ψ 的截断误差仍未证明。
+`PerronInversion.lean` 现已证明 Perron 反演；相对于半权 ψ 的固定 x 截断误差界已在 `PerronError.lean` 中证明。
 
 **局部 Perron 围道积分（2026-10-30）**：
 [`PerronContour.lean`](Legendre/PerronContour.lean) 证明，对每个 `x>0`，
 存在 `δ>0`，使所有以 1 为圆心、半径满足 `0<r<δ` 的正向圆周均满足
 **`∮ K(x,s) ds = 2πix`**。证明构造了 `(s-1)K(x,s)` 在 1 的解析延拓，
-再应用 Cauchy 积分公式。半径尚非有效；矩形围道移动、Perron 反演及截断误差界仍开放。
+再应用 Cauchy 积分公式。半径尚非有效；后续模块已证明标量矩形移动与 Perron 反演，固定 x 的截断误差界现已在 `PerronError.lean` 中证明。
 
 已验证的 Abel/Perron 基础阶段提交: [`83afea75433f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/83afea75433f02e9900fafe5381db659b4fd1ba1).
 
@@ -164,8 +203,8 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 
 **新增推论** `Legendre.Zeta.exists_zero_free_strip`：每个固定高度 `T` 都存在
 `δ(T) > 0`，使 `Re(s) > 1 - δ(T)`、`|Im(s)| ≤ T`、`s ≠ 1` 时 `ζ(s) ≠ 0`。
-宽度无显式估计；**尚未证明** `c/log T` 型定量无零点区域、按重数计数的 `N(T)`
-估计、Perron 公式或 PNT，第 2 层仍未全部完成。
+这个早期定性结果的宽度无显式估计。后续 `ZetaZeroFree.lean` 已证明 c=1/2000000、
+高度阈值 3 的定量对数型无零区域；第 2 层验收已完成。全局 `N(T)` 渐近与所需 PNT 误差项仍属后续工作。
 固定版本、上游作者及逐项对应见 [出处说明](docs/zeta-provenance.md)。
 适配并验证于 Lean 4.35.0 / mathlib v4.35.0；没有引入新的信任公理。
 
@@ -307,8 +346,8 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
-| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | 已接入 ζ 基础与固定高度的定性无零点带；已定义按重数计数并证明单调性；定量区域和计数估计仍开放 |
-| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 有 `PrimeCounting.lean`、`Chebyshev.lean`；没有 Perron 公式与所需误差项的 PNT |
+| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **第 2 层验收完成**：ζ 基础、按重数计数的定义、显式 c=1/2000000 无零区域（高度≥3）、带误差截断 Perron 公式及公理审计；全局计数渐近仍待后续工作 |
+| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 已证明端点半权的 Perron 反演（`PerronInversion.lean`）；已证明固定 x 的 O(1/T) 截断误差；所需误差项的 PNT 仍开放 |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
