@@ -62,6 +62,7 @@ Borel-Carathéodory 与 Cauchy 估计给出对数导数界，再与实轴极点�
 结合按重数计数的 N(T)、N(σ,T) 定义、带误差的截断 Perron 公式和公理审计，
 已满足 [路线图中的 Layer 2 四项验收条件](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations)。
 **完整范围补齐（2026-10-31）**：
+已验证实现源码：[`6b921a2528fa`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6b921a2528fa1567d37b1b9dea92b1ff92d6f14e)。
 最新完整 `lake build`（3999 项构建任务）及全部 **347** 项公理审计通过。
 [`ZetaGlobalCounting.lean`](Legendre/ZetaGlobalCounting.lean) 已证明保留解析重数的
 全局 **`N(T)≤C·T·log T`（T≥7）** 和 `N(T)=O(T log T)`。

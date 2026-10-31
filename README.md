@@ -74,6 +74,7 @@ Together with the multiplicity-weighted N(T)/N(σ,T) definitions, the proved
 truncated Perron formula below and the axiom audit, this meets all four
 [Layer 2 acceptance criteria](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations).
 **Full-scope completion (2026-10-31):**
+Verified implementation source: [`6b921a2528fa`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6b921a2528fa1567d37b1b9dea92b1ff92d6f14e).
 Full local validation: `lake build` (3999 jobs) and all **347** axiom audit entries passed.
 [`ZetaGlobalCounting.lean`](Legendre/ZetaGlobalCounting.lean) now proves
 **`N(T)≤C T log T` for T≥7**, and `N(T)=O(T log T)`, counting analytic
