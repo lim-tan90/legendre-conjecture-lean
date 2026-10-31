@@ -117,7 +117,8 @@ The first two suggested slices below are now integrated from mathlib;
 the boundary nonvanishing part of slice 3 is integrated, with a qualitative
 compact-height neighborhood. The effective logarithmic region and fixed-x
 Perron truncation are now proved below, meeting the four acceptance criteria.
-The wider Layer 2 suggested slice on global zero-counting bounds remains open.
+The wider Layer 2 suggested slice on global zero-counting bounds is now
+proved in `ZetaGlobalCounting.lean` as N(T)=O(T log T).
 
 **Counting foundations (2026-10-29).** `Legendre/ZetaCounting.lean` now defines
 `NontrivialZero` in the open critical strip, `zeroCount` (`N(T)`) and
@@ -128,7 +129,7 @@ critical-strip zeros are proved before the natural-valued sums are used.
 Finiteness, height monotonicity, antitonicity in σ, positivity/existence
 and the nonpositive-height / outside-strip boundary cases are proved.
 The definitions part of the first acceptance criterion is met; quantitative
-global zero counting remains a Layer 2 follow-up; the logarithmic zero-free region and fixed-x Perron truncation are proved below.
+global zero counting is now proved below as N(T)=O(T log T); the logarithmic zero-free region and fixed-x Perron truncation are also proved.
 
 **Logarithmic derivative milestone (2026-10-29).**
 `Legendre/ZetaLogDerivative.lean` reuses the proved, absolutely convergent
@@ -339,27 +340,49 @@ logarithms. Thus the final audited theorem is:
 
 `|Im(s)|≥3 ∧ Re(s)>1−1/(2000000 log|Im(s)|) ⇒ ζ(s)≠0`.
 
-**The four Layer 2 acceptance criteria are met; the wider scope is not
-fully complete.** Definitions of nontrivial zeros and multiplicity-weighted
-counts, the effective region with explicit constants, the fixed-x truncated
-Perron formula and the axiom audit meet the four-item checklist above.
-The suggested PR slices additionally include global N(T) bounds, and the
-Scope paragraph includes the argument principle. These require their own
-completion checks and are not implied by the four acceptance items.
+**Global zero counting (2026-10-31).** `ZetaReflection.lean` proves that
+reflection s↦1−s preserves analytic zero orders in the critical strip.
+`rightHalfZero` sends every positive-height zero to Re(s)≥1/2, preserving
+absolute height and multiplicity; its two branches have opposite signs
+of height, so this map is injective on positive-height zeros.
+`ZetaCountingDisks.lean` uses inner radius 13/8 and outer radius 7/4 at 2+it
+for |t|≥4. The outer disk stays in Re(s)≥1/4, its zeta norm is at most
+`20(|t|+2)`, and Jensen bounds its inner multiplicity by
+`log(40(|t|+2))/log(14/13)`.
+`ZetaCountingCover.lean` covers the right half of the full critical strip
+by unit-height cells at centers ±(k+9/2), plus a fixed compact low-height
+set |Im(s)|≤5. The latter has a proved finite total multiplicity B.
 
-| Wider Layer 2 scope / suggested slice | Evidence or remaining gap |
+`ZetaGlobalCounting.lean` uses the multiplicity-preserving injection and
+finite-union sum inequalities, allowing disk overlaps without undercounting.
+For all T≥0 it proves
+`N(T) ≤ B + 2(floor(T)+1) log(40(T+7))/log(14/13)`.
+It then proves, for T≥7, `N(T)≤C T log T`, where
+`C = B/log 2 + 4(1+log 80/log 2)/log(14/13) + 1 > 0`.
+Thus `zeroCount_isBigO` establishes the global upper order O(T log T),
+and the same crude bound holds for N(σ,T), uniformly in σ. The fixed
+low-height count B is not numerically evaluated. No leading-term
+Riemann–von Mangoldt asymptotic or σ-sensitive density estimate is claimed.
+
+**The complete documented Layer 2 scope is now covered.** The four
+acceptance items and all five suggested slices have the following evidence:
+
+| Layer 2 scope / suggested slice | Proof evidence |
 |---|---|
 | Euler product and convergence | `Zeta.lean`: `euler_product`, `euler_product_limit`, `series_norm_summable` |
-| Analytic continuation and functional equation | `Zeta.lean`: `analytic_off_pole`, `completed_functional_equation` |
+| Analytic continuation and functional equation | `Zeta.lean`: `analytic_off_pole`, `completed_functional_equation`; `ZetaReflection.lean`: zero-order reflection |
 | Boundary nonvanishing and effective zero-free region | `Zeta.lean`: `nonvanishing`; `ZetaZeroFree.lean`: explicit c=1/2000000, height 3 |
 | Bounds for ζ'/ζ | `ZetaHalfPlane.lean`, `ZetaLogDerivativeLocal.lean`, `ZetaPoleBounds.lean` |
 | Perron formula | `PerronInversion.lean`, `PerronError.lean`: half-weight ψ and explicit fixed-x O(1/T) error |
-| Argument principle counting interface | **pending integration**; Cauchy/Jensen inputs and local principal-part decomposition are proved, but this is not yet a standalone ζ contour-count theorem |
-| Global N(T) quantitative bound (suggested slice 4) | **open**; current multiplicity counts have finiteness and monotonicity, and the quantitative Jensen bound is only local |
+| Argument principle counting interface | `ZetaArgumentPrinciple.lean`: high-disk circle integral counts analytic multiplicity, assuming a zero-free boundary |
+| Global N(T) quantitative bound (suggested slice 4) | `ZetaGlobalCounting.lean`: global finite-cover bound and N(T)=O(T log T), counting both halves with multiplicity |
+| Axiom audit | Every new theorem is listed in `Legendre/Audit.lean` and `docs/proof-map.md` |
 
-A blanket statement that every Layer 2 task is done is therefore premature.
-Zero-density theorems and the strong PNT/short-interval error terms remain
-later-layer work. The wider Layer 2 items above retain their original scope.
+This completes the documented Layer 2 scope without moving its global
+counting task elsewhere. Zero-density theorems and the strong
+PNT/short-interval error terms remain the later-layer goals already listed
+below. The argument-principle interface and global counting bound have the
+precise scope stated above; neither asserts an unproved asymptotic formula.
 
 **Suggested PR slicing.**
 

@@ -44,6 +44,16 @@ public import Legendre.ZetaPoleBounds
 
 public import Legendre.ZetaZeroFree
 
+public import Legendre.ZetaArgumentPrinciple
+
+public import Legendre.ZetaReflection
+
+public import Legendre.ZetaCountingDisks
+
+public import Legendre.ZetaCountingCover
+
+public import Legendre.ZetaGlobalCounting
+
 /-!
 # Axiom audit
 
@@ -398,3 +408,45 @@ end Legendre
 #print axioms Legendre.Zeta.zetaZeroFreeCost_le
 #print axioms Legendre.Zeta.rational_le_zetaZeroFreeConstant
 #print axioms Legendre.Zeta.riemannZeta_ne_zero_of_explicit_log_region
+
+#print axioms Legendre.Zeta.localZetaDivisor_mem_ball
+#print axioms Legendre.Zeta.localZetaRegularized_logDeriv_analyticOnNhd
+#print axioms Legendre.Zeta.circleIntegral_localZetaRegularized_logDeriv
+#print axioms Legendre.Zeta.circleIntegral_logDeriv_riemannZeta_eq_degree
+
+#print axioms Legendre.Zeta.completedZeta_analyticAt
+#print axioms Legendre.Zeta.zeta_order_eq_completed
+#print axioms Legendre.Zeta.zeta_order_one_sub
+#print axioms Legendre.Zeta.zeroMultiplicity_one_sub
+#print axioms Legendre.Zeta.NontrivialZero.one_sub
+#print axioms Legendre.Zeta.rightHalfZero_properties
+#print axioms Legendre.Zeta.rightHalfZero_injOn
+
+#print axioms Legendre.Zeta.counting_disk_coordinates
+#print axioms Legendre.Zeta.counting_disk_ne_one
+#print axioms Legendre.Zeta.riemannZeta_analyticOnNhd_counting_disk
+#print axioms Legendre.Zeta.norm_riemannZeta_counting_disk_le
+#print axioms Legendre.Zeta.countingDivisor_finite
+#print axioms Legendre.Zeta.countingDivisor_eq_multiplicity
+#print axioms Legendre.Zeta.countingDegree_cast
+#print axioms Legendre.Zeta.mem_countingZeros
+#print axioms Legendre.Zeta.countingDegree_le
+
+#print axioms Legendre.Zeta.lowCountingSet_finite
+#print axioms Legendre.Zeta.countingHeight_abs_ge
+#print axioms Legendre.Zeta.countingHeightIndex_lt
+#print axioms Legendre.Zeta.countingHeight_index_eq
+#print axioms Legendre.Zeta.rightHalf_mem_counting_disk
+#print axioms Legendre.Zeta.rightHalf_mem_countingZeros
+#print axioms Legendre.Zeta.rightHalfZero_mem_cover
+
+#print axioms Legendre.Zeta.sum_zeroMultiplicity_union_le
+#print axioms Legendre.Zeta.sum_zeroMultiplicity_biUnion_le
+#print axioms Legendre.Zeta.zeroCount_le_cover
+#print axioms Legendre.Zeta.zeroCount_le_sum_countingDegree
+#print axioms Legendre.Zeta.zeroCount_le_global_bound
+#print axioms Legendre.Zeta.globalZeroCountConstant_pos
+#print axioms Legendre.Zeta.global_counting_log_le
+#print axioms Legendre.Zeta.zeroCount_le_mul_log
+#print axioms Legendre.Zeta.zeroCount_isBigO
+#print axioms Legendre.Zeta.zeroDensityCount_le_mul_log

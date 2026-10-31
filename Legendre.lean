@@ -30,4 +30,9 @@ import Legendre.ZetaRegularizedBound
 import Legendre.ZetaLogDerivativeLocal
 import Legendre.ZetaPoleBounds
 import Legendre.ZetaZeroFree
+import Legendre.ZetaArgumentPrinciple
+import Legendre.ZetaReflection
+import Legendre.ZetaCountingDisks
+import Legendre.ZetaCountingCover
+import Legendre.ZetaGlobalCounting
 import Legendre.Audit

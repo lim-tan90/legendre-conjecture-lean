@@ -291,6 +291,44 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.zerofree.13 | riemannZeta ne zero of explicit log region | `Legendre.Zeta.riemannZeta_ne_zero_of_explicit_log_region` | **proved**; effective logarithmic zero-free region and explicit constants |
 | 2.removal.def | selected divisor, finite factor, regularized quotient and degree | `Legendre.Zeta.localZetaDivisor`, `localZetaFactor`, `localZetaRegularized`, `localZetaDegree` | definitions; finite support and order preservation proved |
 | 2.zerofree.def | explicit analytic bounds and width coefficient | `Legendre.Zeta.localZetaLogBound`, `zetaZeroFreeK`, `zetaZeroFreeCost`, `zetaZeroFreeConstant` | definitions; positivity and rational width comparison proved |
+| 2.argument.1 | localZetaDivisor mem ball | `Legendre.Zeta.localZetaDivisor_mem_ball` | **proved**; high-disk argument principle with zero-free boundary, not a global N(T) estimate |
+| 2.argument.2 | localZetaRegularized logDeriv analyticOnNhd | `Legendre.Zeta.localZetaRegularized_logDeriv_analyticOnNhd` | **proved**; high-disk argument principle with zero-free boundary, not a global N(T) estimate |
+| 2.argument.3 | circleIntegral localZetaRegularized logDeriv | `Legendre.Zeta.circleIntegral_localZetaRegularized_logDeriv` | **proved**; high-disk argument principle with zero-free boundary, not a global N(T) estimate |
+| 2.argument.4 | circleIntegral logDeriv riemannZeta eq degree | `Legendre.Zeta.circleIntegral_logDeriv_riemannZeta_eq_degree` | **proved**; high-disk argument principle with zero-free boundary, not a global N(T) estimate |
+| 2.reflection.1 | completedZeta analyticAt | `Legendre.Zeta.completedZeta_analyticAt` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.2 | zeta order eq completed | `Legendre.Zeta.zeta_order_eq_completed` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.3 | zeta order one sub | `Legendre.Zeta.zeta_order_one_sub` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.4 | zeroMultiplicity one sub | `Legendre.Zeta.zeroMultiplicity_one_sub` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.5 | NontrivialZero.one sub | `Legendre.Zeta.NontrivialZero.one_sub` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.6 | rightHalfZero properties | `Legendre.Zeta.rightHalfZero_properties` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.reflection.7 | rightHalfZero injOn | `Legendre.Zeta.rightHalfZero_injOn` | **proved**; critical-strip reflection preserving analytic multiplicity |
+| 2.countdisk.1 | counting disk coordinates | `Legendre.Zeta.counting_disk_coordinates` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.2 | counting disk ne one | `Legendre.Zeta.counting_disk_ne_one` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.3 | riemannZeta analyticOnNhd counting disk | `Legendre.Zeta.riemannZeta_analyticOnNhd_counting_disk` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.4 | norm riemannZeta counting disk le | `Legendre.Zeta.norm_riemannZeta_counting_disk_le` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.5 | countingDivisor finite | `Legendre.Zeta.countingDivisor_finite` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.6 | countingDivisor eq multiplicity | `Legendre.Zeta.countingDivisor_eq_multiplicity` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.7 | countingDegree cast | `Legendre.Zeta.countingDegree_cast` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.8 | mem countingZeros | `Legendre.Zeta.mem_countingZeros` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countdisk.9 | countingDegree le | `Legendre.Zeta.countingDegree_le` | **proved**; wider Jensen counting disks; abs(t)≥4 |
+| 2.countcover.1 | lowCountingSet finite | `Legendre.Zeta.lowCountingSet_finite` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.2 | countingHeight abs ge | `Legendre.Zeta.countingHeight_abs_ge` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.3 | countingHeightIndex lt | `Legendre.Zeta.countingHeightIndex_lt` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.4 | countingHeight index eq | `Legendre.Zeta.countingHeight_index_eq` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.5 | rightHalf mem counting disk | `Legendre.Zeta.rightHalf_mem_counting_disk` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.6 | rightHalf mem countingZeros | `Legendre.Zeta.rightHalf_mem_countingZeros` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.countcover.7 | rightHalfZero mem cover | `Legendre.Zeta.rightHalfZero_mem_cover` | **proved**; finite multiplicity-preserving cover of the full critical strip |
+| 2.globalcount.1 | sum zeroMultiplicity union le | `Legendre.Zeta.sum_zeroMultiplicity_union_le` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.2 | sum zeroMultiplicity biUnion le | `Legendre.Zeta.sum_zeroMultiplicity_biUnion_le` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.3 | zeroCount le cover | `Legendre.Zeta.zeroCount_le_cover` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.4 | zeroCount le sum countingDegree | `Legendre.Zeta.zeroCount_le_sum_countingDegree` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.5 | zeroCount le global bound | `Legendre.Zeta.zeroCount_le_global_bound` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.6 | globalZeroCountConstant pos | `Legendre.Zeta.globalZeroCountConstant_pos` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.7 | global counting log le | `Legendre.Zeta.global_counting_log_le` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.8 | zeroCount le mul log | `Legendre.Zeta.zeroCount_le_mul_log` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.9 | zeroCount isBigO | `Legendre.Zeta.zeroCount_isBigO` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.10 | zeroDensityCount le mul log | `Legendre.Zeta.zeroDensityCount_le_mul_log` | **proved**; global N(T) bounds; final C T log T bound for T≥7 |
+| 2.globalcount.def | reflected zeros, finite counting disks and cover, fixed low-height degree, global constant | `Legendre.Zeta.rightHalfZero`, `countingDivisor`, `countingZeros`, `countingDegree`, `lowCountingSet`, `lowCountingDegree`, `countingHeight`, `countingHeightIndex`, `globalCountingCover`, `globalZeroCountConstant` | definitions; finiteness, multiplicity preservation and positive fixed coefficient proved |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |
