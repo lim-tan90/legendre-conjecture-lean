@@ -24,6 +24,25 @@ public import Legendre.PerronTail
 public import Legendre.PerronShift
 public import Legendre.PerronZero
 public import Legendre.PerronResidue
+public import Legendre.PerronInversion
+
+public import Legendre.PerronError
+
+public import Legendre.ZetaPositivity
+
+public import Legendre.ZetaGrowth
+
+public import Legendre.ZetaLocalBound
+
+public import Legendre.ZetaZeroRemoval
+
+public import Legendre.ZetaRegularizedBound
+
+public import Legendre.ZetaLogDerivativeLocal
+
+public import Legendre.ZetaPoleBounds
+
+public import Legendre.ZetaZeroFree
 
 /-!
 # Axiom audit
@@ -254,3 +273,128 @@ end Legendre
 #print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_crossing_sub
 #print axioms Legendre.Zeta.tendsto_truncatedPerronKernel_of_one_lt
 #print axioms Legendre.Zeta.tendsto_truncatedPerronKernel
+
+#print axioms Legendre.Zeta.perronKernelBound_nonneg
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_le_bound
+#print axioms Legendre.Zeta.log_ratio_abs_ge_log_two
+#print axioms Legendre.Zeta.perronKernelBound_ratio_le
+#print axioms Legendre.Zeta.summable_vonMangoldt_perronKernelBound
+#print axioms Legendre.Zeta.tendsto_truncatedPerron_tsum
+#print axioms Legendre.Zeta.vonMangoldt_mul_scalarPerronValue_eq_zero
+#print axioms Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_sum
+#print axioms Legendre.Zeta.vonMangoldt_mul_scalarPerronValue_eq
+#print axioms Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_psi
+#print axioms Legendre.Zeta.tendsto_truncatedPerron
+#print axioms Legendre.Zeta.tendsto_truncatedPerron_of_not_nat
+#print axioms Legendre.Zeta.tendsto_truncatedPerron_nat
+
+#print axioms Legendre.Zeta.integral_perron_inv_sq
+#print axioms Legendre.Zeta.norm_perronTail_boundary_height_le
+#print axioms Legendre.Zeta.norm_integral_perronTail_remainder_height_le
+#print axioms Legendre.Zeta.norm_integral_perronWeight_tail_le
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_sub_le
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_sub_value_le
+#print axioms Legendre.Zeta.perronScalarError_nonneg
+#print axioms Legendre.Zeta.norm_truncatedPerronKernel_error_le
+#print axioms Legendre.Zeta.perronScalarError_le_bound
+#print axioms Legendre.Zeta.summable_vonMangoldt_perronScalarError
+#print axioms Legendre.Zeta.perronErrorConstant_nonneg
+#print axioms Legendre.Zeta.summable_vonMangoldt_truncatedPerronKernel
+#print axioms Legendre.Zeta.summable_vonMangoldt_scalarPerronValue
+#print axioms Legendre.Zeta.norm_truncatedPerron_sub_psi_le
+#print axioms Legendre.Zeta.vonMangoldt_dirichlet_norm_sum_le
+#print axioms Legendre.Zeta.vonMangoldt_perronScalarError_tail_le
+#print axioms Legendre.Zeta.perronErrorConstant_le_upper
+#print axioms Legendre.Zeta.norm_truncatedPerron_sub_psi_le_upper
+
+#print axioms Legendre.Zeta.vonMangoldt_term_re
+#print axioms Legendre.Zeta.vonMangoldt_term_three_four_one_nonneg
+#print axioms Legendre.Zeta.neg_logDeriv_three_four_one_nonneg
+
+#print axioms Legendre.Zeta.zetaFractionalPart_measurable
+#print axioms Legendre.Zeta.norm_zetaFractionalPart_le
+#print axioms Legendre.Zeta.zetaFractionalPart_locallyIntegrable
+#print axioms Legendre.Zeta.zetaFractionalPart_isBigO_atTop
+#print axioms Legendre.Zeta.zetaFractionalPart_isBigO_at_zero
+#print axioms Legendre.Zeta.zetaMellinRemainder_convergent
+#print axioms Legendre.Zeta.zetaMellinRemainder_differentiableAt
+#print axioms Legendre.Zeta.zetaMellin_integrand_eq_indicator
+#print axioms Legendre.Zeta.zetaMellinRemainder_eq_integral
+#print axioms Legendre.Zeta.zetaMellinRemainder_integrable
+#print axioms Legendre.Zeta.norm_zetaMellinRemainder_le
+#print axioms Legendre.Zeta.riemannZeta_eq_euler_sum_right
+#print axioms Legendre.Zeta.poleRemovedZeta_differentiable
+#print axioms Legendre.Zeta.zetaEulerNumerator_differentiableAt
+#print axioms Legendre.Zeta.poleRemovedZeta_eq_euler_sum
+#print axioms Legendre.Zeta.riemannZeta_eq_euler_sum
+#print axioms Legendre.Zeta.norm_riemannZeta_le_positive_re
+#print axioms Legendre.Zeta.norm_riemannZeta_le_three_mul_norm
+#print axioms Legendre.Zeta.norm_moebius_LSeries_le_two
+#print axioms Legendre.Zeta.one_half_le_norm_riemannZeta
+
+#print axioms Legendre.Zeta.zeta_disk_coordinates
+#print axioms Legendre.Zeta.riemannZeta_analyticOnNhd_disk
+#print axioms Legendre.Zeta.norm_riemannZeta_disk_le
+#print axioms Legendre.Zeta.one_half_le_norm_riemannZeta_disk_center
+#print axioms Legendre.Zeta.zeta_local_divisor_sum_le
+
+#print axioms Legendre.Zeta.localZetaDivisor_finite
+#print axioms Legendre.Zeta.localZetaDivisor_nonneg
+#print axioms Legendre.Zeta.localZetaFactor_analyticAt
+#print axioms Legendre.Zeta.localZetaFactor_order
+#print axioms Legendre.Zeta.localZetaFactor_ne_zero
+#print axioms Legendre.Zeta.riemannZeta_meromorphicOrderAt_eq
+#print axioms Legendre.Zeta.localZetaDivisor_eq_multiplicity
+#print axioms Legendre.Zeta.localZetaQuotient_meromorphicOn
+#print axioms Legendre.Zeta.localZetaQuotient_order
+#print axioms Legendre.Zeta.localZetaRegularized_order
+#print axioms Legendre.Zeta.zeta_disk_ne_one
+#print axioms Legendre.Zeta.localZetaDivisor_eq_zero_of_not_mem
+#print axioms Legendre.Zeta.localZetaRegularized_analyticOnNhd
+#print axioms Legendre.Zeta.localZetaRegularized_ne_zero
+#print axioms Legendre.Zeta.localZetaDivisor_eq_zero_of_ne_zero
+#print axioms Legendre.Zeta.localZetaRegularized_eq
+#print axioms Legendre.Zeta.localZetaRegularized_eventuallyEq
+#print axioms Legendre.Zeta.localZetaFactor_eq_prod
+#print axioms Legendre.Zeta.localZetaFactor_logDeriv
+#print axioms Legendre.Zeta.logDeriv_riemannZeta_eq_regularized_add
+#print axioms Legendre.Zeta.localZetaDivisor_support_zero
+#print axioms Legendre.Zeta.localZetaPrincipalPart_re_nonneg
+#print axioms Legendre.Zeta.localZetaDegree_cast
+#print axioms Legendre.Zeta.localZetaDegree_le
+#print axioms Legendre.Zeta.localZetaFactor_eq_prod_nat
+#print axioms Legendre.Zeta.norm_localZetaFactor_center_le
+#print axioms Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor
+
+#print axioms Legendre.Zeta.norm_localZetaRegularized_sphere_le
+#print axioms Legendre.Zeta.norm_localZetaRegularized_disk_le
+#print axioms Legendre.Zeta.norm_localZetaRegularized_ratio_le
+#print axioms Legendre.Zeta.exists_localZetaLog
+#print axioms Legendre.Zeta.localZetaLogBound_pos
+#print axioms Legendre.Zeta.localZetaLog_re_le
+#print axioms Legendre.Zeta.exists_localZetaLog_bounded
+#print axioms Legendre.Zeta.norm_logDeriv_localZetaRegularized_le
+
+#print axioms Legendre.Zeta.neg_logDeriv_re_le_local
+#print axioms Legendre.Zeta.neg_logDeriv_re_le_local_sub_zero
+
+#print axioms Legendre.Zeta.norm_deriv_zetaMellinRemainder_le
+#print axioms Legendre.Zeta.deriv_poleRemovedZeta_eq
+#print axioms Legendre.Zeta.one_half_le_norm_poleRemovedZeta
+#print axioms Legendre.Zeta.norm_deriv_poleRemovedZeta_le
+#print axioms Legendre.Zeta.norm_logDeriv_poleRemovedZeta_le
+#print axioms Legendre.Zeta.neg_logDeriv_real_le_pole
+
+#print axioms Legendre.Zeta.zetaZeroFreeK_pos
+#print axioms Legendre.Zeta.zetaZeroFreeCost_pos
+#print axioms Legendre.Zeta.zetaZeroFreeConstant_pos
+#print axioms Legendre.Zeta.zeta_local_log_le
+#print axioms Legendre.Zeta.localZetaLogBound_le_five_log
+#print axioms Legendre.Zeta.localZetaLogBound_two_mul_le
+#print axioms Legendre.Zeta.eighteen_le_log_term
+#print axioms Legendre.Zeta.eighteen_le_zeroFreeCost_mul_log
+#print axioms Legendre.Zeta.riemannZeta_ne_zero_of_log_region
+#print axioms Legendre.Zeta.zetaZeroFreeK_le_ten
+#print axioms Legendre.Zeta.zetaZeroFreeCost_le
+#print axioms Legendre.Zeta.rational_le_zetaZeroFreeConstant
+#print axioms Legendre.Zeta.riemannZeta_ne_zero_of_explicit_log_region

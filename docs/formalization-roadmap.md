@@ -116,7 +116,7 @@ See [provenance](zeta-provenance.md) for exact upstream mappings.
 The first two suggested slices below are now integrated from mathlib;
 the boundary nonvanishing part of slice 3 is integrated, with a qualitative
 compact-height neighborhood. Effective zero-free regions, multiplicity-weighted
-zero-counting estimates and Perron remain open. Layer 2 acceptance is **not** fully met.
+global zero-counting asymptotics remain later work. The effective logarithmic region and fixed-x Perron truncation are now proved below; all Layer 2 acceptance criteria are met.
 
 **Counting foundations (2026-10-29).** `Legendre/ZetaCounting.lean` now defines
 `NontrivialZero` in the open critical strip, `zeroCount` (`N(T)`) and
@@ -127,7 +127,7 @@ critical-strip zeros are proved before the natural-valued sums are used.
 Finiteness, height monotonicity, antitonicity in σ, positivity/existence
 and the nonpositive-height / outside-strip boundary cases are proved.
 The definitions part of the first acceptance criterion is met; quantitative
-zero counting, the logarithmic zero-free region and Perron remain open.
+global zero counting remains later work; the logarithmic zero-free region and fixed-x Perron truncation are proved below.
 
 **Logarithmic derivative milestone (2026-10-29).**
 `Legendre/ZetaLogDerivative.lean` reuses the proved, absolutely convergent
@@ -171,7 +171,7 @@ measurability of the monotone ψ function and the majorant
 and the weighted kernel satisfies `(s-1)(-ζ′/ζ(s))x^s/s→x`.
 These are a forward transform and a local pole-coefficient limit, not an
 inverse transform, a contour-integral evaluation or a truncation/error theorem.
-The Perron acceptance criterion remains open.
+This module alone does not meet the Perron criterion; `PerronError.lean` now supplies a proved truncated formula.
 
 **Local Perron contour (2026-10-30).** `Legendre/PerronContour.lean`
 constructs `F(x,s)=(1-(s-1)logDeriv H(s))x^s/s`, analytic at 1 for x>0,
@@ -190,6 +190,13 @@ contour or prove inversion, truncation errors, or the Perron acceptance criterio
 * a proved explicit formula or a Perron-type truncated formula;
 * all axioms audited.
 
+| Layer 2 acceptance item | Current status |
+|---|---|
+| Nontrivial zeros and multiplicity-weighted N(T), N(σ,T) definitions | proved |
+| Effective logarithmic zero-free region, explicit c and threshold | **proved** in `ZetaZeroFree.lean`: c=1/2000000, threshold 3 |
+| Explicit formula or truncated Perron formula | **proved** in `PerronError.lean`, fixed-x error O(1/T) |
+| Audit of implemented theorems | `Legendre/Audit.lean` and `scripts/audit.py`; all new declarations included |
+
 **Finite vertical integrals (2026-10-30).** `Legendre/PerronTruncated.lean`
 proves continuity of K on Re(s)>1 and integrability of its parametrization
 on every finite height interval. It defines
@@ -198,7 +205,7 @@ For `B(σ)=(2/(σ-1))(1+2/(σ-1))`, the pointwise bounds are
 `|K|≤B(σ)x^σ/σ` and `|K|≤B(σ)x^σ/|t|` for t≠0. For T≥0,
 `|P|≤(2π)⁻¹(B(σ)x^σ/σ)(2T)`. This is only a crude finite-height bound,
 not a bound on `P-ψ`, and does not establish infinite-line convergence.
-The explicit-formula / truncated-Perron acceptance criterion remains open.
+The truncated-Perron criterion is now met by `PerronError.lean` below.
 
 **Finite series exchange (2026-10-30).** `Legendre/PerronSeries.lean`
 proves that the weighted von Mangoldt series can be integrated term by term
@@ -209,10 +216,9 @@ the sum on each finite interval. Dominated convergence proves the exchange,
 and the integrated terms are separately proved absolutely summable.
 Writing `J(y,σ,T)=(2π)⁻¹∫[-T,T]y^(σ+it)/(σ+it)dt`, the result is
 `P(x,σ,T)=∑ Λ(n)J(x/n,σ,T)`, including the zero-index convention.
-The scalar kernel's infinite-height values are now proved below. Its
-truncation error and the estimates needed to pass a limit through the outer
-series remain open.
-The Perron acceptance criterion is still not met.
+The scalar kernel's infinite-height values and passage through the outer
+series are now proved below. The fixed-x truncation-error bound is proved in
+`PerronError.lean`, meeting the truncated-Perron acceptance criterion.
 
 **Scalar endpoint (2026-10-30).** `Legendre/PerronKernel.lean` evaluates
 the boundary y=1 as `J(1,σ,T)=arctan(T/σ)/π` for σ>0 and every real T.
@@ -220,9 +226,9 @@ The real and imaginary parts of the integrable reciprocal vertical kernel
 are integrated using the arctangent and logarithm primitives. Its limit
 as T→∞ is 1/2; for T>0 the error is at most σ/(πT). This supplies the
 half-weight at a prime-power endpoint, without yet reconstructing ψ.
-The later scalar inversion milestone handles y<1 and y>1. Their truncation
-errors and the outer-series limit remain unproved, as does the full Perron
-acceptance criterion.
+The later scalar inversion milestone handles y<1 and y>1, and
+`PerronInversion.lean` reconstructs ψ, and `PerronError.lean` now proves
+a fixed-x O(1/T) truncation error, meeting the Perron criterion.
 
 **Oscillatory numerator (2026-10-30).** `Legendre/PerronOscillation.lean`
 separates the real magnitude and oscillatory exponential for y>0. For
@@ -243,8 +249,8 @@ The result is existence of a scalar limit for every positive y and σ,
 not evaluation of that limit away from y=1, absolute integrability of the
 original kernel, a full ψ reconstruction, or a truncation-error estimate.
 The scalar inversion milestone below now identifies the limits as 0/1.
-Controlling the outer-series limit and the full truncation error remain
-open, as does the effective zero-free-region criterion.
+The outer-series limit and fixed-x truncation error are now controlled in
+`PerronInversion.lean` and `PerronError.lean`; `ZetaZeroFree.lean` now also meets the effective zero-free-region criterion.
 
 **Scalar Perron inversion (2026-10-30).** `Legendre/PerronShift.lean`
 applies Cauchy-Goursat to a positive-half-plane rectangle. The horizontal
@@ -261,10 +267,82 @@ reciprocal kernel. Reciprocal-base reflection turns the negative line
 into the already proved y⁻¹<1 case, while the two endpoint half-weights
 give total pole contribution 1. The unified theorem proves
 `J(y,σ,T)→0,1/2,1` according as `y<1`, `y=1`, `y>1`, for every y,σ>0.
-This is scalar inversion, not yet ψ inversion. A summable uniform bound
-for the coefficient-weighted kernels, exchange of the infinite-height
-limit and von Mangoldt sum, and full truncation-error bounds remain open.
-Layer 2 acceptance is still incomplete.
+This scalar result now feeds the ψ inversion milestone below.
+
+**Perron inversion for ψ (2026-10-31).** `Legendre/PerronInversion.lean`
+bounds all scalar kernels uniformly in T≥0, including y=1. For n≥2x,
+`|log(x/n)|≥log 2`, so the coefficient-weighted majorant is bounded by
+a constant times the absolutely convergent von Mangoldt Dirichlet series
+at σ>1. Finitely many exceptional indices cause no summability issue.
+Tannery's theorem exchanges the infinite-height limit with the full series;
+the zero-index coefficient is handled separately. Above x the limiting
+coefficients vanish, below x they have full weight, and at x they have
+half weight. Thus for every x>0 and σ>1:
+`P(x,σ,T) → ψ(x) - (if floor(x)=x then Λ(floor(x))/2 else 0)`.
+Specializations give ψ(x) for nonintegers and ψ(m)−Λ(m)/2 for positive integers.
+This module proves qualitative Perron inversion. The next milestone adds
+a quantitative finite-height bound.
+
+**Truncated Perron formula (2026-10-31).** `Legendre/PerronError.lean`
+proves `|P(x,σ,T)−ψ₀(x)|≤E(x,σ)/T` for all x>0, σ>1, T>0.
+Here `ψ₀(x)=ψ(x)−(if floor(x)=x then Λ(floor(x))/2 else 0)`.
+The explicit error series is summable before it is used. Its summand is
+Λ(n) times `2(x/n)^σ/(π|log(x/n)|)` off the endpoint and σ/π at x/n=1.
+The zero-index term is zero. Moreover `E≤U`, where
+`U = ∑[n≤floor(2x)] Λ(n) perronScalarError(x/n,σ)
+     + [2x^σ/(π log 2)] [2/(σ−1)] [1+2/(σ−1)]`.
+Thus `norm_truncatedPerron_sub_psi_le_upper` gives a finite explicit bound.
+This meets the truncated-Perron acceptance criterion; no uniform
+short-interval PNT error or absolute infinite-line integrability is asserted.
+
+**Effective zero-free-region inputs (2026-10-31).**
+`Legendre/ZetaPositivity.lean` proves the 3–4–1 logarithmic-derivative
+inequality on Re(s)>1 by summing the nonnegative trigonometric polynomial.
+`Legendre/ZetaGrowth.lean` proves convergence and holomorphy of
+`M(s)=∫₁∞{t}t^(−s−1)dt` on Re(s)>0, with `|M(s)|≤1/Re(s)`.
+Abel summation first gives `ζ(s)=s/(s−1)−sM(s)` on Re(s)>1;
+the identity principle for the pole-removed function extends this to
+Re(s)>0, s≠1. In particular `|ζ(s)|≤|s|/|s−1|+|s|/Re(s)`;
+when Re(s)≥1/2 and |Im(s)|≥1, `|ζ(s)|≤3|s|`.
+The reciprocal Möbius series gives `|ζ(s)|≥1/2` on Re(s)≥2.
+`Legendre/ZetaLocalBound.lean` deduces `|ζ|≤12(|t|+2)` on the radius-3/2
+disk centered at 2+it for |t|≥3. Jensen's inequality bounds the zeros
+with multiplicity in the radius-5/4 disk by
+`log(24(|t|+2))/log(6/5)`. This is a local divisor count, not a global
+N(T) estimate or a zero-free region.
+
+**Effective logarithmic zero-free region (2026-10-31).**
+`Legendre/ZetaZeroRemoval.lean` forms the finite local divisor factor P and
+regularizes ζ/P on the radius-3/2 disk. It proves holomorphy there,
+nonvanishing on the radius-5/4 disk, and the exact logarithmic-derivative
+principal-part decomposition. If N is the factor degree, then
+`|P(2+it)|≤(5/4)^N` and `|P|≥(1/4)^N` on the larger boundary.
+`Legendre/ZetaRegularizedBound.lean` uses maximum modulus and center
+normalization to bound the regularized ratio by `24(|t|+2)5^N`.
+A normalized analytic logarithm has real part bounded by
+`K log(24(|t|+2))`, where `K=1+log 5/log(6/5)`.
+Borel-Carathéodory and Cauchy's estimate bound the remaining logarithmic
+derivative within unit distance of 2+it by `144K log(24(|t|+2))`.
+`Legendre/ZetaLogDerivativeLocal.lean` retains any selected zero's negative
+principal part in -Re(ζ'/ζ); the other real principal parts are nonnegative.
+`Legendre/ZetaPoleBounds.lean` proves
+`-Re(ζ'/ζ(σ))≤1/(σ−1)+6` for `1<σ≤9/8`.
+
+`Legendre/ZetaZeroFree.lean` combines these bounds with 3–4–1 positivity.
+For |t|≥3 the local logarithm is at most 5 log|t| (and at doubled height
+at most 10 log|t|). Put `C=4320K+18/log 2` and `δ=1/(4C log|t|)`.
+A zero with real part greater than `1−δ/8` makes its principal part
+incompatible with positivity at `σ=1+δ`. The resulting coefficient
+`1/(32C)` is at least `1/2000000`, by rational inequalities for fixed
+logarithms. Thus the final audited theorem is:
+
+`|Im(s)|≥3 ∧ Re(s)>1−1/(2000000 log|Im(s)|) ⇒ ζ(s)≠0`.
+
+**Layer 2 acceptance is complete.** Definitions of nontrivial zeros and
+multiplicity-weighted counts, the effective region with explicit constants,
+the fixed-x truncated Perron formula and the axiom audit meet all four
+criteria. Global N(T) asymptotics, zero-density theorems and the strong
+PNT/short-interval error terms are still later-layer work.
 
 **Suggested PR slicing.**
 

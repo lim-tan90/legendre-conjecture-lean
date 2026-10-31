@@ -347,6 +347,145 @@ whose positive-line limit is already zero. The endpoint half-weights on
 opposite lines contribute 1. Together with the previous endpoint theorem,
 this proves scalar inversion with values 0, 1/2 and 1.
 
-No infinite-height limit is interchanged with the von Mangoldt series here.
-Reconstruction of ψ, full truncation-error bounds and an effective
-logarithmic zero-free region remain open.
+These three modules do not exchange the infinite-height limit with the
+von Mangoldt series; the following module supplies that step.
+
+
+## Perron inversion for ψ (2026-10-31)
+
+`Legendre/PerronInversion.lean` contains original deductions using mathlib
+v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0).
+No external formalization was copied; dependency pins are unchanged.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Limit under a dominated series | `tendsto_tsum_of_dominated_convergence` | `Analysis/Normed/Group/Tannery.lean`, David Loeffler, Apache-2.0 |
+| Summability from a tail comparison | `Summable.of_norm_bounded_eventually_nat` | `Analysis/Normed/Group/InfiniteSum.lean` |
+| Dirichlet term norm | `LSeries.norm_term_eq` | `NumberTheory/LSeries/Basic.lean` |
+| Finite Chebyshev sum | `Chebyshev.psi_eq_sum_Icc` | `NumberTheory/Chebyshev.lean` |
+| Finite support and endpoint | `tsum_eq_sum`, `Finset.sum_ite_eq'`, `Nat.le_floor_iff` | infinite-sum, finite-sum and floor APIs |
+
+The scalar majorant is 1 at y=1 and the previously proved
+`(y^σ/|log y|)(2+π)/(2πσ)` elsewhere. For n≥2x, logarithmic monotonicity
+gives `|log(x/n)|≥log 2`. Multiplication by Λ(n) leaves a summable bound
+by comparison with the absolutely convergent Dirichlet series. Tannery's
+theorem therefore permits the limit through the coefficient series.
+The n=0 term is always zero, so no positivity assumption is silently
+applied to x/0. Finite support above floor(x) and explicit endpoint
+algebra identify the result as ψ(x), minus half of Λ(x) when x is a
+positive integer. All x>0 are covered, including x<1 and x=1.
+
+This proves convergence of the symmetric finite Perron integrals for σ>1.
+It does not assert absolute integrability of the original infinite-line
+integrand. The following module gives a finite-height error estimate;
+the effective logarithmic zero-free region is proved in `ZetaZeroFree.lean`.
+
+
+## Fixed-x Perron truncation error (2026-10-31)
+
+`Legendre/PerronError.lean` contains original deductions using the same
+mathlib v4.35.0 commit. Integration by parts on T..U has endpoint bounds
+C/T and C/U and a remainder bound C(1/T−1/U), where C=y^σ/|log y|.
+Their sum is 2C/T, independent of U≥T>0. Conjugation symmetry doubles
+the positive-half bound; normalization and the proved scalar limit give
+`|J−scalarPerronValue|≤2y^σ/(πT|log y|)` off y=1.
+The earlier arctangent endpoint error handles y=1. The weighted scalar
+error coefficients are summable by comparison with the existing kernel
+majorant. Absolute summability justifies subtracting the two series and
+taking the norm bound term by term.
+
+For n≥2x, the error coefficients are bounded by
+`[2x^σ/(π log 2)] ‖LSeries.term Λ σ n‖`. Splitting off the finite initial
+segment and applying the proved Dirichlet majorant gives `perronErrorUpper`.
+No hidden existence constant, unproved exchange, or divergent tsum is used.
+The constant depends on x and σ; no uniform short-interval PNT bound is claimed.
+Upstream inputs are `integral_rpow`, interval integral estimates and
+`Summable.tsum_sub` / `norm_tsum_le_tsum_norm`; all retain their Apache-2.0
+provenance in mathlib. No external proof code is copied.
+
+## Quantitative inputs for the zero-free region (2026-10-31)
+
+`Legendre/ZetaPositivity.lean`, `ZetaGrowth.lean` and `ZetaLocalBound.lean`
+contain original deductions using the same fixed mathlib commit. Dependency
+pins are unchanged; no external formalization was copied.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Mellin convergence and differentiation | `mellinConvergent_of_isBigO_rpow`, `mellin_differentiableAt_of_isBigO_rpow` | `Analysis/MellinTransform.lean`, David Loeffler, Apache-2.0 |
+| Abel summation | `LSeries_eq_mul_integral_of_nonneg` | `NumberTheory/LSeries/SumCoeff.lean`, Xavier Roblot, Apache-2.0 |
+| Identity principle | `AnalyticOnNhd.eqOn_of_preconnected_of_eventuallyEq` | `Analysis/Analytic/Uniqueness.lean` |
+| Reciprocal zeta series | `ArithmeticFunction.LSeries_zeta_mul_Lseries_moebius`, `LSeriesSummable_moebius_iff` | `NumberTheory/LSeries/Dirichlet.lean` |
+| Jensen multiplicity count | `AnalyticOnNhd.sum_divisor_le` | `Analysis/Complex/JensenFormula.lean`, Stefan Kebekus, Apache-2.0 |
+| Trigonometric polynomial | `Real.cos_two_mul`, `Complex.exp_re` | trigonometric and complex exponential APIs |
+
+The cutoff fractional part is measurable, bounded by 1 and locally
+integrable; it vanishes near zero. These facts justify Mellin convergence
+and holomorphic dependence on Re(s)>0, rather than treating a default-valued
+integral as an analytic function. Abel summation on Re(s)>1 and the identity
+principle applied to the residue-updated `poleRemovedZeta` give Euler summation
+on Re(s)>0. The pole itself is excluded from the formula for ζ.
+The resulting explicit bound is `|ζ(s)|≤|s|/|s−1|+|s|/Re(s)`.
+The reciprocal Möbius Dirichlet series has norm at most 2 on Re(s)≥2,
+so `|ζ(s)|≥1/2` there. For |t|≥3 the radius-3/2 disk at 2+it avoids the
+pole; its polynomial norm bound and nonzero center allow Jensen's inequality.
+The sum of the analytic divisor on the radius-5/4 disk is at most
+`log(24(|t|+2))/log(6/5)`, counting zeros with multiplicity.
+
+The 3–4–1 inequality is proved term by term from
+`3+4 cos θ+cos(2θ)=2(1+cos θ)^2≥0`, then summed using the absolutely
+convergent von Mangoldt series on σ>1. The subsequent modules below
+complete the zero removal and local logarithmic-derivative estimates and
+prove the effective logarithmic region.
+
+
+## Explicit logarithmic zero-free region (2026-10-31)
+
+`Legendre/ZetaZeroRemoval.lean`, `ZetaRegularizedBound.lean`,
+`ZetaLogDerivativeLocal.lean`, `ZetaPoleBounds.lean` and `ZetaZeroFree.lean`
+contain original proofs using mathlib v4.35.0, commit
+`56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0). No external
+formalization is copied and no dependency pins are changed.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Finite local zero factors | `Function.FactorizedRational.analyticAt`, `meromorphicOrderAt_eq`, `ne_zero` | `Analysis/Meromorphic/FactorizedRational.lean` |
+| Removable quotient values | `toMeromorphicNFOn`, `toMeromorphicNFOn_eq_toMeromorphicNFAt_on_nhds`, `MeromorphicNFAt.meromorphicOrderAt_nonneg_iff_analyticAt` | `Analysis/Meromorphic/NormalForm.lean` |
+| Maximum modulus | `Complex.norm_le_of_forall_mem_frontier_norm_le` | `Analysis/Complex/AbsMax.lean`, Yury Kudryashov and others, Apache-2.0 |
+| Holomorphic primitives | `DifferentiableOn.isExactOn_ball`, `Complex.IsExactOn.with_val_at` | `Analysis/Complex/HasPrimitives.lean` |
+| Borel-Carathéodory | `Complex.borelCaratheodory_zero` | `Analysis/Complex/BorelCaratheodory.lean` |
+| Cauchy derivative bound | `Complex.norm_deriv_le_of_forall_mem_sphere_norm_le` | `Analysis/Complex/Liouville.lean` |
+| Rational logarithm estimates | `Real.log_le_log`, `Real.log_pow`, `Real.one_sub_inv_le_log_of_pos` | `Analysis/SpecialFunctions/Log/Basic.lean` |
+
+The inner divisor is finite and nonnegative before any product or degree
+is used. Its integer sum equals the natural degree, so no negative or
+infinite multiplicity is silently discarded. Regularization of ζ/P is
+proved analytic on the larger disk and nonzero on the smaller disk by
+meromorphic order cancellation. At nonzeros its ordinary quotient and
+logarithmic derivative are recovered exactly.
+
+For degree N the center factor norm is at most (5/4)^N, while its larger
+boundary norm is at least (1/4)^N. Maximum modulus and the nonzero center
+bound give a normalized quotient norm at most `24(|t|+2)5^N`.
+A primitive of its logarithmic derivative, normalized to zero at the
+center, exponentiates to that quotient; this proves existence of the
+analytic logarithm used in Borel-Carathéodory. Jensen bounds its real part
+by `K log(24(|t|+2))`, `K=1+log 5/log(6/5)`.
+Borel-Carathéodory bounds this primitive by 18 times that quantity on the
+radius-9/8 disk; Cauchy's radius-1/8 estimate gives the factor 144 for the
+regularized logarithmic derivative within the unit disk.
+
+On the short real interval 1<σ≤9/8, Cauchy's estimate bounds M'(σ) by 4.
+Euler summation bounds the pole numerator H below by 1/2 and H' above by 3.
+Thus `|H'/H|≤6` and `-Re(ζ'/ζ(σ))≤1/(σ−1)+6`.
+The exact principal-part decomposition retains the contribution of a
+selected zero; all remaining principal parts have nonnegative real part
+on Re(s)>1. Combining with 3–4–1 positivity at σ, σ+it and σ+2it gives
+an effective zero-free width `1/(32C log|t|)`, `C=4320K+18/log 2`, for |t|≥3.
+Purely rational comparisons show K≤10, C≤43236 and
+`1/(32C)≥1/2000000`. The final theorem therefore has the explicit constants
+**c=1/2000000, height threshold 3**. No floating-point certificate or
+unproved analytic estimate is used. These constants are deliberately coarse.
+
+This completes the four documented Layer 2 acceptance criteria. It does
+not supply global zero-counting asymptotics, a zero-density theorem, a
+short-interval PNT error term or a proof of Legendre's conjecture.

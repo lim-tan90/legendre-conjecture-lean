@@ -171,6 +171,126 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.residue.8 | limiting pole contribution comparison | `Legendre.Zeta.tendsto_truncatedPerronKernel_crossing_sub` | **proved** via horizontal-side decay |
 | 2.residue.9 | scalar kernel limit above endpoint | `Legendre.Zeta.tendsto_truncatedPerronKernel_of_one_lt` | **proved**; limit 1 for y>1, σ>0 |
 | 2.residue.10 | unified scalar Perron inversion | `Legendre.Zeta.tendsto_truncatedPerronKernel` | **proved**; 0/half/1 for all y,σ>0; no ψ reconstruction asserted |
+| 2.inversion.def | scalar bound including the endpoint | `Legendre.Zeta.perronKernelBound` | definition |
+| 2.inversion.1 | nonnegative scalar majorant | `Legendre.Zeta.perronKernelBound_nonneg` | **proved**; for y≥0, σ>0 |
+| 2.inversion.2 | uniform scalar bound including endpoint | `Legendre.Zeta.norm_truncatedPerronKernel_le_bound` | **proved**; for y,σ>0, T≥0 |
+| 2.inversion.3 | logarithmic separation on coefficient tail | `Legendre.Zeta.log_ratio_abs_ge_log_two` | **proved**; for n≥2x, x>0 |
+| 2.inversion.4 | Dirichlet-power bound for scalar majorant | `Legendre.Zeta.perronKernelBound_ratio_le` | **proved**; for n≥2x, x,σ>0 |
+| 2.inversion.5 | summable coefficient majorant | `Legendre.Zeta.summable_vonMangoldt_perronKernelBound` | **proved**; for x>0, σ>1; uniform in T≥0 |
+| 2.inversion.6 | Perron limit and von Mangoldt sum exchange | `Legendre.Zeta.tendsto_truncatedPerron_tsum` | **proved**; by Tannery; includes the zero-index case |
+| 2.inversion.7 | limiting coefficients vanish above x | `Legendre.Zeta.vonMangoldt_mul_scalarPerronValue_eq_zero` | **proved**; includes the zero-index convention |
+| 2.inversion.8 | finite support of limiting series | `Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_sum` | **proved**; sum over 0≤n≤floor(x) |
+| 2.inversion.9 | endpoint coefficient correction | `Legendre.Zeta.vonMangoldt_mul_scalarPerronValue_eq` | **proved**; full weight below x, half at x |
+| 2.inversion.10 | limiting series equals half-weighted ψ | `Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_psi` | **proved**; exact floor-based endpoint correction |
+| 2.inversion.11 | Perron inversion | `Legendre.Zeta.tendsto_truncatedPerron` | **proved**; for x>0, σ>1; half weight at integer endpoints |
+| 2.inversion.12 | Perron inversion away from integers | `Legendre.Zeta.tendsto_truncatedPerron_of_not_nat` | **proved**; limit ψ(x) for positive nonintegers |
+| 2.inversion.13 | Perron inversion at integers | `Legendre.Zeta.tendsto_truncatedPerron_nat` | **proved**; limit ψ(m)−Λ(m)/2 for positive integers |
+| 2.error.1 | integral perron inv sq | `Legendre.Zeta.integral_perron_inv_sq` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.2 | norm perronTail boundary height le | `Legendre.Zeta.norm_perronTail_boundary_height_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.3 | norm integral perronTail remainder height le | `Legendre.Zeta.norm_integral_perronTail_remainder_height_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.4 | norm integral perronWeight tail le | `Legendre.Zeta.norm_integral_perronWeight_tail_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.5 | norm truncatedPerronKernel sub le | `Legendre.Zeta.norm_truncatedPerronKernel_sub_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.6 | norm truncatedPerronKernel sub value le | `Legendre.Zeta.norm_truncatedPerronKernel_sub_value_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.7 | perronScalarError nonneg | `Legendre.Zeta.perronScalarError_nonneg` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.8 | norm truncatedPerronKernel error le | `Legendre.Zeta.norm_truncatedPerronKernel_error_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.9 | perronScalarError le bound | `Legendre.Zeta.perronScalarError_le_bound` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.10 | summable vonMangoldt perronScalarError | `Legendre.Zeta.summable_vonMangoldt_perronScalarError` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.11 | perronErrorConstant nonneg | `Legendre.Zeta.perronErrorConstant_nonneg` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.12 | summable vonMangoldt truncatedPerronKernel | `Legendre.Zeta.summable_vonMangoldt_truncatedPerronKernel` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.13 | summable vonMangoldt scalarPerronValue | `Legendre.Zeta.summable_vonMangoldt_scalarPerronValue` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.14 | norm truncatedPerron sub psi le | `Legendre.Zeta.norm_truncatedPerron_sub_psi_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.15 | vonMangoldt dirichlet norm sum le | `Legendre.Zeta.vonMangoldt_dirichlet_norm_sum_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.16 | vonMangoldt perronScalarError tail le | `Legendre.Zeta.vonMangoldt_perronScalarError_tail_le` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.17 | perronErrorConstant le upper | `Legendre.Zeta.perronErrorConstant_le_upper` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.error.18 | norm truncatedPerron sub psi le upper | `Legendre.Zeta.norm_truncatedPerron_sub_psi_le_upper` | **proved**; finite Perron error; x>0, σ>1, T>0 for the final bound |
+| 2.positivity.1 | vonMangoldt term re | `Legendre.Zeta.vonMangoldt_term_re` | **proved**; 3–4–1 positivity; σ>1 for the logarithmic derivative |
+| 2.positivity.2 | vonMangoldt term three four one nonneg | `Legendre.Zeta.vonMangoldt_term_three_four_one_nonneg` | **proved**; 3–4–1 positivity; σ>1 for the logarithmic derivative |
+| 2.positivity.3 | neg logDeriv three four one nonneg | `Legendre.Zeta.neg_logDeriv_three_four_one_nonneg` | **proved**; 3–4–1 positivity; σ>1 for the logarithmic derivative |
+| 2.growth.1 | zetaFractionalPart measurable | `Legendre.Zeta.zetaFractionalPart_measurable` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.2 | norm zetaFractionalPart le | `Legendre.Zeta.norm_zetaFractionalPart_le` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.3 | zetaFractionalPart locallyIntegrable | `Legendre.Zeta.zetaFractionalPart_locallyIntegrable` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.4 | zetaFractionalPart isBigO atTop | `Legendre.Zeta.zetaFractionalPart_isBigO_atTop` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.5 | zetaFractionalPart isBigO at zero | `Legendre.Zeta.zetaFractionalPart_isBigO_at_zero` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.6 | zetaMellinRemainder convergent | `Legendre.Zeta.zetaMellinRemainder_convergent` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.7 | zetaMellinRemainder differentiableAt | `Legendre.Zeta.zetaMellinRemainder_differentiableAt` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.8 | zetaMellin integrand eq indicator | `Legendre.Zeta.zetaMellin_integrand_eq_indicator` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.9 | zetaMellinRemainder eq integral | `Legendre.Zeta.zetaMellinRemainder_eq_integral` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.10 | zetaMellinRemainder integrable | `Legendre.Zeta.zetaMellinRemainder_integrable` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.11 | norm zetaMellinRemainder le | `Legendre.Zeta.norm_zetaMellinRemainder_le` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.12 | riemannZeta eq euler sum right | `Legendre.Zeta.riemannZeta_eq_euler_sum_right` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.13 | poleRemovedZeta differentiable | `Legendre.Zeta.poleRemovedZeta_differentiable` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.14 | zetaEulerNumerator differentiableAt | `Legendre.Zeta.zetaEulerNumerator_differentiableAt` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.15 | poleRemovedZeta eq euler sum | `Legendre.Zeta.poleRemovedZeta_eq_euler_sum` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.16 | riemannZeta eq euler sum | `Legendre.Zeta.riemannZeta_eq_euler_sum` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.17 | norm riemannZeta le positive re | `Legendre.Zeta.norm_riemannZeta_le_positive_re` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.18 | norm riemannZeta le three mul norm | `Legendre.Zeta.norm_riemannZeta_le_three_mul_norm` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.19 | norm moebius LSeries le two | `Legendre.Zeta.norm_moebius_LSeries_le_two` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.growth.20 | one half le norm riemannZeta | `Legendre.Zeta.one_half_le_norm_riemannZeta` | **proved**; Euler summation and explicit growth; Re(s)>0, excluding the pole where needed |
+| 2.local.1 | zeta disk coordinates | `Legendre.Zeta.zeta_disk_coordinates` | **proved**; local disk estimates; abs(t)≥3 for the disk and Jensen bounds |
+| 2.local.2 | riemannZeta analyticOnNhd disk | `Legendre.Zeta.riemannZeta_analyticOnNhd_disk` | **proved**; local disk estimates; abs(t)≥3 for the disk and Jensen bounds |
+| 2.local.3 | norm riemannZeta disk le | `Legendre.Zeta.norm_riemannZeta_disk_le` | **proved**; local disk estimates; abs(t)≥3 for the disk and Jensen bounds |
+| 2.local.4 | one half le norm riemannZeta disk center | `Legendre.Zeta.one_half_le_norm_riemannZeta_disk_center` | **proved**; local disk estimates; abs(t)≥3 for the disk and Jensen bounds |
+| 2.local.5 | zeta local divisor sum le | `Legendre.Zeta.zeta_local_divisor_sum_le` | **proved**; local disk estimates; abs(t)≥3 for the disk and Jensen bounds |
+| 2.error.def | explicit scalar/series/finite error bounds | `Legendre.Zeta.perronScalarError`, `perronErrorConstant`, `perronErrorUpper` | definitions; summability proved before use |
+| 2.growth.def | cutoff fractional part and Mellin remainder | `Legendre.Zeta.zetaFractionalPart`, `zetaMellinRemainder` | definitions; convergence and holomorphy on Re(s)>0 proved |
+| 2.removal.1 | localZetaDivisor finite | `Legendre.Zeta.localZetaDivisor_finite` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.2 | localZetaDivisor nonneg | `Legendre.Zeta.localZetaDivisor_nonneg` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.3 | localZetaFactor analyticAt | `Legendre.Zeta.localZetaFactor_analyticAt` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.4 | localZetaFactor order | `Legendre.Zeta.localZetaFactor_order` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.5 | localZetaFactor ne zero | `Legendre.Zeta.localZetaFactor_ne_zero` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.6 | riemannZeta meromorphicOrderAt eq | `Legendre.Zeta.riemannZeta_meromorphicOrderAt_eq` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.7 | localZetaDivisor eq multiplicity | `Legendre.Zeta.localZetaDivisor_eq_multiplicity` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.8 | localZetaQuotient meromorphicOn | `Legendre.Zeta.localZetaQuotient_meromorphicOn` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.9 | localZetaQuotient order | `Legendre.Zeta.localZetaQuotient_order` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.10 | localZetaRegularized order | `Legendre.Zeta.localZetaRegularized_order` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.11 | zeta disk ne one | `Legendre.Zeta.zeta_disk_ne_one` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.12 | localZetaDivisor eq zero of not mem | `Legendre.Zeta.localZetaDivisor_eq_zero_of_not_mem` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.13 | localZetaRegularized analyticOnNhd | `Legendre.Zeta.localZetaRegularized_analyticOnNhd` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.14 | localZetaRegularized ne zero | `Legendre.Zeta.localZetaRegularized_ne_zero` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.15 | localZetaDivisor eq zero of ne zero | `Legendre.Zeta.localZetaDivisor_eq_zero_of_ne_zero` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.16 | localZetaRegularized eq | `Legendre.Zeta.localZetaRegularized_eq` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.17 | localZetaRegularized eventuallyEq | `Legendre.Zeta.localZetaRegularized_eventuallyEq` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.18 | localZetaFactor eq prod | `Legendre.Zeta.localZetaFactor_eq_prod` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.19 | localZetaFactor logDeriv | `Legendre.Zeta.localZetaFactor_logDeriv` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.20 | logDeriv riemannZeta eq regularized add | `Legendre.Zeta.logDeriv_riemannZeta_eq_regularized_add` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.21 | localZetaDivisor support zero | `Legendre.Zeta.localZetaDivisor_support_zero` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.22 | localZetaPrincipalPart re nonneg | `Legendre.Zeta.localZetaPrincipalPart_re_nonneg` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.23 | localZetaDegree cast | `Legendre.Zeta.localZetaDegree_cast` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.24 | localZetaDegree le | `Legendre.Zeta.localZetaDegree_le` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.25 | localZetaFactor eq prod nat | `Legendre.Zeta.localZetaFactor_eq_prod_nat` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.26 | norm localZetaFactor center le | `Legendre.Zeta.norm_localZetaFactor_center_le` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.removal.27 | one fourth pow le norm localZetaFactor | `Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor` | **proved**; finite local zero removal; abs(t)≥3 |
+| 2.regularized.1 | norm localZetaRegularized sphere le | `Legendre.Zeta.norm_localZetaRegularized_sphere_le` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.2 | norm localZetaRegularized disk le | `Legendre.Zeta.norm_localZetaRegularized_disk_le` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.3 | norm localZetaRegularized ratio le | `Legendre.Zeta.norm_localZetaRegularized_ratio_le` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.4 | exists localZetaLog | `Legendre.Zeta.exists_localZetaLog` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.5 | localZetaLogBound pos | `Legendre.Zeta.localZetaLogBound_pos` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.6 | localZetaLog re le | `Legendre.Zeta.localZetaLog_re_le` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.7 | exists localZetaLog bounded | `Legendre.Zeta.exists_localZetaLog_bounded` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.regularized.8 | norm logDeriv localZetaRegularized le | `Legendre.Zeta.norm_logDeriv_localZetaRegularized_le` | **proved**; explicit bounds for the zero-removed quotient; abs(t)≥3 |
+| 2.localderiv.1 | neg logDeriv re le local | `Legendre.Zeta.neg_logDeriv_re_le_local` | **proved**; local principal-part estimates on Re(s)>1 |
+| 2.localderiv.2 | neg logDeriv re le local sub zero | `Legendre.Zeta.neg_logDeriv_re_le_local_sub_zero` | **proved**; local principal-part estimates on Re(s)>1 |
+| 2.polebound.1 | norm deriv zetaMellinRemainder le | `Legendre.Zeta.norm_deriv_zetaMellinRemainder_le` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.polebound.2 | deriv poleRemovedZeta eq | `Legendre.Zeta.deriv_poleRemovedZeta_eq` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.polebound.3 | one half le norm poleRemovedZeta | `Legendre.Zeta.one_half_le_norm_poleRemovedZeta` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.polebound.4 | norm deriv poleRemovedZeta le | `Legendre.Zeta.norm_deriv_poleRemovedZeta_le` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.polebound.5 | norm logDeriv poleRemovedZeta le | `Legendre.Zeta.norm_logDeriv_poleRemovedZeta_le` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.polebound.6 | neg logDeriv real le pole | `Legendre.Zeta.neg_logDeriv_real_le_pole` | **proved**; explicit real-axis pole estimates; 1<σ≤9/8 for the final bound |
+| 2.zerofree.1 | zetaZeroFreeK pos | `Legendre.Zeta.zetaZeroFreeK_pos` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.2 | zetaZeroFreeCost pos | `Legendre.Zeta.zetaZeroFreeCost_pos` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.3 | zetaZeroFreeConstant pos | `Legendre.Zeta.zetaZeroFreeConstant_pos` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.4 | zeta local log le | `Legendre.Zeta.zeta_local_log_le` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.5 | localZetaLogBound le five log | `Legendre.Zeta.localZetaLogBound_le_five_log` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.6 | localZetaLogBound two mul le | `Legendre.Zeta.localZetaLogBound_two_mul_le` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.7 | eighteen le log term | `Legendre.Zeta.eighteen_le_log_term` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.8 | eighteen le zeroFreeCost mul log | `Legendre.Zeta.eighteen_le_zeroFreeCost_mul_log` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.9 | riemannZeta ne zero of log region | `Legendre.Zeta.riemannZeta_ne_zero_of_log_region` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.10 | zetaZeroFreeK le ten | `Legendre.Zeta.zetaZeroFreeK_le_ten` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.11 | zetaZeroFreeCost le | `Legendre.Zeta.zetaZeroFreeCost_le` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.12 | rational le zetaZeroFreeConstant | `Legendre.Zeta.rational_le_zetaZeroFreeConstant` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.zerofree.13 | riemannZeta ne zero of explicit log region | `Legendre.Zeta.riemannZeta_ne_zero_of_explicit_log_region` | **proved**; effective logarithmic zero-free region and explicit constants |
+| 2.removal.def | selected divisor, finite factor, regularized quotient and degree | `Legendre.Zeta.localZetaDivisor`, `localZetaFactor`, `localZetaRegularized`, `localZetaDegree` | definitions; finite support and order preservation proved |
+| 2.zerofree.def | explicit analytic bounds and width coefficient | `Legendre.Zeta.localZetaLogBound`, `zetaZeroFreeK`, `zetaZeroFreeCost`, `zetaZeroFreeConstant` | definitions; positivity and rational width comparison proved |
 | 2.54 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums floor eq psi | `Legendre.Zeta.vonMangoldt_partialSums_floor_eq_psi` | **proved**; not Perron inversion |
 | 2.55 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums isBigO | `Legendre.Zeta.vonMangoldt_partialSums_isBigO` | **proved**; not Perron inversion |
 | 2.56 | Layer 2 forward Abel / weighted pole foundation: vonMangoldt partialSums complex eq psi | `Legendre.Zeta.vonMangoldt_partialSums_complex_eq_psi` | **proved**; not Perron inversion |
