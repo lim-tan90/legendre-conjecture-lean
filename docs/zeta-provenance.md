@@ -486,9 +486,70 @@ Purely rational comparisons show K≤10, C≤43236 and
 **c=1/2000000, height threshold 3**. No floating-point certificate or
 unproved analytic estimate is used. These constants are deliberately coarse.
 
-This meets the four documented Layer 2 acceptance criteria, while the
-wider Layer 2 scope still has open items: the global N(T) bound suggested
-slice and a standalone argument-principle counting interface. The current
-Jensen estimate is local and does not prove a global counting bound.
+This meets the four documented Layer 2 acceptance criteria. The following
+argument-principle and global counting modules now also complete the wider
+Layer 2 scope. This earlier Jensen estimate alone is local.
 No zero-density theorem, short-interval PNT error term or proof of
 Legendre's conjecture is claimed.
+
+
+## Local argument-principle interface (2026-10-31)
+
+`Legendre/ZetaArgumentPrinciple.lean` contains original deductions using the
+same mathlib v4.35.0 commit. On the radius-5/4 high disk, a zero-free boundary
+forces every selected divisor point to lie strictly inside. The zero-removed
+logarithmic derivative is analytic on the closed disk, so Cauchy-Goursat
+makes its circle integral zero. Integrating the finite principal-part sum
+term by term gives `∮ ζ'/ζ = 2πi localZetaDegree`, with analytic multiplicity.
+Circle integrability of each summand is established before additivity is used.
+
+Upstream inputs are `DiffContOnCl.circleIntegral_eq_zero`,
+`circleIntegral.integral_fun_sum` and
+`circleIntegral.integral_sub_inv_of_mem_ball`, from mathlib's
+`Analysis/Complex/CauchyIntegral.lean` and
+`MeasureTheory/Integral/CircleIntegral.lean` (Apache-2.0).
+This local interface counts zeros on the specified disks. The following
+covering argument separately establishes the global N(T) upper bound.
+
+
+## Global multiplicity-weighted N(T) bound (2026-10-31)
+
+`ZetaReflection.lean`, `ZetaCountingDisks.lean`, `ZetaCountingCover.lean`
+and `ZetaGlobalCounting.lean` contain original deductions using mathlib
+v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0).
+No external formalization was copied and dependency pins are unchanged.
+
+| Input | Upstream declaration | Source |
+|---|---|---|
+| Gamma completion, nonzero in the strip | `riemannZeta_def_of_ne_zero`, `Gammaℝ_ne_zero_of_re_pos`, `differentiable_Gammaℝ_inv` | `NumberTheory/LSeries/RiemannZeta.lean`, `Analysis/SpecialFunctions/Gamma/Deligne.lean` |
+| Functional-equation symmetry | `completedRiemannZeta_one_sub` | `NumberTheory/LSeries/RiemannZeta.lean` |
+| Multiplicity under a change of variables | `analyticOrderAt_mul`, `analyticOrderAt_comp_of_deriv_ne_zero` | `Analysis/Analytic/Order.lean`, Vincent Beffara and Stefan Kebekus, Apache-2.0 |
+| Local count | `AnalyticOnNhd.sum_divisor_le` | `Analysis/Complex/JensenFormula.lean`, Stefan Kebekus, Apache-2.0 |
+| Weighted finite injection | `Finset.sum_le_sum_of_injOn`, `Finset.sum_union_inter` | ordered finite-sum APIs |
+
+Completion by the reciprocal Gamma factor changes no zero order on
+0<Re(s)<1. The functional equation therefore preserves the original zeta
+zero multiplicity under s↦1−s. `rightHalfZero` folds the strip into
+Re(s)≥1/2 while preserving |Im(s)| and multiplicity. Its two branches have
+opposite signs of height on upper-half-plane inputs, giving injectivity.
+Thus left-half zeros are neither discarded nor counted with a false
+assumption that all zeros already lie on the critical line.
+
+The counting disks have inner radius 13/8 and outer radius 7/4 at 2+it.
+For |t|≥4 the outer disk stays in Re(s)≥1/4 and away from the pole.
+Euler summation gives the norm bound `20(|t|+2)`; the center lower bound
+1/2 and Jensen give `countingDegree(t)≤log(40(|t|+2))/log(14/13)`.
+Unit-height cells with Re(s)≥1/2 fit inside the inner disks. Centers
+±(k+9/2) cover every sufficiently high reflected zero. The remaining
+|Im(s)|≤5 set lies in a fixed compact rectangle, so its multiplicity sum B
+is finite before B is used in any estimate. Overlap of disks only enlarges
+the covering sum and is handled by explicit nonnegative finite-sum bounds.
+
+The final global estimate, for every T≥0, is
+`N(T)≤B+2(floor(T)+1)log(40(T+7))/log(14/13)`.
+The derived fixed coefficient
+`C=B/log 2+4(1+log 80/log 2)/log(14/13)+1` is positive and satisfies
+`N(T)≤C T log T` for T≥7. Thus N(T)=O(T log T), with analytic multiplicity.
+B is a fixed finite count and is not numerically certified here. This is
+not the Riemann–von Mangoldt leading-term asymptotic or an Ingham/Huxley
+density estimate. The crude upper bound for N(σ,T) follows from N(σ,T)≤N(T).
