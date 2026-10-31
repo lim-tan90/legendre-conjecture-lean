@@ -59,9 +59,9 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 2 complete — progress (2026-10-31)</strong></summary>
+<summary><strong>Layer 2 — acceptance criteria met; broader scope still open (2026-10-31)</strong></summary>
 
-**Layer 2 acceptance completed (2026-10-31):**
+**Layer 2 four-item acceptance completed (2026-10-31):**
 Verified source commit: [`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4).
 Local validation: full `lake build` (3994 jobs) and all 310 axiom audit entries passed.
 [`ZetaZeroFree.lean`](Legendre/ZetaZeroFree.lean) proves the effective region
@@ -73,9 +73,14 @@ and the 3–4–1 inequality exclude a zero in this region.
 Together with the multiplicity-weighted N(T)/N(σ,T) definitions, the proved
 truncated Perron formula below and the axiom audit, this meets all four
 [Layer 2 acceptance criteria](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations).
-Global zero-counting asymptotics, zero-density estimates and the PNT error
-terms needed for short intervals remain later work. Legendre's conjecture
-is not proved.
+**Scope cross-check:** the four-item acceptance checklist is satisfied, but
+this is not a claim that every item in the wider Layer 2 scope and suggested
+PR slices is complete. The suggested slice on global N(T) bounds remains
+open: the proved Jensen estimate is local. A standalone zeta argument-principle
+counting interface also still needs integration. These are tracked as Layer 2
+follow-up items, rather than silently moved to another layer.
+Zero-density estimates and the needed short-interval PNT error terms remain
+later-layer work. Legendre's conjecture is not proved.
 
 **Truncated Perron formula with error (2026-10-31):**
 [`PerronError.lean`](Legendre/PerronError.lean) proves, for x>0, σ>1 and T>0,
@@ -256,8 +261,8 @@ each fixed height `T` there is `δ(T) > 0` such that `ζ(s) ≠ 0` whenever
 `Re(s) > 1 - δ(T)`, `|Im(s)| ≤ T`, and `s ≠ 1`. The width is non-effective.
 
 **Now proved:** an effective logarithmic zero-free region (c=1/2000000, threshold 3)
-and a fixed-x truncated Perron formula with error. Layer 2 acceptance is complete.
-Global `N(T)` asymptotics and the needed PNT error terms remain later work.
+and a fixed-x truncated Perron formula with error. The four-item Layer 2 acceptance checklist is complete.
+The broader Layer 2 global `N(T)` bound slice and argument-principle interface remain open; the needed PNT error terms remain later-layer work.
 
 See [provenance and upstream mapping](docs/zeta-provenance.md) for fixed
 commits and authors. Adapted and checked with Lean 4.35.0 / mathlib v4.35.0,
@@ -408,7 +413,7 @@ This table is the roadmap, not a claim that the work is done.
 |---:|---|---|---|
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
-| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **Layer 2 acceptance complete**: zeta foundations, multiplicity-weighted count definitions, explicit c=1/2000000 zero-free region (height≥3), truncated Perron with error and axiom audit; global counting asymptotics remain later work |
+| 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **four acceptance items met; broader scope open**: explicit c=1/2000000 zero-free region (height≥3), truncated Perron with error and audit; global N(T) bounds and a standalone argument-principle interface still need completion |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | Perron inversion with half-weight endpoints is proved in `PerronInversion.lean`; a fixed-x O(1/T) truncation bound is proved; the needed PNT error term remains open |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
