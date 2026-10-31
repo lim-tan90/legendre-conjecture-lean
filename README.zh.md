@@ -50,7 +50,7 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 2 验收完成 — 进度（2026-10-31）</strong></summary>
+<summary><strong>Layer 2 四项验收完成，扩展范围仍有待办（2026-10-31）</strong></summary>
 
 **Layer 2 四项验收已完成（2026-10-31）**：
 已验证源码提交：[`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4)。
@@ -61,7 +61,10 @@
 Borel-Carathéodory 与 Cauchy 估计给出对数导数界，再与实轴极点界及 `3–4–1` 正性组合排除零点。
 结合按重数计数的 N(T)、N(σ,T) 定义、带误差的截断 Perron 公式和公理审计，
 已满足 [路线图中的 Layer 2 四项验收条件](docs/formalization-roadmap.md#layer-2--riemann-zeta-foundations)。
-全局零点计数渐近、零密度估计及短区间 PNT 所需误差项仍属后续工作，尚未证明勒让德猜想。
+**范围复核**：四项验收通过，不代表 Layer 2 的宽泛范围和所有建议切片都已完成。
+建议切片中的全局 N(T) 界仍开放，目前的 Jensen 估计只涉及局部圆盘；
+独立的 ζ 辐角原理计数接口也仍待集成。这些保留为 Layer 2 待办，不移到其他层来缩小完成口径。
+零密度估计和短区间 PNT 误差项仍属后续层级，尚未证明勒让德猜想。
 
 **带误差的截断 Perron 公式（2026-10-31）**：
 [`PerronError.lean`](Legendre/PerronError.lean) 证明，对 x>0、σ>1、T>0，
@@ -204,7 +207,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 **新增推论** `Legendre.Zeta.exists_zero_free_strip`：每个固定高度 `T` 都存在
 `δ(T) > 0`，使 `Re(s) > 1 - δ(T)`、`|Im(s)| ≤ T`、`s ≠ 1` 时 `ζ(s) ≠ 0`。
 这个早期定性结果的宽度无显式估计。后续 `ZetaZeroFree.lean` 已证明 c=1/2000000、
-高度阈值 3 的定量对数型无零区域；第 2 层验收已完成。全局 `N(T)` 渐近与所需 PNT 误差项仍属后续工作。
+高度阈值 3 的定量对数型无零区域；第 2 层四项验收已完成。更宽范围内的全局 `N(T)` 界与独立辐角原理接口仍待完成；PNT 误差项属后续层级。
 固定版本、上游作者及逐项对应见 [出处说明](docs/zeta-provenance.md)。
 适配并验证于 Lean 4.35.0 / mathlib v4.35.0；没有引入新的信任公理。
 
@@ -346,7 +349,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 |---:|---|---|---|
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
-| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **第 2 层验收完成**：ζ 基础、按重数计数的定义、显式 c=1/2000000 无零区域（高度≥3）、带误差截断 Perron 公式及公理审计；全局计数渐近仍待后续工作 |
+| 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **四项验收完成，扩展范围未全部完成**：显式 c=1/2000000 无零区域（高度≥3）、带误差截断 Perron 公式及公理审计；全局 N(T) 界和独立辐角原理接口仍待完成 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | 已证明端点半权的 Perron 反演（`PerronInversion.lean`）；已证明固定 x 的 O(1/T) 截断误差；所需误差项的 PNT 仍开放 |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |

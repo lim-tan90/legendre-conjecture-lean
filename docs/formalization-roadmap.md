@@ -115,8 +115,9 @@ See [provenance](zeta-provenance.md) for exact upstream mappings.
 
 The first two suggested slices below are now integrated from mathlib;
 the boundary nonvanishing part of slice 3 is integrated, with a qualitative
-compact-height neighborhood. Effective zero-free regions, multiplicity-weighted
-global zero-counting asymptotics remain later work. The effective logarithmic region and fixed-x Perron truncation are now proved below; all Layer 2 acceptance criteria are met.
+compact-height neighborhood. The effective logarithmic region and fixed-x
+Perron truncation are now proved below, meeting the four acceptance criteria.
+The wider Layer 2 suggested slice on global zero-counting bounds remains open.
 
 **Counting foundations (2026-10-29).** `Legendre/ZetaCounting.lean` now defines
 `NontrivialZero` in the open critical strip, `zeroCount` (`N(T)`) and
@@ -127,7 +128,7 @@ critical-strip zeros are proved before the natural-valued sums are used.
 Finiteness, height monotonicity, antitonicity in σ, positivity/existence
 and the nonpositive-height / outside-strip boundary cases are proved.
 The definitions part of the first acceptance criterion is met; quantitative
-global zero counting remains later work; the logarithmic zero-free region and fixed-x Perron truncation are proved below.
+global zero counting remains a Layer 2 follow-up; the logarithmic zero-free region and fixed-x Perron truncation are proved below.
 
 **Logarithmic derivative milestone (2026-10-29).**
 `Legendre/ZetaLogDerivative.lean` reuses the proved, absolutely convergent
@@ -338,11 +339,27 @@ logarithms. Thus the final audited theorem is:
 
 `|Im(s)|≥3 ∧ Re(s)>1−1/(2000000 log|Im(s)|) ⇒ ζ(s)≠0`.
 
-**Layer 2 acceptance is complete.** Definitions of nontrivial zeros and
-multiplicity-weighted counts, the effective region with explicit constants,
-the fixed-x truncated Perron formula and the axiom audit meet all four
-criteria. Global N(T) asymptotics, zero-density theorems and the strong
-PNT/short-interval error terms are still later-layer work.
+**The four Layer 2 acceptance criteria are met; the wider scope is not
+fully complete.** Definitions of nontrivial zeros and multiplicity-weighted
+counts, the effective region with explicit constants, the fixed-x truncated
+Perron formula and the axiom audit meet the four-item checklist above.
+The suggested PR slices additionally include global N(T) bounds, and the
+Scope paragraph includes the argument principle. These require their own
+completion checks and are not implied by the four acceptance items.
+
+| Wider Layer 2 scope / suggested slice | Evidence or remaining gap |
+|---|---|
+| Euler product and convergence | `Zeta.lean`: `euler_product`, `euler_product_limit`, `series_norm_summable` |
+| Analytic continuation and functional equation | `Zeta.lean`: `analytic_off_pole`, `completed_functional_equation` |
+| Boundary nonvanishing and effective zero-free region | `Zeta.lean`: `nonvanishing`; `ZetaZeroFree.lean`: explicit c=1/2000000, height 3 |
+| Bounds for ζ'/ζ | `ZetaHalfPlane.lean`, `ZetaLogDerivativeLocal.lean`, `ZetaPoleBounds.lean` |
+| Perron formula | `PerronInversion.lean`, `PerronError.lean`: half-weight ψ and explicit fixed-x O(1/T) error |
+| Argument principle counting interface | **pending integration**; Cauchy/Jensen inputs and local principal-part decomposition are proved, but this is not yet a standalone ζ contour-count theorem |
+| Global N(T) quantitative bound (suggested slice 4) | **open**; current multiplicity counts have finiteness and monotonicity, and the quantitative Jensen bound is only local |
+
+A blanket statement that every Layer 2 task is done is therefore premature.
+Zero-density theorems and the strong PNT/short-interval error terms remain
+later-layer work. The wider Layer 2 items above retain their original scope.
 
 **Suggested PR slicing.**
 

@@ -486,6 +486,9 @@ Purely rational comparisons show K≤10, C≤43236 and
 **c=1/2000000, height threshold 3**. No floating-point certificate or
 unproved analytic estimate is used. These constants are deliberately coarse.
 
-This completes the four documented Layer 2 acceptance criteria. It does
-not supply global zero-counting asymptotics, a zero-density theorem, a
-short-interval PNT error term or a proof of Legendre's conjecture.
+This meets the four documented Layer 2 acceptance criteria, while the
+wider Layer 2 scope still has open items: the global N(T) bound suggested
+slice and a standalone argument-principle counting interface. The current
+Jensen estimate is local and does not prove a global counting bound.
+No zero-density theorem, short-interval PNT error term or proof of
+Legendre's conjecture is claimed.
