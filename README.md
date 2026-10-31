@@ -62,6 +62,8 @@
 <summary><strong>Layer 2 complete — progress (2026-10-31)</strong></summary>
 
 **Layer 2 acceptance completed (2026-10-31):**
+Verified source commit: [`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4).
+Local validation: full `lake build` (3994 jobs) and all 310 axiom audit entries passed.
 [`ZetaZeroFree.lean`](Legendre/ZetaZeroFree.lean) proves the effective region
 **`|Im(s)|≥3` and `Re(s)>1−1/(2000000 log|Im(s)|) ⇒ ζ(s)≠0`**.
 The coefficient `c=1/2000000` and height threshold 3 are explicit.

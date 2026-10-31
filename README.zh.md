@@ -53,6 +53,8 @@
 <summary><strong>Layer 2 验收完成 — 进度（2026-10-31）</strong></summary>
 
 **Layer 2 四项验收已完成（2026-10-31）**：
+已验证源码提交：[`f83e5cb32a60`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f83e5cb32a60112cfc4b41afd971dbadec1795e4)。
+本地完整 `lake build`（3994 项构建任务）及全部 310 项公理审计通过。
 [`ZetaZeroFree.lean`](Legendre/ZetaZeroFree.lean) 已证明有效无零区域：
 **`|Im(s)|≥3` 且 `Re(s)>1−1/(2000000·log|Im(s)|)` 时 `ζ(s)≠0`**。
 宽度系数 `c=1/2000000` 和高度阈值 3 均显式给出。局部零点按重数去除后，
