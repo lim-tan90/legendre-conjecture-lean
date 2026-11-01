@@ -63,6 +63,16 @@ The left side is bounded using `|s|≥a`, its length 2T and `|x^s|=x^a`.
 Each horizontal side uses `|s|≥T`, length σ−a, and
 `x^Re(s)≤max(x^a,x^σ)`. Normalization by 2πi gives the displayed factors.
 
+## Quantitative good-height refinement
+
+`PerronGoodHeight.lean` now proves `exists_truncated_explicit_formula_good_height`,
+selecting T with a proved c/log H separation from every nontrivial zero ordinate
+for H≥7. At such heights, the paired horizontal lines satisfy an explicit
+C(log H)² logarithmic-derivative bound for Re(s)≥7/8, and their Perron pieces
+have corresponding integral bounds with proved integrability. This does not
+control the remaining left portion of the full zero-sum contour or replace M
+in the displayed theorem. See [constants, proof and scope](zeta-good-heights.md).
+
 ## Quantitative limits
 
 This is a finite zero-sum formula with a proved, explicitly displayed
@@ -79,7 +89,7 @@ proof, rather than deriving that rate from the coarse contour remainder above.
 Neither result alone proves the polynomial short-interval exponent theorems
 or Legendre's conjecture.
 
-## Validation
+## Initial validation
 
 On 2026-11-01 the full `lake build` passed 4,030 jobs, followed by
 `python3 scripts/audit.py --skip-build` passing all 1,918 expected targets.

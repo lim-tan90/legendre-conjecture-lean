@@ -61,7 +61,7 @@
 <details>
 <summary><strong>Layer 3 — classical PNT error terms (2026-11-01)</strong></summary>
 
-Local validation: full `lake build` (**4,030 jobs**) and all **1,918** axiom audit targets passed.
+Local validation: full `lake build` (**4,036 jobs**) and all **1,970** axiom audit targets passed.
 
 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean) implements
 **ψ(x)=x+O(x exp(−c√log x))**, **θ(x)=x+O(x exp(−c√log x))**, and
@@ -75,7 +75,12 @@ are also available. The truncated **zero-sum** explicit formula is now proved in
 `PerronExplicitBounds.lean`, including all zeros through absolute height T
 with analytic multiplicity and an explicit contour-dependent remainder.
 The choices of contour and its boundary bound are existential; a universal
-log-squared good-height error is not claimed. See [the exact statement](docs/perron-explicit-formula.md).
+log-squared good-height error is not claimed. Quantitative heights with separation
+`c/log H` and the bound `|ζ′/ζ|≤C(log H)²` on both horizontal lines for
+`Re(s)≥7/8` are now proved, with explicit positive c and C. The corresponding
+horizontal Perron pieces are bounded; the left part of the contour still needs
+control. See [good-height bounds](docs/zeta-good-heights.md) and
+[the exact zero-sum formula](docs/perron-explicit-formula.md).
 
 This is the classical de la Vallée Poussin error scale. It is sublinear,
 but larger than every fixed x^a for a<1 at sufficiently large x.
@@ -392,6 +397,9 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | common classical ψ/θ/π−Li₂ error and eventual inequalities | **proved**; constants existential | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.classicalError_isLittleO` / `exists_smoothed_truncated_formula` | sublinearity and exact finite-height smoothed contour decomposition | **proved**; zero-sum formula has a separate contour-dependent remainder bound | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.Zeta.exists_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ+E, with all critical-strip zeros through absolute height T | **proved**; contour-dependent remainder bound | [PerronExplicitBounds.lean](Legendre/PerronExplicitBounds.lean) |
+| `Legendre.Zeta.unitZeroCount_le_log` / `zeroCount_increment_le_unitZeroCount` | multiplicity-weighted unit-height zero count of order log H | **proved**; H≥4, includes both sides of the critical line | [ZetaUnitCounting.lean](Legendre/ZetaUnitCounting.lean) |
+| `Legendre.Zeta.exists_good_height_log_separation` / `exists_good_height_logDeriv_bound` | separation c/log H and ‖ζ′/ζ‖≤C(log H)² on both selected horizontal lines, Re(s)≥7/8 | **proved**; explicit positive c,C; H≥7 | [ZetaGoodHeightBounds.lean](Legendre/ZetaGoodHeightBounds.lean) |
+| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | normalized horizontal Perron estimates for 7/8≤α≤σ | **proved**; integrability included, full contour bound still open | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -497,7 +505,7 @@ A realistic order for this repository is:
    Baker–Harman and Baker–Harman–Pintz, proves the interval form equivalent to
    the gap form, and connects each paper-exact statement to its coarse `Prop`.
    The analytic proofs are still open.
-3. **Layer 3**: classical PNT error terms and a truncated zero-sum explicit formula are implemented; sharper uniform-in-height remainder estimates remain follow-up work.
+3. **Layer 3**: classical PNT error terms and a truncated zero-sum explicit formula are implemented; quantitative good heights and log-squared horizontal estimates for Re(s)≥7/8 are proved; sharper estimates for the full contour remain follow-up work.
    This is the first genuinely large project and should be split into many PRs.
 4. **Layer 4–5 (proof level)**: Ingham's theorem first, then Huxley, then the
    BHP sieve refinement.  Do not claim BHP before Ingham is complete.
@@ -552,6 +560,8 @@ Legendre/
   Reduction.lean     square-gap criterion, θ < 1/2 reduction
   Conditional.lean   literature exponents as Props, conditional theorems, P_k
   Bertrand.lean      Bertrand's postulate re-exported and compared
+  ZetaGoodHeight*.lean Quantitative zero avoidance and horizontal log-squared bounds
+  PerronGoodHeight.lean Horizontal Perron estimates at selected heights
   PrimeNumberTheorem.lean Layer 3: classical ψ/θ/π error terms and partial summation
   PNT/               selected Apache-2.0 PNT+ proof dependencies
   ExplicitBounds.lean Layer 1: interval API, (x,2x], Chebyshev θ/ψ/π bounds

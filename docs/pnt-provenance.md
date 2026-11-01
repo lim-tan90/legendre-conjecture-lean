@@ -117,7 +117,7 @@ or prove Legendre's conjecture.
 
 ## Validation and upstream communication
 
-Validation on 2026-11-01: full `lake build` passed **4,030 jobs**;
+Initial zero-sum validation on 2026-11-01: full `lake build` passed **4,030 jobs**;
 `python3 scripts/audit.py --skip-build` then passed all **1,918** expected
 axiom targets (347 existing + 1,492 selected PNT/bridge declarations + 79 declarations
 from the four zero-sum modules, including generated/private lemmas).
@@ -131,3 +131,11 @@ The repository owner is handling upstream communication separately. This
 implementation task has not published an upstream issue or PR. Source commits,
 modules, licenses and the local proof/port distinction above can be used in
 that notification. No access token is stored in this repository.
+
+The quantitative good-height extension consists of original local deductions,
+with no further PNT+ modules or dependencies ported. See
+[the precise horizontal estimates and remaining limits](zeta-good-heights.md).
+
+Current validation including that extension: full build passed 4,036 jobs and
+the audit passed 1,970 targets (the previous 1,918 plus all 52 declarations
+from the six good-height modules).

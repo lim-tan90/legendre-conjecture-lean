@@ -358,6 +358,17 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.17 | specialized rectangle residue formula and exact finite zero sum | `Legendre.Zeta.perronRectangle_integral_eq`, `truncatedPerron_explicit`, `halfWeightedPsi_explicit` | **proved**; all critical-strip zeros at the selected height counted with analytic multiplicity |
 | 3.18 | contour integrability, finite boundary bound and quantitative remainder | `Legendre.Zeta.perron_rectangleBorderIntegrable`, `exists_perron_boundary_bound`, `norm_truncatedExplicitError_le_boundary_bound` | **proved**; bound depends on the selected a, T and M |
 | 3.19 | unconditional finite-height explicit formula | `Legendre.Zeta.exists_truncated_explicit_formula` | **proved**; T in (H,H+1), no universal log-squared height bound claimed |
+| 3.20 | finite unit-height cells, signed disk cover and multiplicity-weighted logarithmic count | `Legendre.Zeta.unitZeros_finite`, `unitCell_mem_counting_disk`, `rightHalfZero_mem_unit_cover`, `unitZeroCount_le_countingDegrees`, `unitZeroCount_le_log`, `unitZeros_card_le_count`, `zeroCount_increment_le_unitZeroCount` | **proved**; count bound for H≥4, includes zeros left of 1/2 |
+| 3.21 | quantitative avoidance of any finite set of real ordinates | `Legendre.Zeta.exists_height_avoiding_finset` | **proved**; gap 1/(4(n+1)) in an open unit interval |
+| 3.22 | logarithmic count of nearby ordinates, including both signs | `Legendre.Zeta.nearbyZeroOrdinates_card_le_counts`, `nearbyZeroOrdinates_card_le_log`, `nontrivialZero_exists_positive_ordinate`, `mem_nearbyZeroOrdinates` | **proved**; three unit cells, H≥5 for the logarithmic bound |
+| 3.23 | explicit good-height gap and inverse-log lower bound | `Legendre.Zeta.goodHeightGap_bounds`, `exists_good_height_quantitative`, `goodHeightSeparationConstant_pos`, `goodHeightGap_ge_inv_log`, `exists_good_height_log_separation` | **proved**; c/log H separation for H≥7, explicit c>0 |
+| 3.24 | regularized Cauchy estimate and finite principal parts at separated points | `Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide`, `zeta_ne_zero_of_local_separation`, `norm_localZetaPrincipalParts_le`, `norm_logDeriv_le_local_separated` | **proved**; radius 9/8 from 2+it, principal-parts bound degree/δ |
+| 3.25 | explicit coefficient and uniform local estimates at good heights | `Legendre.Zeta.goodHeightLogDerivativeConstant_pos`, `zero_distance_of_height_separation`, `localZeta_log_le_at_good_height` | **proved**; constant independent of H |
+| 3.26 | paired horizontal log-squared bound and nonvanishing | `Legendre.Zeta.norm_logDeriv_le_at_good_height`, `zeta_ne_zero_at_good_height`, `exists_good_height_logDeriv_bound` | **proved**; both ±T, H≥7, Re(s)≥7/8 |
+| 3.27 | horizontal Perron estimate from segment data and genuine integrability | `Legendre.Zeta.norm_perron_horizontal_le_of_segment_bound`, `perron_horizontal_intervalIntegrable` | **proved**; no whole-boundary hypothesis needed |
+| 3.28 | common selected heights with horizontal Perron bounds uniform in x and endpoints | `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | **proved**; 7/8≤α≤σ; full left contour still uncontrolled |
+| 3.29 | full finite zero-sum formula on quantitatively separated heights | `Legendre.Zeta.exists_truncated_explicit_formula_good_height` | **proved**; original contour-dependent M retained |
+| 3.goodheight.def | cells, forbidden ordinates, gap and explicit positive constants | `Legendre.Zeta.unitZeros`, `unitZeroCount`, `nearbyHeightZeros`, `nearbyZeroOrdinates`, `goodHeightGap`, `goodHeightSeparationConstant`, `goodHeightLogDerivativeConstant` | definitions; [precise constants and scope](zeta-good-heights.md) |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -375,9 +386,10 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
 
-Layer 3 validation (2026-11-01): full build passed 4,030 jobs and the audit
-passed all 1,918 expected targets, including the finite zero-sum formula and its
-contour-dependent remainder.
+Layer 3 validation (2026-11-01): full build passed 4,036 jobs and the audit
+passed all 1,970 expected targets, including the finite zero-sum formula, its
+contour-dependent remainder, and all 52 declarations from the six quantitative
+good-height modules (including generated helpers).
 
 ## What the audit proves — and what it does not
 

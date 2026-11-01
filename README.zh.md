@@ -52,7 +52,7 @@
 <details>
 <summary><strong>Layer 3：经典 PNT 误差项（2026-11-01）</strong></summary>
 
-本地验证：整库 `lake build`（**4,030 项**）及 **1,918 项**公理审计全部通过。
+本地验证：整库 `lake build`（**4,036 项**）及 **1,970 项**公理审计全部通过。
 
 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean) 实现
 **ψ(x)=x+O(x exp(−c√log x))**、**θ(x)=x+O(x exp(−c√log x))** 以及
@@ -62,7 +62,10 @@
 `pnt_eventual_bound` 给出最终不等式接口。
 精确的平滑有限高度轮廓分解及其尾项已接入；**截断零点和式**现也已在
 `PerronExplicitBounds.lean` 中证明，包含绝对高度 T 内全部临界带零点及解析重数。
-余项保留合法轮廓及其边界界限的依赖，没有声称统一的对数平方 good-height 误差。
+余项保留合法轮廓及其边界界限的依赖。现已证明定量避零高度（距离至少 `c/log H`），
+以及两条水平线在 `Re(s)≥7/8` 部分的 `‖ζ′/ζ‖≤C(log H)²`，c、C 均为显式正常数；
+相应 Perron 水平积分界也已证明。更左侧轮廓尚待控制，完整余项仍无统一的对数平方界。
+详见[定量高度与水平积分](docs/zeta-good-heights.md)。
 详见[精确陈述与限制](docs/perron-explicit-formula.md)。
 
 这是经典 de la Vallée Poussin 误差尺度。它是 o(x)，但最终大于每个固定 a<1 的 x^a，
@@ -326,6 +329,9 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | ψ/θ/π−Li₂ 的共同经典误差与最终不等式 | **已证明**；常数为存在性结果 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.classicalError_isLittleO` / `exists_smoothed_truncated_formula` | 次线性误差与精确平滑有限高度轮廓分解 | **已证明**；零点和式另有依赖轮廓的余项界 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.Zeta.exists_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ+E，计入绝对高度 T 内全部临界带零点 | **已证明**；余项界保留轮廓依赖 | [PerronExplicitBounds.lean](Legendre/PerronExplicitBounds.lean) |
+| `Legendre.Zeta.unitZeroCount_le_log` / `zeroCount_increment_le_unitZeroCount` | 单位高度零点重数之和为 O(log H) | **已证明**；H≥4，包含临界线两侧 | [ZetaUnitCounting.lean](Legendre/ZetaUnitCounting.lean) |
+| `Legendre.Zeta.exists_good_height_log_separation` / `exists_good_height_logDeriv_bound` | 定量避零距离 c/log H；两条水平线在 Re(s)≥7/8 上的对数平方界 | **已证明**；显式正常数，H≥7 | [ZetaGoodHeightBounds.lean](Legendre/ZetaGoodHeightBounds.lean) |
+| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | 7/8≤α≤σ 的归一化 Perron 水平积分界 | **已证明**；含可积性，完整轮廓尚待控制 | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 

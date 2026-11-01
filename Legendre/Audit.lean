@@ -58,6 +58,12 @@ public import Legendre.PerronResidues
 public import Legendre.PerronRectangle
 public import Legendre.PerronExplicit
 public import Legendre.PerronExplicitBounds
+public import Legendre.ZetaUnitCounting
+public import Legendre.FiniteHeightAvoidance
+public import Legendre.ZetaGoodHeight
+public import Legendre.ZetaLogDerivativeSeparated
+public import Legendre.ZetaGoodHeightBounds
+public import Legendre.PerronGoodHeight
 public import Lean.Elab.Print
 
 /- Import implementation declarations solely for exhaustive dependency auditing. -/
@@ -80,7 +86,12 @@ import all Legendre.PerronResidues
 import all Legendre.PerronRectangle
 import all Legendre.PerronExplicit
 import all Legendre.PerronExplicitBounds
-
+import all Legendre.ZetaUnitCounting
+import all Legendre.FiniteHeightAvoidance
+import all Legendre.ZetaGoodHeight
+import all Legendre.ZetaLogDerivativeSeparated
+import all Legendre.ZetaGoodHeightBounds
+import all Legendre.PerronGoodHeight
 
 /-!
 # Axiom audit
@@ -2066,3 +2077,57 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_5"
 #audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_6"
 #audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_7"
+
+/- Quantitative good heights: all theorem declarations, including generated helpers. -/
+#print axioms Legendre.Zeta.exists_good_height_logDeriv_bound
+#print axioms Legendre.Zeta.exists_good_height_log_separation
+#print axioms Legendre.Zeta.exists_good_height_perron_horizontal_bound
+#print axioms Legendre.Zeta.exists_good_height_quantitative
+#print axioms Legendre.Zeta.exists_height_avoiding_finset
+#print axioms Legendre.Zeta.exists_truncated_explicit_formula_good_height
+#print axioms Legendre.Zeta.goodHeightGap._proof_1
+#print axioms Legendre.Zeta.goodHeightGap._proof_2
+#print axioms Legendre.Zeta.goodHeightGap._proof_3
+#print axioms Legendre.Zeta.goodHeightGap._proof_4
+#print axioms Legendre.Zeta.goodHeightGap._proof_5
+#print axioms Legendre.Zeta.goodHeightGap_bounds
+#print axioms Legendre.Zeta.goodHeightGap_ge_inv_log
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant._proof_1
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant._proof_2
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant._proof_3
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant._proof_4
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant._proof_5
+#print axioms Legendre.Zeta.goodHeightLogDerivativeConstant_pos
+#print axioms Legendre.Zeta.goodHeightSeparationConstant._proof_1
+#print axioms Legendre.Zeta.goodHeightSeparationConstant._proof_2
+#print axioms Legendre.Zeta.goodHeightSeparationConstant_pos
+#print axioms Legendre.Zeta.localZeta_log_le_at_good_height
+#print axioms Legendre.Zeta.mem_nearbyZeroOrdinates
+#print axioms Legendre.Zeta.nearbyHeightZeros._proof_1
+#print axioms Legendre.Zeta.nearbyHeightZeros._proof_2
+#print axioms Legendre.Zeta.nearbyZeroOrdinates_card_le_counts
+#print axioms Legendre.Zeta.nearbyZeroOrdinates_card_le_log
+#print axioms Legendre.Zeta.nontrivialZero_exists_positive_ordinate
+#print axioms Legendre.Zeta.norm_localZetaPrincipalParts_le
+#print axioms Legendre.Zeta.norm_logDeriv_le_at_good_height
+#print axioms Legendre.Zeta.norm_logDeriv_le_local_separated
+#print axioms Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide
+#print axioms Legendre.Zeta.norm_perron_horizontal_le_of_segment_bound
+#print axioms Legendre.Zeta.perron_horizontal_intervalIntegrable
+#print axioms Legendre.Zeta.rightHalfZero_mem_unit_cover
+#print axioms Legendre.Zeta.unitCell_mem_counting_disk
+#print axioms Legendre.Zeta.unitZeroCount.eq_1
+#print axioms Legendre.Zeta.unitZeroCount_le_countingDegrees
+#print axioms Legendre.Zeta.unitZeroCount_le_log
+#print axioms Legendre.Zeta.unitZeros_card_le_count
+#print axioms Legendre.Zeta.unitZeros_finite
+#print axioms Legendre.Zeta.zeroCount_increment_le_unitZeroCount
+#print axioms Legendre.Zeta.zero_distance_of_height_separation
+#print axioms Legendre.Zeta.zeta_ne_zero_at_good_height
+#print axioms Legendre.Zeta.zeta_ne_zero_of_local_separation
+#audit_private_axioms "_private.Legendre.ZetaGoodHeight.0.Legendre.Zeta.nearbyZeroOrdinates_card_le_counts._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaUnitCounting.0.Legendre.Zeta.zeroCount_increment_le_unitZeroCount._proof_1_1"

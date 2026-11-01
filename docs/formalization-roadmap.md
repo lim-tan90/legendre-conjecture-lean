@@ -404,8 +404,9 @@ Apache-2.0 PNT+ proof slice under `Legendre/PNT/`. The rate is
 `x exp(-c sqrt(log x))`, with c>0 and existential coefficient/threshold.
 See [provenance, proof outline and limits](pnt-provenance.md).
 
-**Four acceptance items verified (2026-11-01):** full `lake build` (4,030 jobs)
-and all 1,918 axiom targets passed, including the zero-sum specialization.
+**Four acceptance items verified (2026-11-01):** full `lake build` (4,036 jobs)
+and all 1,970 axiom targets passed, including the zero-sum specialization and
+the quantitative good-height extension.
 
 **Acceptance criteria and proof references.**
 
@@ -426,6 +427,7 @@ and all 1,918 axiom targets passed, including the zero-sum specialization.
 | Perron inversion and fixed-x error | `PerronInversion.lean`, `PerronError.lean` (Layer 2) |
 | Finite-height smoothed contour decomposition with tails | `exists_smoothed_truncated_formula`, `SmoothedChebyshevPull1/Pull2`, `ZetaBoxEval` |
 | Truncated multiplicity-weighted zero-sum explicit formula | `halfWeightedPsi_explicit`, `exists_truncated_explicit_formula`; contour-dependent remainder, [exact statement and limits](perron-explicit-formula.md) |
+| Quantitative good heights and horizontal estimates | `exists_good_height_log_separation`, `exists_good_height_logDeriv_bound`, `exists_good_height_perron_horizontal_bound`; explicit c/log H and C(log H)² for Re(s)≥7/8, [scope](zeta-good-heights.md) |
 | Classical PNT error terms | `pnt_classical_error`, `pnt_eventual_bound` |
 
 The classical error alone is larger than x^a for every fixed a<1 eventually.
@@ -433,7 +435,9 @@ It is useful analytic infrastructure, but does not itself prove the polynomial
 short-interval results of later layers or Legendre's conjecture. No numerical
 Dusart constants or Riemann-hypothesis estimates are claimed. The documented Layer 3 interfaces are implemented. The zero-sum remainder
 retains its dependence on the chosen contour; a uniform log-squared
-good-height error and numerical constants are stronger refinements, not claimed here.
+good-height error for the full contour remains a stronger refinement. Explicit constants
+for zero separation and horizontal Re(s)≥7/8 bounds are now proved; these do
+not bound the left part of the rectangle.
 See [the formula and its limits](perron-explicit-formula.md).
 
 ## Layer 4 — Zero-density estimates

@@ -40,4 +40,10 @@ import Legendre.PerronRectangle
 import Legendre.PerronExplicit
 import Legendre.PerronExplicitBounds
 import Legendre.PrimeNumberTheorem
+import Legendre.ZetaUnitCounting
+import Legendre.FiniteHeightAvoidance
+import Legendre.ZetaGoodHeight
+import Legendre.ZetaLogDerivativeSeparated
+import Legendre.ZetaGoodHeightBounds
+import Legendre.PerronGoodHeight
 import Legendre.Audit
