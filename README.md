@@ -59,6 +59,32 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
+<summary><strong>Layer 3 — classical PNT error terms (2026-11-01)</strong></summary>
+
+Local validation: full `lake build` (**4,026 jobs**) and all **1,839** axiom audit targets passed.
+
+[`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean) implements
+**ψ(x)=x+O(x exp(−c√log x))**, **θ(x)=x+O(x exp(−c√log x))**, and
+**π(x)=Li₂(x)+O(x exp(−c√log x))**, with one common c>0 and
+`Li₂(x)=∫₂ˣ dt/log t`. The decay constant, coefficient and threshold are
+existential; no numerical Dusart-type bound is claimed.
+The analytic ψ estimate is adapted from PNT+; the partial-summation error
+transfer is proved here. `pnt_eventual_bound` exposes eventual inequalities.
+The exact smoothed finite-height contour decomposition and its tail terms
+are also available. The separate classical truncated **zero-sum** explicit
+formula is still outside this implementation; the broader scope checklist
+keeps that item open.
+
+This is the classical de la Vallée Poussin error scale. It is sublinear,
+but larger than every fixed x^a for a<1 at sufficiently large x.
+Thus it does not by itself establish a fixed polynomial short-interval
+exponent, a zero-density theorem, or Legendre's conjecture.
+See [Layer 3 scope and acceptance](docs/formalization-roadmap.md#layer-3--prime-counting-and-pnt-with-error-term)
+and [the fixed upstream source and license](docs/pnt-provenance.md).
+
+</details>
+
+<details>
 <summary><strong>Layer 2 — full documented scope completed (2026-10-31)</strong></summary>
 
 **Layer 2 four-item acceptance completed (2026-10-31):**
@@ -359,6 +385,10 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | paper-exact `+ε` form ↔ the coarse conditional interface | **proved** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
 | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | **proved** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
 | `Legendre.*Paper_iff` (nine results) | each paper-exact statement ↔ its coarse `Prop` | **proved** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
+| `Legendre.PNT.psi_classical_error` | ψ=x+O(x exp(−c√log x)), c>0 | **proved**; analytic proof adapted from PNT+ | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.primeCount_error_of_theta` | partial summation preserves the classical error scale | **proved**; new downstream bridge | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | common classical ψ/θ/π−Li₂ error and eventual inequalities | **proved**; constants existential | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.classicalError_isLittleO` / `exists_smoothed_truncated_formula` | sublinearity and exact finite-height smoothed contour decomposition | **proved**; classical zero-sum formula still open | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -464,7 +494,7 @@ A realistic order for this repository is:
    Baker–Harman and Baker–Harman–Pintz, proves the interval form equivalent to
    the gap form, and connects each paper-exact statement to its coarse `Prop`.
    The analytic proofs are still open.
-3. **Layer 2–3 (next)**: zeta foundations and Perron/PNT with error term.
+3. **Layer 3**: classical PNT error terms are implemented; the classical truncated zero-sum explicit formula remains open.
    This is the first genuinely large project and should be split into many PRs.
 4. **Layer 4–5 (proof level)**: Ingham's theorem first, then Huxley, then the
    BHP sieve refinement.  Do not claim BHP before Ingham is complete.
@@ -519,6 +549,8 @@ Legendre/
   Reduction.lean     square-gap criterion, θ < 1/2 reduction
   Conditional.lean   literature exponents as Props, conditional theorems, P_k
   Bertrand.lean      Bertrand's postulate re-exported and compared
+  PrimeNumberTheorem.lean Layer 3: classical ψ/θ/π error terms and partial summation
+  PNT/               selected Apache-2.0 PNT+ proof dependencies
   ExplicitBounds.lean Layer 1: interval API, (x,2x], Chebyshev θ/ψ/π bounds
   Layer5.lean        Layer 5: paper-exact short-interval statements and bridges
   Nagura.lean        Layer 1: Nagura's theorem, (x, 6x/5] for x >= 25
@@ -577,12 +609,23 @@ this repository.
   upgraded in October 2026); the mathematical proof is the upstream one.
   The original MIT license is retained in
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
+* **[AlexKontorovich/PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)** —
+  Apache-2.0, commit `127b50e33f6033e2147921167a117af96d9ba4ea`.
+  Fourteen selected modules under [`Legendre/PNT/`](Legendre/PNT/) adapt the
+  complete `StrongPNT` proof dependency slice, including smoothing, Mellin
+  calculus, rectangle residues, zeta bounds and the logarithmic zero-free region.
+  Upstream proofs and contributor credits are retained; imports, module visibility,
+  blueprint metadata and six nonzero contradiction expressions were adapted.
+  The original license is in [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt).
+  The new ψ-to-θ-to-π error bridge is in
+  [`Legendre/PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean).
+  See [provenance and limits](docs/pnt-provenance.md).
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
   re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
   mathlib proof is copied into this repository.
 
-No other third-party formalization code is currently vendored.
+
 
 ## Copyright
 

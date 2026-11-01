@@ -50,6 +50,27 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
+<summary><strong>Layer 3：经典 PNT 误差项（2026-11-01）</strong></summary>
+
+本地验证：整库 `lake build`（**4,026 项**）及 **1,839 项**公理审计全部通过。
+
+[`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean) 实现
+**ψ(x)=x+O(x exp(−c√log x))**、**θ(x)=x+O(x exp(−c√log x))** 以及
+**π(x)=Li₂(x)+O(x exp(−c√log x))**，共用一个 c>0；这里
+`Li₂(x)=∫₂ˣ dt/log t`。衰减常数、误差系数及起始阈值都是存在性结果，没有数值化。
+ψ 的解析证明移植自 PNT+，部分求和的误差传递在本项目中新证；
+`pnt_eventual_bound` 给出最终不等式接口。
+精确的平滑有限高度轮廓分解及其尾项也已接入，但经典的**截断零点和式**显式公式
+尚未实现，完整范围检查表保留这一未完成项。
+
+这是经典 de la Vallée Poussin 误差尺度。它是 o(x)，但最终大于每个固定 a<1 的 x^a，
+因此不能仅凭它推出固定幂次的短区间结果、零密度估计或勒让德猜想。
+详见[Layer 3 范围与验收](docs/formalization-roadmap.md#layer-3--prime-counting-and-pnt-with-error-term)
+和[移植来源](docs/pnt-provenance.md)。
+
+</details>
+
+<details>
 <summary><strong>Layer 2 文档所列完整范围已完成（2026-10-31）</strong></summary>
 
 **Layer 2 四项验收已完成（2026-10-31）**：
@@ -298,6 +319,10 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.shortIntervalStatement_iff_exponentLimit` | 论文精确 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
 | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | 论文精确 `θ < 1/2` 陈述 ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
 | `Legendre.*Paper_iff`（九项结果） | 每项结果的精确陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
+| `Legendre.PNT.psi_classical_error` | ψ=x+O(x exp(−c√log x))，c>0 | **已证明**；解析证明移植自 PNT+ | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.primeCount_error_of_theta` | 部分求和保留经典误差尺度 | **已证明**；本项目新增桥梁 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | ψ/θ/π−Li₂ 的共同经典误差与最终不等式 | **已证明**；常数为存在性结果 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
+| `Legendre.PNT.classicalError_isLittleO` / `exists_smoothed_truncated_formula` | 次线性误差与精确平滑有限高度轮廓分解 | **已证明**；经典截断零点和式仍未完成 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -498,12 +523,19 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）；数学证明
   本身来自上游。原始 MIT 许可证保留在
   [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
+* **[AlexKontorovich/PrimeNumberTheoremAnd（PNT+）](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)** —
+  Apache-2.0，固定提交 `127b50e33f6033e2147921167a117af96d9ba4ea`。
+  [`Legendre/PNT/`](Legendre/PNT/) 中的 14 个模块移植了 `StrongPNT` 的完整证明依赖切片，
+  保留来源和贡献者信息，适配导入、模块可见性、蓝图元数据和六处非零性反证表达。
+  原许可证保存在 [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt)。
+  ψ→θ→π 的误差传递证明位于 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean)。
+  详见[来源与限制](docs/pnt-provenance.md)。
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
   `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
   mathlib 的证明。
 
-目前没有收录其他第三方形式化代码。
+
 
 ## 版权
 

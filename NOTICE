@@ -6,7 +6,7 @@ released under the Apache License 2.0.
 mathlib4 is Copyright (c) 2017-2026 The mathlib Community,
 released under the Apache License 2.0.
 
-The files under `Legendre/` in this repository were written for this project
+Except for the adaptations recorded below, the files under `Legendre/` were written for this project
 and are released under the Apache License 2.0 (see `LICENSE`).  The
 `Legendre.bertrand` theorem is a thin re-export of a theorem already proved in
 mathlib4 (`Nat.exists_prime_lt_and_le_two_mul`); the proof is mathlib's, not
@@ -21,3 +21,11 @@ MIT license; the rest of this repository remains Apache-2.0.
 
 No paper PDFs or scans are included.  Bibliographic references and links are in
 `docs/literature.md`.
+
+The files under `Legendre/PNT/` are adapted from the Apache-2.0 PNT+ project,
+by Alex Kontorovich and contributors:
+https://github.com/AlexKontorovich/PrimeNumberTheoremAnd
+Pinned commit: 127b50e33f6033e2147921167a117af96d9ba4ea.
+The original license is retained in `licenses/PNTplus-Apache-2.0.txt`.
+Source paths and adaptations are recorded in every adapted file and in
+`docs/pnt-provenance.md`.

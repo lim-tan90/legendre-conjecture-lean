@@ -163,18 +163,22 @@ def check_pdfs() -> list[str]:
 def expected_axiom_targets() -> list[str]:
     audit = ROOT / "Legendre" / "Audit.lean"
     text = audit.read_text(encoding="utf-8", errors="replace")
-    return re.findall(r"#print axioms\s+([A-Za-z0-9_.]+)", text)
+    direct = re.findall(r"^#print axioms[ \t]+([^\s]+)", text, re.MULTILINE)
+    private = re.findall(r'^#audit_private_axioms[ \t]+"([^"\n]+)"', text, re.MULTILINE)
+    return direct + private
 
 
 def parse_axiom_output(output: str) -> dict[str, set[str]]:
     # `info: file:line: 'Legendre.foo' depends on axioms: [propext, ...]`
     pattern = re.compile(
-        r"'([^']+)'\s+depends on axioms:\s*\[(.*?)\]", re.DOTALL
+        r"'([^\n]+)'\s+depends on axioms:\s*\[(.*?)\]", re.DOTALL
     )
     found: dict[str, set[str]] = {}
     for name, body in pattern.findall(output):
         axioms = {piece.strip() for piece in body.split(",") if piece.strip()}
         found[name] = axioms
+    for name in re.findall(r"'([^\n]+)' does not depend on any axioms", output):
+        found[name] = set()
     return found
 
 

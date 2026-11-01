@@ -338,6 +338,22 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 2.60 | Layer 2 forward Abel / weighted pole foundation: perronWeight one | `Legendre.Zeta.perronWeight_one` | **proved**; not Perron inversion |
 | 2.61 | Layer 2 forward Abel / weighted pole foundation: perronWeight continuousAt one | `Legendre.Zeta.perronWeight_continuousAt_one` | **proved**; not Perron inversion |
 | 2.62 | Layer 2 forward Abel / weighted pole foundation: tendsto sub mul perronIntegrand at one | `Legendre.Zeta.tendsto_sub_mul_perronIntegrand_at_one` | **proved**; not Perron inversion |
+| 3.def | real prime counting, offset logarithmic integral, classical error and derivative | `Legendre.PNT.primeCount`, `logarithmicIntegral`, `classicalError`, `classicalErrorDeriv` | definitions; offset Li from 2 |
+| 3.1 | PNT+ smoothing and Mellin-calculus slice | `Legendre/PNT/{Auxiliary,Sobolev,Fourier,SmoothExistence,MellinCalculus}.lean` | **proved upstream, adapted**; Apache-2.0, pinned source in `docs/pnt-provenance.md` |
+| 3.2 | PNT+ rectangular Cauchy/residue calculations | `Legendre/PNT/{Rectangle,ResidueCalcOnRectangles}.lean` | **proved upstream, adapted**; generic simple-pole theorem, not a zeta zero-sum specialization |
+| 3.3 | PNT+ analytic zeta inputs | `Legendre/PNT/{EulerMaclaurin,ZetaBounds,ZetaConj}.lean`, two small `PNT/Mathlib/` modules | **proved upstream, adapted**; no new dependency pins |
+| 3.4 | PNT+ general-strength PNT and classical ψ estimate | `GenStrengthPNT`, `MediumPNT`, `StrongPNT` | **proved upstream, adapted**; selected dependency chain only |
+| 3.5 | derivative of the classical error scale | `Legendre.PNT.classicalError_hasDerivAt`, `exp_le_two_mul_classicalErrorDeriv` | **proved** for x>1 under the stated comparison |
+| 3.6 | absorption of the elementary prime-power contribution | `Legendre.PNT.sqrt_le_classicalError`, `sqrt_isBigO_classicalError` | **proved**; eventual logarithmic threshold |
+| 3.7 | eventual positivity and growth of the error scale | `Legendre.PNT.eventually_classicalError_bounds`, `classicalError_eventually_ge_one` | **proved** |
+| 3.8 | offset logarithmic-integral identity | `Legendre.PNT.logarithmicIntegral_eq` | **proved** by integration by parts, x≥2 |
+| 3.9 | exact Abel identity and integrability for the π error | `Legendre.PNT.primeCount_sub_logarithmicIntegral`, `theta_error_intervalIntegrable` | **proved**; integrability precedes integral subtraction/splitting |
+| 3.10 | θ error ⇒ π−Li₂ error, preserving c | `Legendre.PNT.primeCount_error_of_theta` | **proved**; original downstream partial-summation transfer |
+| 3.11 | ψ=x+O(x exp(−c√log x)) | `Legendre.PNT.psi_classical_error` | **proved**; PNT+ interface, c>0 existential |
+| 3.12 | common classical error for ψ, θ and π−Li₂ | `Legendre.PNT.pnt_classical_error`, `pnt_eventual_bound` | **proved**; existential coefficient/threshold, no numerical Dusart claim |
+| 3.13 | classical error is o(x) | `Legendre.PNT.classicalError_isLittleO` | **proved** for c>0 |
+| 3.14 | exact smoothed finite-height contour decomposition | `Legendre.PNT.exists_smoothed_truncated_formula` | **proved**; five contour/tail terms retained, strip existence proved |
+| 3.open | classical truncated zero-sum explicit formula | — | **open**; full Layer 3 scope and public push remain pending |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -354,6 +370,9 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 23 | Chen 1975: `P₂` for all sufficiently large `n` | — | **not encoded in Lean** (deep sieve theorem) |
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
+
+Layer 3 validation (2026-11-01): full build passed 4,026 jobs and the audit
+passed all 1,839 expected targets. The truncated zero-sum item remains open.
 
 ## What the audit proves — and what it does not
 

@@ -35,4 +35,5 @@ import Legendre.ZetaReflection
 import Legendre.ZetaCountingDisks
 import Legendre.ZetaCountingCover
 import Legendre.ZetaGlobalCounting
+import Legendre.PrimeNumberTheorem
 import Legendre.Audit

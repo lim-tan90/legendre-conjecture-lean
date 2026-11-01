@@ -398,16 +398,41 @@ precise scope stated above; neither asserts an unproved asymptotic formula.
 explicit formula, and a PNT with an error term strong enough to feed
 short-interval arguments.
 
-**Current state.** mathlib has `π`, `ψ`, `θ` and some relations, but not the
-needed Perron/PNT error term.
+**Current state (2026-11-01).** The classical PNT error terms for ψ, θ and π
+are implemented in `Legendre/PrimeNumberTheorem.lean`, using the pinned,
+Apache-2.0 PNT+ proof slice under `Legendre/PNT/`. The rate is
+`x exp(-c sqrt(log x))`, with c>0 and existential coefficient/threshold.
+See [provenance, proof outline and limits](pnt-provenance.md).
 
-**Acceptance criteria.**
+**Four acceptance items verified (2026-11-01):** full `lake build` (4,026 jobs)
+and all 1,839 axiom targets passed. The broader scope remains incomplete.
 
-* a theorem `ψ(x) = x + O(...)` with an explicit error term;
-* a theorem `π(x) = li(x) + O(...)`;
-* a documented comparison with the classical de la Vallée Poussin error
-  `x exp(-c sqrt(log x))`;
-* no hidden axioms in the analytic estimates.
+**Acceptance criteria and proof references.**
+
+* `ψ(x)=x+O(x exp(-c sqrt(log x)))`: `Legendre.PNT.psi_classical_error`.
+* `π(x)=Li₂(x)+O(x exp(-c sqrt(log x)))`: `Legendre.PNT.pnt_classical_error`;
+  `Li₂(x)=∫₂ˣ dt/log t`. `pnt_eventual_bound` exposes eventual inequalities.
+* The comparison with the classical de la Vallée Poussin error is documented
+  in `docs/pnt-provenance.md`; `classicalError_isLittleO` proves sublinearity.
+* All selected analytic proof dependencies and new bridge theorems are
+  included in `Legendre/Audit.lean`, permitting only the three standard axioms.
+
+**Broader scope checklist (separate from acceptance).**
+
+| Scope item | Implementation / status |
+|---|---|
+| π, ψ, θ conventions | `primeCount`, mathlib `Chebyshev.psi/theta` |
+| Partial summation | `primeCount_sub_logarithmicIntegral`, `primeCount_error_of_theta` |
+| Perron inversion and fixed-x error | `PerronInversion.lean`, `PerronError.lean` (Layer 2) |
+| Finite-height smoothed contour decomposition with tails | `exists_smoothed_truncated_formula`, `SmoothedChebyshevPull1/Pull2`, `ZetaBoxEval` |
+| Classical truncated multiplicity-weighted zero-sum explicit formula | **Open**; a generic residue theorem is not yet this specialization |
+| Classical PNT error terms | `pnt_classical_error`, `pnt_eventual_bound` |
+
+The classical error alone is larger than x^a for every fixed a<1 eventually.
+It is useful analytic infrastructure, but does not itself prove the polynomial
+short-interval results of later layers or Legendre's conjecture. No numerical
+Dusart constants or Riemann-hypothesis estimates are claimed. Full documented
+Layer 3 scope is not yet complete; public push is deferred.
 
 ## Layer 4 — Zero-density estimates
 
