@@ -35,5 +35,9 @@ import Legendre.ZetaReflection
 import Legendre.ZetaCountingDisks
 import Legendre.ZetaCountingCover
 import Legendre.ZetaGlobalCounting
+import Legendre.PerronResidues
+import Legendre.PerronRectangle
+import Legendre.PerronExplicit
+import Legendre.PerronExplicitBounds
 import Legendre.PrimeNumberTheorem
 import Legendre.Audit

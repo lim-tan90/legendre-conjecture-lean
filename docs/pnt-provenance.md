@@ -97,11 +97,12 @@ pieces, and `ZetaBoxEval` bounds the difference between the Mellin main term
 and x. The original fixed-x Perron inversion and truncation-error results
 in `Legendre/Perron*.lean` remain available.
 
-**The classical truncated zero-sum explicit formula is not implemented.**
-A generic simple-pole rectangle residue theorem in the port is not, by itself,
-a specialization to a multiplicity-weighted sum of zeta zeros.
-Thus completing the four PNT acceptance items does not mean every sentence
-of the broader Layer 3 scope is complete. The roadmap keeps this distinction.
+The finite multiplicity-weighted zero-sum specialization is now proved in
+`PerronResidues.lean`, `PerronRectangle.lean`, `PerronExplicit.lean`, and
+`PerronExplicitBounds.lean`. These are new local proofs using the already
+ported generic rectangle theorem. See [the exact formula and error bound](perron-explicit-formula.md).
+The remainder retains contour-dependent a and M; it does not assert a
+universal log-squared good-height bound or a numerical error threshold.
 
 ## Comparison with the classical error
 
@@ -116,23 +117,17 @@ or prove Legendre's conjecture.
 
 ## Validation and upstream communication
 
-Validation on 2026-11-01: full `lake build` passed **4,026 jobs**;
-`python3 scripts/audit.py --skip-build` then passed all **1,839** expected
-axiom targets (347 existing + 1,492 selected PNT/bridge theorem declarations).
+Validation on 2026-11-01: full `lake build` passed **4,030 jobs**;
+`python3 scripts/audit.py --skip-build` then passed all **1,918** expected
+axiom targets (347 existing + 1,492 selected PNT/bridge declarations + 79 declarations
+from the four zero-sum modules, including generated/private lemmas).
 The skip-build flag reuses the immediately preceding successful full build.
 Source-token and no-PDF checks also passed.
 All selected theorem declarations, including private and generated lemmas, are listed in
 `Legendre/Audit.lean`. The audit parser supports apostrophes and Unicode in
 names so upstream primed/Greek names cannot fall outside the checks.
 
-An upstream reuse issue was requested. The issue body is prepared, but creation
-returned HTTP 403 `Resource not accessible by integration` with the current
-managed GitHub App authentication. **No upstream issue or PR has been created.**
-The provided PAT was not used as the effective outbound authentication;
-a standard Basic-authentication attempt also received the App identity.
-A proposed downstream notification issue mentioning the upstream author was
-rejected by automatic approval review because it changes the publication
-destination and publicly discloses local project status. It was not created.
-That alternative requires explicit user approval.
-No access token is stored in this repository. Public push is deferred while
-the broader Layer 3 scope and upstream notification remain incomplete.
+The repository owner is handling upstream communication separately. This
+implementation task has not published an upstream issue or PR. Source commits,
+modules, licenses and the local proof/port distinction above can be used in
+that notification. No access token is stored in this repository.

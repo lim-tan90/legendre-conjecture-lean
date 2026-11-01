@@ -54,6 +54,10 @@ public import Legendre.ZetaCountingCover
 
 public import Legendre.ZetaGlobalCounting
 public import Legendre.PrimeNumberTheorem
+public import Legendre.PerronResidues
+public import Legendre.PerronRectangle
+public import Legendre.PerronExplicit
+public import Legendre.PerronExplicitBounds
 public import Lean.Elab.Print
 
 /- Import implementation declarations solely for exhaustive dependency auditing. -/
@@ -72,6 +76,10 @@ import all Legendre.PNT.StrongPNT
 import all Legendre.PNT.ZetaBounds
 import all Legendre.PNT.ZetaConj
 import all Legendre.PrimeNumberTheorem
+import all Legendre.PerronResidues
+import all Legendre.PerronRectangle
+import all Legendre.PerronExplicit
+import all Legendre.PerronExplicitBounds
 
 
 /-!
@@ -1977,3 +1985,84 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms vonMangoldtLSeriesSummable
 #print axioms x_ε_to_inf
 #print axioms xpos_of_uIcc
+
+/- Layer 3: multiplicity-weighted finite zero sums and contour error bounds. -/
+#print axioms HIntegral'.eq_1
+#print axioms Legendre.Zeta.NontrivialZero.eq_1
+#print axioms Legendre.Zeta.VIntegral'_eq_truncatedPerron
+#print axioms Legendre.Zeta.exists_good_zero_height
+#print axioms Legendre.Zeta.exists_perron_boundary_bound
+#print axioms Legendre.Zeta.exists_symmetricZeroCutoff
+#print axioms Legendre.Zeta.exists_truncated_explicit_formula
+#print axioms Legendre.Zeta.halfWeightedPsi._proof_1
+#print axioms Legendre.Zeta.halfWeightedPsi_explicit
+#print axioms Legendre.Zeta.isCompact_rectangleBorder
+#print axioms Legendre.Zeta.mem_perronRectangle
+#print axioms Legendre.Zeta.ne_zero_of_mem_perronRectangle
+#print axioms Legendre.Zeta.norm_perron_horizontal_le
+#print axioms Legendre.Zeta.norm_perron_left_le
+#print axioms Legendre.Zeta.norm_perron_normalization
+#print axioms Legendre.Zeta.norm_truncatedExplicitError_le
+#print axioms Legendre.Zeta.norm_truncatedExplicitError_le_boundary_bound
+#print axioms Legendre.Zeta.one_mem_perronRectangle
+#print axioms Legendre.Zeta.one_not_mem_perronRectangleBorder
+#print axioms Legendre.Zeta.perronContourRemainder.eq_1
+#print axioms Legendre.Zeta.perronIntegrand_analyticAt
+#print axioms Legendre.Zeta.perronIntegrand_meromorphicAt
+#print axioms Legendre.Zeta.perronIntegrand_order_at_zero
+#print axioms Legendre.Zeta.perronIntegrand_order_one
+#print axioms Legendre.Zeta.perronIntegrand_pole_iff
+#print axioms Legendre.Zeta.perronIntegrand_simple_poles
+#print axioms Legendre.Zeta.perronRectangle.eq_1
+#print axioms Legendre.Zeta.perronRectangleBorder_nonvanishing
+#print axioms Legendre.Zeta.perronRectangle_integral_eq
+#print axioms Legendre.Zeta.perronRectangle_poles
+#print axioms Legendre.Zeta.perronRectangle_zeros
+#print axioms Legendre.Zeta.perronWeight_analyticAt
+#print axioms Legendre.Zeta.perronWeight_ne_zero
+#print axioms Legendre.Zeta.perron_horizontal_mem_boundary
+#print axioms Legendre.Zeta.perron_left_mem_boundary
+#print axioms Legendre.Zeta.perron_rectangleBorderIntegrable
+#print axioms Legendre.Zeta.residue_perronIntegrand_at_zero
+#print axioms Legendre.Zeta.residue_perronIntegrand_one
+#print axioms Legendre.Zeta.sumResiduesIn_eq_sum
+#print axioms Legendre.Zeta.symmetricZeros.eq_1
+#print axioms Legendre.Zeta.symmetricZeros_finite
+#print axioms Legendre.Zeta.tendsto_mul_logDeriv_of_analytic
+#print axioms Legendre.Zeta.truncatedExplicitError.eq_1
+#print axioms Legendre.Zeta.truncatedPerron_explicit
+#print axioms Legendre.Zeta.truncatedZeroSum.eq_1
+#print axioms Legendre.Zeta.zeroMultiplicity_pos_of_zero
+#print axioms Legendre.Zeta.zeta_meromorphicOrder_eq_multiplicity
+#print axioms VIntegral'.eq_1
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronExplicit.0.Legendre.Zeta.VIntegral'_eq_truncatedPerron._simp_1_8"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.norm_perron_left_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.perron_horizontal_mem_boundary._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.perron_left_mem_boundary._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronExplicitBounds.0.Legendre.Zeta.perron_left_mem_boundary._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.mem_perronRectangle._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.mem_perronRectangle._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.mem_perronRectangle._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.one_not_mem_perronRectangleBorder._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.perronRectangleBorder_nonvanishing._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.perronRectangleBorder_nonvanishing._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronRectangle.0.Legendre.Zeta.perronRectangleBorder_nonvanishing._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronResidues.0.Legendre.Zeta.tendsto_mul_logDeriv_of_analytic._simp_1_7"

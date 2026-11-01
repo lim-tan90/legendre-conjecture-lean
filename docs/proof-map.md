@@ -353,7 +353,11 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.12 | common classical error for ψ, θ and π−Li₂ | `Legendre.PNT.pnt_classical_error`, `pnt_eventual_bound` | **proved**; existential coefficient/threshold, no numerical Dusart claim |
 | 3.13 | classical error is o(x) | `Legendre.PNT.classicalError_isLittleO` | **proved** for c>0 |
 | 3.14 | exact smoothed finite-height contour decomposition | `Legendre.PNT.exists_smoothed_truncated_formula` | **proved**; five contour/tail terms retained, strip existence proved |
-| 3.open | classical truncated zero-sum explicit formula | — | **open**; full Layer 3 scope and public push remain pending |
+| 3.15 | arbitrary-multiplicity logarithmic residue and weighted kernel poles | `Legendre.Zeta.tendsto_mul_logDeriv_of_analytic`, `residue_perronIntegrand_at_zero/one`, `perronIntegrand_order_at_zero/one` | **proved**; no simple-zero assumption |
+| 3.16 | finite symmetric zero set, positive cutoff and admissible heights | `Legendre.Zeta.symmetricZeros_finite`, `exists_symmetricZeroCutoff`, `exists_good_zero_height`, `perronRectangleBorder_nonvanishing` | **proved**; both signs of height, cutoff strictly left of every zero |
+| 3.17 | specialized rectangle residue formula and exact finite zero sum | `Legendre.Zeta.perronRectangle_integral_eq`, `truncatedPerron_explicit`, `halfWeightedPsi_explicit` | **proved**; all critical-strip zeros at the selected height counted with analytic multiplicity |
+| 3.18 | contour integrability, finite boundary bound and quantitative remainder | `Legendre.Zeta.perron_rectangleBorderIntegrable`, `exists_perron_boundary_bound`, `norm_truncatedExplicitError_le_boundary_bound` | **proved**; bound depends on the selected a, T and M |
+| 3.19 | unconditional finite-height explicit formula | `Legendre.Zeta.exists_truncated_explicit_formula` | **proved**; T in (H,H+1), no universal log-squared height bound claimed |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -371,8 +375,9 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
 
-Layer 3 validation (2026-11-01): full build passed 4,026 jobs and the audit
-passed all 1,839 expected targets. The truncated zero-sum item remains open.
+Layer 3 validation (2026-11-01): full build passed 4,030 jobs and the audit
+passed all 1,918 expected targets, including the finite zero-sum formula and its
+contour-dependent remainder.
 
 ## What the audit proves — and what it does not
 

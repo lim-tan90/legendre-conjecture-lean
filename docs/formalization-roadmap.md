@@ -404,8 +404,8 @@ Apache-2.0 PNT+ proof slice under `Legendre/PNT/`. The rate is
 `x exp(-c sqrt(log x))`, with c>0 and existential coefficient/threshold.
 See [provenance, proof outline and limits](pnt-provenance.md).
 
-**Four acceptance items verified (2026-11-01):** full `lake build` (4,026 jobs)
-and all 1,839 axiom targets passed. The broader scope remains incomplete.
+**Four acceptance items verified (2026-11-01):** full `lake build` (4,030 jobs)
+and all 1,918 axiom targets passed, including the zero-sum specialization.
 
 **Acceptance criteria and proof references.**
 
@@ -425,14 +425,16 @@ and all 1,839 axiom targets passed. The broader scope remains incomplete.
 | Partial summation | `primeCount_sub_logarithmicIntegral`, `primeCount_error_of_theta` |
 | Perron inversion and fixed-x error | `PerronInversion.lean`, `PerronError.lean` (Layer 2) |
 | Finite-height smoothed contour decomposition with tails | `exists_smoothed_truncated_formula`, `SmoothedChebyshevPull1/Pull2`, `ZetaBoxEval` |
-| Classical truncated multiplicity-weighted zero-sum explicit formula | **Open**; a generic residue theorem is not yet this specialization |
+| Truncated multiplicity-weighted zero-sum explicit formula | `halfWeightedPsi_explicit`, `exists_truncated_explicit_formula`; contour-dependent remainder, [exact statement and limits](perron-explicit-formula.md) |
 | Classical PNT error terms | `pnt_classical_error`, `pnt_eventual_bound` |
 
 The classical error alone is larger than x^a for every fixed a<1 eventually.
 It is useful analytic infrastructure, but does not itself prove the polynomial
 short-interval results of later layers or Legendre's conjecture. No numerical
-Dusart constants or Riemann-hypothesis estimates are claimed. Full documented
-Layer 3 scope is not yet complete; public push is deferred.
+Dusart constants or Riemann-hypothesis estimates are claimed. The documented Layer 3 interfaces are implemented. The zero-sum remainder
+retains its dependence on the chosen contour; a uniform log-squared
+good-height error and numerical constants are stronger refinements, not claimed here.
+See [the formula and its limits](perron-explicit-formula.md).
 
 ## Layer 4 — Zero-density estimates
 
