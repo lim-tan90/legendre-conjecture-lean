@@ -59,11 +59,11 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 3 — documented scope complete (2026-11-07)</strong></summary>
+<summary><strong>Layer 3 — complete, including the uniform full contour (2026-11-07)</strong></summary>
 
-Local validation: full `lake build` (**4,039 jobs**) and all **2,552** axiom audit targets passed.
-Additional verification covers all **2,552 project theorem declarations**, five
-standalone consumer checks, and all 70 project Lean files with **zero actual
+Local validation: full `lake build` (**4,054 jobs**) and all **2,756** axiom audit targets passed.
+Additional verification covers all **2,756 project theorem declarations**, nine
+standalone consumer checks, and all 85 project Lean files with **zero actual
 `sorry`/`admit`/`sorryAx` placeholders**. The consumer check is a dedicated CI step.
 Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
 
@@ -82,16 +82,17 @@ existential; no numerical Dusart-type bound is claimed.
 The analytic ψ estimate is adapted from PNT+; the partial-summation error
 transfer is proved here. `pnt_eventual_bound` exposes eventual inequalities.
 The exact smoothed finite-height contour decomposition and its tail terms
-are also available. The truncated **zero-sum** explicit formula is now proved in
-`PerronExplicitBounds.lean`, including all zeros through absolute height T
-with analytic multiplicity and an explicit contour-dependent remainder.
-The choices of contour and its boundary bound are existential; a universal
-log-squared good-height error is not claimed. Quantitative heights with separation
-`c/log H` and the bound `|ζ′/ζ|≤C(log H)²` on both horizontal lines for
-`Re(s)≥7/8` are now proved, with explicit positive c and C. The corresponding
-horizontal Perron pieces are bounded; the left part of the contour still needs
-control. See [good-height bounds](docs/zeta-good-heights.md) and
-[the exact zero-sum formula](docs/perron-explicit-formula.md).
+are also available. The strengthened **zero-sum explicit formula** in
+[`PerronFullExplicit.lean`](Legendre/PerronFullExplicit.lean) now uses a fixed
+negative left edge, `Re(s)=−1/8`, and includes all critical-strip zeros through
+absolute height T with analytic multiplicity, the evaluated term `−log(2π)`,
+and a **uniform bound on the complete retained contour**. One absolute error
+coefficient is chosen before H; the height T∈(H,H+1) is chosen before σ and x.
+Both horizontal lines have `|ζ′/ζ|≤C(log H)²` for every `Re(s)≥−1/8`;
+the complete left integral is bounded by `C x^(−1/8) log²(H+6)`.
+The existing explicit Perron truncation majorant is retained.
+See [the exact uniform formula, quantifiers and proof](docs/perron-uniform-explicit-formula.md)
+and [acceptance evidence](docs/layer3-completion.md).
 
 This is the classical de la Vallée Poussin error scale. It is sublinear,
 and `rpow_isLittleO_classicalError` now proves that it dominates every fixed
@@ -412,7 +413,8 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Zeta.exists_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ+E, with all critical-strip zeros through absolute height T | **proved**; contour-dependent remainder bound | [PerronExplicitBounds.lean](Legendre/PerronExplicitBounds.lean) |
 | `Legendre.Zeta.unitZeroCount_le_log` / `zeroCount_increment_le_unitZeroCount` | multiplicity-weighted unit-height zero count of order log H | **proved**; H≥4, includes both sides of the critical line | [ZetaUnitCounting.lean](Legendre/ZetaUnitCounting.lean) |
 | `Legendre.Zeta.exists_good_height_log_separation` / `exists_good_height_logDeriv_bound` | separation c/log H and ‖ζ′/ζ‖≤C(log H)² on both selected horizontal lines, Re(s)≥7/8 | **proved**; explicit positive c,C; H≥7 | [ZetaGoodHeightBounds.lean](Legendre/ZetaGoodHeightBounds.lean) |
-| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | normalized horizontal Perron estimates for 7/8≤α≤σ | **proved**; integrability included, full contour bound still open | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
+| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | normalized horizontal Perron estimates for 7/8≤α≤σ | **proved**; integrability included; strengthened to Re(s)≥−1/8 below | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
+| `Legendre.Zeta.exists_full_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ−log(2π)+E, fixed Re(s)=−1/8 | **proved**; one absolute contour coefficient before H,T,σ,x; [exact bound](docs/perron-uniform-explicit-formula.md) | [PerronFullExplicit.lean](Legendre/PerronFullExplicit.lean) |
 | `Legendre.PNT.pnt_hasPrimeIn_classical_interval` / `pnt_prime_gap_classical` | primes in classical-rate sublinear intervals and the natural-number gap interface | **proved**; coefficient one, c and threshold existential | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.rpow_isLittleO_classicalError` / `classicalError_not_isBigO_rpow` | every fixed x^a, a<1, is asymptotically smaller than the error scale | **proved**; no fixed polynomial exponent inferred | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.layer3_pnt_package` | one c>0 for ψ/θ/π error, sublinearity and coefficient-one prime intervals | **proved**; final Layer 3 import interface | [Layer3.lean](Legendre/Layer3.lean) |
@@ -482,7 +484,7 @@ This table is the roadmap, not a claim that the work is done.
 | 0 | Natural-number primes, prime gaps, square intervals, basic real powers | statements and the `θ < 1/2` reduction | **done here**: **[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
-| 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with contour-dependent remainder, and sublinear classical-rate prime intervals; [quantitative limits](docs/perron-explicit-formula.md) |
+| 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
@@ -521,12 +523,11 @@ A realistic order for this repository is:
    Baker–Harman and Baker–Harman–Pintz, proves the interval form equivalent to
    the gap form, and connects each paper-exact statement to its coarse `Prop`.
    The analytic proofs are still open.
-3. ✅ **Layer 3 — documented scope complete.** Classical PNT error terms, the
-   finite multiplicity-weighted explicit formula with its contour-dependent
-   remainder, and classical-rate sublinear prime intervals are proved.
-   Quantitative good heights and log-squared horizontal estimates for Re(s)≥7/8
-   are also proved. Uniform bounds for the full left contour remain a stronger
-   explicit-formula refinement; [completion evidence](docs/layer3-completion.md).
+3. ✅ **Layer 3 — complete, including the uniform full contour.** Classical PNT
+   errors, partial summation, Perron inversion, the multiplicity-weighted
+   zero-sum formula with `−log(2π)` and a uniform complete-contour bound,
+   and classical-rate sublinear prime intervals are proved.
+   [Completion evidence and limits](docs/layer3-completion.md).
 4. **Layer 4–5 (proof level)**: Ingham's theorem first, then Huxley, then the
    BHP sieve refinement.  Do not claim BHP before Ingham is complete.
 5. **Layer 6**: a verified interval-certificate checker can proceed in parallel
@@ -582,6 +583,7 @@ Legendre/
   Bertrand.lean      Bertrand's postulate re-exported and compared
   ZetaGoodHeight*.lean Quantitative zero avoidance and horizontal log-squared bounds
   PerronGoodHeight.lean Horizontal Perron estimates at selected heights
+  PerronFullExplicit.lean Fixed negative contour, origin residue and uniform explicit formula
   Layer3.lean         Complete Layer 3 import interface and common-constant theorem
   PrimeIntervals.lean Classical-rate prime intervals, gaps and scale comparisons
   PrimeNumberTheorem.lean Layer 3: classical ψ/θ/π error terms and partial summation

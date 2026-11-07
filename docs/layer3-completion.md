@@ -5,8 +5,9 @@ Layer 3 meets the acceptance criteria in
 Its scope is the classical PNT error, partial summation, Perron inversion and
 a finite multiplicity-weighted explicit formula with a proved remainder.
 The original four acceptance criteria have not been broadened or weakened.
-The 2026-11-07 completion adds a downstream prime-interval theorem and formal
-asymptotic comparisons, exposed by `import Legendre.Layer3`.
+The 2026-11-07 completion includes downstream prime intervals, formal
+asymptotic comparisons and the full-contour uniform refinement, all exposed
+by `import Legendre.Layer3`.
 
 ## Acceptance evidence
 
@@ -22,8 +23,11 @@ The broader documented scope is also implemented: `primeCount`, mathlib ψ/θ,
 inversion/error, the smoothed contour decomposition, and
 `Legendre.Zeta.exists_truncated_explicit_formula`. The latter includes every
 critical-strip zero through the selected absolute height, with analytic
-multiplicity, and retains the proved contour-dependent remainder described
-[in its exact statement](perron-explicit-formula.md).
+multiplicity. The stronger `exists_full_truncated_explicit_formula` now uses
+the fixed negative edge −1/8, evaluates the origin residue as −log(2π), and
+bounds all retained contour pieces with one absolute coefficient. Its
+[exact statement](perron-uniform-explicit-formula.md) retains the explicit
+Perron majorant and makes the quantifier order clear.
 
 ## Prime intervals and gaps
 
@@ -69,24 +73,27 @@ sufficiently large (x,x+εx] contains a prime. The prime-gap interface asserts
 existence of a larger prime; it does not introduce a separate next-prime
 function or depend on an unproved prime-gap hypothesis.
 
-## Scope beyond completion
+## Full-contour refinement completed
 
-The full-boundary uniform logarithmic remainder remains an **optional
-strengthening** of the finite explicit formula. The good-height estimate
-currently covers the horizontal parts with Re(s)≥7/8; it does not bound the
-entire left portion of the rectangle. See
-[the quantitative good-height limits](zeta-good-heights.md).
+The previously open left-contour bound is now proved. The new theorem has
+one absolute C>0 chosen before H; T∈(H,H+1) is chosen before σ and x.
+Its retained-contour error is bounded by
 
-Layer 4 zero-density estimates, Layer 5 fixed polynomial short-interval
-exponents, numerical Dusart constants, and Legendre's conjecture remain
-outside the completed Layer 3 scope. The new sublinear intervals do not
-prove those results. Work on the remaining left contour may continue as an
-explicit-formula refinement without keeping the original Layer 3 acceptance
-status open.
+`C log²(H+6) [x^(−1/8)+(σ+1/8) max(x^(−1/8),x^σ)/T]`.
+
+Add the existing Perron truncation majorant `U(x,σ)/T`. The exact formula is
+`ψ₀(x)=x−Σ m(ρ)x^ρ/ρ−log(2π)+E`. Both horizontal logarithmic-derivative
+bounds extend to Re(s)≥−1/8, and the left line is controlled for every real
+height. See [the fifteen-module proof chain](perron-uniform-explicit-formula.md).
+
+Layer 4 zero density, Layer 5 fixed polynomial short-interval exponents,
+numerical Dusart constants and Legendre's conjecture remain outside Layer 3.
+The theorem crosses zero but no trivial zero, and makes no infinite
+explicit-formula or sharp simplification of U claim.
 
 ## Provenance
 
-`PrimeIntervals.lean` and `Layer3.lean` contain original downstream deductions
+`PrimeIntervals.lean`, `Layer3.lean` and the fifteen full-contour modules contain local proofs
 using the already attributed PNT+ slice and mathlib v4.35.0. No additional
 third-party code, package dependency, or lockfile change is introduced.
 Upstream issue/PR communication remains assigned separately by the repository
@@ -94,24 +101,22 @@ owner.
 
 ## Completion validation (2026-11-07)
 
-Full `lake build` passed **4,039 jobs**. The immediately following
-`python3 scripts/audit.py --skip-build` passed **all 2,552 expected targets**.
-Enumerating the full theorem declarations of `PrimeIntervals.lean` and
-`Layer3.lean` yielded 13 new targets, all included in the audit.
-A second, exhaustive enumeration covered all 2,552 project theorem declarations.
-It added 619 previously unlisted declarations and removed 55 duplicate
-short-name checks. The final parsed axiom output matches all 2,552 declarations
-exactly, including private/generated helpers and the five consumer checks.
-Only `propext`, `Classical.choice`, and `Quot.sound` occur. Source-token and
-no-PDF checks passed; the Lean/mathlib pins and dependency lockfile are
-unchanged. The completion uses the existing `review → master` workflow.
+Full `lake build` passed **4,054 jobs**. The immediately following
+`python3 scripts/audit.py --skip-build` passed **all 2,756 expected targets**.
+A complete Lean-environment enumeration covers exactly the same 2,756
+project theorem declarations, including private/generated helpers and the
+nine consumer checks. The 204 declarations added in this refinement are
+all included. The parsed axiom output matches the enumeration exactly;
+only `propext`, `Classical.choice` and `Quot.sound` occur. Source-token and
+no-PDF checks pass; dependency pins and the lockfile are unchanged.
+The completion uses the existing `review → master` workflow.
 
 Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
 
 ## Additional verification
 
 The standalone consumer module `Legendre/Tests/Layer3.lean` imports only
-`Legendre.Layer3` with a normal import and checks five downstream uses:
+`Legendre.Layer3` with a normal import and checks nine downstream uses:
 
 1. The same decay constant is available for theta error and prime intervals.
 2. A concrete one-percent relative interval has the correct strict lower and
@@ -119,15 +124,19 @@ The standalone consumer module `Legendre/Tests/Layer3.lean` imports only
 3. Natural-number prime ordering and real-valued gap bounds work together.
 4. The exponent 9999/10000 satisfies both little-o and non-big-O comparisons.
 5. The finite explicit formula is re-exported independently of the PNT package.
+6. The uniform formula uses the same C and T at x=1 and x=1/2.
+7. The origin residue evaluates to −log(2π).
+8. The fixed negative line is integrable for x=1/2.
+9. Both good-height horizontal lines include the endpoint Re(s)=−1/8.
 
 It is checked both as a compiled module and by the standalone command
 `lake env lean Legendre/Tests/Layer3.lean`. The latter is an explicit CI step.
 The test declarations are included in the main axiom audit.
 
-The placeholder scan covers all 70 project Lean files, including Layer 0–3
+The placeholder scan covers all 85 project Lean files, including Layer 0–3
 and the adapted PNT+ sources. After removing comments and strings it finds
-**zero** occurrences of `sorry`, `admit`, or `sorryAx`. The five raw-text
-matches occur in explanatory comments. The general forbidden-source scan also
+**zero** occurrences of `sorry`, `admit`, or `sorryAx`. Raw-text mentions
+in explanatory comments are not executable placeholders. The general forbidden-source scan also
 passes. For imported mathlib dependencies, the audited theorem dependency
 closures contain only the three standard axioms, excluding `sorryAx` there
 as well.

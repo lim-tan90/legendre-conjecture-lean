@@ -6,6 +6,7 @@ module
 
 public import Legendre.PrimeIntervals
 public import Legendre.PerronGoodHeight
+public import Legendre.PerronFullExplicit
 
 /-!
 # Layer 3: prime counting, finite explicit formula and classical PNT
@@ -15,9 +16,9 @@ partial summation, Perron inversion with an error bound, the finite
 multiplicity-weighted zero-sum formula, the classical PNT error for ψ, θ
 and π−Li₂, and an unconditional sublinear prime-interval theorem.
 
-The explicit formula retains its proved contour-dependent remainder.
-Uniform estimates on the entire left contour are a stronger refinement;
-no polynomial short-interval exponent or numerical threshold is asserted.
+The full-strip explicit formula now has a fixed negative edge, the evaluated
+origin residue, and one absolute coefficient for the uniform contour error.
+No polynomial short-interval exponent or numerical threshold is asserted.
 -/
 
 @[expose] public section

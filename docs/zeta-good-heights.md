@@ -77,19 +77,24 @@ The selection of T precedes x, α and σ.
 separated heights for the full finite multiplicity-weighted explicit formula.
 Its remainder still retains the original contour-dependent constant M.
 
-## Remaining limits
+## Full-contour extension
 
-The horizontal estimate covers **Re(s)≥7/8**. The full zero-sum rectangle has
-an existential left cutoff a∈(0,1), chosen strictly to the left of all included
-zeros; it need not satisfy a≥7/8. Therefore the new estimate does not control
-its entire horizontal sides or its left vertical side. It does not justify
-replacing the full-boundary M by C(log H)² in the existing remainder theorem.
-A classical uniform truncation error and shifting through zero or the trivial
-zeros remain further work. See [the exact formula](perron-explicit-formula.md).
+The original six-module interfaces above retain their exact statements.
+The subsequent fifteen-module extension proves
+`exists_full_good_height_logDeriv_bound` for **all Re(s)≥−1/8** at both
+selected heights. Larger Jensen disks and a second Euler summation remainder
+provide the required control to the left of zero.
+
+`exists_uniform_perron_left_bound` proves a single absolute logarithmic bound
+on the complete fixed line Re(s)=−1/8. The resulting
+`exists_full_truncated_explicit_formula` bounds all retained sides with a
+height-independent coefficient and includes the evaluated −log(2π) residue.
+See [the exact statement, constants and proof chain](perron-uniform-explicit-formula.md).
+No trivial zero is crossed, and the explicit Perron majorant U is retained.
 
 ## Validation
 
-On 2026-11-01, full `lake build` passed 4,036 jobs, followed by
+Initial validation on 2026-11-01: full `lake build` passed 4,036 jobs, followed by
 `python3 scripts/audit.py --skip-build` passing all 1,970 expected targets.
 All 52 theorem declarations from these six modules, including generated
 helpers, are audited. The only axioms are `propext`, `Classical.choice` and

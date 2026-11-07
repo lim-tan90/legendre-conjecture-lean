@@ -50,10 +50,10 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 3：文档所列范围已完成（2026-11-07）</strong></summary>
+<summary><strong>Layer 3：已完成，含完整轮廓的统一估计（2026-11-07）</strong></summary>
 
-本地验证：整库 `lake build`（**4,039 项**）及 **2,552 项**公理审计全部通过。
-额外验证覆盖**全部 2,552 个项目定理声明**、5 个独立使用检查及 70 个 Lean 文件；
+本地验证：整库 `lake build`（**4,054 项**）及 **2,756 项**公理审计全部通过。
+额外验证覆盖**全部 2,756 个项目定理声明**、9 个独立使用检查及 85 个 Lean 文件；
 实际代码中 **`sorry`/`admit`/`sorryAx` 均为 0**。独立使用检查已加入 CI。
 已验证证明提交：[`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc)。
 
@@ -68,13 +68,14 @@
 `Li₂(x)=∫₂ˣ dt/log t`。衰减常数、误差系数及起始阈值都是存在性结果，没有数值化。
 ψ 的解析证明移植自 PNT+，部分求和的误差传递在本项目中新证；
 `pnt_eventual_bound` 给出最终不等式接口。
-精确的平滑有限高度轮廓分解及其尾项已接入；**截断零点和式**现也已在
-`PerronExplicitBounds.lean` 中证明，包含绝对高度 T 内全部临界带零点及解析重数。
-余项保留合法轮廓及其边界界限的依赖。现已证明定量避零高度（距离至少 `c/log H`），
-以及两条水平线在 `Re(s)≥7/8` 部分的 `‖ζ′/ζ‖≤C(log H)²`，c、C 均为显式正常数；
-相应 Perron 水平积分界也已证明。更左侧轮廓尚待控制，完整余项仍无统一的对数平方界。
-详见[定量高度与水平积分](docs/zeta-good-heights.md)。
-详见[精确陈述与限制](docs/perron-explicit-formula.md)。
+精确的平滑有限高度轮廓分解及其尾项已接入；加强后的**截断零点和式**
+见 [`PerronFullExplicit.lean`](Legendre/PerronFullExplicit.lean)：左边固定为
+`Re(s)=−1/8`，包含高度 T 内全部临界带零点及解析重数、精确原点项 `−log(2π)`，
+并给出**完整保留轮廓的统一余项界**。绝对常数先于 H 选取，高度 T∈(H,H+1)
+先于 σ、x 选取。两条水平线的 `‖ζ′/ζ‖≤C(log H)²` 已覆盖 `Re(s)≥−1/8`；
+整条左竖边积分的界为 `C x^(−1/8) log²(H+6)`。原有显式 Perron 截断误差界继续保留。
+详见[完整公式、量词顺序与证明](docs/perron-uniform-explicit-formula.md)
+及[验收证据](docs/layer3-completion.md)。
 
 这是经典 de la Vallée Poussin 误差尺度。它是 o(x)；现已形式化证明对每个 a<1，
 `x^a=o(classicalError c)`，且该误差尺度不是 O(x^a)，
@@ -340,7 +341,8 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.Zeta.exists_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ+E，计入绝对高度 T 内全部临界带零点 | **已证明**；余项界保留轮廓依赖 | [PerronExplicitBounds.lean](Legendre/PerronExplicitBounds.lean) |
 | `Legendre.Zeta.unitZeroCount_le_log` / `zeroCount_increment_le_unitZeroCount` | 单位高度零点重数之和为 O(log H) | **已证明**；H≥4，包含临界线两侧 | [ZetaUnitCounting.lean](Legendre/ZetaUnitCounting.lean) |
 | `Legendre.Zeta.exists_good_height_log_separation` / `exists_good_height_logDeriv_bound` | 定量避零距离 c/log H；两条水平线在 Re(s)≥7/8 上的对数平方界 | **已证明**；显式正常数，H≥7 | [ZetaGoodHeightBounds.lean](Legendre/ZetaGoodHeightBounds.lean) |
-| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | 7/8≤α≤σ 的归一化 Perron 水平积分界 | **已证明**；含可积性，完整轮廓尚待控制 | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
+| `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | 7/8≤α≤σ 的归一化 Perron 水平积分界 | **已证明**；含可积性；下方已加强到 Re(s)≥−1/8 | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
+| `Legendre.Zeta.exists_full_truncated_explicit_formula` | ψ₀=x−∑m(ρ)x^ρ/ρ−log(2π)+E，固定左边界 Re(s)=−1/8 | **已证明**；完整轮廓绝对常数先于 H、T、σ、x；[精确界](docs/perron-uniform-explicit-formula.md) | [PerronFullExplicit.lean](Legendre/PerronFullExplicit.lean) |
 | `Legendre.PNT.pnt_hasPrimeIn_classical_interval` / `pnt_prime_gap_classical` | 经典误差尺度的次线性素数区间与自然数间隙接口 | **已证明**；系数 1，c 与阈值为存在性结果 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.rpow_isLittleO_classicalError` / `classicalError_not_isBigO_rpow` | 任意固定 a<1 的 x^a 渐近小于经典误差尺度 | **已证明**；不能由此推断固定幂次指数 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.layer3_pnt_package` | 同一个 c>0 连接 ψ/θ/π 误差、次线性比较与系数 1 的素数区间 | **已证明**；Layer 3 统一入口 | [Layer3.lean](Legendre/Layer3.lean) |
@@ -406,7 +408,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
-| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、保留重数的有限零点和式与依赖轮廓的余项界，以及经典误差尺度的次线性素数区间；[定量限制](docs/perron-explicit-formula.md) |
+| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
@@ -443,9 +445,9 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
    Baker–Harman 与 Baker–Harman–Pintz 的精确 `+ε`、“充分大”和常数约定，证明
    区间形式等价于间隙形式，并把每篇论文的精确陈述连接到其粗粒度 `Prop`。
    解析证明仍然开放。
-3. ✅ **第 3 层文档所列范围已完成。** 经典 PNT 误差、带依赖轮廓余项的
-   有限零点和式，以及经典误差尺度的次线性素数区间均已证明。
-   完整左侧轮廓的统一界属于显式公式加强项；见[验收证据](docs/layer3-completion.md)。
+3. ✅ **第 3 层已完成，含完整轮廓统一估计。** 经典 PNT 误差、部分求和、
+   Perron 反演、含 `−log(2π)` 与完整轮廓统一余项界的有限零点和式，
+   以及经典误差尺度的次线性素数区间均已证明；见[验收证据](docs/layer3-completion.md)。
 4. **第 4–5 层**：先 Ingham，再 Huxley，最后 BHP 的筛法精化。Ingham 未完成
    前不要声称 BHP 已完成。
 5. **第 6 层**：可验证区间证书检查器可以并行推进，是覆盖有限范围最现实的

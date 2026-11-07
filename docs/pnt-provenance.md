@@ -101,8 +101,10 @@ The finite multiplicity-weighted zero-sum specialization is now proved in
 `PerronResidues.lean`, `PerronRectangle.lean`, `PerronExplicit.lean`, and
 `PerronExplicitBounds.lean`. These are new local proofs using the already
 ported generic rectangle theorem. See [the exact formula and error bound](perron-explicit-formula.md).
-The remainder retains contour-dependent a and M; it does not assert a
-universal log-squared good-height bound or a numerical error threshold.
+That original interface retains contour-dependent a and M. The later
+[`exists_full_truncated_explicit_formula`](perron-uniform-explicit-formula.md)
+proves a uniform full-contour bound with fixed Re(s)=−1/8 and the evaluated
+origin term −log(2π). Numerical error thresholds remain unclaimed.
 
 ## Comparison with the classical error
 
@@ -140,7 +142,7 @@ The quantitative good-height extension consists of original local deductions,
 with no further PNT+ modules or dependencies ported. See
 [the precise horizontal estimates and remaining limits](zeta-good-heights.md).
 
-Current validation including that extension: full build passed 4,036 jobs and
+Initial validation including that extension: full build passed 4,036 jobs and
 the audit passed 1,970 targets (the previous 1,918 plus all 52 declarations
 from the six good-height modules).
 
@@ -149,14 +151,21 @@ from the six good-height modules).
 `PrimeIntervals.lean` and `Layer3.lean` add original downstream proofs of
 classical-rate prime intervals, prime gaps, and formal scale comparisons.
 No additional PNT+ files or dependencies were ported. The completed scope and
-its remaining optional refinements are recorded in
+the subsequent uniform full-contour refinement are recorded in
 [the acceptance report](layer3-completion.md).
 
-Completion validation: full build passed 4,038 jobs and the audit passed all
+Initial completion validation: full build passed 4,038 jobs and the audit passed all
 1,983 targets (the prior 1,970 plus all 13 completion declarations).
 
-The additional verification pass covered all 2,552 project theorem declarations
-(including private/generated helpers), with no omitted dependency checks.
-Full build passed 4,039 jobs, five standalone consumer checks passed, and the
-audit parsed exactly 2,552 of 2,552 expected targets. All 70 project Lean
-files have zero executable `sorry`, `admit` or `sorryAx` placeholders.
+The full-contour extension adds fifteen local proof modules, from
+`ZetaEulerPrimitive.lean` through `PerronFullExplicit.lean`. These reuse the
+existing local regularization and generic rectangle-residue infrastructure;
+no further PNT+ code or dependency was ported. The previous left-contour gap
+is closed, including the independently evaluated origin residue. See the
+[module-by-module proof chain and exact bound](perron-uniform-explicit-formula.md).
+
+Latest verification: full build passed 4,054 jobs; all nine standalone
+consumer checks passed. An exhaustive Lean-environment enumeration and the
+parsed audit output match exactly on all 2,756 project theorem declarations,
+including private/generated helpers. All 85 project Lean files have zero
+executable `sorry`, `admit` or `sorryAx`. Only the three standard axioms occur.

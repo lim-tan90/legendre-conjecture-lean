@@ -366,7 +366,7 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.25 | explicit coefficient and uniform local estimates at good heights | `Legendre.Zeta.goodHeightLogDerivativeConstant_pos`, `zero_distance_of_height_separation`, `localZeta_log_le_at_good_height` | **proved**; constant independent of H |
 | 3.26 | paired horizontal log-squared bound and nonvanishing | `Legendre.Zeta.norm_logDeriv_le_at_good_height`, `zeta_ne_zero_at_good_height`, `exists_good_height_logDeriv_bound` | **proved**; both ±T, H≥7, Re(s)≥7/8 |
 | 3.27 | horizontal Perron estimate from segment data and genuine integrability | `Legendre.Zeta.norm_perron_horizontal_le_of_segment_bound`, `perron_horizontal_intervalIntegrable` | **proved**; no whole-boundary hypothesis needed |
-| 3.28 | common selected heights with horizontal Perron bounds uniform in x and endpoints | `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | **proved**; 7/8≤α≤σ; full left contour still uncontrolled |
+| 3.28 | common selected heights with horizontal Perron bounds uniform in x and endpoints | `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | **proved**; 7/8≤α≤σ; full-contour extension below reaches −1/8 |
 | 3.29 | full finite zero-sum formula on quantitatively separated heights | `Legendre.Zeta.exists_truncated_explicit_formula_good_height` | **proved**; original contour-dependent M retained |
 | 3.goodheight.def | cells, forbidden ordinates, gap and explicit positive constants | `Legendre.Zeta.unitZeros`, `unitZeroCount`, `nearbyHeightZeros`, `nearbyZeroOrdinates`, `goodHeightGap`, `goodHeightSeparationConstant`, `goodHeightLogDerivativeConstant` | definitions; [precise constants and scope](zeta-good-heights.md) |
 | 3.30 | positivity and two-point control of the classical error | `Legendre.PNT.classicalError_pos`, `classicalError_le_two_mul` | **proved**; for c≥0 and x≤y≤2x |
@@ -377,7 +377,22 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.35 | domination of every fixed sublinear power | `Legendre.PNT.eventually_rpow_le_classicalError`, `rpow_isLittleO_classicalError`, `classicalError_not_isBigO_rpow` | **proved** for a<1; no fixed polynomial error inferred |
 | 3.36 | natural-number prime-gap interface | `Legendre.PNT.pnt_prime_gap_classical` | **proved**; every sufficiently large prime has a larger prime within E_c(p) |
 | 3.37 | final common-constant Layer 3 package | `Legendre.PNT.layer3_pnt_package` | **proved**; same c for ψ/θ/π error, coefficient-one prime intervals and asymptotic comparisons; [completion scope](layer3-completion.md) |
-| 3.validation | five independently compiled consumer checks | `Legendre/Tests/Layer3.lean` | normal Layer3 import only; common constant, concrete endpoints, natural gaps, exponent near one and explicit-formula re-export; all test declarations audited |
+| 3.38 | Continuous periodic Euler primitive | `Legendre.Zeta.zetaEulerPrimitive_continuous`, `zetaEulerPrimitive_hasDerivWithinAt_right`; [ZetaEulerPrimitive.lean](../Legendre/ZetaEulerPrimitive.lean) | **proved**; including right derivatives at integers |
+| 3.39 | Second Euler Mellin remainder | `Legendre.Zeta.zetaSecondMellinRemainder_convergent`, `norm_zetaSecondMellinRemainder_le`; [ZetaSecondMellin.lean](../Legendre/ZetaSecondMellin.lean) | **proved**; absolute convergence and analyticity on Re(s)>−1 |
+| 3.40 | Second Euler continuation and polynomial bound | `Legendre.Zeta.zetaMellinRemainder_eq_second`, `riemannZeta_eq_second_euler`, `norm_riemannZeta_le_second_euler`; [ZetaSecondEuler.lean](../Legendre/ZetaSecondEuler.lean) | **proved**; integration by parts and identity theorem; bounds reach Re(s)=−1/2 |
+| 3.41 | Negative-strip nonvanishing | `Legendre.Zeta.riemannZeta_ne_zero_negative_strip`, `riemannZeta_ne_zero_perron_left`; [ZetaNegativeStrip.lean](../Legendre/ZetaNegativeStrip.lean) | **proved**; −1<Re(s)≤0, including the origin |
+| 3.42 | Wide local Jensen bound | `Legendre.Zeta.norm_riemannZeta_wide_disk_le`, `zeta_wide_divisor_sum_le`; [ZetaWideLocalBound.lean](../Legendre/ZetaWideLocalBound.lean) | **proved**; outer radius 5/2 around 2+it, abs(t)≥4 |
+| 3.43 | Wide local divisor removal | `Legendre.Zeta.wideZetaRegularized_analyticOnNhd`, `logDeriv_riemannZeta_eq_wide_regularized_add`, `wideZetaDegree_le`; [ZetaWideZeroRemoval.lean](../Legendre/ZetaWideZeroRemoval.lean) | **proved**; analytic multiplicities preserved, inner radius 9/4 |
+| 3.44 | Wide regularized analytic logarithm | `Legendre.Zeta.exists_wideZetaLog_bounded`, `norm_logDeriv_wideZetaRegularized_le`; [ZetaWideRegularizedBound.lean](../Legendre/ZetaWideRegularizedBound.lean) | **proved**; Cauchy estimate reaches radius 17/8 |
+| 3.45 | Wide separated logarithmic derivative | `Legendre.Zeta.wide_disk_zero_nontrivial`, `norm_logDeriv_le_wide_separated`; [ZetaWideSeparated.lean](../Legendre/ZetaWideSeparated.lean) | **proved**; regularized bound plus degree/separation |
+| 3.46 | Full horizontal good-height bound | `Legendre.Zeta.fullGoodHeightLogDerivativeConstant_pos`, `exists_full_good_height_logDeriv_bound`; [ZetaFullGoodHeightBounds.lean](../Legendre/ZetaFullGoodHeightBounds.lean) | **proved**; both ±T; every Re(s)≥−1/8; explicit positive coefficient |
+| 3.47 | Absolute fixed-left-line bound | `Legendre.Zeta.continuous_logDeriv_perron_left`, `exists_uniform_perron_left_bound`; [ZetaPerronLeft.lean](../Legendre/ZetaPerronLeft.lean) | **proved**; one absolute C with norm≤C log(abs(t)+5) for all t |
+| 3.48 | Meromorphic Perron kernel across the origin | `Legendre.Zeta.perronIntegrand_hasSimplePolesOn_all`, `residue_perronIntegrand_origin`; [PerronOriginResidue.lean](../Legendre/PerronOriginResidue.lean) | **proved**; at most simple poles; origin residue −ζ′(0)/ζ(0) |
+| 3.49 | Evaluated zeta derivative at zero | `Legendre.Zeta.deriv_riemannZeta_origin`, `logDeriv_riemannZeta_origin`; [ZetaOriginValue.lean](../Legendre/ZetaOriginValue.lean) | **proved**; ζ′(0)=−log(2π)/2, log derivative=log(2π) |
+| 3.50 | Fixed negative rectangle residue identity | `Legendre.Zeta.fullPerron_poles_subset`, `fullPerronRectangle_integral_eq`; [PerronFullRectangle.lean](../Legendre/PerronFullRectangle.lean) | **proved**; candidates {0,1}∪Z(T), removable candidates contribute zero |
+| 3.51 | Uniform side integrals | `Legendre.Zeta.continuous_perronIntegrand_left`, `norm_perron_left_uniform`, `norm_perron_full_horizontal_le`; [PerronUniformBounds.lean](../Legendre/PerronUniformBounds.lean) | **proved**; genuine integrability; complete left and horizontal bounds |
+| 3.52 | Full uniform finite explicit formula | `Legendre.Zeta.halfWeightedPsi_full_explicit`, `norm_fullExplicitError_le_uniform`, `exists_full_truncated_explicit_formula`; [PerronFullExplicit.lean](../Legendre/PerronFullExplicit.lean) | **proved**; ψ₀=x−zero sum−log(2π)+E; one absolute contour coefficient before H,T,σ,x |
+| 3.validation | nine independently compiled consumer checks | `Legendre/Tests/Layer3.lean` | normal Layer3 import only; includes common height at x=1 and x=1/2, origin residue, small-x integrability and negative endpoints; all test declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -395,13 +410,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
 
-Layer 3 completion validation (2026-11-07): full build passed 4,039 jobs and
-the audit passed all 2,552 expected targets. These cover **all 2,552 project theorem declarations**,
-including private/generated helpers and five standalone consumer checks.
-The project-wide enumeration identified 619 previously unlisted declarations,
-which were added to the audit; 55 duplicate short-name checks were removed.
-The parsed axiom output matches the complete enumeration exactly. All 70
-project Lean files contain no executable `sorry`, `admit` or `sorryAx`.
+Layer 3 full-contour validation (2026-11-07): full build passed 4,054 jobs and
+the audit passed all 2,756 expected targets. These cover **all 2,756 project theorem declarations**,
+including private/generated helpers and nine independently compiled consumer checks.
+The parsed axiom output matches the complete Lean-environment enumeration exactly;
+204 declarations were added in this refinement. All 85 project Lean files
+contain no executable `sorry`, `admit` or `sorryAx`. See
+[the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
 ## What the audit proves — and what it does not
 

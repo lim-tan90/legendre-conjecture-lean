@@ -5,7 +5,12 @@ The four modules `PerronResidues.lean`, `PerronRectangle.lean`,
 Layer 3 zero-sum interface. They contain new local proofs against the existing
 mathlib v4.35.0 and selected PNT+ modules; no further dependency is added.
 
-## Exact theorem
+The stronger current interface uses a **fixed negative left edge, evaluated
+origin term and uniform full-contour bound**:
+[`exists_full_truncated_explicit_formula`](perron-uniform-explicit-formula.md).
+The positive-cutoff interface below remains available unchanged.
+
+## Original positive-cutoff theorem
 
 For every H≥0 and σ>1, `Legendre.Zeta.exists_truncated_explicit_formula` proves
 there exist T∈(H,H+1), a∈(0,1), and M≥0, chosen before x, such that for every
@@ -69,19 +74,19 @@ Each horizontal side uses `|s|≥T`, length σ−a, and
 selecting T with a proved c/log H separation from every nontrivial zero ordinate
 for H≥7. At such heights, the paired horizontal lines satisfy an explicit
 C(log H)² logarithmic-derivative bound for Re(s)≥7/8, and their Perron pieces
-have corresponding integral bounds with proved integrability. This does not
-control the remaining left portion of the full zero-sum contour or replace M
-in the displayed theorem. See [constants, proof and scope](zeta-good-heights.md).
+have corresponding integral bounds with proved integrability. The original
+interface retains M, while the newer full-contour theorem extends these
+bounds to Re(s)≥−1/8 and replaces that dependence by one absolute contour
+coefficient. See [the complete uniform formula](perron-uniform-explicit-formula.md).
 
 ## Quantitative limits
 
-This is a finite zero-sum formula with a proved, explicitly displayed
-contour-dependent remainder. The choices a and M depend on T (and M also on σ).
-They are existential and not numerically certified. No assertion that
-`M=O(log²T)`, no universal good-height error of the usual
-`O(x log²(xT)/T + …)` shape, and no evaluated contribution from shifting past
-0 or the trivial zeros is made. Those stronger refinements remain possible
-follow-up work. The left edge here stays strictly to the right of 0.
+The displayed positive-cutoff theorem retains existential a and M depending
+on the contour. The newer `exists_full_truncated_explicit_formula` proves
+uniform bounds for the entire retained contour and evaluates the origin
+contribution as −log(2π). Its left edge is fixed at −1/8, so no trivial
+zeros are crossed. The existing Perron truncation majorant U is retained;
+no sharp textbook simplification of U or numerical Dusart constant is claimed.
 
 The separate `Legendre.PNT.pnt_classical_error` theorem already proves the
 classical de la Vallée Poussin rate for ψ, θ and π. It uses the PNT+ smoothing

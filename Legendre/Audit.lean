@@ -66,6 +66,21 @@ public import Legendre.ZetaGoodHeightBounds
 public import Legendre.PerronGoodHeight
 public import Legendre.PrimeIntervals
 public import Legendre.Layer3
+public import Legendre.ZetaEulerPrimitive
+public import Legendre.ZetaSecondMellin
+public import Legendre.ZetaSecondEuler
+public import Legendre.ZetaNegativeStrip
+public import Legendre.ZetaWideLocalBound
+public import Legendre.ZetaWideZeroRemoval
+public import Legendre.ZetaWideRegularizedBound
+public import Legendre.ZetaWideSeparated
+public import Legendre.ZetaFullGoodHeightBounds
+public import Legendre.ZetaPerronLeft
+public import Legendre.PerronOriginResidue
+public import Legendre.ZetaOriginValue
+public import Legendre.PerronFullRectangle
+public import Legendre.PerronUniformBounds
+public import Legendre.PerronFullExplicit
 public import Lean.Elab.Print
 
 /- Import implementation declarations solely for exhaustive dependency auditing. -/
@@ -137,6 +152,22 @@ import all Legendre.ZetaReflection
 import all Legendre.ZetaRegularizedBound
 import all Legendre.ZetaZeroFree
 import all Legendre.ZetaZeroRemoval
+
+import all Legendre.ZetaEulerPrimitive
+import all Legendre.ZetaSecondMellin
+import all Legendre.ZetaSecondEuler
+import all Legendre.ZetaNegativeStrip
+import all Legendre.ZetaWideLocalBound
+import all Legendre.ZetaWideZeroRemoval
+import all Legendre.ZetaWideRegularizedBound
+import all Legendre.ZetaWideSeparated
+import all Legendre.ZetaFullGoodHeightBounds
+import all Legendre.ZetaPerronLeft
+import all Legendre.PerronOriginResidue
+import all Legendre.ZetaOriginValue
+import all Legendre.PerronFullRectangle
+import all Legendre.PerronUniformBounds
+import all Legendre.PerronFullExplicit
 
 
 /-!
@@ -2765,3 +2796,209 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.norm_localZetaFactor_center_le._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor._simp_1_2"
+
+-- Full-strip uniform Perron refinement: all public, private and generated theorems.
+#print axioms Legendre.Zeta.Gamma_analyticAt_one
+#print axioms Legendre.Zeta.centeredEuler_integrable
+#print axioms Legendre.Zeta.centeredEuler_integral
+#print axioms Legendre.Zeta.continuous_logDeriv_perron_left
+#print axioms Legendre.Zeta.continuous_perronIntegrand_left
+#print axioms Legendre.Zeta.cos_functional_factor_ne_zero
+#print axioms Legendre.Zeta.deriv_riemannZeta_origin
+#print axioms Legendre.Zeta.eulerPrimitive_power_tendsto_zero
+#print axioms Legendre.Zeta.euler_power_hasDerivAt
+#print axioms Legendre.Zeta.exists_full_good_height_logDeriv_bound
+#print axioms Legendre.Zeta.exists_full_truncated_explicit_formula
+#print axioms Legendre.Zeta.exists_uniform_perron_left_bound
+#print axioms Legendre.Zeta.exists_wideZetaLog
+#print axioms Legendre.Zeta.exists_wideZetaLog_bounded
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_1
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_2
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_3
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_4
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_5
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant._proof_6
+#print axioms Legendre.Zeta.fullGoodHeightLogDerivativeConstant_pos
+#print axioms Legendre.Zeta.fullPerronCandidates_finite
+#print axioms Legendre.Zeta.fullPerronCandidates_subset_rectangle
+#print axioms Legendre.Zeta.fullPerronRectangle_integral_eq
+#print axioms Legendre.Zeta.fullPerron_border_nonvanishing
+#print axioms Legendre.Zeta.fullPerron_poles_inter_eq
+#print axioms Legendre.Zeta.fullPerron_poles_subset
+#print axioms Legendre.Zeta.fullPerron_zero_nontrivial
+#print axioms Legendre.Zeta.halfWeightedPsi_full_explicit
+#print axioms Legendre.Zeta.hasDerivAt_riemannZetaOne_one
+#print axioms Legendre.Zeta.integral_one_div_one_add_abs
+#print axioms Legendre.Zeta.logDeriv_riemannZeta_analyticAt_origin
+#print axioms Legendre.Zeta.logDeriv_riemannZeta_eq_wide_regularized_add
+#print axioms Legendre.Zeta.logDeriv_riemannZeta_origin
+#print axioms Legendre.Zeta.norm_fullExplicitError_le_uniform
+#print axioms Legendre.Zeta.norm_logDeriv_le_at_full_good_height
+#print axioms Legendre.Zeta.norm_logDeriv_le_wide_separated
+#print axioms Legendre.Zeta.norm_logDeriv_perron_left_high
+#print axioms Legendre.Zeta.norm_logDeriv_wideZetaRegularized_le
+#print axioms Legendre.Zeta.norm_perronIntegrand_left_le
+#print axioms Legendre.Zeta.norm_perron_full_horizontal_le
+#print axioms Legendre.Zeta.norm_perron_left_uniform
+#print axioms Legendre.Zeta.norm_riemannZeta_le_second_euler
+#print axioms Legendre.Zeta.norm_riemannZeta_wide_disk_le
+#print axioms Legendre.Zeta.norm_wideZetaFactor_center_le
+#print axioms Legendre.Zeta.norm_wideZetaPrincipalParts_le
+#print axioms Legendre.Zeta.norm_wideZetaRegularized_disk_le
+#print axioms Legendre.Zeta.norm_wideZetaRegularized_ratio_le
+#print axioms Legendre.Zeta.norm_wideZetaRegularized_sphere_le
+#print axioms Legendre.Zeta.norm_zetaCenteredFractionalPart_le
+#print axioms Legendre.Zeta.norm_zetaEulerPrimitive_le
+#print axioms Legendre.Zeta.norm_zetaSecondKernel_le
+#print axioms Legendre.Zeta.norm_zetaSecondMellinRemainder_le
+#print axioms Legendre.Zeta.one_fourth_pow_le_norm_wideZetaFactor
+#print axioms Legendre.Zeta.perronIntegrand_hasSimplePolesOn_all
+#print axioms Legendre.Zeta.perronIntegrand_meromorphicAt_all
+#print axioms Legendre.Zeta.perronIntegrand_order_origin_ge
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_1
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_2
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_3
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_4
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_5
+#print axioms Legendre.Zeta.perronLeftHighConstant._proof_6
+#print axioms Legendre.Zeta.perronLeftHighConstant.eq_1
+#print axioms Legendre.Zeta.perronLeftHighConstant_pos
+#print axioms Legendre.Zeta.perron_left_norm_geometry
+#print axioms Legendre.Zeta.perron_left_zero_separation
+#print axioms Legendre.Zeta.perron_origin_numerator_analyticAt
+#print axioms Legendre.Zeta.poleRemovedZeta_eq_second_euler
+#print axioms Legendre.Zeta.poleRemovedZeta_eq_second_euler_positive
+#print axioms Legendre.Zeta.residue_perronIntegrand_origin
+#print axioms Legendre.Zeta.riemannZeta_analyticOnNhd_wide_disk
+#print axioms Legendre.Zeta.riemannZeta_eq_second_euler
+#print axioms Legendre.Zeta.riemannZeta_ne_zero_negative_strip
+#print axioms Legendre.Zeta.riemannZeta_ne_zero_origin
+#print axioms Legendre.Zeta.riemannZeta_ne_zero_perron_left
+#print axioms Legendre.Zeta.truncatedPerron_full_explicit
+#print axioms Legendre.Zeta.wideZetaDegree.eq_1
+#print axioms Legendre.Zeta.wideZetaDegree_cast
+#print axioms Legendre.Zeta.wideZetaDegree_le
+#print axioms Legendre.Zeta.wideZetaDivisor._proof_1
+#print axioms Legendre.Zeta.wideZetaDivisor._proof_2
+#print axioms Legendre.Zeta.wideZetaDivisor._proof_3
+#print axioms Legendre.Zeta.wideZetaDivisor.eq_1
+#print axioms Legendre.Zeta.wideZetaDivisor_eq_multiplicity
+#print axioms Legendre.Zeta.wideZetaDivisor_eq_zero_of_ne_zero
+#print axioms Legendre.Zeta.wideZetaDivisor_eq_zero_of_not_mem
+#print axioms Legendre.Zeta.wideZetaDivisor_finite
+#print axioms Legendre.Zeta.wideZetaDivisor_nonneg
+#print axioms Legendre.Zeta.wideZetaDivisor_support_zero
+#print axioms Legendre.Zeta.wideZetaFactor.eq_1
+#print axioms Legendre.Zeta.wideZetaFactor_analyticAt
+#print axioms Legendre.Zeta.wideZetaFactor_eq_prod
+#print axioms Legendre.Zeta.wideZetaFactor_eq_prod_nat
+#print axioms Legendre.Zeta.wideZetaFactor_logDeriv
+#print axioms Legendre.Zeta.wideZetaFactor_ne_zero
+#print axioms Legendre.Zeta.wideZetaFactor_order
+#print axioms Legendre.Zeta.wideZetaLogBound._proof_1
+#print axioms Legendre.Zeta.wideZetaLogBound._proof_2
+#print axioms Legendre.Zeta.wideZetaLogBound._proof_3
+#print axioms Legendre.Zeta.wideZetaLogBound._proof_4
+#print axioms Legendre.Zeta.wideZetaLogBound_pos
+#print axioms Legendre.Zeta.wideZetaLog_re_le
+#print axioms Legendre.Zeta.wideZetaPrincipalPart_re_nonneg
+#print axioms Legendre.Zeta.wideZetaQuotient_meromorphicOn
+#print axioms Legendre.Zeta.wideZetaQuotient_order
+#print axioms Legendre.Zeta.wideZetaRegularized._proof_1
+#print axioms Legendre.Zeta.wideZetaRegularized.eq_1
+#print axioms Legendre.Zeta.wideZetaRegularized_analyticOnNhd
+#print axioms Legendre.Zeta.wideZetaRegularized_eq
+#print axioms Legendre.Zeta.wideZetaRegularized_eventuallyEq
+#print axioms Legendre.Zeta.wideZetaRegularized_ne_zero
+#print axioms Legendre.Zeta.wideZetaRegularized_order
+#print axioms Legendre.Zeta.wideZeta_log_le_at_good_height
+#print axioms Legendre.Zeta.wideZeta_log_le_left
+#print axioms Legendre.Zeta.wide_disk_zero_nontrivial
+#print axioms Legendre.Zeta.wide_zeta_disk_coordinates
+#print axioms Legendre.Zeta.wide_zeta_disk_ne_one
+#print axioms Legendre.Zeta.zero_not_mem_fullPerron_border
+#print axioms Legendre.Zeta.zetaCenteredFractionalPart._proof_1
+#print axioms Legendre.Zeta.zetaCenteredFractionalPart.eq_1
+#print axioms Legendre.Zeta.zetaCenteredFractionalPart_eq
+#print axioms Legendre.Zeta.zetaCenteredFractionalPart_measurable
+#print axioms Legendre.Zeta.zetaEulerPrimitive._proof_1
+#print axioms Legendre.Zeta.zetaEulerPrimitive.eq_1
+#print axioms Legendre.Zeta.zetaEulerPrimitive_continuous
+#print axioms Legendre.Zeta.zetaEulerPrimitive_hasDerivWithinAt_right
+#print axioms Legendre.Zeta.zetaEulerPrimitive_int
+#print axioms Legendre.Zeta.zetaMellinRemainder_eq_second
+#print axioms Legendre.Zeta.zetaOriginFunctionalFactor._proof_1
+#print axioms Legendre.Zeta.zetaOriginFunctionalFactor_analyticAt
+#print axioms Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt
+#print axioms Legendre.Zeta.zetaOrigin_functional_eventuallyEq
+#print axioms Legendre.Zeta.zetaSecondEulerNumerator.eq_1
+#print axioms Legendre.Zeta.zetaSecondEulerNumerator_differentiableAt
+#print axioms Legendre.Zeta.zetaSecondKernel.eq_1
+#print axioms Legendre.Zeta.zetaSecondKernel_isBigO_atTop
+#print axioms Legendre.Zeta.zetaSecondKernel_isBigO_at_zero
+#print axioms Legendre.Zeta.zetaSecondKernel_locallyIntegrable
+#print axioms Legendre.Zeta.zetaSecondKernel_measurable
+#print axioms Legendre.Zeta.zetaSecondMellinRemainder.eq_1
+#print axioms Legendre.Zeta.zetaSecondMellinRemainder_convergent
+#print axioms Legendre.Zeta.zetaSecondMellinRemainder_differentiableAt
+#print axioms Legendre.Zeta.zetaSecondMellinRemainder_eq_integral
+#print axioms Legendre.Zeta.zetaSecondMellinRemainder_integrable
+#print axioms Legendre.Zeta.zetaSecondMellin_integrand_eq_indicator
+#print axioms Legendre.Zeta.zeta_ne_zero_at_full_good_height
+#print axioms Legendre.Zeta.zeta_ne_zero_of_wide_separation
+#print axioms Legendre.Zeta.zeta_wide_divisor_sum_le
+#audit_private_axioms "_private.Legendre.PerronFullRectangle.0.Legendre.Zeta.fullPerron_border_nonvanishing._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronFullRectangle.0.Legendre.Zeta.fullPerron_border_nonvanishing._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronFullRectangle.0.Legendre.Zeta.fullPerron_border_nonvanishing._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronFullRectangle.0.Legendre.Zeta.zero_not_mem_fullPerron_border._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronOriginResidue.0.Legendre.Zeta.residue_perronIntegrand_origin._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.evaluated_origin_residue_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.full_formula_shared_height_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.full_negative_horizontal_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.small_x_left_integrability_consumer"
+#audit_private_axioms "_private.Legendre.ZetaNegativeStrip.0.Legendre.Zeta.cos_functional_factor_ne_zero._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOriginFunctionalFactor_hasDerivAt._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaOriginValue.0.Legendre.Zeta.zetaOrigin_functional_eventuallyEq._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaPerronLeft.0.Legendre.Zeta.exists_uniform_perron_left_bound._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaWideLocalBound.0.Legendre.Zeta.norm_riemannZeta_wide_disk_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideLocalBound.0.Legendre.Zeta.wide_zeta_disk_coordinates._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_8"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.exists_wideZetaLog._simp_1_9"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.norm_logDeriv_wideZetaRegularized_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.norm_logDeriv_wideZetaRegularized_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.norm_logDeriv_wideZetaRegularized_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaWideRegularizedBound.0.Legendre.Zeta.norm_logDeriv_wideZetaRegularized_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.norm_wideZetaFactor_center_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_wideZetaFactor._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_wideZetaFactor._simp_1_2"

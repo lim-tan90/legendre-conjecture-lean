@@ -60,4 +60,45 @@ theorem finite_explicit_formula_consumer {H : ℝ} (hH : 0 ≤ H) :
   obtain ⟨E,hE,_hbound⟩ := hformula x hx
   exact ⟨E,hE⟩
 
+/-- One absolute coefficient and one selected height work simultaneously at x=1 and x=1/2. -/
+theorem full_formula_shared_height_consumer : ∃ C > 0, ∀ H : ℝ, 7 ≤ H →
+    ∃ T ∈ Set.Ioo H (H+1),
+      (∃ E : ℂ, Zeta.halfWeightedPsi 1 = 1-Zeta.truncatedZeroSum 1 T-Complex.log (2*(Real.pi : ℂ))+E ∧
+        ‖E‖ ≤ Zeta.perronErrorUpper 1 2/T+C*(Real.log (H+6))^2*(1+(2+1/8)/T)) ∧
+      (∃ E : ℂ, Zeta.halfWeightedPsi (1/2) = (1/2 : ℂ)-Zeta.truncatedZeroSum (1/2) T-
+          Complex.log (2*(Real.pi : ℂ))+E ∧
+        ‖E‖ ≤ Zeta.perronErrorUpper (1/2) 2/T+C*(Real.log (H+6))^2*
+          ((1/2 : ℝ)^(-(1/8 : ℝ))+(2+1/8)*max ((1/2 : ℝ)^(-(1/8 : ℝ))) ((1/2 : ℝ)^2)/T)) := by
+  obtain ⟨C,hC,hfull⟩ := Zeta.exists_full_truncated_explicit_formula
+  refine ⟨C,hC,fun H hH => ?_⟩
+  obtain ⟨T,hT,hTformula⟩ := hfull H hH
+  refine ⟨T,hT,?_,?_⟩
+  · simpa only [Complex.ofReal_one,Real.one_rpow,max_self,mul_one] using
+      hTformula 2 (by norm_num) 1 (by norm_num)
+  · simpa only [Complex.ofReal_div,Complex.ofReal_one,Complex.ofReal_ofNat,Real.rpow_two] using
+      hTformula 2 (by norm_num) (1/2) (by norm_num)
+
+/-- Crossing zero contributes the evaluated constant independently of the Perron weight. -/
+theorem evaluated_origin_residue_consumer {x : ℝ} (hx : 0 < x) :
+    residue (Zeta.perronIntegrand x) 0 = -Complex.log (2*(Real.pi : ℂ)) := by
+  rw [Zeta.residue_perronIntegrand_origin hx,Zeta.logDeriv_riemannZeta_origin]
+
+/-- The complete fixed negative line is integrable also for x below one. -/
+theorem small_x_left_integrability_consumer (T : ℝ) :
+    IntervalIntegrable
+      (fun t : ℝ => Zeta.perronIntegrand (1/2) ((-(1/8) : ℂ)+(t : ℂ)*Complex.I))
+      MeasureTheory.volume (-T) T := by
+  exact (Zeta.continuous_perronIntegrand_left (by norm_num : (0 : ℝ) < 1/2)).intervalIntegrable (-T) T
+
+/-- Both selected horizontal lines include the fixed negative endpoint. -/
+theorem full_negative_horizontal_consumer : ∃ T ∈ Set.Ioo (7 : ℝ) 8,
+    ∀ t : ℝ, (t = T ∨ t = -T) →
+      riemannZeta ((-(1/8) : ℂ)+(t : ℂ)*Complex.I) ≠ 0 ∧
+      ‖logDeriv riemannZeta ((-(1/8) : ℂ)+(t : ℂ)*Complex.I)‖ ≤
+        Zeta.fullGoodHeightLogDerivativeConstant*(Real.log 7)^2 := by
+  obtain ⟨T,hT,hbound⟩ := Zeta.exists_full_good_height_logDeriv_bound (by norm_num : (7 : ℝ) ≤ 7)
+  refine ⟨T,by convert! hT using 1; norm_num,fun t ht => ?_⟩
+  simpa only [Complex.ofReal_neg,Complex.ofReal_div,Complex.ofReal_one,Complex.ofReal_ofNat] using!
+    hbound t ht (-(1/8)) le_rfl
+
 end Legendre.Tests
