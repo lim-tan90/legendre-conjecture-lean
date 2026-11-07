@@ -111,7 +111,7 @@ only `propext`, `Classical.choice` and `Quot.sound` occur. Source-token and
 no-PDF checks pass; dependency pins and the lockfile are unchanged.
 The completion uses the existing `review → master` workflow.
 
-Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
+Verified proof commit: [`5c4be2780255`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/5c4be2780255ef78fd03bff6976596287d007c06).
 
 ## Additional verification
 

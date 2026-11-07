@@ -73,6 +73,8 @@ Each horizontal integral is at most
 
 ## Validation and provenance (2026-11-07)
 
+Verified proof commit: [`5c4be2780255`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/5c4be2780255ef78fd03bff6976596287d007c06).
+
 The full build passed **4,054 jobs**. A complete Lean-environment enumeration
 found **2,756 project theorem declarations**, including private/generated
 helpers. Exactly these 2,756 distinct declarations are listed in the audit;

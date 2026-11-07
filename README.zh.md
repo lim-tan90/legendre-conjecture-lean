@@ -55,7 +55,7 @@
 本地验证：整库 `lake build`（**4,054 项**）及 **2,756 项**公理审计全部通过。
 额外验证覆盖**全部 2,756 个项目定理声明**、9 个独立使用检查及 85 个 Lean 文件；
 实际代码中 **`sorry`/`admit`/`sorryAx` 均为 0**。独立使用检查已加入 CI。
-已验证证明提交：[`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc)。
+已验证证明提交：[`5c4be2780255`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/5c4be2780255ef78fd03bff6976596287d007c06)。
 
 **统一入口：** `import Legendre.Layer3`。Layer 3 原定验收已完成，
 见[验收证据与范围](docs/layer3-completion.md)。`layer3_pnt_package` 给出同一个 c>0，

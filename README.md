@@ -65,7 +65,7 @@ Local validation: full `lake build` (**4,054 jobs**) and all **2,756** axiom aud
 Additional verification covers all **2,756 project theorem declarations**, nine
 standalone consumer checks, and all 85 project Lean files with **zero actual
 `sorry`/`admit`/`sorryAx` placeholders**. The consumer check is a dedicated CI step.
-Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
+Verified proof commit: [`5c4be2780255`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/5c4be2780255ef78fd03bff6976596287d007c06).
 
 **Import interface:** `import Legendre.Layer3`. The documented Layer 3 acceptance
 criteria are complete; [acceptance evidence and limits](docs/layer3-completion.md).
