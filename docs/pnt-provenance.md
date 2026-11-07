@@ -109,6 +109,10 @@ universal log-squared good-height bound or a numerical error threshold.
 The proved rate is exactly the de la Vallée Poussin scale
 `x exp(-c sqrt(log x))`, for some c>0, for both ψ and π.
 `classicalError_isLittleO` proves this is o(x).
+`rpow_isLittleO_classicalError` and `classicalError_not_isBigO_rpow` now formally
+prove the comparison with every fixed sublinear power;
+`pnt_hasPrimeIn_classical_interval` supplies the corresponding sublinear
+prime-interval theorem.
 For each fixed a<1, the logarithm of its ratio to x^a is
 `(1-a)log x-c sqrt(log x)`, which tends to +∞.
 Consequently the bound alone does not prove prime existence in intervals
@@ -139,3 +143,14 @@ with no further PNT+ modules or dependencies ported. See
 Current validation including that extension: full build passed 4,036 jobs and
 the audit passed 1,970 targets (the previous 1,918 plus all 52 declarations
 from the six good-height modules).
+
+## Layer 3 completion (2026-11-07)
+
+`PrimeIntervals.lean` and `Layer3.lean` add original downstream proofs of
+classical-rate prime intervals, prime gaps, and formal scale comparisons.
+No additional PNT+ files or dependencies were ported. The completed scope and
+its remaining optional refinements are recorded in
+[the acceptance report](layer3-completion.md).
+
+Completion validation: full build passed 4,038 jobs and the audit passed all
+1,983 targets (the prior 1,970 plus all 13 completion declarations).

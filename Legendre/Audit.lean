@@ -64,6 +64,8 @@ public import Legendre.ZetaGoodHeight
 public import Legendre.ZetaLogDerivativeSeparated
 public import Legendre.ZetaGoodHeightBounds
 public import Legendre.PerronGoodHeight
+public import Legendre.PrimeIntervals
+public import Legendre.Layer3
 public import Lean.Elab.Print
 
 /- Import implementation declarations solely for exhaustive dependency auditing. -/
@@ -92,6 +94,8 @@ import all Legendre.ZetaGoodHeight
 import all Legendre.ZetaLogDerivativeSeparated
 import all Legendre.ZetaGoodHeightBounds
 import all Legendre.PerronGoodHeight
+import all Legendre.PrimeIntervals
+import all Legendre.Layer3
 
 /-!
 # Axiom audit
@@ -2131,3 +2135,18 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_3"
 #audit_private_axioms "_private.Legendre.ZetaLogDerivativeSeparated.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le_wide._simp_1_4"
 #audit_private_axioms "_private.Legendre.ZetaUnitCounting.0.Legendre.Zeta.zeroCount_increment_le_unitZeroCount._proof_1_1"
+
+/- Layer 3 completion: every theorem declaration in PrimeIntervals and Layer3. -/
+#print axioms Legendre.PNT.classicalError_le_two_mul
+#print axioms Legendre.PNT.classicalError_not_isBigO_rpow
+#print axioms Legendre.PNT.classicalError_pos
+#print axioms Legendre.PNT.eventually_hasPrimeIn_of_theta_classical_error
+#print axioms Legendre.PNT.eventually_hasPrimeIn_relative
+#print axioms Legendre.PNT.eventually_mul_classicalError_le
+#print axioms Legendre.PNT.eventually_rpow_le_classicalError
+#print axioms Legendre.PNT.hasPrimeIn_of_classical_theta_error
+#print axioms Legendre.PNT.layer3_pnt_package
+#print axioms Legendre.PNT.pnt_classical_error_with_prime_intervals
+#print axioms Legendre.PNT.pnt_hasPrimeIn_classical_interval
+#print axioms Legendre.PNT.pnt_prime_gap_classical
+#print axioms Legendre.PNT.rpow_isLittleO_classicalError

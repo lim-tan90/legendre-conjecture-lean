@@ -398,15 +398,20 @@ precise scope stated above; neither asserts an unproved asymptotic formula.
 explicit formula, and a PNT with an error term strong enough to feed
 short-interval arguments.
 
-**Current state (2026-11-01).** The classical PNT error terms for ψ, θ and π
+**Current state (2026-11-07): documented Layer 3 scope complete.**
+The acceptance criteria below are unchanged. `import Legendre.Layer3` now
+exports the completed interfaces, including a common-constant theorem and
+classical-rate sublinear prime intervals. See
+[completion evidence and boundaries](layer3-completion.md).
+The classical PNT error terms for ψ, θ and π
 are implemented in `Legendre/PrimeNumberTheorem.lean`, using the pinned,
 Apache-2.0 PNT+ proof slice under `Legendre/PNT/`. The rate is
 `x exp(-c sqrt(log x))`, with c>0 and existential coefficient/threshold.
 See [provenance, proof outline and limits](pnt-provenance.md).
 
-**Four acceptance items verified (2026-11-01):** full `lake build` (4,036 jobs)
-and all 1,970 axiom targets passed, including the zero-sum specialization and
-the quantitative good-height extension.
+**Four acceptance items verified (2026-11-07):** full `lake build` (4,038 jobs)
+and all 1,983 axiom targets passed, including the zero-sum specialization and
+the quantitative good-height extension, prime intervals and formal scale comparisons.
 
 **Acceptance criteria and proof references.**
 
@@ -429,6 +434,9 @@ the quantitative good-height extension.
 | Truncated multiplicity-weighted zero-sum explicit formula | `halfWeightedPsi_explicit`, `exists_truncated_explicit_formula`; contour-dependent remainder, [exact statement and limits](perron-explicit-formula.md) |
 | Quantitative good heights and horizontal estimates | `exists_good_height_log_separation`, `exists_good_height_logDeriv_bound`, `exists_good_height_perron_horizontal_bound`; explicit c/log H and C(log H)² for Re(s)≥7/8, [scope](zeta-good-heights.md) |
 | Classical PNT error terms | `pnt_classical_error`, `pnt_eventual_bound` |
+| Classical-rate sublinear prime intervals and natural-number gaps | `pnt_hasPrimeIn_classical_interval`, `pnt_prime_gap_classical` |
+| Formal comparison with every fixed sublinear power | `rpow_isLittleO_classicalError`, `classicalError_not_isBigO_rpow` |
+| Common-constant completion interface | `layer3_pnt_package` in `Legendre/Layer3.lean` |
 
 The classical error alone is larger than x^a for every fixed a<1 eventually.
 It is useful analytic infrastructure, but does not itself prove the polynomial

@@ -50,9 +50,14 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 3：经典 PNT 误差项（2026-11-01）</strong></summary>
+<summary><strong>Layer 3：文档所列范围已完成（2026-11-07）</strong></summary>
 
-本地验证：整库 `lake build`（**4,036 项**）及 **1,970 项**公理审计全部通过。
+本地验证：整库 `lake build`（**4,038 项**）及 **1,983 项**公理审计全部通过。
+
+**统一入口：** `import Legendre.Layer3`。Layer 3 原定验收已完成，
+见[验收证据与范围](docs/layer3-completion.md)。`layer3_pnt_package` 给出同一个 c>0，
+同时满足 ψ/θ/π 的误差界，并保证充分大的 `(x,x+x exp(−c√log x)]` 内有素数。
+区间长度的系数为 1，c 和起始阈值为存在性结果；`pnt_prime_gap_classical` 给出自然数素数间隙接口。
 
 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean) 实现
 **ψ(x)=x+O(x exp(−c√log x))**、**θ(x)=x+O(x exp(−c√log x))** 以及
@@ -68,7 +73,8 @@
 详见[定量高度与水平积分](docs/zeta-good-heights.md)。
 详见[精确陈述与限制](docs/perron-explicit-formula.md)。
 
-这是经典 de la Vallée Poussin 误差尺度。它是 o(x)，但最终大于每个固定 a<1 的 x^a，
+这是经典 de la Vallée Poussin 误差尺度。它是 o(x)；现已形式化证明对每个 a<1，
+`x^a=o(classicalError c)`，且该误差尺度不是 O(x^a)，
 因此不能仅凭它推出固定幂次的短区间结果、零密度估计或勒让德猜想。
 详见[Layer 3 范围与验收](docs/formalization-roadmap.md#layer-3--prime-counting-and-pnt-with-error-term)
 和[移植来源](docs/pnt-provenance.md)。
@@ -332,6 +338,9 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.Zeta.unitZeroCount_le_log` / `zeroCount_increment_le_unitZeroCount` | 单位高度零点重数之和为 O(log H) | **已证明**；H≥4，包含临界线两侧 | [ZetaUnitCounting.lean](Legendre/ZetaUnitCounting.lean) |
 | `Legendre.Zeta.exists_good_height_log_separation` / `exists_good_height_logDeriv_bound` | 定量避零距离 c/log H；两条水平线在 Re(s)≥7/8 上的对数平方界 | **已证明**；显式正常数，H≥7 | [ZetaGoodHeightBounds.lean](Legendre/ZetaGoodHeightBounds.lean) |
 | `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | 7/8≤α≤σ 的归一化 Perron 水平积分界 | **已证明**；含可积性，完整轮廓尚待控制 | [PerronGoodHeight.lean](Legendre/PerronGoodHeight.lean) |
+| `Legendre.PNT.pnt_hasPrimeIn_classical_interval` / `pnt_prime_gap_classical` | 经典误差尺度的次线性素数区间与自然数间隙接口 | **已证明**；系数 1，c 与阈值为存在性结果 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
+| `Legendre.PNT.rpow_isLittleO_classicalError` / `classicalError_not_isBigO_rpow` | 任意固定 a<1 的 x^a 渐近小于经典误差尺度 | **已证明**；不能由此推断固定幂次指数 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
+| `Legendre.PNT.layer3_pnt_package` | 同一个 c>0 连接 ψ/θ/π 误差、次线性比较与系数 1 的素数区间 | **已证明**；Layer 3 统一入口 | [Layer3.lean](Legendre/Layer3.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -394,7 +403,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 0 | 自然数素数、素数间隙、平方区间、实数幂 | 陈述与 `θ < 1/2` 归约 | **本仓库已完成**：**[Basic.lean](Legendre/Basic.lean)** · **[Reduction.lean](Legendre/Reduction.lean)** |
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
-| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列接口已实现**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项，以及保留重数的有限零点和式与依赖轮廓的余项界；[定量限制](docs/perron-explicit-formula.md) |
+| 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、保留重数的有限零点和式与依赖轮廓的余项界，以及经典误差尺度的次线性素数区间；[定量限制](docs/perron-explicit-formula.md) |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
@@ -431,8 +440,9 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
    Baker–Harman 与 Baker–Harman–Pintz 的精确 `+ε`、“充分大”和常数约定，证明
    区间形式等价于间隙形式，并把每篇论文的精确陈述连接到其粗粒度 `Prop`。
    解析证明仍然开放。
-3. **先做第 2–3 层**：ζ 基础与 Perron/带误差项 PNT。这是第一个真正的大型
-   工程，应拆成许多 PR。
+3. ✅ **第 3 层文档所列范围已完成。** 经典 PNT 误差、带依赖轮廓余项的
+   有限零点和式，以及经典误差尺度的次线性素数区间均已证明。
+   完整左侧轮廓的统一界属于显式公式加强项；见[验收证据](docs/layer3-completion.md)。
 4. **第 4–5 层**：先 Ingham，再 Huxley，最后 BHP 的筛法精化。Ingham 未完成
    前不要声称 BHP 已完成。
 5. **第 6 层**：可验证区间证书检查器可以并行推进，是覆盖有限范围最现实的

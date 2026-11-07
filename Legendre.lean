@@ -46,4 +46,6 @@ import Legendre.ZetaGoodHeight
 import Legendre.ZetaLogDerivativeSeparated
 import Legendre.ZetaGoodHeightBounds
 import Legendre.PerronGoodHeight
+import Legendre.PrimeIntervals
+import Legendre.Layer3
 import Legendre.Audit

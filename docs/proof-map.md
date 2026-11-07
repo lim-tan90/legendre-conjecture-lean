@@ -369,6 +369,14 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.28 | common selected heights with horizontal Perron bounds uniform in x and endpoints | `Legendre.Zeta.exists_good_height_perron_horizontal_bound` | **proved**; 7/8≤α≤σ; full left contour still uncontrolled |
 | 3.29 | full finite zero-sum formula on quantitatively separated heights | `Legendre.Zeta.exists_truncated_explicit_formula_good_height` | **proved**; original contour-dependent M retained |
 | 3.goodheight.def | cells, forbidden ordinates, gap and explicit positive constants | `Legendre.Zeta.unitZeros`, `unitZeroCount`, `nearbyHeightZeros`, `nearbyZeroOrdinates`, `goodHeightGap`, `goodHeightSeparationConstant`, `goodHeightLogDerivativeConstant` | definitions; [precise constants and scope](zeta-good-heights.md) |
+| 3.30 | positivity and two-point control of the classical error | `Legendre.PNT.classicalError_pos`, `classicalError_le_two_mul` | **proved**; for c≥0 and x≤y≤2x |
+| 3.31 | theta endpoint errors give a prime interval | `Legendre.PNT.hasPrimeIn_of_classical_theta_error`, `eventually_hasPrimeIn_of_theta_classical_error` | **proved**; explicit coefficient 3C+1 |
+| 3.32 | absorb fixed coefficients by decreasing the decay constant | `Legendre.PNT.eventually_mul_classicalError_le` | **proved** for d<c |
+| 3.33 | unconditional classical PNT and prime intervals at a common rate | `Legendre.PNT.pnt_classical_error_with_prime_intervals` | **proved**; one c and positive interval coefficient |
+| 3.34 | coefficient-one classical-rate prime intervals and relative intervals | `Legendre.PNT.pnt_hasPrimeIn_classical_interval`, `eventually_hasPrimeIn_relative` | **proved**; ∃c>0, ∃X≥1, prime in (x,x+E_c(x)] for all x≥X |
+| 3.35 | domination of every fixed sublinear power | `Legendre.PNT.eventually_rpow_le_classicalError`, `rpow_isLittleO_classicalError`, `classicalError_not_isBigO_rpow` | **proved** for a<1; no fixed polynomial error inferred |
+| 3.36 | natural-number prime-gap interface | `Legendre.PNT.pnt_prime_gap_classical` | **proved**; every sufficiently large prime has a larger prime within E_c(p) |
+| 3.37 | final common-constant Layer 3 package | `Legendre.PNT.layer3_pnt_package` | **proved**; same c for ψ/θ/π error, coefficient-one prime intervals and asymptotic comparisons; [completion scope](layer3-completion.md) |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -386,10 +394,12 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
 
-Layer 3 validation (2026-11-01): full build passed 4,036 jobs and the audit
-passed all 1,970 expected targets, including the finite zero-sum formula, its
-contour-dependent remainder, and all 52 declarations from the six quantitative
-good-height modules (including generated helpers).
+Layer 3 completion validation (2026-11-07): full build passed 4,038 jobs and
+the audit passed all 1,983 expected targets. These include the finite zero-sum
+formula, all 52 declarations from the quantitative good-height modules, and
+all 13 declarations from `PrimeIntervals.lean` and `Layer3.lean`.
+The latter were enumerated from the full Lean environment, so generated or
+private theorem declarations could not be silently omitted.
 
 ## What the audit proves — and what it does not
 
