@@ -96,6 +96,48 @@ import all Legendre.ZetaGoodHeightBounds
 import all Legendre.PerronGoodHeight
 import all Legendre.PrimeIntervals
 import all Legendre.Layer3
+import all Legendre.Tests.Layer3
+import all Legendre.Basic
+import all Legendre.Bertrand
+import all Legendre.Conditional
+import all Legendre.ExplicitBounds
+import all Legendre.Layer5
+import all Legendre.Nagura
+import all Legendre.Nagura.FiniteCertificates
+import all Legendre.Nagura.PsiBounds
+import all Legendre.Nagura.Theorem
+import all Legendre.PerronContour
+import all Legendre.PerronError
+import all Legendre.PerronFoundation
+import all Legendre.PerronInversion
+import all Legendre.PerronKernel
+import all Legendre.PerronOscillation
+import all Legendre.PerronResidue
+import all Legendre.PerronSeries
+import all Legendre.PerronShift
+import all Legendre.PerronTail
+import all Legendre.PerronTruncated
+import all Legendre.PerronZero
+import all Legendre.Reduction
+import all Legendre.Zeta
+import all Legendre.ZetaArgumentPrinciple
+import all Legendre.ZetaCounting
+import all Legendre.ZetaCountingCover
+import all Legendre.ZetaCountingDisks
+import all Legendre.ZetaGlobalCounting
+import all Legendre.ZetaGrowth
+import all Legendre.ZetaHalfPlane
+import all Legendre.ZetaLocalBound
+import all Legendre.ZetaLogDerivative
+import all Legendre.ZetaLogDerivativeLocal
+import all Legendre.ZetaPole
+import all Legendre.ZetaPoleBounds
+import all Legendre.ZetaPositivity
+import all Legendre.ZetaReflection
+import all Legendre.ZetaRegularizedBound
+import all Legendre.ZetaZeroFree
+import all Legendre.ZetaZeroRemoval
+
 
 /-!
 # Axiom audit
@@ -114,58 +156,6 @@ fails the build if any other axiom is reported.
 
 namespace Legendre
 
-#print axioms legendreAt_one
-#print axioms sq_interval_length
-#print axioms legendre_of_gap_lt_two_sqrt
-#print axioms eventually_const_mul_rpow_lt
-#print axioms eventually_legendre_of_gap_exponent_lt_half
-#print axioms legendre_eventually_of_shortIntervalExponent_lt_half
-#print axioms legendre_eventually_of_shortIntervalExponentLimit_lt_half
-#print axioms hoheisel_above_half
-#print axioms ingham58_above_half
-#print axioms ingham577_above_half
-#print axioms huxley_above_half
-#print axioms heathBrownIwaniec_above_half
-#print axioms iwaniecPintz_above_half
-#print axioms mozzochi_above_half
-#print axioms bakerHarman_above_half
-#print axioms bakerHarmanPintz_above_half
-#print axioms bhp_exponent_not_below_half
-#print axioms prime_of_isAtMostAlmostPrime_one
-#print axioms conjecture_of_almostPrimeSquareAtMost_one
-#print axioms almostPrimeSquareAtMost_one_of_conjecture
-#print axioms almostPrimeSquareAtMost_one_iff
-#print axioms bertrand
-#print axioms bertrand_gap_le
-#print axioms square_interval_shorter_than_linear_gap
-#print axioms hasPrimeIn_self
-#print axioms exists_prime_of_theta_lt
-#print axioms hasPrimeIn_of_theta_gap
-#print axioms theta_upper_explicit
-#print axioms theta_lower_explicit
-#print axioms psi_upper_explicit
-#print axioms psi_lower_explicit
-#print axioms pi_lower_explicit
-#print axioms pi_upper_explicit
-#print axioms primeGapBound_iff_eventuallyGapBound
-#print axioms primeGapBound_of_hasPrimeInShortInterval
-#print axioms hasPrimeInShortInterval_of_primeGapBound
-#print axioms hasPrimeInShortInterval_iff_primeGapBound
-#print axioms hasPrimeInShortInterval_mono
-#print axioms shortIntervalStatement_mono
-#print axioms shortIntervalExponentLimit_of_statement
-#print axioms statement_of_shortIntervalExponentLimit
-#print axioms shortIntervalStatement_iff_exponentLimit
-#print axioms legendre_eventually_of_shortIntervalStatement_lt_half
-#print axioms hoheiselPaper_iff
-#print axioms ingham58Paper_iff
-#print axioms ingham577Paper_iff
-#print axioms huxleyPaper_iff
-#print axioms heathBrownIwaniecPaper_iff
-#print axioms iwaniecPintzPaper_iff
-#print axioms mozzochiPaper_iff
-#print axioms bakerHarmanPaper_iff
-#print axioms bakerHarmanPintzPaper_iff
 #print axioms Legendre.Nagura.exists_prime_nagura
 #print axioms Legendre.Nagura.exists_prime_nagura_91639_to_16000000
 #print axioms Legendre.Nagura.exists_prime_nagura_analytic_tail
@@ -173,9 +163,6 @@ namespace Legendre
 #print axioms Legendre.Nagura.psi_nat_gt_0_916_mul
 #print axioms Legendre.Nagura.naguraGeneralUpperCombination_lt_1_0851_mul
 #print axioms Legendre.Nagura.naguraGeneralLowerCombination_gt_0_916_mul
-#print axioms nagura_prime_gap
-#print axioms nagura_hasPrimeIn
-#print axioms nagura_hasPrimeIn_nat
 
 end Legendre
 
@@ -2150,3 +2137,631 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.PNT.pnt_hasPrimeIn_classical_interval
 #print axioms Legendre.PNT.pnt_prime_gap_classical
 #print axioms Legendre.PNT.rpow_isLittleO_classicalError
+
+/- Independently compiled Layer 3 consumer regression checks. -/
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.common_constant_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.finite_explicit_formula_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.natural_gap_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.near_one_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer3.0.Legendre.Tests.one_percent_interval_consumer"
+
+/- Exhaustive project-wide dependency coverage, including older generated/private lemmas. -/
+#print axioms Legendre.BakerHarman._proof_1
+#print axioms Legendre.BakerHarman._proof_2
+#print axioms Legendre.BakerHarman.eq_1
+#print axioms Legendre.BakerHarmanPaper._proof_1
+#print axioms Legendre.BakerHarmanPaper._proof_2
+#print axioms Legendre.BakerHarmanPaper.eq_1
+#print axioms Legendre.BakerHarmanPintz._proof_1
+#print axioms Legendre.BakerHarmanPintz.eq_1
+#print axioms Legendre.BakerHarmanPintzPaper._proof_1
+#print axioms Legendre.BakerHarmanPintzPaper.eq_1
+#print axioms Legendre.HasPrimeIn.mono
+#print axioms Legendre.HeathBrownIwaniec._proof_1
+#print axioms Legendre.HeathBrownIwaniec._proof_2
+#print axioms Legendre.HeathBrownIwaniec.eq_1
+#print axioms Legendre.HeathBrownIwaniecPaper._proof_1
+#print axioms Legendre.HeathBrownIwaniecPaper._proof_2
+#print axioms Legendre.HeathBrownIwaniecPaper.eq_1
+#print axioms Legendre.Hoheisel._proof_1
+#print axioms Legendre.Hoheisel._proof_2
+#print axioms Legendre.Hoheisel.eq_1
+#print axioms Legendre.HoheiselPaper._proof_1
+#print axioms Legendre.HoheiselPaper._proof_2
+#print axioms Legendre.HoheiselPaper.eq_1
+#print axioms Legendre.Huxley._proof_1
+#print axioms Legendre.Huxley._proof_2
+#print axioms Legendre.Huxley.eq_1
+#print axioms Legendre.HuxleyPaper._proof_1
+#print axioms Legendre.HuxleyPaper._proof_2
+#print axioms Legendre.HuxleyPaper.eq_1
+#print axioms Legendre.Ingham577._proof_1
+#print axioms Legendre.Ingham577._proof_2
+#print axioms Legendre.Ingham577.eq_1
+#print axioms Legendre.Ingham577Paper._proof_1
+#print axioms Legendre.Ingham577Paper._proof_2
+#print axioms Legendre.Ingham577Paper.eq_1
+#print axioms Legendre.Ingham58._proof_1
+#print axioms Legendre.Ingham58._proof_2
+#print axioms Legendre.Ingham58.eq_1
+#print axioms Legendre.Ingham58Paper._proof_1
+#print axioms Legendre.Ingham58Paper._proof_2
+#print axioms Legendre.Ingham58Paper.eq_1
+#print axioms Legendre.IwaniecPintz._proof_1
+#print axioms Legendre.IwaniecPintz._proof_2
+#print axioms Legendre.IwaniecPintz._proof_3
+#print axioms Legendre.IwaniecPintz.eq_1
+#print axioms Legendre.IwaniecPintzPaper._proof_1
+#print axioms Legendre.IwaniecPintzPaper._proof_2
+#print axioms Legendre.IwaniecPintzPaper._proof_3
+#print axioms Legendre.IwaniecPintzPaper.eq_1
+#print axioms Legendre.Mozzochi._proof_1
+#print axioms Legendre.Mozzochi.eq_1
+#print axioms Legendre.MozzochiPaper._proof_1
+#print axioms Legendre.MozzochiPaper.eq_1
+#print axioms Legendre.Nagura.consecutivePrime_ratio_of_naguraWitness
+#print axioms Legendre.Nagura.consecutivePrimes_ratio_finite
+#print axioms Legendre.Nagura.exists_prime_Ioc_of_theta_lt
+#print axioms Legendre.Nagura.exists_prime_nagura_1046959_to_1482617
+#print axioms Legendre.Nagura.exists_prime_nagura_1482617_to_16000000
+#print axioms Legendre.Nagura.exists_prime_nagura_1482617_to_3538187
+#print axioms Legendre.Nagura.exists_prime_nagura_218737_to_522059
+#print axioms Legendre.Nagura.exists_prime_nagura_3538187_to_8443433
+#print axioms Legendre.Nagura.exists_prime_nagura_522059_to_1046959
+#print axioms Legendre.Nagura.exists_prime_nagura_8443433_to_16000000
+#print axioms Legendre.Nagura.exists_prime_nagura_91639_to_218737
+#print axioms Legendre.Nagura.exists_prime_nagura_below_91639
+#print axioms Legendre.Nagura.exists_prime_nagura_finite
+#print axioms Legendre.Nagura.exists_prime_nagura_medium
+#print axioms Legendre.Nagura.exists_prime_nagura_to_1482617
+#print axioms Legendre.Nagura.first_sub_1806_le_nagura_weighted_sum
+#print axioms Legendre.Nagura.hasNaguraPrime_of_psi_gap
+#print axioms Legendre.Nagura.log_factorial_le_integral_upper
+#print axioms Legendre.Nagura.log_factorial_le_naguraFactorialLogUpper
+#print axioms Legendre.Nagura.log_factorial_le_stirling_elementary
+#print axioms Legendre.Nagura.log_five_gt_1_609
+#print axioms Legendre.Nagura.log_forty_three_lt_3_762
+#print axioms Legendre.Nagura.log_forty_three_lt_three_point_seven_seven
+#print axioms Legendre.Nagura.log_lt_sqrt_div_two_hundred
+#print axioms Legendre.Nagura.log_nat_lt_div_one_hundred_add_four
+#print axioms Legendre.Nagura.log_nat_lt_div_ten_thousand_add_nine
+#print axioms Legendre.Nagura.log_one_sub_le_neg_sum_add_remainder
+#print axioms Legendre.Nagura.log_one_thousand_eight_hundred_six_lt_seven_point_five
+#print axioms Legendre.Nagura.log_seven_lt_1_9465
+#print axioms Legendre.Nagura.log_seven_lt_1_949
+#print axioms Legendre.Nagura.log_seven_lt_one_point_nine_five
+#print axioms Legendre.Nagura.log_shifted_div_lower
+#print axioms Legendre.Nagura.log_thirty_lt_3_402
+#print axioms Legendre.Nagura.log_three_gt_1_098
+#print axioms Legendre.Nagura.log_three_lt_1_099
+#print axioms Legendre.Nagura.log_three_lt_eleven_tenths
+#print axioms Legendre.Nagura.naguraChebyshevCombination.eq_1
+#print axioms Legendre.Nagura.naguraChebyshevCombination_le_stirlingMajorant
+#print axioms Legendre.Nagura.naguraChebyshevCombination_lt_1_083_mul
+#print axioms Legendre.Nagura.naguraChebyshevCombination_lt_1_085_mul
+#print axioms Legendre.Nagura.naguraChebyshevCombination_lt_1_086_mul
+#print axioms Legendre.Nagura.naguraChebyshevSum.eq_1
+#print axioms Legendre.Nagura.naguraChebyshevSum_eq_log_factorial
+#print axioms Legendre.Nagura.naguraChebyshevSum_eq_sum_log
+#print axioms Legendre.Nagura.naguraChebyshevSum_eq_sum_range
+#print axioms Legendre.Nagura.naguraChebyshevSum_le_integral_upper
+#print axioms Legendre.Nagura.naguraChebyshevSum_le_stirling_elementary
+#print axioms Legendre.Nagura.naguraDivisorLogSum_eq_log_factorial
+#print axioms Legendre.Nagura.naguraDivisorLogSum_eq_sum_log
+#print axioms Legendre.Nagura.naguraFactorialLogLower._proof_1
+#print axioms Legendre.Nagura.naguraFactorialLogLower.eq_1
+#print axioms Legendre.Nagura.naguraFactorialLogLower_le_log_factorial
+#print axioms Legendre.Nagura.naguraFactorialLogUpper.eq_1
+#print axioms Legendre.Nagura.naguraFactorialLogUpper_div_le_coarse
+#print axioms Legendre.Nagura.naguraFactorialUpperDivCoarseModel.eq_1
+#print axioms Legendre.Nagura.naguraFloorFactorialCoarseModel.eq_1
+#print axioms Legendre.Nagura.naguraFloorFactorialCoarseModel_le
+#print axioms Legendre.Nagura.naguraFloorFactorialLowerModel.eq_1
+#print axioms Legendre.Nagura.naguraFloorFactorialLowerModel_le
+#print axioms Legendre.Nagura.naguraGeneralLowerModel.eq_1
+#print axioms Legendre.Nagura.naguraGeneralLowerModel_eq
+#print axioms Legendre.Nagura.naguraGeneralLowerModel_le_combination
+#print axioms Legendre.Nagura.naguraGeneralUpperCoarseModel.eq_1
+#print axioms Legendre.Nagura.naguraGeneralUpperCoarseModel_eq
+#print axioms Legendre.Nagura.naguraGeneralUpperCombination.eq_1
+#print axioms Legendre.Nagura.naguraGeneralUpperCombination_le_model
+#print axioms Legendre.Nagura.naguraGeneralUpperCombination_lt_1_083_mul
+#print axioms Legendre.Nagura.naguraGeneralUpperModel_le_coarse
+#print axioms Legendre.Nagura.naguraLowerChebyshevCombination.eq_1
+#print axioms Legendre.Nagura.naguraLowerChebyshevCombination_gt_0_916_mul
+#print axioms Legendre.Nagura.naguraLowerChebyshevCombination_le_psi
+#print axioms Legendre.Nagura.naguraLowerMainCoefficient._proof_1
+#print axioms Legendre.Nagura.naguraLowerMainCoefficient.eq_1
+#print axioms Legendre.Nagura.naguraLowerMainCoefficient_gt_0_9209
+#print axioms Legendre.Nagura.naguraLowerRoundingError._proof_1
+#print axioms Legendre.Nagura.naguraLowerRoundingError.eq_1
+#print axioms Legendre.Nagura.naguraLowerRoundingError_le_half
+#print axioms Legendre.Nagura.naguraLowerStirlingMinorant.eq_1
+#print axioms Legendre.Nagura.naguraLowerStirlingMinorant_eq_main_add_remainder
+#print axioms Legendre.Nagura.naguraLowerStirlingMinorant_le_combination
+#print axioms Legendre.Nagura.naguraLowerStirlingRemainder.eq_1
+#print axioms Legendre.Nagura.naguraLowerWeight.eq_1
+#print axioms Legendre.Nagura.naguraLowerWeightArithmetic._proof_1
+#print axioms Legendre.Nagura.naguraLowerWeightArithmetic.eq_1
+#print axioms Legendre.Nagura.naguraLowerWeightArithmetic_apply
+#print axioms Legendre.Nagura.naguraLowerWeightPrefix_mem_unitInterval
+#print axioms Legendre.Nagura.naguraMainCoefficient._proof_1
+#print axioms Legendre.Nagura.naguraMainCoefficient._proof_2
+#print axioms Legendre.Nagura.naguraMainCoefficient._proof_3
+#print axioms Legendre.Nagura.naguraMainCoefficient._proof_4
+#print axioms Legendre.Nagura.naguraMainCoefficient.eq_1
+#print axioms Legendre.Nagura.naguraMainCoefficient_lt_1_0827
+#print axioms Legendre.Nagura.naguraMainCoefficient_lt_1_083
+#print axioms Legendre.Nagura.naguraMainCoefficient_lt_1_085
+#print axioms Legendre.Nagura.naguraMainCoefficient_lt_1_086
+#print axioms Legendre.Nagura.naguraStirlingMajorant.eq_1
+#print axioms Legendre.Nagura.naguraStirlingMajorant_eq_main_add_remainder
+#print axioms Legendre.Nagura.naguraStirlingRemainder._proof_1
+#print axioms Legendre.Nagura.naguraStirlingRemainder.eq_1
+#print axioms Legendre.Nagura.naguraStirlingRemainder_lt_zero
+#print axioms Legendre.Nagura.naguraStrictUpper.eq_1
+#print axioms Legendre.Nagura.naguraStrictUpper_spec
+#print axioms Legendre.Nagura.naguraUpperRoundingError._proof_1
+#print axioms Legendre.Nagura.naguraUpperRoundingError._proof_2
+#print axioms Legendre.Nagura.naguraUpperRoundingError._proof_3
+#print axioms Legendre.Nagura.naguraUpperRoundingError.eq_1
+#print axioms Legendre.Nagura.naguraUpperRoundingError_le_two_point_five
+#print axioms Legendre.Nagura.naguraWeight.eq_1
+#print axioms Legendre.Nagura.naguraWeightPrefix_nonneg
+#print axioms Legendre.Nagura.nagura_floor_coarse_algebra
+#print axioms Legendre.Nagura.nagura_reciprocal_numerators
+#print axioms Legendre.Nagura.neg_eleven_sub_two_log_lt_naguraLowerStirlingRemainder
+#print axioms Legendre.Nagura.neg_sum_sub_remainder_le_log_one_sub
+#print axioms Legendre.Nagura.one_le_naguraWeightPrefix
+#print axioms Legendre.Nagura.psi_gt_0_916_mul_sub_27_48
+#print axioms Legendre.Nagura.psi_lt_1_086_mul_add_1961_316
+#print axioms Legendre.Nagura.psi_mul_1806_lt_1_086
+#print axioms Legendre.Nagura.psi_mul_30_gt_0_916
+#print axioms Legendre.Nagura.psi_sub_psi_div_1806_le_generalUpperCombination
+#print axioms Legendre.Nagura.psi_sub_psi_le_naguraChebyshevCombination
+#print axioms Legendre.Nagura.sum_Ioc_zero_eq_sum_range_succ
+#print axioms Legendre.Nagura.sum_dvd_indicator_apply_eq
+#print axioms Legendre.Nagura.sum_dvd_indicator_eq_div
+#print axioms Legendre.Nagura.sum_dvd_indicator_psi_eq_chebyshevSum
+#print axioms Legendre.Nagura.sum_lowerWeight_mul_psi_eq_sum_vonMangoldt_mul_prefix
+#print axioms Legendre.Nagura.sum_naguraLowerWeight_eq_prefix
+#print axioms Legendre.Nagura.sum_naguraLowerWeight_mul_psi_eq_combination
+#print axioms Legendre.Nagura.sum_naguraWeight_eq_prefix
+#print axioms Legendre.Nagura.sum_naguraWeight_mul_psi_eq
+#print axioms Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination
+#print axioms Legendre.Nagura.sum_range_mul_eq_partial_sum
+#print axioms Legendre.Nagura.two_sqrt_mul_log_lt_div_one_hundred
+#print axioms Legendre.ShortIntervalExponent.eq_1
+#print axioms Legendre.Zeta.countingDegree.eq_1
+#print axioms Legendre.Zeta.countingDivisor._proof_1
+#print axioms Legendre.Zeta.countingDivisor._proof_2
+#print axioms Legendre.Zeta.countingDivisor._proof_3
+#print axioms Legendre.Zeta.countingDivisor.eq_1
+#print axioms Legendre.Zeta.countingHeight._proof_1
+#print axioms Legendre.Zeta.countingHeight._proof_2
+#print axioms Legendre.Zeta.globalZeroCountConstant._proof_1
+#print axioms Legendre.Zeta.globalZeroCountConstant._proof_2
+#print axioms Legendre.Zeta.globalZeroCountConstant._proof_3
+#print axioms Legendre.Zeta.globalZeroCountConstant._proof_4
+#print axioms Legendre.Zeta.globalZeroCountConstant._proof_5
+#print axioms Legendre.Zeta.localZetaDegree.eq_1
+#print axioms Legendre.Zeta.localZetaDivisor._proof_1
+#print axioms Legendre.Zeta.localZetaDivisor._proof_2
+#print axioms Legendre.Zeta.localZetaDivisor._proof_3
+#print axioms Legendre.Zeta.localZetaDivisor.eq_1
+#print axioms Legendre.Zeta.localZetaFactor.eq_1
+#print axioms Legendre.Zeta.localZetaLogBound._proof_1
+#print axioms Legendre.Zeta.localZetaLogBound._proof_2
+#print axioms Legendre.Zeta.localZetaLogBound._proof_3
+#print axioms Legendre.Zeta.localZetaLogBound._proof_4
+#print axioms Legendre.Zeta.localZetaRegularized._proof_1
+#print axioms Legendre.Zeta.localZetaRegularized.eq_1
+#print axioms Legendre.Zeta.lowCountingSet._proof_1
+#print axioms Legendre.Zeta.perronErrorConstant.eq_1
+#print axioms Legendre.Zeta.perronHorizontal.eq_1
+#print axioms Legendre.Zeta.perronIntegrand.eq_1
+#print axioms Legendre.Zeta.perronKernelBound._proof_1
+#print axioms Legendre.Zeta.perronKernelBound.eq_1
+#print axioms Legendre.Zeta.perronOscPrimitive.eq_1
+#print axioms Legendre.Zeta.perronPoleNumerator.eq_1
+#print axioms Legendre.Zeta.perronReciprocalDeriv.eq_1
+#print axioms Legendre.Zeta.perronRegularizedWeight.eq_1
+#print axioms Legendre.Zeta.perronScalarError._proof_1
+#print axioms Legendre.Zeta.perronScalarError.eq_1
+#print axioms Legendre.Zeta.perronSeriesTerm.eq_1
+#print axioms Legendre.Zeta.perronWeight.eq_1
+#print axioms Legendre.Zeta.poleRemovedZeta.eq_1
+#print axioms Legendre.Zeta.rightHalfZero._proof_1
+#print axioms Legendre.Zeta.scalarPerronValue._proof_1
+#print axioms Legendre.Zeta.scalarPerronValue.eq_1
+#print axioms Legendre.Zeta.truncatedPerron._proof_1
+#print axioms Legendre.Zeta.truncatedPerron.eq_1
+#print axioms Legendre.Zeta.truncatedPerronKernel._proof_1
+#print axioms Legendre.Zeta.truncatedPerronKernel.eq_1
+#print axioms Legendre.Zeta.zeroCount.eq_1
+#print axioms Legendre.Zeta.zeroDensityCount.eq_1
+#print axioms Legendre.Zeta.zeroMultiplicity.eq_1
+#print axioms Legendre.Zeta.zerosRightOf.eq_1
+#print axioms Legendre.Zeta.zerosUpTo.eq_1
+#print axioms Legendre.Zeta.zetaFractionalPart.eq_1
+#print axioms Legendre.Zeta.zetaMellinRemainder.eq_1
+#print axioms Legendre.Zeta.zetaZeroFreeConstant._proof_1
+#print axioms Legendre.Zeta.zetaZeroFreeCost._proof_1
+#print axioms Legendre.Zeta.zetaZeroFreeCost._proof_2
+#print axioms Legendre.Zeta.zetaZeroFreeCost._proof_3
+#print axioms Legendre.Zeta.zetaZeroFreeK._proof_1
+#print axioms Legendre.Zeta.zetaZeroFreeK._proof_2
+#print axioms Legendre.almostPrimeSquareAtMost_one_iff
+#print axioms Legendre.almostPrimeSquareAtMost_one_of_conjecture
+#print axioms Legendre.bakerHarmanPaper_iff
+#print axioms Legendre.bakerHarmanPintzPaper_iff
+#print axioms Legendre.bakerHarmanPintz_above_half
+#print axioms Legendre.bakerHarman_above_half
+#print axioms Legendre.bertrand
+#print axioms Legendre.bertrand_exponent_above_half
+#print axioms Legendre.bertrand_gap_le
+#print axioms Legendre.bhp_exponent_not_below_half
+#print axioms Legendre.conjecture_of_almostPrimeSquareAtMost_one
+#print axioms Legendre.eventually_const_mul_rpow_lt
+#print axioms Legendre.eventually_legendre_of_gap_exponent_lt_half
+#print axioms Legendre.exists_prime_of_theta_lt
+#print axioms Legendre.hasPrimeInShortInterval_iff_primeGapBound
+#print axioms Legendre.hasPrimeInShortInterval_mono
+#print axioms Legendre.hasPrimeInShortInterval_of_primeGapBound
+#print axioms Legendre.hasPrimeIn_iff
+#print axioms Legendre.hasPrimeIn_of_theta_gap
+#print axioms Legendre.hasPrimeIn_self
+#print axioms Legendre.heathBrownIwaniecPaper_iff
+#print axioms Legendre.heathBrownIwaniec_above_half
+#print axioms Legendre.hoheiselPaper_iff
+#print axioms Legendre.hoheisel_above_half
+#print axioms Legendre.huxleyPaper_iff
+#print axioms Legendre.huxley_above_half
+#print axioms Legendre.ingham577Paper_iff
+#print axioms Legendre.ingham577_above_half
+#print axioms Legendre.ingham58Paper_iff
+#print axioms Legendre.ingham58_above_half
+#print axioms Legendre.iwaniecPintzPaper_iff
+#print axioms Legendre.iwaniecPintz_above_half
+#print axioms Legendre.legendreAt_iff_gapFormAt
+#print axioms Legendre.legendreAt_one
+#print axioms Legendre.legendreAt_two
+#print axioms Legendre.legendre_eventually_of_shortIntervalExponentLimit_lt_half
+#print axioms Legendre.legendre_eventually_of_shortIntervalExponent_lt_half
+#print axioms Legendre.legendre_eventually_of_shortIntervalStatement_lt_half
+#print axioms Legendre.legendre_of_gap_lt_two_sqrt
+#print axioms Legendre.mozzochiPaper_iff
+#print axioms Legendre.mozzochi_above_half
+#print axioms Legendre.nagura_hasPrimeIn
+#print axioms Legendre.nagura_hasPrimeIn_nat
+#print axioms Legendre.nagura_prime_gap
+#print axioms Legendre.pi_lower_explicit
+#print axioms Legendre.pi_upper_explicit
+#print axioms Legendre.primeGapBound_iff_eventuallyGapBound
+#print axioms Legendre.primeGapBound_of_hasPrimeInShortInterval
+#print axioms Legendre.prime_of_isAtMostAlmostPrime_one
+#print axioms Legendre.psi_lower_explicit
+#print axioms Legendre.psi_upper_explicit
+#print axioms Legendre.shortIntervalExponentLimit_of_statement
+#print axioms Legendre.shortIntervalStatement_iff_exponentLimit
+#print axioms Legendre.shortIntervalStatement_mono
+#print axioms Legendre.sq_interval_length
+#print axioms Legendre.square_interval_shorter_than_linear_gap
+#print axioms Legendre.statement_of_shortIntervalExponentLimit
+#print axioms Legendre.theta_lower_explicit
+#print axioms Legendre.theta_upper_explicit
+#audit_private_axioms "_private.Legendre.Basic.0.Legendre.sq_interval_length._proof_1_1"
+#audit_private_axioms "_private.Legendre.Conditional.0.Legendre.conjecture_of_almostPrimeSquareAtMost_one._proof_1_1"
+#audit_private_axioms "_private.Legendre.Conditional.0.Legendre.prime_of_isAtMostAlmostPrime_one._proof_1_1"
+#audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.exists_prime_of_theta_lt._simp_1_1"
+#audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.exists_prime_of_theta_lt._simp_1_2"
+#audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.hasPrimeIn_self._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.bakerHarmanPaper_iff._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.bakerHarmanPintzPaper_iff._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_6"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrime_ratio_of_naguraWitness._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1046959_to_1482617._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1046959_to_1482617._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_16000000._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_16000000._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_3538187._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_3538187._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_3538187._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_3538187._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_1482617_to_3538187._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_218737_to_522059._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_218737_to_522059._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_218737_to_522059._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_218737_to_522059._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_218737_to_522059._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_3538187_to_8443433._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_3538187_to_8443433._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_3538187_to_8443433._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_3538187_to_8443433._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_3538187_to_8443433._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_522059_to_1046959._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_522059_to_1046959._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_522059_to_1046959._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_522059_to_1046959._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_8443433_to_16000000._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_8443433_to_16000000._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_8443433_to_16000000._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_8443433_to_16000000._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_8443433_to_16000000._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_16000000._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_218737._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_218737._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_218737._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_218737._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_91639_to_218737._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_below_91639._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_10"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_11"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_12"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_13"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_14"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_15"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_16"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_17"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_18"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_19"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_20"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_21"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_22"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_23"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_24"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_25"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_26"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_27"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_28"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_29"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_6"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_7"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_8"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_finite._proof_1_9"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_10"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_11"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_12"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_13"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_14"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_15"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_16"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_17"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_18"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_19"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_20"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_6"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_7"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_8"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_medium._proof_1_9"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_to_1482617._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_to_1482617._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.exists_prime_nagura_to_1482617._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.first_sub_1806_le_nagura_weighted_sum._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.first_sub_1806_le_nagura_weighted_sum._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.first_sub_1806_le_nagura_weighted_sum._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.first_sub_1806_le_nagura_weighted_sum._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.log_factorial_le_integral_upper._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraChebyshevSum_eq_sum_log._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraChebyshevSum_eq_sum_log._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraChebyshevSum_eq_sum_log._simp_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraChebyshevSum_eq_sum_log._simp_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraDivisorLogSum_eq_log_factorial._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraFactorialLogUpper_div_le_coarse._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraFloorFactorialCoarseModel_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraFloorFactorialLowerModel_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerCombination_gt_0_916_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_10"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_6"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_7"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_8"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralLowerModel_le_combination._proof_1_9"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_10"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_11"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_6"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_7"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_8"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_le_model._proof_1_9"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_lt_1_083_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_lt_1_083_mul._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperCombination_lt_1_0851_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperModel_le_coarse._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperModel_le_coarse._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperModel_le_coarse._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperModel_le_coarse._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraGeneralUpperModel_le_coarse._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerChebyshevCombination_gt_0_916_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerStirlingMinorant_le_combination._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerStirlingMinorant_le_combination._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerStirlingMinorant_le_combination._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerStirlingMinorant_le_combination._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraLowerWeightPrefix_mem_unitInterval._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.naguraWeightPrefix_nonneg._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.one_le_naguraWeightPrefix._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_gt_0_916_mul_sub_27_48._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_gt_0_916_mul_sub_27_48._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_gt_0_916_mul_sub_27_48._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_lt_1_086_mul_add_1961_316._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_lt_1_086_mul_add_1961_316._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_lt_1_086_mul_add_1961_316._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_nat_lt_1_086_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_sub_psi_div_1806_le_generalUpperCombination._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_sub_psi_le_naguraChebyshevCombination._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_sub_psi_le_naguraChebyshevCombination._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.psi_sub_psi_le_naguraChebyshevCombination._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_Ioc_zero_eq_sum_range_succ._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_Ioc_zero_eq_sum_range_succ._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_lowerWeight_mul_psi_eq_sum_vonMangoldt_mul_prefix._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.PsiBounds.0.Legendre.Nagura.sum_naguraWeight_mul_psi_eq_combination._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_Ioc_of_theta_lt._simp_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_Ioc_of_theta_lt._simp_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura_analytic_tail._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura_analytic_tail._proof_1_2"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura_analytic_tail._proof_1_3"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura_analytic_tail._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.exists_prime_nagura_analytic_tail._proof_1_5"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.hasNaguraPrime_of_psi_gap._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.naguraStrictUpper_spec._proof_1_1"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.naguraStrictUpper_spec._proof_1_4"
+#audit_private_axioms "_private.Legendre.Nagura.Theorem.0.Legendre.Nagura.naguraStrictUpper_spec._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.exists_perronIntegrand_circleIntegral._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronContour.0.Legendre.Zeta.perronIntegrand_eventuallyEq_poleNumerator._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronError.0.Legendre.Zeta.perronScalarError_le_bound._simp_1_8"
+#audit_private_axioms "_private.Legendre.PerronInversion.0.Legendre.Zeta.vonMangoldt_mul_scalarPerronValue_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronInversion.0.Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_psi._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronInversion.0.Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_psi._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronInversion.0.Legendre.Zeta.vonMangoldt_scalarPerronValue_tsum_eq_psi._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.tendsto_truncatedPerronKernel_one._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronKernel.0.Legendre.Zeta.truncatedPerronKernel_one._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronResidue.0.Legendre.Zeta.truncatedPerronKernel_crossing_sub_eq._simp_1_8"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.perronWeight_rectangle._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_7"
+#audit_private_axioms "_private.Legendre.PerronShift.0.Legendre.Zeta.truncatedPerronKernel_sub_eq_horizontal._simp_1_8"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_1"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_2"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_3"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_4"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_5"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_6"
+#audit_private_axioms "_private.Legendre.PerronTail.0.Legendre.Zeta.perronOscPrimitive_hasDerivAt._simp_1_7"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_1"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_2"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_3"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_4"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_5"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_6"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.eventually_legendre_of_gap_exponent_lt_half._proof_1_7"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.legendre_of_gap_lt_two_sqrt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.legendre_of_gap_lt_two_sqrt._proof_1_2"
+#audit_private_axioms "_private.Legendre.Reduction.0.Legendre.legendre_of_gap_lt_two_sqrt._proof_1_3"
+#audit_private_axioms "_private.Legendre.ZetaArgumentPrinciple.0.Legendre.Zeta.localZetaDivisor_mem_ball._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaCounting.0.Legendre.Zeta.zeroCount_eq_zero_of_nonpos._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaCounting.0.Legendre.Zeta.zeroDensityCount_eq_zero_of_one_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaCountingCover.0.Legendre.Zeta.countingHeightIndex_lt._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaCountingDisks.0.Legendre.Zeta.counting_disk_coordinates._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaCountingDisks.0.Legendre.Zeta.norm_riemannZeta_counting_disk_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.sum_zeroMultiplicity_union_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaGlobalCounting.0.Legendre.Zeta.zeroCount_le_mul_log._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.poleRemovedZeta_eq_euler_sum._simp_1_8"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaGrowth.0.Legendre.Zeta.riemannZeta_eq_euler_sum._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaHalfPlane.0.Legendre.Zeta.tsum_nat_rpow_neg_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaLocalBound.0.Legendre.Zeta.norm_riemannZeta_disk_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaLocalBound.0.Legendre.Zeta.zeta_disk_coordinates._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivative.0.Legendre.Zeta.zeroDensityCount_eq_zero_of_zero_free._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaLogDerivativeLocal.0.Legendre.Zeta.neg_logDeriv_re_le_local_sub_zero._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaPole.0.Legendre.Zeta.poleRemovedZeta_continuousAt_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaPoleBounds.0.Legendre.Zeta.norm_deriv_poleRemovedZeta_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaPoleBounds.0.Legendre.Zeta.norm_deriv_zetaMellinRemainder_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_8"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.exists_localZetaLog._simp_1_9"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaRegularizedBound.0.Legendre.Zeta.norm_logDeriv_localZetaRegularized_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.norm_localZetaFactor_center_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_localZetaFactor._simp_1_2"

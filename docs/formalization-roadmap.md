@@ -409,8 +409,8 @@ Apache-2.0 PNT+ proof slice under `Legendre/PNT/`. The rate is
 `x exp(-c sqrt(log x))`, with c>0 and existential coefficient/threshold.
 See [provenance, proof outline and limits](pnt-provenance.md).
 
-**Four acceptance items verified (2026-11-07):** full `lake build` (4,038 jobs)
-and all 1,983 axiom targets passed, including the zero-sum specialization and
+**Four acceptance items verified (2026-11-07):** full `lake build` (4,039 jobs)
+and all 2,552 axiom targets passed, including the zero-sum specialization and
 the quantitative good-height extension, prime intervals and formal scale comparisons.
 
 **Acceptance criteria and proof references.**

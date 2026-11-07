@@ -26,6 +26,7 @@ Thanks for helping with the formalization.
 ```bash
 lake exe cache get
 lake build
+lake env lean Legendre/Tests/Layer3.lean
 python3 scripts/audit.py
 ```
 

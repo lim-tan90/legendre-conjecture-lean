@@ -154,3 +154,9 @@ its remaining optional refinements are recorded in
 
 Completion validation: full build passed 4,038 jobs and the audit passed all
 1,983 targets (the prior 1,970 plus all 13 completion declarations).
+
+The additional verification pass covered all 2,552 project theorem declarations
+(including private/generated helpers), with no omitted dependency checks.
+Full build passed 4,039 jobs, five standalone consumer checks passed, and the
+audit parsed exactly 2,552 of 2,552 expected targets. All 70 project Lean
+files have zero executable `sorry`, `admit` or `sorryAx` placeholders.

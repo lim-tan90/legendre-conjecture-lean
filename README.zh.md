@@ -52,7 +52,9 @@
 <details>
 <summary><strong>Layer 3：文档所列范围已完成（2026-11-07）</strong></summary>
 
-本地验证：整库 `lake build`（**4,038 项**）及 **1,983 项**公理审计全部通过。
+本地验证：整库 `lake build`（**4,039 项**）及 **2,552 项**公理审计全部通过。
+额外验证覆盖**全部 2,552 个项目定理声明**、5 个独立使用检查及 70 个 Lean 文件；
+实际代码中 **`sorry`/`admit`/`sorryAx` 均为 0**。独立使用检查已加入 CI。
 已验证证明提交：[`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc)。
 
 **统一入口：** `import Legendre.Layer3`。Layer 3 原定验收已完成，

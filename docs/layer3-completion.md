@@ -94,12 +94,40 @@ owner.
 
 ## Completion validation (2026-11-07)
 
-Full `lake build` passed **4,038 jobs**. The immediately following
-`python3 scripts/audit.py --skip-build` passed **all 1,983 expected targets**.
+Full `lake build` passed **4,039 jobs**. The immediately following
+`python3 scripts/audit.py --skip-build` passed **all 2,552 expected targets**.
 Enumerating the full theorem declarations of `PrimeIntervals.lean` and
 `Layer3.lean` yielded 13 new targets, all included in the audit.
+A second, exhaustive enumeration covered all 2,552 project theorem declarations.
+It added 619 previously unlisted declarations and removed 55 duplicate
+short-name checks. The final parsed axiom output matches all 2,552 declarations
+exactly, including private/generated helpers and the five consumer checks.
 Only `propext`, `Classical.choice`, and `Quot.sound` occur. Source-token and
 no-PDF checks passed; the Lean/mathlib pins and dependency lockfile are
 unchanged. The completion uses the existing `review → master` workflow.
 
 Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
+
+## Additional verification
+
+The standalone consumer module `Legendre/Tests/Layer3.lean` imports only
+`Legendre.Layer3` with a normal import and checks five downstream uses:
+
+1. The same decay constant is available for theta error and prime intervals.
+2. A concrete one-percent relative interval has the correct strict lower and
+   closed upper endpoints.
+3. Natural-number prime ordering and real-valued gap bounds work together.
+4. The exponent 9999/10000 satisfies both little-o and non-big-O comparisons.
+5. The finite explicit formula is re-exported independently of the PNT package.
+
+It is checked both as a compiled module and by the standalone command
+`lake env lean Legendre/Tests/Layer3.lean`. The latter is an explicit CI step.
+The test declarations are included in the main axiom audit.
+
+The placeholder scan covers all 70 project Lean files, including Layer 0–3
+and the adapted PNT+ sources. After removing comments and strings it finds
+**zero** occurrences of `sorry`, `admit`, or `sorryAx`. The five raw-text
+matches occur in explanatory comments. The general forbidden-source scan also
+passes. For imported mathlib dependencies, the audited theorem dependency
+closures contain only the three standard axioms, excluding `sorryAx` there
+as well.

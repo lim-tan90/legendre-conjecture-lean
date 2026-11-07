@@ -41,5 +41,8 @@ jobs:
       - name: Build all proofs
         run: lake build
 
+      - name: Standalone Layer 3 consumer checks
+        run: lake env lean Legendre/Tests/Layer3.lean
+
       - name: Axiom and explosion audit
         run: python3 scripts/audit.py --skip-build

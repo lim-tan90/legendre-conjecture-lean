@@ -377,6 +377,7 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.35 | domination of every fixed sublinear power | `Legendre.PNT.eventually_rpow_le_classicalError`, `rpow_isLittleO_classicalError`, `classicalError_not_isBigO_rpow` | **proved** for a<1; no fixed polynomial error inferred |
 | 3.36 | natural-number prime-gap interface | `Legendre.PNT.pnt_prime_gap_classical` | **proved**; every sufficiently large prime has a larger prime within E_c(p) |
 | 3.37 | final common-constant Layer 3 package | `Legendre.PNT.layer3_pnt_package` | **proved**; same c for ψ/θ/π error, coefficient-one prime intervals and asymptotic comparisons; [completion scope](layer3-completion.md) |
+| 3.validation | five independently compiled consumer checks | `Legendre/Tests/Layer3.lean` | normal Layer3 import only; common constant, concrete endpoints, natural gaps, exponent near one and explicit-formula re-export; all test declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -394,12 +395,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 24 | Dudek–Johnston 2026: `P₄` for all `n` | — | **not encoded in Lean** (deep sieve/computation) |
 | 25 | explicit verification `n ≤ 7.05×10¹³` | — | **not encoded in Lean** (large external computation) |
 
-Layer 3 completion validation (2026-11-07): full build passed 4,038 jobs and
-the audit passed all 1,983 expected targets. These include the finite zero-sum
-formula, all 52 declarations from the quantitative good-height modules, and
-all 13 declarations from `PrimeIntervals.lean` and `Layer3.lean`.
-The latter were enumerated from the full Lean environment, so generated or
-private theorem declarations could not be silently omitted.
+Layer 3 completion validation (2026-11-07): full build passed 4,039 jobs and
+the audit passed all 2,552 expected targets. These cover **all 2,552 project theorem declarations**,
+including private/generated helpers and five standalone consumer checks.
+The project-wide enumeration identified 619 previously unlisted declarations,
+which were added to the audit; 55 duplicate short-name checks were removed.
+The parsed axiom output matches the complete enumeration exactly. All 70
+project Lean files contain no executable `sorry`, `admit` or `sorryAx`.
 
 ## What the audit proves — and what it does not
 
