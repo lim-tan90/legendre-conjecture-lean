@@ -53,6 +53,7 @@
 <summary><strong>Layer 3：文档所列范围已完成（2026-11-07）</strong></summary>
 
 本地验证：整库 `lake build`（**4,038 项**）及 **1,983 项**公理审计全部通过。
+已验证证明提交：[`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc)。
 
 **统一入口：** `import Legendre.Layer3`。Layer 3 原定验收已完成，
 见[验收证据与范围](docs/layer3-completion.md)。`layer3_pnt_package` 给出同一个 c>0，

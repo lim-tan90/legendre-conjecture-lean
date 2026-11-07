@@ -101,3 +101,5 @@ Enumerating the full theorem declarations of `PrimeIntervals.lean` and
 Only `propext`, `Classical.choice`, and `Quot.sound` occur. Source-token and
 no-PDF checks passed; the Lean/mathlib pins and dependency lockfile are
 unchanged. The completion uses the existing `review → master` workflow.
+
+Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).

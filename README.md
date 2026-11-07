@@ -62,6 +62,7 @@
 <summary><strong>Layer 3 — documented scope complete (2026-11-07)</strong></summary>
 
 Local validation: full `lake build` (**4,038 jobs**) and all **1,983** axiom audit targets passed.
+Verified proof commit: [`1ecc73ba2191`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/1ecc73ba2191cfda7f997b27a12a2046b28e3cbc).
 
 **Import interface:** `import Legendre.Layer3`. The documented Layer 3 acceptance
 criteria are complete; [acceptance evidence and limits](docs/layer3-completion.md).
