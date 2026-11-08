@@ -27,6 +27,7 @@ Thanks for helping with the formalization.
 lake exe cache get
 lake build
 lake env lean Legendre/Tests/Layer3.lean
+lake env lean Legendre/Tests/Layer4.lean
 python3 scripts/audit.py
 ```
 

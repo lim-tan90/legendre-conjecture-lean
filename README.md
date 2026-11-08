@@ -59,6 +59,31 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
+<summary><strong>Layer 4 — initial quantitative mean-value infrastructure (2026-11-08)</strong></summary>
+
+**Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
+`P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
+`(B−A)Σ|a(n)|²` is at most **`4NH_N Σ|a(n)|²`**, uniformly in both endpoints.
+This gives an explicit `O(N log N)` error, the exact limiting mean, and a
+continuous large-value measure bound with a `V⁻²` factor. Logarithmic gap
+and harmonic row-sum estimates are proved, with arbitrary complex coefficients.
+
+The density-exponent interface has a coefficient uniform in σ∈[1/2,1].
+Logarithmic losses are absorbed into `T^ε` by a proved conditional bridge.
+The effective zero-free region also gives a fixed low-height bound for
+`N(1−1/(4000000 log T),T)`, T≥3.
+**Ingham, Huxley, the large sieve and separated-point large-value estimates
+remain open; Layer 4 is not complete.**
+
+Validation: **4,062 build jobs**, all **2,846 project theorem declarations**
+audited with only the three standard axioms, **93 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **18 independent consumer checks**
+(nine Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+[Exact statements, proof chain and remaining obligations](docs/layer4-mean-values.md).
+
+</details>
+
+<details>
 <summary><strong>Layer 3 — complete, including the uniform full contour (2026-11-07)</strong></summary>
 
 Local validation: full `lake build` (**4,054 jobs**) and all **2,756** axiom audit targets passed.
@@ -418,6 +443,12 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.PNT.pnt_hasPrimeIn_classical_interval` / `pnt_prime_gap_classical` | primes in classical-rate sublinear intervals and the natural-number gap interface | **proved**; coefficient one, c and threshold existential | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.rpow_isLittleO_classicalError` / `classicalError_not_isBigO_rpow` | every fixed x^a, a<1, is asymptotically smaller than the error scale | **proved**; no fixed polynomial exponent inferred | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.layer3_pnt_package` | one c>0 for ψ/θ/π error, sublinearity and coefficient-one prime intervals | **proved**; final Layer 3 import interface | [Layer3.lean](Legendre/Layer3.lean) |
+| `Legendre.Density.norm_oscillatoryKernel_le` / `integral_exponentialSum_diagonal` | Exact mean-value diagonal and oscillatory cancellation for finite exponential sums | **proved**; pairwise injectivity required for cancellation | [ExponentialKernel.lean](Legendre/ExponentialKernel.lean), [ExponentialMeanValue.lean](Legendre/ExponentialMeanValue.lean) |
+| `Legendre.Density.sum_inv_abs_log_gaps_le` / `meanValueError_le_energy` | Logarithmic-frequency row bound and Schur energy estimate | **proved**; explicit harmonic bounds | [DirichletSpacing.lean](Legendre/DirichletSpacing.lean), [ExponentialMeanValue.lean](Legendre/ExponentialMeanValue.lean) |
+| `Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le` / `tendsto_dirichletPolynomial_mean_square` | Mean-square error ≤4NH_N E and limiting average E | **proved**; arbitrary complex coefficients, uniform endpoints | [DirichletMeanValue.lean](Legendre/DirichletMeanValue.lean) |
+| `Legendre.Density.dirichlet_large_values_measure_le` | Continuous large-value measure ≤(length+4N(1+log N))E/V² | **proved**; A≤B, V>0; separated-point counts remain open | [DirichletLargeValues.lean](Legendre/DirichletLargeValues.lean) |
+| `Legendre.Zeta.HasZeroDensityEstimate` / `hasZeroDensityEstimate_of_log_bound` | Uniform σ density convention and log-loss absorption | Prop definition / **proved conditional bridge**; no exponent asserted | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
+| `Legendre.Zeta.zeroDensityCount_rational_near_one` | N(1−1/(4000000 log T),T)≤N(3) for T≥3 | **proved**; fixed compact count, not a fixed-strip density theorem | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -485,7 +516,7 @@ This table is the roadmap, not a claim that the work is done.
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
-| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **not in mathlib** |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, elementary `O(N log N)` Dirichlet-polynomial mean-square and continuous large-value measure bounds; **Ingham, Huxley, large sieve and separated-point estimates open**; [scope](docs/layer4-mean-values.md) |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -585,6 +616,10 @@ Legendre/
   PerronGoodHeight.lean Horizontal Perron estimates at selected heights
   PerronFullExplicit.lean Fixed negative contour, origin residue and uniform explicit formula
   Layer3.lean         Complete Layer 3 import interface and common-constant theorem
+  Layer4.lean         Initial density and quantitative mean-value interface
+  DirichletMeanValue.lean Explicit 4NH_N mean-square error for Dirichlet polynomials
+  DirichletLargeValues.lean Continuous-time large-value measure bounds
+  ZeroDensity.lean    Uniform exponent convention, log-loss bridge and near-one count
   PrimeIntervals.lean Classical-rate prime intervals, gaps and scale comparisons
   PrimeNumberTheorem.lean Layer 3: classical ψ/θ/π error terms and partial summation
   PNT/               selected Apache-2.0 PNT+ proof dependencies

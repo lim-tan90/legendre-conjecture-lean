@@ -50,6 +50,26 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
+<summary><strong>Layer 4：定量均值估计基础已推进（2026-11-08）</strong></summary>
+
+**入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
+`P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
+`(B−A)Σ|a(n)|²` 的偏差不超过 **`4NH_N Σ|a(n)|²`**，常数对两个端点统一。
+这给出显式 `O(N log N)` 误差、精确的极限均值及带 `V⁻²` 因子的连续大值集合测度界。
+对数频率间距、调和数行和估计均有证明，系数允许为任意复数。
+
+新增零密度指数接口，常数对 σ∈[1/2,1] 统一；已证明对数损失到 `T^ε` 的条件传递。
+现有有效无零区域还给出 `N(1−1/(4000000 log T),T)` 的固定低高度计数界（T≥3）。
+**Ingham、Huxley、大筛及离散采样点的大值估计仍开放，Layer 4 尚未完成。**
+
+验证：**4,062 项构建**、**全部 2,846 个项目定理声明**的公理审计（仅三项标准公理）、
+**93 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**18 项独立使用检查**（Layer 4 九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+[精确陈述、证明链及后续任务](docs/layer4-mean-values.md)。
+
+</details>
+
+<details>
 <summary><strong>Layer 3：已完成，含完整轮廓的统一估计（2026-11-07）</strong></summary>
 
 本地验证：整库 `lake build`（**4,054 项**）及 **2,756 项**公理审计全部通过。
@@ -346,6 +366,12 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.PNT.pnt_hasPrimeIn_classical_interval` / `pnt_prime_gap_classical` | 经典误差尺度的次线性素数区间与自然数间隙接口 | **已证明**；系数 1，c 与阈值为存在性结果 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.rpow_isLittleO_classicalError` / `classicalError_not_isBigO_rpow` | 任意固定 a<1 的 x^a 渐近小于经典误差尺度 | **已证明**；不能由此推断固定幂次指数 | [PrimeIntervals.lean](Legendre/PrimeIntervals.lean) |
 | `Legendre.PNT.layer3_pnt_package` | 同一个 c>0 连接 ψ/θ/π 误差、次线性比较与系数 1 的素数区间 | **已证明**；Layer 3 统一入口 | [Layer3.lean](Legendre/Layer3.lean) |
+| `Legendre.Density.norm_oscillatoryKernel_le` / `integral_exponentialSum_diagonal` | 有限指数和的精确均方对角项及振荡抵消 | **已证明**；抵消界显式要求频率单射 | [ExponentialKernel.lean](Legendre/ExponentialKernel.lean)、[ExponentialMeanValue.lean](Legendre/ExponentialMeanValue.lean) |
+| `Legendre.Density.sum_inv_abs_log_gaps_le` / `meanValueError_le_energy` | 对数频率行和界及 Schur 能量估计 | **已证明**；显式调和数界 | [DirichletSpacing.lean](Legendre/DirichletSpacing.lean)、[ExponentialMeanValue.lean](Legendre/ExponentialMeanValue.lean) |
+| `Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le` / `tendsto_dirichletPolynomial_mean_square` | 均方误差 ≤4NH_N E，极限均值为 E | **已证明**；任意复系数，对两个端点统一 | [DirichletMeanValue.lean](Legendre/DirichletMeanValue.lean) |
+| `Legendre.Density.dirichlet_large_values_measure_le` | 连续大值集合测度 ≤(区间长度+4N(1+log N))E/V² | **已证明**；A≤B、V>0；离散采样点计数仍开放 | [DirichletLargeValues.lean](Legendre/DirichletLargeValues.lean) |
+| `Legendre.Zeta.HasZeroDensityEstimate` / `hasZeroDensityEstimate_of_log_bound` | 对 σ 统一的密度约定及对数损失吸收 | Prop 定义 / **条件传递已证明**；未断言指数取值 | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
+| `Legendre.Zeta.zeroDensityCount_rational_near_one` | T≥3 时 N(1−1/(4000000 log T),T)≤N(3) | **已证明**；固定紧集计数，不是固定带内的密度定理 | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -409,7 +435,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **mathlib 中没有** |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、Dirichlet 多项式的初等 `O(N log N)` 均方界及连续大值测度界；**Ingham、Huxley、大筛及离散大值估计仍开放**；[范围](docs/layer4-mean-values.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |

@@ -44,5 +44,8 @@ jobs:
       - name: Standalone Layer 3 consumer checks
         run: lake env lean Legendre/Tests/Layer3.lean
 
+      - name: Standalone Layer 4 consumer checks
+        run: lake env lean Legendre/Tests/Layer4.lean
+
       - name: Axiom and explosion audit
         run: python3 scripts/audit.py --skip-build

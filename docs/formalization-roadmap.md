@@ -457,6 +457,32 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
+**Current state (2026-11-08): initial infrastructure proved; Layer 4 remains open.**
+`import Legendre.Layer4` exports the multiplicity-weighted counting convention,
+`HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
+weakening, and a proved transfer from a hypothesized power/log density bound.
+The ε in this convention is additive in the exponent of T.
+
+The elementary Dirichlet-polynomial mean-square theorem is now proved with
+an explicit `4NH_N Σ|a(n)|²` error, independent of interval endpoints.
+Logarithmic spacing and harmonic row estimates give its `O(N log N)` length
+dependence. The exact limiting average and continuous large-value measure
+bound follow. The logarithmic zero-free region gives an unconditional
+near-one count bounded by the fixed low-height count N(3).
+See [exact statements, proof map and validation](layer4-mean-values.md).
+
+| Acceptance component | Current evidence |
+|---|---|
+| Definition of N(σ,T) | Already proved finite, multiplicity-weighted in Layer 2 |
+| Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
+| Ingham zero-density theorem | **open** |
+| Huxley b=12/5 | **open** |
+| Mean-value/large-value input | Elementary `O(N log N)` mean square and continuous large-value measure **proved**; separated-point estimates and large sieve **open** |
+
+Full validation: 4,062 build jobs, all 2,846 theorem declarations audited,
+93 Lean files free of executable placeholders, and nine Layer 4 consumers
+plus nine Layer 3 regression consumers. Both standalone checks run in CI.
+
 **Acceptance criteria.**
 
 * a formal definition of `N(σ,T)` and the zero-density exponent;

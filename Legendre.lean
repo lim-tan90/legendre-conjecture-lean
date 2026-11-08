@@ -63,4 +63,11 @@ import Legendre.ZetaOriginValue
 import Legendre.PerronFullRectangle
 import Legendre.PerronUniformBounds
 import Legendre.PerronFullExplicit
+import Legendre.ExponentialKernel
+import Legendre.ExponentialMeanValue
+import Legendre.DirichletSpacing
+import Legendre.DirichletMeanValue
+import Legendre.DirichletLargeValues
+import Legendre.ZeroDensity
+import Legendre.Layer4
 import Legendre.Audit

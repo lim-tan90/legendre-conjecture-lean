@@ -84,6 +84,24 @@ public import Legendre.PerronFullExplicit
 public import Lean.Elab.Print
 
 /- Import implementation declarations solely for exhaustive dependency auditing. -/
+public import Legendre.ExponentialKernel
+public import Legendre.ExponentialMeanValue
+public import Legendre.DirichletSpacing
+public import Legendre.DirichletMeanValue
+public import Legendre.DirichletLargeValues
+public import Legendre.ZeroDensity
+public import Legendre.Layer4
+public import Legendre.Tests.Layer4
+
+import all Legendre.ExponentialKernel
+import all Legendre.ExponentialMeanValue
+import all Legendre.DirichletSpacing
+import all Legendre.DirichletMeanValue
+import all Legendre.DirichletLargeValues
+import all Legendre.ZeroDensity
+import all Legendre.Layer4
+import all Legendre.Tests.Layer4
+
 import all Legendre.PNT.Auxiliary
 import all Legendre.PNT.EulerMaclaurin
 import all Legendre.PNT.Fourier
@@ -3002,3 +3020,95 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.norm_wideZetaFactor_center_le._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_wideZetaFactor._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaWideZeroRemoval.0.Legendre.Zeta.one_fourth_pow_le_norm_wideZetaFactor._simp_1_2"
+
+-- Layer 4: all public, private and generated theorem declarations.
+#print axioms Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le
+#print axioms Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le_log
+#print axioms Legendre.Density.abs_integral_exponentialSum_sub_diagonal_le
+#print axioms Legendre.Density.coefficientEnergy.eq_1
+#print axioms Legendre.Density.coefficientEnergy_nonneg
+#print axioms Legendre.Density.conj_realPhase
+#print axioms Legendre.Density.continuous_dirichletPolynomial
+#print axioms Legendre.Density.continuous_exponentialSum
+#print axioms Legendre.Density.continuous_realPhase
+#print axioms Legendre.Density.dirichletPolynomial_eq_sum
+#print axioms Legendre.Density.dirichlet_frequencies_inj
+#print axioms Legendre.Density.dirichlet_large_values_measure_le
+#print axioms Legendre.Density.dirichlet_large_values_mul_measure_le
+#print axioms Legendre.Density.dirichlet_meanValueError_le
+#print axioms Legendre.Density.exponentialSum.eq_1
+#print axioms Legendre.Density.exponentialSum_norm_sq
+#print axioms Legendre.Density.harmonic_real_eq_sum
+#print axioms Legendre.Density.integral_dirichletPolynomial_norm_sq_le
+#print axioms Legendre.Density.integral_exponentialSum_diagonal
+#print axioms Legendre.Density.integral_exponentialSum_norm_sq
+#print axioms Legendre.Density.inv_abs_log_gap_le
+#print axioms Legendre.Density.inv_log_gap_le
+#print axioms Legendre.Density.log_gap_lower
+#print axioms Legendre.Density.meanValueError._proof_1
+#print axioms Legendre.Density.meanValueError_eq_sum
+#print axioms Legendre.Density.meanValueError_le_energy
+#print axioms Legendre.Density.norm_meanValueOffDiagonal_le
+#print axioms Legendre.Density.norm_oscillatoryKernel_le
+#print axioms Legendre.Density.norm_realPhase
+#print axioms Legendre.Density.oscillatoryKernel.eq_1
+#print axioms Legendre.Density.oscillatoryKernel_eq
+#print axioms Legendre.Density.oscillatoryKernel_zero
+#print axioms Legendre.Density.realPhase.eq_1
+#print axioms Legendre.Density.realPhase_mul_conj
+#print axioms Legendre.Density.realPhase_neg_log_eq_cpow
+#print axioms Legendre.Density.sum_inv_abs_log_gaps_le
+#print axioms Legendre.Density.sum_inv_abs_nat_gaps_le
+#print axioms Legendre.Density.sum_inv_left_gaps_le
+#print axioms Legendre.Density.sum_inv_right_gaps_le
+#print axioms Legendre.Density.tendsto_dirichletPolynomial_mean_square
+#print axioms Legendre.Density.tendsto_exponentialSum_mean_square
+#print axioms Legendre.Zeta.HasZeroDensityEstimate._proof_1
+#print axioms Legendre.Zeta.HasZeroDensityEstimate.mono
+#print axioms Legendre.Zeta.exists_log_pow_le_rpow
+#print axioms Legendre.Zeta.hasZeroDensityEstimate_of_log_bound
+#print axioms Legendre.Zeta.zeroDensityCount_le_low_of_near_one
+#print axioms Legendre.Zeta.zeroDensityCount_rational_near_one
+#print axioms Legendre.Zeta.zero_height_lt_three_of_near_one
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_2"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_3"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_4"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_5"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_6"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.log_gap_lower._simp_1_7"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._proof_1_5"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._proof_1_6"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_abs_nat_gaps_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_left_gaps_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_left_gaps_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_left_gaps_le._proof_1_3"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_right_gaps_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_right_gaps_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.DirichletSpacing.0.Legendre.Density.sum_inv_right_gaps_le._proof_1_3"
+#audit_private_axioms "_private.Legendre.ExponentialKernel.0.Legendre.Density.conj_realPhase._simp_1_2"
+#audit_private_axioms "_private.Legendre.ExponentialKernel.0.Legendre.Density.realPhase_mul_conj._simp_1_2"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_1"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_2"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_3"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_4"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_5"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_6"
+#audit_private_axioms "_private.Legendre.ExponentialMeanValue.0.Legendre.Density.tendsto_exponentialSum_mean_square._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.coefficientEnergy.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.dirichletPolynomial.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.exponentialSum.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.realPhase.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_coincident_frequency_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_density_weaken_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_large_values_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_log_loss_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mean_limit_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_near_one_count_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_singleton_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_two_term_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.harmonic.eq_1"

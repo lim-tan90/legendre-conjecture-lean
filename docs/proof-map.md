@@ -393,6 +393,22 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 3.51 | Uniform side integrals | `Legendre.Zeta.continuous_perronIntegrand_left`, `norm_perron_left_uniform`, `norm_perron_full_horizontal_le`; [PerronUniformBounds.lean](../Legendre/PerronUniformBounds.lean) | **proved**; genuine integrability; complete left and horizontal bounds |
 | 3.52 | Full uniform finite explicit formula | `Legendre.Zeta.halfWeightedPsi_full_explicit`, `norm_fullExplicitError_le_uniform`, `exists_full_truncated_explicit_formula`; [PerronFullExplicit.lean](../Legendre/PerronFullExplicit.lean) | **proved**; ψ₀=x−zero sum−log(2π)+E; one absolute contour coefficient before H,T,σ,x |
 | 3.validation | nine independently compiled consumer checks | `Legendre/Tests/Layer3.lean` | normal Layer3 import only; includes common height at x=1 and x=1/2, origin residue, small-x integrability and negative endpoints; all test declarations audited |
+| 4.1 | Unit phases and endpoint-independent kernel cancellation | `Legendre.Density.realPhase_mul_conj`, `oscillatoryKernel_zero`, `oscillatoryKernel_eq`, `norm_oscillatoryKernel_le`; [ExponentialKernel.lean](../Legendre/ExponentialKernel.lean) | **proved**; exact zero-frequency case; nonzero u gives 2/abs(u) |
+| 4.2 | Finite Gram-matrix integral and exact diagonal separation | `Legendre.Density.continuous_exponentialSum`, `exponentialSum_norm_sq`, `integral_exponentialSum_norm_sq`, `integral_exponentialSum_diagonal`; [ExponentialMeanValue.lean](../Legendre/ExponentialMeanValue.lean) | **proved**; valid with coincident frequencies, all cross terms retained |
+| 4.3 | Uniform off-diagonal mean-value error | `Legendre.Density.norm_meanValueOffDiagonal_le`, `abs_integral_exponentialSum_sub_diagonal_le`; [ExponentialMeanValue.lean](../Legendre/ExponentialMeanValue.lean) | **proved**; explicit pair sum; injective frequencies required; independent of endpoints |
+| 4.4 | Symmetric row bound transfers to coefficient energy | `Legendre.Density.meanValueError_eq_sum`, `meanValueError_le_energy`; [ExponentialMeanValue.lean](../Legendre/ExponentialMeanValue.lean) | **proved**; Schur estimate 2R times coefficient energy |
+| 4.5 | Exact limiting mean of a fixed finite exponential sum | `Legendre.Density.tendsto_exponentialSum_mean_square`; [ExponentialMeanValue.lean](../Legendre/ExponentialMeanValue.lean) | **proved**; average converges to coefficient energy for injective frequencies |
+| 4.6 | Logarithmic frequency spacing | `Legendre.Density.log_gap_lower`, `inv_log_gap_le`, `inv_abs_log_gap_le`; [DirichletSpacing.lean](../Legendre/DirichletSpacing.lean) | **proved**; reciprocal log gap ≤N/abs(m−n), distinct positive m,n≤N |
+| 4.7 | Harmonic row bounds by two gap injections | `Legendre.Density.sum_inv_left_gaps_le`, `sum_inv_right_gaps_le`, `sum_inv_abs_nat_gaps_le`, `sum_inv_abs_log_gaps_le`; [DirichletSpacing.lean](../Legendre/DirichletSpacing.lean) | **proved**; integer-gap row≤2H_N; log-gap row≤2NH_N |
+| 4.8 | Usual Dirichlet-polynomial convention and frequency injectivity | `Legendre.Density.realPhase_neg_log_eq_cpow`, `dirichletPolynomial_eq_sum`, `dirichlet_frequencies_inj`, `continuous_dirichletPolynomial`; [DirichletMeanValue.lean](../Legendre/DirichletMeanValue.lean) | **proved**; Σ over 1≤n≤N; arbitrary complex coefficients, N=0 allowed |
+| 4.9 | Explicit quantitative Dirichlet mean square | `Legendre.Density.dirichlet_meanValueError_le`, `abs_integral_dirichletPolynomial_sub_diagonal_le`, `abs_integral_dirichletPolynomial_sub_diagonal_le_log`, `integral_dirichletPolynomial_norm_sq_le`; [DirichletMeanValue.lean](../Legendre/DirichletMeanValue.lean) | **proved**; error≤4NH_N E≤4N(1+log N)E, uniform in both endpoints |
+| 4.10 | Long-interval Dirichlet mean square | `Legendre.Density.tendsto_dirichletPolynomial_mean_square`; [DirichletMeanValue.lean](../Legendre/DirichletMeanValue.lean) | **proved**; fixed N and coefficients, limit equals energy |
+| 4.11 | Continuous large-value measure bound | `Legendre.Density.dirichlet_large_values_mul_measure_le`, `dirichlet_large_values_measure_le`; [DirichletLargeValues.lean](../Legendre/DirichletLargeValues.lean) | **proved**; A≤B, V>0, threshold equality included; no separated-point count asserted |
+| 4.12 | Uniform density-exponent convention and weakening | `Legendre.Zeta.HasZeroDensityEstimate`, `HasZeroDensityEstimate.mono`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; Prop definition / proved implication; epsilon additive in exponent, C before sigma |
+| 4.13 | Uniform logarithmic-loss absorption and conditional density transfer | `Legendre.Zeta.exists_log_pow_le_rpow`, `hasZeroDensityEstimate_of_log_bound`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; every fixed log power absorbed into T^epsilon; analytic density bound is a hypothesis |
+| 4.14 | Unconditional near-one density count | `Legendre.Zeta.zero_height_lt_three_of_near_one`, `zeroDensityCount_le_low_of_near_one`, `zeroDensityCount_rational_near_one`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; rational moving cutoff count≤fixed N(3), T≥3; no fixed-strip power saving claimed |
+| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; Ingham, Huxley, large sieve and separated-point estimates remain open |
+| 4.validation | Nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -417,6 +433,14 @@ The parsed axiom output matches the complete Lean-environment enumeration exactl
 204 declarations were added in this refinement. All 85 project Lean files
 contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
+
+Layer 4 initial-infrastructure validation (2026-11-08): full build passed
+4,062 jobs, and all 2,846 project theorem declarations are audited, including
+90 new public/private/generated declarations. Two independent enumerations
+agree with the parsed audit output exactly. All 93 project Lean files have
+zero executable placeholders. Nine new Layer 4 consumers and all nine
+Layer 3 regression consumers compile and pass standalone checks in CI.
+See [the precise estimates and remaining obligations](layer4-mean-values.md).
 
 ## What the audit proves — and what it does not
 
