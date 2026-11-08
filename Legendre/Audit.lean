@@ -4,10 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import Legendre.Literature
+import all Legendre.Literature
+import all Legendre.Literature.Statements
+import all Legendre.Literature.Comparators
+import all Legendre.Literature.LayerCoverage
+public import Legendre.Tests.Literature
+import all Legendre.Tests.Literature
+public import Legendre.Tests.LiteratureRegression
+import all Legendre.Tests.LiteratureRegression
+
 public import Legendre.Conditional
 public import Legendre.Bertrand
 public import Legendre.ExplicitBounds
 public import Legendre.Layer5
+import all Legendre.Layer5.Statements
 public import Legendre.Nagura
 public import Legendre.Zeta
 public import Legendre.ZetaCounting
@@ -2370,11 +2381,9 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.Ingham58Paper.eq_1
 #print axioms Legendre.IwaniecPintz._proof_1
 #print axioms Legendre.IwaniecPintz._proof_2
-#print axioms Legendre.IwaniecPintz._proof_3
 #print axioms Legendre.IwaniecPintz.eq_1
 #print axioms Legendre.IwaniecPintzPaper._proof_1
 #print axioms Legendre.IwaniecPintzPaper._proof_2
-#print axioms Legendre.IwaniecPintzPaper._proof_3
 #print axioms Legendre.IwaniecPintzPaper.eq_1
 #print axioms Legendre.Mozzochi._proof_1
 #print axioms Legendre.Mozzochi.eq_1
@@ -2637,14 +2646,14 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.exists_prime_of_theta_lt._simp_1_1"
 #audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.exists_prime_of_theta_lt._simp_1_2"
 #audit_private_axioms "_private.Legendre.ExplicitBounds.0.Legendre.hasPrimeIn_self._proof_1_1"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.bakerHarmanPaper_iff._simp_1_4"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.bakerHarmanPintzPaper_iff._simp_1_4"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_1"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_2"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_3"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_4"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_5"
-#audit_private_axioms "_private.Legendre.Layer5.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.bakerHarmanPaper_iff._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.bakerHarmanPintzPaper_iff._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer5.Statements.0.Legendre.hasPrimeInShortInterval_of_primeGapBound._proof_1_6"
 #audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrime_ratio_of_naguraWitness._proof_1_1"
 #audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_1"
 #audit_private_axioms "_private.Legendre.Nagura.FiniteCertificates.0.Legendre.Nagura.consecutivePrimes_ratio_finite._proof_1_2"
@@ -3719,3 +3728,118 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_5"
 #audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_6"
 #audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_7"
+
+-- Independent literature comparisons, coverage and semantic regression guards.
+#print axioms Legendre.HasPrimeIn.eq_1
+#print axioms Legendre.HasPrimeInShortInterval.eq_1
+#print axioms Legendre.LegendreAt.eq_1
+#print axioms Legendre.Literature.BakerHarman1996Progress._proof_1
+#print axioms Legendre.Literature.BakerHarman1996Progress._proof_2
+#print axioms Legendre.Literature.BakerHarmanPintz2001._proof_1
+#print axioms Legendre.Literature.ForwardProgress.eq_1
+#print axioms Legendre.Literature.GuthMaynard2024Density._proof_1
+#print axioms Legendre.Literature.HeathBrownIwaniec1979Progress._proof_1
+#print axioms Legendre.Literature.HeathBrownIwaniec1979Progress._proof_2
+#print axioms Legendre.Literature.Hoheisel1930Progress._proof_1
+#print axioms Legendre.Literature.Hoheisel1930Progress._proof_2
+#print axioms Legendre.Literature.Huxley1972Progress._proof_1
+#print axioms Legendre.Literature.Huxley1972Progress._proof_2
+#print axioms Legendre.Literature.Ingham1937DensityProgress._proof_1
+#print axioms Legendre.Literature.Ingham1937DensityProgress._proof_2
+#print axioms Legendre.Literature.Ingham1937LindelofProgress._proof_1
+#print axioms Legendre.Literature.Ingham1940Density._proof_1
+#print axioms Legendre.Literature.IwaniecPintz1984Progress._proof_1
+#print axioms Legendre.Literature.IwaniecPintz1984Progress._proof_2
+#print axioms Legendre.Literature.LinearMeanSquareBenchmark._proof_1
+#print axioms Legendre.Literature.Mozzochi1986Progress._proof_1
+#print axioms Legendre.Literature.Nagura1952._proof_1
+#print axioms Legendre.Literature.Nagura1952._proof_2
+#print axioms Legendre.Literature.Nagura1952._proof_3
+#print axioms Legendre.Literature.RHGapProgress._proof_1
+#print axioms Legendre.Literature.ZetaFoundationBenchmark._proof_1
+#print axioms Legendre.Literature.ZetaFoundationBenchmark._proof_2
+#print axioms Legendre.Literature.bakerHarmanPintz_comparator
+#print axioms Legendre.Literature.bakerHarman_comparator_iff
+#print axioms Legendre.Literature.bertrand_comparator
+#print axioms Legendre.Literature.chen_comparator_iff
+#print axioms Legendre.Literature.cramer1920_count_comparator
+#print axioms Legendre.Literature.cramer_comparator_iff
+#print axioms Legendre.Literature.cramer_implies_eventual_legendre
+#print axioms Legendre.Literature.cramer_positive_exponent
+#print axioms Legendre.Literature.densityPower_iff
+#print axioms Legendre.Literature.densityPower_of_two
+#print axioms Legendre.Literature.dudekJohnston_comparator_iff
+#print axioms Legendre.Literature.exists_prime_of_count_lt
+#print axioms Legendre.Literature.finiteLegendre_mono
+#print axioms Legendre.Literature.finiteOppermann_implies_legendre
+#print axioms Legendre.Literature.forwardProgress_iff
+#print axioms Legendre.Literature.forwardProgress_of_gap
+#print axioms Legendre.Literature.gapProgress_iff
+#print axioms Legendre.Literature.gapProgress_of_backward
+#print axioms Legendre.Literature.guthMaynard_global_comparator
+#print axioms Legendre.Literature.heathBrownIwaniec_comparator_iff
+#print axioms Legendre.Literature.hoheisel_comparator_iff
+#print axioms Legendre.Literature.huxley_comparator_iff
+#print axioms Legendre.Literature.huxley_global_comparator
+#print axioms Legendre.Literature.ingham_density_comparator_iff
+#print axioms Legendre.Literature.ingham_lindelof_comparator_iff
+#print axioms Legendre.Literature.iwaniecPintz_comparator_iff
+#print axioms Legendre.Literature.layer2_comparator
+#print axioms Legendre.Literature.layer3_comparator
+#print axioms Legendre.Literature.layer3_no_fixed_power_comparator
+#print axioms Legendre.Literature.layer4_mean_comparator
+#print axioms Legendre.Literature.legendre_comparator_iff
+#print axioms Legendre.Literature.mozzochi_comparator_iff
+#print axioms Legendre.Literature.nagura_comparator
+#print axioms Legendre.Literature.nagura_comparator_implies_repository
+#print axioms Legendre.Literature.rhGap_comparator_iff
+#print axioms Legendre.Literature.rhGap_exponent_comparator
+#print axioms Legendre.Literature.sorensonWebster_comparator
+#print axioms Legendre.ShortIntervalStatement.eq_1
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.bertrand_comparator._proof_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.bertrand_comparator._proof_1_2"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.cramer_comparator_iff._simp_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.dudekJohnston_comparator_iff._proof_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.dudekJohnston_comparator_iff._proof_1_2"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.exists_prime_of_count_lt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.finiteOppermann_implies_legendre._proof_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.gapProgress_iff._simp_1_1"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.legendre_comparator_iff._proof_1_2"
+#audit_private_axioms "_private.Legendre.Literature.Comparators.0.Legendre.Literature.legendre_comparator_iff._proof_1_3"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_bakerharman1996"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_bakerharmanpintz2001"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_bertrand1852"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_chen1975"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_cramer1920rh"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_cramer1936"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_dudekjohnston2026"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_heathbrowniwaniec1979"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_hoheisel1930"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_huxley1972"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_ingham1937density"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_ingham1937lindelof"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_iwaniecpintz1984"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_layer0"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_layer1"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_layer2"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_layer3"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_layer4"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_legendre1808"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_mozzochi1986"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_nagura1952"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.comparator_sorensonwebster2025"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.historical_proof_bertrand1852"
+#audit_private_axioms "_private.Legendre.Tests.Literature.0.Legendre.Tests.Literature.historical_proof_nagura1952"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.almost_prime_scope_guard"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.bhp_epsilon_consumer"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.computation_version_guard"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.corrected_heathBrownIwaniec_value"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.corrected_iwaniecPintz_value"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.cramer_bridge_consumer"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.density_12_5_consumer"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.density_30_13_consumer"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.layer3_power_guard"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.oppermann_origin_guard"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.oppermann_origin_guard._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.rh_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.strict_nagura_consumer"

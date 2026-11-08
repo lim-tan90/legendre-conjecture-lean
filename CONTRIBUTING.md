@@ -21,6 +21,15 @@ Thanks for helping with the formalization.
    paths), retain the upstream license text, and keep the attribution in the
    adapted files.  This is required for every port, not only for Nagura.
 
+7. **Use layer directories for new Layer 5 and later work.** Place implementation
+   modules in `Legendre/LayerN/` and keep `Legendre/LayerN.lean` as the public
+   entry point. Layer 5 statements now live in `Layer5/Statements.lean`; Layer 6
+   and 7 directories are reserved for future proofs/certificates.
+8. **Keep literature comparisons current.** Update both READMEs, the proof map,
+   and `docs/literature-comparators.json` for a changed milestone or source file.
+   Preserve exponent, hypotheses and finite/eventual scope. A statement bridge
+   must not be presented as a proof of the open input. Run the comparator checks.
+
 ## Local checks
 
 ```bash
@@ -29,6 +38,7 @@ lake build
 lake env lean Legendre/Tests/Layer3.lean
 lake env lean Legendre/Tests/Layer4.lean
 python3 scripts/audit.py
+python3 scripts/check_literature.py
 ```
 
 On Windows:

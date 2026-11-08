@@ -12,7 +12,9 @@ The repository uses two long-lived branches:
 2. Make the change.  If you add a formalization step:
    * add the Lean declaration and a complete proof (no `sorry`);
    * add a row to `docs/proof-map.md`;
-   * update the progress table in `README.md`;
+   * update both READMEs, the proof map and literature comparator catalog;
+   * put new Layer 5 and later implementations in `Legendre/LayerN/`, exporting
+     completed modules through `Legendre/LayerN.lean`;
    * do **not** add PDFs or long verbatim excerpts of copyrighted papers.
 3. Run locally:
 
@@ -20,6 +22,7 @@ The repository uses two long-lived branches:
    lake exe cache get
    lake build
    python3 scripts/audit.py
+   python3 scripts/check_literature.py
    ```
 
 4. Open a pull request **against `review`**, not `master`.

@@ -134,4 +134,5 @@ import Legendre.ZetaXi
 import Legendre.XiSquareKernel
 import Legendre.XiGaussianEnvelope
 import Legendre.XiSquareContour
+import Legendre.Literature
 import Legendre.Audit

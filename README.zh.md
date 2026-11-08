@@ -18,6 +18,14 @@
 > 5. CI 必须为绿色。维护者只有在收到明确指令、且审计通过后，才会把
 >    `review` 合入 `master`。
 >
+> 6. **Layer 5 及后续层级按层组织：**实现放在 `Legendre/LayerN/`，
+>    `Legendre/LayerN.lean` 作为统一导入入口。Layer 5 陈述已移入
+>    `Layer5/Statements.lean`；Layer 6、7 目录已预留给后续证明和证书。
+> 7. 进展变化时同步更新文献指数 comparator、中英文 README 和证明进度表；
+>    运行 `python3 scripts/check_literature.py`。陈述对应通过不等于原定理已证明。
+> 8. 每次移植均须在中英文 README 标明来源、固定提交、许可证及目标路径，
+>    保留许可证原文与代码中的作者归属。
+>
 > 完整指南：**[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
 > PR 检查清单：[`.github/pull_request_template.md`](.github/pull_request_template.md)
 
@@ -73,9 +81,9 @@
 归一化轮廓积分的均方界及四次矩定理仍开放。[证明链](docs/layer4-moment-kernel.md)。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,132 项构建**、**全部 3,311 个项目定理声明**的公理审计（仅三项标准公理）、
-**157 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**42 项独立使用检查**（Layer 4 三十三项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+验证：**4,139 项构建**、**全部 3,422 个项目定理声明**的公理审计（仅三项标准公理）、
+**164 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**42 项独立使用检查**（Layer 4 三十三项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **78 项**。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -294,38 +302,55 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 
 </details>
 
+## 文献指数对照
+
+下表及目标猜想共 **17 项**均已有[独立 Lean comparator](docs/literature-comparators.md)，
+并建立覆盖全部项目 Lean 文件的 Layer 0～4 对照清单。
+`python3 scripts/check_literature.py` 核对清单并编译独立的数值预期。
+比较允许正 `ε` 损失、无害乘法常数及区间方向变换，但保留假设、有限范围与“最终成立”的区别。
+目前只有 Bertrand、Nagura 两项历史素数区间定理已有无条件证明；其余条目对照通过不代表原定理已证明。
+
+**来源勘误：** Heath-Brown–Iwaniec 1979 应为 `11/20`（Pintz 作者综述 §3 (3.13)）；
+Iwaniec–Pintz 1984 应为 `23/42`（出版社摘要及同一综述）。
+此前的 `13/23` 归属及缺乏所引文献支持的 `11/20−1/406` 已在 Lean 与文档中同步修正。
+旧 `*Paper` 名称保留，含义明确为指数规范化结论，不再称作论文全部强结论的精确陈述。
+Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.33×10^13`。
+[逐项来源、疑似引言笔误及核查限制](docs/literature-comparators.md#corrections-and-source-limitations)。
+本次没有确立原始素数间隙定理证明中的数学漏洞。
+
+<!-- comparator:legendre1808 -->
 ## 历史进展总览
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
-第 2 版, Courcier, Paris, 1808）：`θ = 1/2`（或 `θ = 1/2` 且常数 `< 2`）。
+第 2 版, Courcier, Paris, 1808）：开区间 `(n²,(n+1)²)` 中有素数。`θ < 1/2` 足以推出最终成立；
+在端点 `θ = 1/2` 还需控制常数（例如 `< 2`）。
 它仍未解决，也没有形式化证明。
 
 这里的 `θ` 指 `p_{n+1} - p_n ≪ p_n^{θ+ε}` 中的指数；`+ε` 是论文陈述的一部分。
-对九项指数结果，“无证明”表示精确陈述已经编码（既作为
+对九项指数结果，“无证明”表示指数规范化陈述已经编码（既作为
 `Legendre/Conditional.lean` 中的粗粒度 `Prop`，也作为 `Legendre/Layer5.lean`
-中论文原文的精确约定），但**它的证明没有形式化**。RH 与 Cramér 两行只有粗粒度
-`Prop`。
+中的 `+ε`、常数与阈值约定），但**它的证明没有形式化**。RH 与 Cramér 保留相应条件或猜想身份；对照器不会把它们当作已证明。
 
 | 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
 |---|---|---|---|---|
-| **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
-| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | 不适用 — `(x, 6x/5]`，`x ≥ 25` | **[✅ 是 — 本仓库完整证明](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** |
-| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L289)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
-| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L302)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Layer5.lean L302](Legendre/Layer5.lean#L302)** |
-| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L315)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Layer5.lean L315](Legendre/Layer5.lean#L315)** |
-| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L328)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Layer5.lean L328](Legendre/Layer5.lean#L328)** |
-| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L340)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Layer5.lean L340](Legendre/Layer5.lean#L340)** |
-| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L353)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Layer5.lean L353](Legendre/Layer5.lean#L353)** |
-| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L366)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** · **[Layer5.lean L366](Legendre/Layer5.lean#L366)** |
-| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L380)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** · **[Layer5.lean L380](Legendre/Layer5.lean#L380)** |
-| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | **[❌ 否 — 无证明，精确陈述 ✅](Legendre/Layer5.lean#L395)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** · **[Layer5.lean L395](Legendre/Layer5.lean#L395)** |
-| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
-| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0（猜想） | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
-| 显式验证 `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | 不适用（有限范围） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 6 层路线图](docs/formalization-roadmap.md)** |
-| Chen 1975（`P₂`，最终） | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | 不适用（`P₂`） | **[❌ 否 — 未编码](Legendre/Conditional.lean#L146)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
-| Dudek–Johnston 2026（`P₄`，所有 `n`） | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | 不适用（`P₄`） | **[❌ 否 — 未编码](docs/formalization-roadmap.md)** | **[第 7 层路线图](docs/formalization-roadmap.md)** |
+| **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**  [对照](docs/literature-comparators.md#bertrand1852) <!-- comparator:bertrand1852 --> |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | 不适用 — `(x, 6x/5]`，`x ≥ 25` | **[✅ 是 — 本仓库完整证明](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [对照](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
+| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L291)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Statements.lean L291](Legendre/Layer5/Statements.lean#L291)**  [对照](docs/literature-comparators.md#hoheisel1930) <!-- comparator:hoheisel1930 --> |
+| Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L304)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Statements.lean L304](Legendre/Layer5/Statements.lean#L304)**  [对照](docs/literature-comparators.md#ingham1937lindelof) <!-- comparator:ingham1937lindelof --> |
+| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L317)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [对照](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
+| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L330)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Statements.lean L330](Legendre/Layer5/Statements.lean#L330)**  [对照](docs/literature-comparators.md#huxley1972) <!-- comparator:huxley1972 --> |
+| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 11/20 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L342)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Statements.lean L342](Legendre/Layer5/Statements.lean#L342)**  [对照](docs/literature-comparators.md#heathbrowniwaniec1979) <!-- comparator:heathbrowniwaniec1979 --> |
+| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 23/42 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L355)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Statements.lean L355](Legendre/Layer5/Statements.lean#L355)**  [对照](docs/literature-comparators.md#iwaniecpintz1984) <!-- comparator:iwaniecpintz1984 --> |
+| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L368)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** · **[Statements.lean L368](Legendre/Layer5/Statements.lean#L368)**  [对照](docs/literature-comparators.md#mozzochi1986) <!-- comparator:mozzochi1986 --> |
+| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L382)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** · **[Statements.lean L382](Legendre/Layer5/Statements.lean#L382)**  [对照](docs/literature-comparators.md#bakerharman1996) <!-- comparator:bakerharman1996 --> |
+| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525**（当前纪录） | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L397)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** · **[Statements.lean L397](Legendre/Layer5/Statements.lean#L397)**  [对照](docs/literature-comparators.md#bakerharmanpintz2001) <!-- comparator:bakerharmanpintz2001 --> |
+| Riemann 假设（条件性） | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)**  [对照](docs/literature-comparators.md#cramer1920rh) <!-- comparator:cramer1920rh --> |
+| Cramér 猜想（条件性） | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0 + ε（猜想） | **[❌ 否 — 无证明，粗粒度 `Prop`](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)**  [对照](docs/literature-comparators.md#cramer1936) <!-- comparator:cramer1936 --> |
+| 显式验证 `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | 不适用（有限范围） | **[❌ 无证明 — 已有对照陈述](Legendre/Literature/Statements.lean)** | **[第 6 层路线图](docs/formalization-roadmap.md)**  [对照](docs/literature-comparators.md#sorensonwebster2025) <!-- comparator:sorensonwebster2025 --> |
+| Chen 1975（`P₂`，最终） | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | 不适用（`P₂`） | **[❌ 无证明 — 已有对照陈述](Legendre/Literature/Statements.lean)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)**  [对照](docs/literature-comparators.md#chen1975) <!-- comparator:chen1975 --> |
+| Dudek–Johnston 2026（`P₄`，所有 `n`） | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | 不适用（`P₄`） | **[❌ 无证明 — 已有对照陈述](Legendre/Literature/Statements.lean)** | **[第 7 层路线图](docs/formalization-roadmap.md)**  [对照](docs/literature-comparators.md#dudekjohnston2026) <!-- comparator:dudekjohnston2026 --> |
 
-状态单元格本身可点击：**✅** 跳转到证明；**❌“无证明，精确陈述 ✅”** 跳转到
+状态单元格本身可点击：**✅** 跳转到证明；**❌“无证明，指数陈述 ✅”** 跳转到
 [`Layer5.lean`](Legendre/Layer5.lean) 中按论文原文编码的陈述（不是证明）；
 **❌“无证明，粗粒度 `Prop`”** 跳转到粗粒度条件陈述编码；**❌“未编码”** 跳转到
 路线图。完整 DOI/arXiv 链接与证据等级见
@@ -364,11 +389,11 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.nagura_hasPrimeIn` / `nagura_prime_gap` | Nagura 定理：对每个 `x ≥ 25`，`(x, 6x/5]` 中有素数 | **已证明** | **[Nagura.lean L50](Legendre/Nagura.lean#L50)** · **[L41](Legendre/Nagura.lean#L41)** |
 | `Legendre.Nagura.naguraChebyshevSum_eq_log_factorial` | Ramanujan/Nagura 恒等式 `∑_{m≤n} ψ(n/m) = log n!` | **已证明** | **[PsiBounds.lean L109](Legendre/Nagura/PsiBounds.lean#L109)** |
 | `Legendre.Nagura.psi_nat_lt_1_086_mul` / `psi_nat_gt_0_916_mul` | 显式 Chebyshev 界 `0.916n < ψ(n) < 1.086n` | **已证明** | **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** · **[L1844](Legendre/Nagura/PsiBounds.lean#L1844)** |
-| `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | 论文精确陈述约定：显式指数、常数与“充分大”阈值 | 定义 | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
-| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`，需 `θ ≥ 0`、`C ≥ 0`） | **已证明** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
-| `Legendre.shortIntervalStatement_iff_exponentLimit` | 论文精确 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
-| `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | 论文精确 `θ < 1/2` 陈述 ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
-| `Legendre.*Paper_iff`（九项结果） | 每项结果的精确陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
+| `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | 指数规范化陈述约定：显式指数、常数与“充分大”阈值 | 定义 | **[Statements.lean L62](Legendre/Layer5/Statements.lean#L62)** · **[L72](Legendre/Layer5/Statements.lean#L72)** · **[L81](Legendre/Layer5/Statements.lean#L81)** |
+| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | 区间形式 ↔ 间隙形式（相同的 `θ` 与 `C`，需 `θ ≥ 0`、`C ≥ 0`） | **已证明** | **[Statements.lean L162](Legendre/Layer5/Statements.lean#L162)** |
+| `Legendre.shortIntervalStatement_iff_exponentLimit` | 指数规范化 `+ε` 形式 ↔ 粗粒度条件化接口 | **已证明** | **[Statements.lean L258](Legendre/Layer5/Statements.lean#L258)** |
+| `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | 指数规范化 `θ < 1/2` 陈述 ⇒ 大 `n` 的勒让德猜想 | **已证明** | **[Statements.lean L266](Legendre/Layer5/Statements.lean#L266)** |
+| `Legendre.*Paper_iff`（九项结果） | 每项结果的指数规范化陈述 ↔ 其粗粒度 `Prop` | **已证明** | **[Statements.lean L295](Legendre/Layer5/Statements.lean#L295)** |
 | `Legendre.PNT.psi_classical_error` | ψ=x+O(x exp(−c√log x))，c>0 | **已证明**；解析证明移植自 PNT+ | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.primeCount_error_of_theta` | 部分求和保留经典误差尺度 | **已证明**；本项目新增桥梁 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | ψ/θ/π−Li₂ 的共同经典误差与最终不等式 | **已证明**；常数为存在性结果 | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
@@ -403,12 +428,12 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 
 ## 明确**没有**声称的内容
 
-以下内容只被写成 `Prop` 定义（粗粒度形式与论文精确形式），供后续工作接入；
+以下内容只被写成 `Prop` 定义（粗粒度形式与指数规范化形式），供后续工作接入；
 它们的证明**没有**在本仓库形式化：
 
 * Hoheisel 1930、Ingham 1937（`5/8` 与 `577/925` 两条路线）、Huxley 1972、
   Heath-Brown–Iwaniec 1979、Iwaniec–Pintz 1984、Mozzochi 1986、
-  Baker–Harman 1996、Baker–Harman–Pintz 2001 — 粗粒度 `Prop` 与论文精确形式
+  Baker–Harman 1996、Baker–Harman–Pintz 2001 — 粗粒度 `Prop` 与指数规范化形式
   都已编码（证明仍未形式化）；陈述代码：
   **[Hoheisel L70](Legendre/Conditional.lean#L70)** ·
   **[Ingham 5/8 L74](Legendre/Conditional.lean#L74)** ·
@@ -419,7 +444,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
   **[Mozzochi L89](Legendre/Conditional.lean#L89)** ·
   **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
   **[BHP L96](Legendre/Conditional.lean#L96)** ·
-  **[Layer5.lean 中的论文精确形式](Legendre/Layer5.lean)**；
+  **[Layer5.lean 中的指数规范化形式](Legendre/Layer5.lean)**；
 * Dusart 型显式界（`ϑ(x) − x < x/36260`、`x ≥ 3 594 641` 时
   `|ϑ(x) − x| ≤ 0.2x/log²x`、`x ≥ 396 738` 时 `(x, x + x/(25 log²x)]` 中有素数）
   — 需要带无零点区域的显式素数定理，**尚未**声称（第 2–3 层）；
@@ -457,7 +482,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
 | 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
-| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
+| 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含指数规范化的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
@@ -546,7 +571,10 @@ Legendre/
   Conditional.lean   文献指数 Prop、条件化定理、P_k
   Bertrand.lean      Bertrand 公设的复用与比较
   ExplicitBounds.lean Layer 1：区间 API、(x,2x]、Chebyshev θ/ψ/π 界
-  Layer5.lean        Layer 5：论文精确的短区间陈述与桥接
+  Layer5.lean        Layer 5 统一导入入口
+  Layer5/           短区间陈述及后续解析证明
+  Layer6/           预留：有限验证与证书
+  Layer7/           预留：几乎素数与筛法证明
   Nagura.lean        Layer 1：Nagura 定理，(x, 6x/5]，x >= 25
   Nagura/            Nagura 证明：有限素数链 + 显式 psi 界
   Audit.lean         #print axioms 审计

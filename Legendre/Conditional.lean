@@ -79,11 +79,11 @@ def Ingham577 : Prop := ShortIntervalExponentLimit (577 / 925)
 /-- Huxley (1972): `θ = 7/12 + ε`. -/
 def Huxley : Prop := ShortIntervalExponentLimit (7 / 12)
 
-/-- Heath-Brown--Iwaniec (1979), weighted zero-density: `θ = 13/23 + ε`. -/
-def HeathBrownIwaniec : Prop := ShortIntervalExponentLimit (13 / 23)
+/-- Heath-Brown--Iwaniec (1979), weighted zero-density: `θ = 11/20 + ε`. -/
+def HeathBrownIwaniec : Prop := ShortIntervalExponentLimit (11 / 20)
 
-/-- Iwaniec--Pintz (1984): `θ = 11/20 - 1/406 + ε`. -/
-def IwaniecPintz : Prop := ShortIntervalExponentLimit (11 / 20 - 1 / 406)
+/-- Iwaniec--Pintz (1984): `θ = 23/42 + ε`. -/
+def IwaniecPintz : Prop := ShortIntervalExponentLimit (23 / 42)
 
 /-- Mozzochi (1986): `θ = 11/20 - 1/384 + ε`. -/
 def Mozzochi : Prop := ShortIntervalExponentLimit (11 / 20 - 1 / 384)
@@ -108,9 +108,9 @@ theorem ingham577_above_half : (1 / 2 : ℝ) < 577 / 925 := by norm_num
 
 theorem huxley_above_half : (1 / 2 : ℝ) < 7 / 12 := by norm_num
 
-theorem heathBrownIwaniec_above_half : (1 / 2 : ℝ) < 13 / 23 := by norm_num
+theorem heathBrownIwaniec_above_half : (1 / 2 : ℝ) < 11 / 20 := by norm_num
 
-theorem iwaniecPintz_above_half : (1 / 2 : ℝ) < 11 / 20 - 1 / 406 := by norm_num
+theorem iwaniecPintz_above_half : (1 / 2 : ℝ) < 23 / 42 := by norm_num
 
 theorem mozzochi_above_half : (1 / 2 : ℝ) < 11 / 20 - 1 / 384 := by norm_num
 

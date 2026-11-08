@@ -20,6 +20,16 @@
 > 5. CI must be green. The maintainer merges `review → master` only after an
 >    explicit instruction and a green audit.
 >
+> 6. **Organize new Layer 5 and later work by layer:** put implementations in
+>    `Legendre/LayerN/`; use `Legendre/LayerN.lean` as the public entry point.
+>    Layer 5 statements are in `Layer5/Statements.lean`; Layer 6 and 7 directories
+>    are reserved for future proofs and certificates.
+> 7. Update the historical exponent comparators, both READMEs and proof map when
+>    a milestone changes. Run `python3 scripts/check_literature.py`; statement
+>    correspondence alone must not be labelled a proof.
+> 8. Record every adapted formalization's source, pinned commit, license and
+>    destination in both READMEs; retain the license and attribution in the code.
+>
 > Full guide: **[docs/PR_WORKFLOW.md](docs/PR_WORKFLOW.md)** ·
 > PR checklist: [`.github/pull_request_template.md`](.github/pull_request_template.md)
 
@@ -89,10 +99,11 @@ pointwise reduction `|ζ(s)|⁴ ≤ 4|xiSmoothedZetaSquare(s)|²` on Re(s)=1/2.
 The normalized contour mean bound and fourth-moment theorem remain open. [Proof chain](docs/layer4-moment-kernel.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,132 build jobs**, all **3,311 project theorem declarations**
-audited with only the three standard axioms, **157 Lean files** with zero
+Validation: **4,139 build jobs**, all **3,422 project theorem declarations**
+audited with only the three standard axioms, **164 Lean files** with zero
 executable `sorry`/`admit`/`sorryAx`, and **42 independent consumer checks**
-(thirty-three Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+(thirty-three Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
+(24 catalog/closed-proof consumers and 12 semantic regression guards).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
@@ -371,46 +382,67 @@ with no additional trusted axioms.
 
 </details>
 
+## Literature exponent comparison
+
+All **17 historical targets/results** below now have [typed comparators](docs/literature-comparators.md)
+and a complete Layer 0–4 source map. `python3 scripts/check_literature.py`
+checks coverage and compiles independent numeric expectations. Comparison allows
+positive epsilon losses, harmless constants and changes of interval direction;
+it preserves hypotheses and finite/eventual scope. Only Bertrand and Nagura
+have closed historical prime-interval proofs here; comparison bridges do not
+prove the other historical claims.
+
+**Source corrections:** Heath-Brown–Iwaniec 1979 is `11/20` (Pintz §3 (3.13)),
+and Iwaniec–Pintz 1984 is `23/42` (publisher abstract and the same author survey).
+The former `13/23` attribution and unsupported `11/20−1/406` expectation are
+corrected in Lean as well as this table. Legacy `*Paper` names denote normalized
+exponent consequences, rather than all stronger conclusions of their papers.
+The final Sorenson–Webster range is `7.05×10^13`; arXiv v1 has `3.33×10^13`.
+[Sources, apparent introductory typos and limits](docs/literature-comparators.md#corrections-and-source-limitations).
+No proof gap in the original prime-gap theorems has been established.
+
 ## Historical progress at a glance
 
+<!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
-nombres*, 2nd ed., Courcier, Paris, 1808): `θ = 1/2` (or `θ = 1/2` with
-constant `< 2`).  It is still **open** and has no formal proof.
+nombres*, 2nd ed., Courcier, Paris, 1808): primes in the open square intervals.
+An exponent strictly below `1/2` suffices eventually; at `1/2` an additional
+constant restriction, such as `< 2`, is needed.  It is still **open** and has no formal proof.
 
 Here `θ` means the exponent in `p_{n+1} - p_n ≪ p_n^{θ+ε}`; the `+ε` is part of
 the published statements.  For the nine exponent results, “No proof” means the
 exact statement is encoded (both as a coarse `Prop` in
-`Legendre/Conditional.lean` and in the paper-exact conventions of
+`Legendre/Conditional.lean` and in the normalized exponent conventions of
 `Legendre/Layer5.lean`), but **its proof is not formalized**.  The RH and
-Cramér rows are coarse-`Prop` only.
+Cramér comparators preserve their hypothesis or conjectural status.
 
 | Step (chronological) | Original literature | Exponent θ | Formalized in Lean? | Lean code |
 |---|---|---|---|---|
-| **Bertrand's postulate** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140; proof: P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ Yes — mathlib proof, re-exported](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)** |
-| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | n/a — `(x, 6x/5]`, `x ≥ 25` | **[✅ Yes — fully proved here](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** |
-| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L289)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Layer5.lean L289](Legendre/Layer5.lean#L289)** |
-| Ingham 1937 (Lindelöf route) | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L302)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Layer5.lean L302](Legendre/Layer5.lean#L302)** |
-| Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L315)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Layer5.lean L315](Legendre/Layer5.lean#L315)** |
-| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L328)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Layer5.lean L328](Legendre/Layer5.lean#L328)** |
-| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 13/23 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L340)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Layer5.lean L340](Legendre/Layer5.lean#L340)** |
-| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 11/20 − 1/406 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L353)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Layer5.lean L353](Legendre/Layer5.lean#L353)** |
-| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L366)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** · **[Layer5.lean L366](Legendre/Layer5.lean#L366)** |
-| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L380)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** · **[Layer5.lean L380](Legendre/Layer5.lean#L380)** |
-| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525** (current record) | **[❌ No proof — exact statement ✅](Legendre/Layer5.lean#L395)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** · **[Layer5.lean L395](Legendre/Layer5.lean#L395)** |
-| Riemann Hypothesis (conditional) | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ No proof — coarse `Prop`](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)** |
-| Cramér's conjecture (conditional) | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0 (conjectural) | **[❌ No proof — coarse `Prop`](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)** |
-| Explicit verification `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | n/a (finite range) | **[❌ No — not encoded](docs/formalization-roadmap.md)** | **[Layer 6 roadmap](docs/formalization-roadmap.md)** |
-| Chen 1975 (`P₂`, eventually) | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | n/a (`P₂`) | **[❌ No — not encoded](Legendre/Conditional.lean#L146)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)** |
-| Dudek–Johnston 2026 (`P₄`, all `n`) | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | n/a (`P₄`) | **[❌ No — not encoded](docs/formalization-roadmap.md)** | **[Layer 7 roadmap](docs/formalization-roadmap.md)** |
+| **Bertrand's postulate** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140; proof: P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ Yes — mathlib proof, re-exported](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**  [compare](docs/literature-comparators.md#bertrand1852) <!-- comparator:bertrand1852 --> |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | n/a — `(x, 6x/5]`, `x ≥ 25` | **[✅ Yes — fully proved here](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [compare](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
+| Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L291)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Statements.lean L291](Legendre/Layer5/Statements.lean#L291)**  [compare](docs/literature-comparators.md#hoheisel1930) <!-- comparator:hoheisel1930 --> |
+| Ingham 1937 (Lindelöf route) | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L304)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Statements.lean L304](Legendre/Layer5/Statements.lean#L304)**  [compare](docs/literature-comparators.md#ingham1937lindelof) <!-- comparator:ingham1937lindelof --> |
+| Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L317)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [compare](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
+| Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L330)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Statements.lean L330](Legendre/Layer5/Statements.lean#L330)**  [compare](docs/literature-comparators.md#huxley1972) <!-- comparator:huxley1972 --> |
+| Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 11/20 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L342)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Statements.lean L342](Legendre/Layer5/Statements.lean#L342)**  [compare](docs/literature-comparators.md#heathbrowniwaniec1979) <!-- comparator:heathbrowniwaniec1979 --> |
+| Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 23/42 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L355)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Statements.lean L355](Legendre/Layer5/Statements.lean#L355)**  [compare](docs/literature-comparators.md#iwaniecpintz1984) <!-- comparator:iwaniecpintz1984 --> |
+| Mozzochi 1986 | C. J. Mozzochi, *On the difference between consecutive primes*, J. Number Theory **24** (1986), 181–187 | 11/20 − 1/384 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L368)** | **[Conditional.lean L89](Legendre/Conditional.lean#L89)** · **[Statements.lean L368](Legendre/Layer5/Statements.lean#L368)**  [compare](docs/literature-comparators.md#mozzochi1986) <!-- comparator:mozzochi1986 --> |
+| Baker–Harman 1996 | R. C. Baker, G. Harman, *The difference between consecutive primes*, Proc. London Math. Soc. (3) **72** (1996), 261–280 | 0.535 | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L382)** | **[Conditional.lean L92](Legendre/Conditional.lean#L92)** · **[Statements.lean L382](Legendre/Layer5/Statements.lean#L382)**  [compare](docs/literature-comparators.md#bakerharman1996) <!-- comparator:bakerharman1996 --> |
+| Baker–Harman–Pintz 2001 | R. C. Baker, G. Harman, J. Pintz, *The difference between consecutive primes, II*, Proc. London Math. Soc. (3) **83** (2001), 532–562 | **0.525** (current record) | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L397)** | **[Conditional.lean L96](Legendre/Conditional.lean#L96)** · **[Statements.lean L397](Legendre/Layer5/Statements.lean#L397)**  [compare](docs/literature-comparators.md#bakerharmanpintz2001) <!-- comparator:bakerharmanpintz2001 --> |
+| Riemann Hypothesis (conditional) | H. Cramér, *Some theorems concerning prime numbers*, Ark. Mat. Astron. Fys. **15** (1920), no. 5, 1–32 | 1/2 + o(1) | **[❌ No proof — coarse `Prop`](Legendre/Conditional.lean#L130)** | **[Conditional.lean L130](Legendre/Conditional.lean#L130)**  [compare](docs/literature-comparators.md#cramer1920rh) <!-- comparator:cramer1920rh --> |
+| Cramér's conjecture (conditional) | H. Cramér, *On the order of the difference between consecutive primes*, Acta Arith. **2** (1936), 23–46 | 0 + ε (conjectural) | **[❌ No proof — coarse `Prop`](Legendre/Conditional.lean#L137)** | **[Conditional.lean L137](Legendre/Conditional.lean#L137)**  [compare](docs/literature-comparators.md#cramer1936) <!-- comparator:cramer1936 --> |
+| Explicit verification `n ≤ 7.05×10¹³` | J. Sorenson, J. Webster, *An algorithm and computation to verify Legendre's conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4 | n/a (finite range) | **[❌ No proof — comparator encoded](Legendre/Literature/Statements.lean)** | **[Layer 6 roadmap](docs/formalization-roadmap.md)**  [compare](docs/literature-comparators.md#sorensonwebster2025) <!-- comparator:sorensonwebster2025 --> |
+| Chen 1975 (`P₂`, eventually) | Chen Jing-Run, *On the distribution of almost primes in an interval*, Sci. Sinica **18** (1975), 611–627 | n/a (`P₂`) | **[❌ No proof — comparator encoded](Legendre/Literature/Statements.lean)** | **[Conditional.lean L146](Legendre/Conditional.lean#L146)**  [compare](docs/literature-comparators.md#chen1975) <!-- comparator:chen1975 --> |
+| Dudek–Johnston 2026 (`P₄`, all `n`) | A. W. Dudek, D. R. Johnston, *Almost primes between all squares*, J. Number Theory **278** (2026), 726–745 | n/a (`P₄`) | **[❌ No proof — comparator encoded](Legendre/Literature/Statements.lean)** | **[Layer 7 roadmap](docs/formalization-roadmap.md)**  [compare](docs/literature-comparators.md#dudekjohnston2026) <!-- comparator:dudekjohnston2026 --> |
 
 Status cells are clickable: **✅** jumps to the proof; **❌ “No proof — exact
-statement ✅”** jumps to the paper-exact statement encoding in
+statement ✅”** jumps to the normalized exponent statement encoding in
 [`Layer5.lean`](Legendre/Layer5.lean) (not a proof); **❌ “No proof — coarse
 `Prop`”** jumps to the coarse conditional encoding; **❌ “not encoded”** jumps
 to the roadmap.  Full DOI/arXiv links and evidence levels:
 [docs/literature.md](docs/literature.md).
 The nine exponent results are **not** proved.  Their coarse `Prop`s live in
-`Conditional.lean`, their paper-exact `+ε`/constant/threshold forms live in
+`Conditional.lean`, their normalized exponent `+ε`/constant/threshold forms live in
 `Layer5.lean`, and the equivalence between the two is **proved**.  The
 formalized reduction from a hypothetical `θ < 1/2` result to Legendre is
 separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**.
@@ -444,11 +476,11 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.nagura_hasPrimeIn` / `nagura_prime_gap` | Nagura's theorem: a prime in `(x, 6x/5]` for every `x ≥ 25` | **proved** | **[Nagura.lean L50](Legendre/Nagura.lean#L50)** · **[L41](Legendre/Nagura.lean#L41)** |
 | `Legendre.Nagura.naguraChebyshevSum_eq_log_factorial` | Ramanujan/Nagura identity `∑_{m≤n} ψ(n/m) = log n!` | **proved** | **[PsiBounds.lean L109](Legendre/Nagura/PsiBounds.lean#L109)** |
 | `Legendre.Nagura.psi_nat_lt_1_086_mul` / `psi_nat_gt_0_916_mul` | explicit Chebyshev bounds `0.916n < ψ(n) < 1.086n` | **proved** | **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)** · **[L1844](Legendre/Nagura/PsiBounds.lean#L1844)** |
-| `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | paper-exact statement conventions with explicit exponent, constant and “sufficiently large” threshold | definition | **[Layer5.lean L60](Legendre/Layer5.lean#L60)** · **[L70](Legendre/Layer5.lean#L70)** · **[L79](Legendre/Layer5.lean#L79)** |
-| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | interval form ↔ gap form with the same `θ` and `C` (for `θ ≥ 0`, `C ≥ 0`) | **proved** | **[Layer5.lean L160](Legendre/Layer5.lean#L160)** |
-| `Legendre.shortIntervalStatement_iff_exponentLimit` | paper-exact `+ε` form ↔ the coarse conditional interface | **proved** | **[Layer5.lean L256](Legendre/Layer5.lean#L256)** |
-| `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | **proved** | **[Layer5.lean L264](Legendre/Layer5.lean#L264)** |
-| `Legendre.*Paper_iff` (nine results) | each paper-exact statement ↔ its coarse `Prop` | **proved** | **[Layer5.lean L293](Legendre/Layer5.lean#L293)** |
+| `Legendre.HasPrimeInShortInterval` / `ShortIntervalStatement` / `PrimeGapBound` | normalized exponent statement conventions with explicit exponent, constant and “sufficiently large” threshold | definition | **[Statements.lean L62](Legendre/Layer5/Statements.lean#L62)** · **[L72](Legendre/Layer5/Statements.lean#L72)** · **[L81](Legendre/Layer5/Statements.lean#L81)** |
+| `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | interval form ↔ gap form with the same `θ` and `C` (for `θ ≥ 0`, `C ≥ 0`) | **proved** | **[Statements.lean L162](Legendre/Layer5/Statements.lean#L162)** |
+| `Legendre.shortIntervalStatement_iff_exponentLimit` | normalized exponent `+ε` form ↔ the coarse conditional interface | **proved** | **[Statements.lean L258](Legendre/Layer5/Statements.lean#L258)** |
+| `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | normalized exponent `θ < 1/2` statement ⇒ Legendre eventually | **proved** | **[Statements.lean L266](Legendre/Layer5/Statements.lean#L266)** |
+| `Legendre.*Paper_iff` (nine results) | each normalized exponent statement ↔ its coarse `Prop` | **proved** | **[Statements.lean L295](Legendre/Layer5/Statements.lean#L295)** |
 | `Legendre.PNT.psi_classical_error` | ψ=x+O(x exp(−c√log x)), c>0 | **proved**; analytic proof adapted from PNT+ | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.primeCount_error_of_theta` | partial summation preserves the classical error scale | **proved**; new downstream bridge | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
 | `Legendre.PNT.pnt_classical_error` / `pnt_eventual_bound` | common classical ψ/θ/π−Li₂ error and eventual inequalities | **proved**; constants existential | [PrimeNumberTheorem.lean](Legendre/PrimeNumberTheorem.lean) |
@@ -489,7 +521,7 @@ work can plug them in, but their proofs are **not** formalized here:
 
 * Hoheisel 1930, Ingham 1937 (both `5/8` and `577/925` routes), Huxley 1972,
   Heath-Brown–Iwaniec 1979, Iwaniec–Pintz 1984, Mozzochi 1986,
-  Baker–Harman 1996, Baker–Harman–Pintz 2001 — coarse `Prop`s and paper-exact
+  Baker–Harman 1996, Baker–Harman–Pintz 2001 — coarse `Prop`s and normalized exponent
   forms are both encoded (proofs remain open); statement code:
   **[Hoheisel L70](Legendre/Conditional.lean#L70)** ·
   **[Ingham 5/8 L74](Legendre/Conditional.lean#L74)** ·
@@ -500,7 +532,7 @@ work can plug them in, but their proofs are **not** formalized here:
   **[Mozzochi L89](Legendre/Conditional.lean#L89)** ·
   **[Baker–Harman L92](Legendre/Conditional.lean#L92)** ·
   **[BHP L96](Legendre/Conditional.lean#L96)** ·
-  **[paper-exact forms in Layer5.lean](Legendre/Layer5.lean)**;
+  **[normalized exponent forms in Layer5.lean](Legendre/Layer5.lean)**;
 * Dusart-type explicit bounds (`ϑ(x) − x < x/36260`, `|ϑ(x) − x| ≤ 0.2x/log²x`
   for `x ≥ 3 594 641`, a prime in `(x, x + x/(25 log²x)]` for `x ≥ 396 738`) —
   these require a formalized explicit prime number theorem with a zero-free
@@ -541,7 +573,7 @@ This table is the roadmap, not a claim that the work is done.
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
 | 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **Ingham/Huxley open**; [scope](docs/layer4-large-sieve.md) |
-| 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
+| 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: normalized exponent `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
 
@@ -576,7 +608,7 @@ A realistic order for this repository is:
    exact `+ε`, “sufficiently large” and constant conventions of Hoheisel,
    Ingham (two routes), Huxley, Heath-Brown–Iwaniec, Iwaniec–Pintz, Mozzochi,
    Baker–Harman and Baker–Harman–Pintz, proves the interval form equivalent to
-   the gap form, and connects each paper-exact statement to its coarse `Prop`.
+   the gap form, and connects each normalized exponent statement to its coarse `Prop`.
    The analytic proofs are still open.
 3. ✅ **Layer 3 — complete, including the uniform full contour.** Classical PNT
    errors, partial summation, Perron inversion, the multiplicity-weighted
@@ -648,7 +680,10 @@ Legendre/
   PrimeNumberTheorem.lean Layer 3: classical ψ/θ/π error terms and partial summation
   PNT/               selected Apache-2.0 PNT+ proof dependencies
   ExplicitBounds.lean Layer 1: interval API, (x,2x], Chebyshev θ/ψ/π bounds
-  Layer5.lean        Layer 5: paper-exact short-interval statements and bridges
+  Layer5.lean        Stable public entry point for Layer 5
+  Layer5/           Short-interval specifications and future analytic proofs
+  Layer6/           Reserved: finite verification and certificates
+  Layer7/           Reserved: almost-prime and sieve proofs
   Nagura.lean        Layer 1: Nagura's theorem, (x, 6x/5] for x >= 25
   Nagura/            Nagura's proof: finite prime chains + explicit psi bounds
   Audit.lean         #print axioms audit

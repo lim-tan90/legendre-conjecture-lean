@@ -511,13 +511,22 @@ plus nine Layer 3 regression consumers. Both standalone checks run in CI.
 not proved, it must be a hypothesis of a conditional theorem, exactly as in
 `Legendre/Conditional.lean`.
 
+## Layer directory convention
+
+New Layer 5 and later implementation modules live in `Legendre/LayerN/` and
+are exported through `Legendre/LayerN.lean`. Layer 5 statements have moved to
+`Legendre/Layer5/Statements.lean`; `import Legendre.Layer5` remains valid.
+Layer 6 and 7 have reserved directories with scope notes. Follow the grouped
+requirements in both READMEs and CONTRIBUTING, including source attribution,
+proof-map updates, complete audits and literature comparator checks.
+
 ## Layer 5 — Short-interval theorems
 
 **Order.**
 
 1. Ingham 1937, `θ = 5/8` (and the zero-density route `577/925`);
 2. Huxley 1972, `θ = 7/12 + ε`;
-3. Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε`;
+3. Heath-Brown–Iwaniec 1979, `θ = 11/20 + ε`;
 4. Iwaniec–Pintz 1984 and Mozzochi 1986 refinements;
 5. Baker–Harman 1996, `θ = 0.535`;
 6. Baker–Harman–Pintz 2001, `θ = 0.525`.
@@ -532,13 +541,13 @@ not proved, it must be a hypothesis of a conditional theorem, exactly as in
   (`∃ X, 1 ≤ X, ∀ x ≥ X` and `∃ P, ∀ p ≥ P`);
 * `hasPrimeInShortInterval_iff_primeGapBound` proves the interval and gap
   forms equivalent (same `θ` and `C`, for `θ ≥ 0`, `C ≥ 0`);
-* `shortIntervalStatement_iff_exponentLimit` proves the paper-exact `+ε`
+* `shortIntervalStatement_iff_exponentLimit` proves the normalized exponent `+ε`
   form equivalent to the coarse exponent-limit `Prop` used by the conditional
   reduction in `Conditional.lean`;
 * `legendre_eventually_of_shortIntervalStatement_lt_half` proves the
-  statement-level reduction: any paper-exact `θ < 1/2` statement implies
+  statement-level reduction: any normalized exponent `θ < 1/2` statement implies
   Legendre's conjecture for all sufficiently large `n`;
-* the nine paper-exact declarations `HoheiselPaper`, `Ingham58Paper`,
+* the nine normalized exponent declarations `HoheiselPaper`, `Ingham58Paper`,
   `Ingham577Paper`, `HuxleyPaper`, `HeathBrownIwaniecPaper`,
   `IwaniecPintzPaper`, `MozzochiPaper`, `BakerHarmanPaper`,
   `BakerHarmanPintzPaper` are `Prop` definitions, not theorems.  Each is

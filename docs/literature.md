@@ -35,8 +35,8 @@ the coarse `Prop`s in `Legendre/Conditional.lean`.  These declarations are
 | 1937 | A. E. Ingham | `θ = 5/8`, via `ζ(1/2+it) = O(t^{1/6})` and his general theorem | secondary-authoritative | [DOI 10.1093/qmath/os-8.1.255](https://doi.org/10.1093/qmath/os-8.1.255) · [MacTutor](https://mathshistory.st-andrews.ac.uk/Biographies/Ingham/) |
 | 1937 | A. E. Ingham | same paper, zero-density route: `θ = 577/925 + ε ≈ 0.62378` | secondary-authoritative | [Starichkova, arXiv:2411.01845](https://arxiv.org/abs/2411.01845) |
 | 1972 | M. N. Huxley | `θ = 7/12 + ε ≈ 0.58333` (strict `+ε`; `7/12` is an infimum, not attained) | secondary-authoritative | [DOI 10.1007/BF01418933](https://doi.org/10.1007/BF01418933) · [EuDML](https://eudml.org/doc/142126) |
-| 1979 | D. R. Heath-Brown, H. Iwaniec | `θ = 13/23 + ε ≈ 0.56522`, weighted zero-density | secondary-authoritative (single secondary source) | [DOI 10.1007/BF02139702](https://doi.org/10.1007/BF02139702) |
-| 1984 | H. Iwaniec, J. Pintz | `θ = 11/20 - 1/406 + ε ≈ 0.54754` | secondary-authoritative | [DOI 10.1007/BF01637280](https://doi.org/10.1007/BF01637280) |
+| 1979 | D. R. Heath-Brown, H. Iwaniec | `θ = 11/20 + ε ≈ 0.55`, weighted zero-density | secondary-authoritative (Pintz author survey §3, (3.13)) | [DOI 10.1007/BF02139702](https://doi.org/10.1007/BF02139702) |
+| 1984 | H. Iwaniec, J. Pintz | `θ = 23/42 + ε ≈ 0.54762` | secondary-authoritative | [DOI 10.1007/BF01637280](https://doi.org/10.1007/BF01637280) |
 | 1986 | C. J. Mozzochi | `θ = 11/20 - 1/384 + ε ≈ 0.54740` | secondary-authoritative | [DOI 10.1016/0022-314X(86)90101-0](https://doi.org/10.1016/0022-314X\(86\)90101-0) |
 | 1996 | R. C. Baker, G. Harman | `θ = 0.535` | secondary-authoritative | [DOI 10.1112/plms/s3-72.2.261](https://doi.org/10.1112/plms/s3-72.2.261) |
 | 2001 | R. C. Baker, G. Harman, J. Pintz | `θ = 0.525`; **current record** for existence of a prime in `[x - x^θ, x]` | secondary-authoritative | [DOI 10.1112/plms/83.3.532](https://doi.org/10.1112/plms/83.3.532) |
@@ -105,7 +105,7 @@ such published computation exists.
 | Cramér's conjecture `G(x) = O((log x)²)` | gaps far smaller than `√x` | **Yes**, for all sufficiently large `n`; a finite check would finish | Cramér 1936, [DOI 10.4064/aa-2-1-23-46](https://doi.org/10.4064/aa-2-1-23-46) |
 
 The Lean file `Legendre/Conditional.lean` states `RHGapBound` and
-`CramerGapBound` as opaque `Prop`s; neither is proved.
+`CramerGapBound` as ordinary `Prop` definitions; neither is proved.
 
 ## 4. Almost-prime (P_k) progress
 
@@ -138,8 +138,9 @@ particular:
 * there is no published verification “Legendre up to `n = 4×10¹⁸`”;
 * the exact `925/348` and `577/925` constants are reported via Starichkova's
   paper, not read in Ingham's original;
-* the `13/23` Heath-Brown–Iwaniec value currently has a single secondary
-  source in this table.
+* the corrected Heath-Brown–Iwaniec value `11/20` is supported by Pintz’s
+  author survey, §3 (3.13); the Iwaniec–Pintz value `23/42` also appears in its
+  [publisher abstract](https://link.springer.com/article/10.1007/BF01637280).
 
 ## 6. Minimal bibliography
 
@@ -163,5 +164,28 @@ particular:
    conjecture up to 7·10¹³*, Res. Number Theory **11** (2025), Paper 4.
 10. J. Nagura, *On the interval containing at least one prime number*,
     Proc. Japan Acad. **28** (1952), 177--181.
-10. A. W. Dudek, D. R. Johnston, *Almost primes between all squares*,
+11. A. W. Dudek, D. R. Johnston, *Almost primes between all squares*,
     J. Number Theory **278** (2026), 726–745.
+
+## 7. Exponent comparators and corrections (2026-11-08)
+
+Every historical row in both READMEs now links to an independent
+[exponent comparator](literature-comparators.md). The scope is exponent
+comparison up to any positive epsilon, allowing harmless constants and
+orientation changes; stronger counting theorems are not declared equivalent
+to existence of a prime. The catalog covers 17 historical targets/results and
+classifies every project Lean file. The executable checker distinguishes
+closed proofs from equivalences of open statements and conditional bridges.
+
+Corrections: Heath-Brown–Iwaniec 1979 is recorded at `11/20`, following
+[Pintz, §3 (3.13)](https://www.renyi.hu/~pintz/pjapr.pdf); the former `13/23`
+is associated with Iwaniec–Jutila 1979 in the same survey. Iwaniec–Pintz 1984
+is recorded at `23/42`, as in its publisher abstract and Pintz’s table, rather
+than the unsupported `11/20−1/406`. Both Lean specifications and arithmetic
+checks are corrected. These are corrections to this repository’s sourcing,
+not evidence of a gap in the original analytic proofs.
+
+The final Sorenson–Webster journal article reports `7.05×10^13`; arXiv
+`2401.13753v1` reports only `3.33×10^13`. Its running-time estimates explicitly
+use a probabilistic model; they are not unconditional worst-case bounds. The
+computational certificate itself is still absent from this Lean project.

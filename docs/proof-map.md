@@ -5,7 +5,7 @@ the mathematical statement is encoded as a `Prop`, but its proof is **not**
 formalized.  “Proved” means `lake build` checks a complete proof term.
 
 Rows 9a–9g record the **statement-level Layer 5** infrastructure from
-`Legendre/Layer5.lean`: the paper-exact `+ε`/constant/threshold conventions
+`Legendre/Layer5.lean`: the normalized exponent `+ε`/constant/threshold conventions
 and the proved bridges between the interval form, the gap form and the coarse
 `Prop`s of `Conditional.lean`.  A row marked “statement only” is still
 **not a proved theorem**.
@@ -35,9 +35,15 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 9b | `+ε` paper convention for short intervals | `Legendre.ShortIntervalStatement` | definition |
 | 9c | explicit-threshold gap form | `Legendre.PrimeGapBound` | definition |
 | 9d | interval form ↔ gap form (same `θ`, `C`; `θ ≥ 0`, `C ≥ 0`) | `Legendre.hasPrimeInShortInterval_iff_primeGapBound` | **proved** |
-| 9e | paper-exact `+ε` form ↔ coarse exponent-limit interface | `Legendre.shortIntervalStatement_iff_exponentLimit` | **proved** |
-| 9f | paper-exact `θ < 1/2` statement ⇒ Legendre eventually | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | **proved** |
-| 9g | each paper-exact statement ↔ its coarse `Prop` | `Legendre.*Paper_iff` (nine theorems) | **proved** |
+| 9e | normalized exponent `+ε` form ↔ coarse exponent-limit interface | `Legendre.shortIntervalStatement_iff_exponentLimit` | **proved** |
+| 9f | normalized exponent `θ < 1/2` statement ⇒ Legendre eventually | `Legendre.legendre_eventually_of_shortIntervalStatement_lt_half` | **proved** |
+| 9g | each normalized exponent statement ↔ its coarse `Prop` | `Legendre.*Paper_iff` (nine theorems) | **proved** |
+| comparator.history | All 17 historical targets/results | `Legendre.Literature.*`; [catalog](literature-comparators.md) | Independent exponent specifications; 24 typed catalog/closed-proof consumers and 12 semantic regression guards; only Bertrand/Nagura supply closed historical interval proofs |
+| comparator.elementary | Cramér conjectural log-square gap to eventual Legendre | `Legendre.Literature.cramer_positive_exponent`, `cramer_implies_eventual_legendre` | **proved conditional bridges**; no assertion of the conjectural input |
+| comparator.endpoints | Strict real Nagura and strict Bertrand | `Legendre.Literature.nagura_comparator`, `bertrand_comparator` | **proved**, source endpoint/range retained |
+| comparator.orientation | BHP backward interval to normalized gap/exponent | `Legendre.Literature.gapProgress_of_backward`, `bakerHarmanPintz_comparator`, `forwardProgress_of_gap` | **proved conditional bridges**, same exponent, harmless constant and arbitrary positive epsilon |
+| comparator.density | Curved density estimates to global 12/5 and 30/13 targets | `Legendre.Literature.huxley_global_comparator`, `guthMaynard_global_comparator` | **proved conditional comparisons**, inputs remain open, sigma-uniform constants retained |
+| comparator.layers | All project Lean files classified, Layer 0–4 benchmark coverage | `Legendre.Literature.layer2_comparator`, `layer3_comparator`, `layer3_no_fixed_power_comparator`, `layer4_mean_comparator` | **proved prerequisites / comparison guard**; no new historical power theorem claimed |
 | 2.1 | Layer 2: absolute convergence | `Legendre.Zeta.series_norm_summable` | **proved**; mathlib result re-exported |
 | 2.2 | Layer 2: convergent Dirichlet series | `Legendre.Zeta.eq_series` | **proved**; mathlib result re-exported |
 | 2.3 | Layer 2: Euler product with convergence | `Legendre.Zeta.euler_product` | **proved**; mathlib result re-exported |
@@ -442,15 +448,15 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.47 | Critical-line fourth-power reduction | `Legendre.Zeta.zetaXi_conj`, `xiSquareIntegral_conj`, `riemannZeta_fourth_le_smoothed`; [XiSquareContour.lean](../Legendre/XiSquareContour.lean) | **proved**, pointwise bound by one normalized contour; its mean estimate and the fourth-moment theorem remain open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
 | 4.validation | Thirty-three independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited |
-| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
-| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
-| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
-| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley`, `Legendre.HuxleyPaper` | **statement only**; paper-exact form encoded, `huxleyPaper_iff` proved |
-| 14 | Heath-Brown–Iwaniec 1979, `θ = 13/23 + ε` | `Legendre.HeathBrownIwaniec`, `Legendre.HeathBrownIwaniecPaper` | **statement only**; paper-exact form encoded, `heathBrownIwaniecPaper_iff` proved |
-| 15 | Iwaniec–Pintz 1984, `θ = 11/20 - 1/406 + ε` | `Legendre.IwaniecPintz`, `Legendre.IwaniecPintzPaper` | **statement only**; paper-exact form encoded, `iwaniecPintzPaper_iff` proved |
-| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi`, `Legendre.MozzochiPaper` | **statement only**; paper-exact form encoded, `mozzochiPaper_iff` proved |
-| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman`, `Legendre.BakerHarmanPaper` | **statement only**; paper-exact form encoded, `bakerHarmanPaper_iff` proved |
-| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz`, `Legendre.BakerHarmanPintzPaper` | **statement only**; paper-exact form encoded, `bakerHarmanPintzPaper_iff` proved |
+| 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
+| 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
+| 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
+| 13 | Huxley 1972, `θ = 7/12 + ε` | `Legendre.Huxley`, `Legendre.HuxleyPaper` | **statement only**; normalized exponent form encoded, `huxleyPaper_iff` proved |
+| 14 | Heath-Brown–Iwaniec 1979, `θ = 11/20 + ε` | `Legendre.HeathBrownIwaniec`, `Legendre.HeathBrownIwaniecPaper` | **statement only**; normalized exponent form encoded, `heathBrownIwaniecPaper_iff` proved |
+| 15 | Iwaniec–Pintz 1984, `θ = 23/42 + ε` | `Legendre.IwaniecPintz`, `Legendre.IwaniecPintzPaper` | **statement only**; normalized exponent form encoded, `iwaniecPintzPaper_iff` proved |
+| 16 | Mozzochi 1986, `θ = 11/20 - 1/384 + ε` | `Legendre.Mozzochi`, `Legendre.MozzochiPaper` | **statement only**; normalized exponent form encoded, `mozzochiPaper_iff` proved |
+| 17 | Baker–Harman 1996, `θ = 0.535` | `Legendre.BakerHarman`, `Legendre.BakerHarmanPaper` | **statement only**; normalized exponent form encoded, `bakerHarmanPaper_iff` proved |
+| 18 | Baker–Harman–Pintz 2001, `θ = 0.525` | `Legendre.BakerHarmanPintz`, `Legendre.BakerHarmanPintzPaper` | **statement only**; normalized exponent form encoded, `bakerHarmanPintzPaper_iff` proved |
 | 19 | RH gap bound `≪ √x log x` | `Legendre.RHGapBound` | **statement only** |
 | 20 | Cramér conjecture `O((log x)²)` | `Legendre.CramerGapBound` | **statement only** |
 | 21 | almost-prime `P_k` square statement | `Legendre.AlmostPrimeSquareAtMost`, `AlmostPrimeSquareEventually` | definition |
@@ -503,3 +509,19 @@ Formalizing Ingham/Huxley/BHP at proof level would require, at minimum:
 Mathlib currently has fragments of the zeta function but not a formalized
 zero-density theory or the BHP theorem.  Pretending otherwise with `axiom` or
 `sorry` would violate the project's core rule.
+
+## Literature-comparison checkpoint (2026-11-08)
+
+Both READMEs now cover all 17 historical targets/results, and every project
+Lean source has a coverage category. Historical exponent corrections are
+Heath-Brown–Iwaniec `11/20` and Iwaniec–Pintz `23/42`; the source/evidence
+limitations are recorded in [the comparator report](literature-comparators.md).
+The existing `*Paper` names now explicitly denote normalized exponent statements.
+Layer 5 statements moved to `Legendre/Layer5/Statements.lean`, keeping the public
+import stable; Layer 6 and 7 have reserved implementation directories.
+
+Full validation: 4,139 build jobs, all 3,422 distinct project theorem declarations
+audited, 164 Lean sources without executable placeholders, and 78 independent
+consumers (9 Layer 3, 33 Layer 4, 36 literature checks). Three intentional bad
+comparison fixtures are rejected by Lean: the old unsupported exponent, a
+conditional density bridge used as a closed proof, and a forged proved status.
