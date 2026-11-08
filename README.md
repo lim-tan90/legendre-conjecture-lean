@@ -81,12 +81,17 @@ retained. Sampling permits independently varying real parts; the resulting
 sample bound displays both detector energies. The height exponents required
 for Ingham/Huxley remain to be proved.
 [Exact detector and remaining analytic steps](docs/layer4-zero-detector.md).
+The high-tail energy now has explicit X^(1−2σ) decay, and actual detection
+also bounds the full multiplicity-weighted count with its fixed low-height
+term. An entire self-dual xi square, sharp Gamma quotients and an integrable
+Gaussian envelope prepare the critical-line moment contour; the fourth-moment
+theorem remains open. [Proof chain](docs/layer4-moment-kernel.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,113 build jobs**, all **3,158 project theorem declarations**
-audited with only the three standard axioms, **141 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **32 independent consumer checks**
-(twenty-three Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+Validation: **4,131 build jobs**, all **3,281 project theorem declarations**
+audited with only the three standard axioms, **156 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **38 independent consumer checks**
+(twenty-nine Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
@@ -707,6 +712,11 @@ this repository.
   The original license is in [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt).
   The new ψ-to-θ-to-π error bridge is in
   [`Legendre/PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean).
+  Layer 4 additionally selects Robby Sneiderman's positive-half-plane digamma
+  series and tail helpers from upstream
+  `Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`, at the same commit,
+  into [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean).
+  The original contributor notice and the same Apache-2.0 license are retained.
   See [provenance and limits](docs/pnt-provenance.md).
 * **[openai/math](https://github.com/openai/math)** — Apache-2.0,
   pinned commit `4eaee87548250b2682affda7d05d947c05554bae`.
@@ -752,6 +762,20 @@ this repository.
   [`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean),
   [`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean)
   and [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean).
+  The Gamma-quotient slice under [`Legendre/GammaBounds/`](Legendre/GammaBounds/)
+  additionally adapts `ZeroDensity/LogNormDerivative.lean`, `DigammaTailEstimate.lean`,
+  `SharpDigammaStrip.lean`, `GammaNormDerivative.lean`, `SharpGammaHorizontal.lean`,
+  `SharpGammaVertical.lean`, `SharpGammaRealShift.lean` and `GammaStripBound.lean`.
+  [`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
+  specializes the scalar Gaussian-weight argument in `ZeroDensity/CharacterGammaShift.lean`.
+  [`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) generalizes the Gaussian
+  square/normalization organization in `DensityCompletedSquare.lean` and
+  `DensitySquareGaussian.lean`, using a locally proved entire xi function.
+  [`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) generalizes
+  `DensityGaussianEnvelope.lean` to the sixth-degree polynomial envelope
+  needed after removing the two completed poles.
+  The digamma tail imports only the selected PNT+ series proof, avoiding the
+  unrelated character and zero-free-region dependency chain.
   All paths are under upstream `lean/OAI/NumberTheory/Ostmann/` and use the
   same pinned commit and retained license.
   The selected large-sieve slice builds and is included in the project-wide axiom audit;

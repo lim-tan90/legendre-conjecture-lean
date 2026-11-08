@@ -197,7 +197,8 @@ theorem layer4_mollifier_endpoint_consumer (s : ℂ) :
     norm_num [Finset.sum_Icc_succ_top]
   rw [hm,hz] at h
   have hp : (2 : ℂ)^(-s)*(2 : ℂ)^(-s) = (4 : ℂ)^(-s) := by
-    convert! (Complex.natCast_mul_natCast_cpow 2 2 (-s)).symm using 1 <;> norm_num
+    convert! (Complex.natCast_mul_natCast_cpow 2 2 (-s)).symm using 1
+    norm_num
   linear_combination -h-hp
 
 /-- The finite Euler formula at cutoff one agrees with the earlier centered formula. -/
@@ -236,5 +237,64 @@ theorem layer4_varying_real_parts_consumer (a : ℕ → ℂ) :
   norm_num only [inv_one,sub_zero,Complex.ofReal_natCast] at h
   rw [show (2 : ℝ)+2*Real.pi*2 = 2+4*Real.pi by ring] at h
   exact h
+
+/-- The Möbius-energy theorem also handles the empty polynomial at the critical line. -/
+theorem layer4_empty_mollifier_energy_consumer :
+    coefficientEnergy (Finset.Icc 1 0)
+      (verticalCoefficients (ArithmeticFunction.moebius : ArithmeticFunction ℂ) (1/2)) ≤ 1 := by
+  simpa only [Nat.cast_zero,Real.log_zero,add_zero] using
+    Detector.mollifier_vertical_energy_le 0 (by norm_num : (1/2 : ℝ) ≤ 1/2)
+
+/-- The full density bound restores multiplicities without any detector hypothesis. -/
+theorem layer4_actual_density_consumer {H : ℕ} (hH : 7 ≤ H) :
+    (Zeta.zeroDensityCount (3/4) H : ℝ) ≤ (Zeta.zeroCount 1 : ℝ)+
+      2*Zeta.densitySelectionConstant*Real.log H*Detector.actualDetectorSampleBound H 2 (3/4) :=
+  Zeta.zeroDensityCount_le_actual_detector hH (by norm_num) (by norm_num) (by norm_num)
+
+/-- Absence of high zeros retains the low-height multiplicity contribution. -/
+theorem layer4_low_height_retained_consumer (σ : ℝ) {T : ℝ} (hT : 7 ≤ T)
+    (hnoHigh : ∀ ρ : ℂ, ρ ∈ Zeta.zerosRightOf σ T → ρ.im < 1) :
+    Zeta.zeroDensityCount σ T ≤ Zeta.zeroCount 1 := by
+  have h := Zeta.zeroDensityCount_le_of_high_sample_bound σ (B := 0) hT (by
+    intro S hS hheight _hsep
+    have he : S = ∅ := by
+      apply Finset.eq_empty_iff_forall_notMem.2
+      intro ρ hρ
+      exact (not_le_of_gt (hnoHigh ρ (hS ρ hρ))) (hheight ρ hρ)
+    simp [he])
+  simp only [mul_zero,add_zero] at h
+  exact_mod_cast h
+
+/-- Removing the two completed poles retains finite nonzero endpoint values. -/
+theorem layer4_xi_pole_values_consumer : Zeta.zetaXi 0 = 1 ∧ Zeta.zetaXi 1 = 1 := by
+  simp
+
+/-- Purely imaginary Gamma shifts incur no base-height power. -/
+theorem layer4_gamma_vertical_shift_consumer (t u : ℝ) :
+    ‖Complex.Gammaℝ ((1/2 : ℂ)+(t+u : ℝ)*Complex.I)/
+      Complex.Gammaℝ ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖ ≤
+        Real.exp ((59+|Real.eulerMascheroniConstant|)*(1+|u|)) := by
+  have h := GammaBounds.sharp_gammaReal_shift
+    ((1/2 : ℂ)+(t : ℂ)*Complex.I) ((u : ℂ)*Complex.I)
+    (by norm_num) (by norm_num) (by simp) (by simp)
+  have he : (1/2 : ℂ)+(t : ℂ)*Complex.I+(u : ℂ)*Complex.I =
+      (1/2 : ℂ)+(t+u : ℝ)*Complex.I := by push_cast; ring
+  rw [he] at h
+  simpa using h
+
+/-- The normalized xi kernel is exactly one at zero shift on the critical line. -/
+theorem layer4_xi_kernel_zero_shift_consumer (t : ℝ) :
+    Zeta.xiSquareKernelWeight ((1/2 : ℂ)+(t : ℂ)*Complex.I) 0 = 1 := by
+  let s : ℂ := (1/2 : ℂ)+(t : ℂ)*Complex.I
+  have hs : s.re = 1/2 := by simp [s]
+  have hs0 : s ≠ 0 := by intro he; simp [he] at hs
+  have hs1 : s-1 ≠ 0 := by
+    intro he
+    have hh := sub_eq_zero.1 he
+    simp [hh] at hs
+  have hg : Complex.Gammaℝ s ≠ 0 := Complex.Gammaℝ_ne_zero_of_re_pos (by rw [hs]; norm_num)
+  change Zeta.xiSquareKernelWeight s 0 = 1
+  simp [Zeta.xiSquareKernelWeight,GammaBounds.gammaSquareGaussianWeight,
+    mul_ne_zero hs0 hs1,hg]
 
 end Legendre.Tests

@@ -163,6 +163,36 @@ public import Legendre.ComplexDirichlet
 import all Legendre.ComplexDirichlet
 public import Legendre.ComplexDirichletSampling
 import all Legendre.ComplexDirichletSampling
+public import Legendre.ZeroDetector.TailEnergy
+import all Legendre.ZeroDetector.TailEnergy
+public import Legendre.ZetaDetectedDensity
+import all Legendre.ZetaDetectedDensity
+public import Legendre.PNT.Mathlib.Analysis.SpecialFunctions.Gamma.DigammaSeries
+import all Legendre.PNT.Mathlib.Analysis.SpecialFunctions.Gamma.DigammaSeries
+public import Legendre.GammaBounds.LogNormDerivative
+import all Legendre.GammaBounds.LogNormDerivative
+public import Legendre.GammaBounds.DigammaTailEstimate
+import all Legendre.GammaBounds.DigammaTailEstimate
+public import Legendre.GammaBounds.SharpDigammaStrip
+import all Legendre.GammaBounds.SharpDigammaStrip
+public import Legendre.GammaBounds.GammaNormDerivative
+import all Legendre.GammaBounds.GammaNormDerivative
+public import Legendre.GammaBounds.SharpGammaHorizontal
+import all Legendre.GammaBounds.SharpGammaHorizontal
+public import Legendre.GammaBounds.SharpGammaVertical
+import all Legendre.GammaBounds.SharpGammaVertical
+public import Legendre.GammaBounds.SharpGammaRealShift
+import all Legendre.GammaBounds.SharpGammaRealShift
+public import Legendre.GammaBounds.GammaStripBound
+import all Legendre.GammaBounds.GammaStripBound
+public import Legendre.GammaBounds.GaussianWeight
+import all Legendre.GammaBounds.GaussianWeight
+public import Legendre.ZetaXi
+import all Legendre.ZetaXi
+public import Legendre.XiSquareKernel
+import all Legendre.XiSquareKernel
+public import Legendre.XiGaussianEnvelope
+import all Legendre.XiGaussianEnvelope
 
 import all Legendre.LargeSieve.AdditiveSieveProof
 import all Legendre.LargeSieve.CircleSeparatedPoints
@@ -3530,3 +3560,128 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZeroDetector.Mollifier.0.Legendre.Density.Detector.mollifierCoefficient_vanish._proof_1_1"
 #audit_private_axioms "_private.Legendre.ZetaFiniteEuler.0.Legendre.Zeta.finite_sum_cpow_euler._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaFiniteEuler.0.Legendre.Zeta.riemannZeta_eq_finite_euler._simp_1_1"
+
+-- Tail density and moment kernel: all public/private/generated declarations.
+#print axioms Complex.cauchySeq_logGammaSeq
+#print axioms Complex.exp_logGammaSeq
+#print axioms Complex.hasSum_digamma_of_re_pos
+#print axioms Complex.hasSum_sub_succ_of_tendsto_zero
+#print axioms Complex.inv_add_one_sub_inv_eq
+#print axioms Complex.logGammaSeq.eq_1
+#print axioms Complex.logGammaSeq_succ_sub
+#print axioms Complex.norm_inv_add_one_sub_inv_le
+#print axioms Complex.norm_inv_add_one_sub_inv_le'
+#print axioms Complex.norm_natCast_add_one
+#print axioms Complex.sum_inv_natCast_add_one
+#print axioms Complex.sum_inv_natCast_add_one_real
+#print axioms Complex.summable_one_div_natCast_add_one_sq
+#print axioms Complex.tsum_one_div_natCast_add_add_one_sq_le
+#print axioms Legendre.Density.Detector.actualDetectorSampleBound._proof_1
+#print axioms Legendre.Density.Detector.actualDetectorSampleBound._proof_2
+#print axioms Legendre.Density.Detector.actual_zero_sample_card_le_explicit
+#print axioms Legendre.Density.Detector.complexSampleCoefficient_nonneg
+#print axioms Legendre.Density.Detector.detectorTailEnergyBound._proof_1
+#print axioms Legendre.Density.Detector.detector_tail_energy_eq
+#print axioms Legendre.Density.Detector.detector_tail_energy_le
+#print axioms Legendre.Density.Detector.dyadic_density_ratio_lt_one
+#print axioms Legendre.Density.Detector.dyadic_geometric_energy_le
+#print axioms Legendre.Density.Detector.dyadic_power_weight
+#print axioms Legendre.Density.Detector.dyadic_tail_coefficient_energy_le
+#print axioms Legendre.Density.Detector.high_tail_coefficient_energy_le
+#print axioms Legendre.Density.Detector.mollifier_vertical_energy_le
+#print axioms Legendre.Density.Detector.norm_verticalCoefficients_sq
+#print axioms Legendre.Density.Detector.sum_dyadic_blocks
+#print axioms Legendre.Density.GammaBounds.densityDigammaTerm.eq_1
+#print axioms Legendre.Density.GammaBounds.density_digamma_hasSum
+#print axioms Legendre.Density.GammaBounds.density_digamma_tail_bound
+#print axioms Legendre.Density.GammaBounds.gammaGaussianConstant._proof_1
+#print axioms Legendre.Density.GammaBounds.gammaGaussianConstant._proof_2
+#print axioms Legendre.Density.GammaBounds.gammaGaussianConstant._proof_3
+#print axioms Legendre.Density.GammaBounds.gammaGaussianConstant.eq_1
+#print axioms Legendre.Density.GammaBounds.gammaReal_shift_quotient
+#print axioms Legendre.Density.GammaBounds.gammaSquareGaussianWeight.eq_1
+#print axioms Legendre.Density.GammaBounds.gammaSquareGaussianWeight_bound
+#print axioms Legendre.Density.GammaBounds.gamma_differentiableAt_pos
+#print axioms Legendre.Density.GammaBounds.gamma_log_norm_horizontal
+#print axioms Legendre.Density.GammaBounds.gamma_log_norm_vertical
+#print axioms Legendre.Density.GammaBounds.gamma_norm_le_real
+#print axioms Legendre.Density.GammaBounds.gamma_positive_strip_bound
+#print axioms Legendre.Density.GammaBounds.gaussian_linear_abs_bound
+#print axioms Legendre.Density.GammaBounds.hasDerivAt_log_norm
+#print axioms Legendre.Density.GammaBounds.sharp_digamma_strip
+#print axioms Legendre.Density.GammaBounds.sharp_gammaReal_shift
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_horizontal_ordered
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_log_horizontal_ordered
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_log_vertical
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_log_vertical_ordered
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_quotient
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_vertical
+#print axioms Legendre.Zeta.exists_density_subset_separated_representatives
+#print axioms Legendre.Zeta.gammaReal_positive_strip_bound
+#print axioms Legendre.Zeta.xiGaussianEnvelope_integrable
+#print axioms Legendre.Zeta.xiGaussianEnvelope_nonneg
+#print axioms Legendre.Zeta.xiGaussianEnvelope_tendsto
+#print axioms Legendre.Zeta.xiSquareGaussian.eq_1
+#print axioms Legendre.Zeta.xiSquareGaussian_analytic
+#print axioms Legendre.Zeta.xiSquareGaussian_band_bound
+#print axioms Legendre.Zeta.xiSquareGaussian_normalized
+#print axioms Legendre.Zeta.xiSquareGaussian_reflection
+#print axioms Legendre.Zeta.xiSquareKernelWeight.eq_1
+#print axioms Legendre.Zeta.xiSquareKernelWeight_bound
+#print axioms Legendre.Zeta.xiSquareNormalizer_ne_zero
+#print axioms Legendre.Zeta.xi_polynomial_shift_ratio_le
+#print axioms Legendre.Zeta.zeroDensityCount_le_actual_detector
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_high_sample_bound
+#print axioms Legendre.Zeta.zetaXi.eq_1
+#print axioms Legendre.Zeta.zetaXi_differentiable
+#print axioms Legendre.Zeta.zetaXi_eq_completed
+#print axioms Legendre.Zeta.zetaXi_eq_gamma_poleRemoved
+#print axioms Legendre.Zeta.zetaXi_eq_gamma_zeta
+#print axioms Legendre.Zeta.zetaXi_one
+#print axioms Legendre.Zeta.zetaXi_one_sub
+#print axioms Legendre.Zeta.zetaXi_strip_bound
+#print axioms Legendre.Zeta.zetaXi_zero
+#print axioms Legendre.Zeta.zetaXi_zero_iff
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpDigammaStrip.0.Legendre.Density.GammaBounds.sharp_digamma_strip._proof_1_1"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_1"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_2"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_3"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_4"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_5"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_6"
+#audit_private_axioms "_private.Legendre.GammaBounds.SharpGammaVertical.0.Legendre.Density.GammaBounds.sharp_gamma_quotient._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GammaBounds.gammaSquareGaussianWeight.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_actual_density_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_empty_mollifier_energy_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gamma_vertical_shift_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_low_height_retained_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_xi_kernel_zero_shift_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_xi_pole_values_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Zeta.xiSquareKernelWeight.eq_1"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_2"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_3"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_4"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_5"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_6"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_7"
+#audit_private_axioms "_private.Legendre.XiSquareKernel.0.Legendre.Zeta.xiSquareGaussian_normalized._simp_1_8"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.detector_tail_energy_eq._proof_1_4"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.detector_tail_energy_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.detector_tail_energy_eq._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.detector_tail_energy_eq._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.dyadic_tail_coefficient_energy_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.high_tail_coefficient_energy_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.high_tail_coefficient_energy_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.TailEnergy.0.Legendre.Density.Detector.sum_dyadic_blocks._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaDetectedDensity.0.Legendre.Zeta.zeroDensityCount_le_actual_detector._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaDetectedDensity.0.Legendre.Zeta.zeroDensityCount_le_of_high_sample_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_7"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_8"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_zero_iff._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_zero_iff._simp_1_2"

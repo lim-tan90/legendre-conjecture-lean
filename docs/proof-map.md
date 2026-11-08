@@ -431,8 +431,15 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.36 | Varying-real-part complex sampling | `Legendre.Density.sum_complexDirichletPolynomial_samples_le`; [ComplexDirichletSampling.lean](../Legendre/ComplexDirichletSampling.lean) | **proved**; ordinates separated, independently varying real parts in a strip of width ≤1 |
 | 4.37 | Reciprocal-lcm, divisor-square mean and dyadic energy | `Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_mean`, `mollifier_dyadic_energy_le`; [CoefficientEnergy.lean](../Legendre/ZeroDetector/CoefficientEnergy.lean) | **proved**; explicit M log³M and U^(1−2σ) bounds |
 | 4.38 | Actual separated zero sample bound | `Legendre.Density.Detector.actual_zero_sample_card_le`; [DetectorSamples.lean](../Legendre/ZeroDetector/DetectorSamples.lean) | **proved**; both detector energies and polar weight explicit; required Ingham/Huxley exponents still open |
+| 4.39 | High-tail coefficient energy | `Legendre.Density.Detector.high_tail_coefficient_energy_le`, `detector_tail_energy_le`, `mollifier_vertical_energy_le`; [TailEnergy.lean](../Legendre/ZeroDetector/TailEnergy.lean) | **proved**; X^(1−2σ) decay with a positive geometric denominator, σ>1/2 |
+| 4.40 | Full multiplicity-weighted count from actual detection | `Legendre.Zeta.zeroDensityCount_le_actual_detector`; [ZetaDetectedDensity.lean](../Legendre/ZetaDetectedDensity.lean) | **proved**; no detector hypothesis, both energies explicit, fixed low-height contribution retained; present height power still insufficient |
+| 4.41 | Positive-half-plane digamma series and tail helpers | `Complex.hasSum_digamma_of_re_pos`; [DigammaSeries.lean](../Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean) | **proved**, adapted from the credited PNT+ source |
+| 4.42 | Sharp Gamma quotient and Gaussian weight | `Legendre.Density.GammaBounds.sharp_gammaReal_shift`, `gammaSquareGaussianWeight_bound`; [GammaBounds/](../Legendre/GammaBounds/) | **proved**, exact horizontal height exponent, fixed source/license recorded |
+| 4.43 | Entire self-dual xi completion | `Legendre.Zeta.zetaXi_differentiable`, `zetaXi_one_sub`, `xi_polynomial_shift_ratio_le`; [ZetaXi.lean](../Legendre/ZetaXi.lean) | **proved**, removes both completed poles, polynomial shift costs no base-height power |
+| 4.44 | Normalized entire Gaussian square | `Legendre.Zeta.xiSquareGaussian_normalized`, `xiSquareKernelWeight_bound`; [XiSquareKernel.lean](../Legendre/XiSquareKernel.lean) | **proved**, exact right-line identity and explicit normalized kernel bound |
+| 4.45 | Integrable Gaussian contour envelope | `Legendre.Zeta.zetaXi_strip_bound`, `xiGaussianEnvelope_integrable`, `xiSquareGaussian_band_bound`; [XiGaussianEnvelope.lean](../Legendre/XiGaussianEnvelope.lean) | **proved**, reflection across the band, sixth-degree envelope and vanishing limit; fourth-moment theorem still open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Twenty-three independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros and mixed real parts; all declarations audited |
+| 4.validation | Twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts and zero-shift kernel; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -458,11 +465,11 @@ The parsed axiom output matches the complete Lean-environment enumeration exactl
 contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
-Layer 4 actual-detector validation (2026-11-08): full build passed
-4,113 jobs, and all 3,158 project theorem declarations are audited, including
-106 additional public/private/generated declarations after the linear-mean-square checkpoint. The complete module-data theorem inventory
-agrees with the parsed audit output exactly. All 141 project Lean files have
-zero executable placeholders. Twenty-three Layer 4 consumers and all nine
+Layer 4 moment-kernel validation (2026-11-08): full build passed
+4,131 jobs, and all 3,281 project theorem declarations are audited, including
+123 additional public/private/generated declarations after the actual-detector checkpoint. The complete module-data theorem inventory
+agrees with the parsed audit output exactly. All 156 project Lean files have
+zero executable placeholders. Twenty-nine Layer 4 consumers and all nine
 Layer 3 regression consumers compile and pass standalone checks in CI.
 See [the precise estimates and remaining obligations](layer4-linear-mean-value.md).
 

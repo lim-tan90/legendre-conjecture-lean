@@ -10,7 +10,7 @@ was added.
 
 ## Selected source slice
 
-Only the following 14 modules are adapted. Paths below are relative to
+The original Layer 3 slice adapts the following 14 modules. Paths below are relative to
 upstream `PrimeNumberTheoremAnd/` and local `Legendre/PNT/`, respectively.
 Original contributor/copyright comments, where present, are retained.
 
@@ -169,3 +169,21 @@ consumer checks passed. An exhaustive Lean-environment enumeration and the
 parsed audit output match exactly on all 2,756 project theorem declarations,
 including private/generated helpers. All 85 project Lean files have zero
 executable `sorry`, `admit` or `sorryAx`. Only the three standard axioms occur.
+
+## Layer 4 addition: positive-half-plane digamma series
+
+At the same fixed commit, the additional upstream
+[`Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/127b50e33f6033e2147921167a117af96d9ba4ea/PrimeNumberTheoremAnd/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean)
+is adapted to
+[the corresponding local module](../Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean).
+The original copyright and author credit to Robby Sneiderman are retained.
+The selected slice ends after `Complex.hasSum_digamma_of_re_pos` and includes
+its Euler-logarithm convergence proof and inverse-square tail helpers. The
+remaining continuation and growth theorems in that upstream file are omitted.
+The retained license is still [PNTplus-Apache-2.0.txt](../licenses/PNTplus-Apache-2.0.txt);
+both READMEs record the additional source. No dependency pin changes are required.
+
+This extends the source inventory to fifteen PNT+ modules overall. The earlier
+Layer 3 validation records above refer to its original fourteen-module slice.
+This inventory is prepared for upstream communication by the agent selected
+by the user; no additional upstream issue or PR has been posted by this work.

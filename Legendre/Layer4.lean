@@ -20,6 +20,9 @@ public import Legendre.ZeroDetectionSharp
 public import Legendre.ZetaFiniteEuler
 public import Legendre.ComplexDirichletSampling
 public import Legendre.ZeroDetector.DetectorSamples
+public import Legendre.ZeroDetector.TailEnergy
+public import Legendre.ZetaDetectedDensity
+public import Legendre.XiGaussianEnvelope
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -33,5 +36,7 @@ Hilbert inequality sharpens mean-square error to 2πN times coefficient energy;
 optimized discrete sampling has a single logarithmic factor.
 The actual finite zeta detector now retains two branches, including principal
 pole compensation. Sampling allows independently varying real parts. Neither
-Ingham nor Huxley is asserted, and no exponent value is assumed.
+Ingham nor Huxley is asserted, and no exponent value is assumed. An entire
+xi square, sharp Gamma quotients, and an integrable Gaussian envelope prepare
+the critical-line fourth-moment contour. The fourth-moment theorem remains open.
 -/

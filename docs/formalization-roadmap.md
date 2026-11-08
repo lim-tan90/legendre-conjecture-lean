@@ -476,10 +476,15 @@ Euler formula with an explicit polar contribution now yields an actual two-branc
 zeta detector. Sampling permits independently varying real parts, and both
 branches are retained in a proved separated-zero sample bound. The detector
 length and large-value estimates still need improvement to reach Ingham/Huxley.
+High-tail energy now has explicit X^(1−2σ) decay, and the actual detector bounds
+the full multiplicity-weighted count with a retained low-height term. An entire
+xi square, sharp Gamma quotients and an integrable Gaussian envelope prepare
+the critical-line fourth-moment contour; the fourth-moment theorem remains open.
 See [initial mean values](layer4-mean-values.md),
 [the large-sieve estimates and reduction](layer4-large-sieve.md),
 [linear mean-square error and optimized sampling](layer4-linear-mean-value.md),
-[the actual compensated detector](layer4-zero-detector.md), and
+[the actual compensated detector](layer4-zero-detector.md),
+[tail energy and moment kernels](layer4-moment-kernel.md), and
 [upstream provenance](openai-math-provenance.md).
 
 | Acceptance component | Current evidence |
@@ -490,8 +495,8 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **open** |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; sharper analytic detector estimates **open** |
 
-Full validation: 4,113 build jobs, all 3,158 theorem declarations audited,
-141 Lean files free of executable placeholders, and twenty-three Layer 4 consumers
+Full validation: 4,131 build jobs, all 3,281 theorem declarations audited,
+156 Lean files free of executable placeholders, and twenty-nine Layer 4 consumers
 plus nine Layer 3 regression consumers. Both standalone checks run in CI.
 
 **Acceptance criteria.**

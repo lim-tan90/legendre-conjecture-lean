@@ -67,11 +67,14 @@
 采样允许各零点实部独立变化，计数界保留两个检测分支的能量。
 达到 Ingham/Huxley 所需的高度幂次仍待证明。
 [精确检测器及剩余解析步骤](docs/layer4-zero-detector.md)。
+尾部能量已有显式 X^(1−2σ) 衰减，并已从实际检测器推出保留低高度项的完整带重数计数界。
+整函数 xi 的对称高斯平方核、精确 Gamma 商界及可积包络也已证明；
+临界线四次矩定理仍开放。[证明链](docs/layer4-moment-kernel.md)。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,113 项构建**、**全部 3,158 个项目定理声明**的公理审计（仅三项标准公理）、
-**141 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**32 项独立使用检查**（Layer 4 二十三项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+验证：**4,131 项构建**、**全部 3,281 个项目定理声明**的公理审计（仅三项标准公理）、
+**156 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**38 项独立使用检查**（Layer 4 二十九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -594,6 +597,11 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   保留来源和贡献者信息，适配导入、模块可见性、蓝图元数据和六处非零性反证表达。
   原许可证保存在 [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt)。
   ψ→θ→π 的误差传递证明位于 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean)。
+  Layer 4 另选取同一固定提交中 Robby Sneiderman 的
+  `Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`，保留正实部半平面的
+  digamma 级数及尾和辅助证明，移至
+  [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean)。
+  保留原贡献者说明及同一 Apache-2.0 许可证。
   详见[来源与限制](docs/pnt-provenance.md)。
 * **[openai/math](https://github.com/openai/math)** — Apache-2.0，
   固定来源提交 `4eaee87548250b2682affda7d05d947c05554bae`。
@@ -634,6 +642,18 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   [`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean)、
   [`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean) 和
   [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean)。
+  [`Legendre/GammaBounds/`](Legendre/GammaBounds/) 中的 Gamma 商估计还改编
+  `ZeroDensity/LogNormDerivative.lean`、`DigammaTailEstimate.lean`、
+  `SharpDigammaStrip.lean`、`GammaNormDerivative.lean`、`SharpGammaHorizontal.lean`、
+  `SharpGammaVertical.lean`、`SharpGammaRealShift.lean` 和 `GammaStripBound.lean`。
+  [`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
+  特化 `ZeroDensity/CharacterGammaShift.lean` 的标量高斯权重论证；
+  [`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) 将
+  `DensityCompletedSquare.lean` 和 `DensitySquareGaussian.lean` 的高斯平方与归一化
+  组织推广到本地证明的整函数 xi。
+  [`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) 将
+  `DensityGaussianEnvelope.lean` 推广到消去两个完成极点后所需的六次多项式包络。
+  digamma 尾和仅导入所选 PNT+ 级数证明，省去与此处无关的特征及无零区域依赖链。
   来源提交和保留许可证均同上。
   此前已选取的大筛证明链已编译，并纳入整库公理审计；
   [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。

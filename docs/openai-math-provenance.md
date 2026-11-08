@@ -147,3 +147,47 @@ consumers. See [the precise detector and its limits](layer4-zero-detector.md).
 
 The source inventory above is available for the repository owner's upstream
 communication; this work has not posted an upstream issue or PR.
+
+## Gamma and Gaussian moment-kernel slice
+
+The same pinned openai/math commit supplies the following additional files
+from `lean/OAI/NumberTheory/Ostmann/ZeroDensity/`, adapted to
+[`Legendre/GammaBounds/`](../Legendre/GammaBounds/):
+
+- `LogNormDerivative.lean`
+- `DigammaTailEstimate.lean`
+- `SharpDigammaStrip.lean`
+- `GammaNormDerivative.lean`
+- `SharpGammaHorizontal.lean`
+- `SharpGammaVertical.lean`
+- `SharpGammaRealShift.lean`
+- `GammaStripBound.lean`
+
+The destination filenames match. `DigammaTailEstimate.lean` replaces the broad
+`LogarithmicGammaBound.lean` dependency with the selected
+[PNT+ positive-half-plane digamma-series proof](pnt-provenance.md#layer-4-addition-positive-half-plane-digamma-series).
+`SharpDigammaStrip.lean` adds an explicit harmonic-bounds import required by
+that smaller public dependency boundary. No character-dependent Gamma or
+zero-free-region theorem is imported.
+
+[GammaBounds/GaussianWeight.lean](../Legendre/GammaBounds/GaussianWeight.lean)
+adapts the scalar Gaussian estimate and specializes the square-weight proof
+from `CharacterGammaShift.lean` to the real Gamma factor.
+[XiSquareKernel.lean](../Legendre/XiSquareKernel.lean) generalizes the
+organization of `DensityCompletedSquare.lean` and `DensitySquareGaussian.lean`.
+[ZetaXi.lean](../Legendre/ZetaXi.lean) is a local deduction from mathlib's
+completed zeta function: multiplying by s(s−1) removes both completed poles.
+This retains the reflection equation and introduces only a polynomial in the
+contour shift, without an additional height power. These kernel estimates
+prepare the fourth-moment contour; the fourth-moment theorem remains open.
+
+[XiGaussianEnvelope.lean](../Legendre/XiGaussianEnvelope.lean) additionally
+generalizes `DensityGaussianEnvelope.lean` to a sixth-degree polynomial
+envelope for the entire xi square. The local polynomial strip bound is
+derived from the proved Euler representation and Gamma integral bound.
+
+Moment-kernel validation adds 123 audited public/private/generated declarations
+after the actual-detector checkpoint: 4,131 build jobs, all 3,281 project
+theorem declarations audited, 156 project Lean files without executable
+placeholders, twenty-nine Layer 4 and nine Layer 3 consumer checks. The
+standard three-axiom whitelist and dependency pins are unchanged.
