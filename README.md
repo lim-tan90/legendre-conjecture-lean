@@ -732,6 +732,9 @@ repository's git identity has since been corrected to
 
 ## Reused and adapted formalizations
 
+<details open>
+<summary><strong>Upstream sources and adaptation details</strong></summary>
+
 This project prefers to **adapt existing verified formalizations** instead of
 rewriting proofs from scratch.  Every ported or adapted development is recorded
 here with its upstream repository, pinned commit, license, and destination in
@@ -885,6 +888,8 @@ No additional PNT+ source is copied.
   mathlib proof is copied into this repository.
 
 
+
+</details>
 
 ## Copyright
 

@@ -617,6 +617,9 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 ## 复用的形式化成果
 
+<details open>
+<summary><strong>来源与移植详情</strong></summary>
+
 本项目优先**借鉴、移植已有的已验证形式化成果**，而不是从零重写。所有移植或改编
 的开发都记录在此：上游仓库、固定 commit、许可证，以及在本仓库中的位置。
 
@@ -751,6 +754,8 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   mathlib 的证明。
 
 
+
+</details>
 
 ## 版权
 
