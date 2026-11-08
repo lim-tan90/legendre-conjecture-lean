@@ -297,4 +297,30 @@ theorem layer4_xi_kernel_zero_shift_consumer (t : ℝ) :
   simp [Zeta.xiSquareKernelWeight,GammaBounds.gammaSquareGaussianWeight,
     mul_ne_zero hs0 hs1,hg]
 
+/-- The residue formula includes the removed completed pole s=0. -/
+theorem layer4_xi_rectangle_pole_consumer :
+    Zeta.xiRectangleIntegral (Zeta.xiSquareContour 0) (-1) 1 (-2) 2 =
+      2*(Real.pi : ℂ)*Complex.I := by
+  simpa using Zeta.xiSquareGaussian_rectangle 0 (-1) 1 (-2) 2
+    (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+/-- At the real critical point reflection makes the two contours equal. -/
+theorem layer4_xi_real_center_consumer :
+    Zeta.zetaXi (1/2)^2 = 2*Zeta.xiSquareIntegral (1/2) := by
+  have h := Zeta.zetaXi_square_equation (1/2) (by norm_num)
+  norm_num at h ⊢
+  linear_combination h
+
+/-- The fourth-power reduction holds at every positive or negative ordinate. -/
+theorem layer4_zeta_fourth_reduction_consumer (t : ℝ) :
+    ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4 ≤
+      4*‖Zeta.xiSmoothedZetaSquare ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2 :=
+  Zeta.riemannZeta_fourth_le_smoothed _ (by simp)
+
+/-- Entire xi conjugation includes both removed poles. -/
+theorem layer4_xi_conjugation_endpoints_consumer :
+    Zeta.zetaXi (starRingEnd ℂ 0) = starRingEnd ℂ (Zeta.zetaXi 0) ∧
+    Zeta.zetaXi (starRingEnd ℂ 1) = starRingEnd ℂ (Zeta.zetaXi 1) :=
+  ⟨Zeta.zetaXi_conj 0,Zeta.zetaXi_conj 1⟩
+
 end Legendre.Tests

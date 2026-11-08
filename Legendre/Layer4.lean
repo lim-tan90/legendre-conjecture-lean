@@ -23,6 +23,7 @@ public import Legendre.ZeroDetector.DetectorSamples
 public import Legendre.ZeroDetector.TailEnergy
 public import Legendre.ZetaDetectedDensity
 public import Legendre.XiGaussianEnvelope
+public import Legendre.XiSquareContour
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -37,6 +38,7 @@ optimized discrete sampling has a single logarithmic factor.
 The actual finite zeta detector now retains two branches, including principal
 pole compensation. Sampling allows independently varying real parts. Neither
 Ingham nor Huxley is asserted, and no exponent value is assumed. An entire
-xi square, sharp Gamma quotients, and an integrable Gaussian envelope prepare
-the critical-line fourth-moment contour. The fourth-moment theorem remains open.
+xi square, sharp Gamma quotients, and an integrable Gaussian envelope justify
+an exact contour functional equation and pointwise fourth-power reduction.
+The contour mean bound and fourth-moment theorem remain open.
 -/

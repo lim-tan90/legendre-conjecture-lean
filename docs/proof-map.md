@@ -438,8 +438,10 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.43 | Entire self-dual xi completion | `Legendre.Zeta.zetaXi_differentiable`, `zetaXi_one_sub`, `xi_polynomial_shift_ratio_le`; [ZetaXi.lean](../Legendre/ZetaXi.lean) | **proved**, removes both completed poles, polynomial shift costs no base-height power |
 | 4.44 | Normalized entire Gaussian square | `Legendre.Zeta.xiSquareGaussian_normalized`, `xiSquareKernelWeight_bound`; [XiSquareKernel.lean](../Legendre/XiSquareKernel.lean) | **proved**, exact right-line identity and explicit normalized kernel bound |
 | 4.45 | Integrable Gaussian contour envelope | `Legendre.Zeta.zetaXi_strip_bound`, `xiGaussianEnvelope_integrable`, `xiSquareGaussian_band_bound`; [XiGaussianEnvelope.lean](../Legendre/XiGaussianEnvelope.lean) | **proved**, reflection across the band, sixth-degree envelope and vanishing limit; fourth-moment theorem still open |
+| 4.46 | Exact Gaussian xi-square functional equation | `Legendre.Zeta.xiSquareContour_vertical_integrable`, `xiSquareGaussian_rectangle`, `zetaXi_square_equation`; [XiSquareContour.lean](../Legendre/XiSquareContour.lean) | **proved**, convergent vertical lines, vanishing horizontal edges, central residue and reflected orientation |
+| 4.47 | Critical-line fourth-power reduction | `Legendre.Zeta.zetaXi_conj`, `xiSquareIntegral_conj`, `riemannZeta_fourth_le_smoothed`; [XiSquareContour.lean](../Legendre/XiSquareContour.lean) | **proved**, pointwise bound by one normalized contour; its mean estimate and the fourth-moment theorem remain open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts and zero-shift kernel; all declarations audited |
+| 4.validation | Thirty-three independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -465,13 +467,13 @@ The parsed axiom output matches the complete Lean-environment enumeration exactl
 contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
-Layer 4 moment-kernel validation (2026-11-08): full build passed
-4,131 jobs, and all 3,281 project theorem declarations are audited, including
-123 additional public/private/generated declarations after the actual-detector checkpoint. The complete module-data theorem inventory
-agrees with the parsed audit output exactly. All 156 project Lean files have
-zero executable placeholders. Twenty-nine Layer 4 consumers and all nine
-Layer 3 regression consumers compile and pass standalone checks in CI.
-See [the precise estimates and remaining obligations](layer4-linear-mean-value.md).
+Layer 4 moment-contour validation (2026-11-08): full build passed
+4,132 jobs, and all 3,311 project theorem declarations are audited, including
+153 additional public/private/generated declarations after the actual-detector checkpoint. The complete module-data theorem inventory
+agrees with the parsed audit output exactly. All 157 project Lean files have
+zero executable placeholders. Thirty-three Layer 4 consumers and all nine
+Layer 3 regression consumers compile and pass standalone checks, also required by CI.
+See [the precise estimates and remaining obligations](layer4-moment-kernel.md).
 
 ## What the audit proves — and what it does not
 

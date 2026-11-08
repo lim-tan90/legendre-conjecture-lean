@@ -121,12 +121,54 @@ For each critical-line s there is K_s>0 such that, uniformly for |x|≤1,
 ```
 
 The envelope is proved integrable and tends to zero as u→+∞. It is the input
-for convergent vertical integrals and vanishing horizontal edges. Completing
-the resulting contour identity and bounding the normalized Dirichlet square
-mean are the next steps toward the fourth moment.
+for convergent vertical integrals and vanishing horizontal edges.
 
-Validation of this slice: 4,131 full-build jobs; all 3,281 distinct project
-theorem declarations audited against the three standard axioms; 156 Lean
-files without executable `sorry`, `admit` or `sorryAx`; twenty-nine Layer 4
+## Exact contour identity and pointwise fourth-power reduction
+
+[XiSquareContour.lean](../Legendre/XiSquareContour.lean) defines
+
+```
+C_s(w) = G_s(w)/w,
+I(s) = (2π)⁻¹ ∫[u∈ℝ] C_s(1+iu) du,
+Φ(s) = I(s)/Q(s).
+```
+
+On Re(s)=1/2, both vertical lines are integrable and the horizontal rectangle
+edges tend to zero. The rectangle residue is exactly 2πi Xi(s)²; its proof
+also holds at s=0 and s=1 because the numerator is entire. Reflection gives
+the correct orientation sign on the left vertical line. Thus
+
+```
+Xi(s)² = I(s)+I(1−s).
+```
+
+The entire completion and I commute with conjugation, including the removed
+completed poles for Xi. On the critical line 1−s=conj(s), so the triangle
+inequality and the nonzero normalizer give the unconditional pointwise bound
+
+```
+|ζ(s)|⁴ ≤ 4|Φ(s)|².
+```
+
+No contour mean estimate is assumed here. Proving its height-uniform integral
+bound is the next analytic obligation for the fourth-moment theorem; the
+Ingham/Huxley estimates and completion of Layer 4 remain open.
+
+The new consumers check the residue at the removed pole s=0, equality of the
+two smoothed terms at s=1/2, the fourth-power reduction at every real ordinate,
+and conjugation at both removed poles. Both READMEs and the source inventory
+credit all three adapted contour files.
+
+## CI toolchain installation
+
+The official release redirect repeatedly returned HTTP 504 before compilation.
+`scripts/install-lean-ci.sh` resolves the exact pinned release through GitHub's
+release API, downloads the official Linux asset with a second official route
+as fallback, and verifies its published SHA-256 before extraction. The Lean
+and mathlib pins are unchanged.
+
+Validation of this slice: 4,132 full-build jobs; all 3,311 distinct project
+theorem declarations audited against the three standard axioms; 157 Lean
+files without executable `sorry`, `admit` or `sorryAx`; thirty-three Layer 4
 and nine Layer 3 consumers pass compiled and standalone checks. The full
 module-data theorem inventory matches the parsed axiom output exactly.

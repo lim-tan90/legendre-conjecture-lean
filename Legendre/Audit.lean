@@ -193,6 +193,8 @@ public import Legendre.XiSquareKernel
 import all Legendre.XiSquareKernel
 public import Legendre.XiGaussianEnvelope
 import all Legendre.XiGaussianEnvelope
+public import Legendre.XiSquareContour
+import all Legendre.XiSquareContour
 
 import all Legendre.LargeSieve.AdditiveSieveProof
 import all Legendre.LargeSieve.CircleSeparatedPoints
@@ -3685,3 +3687,35 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_eq_gamma_poleRemoved._simp_1_8"
 #audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_zero_iff._simp_1_1"
 #audit_private_axioms "_private.Legendre.ZetaXi.0.Legendre.Zeta.zetaXi_zero_iff._simp_1_2"
+
+-- Entire xi-square contour and independent consumer declarations.
+#print axioms Legendre.Zeta.riemannZeta_fourth_le_smoothed
+#print axioms Legendre.Zeta.xiGaussianEnvelope.eq_1
+#print axioms Legendre.Zeta.xiRectangleIntegral.eq_1
+#print axioms Legendre.Zeta.xiSquareContour.eq_1
+#print axioms Legendre.Zeta.xiSquareContour_bound
+#print axioms Legendre.Zeta.xiSquareContour_conj
+#print axioms Legendre.Zeta.xiSquareContour_horizontal_bound
+#print axioms Legendre.Zeta.xiSquareContour_horizontal_tendsto
+#print axioms Legendre.Zeta.xiSquareContour_left_reflection
+#print axioms Legendre.Zeta.xiSquareContour_limit
+#print axioms Legendre.Zeta.xiSquareContour_vertical_integrable
+#print axioms Legendre.Zeta.xiSquareGaussian_conj
+#print axioms Legendre.Zeta.xiSquareGaussian_rectangle
+#print axioms Legendre.Zeta.xiSquareIntegral._proof_1
+#print axioms Legendre.Zeta.xiSquareIntegral_conj
+#print axioms Legendre.Zeta.zetaXi_conj
+#print axioms Legendre.Zeta.zetaXi_square_equation
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_xi_conjugation_endpoints_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_xi_real_center_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_xi_rectangle_pole_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_fourth_reduction_consumer"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.riemannZeta_fourth_le_smoothed._simp_1_1"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_conj._simp_1_1"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_1"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_2"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_3"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_4"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_5"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_6"
+#audit_private_axioms "_private.Legendre.XiSquareContour.0.Legendre.Zeta.xiSquareGaussian_rectangle._simp_1_7"

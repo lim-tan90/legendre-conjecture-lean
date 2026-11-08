@@ -191,3 +191,27 @@ after the actual-detector checkpoint: 4,131 build jobs, all 3,281 project
 theorem declarations audited, 156 project Lean files without executable
 placeholders, twenty-nine Layer 4 and nine Layer 3 consumer checks. The
 standard three-axiom whitelist and dependency pins are unchanged.
+
+## Entire xi-square contour addition
+
+[XiSquareContour.lean](../Legendre/XiSquareContour.lean) adapts the vertical-line,
+reflection and conjugation proof organization from these additional files in
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/` at the same pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, under the retained Apache-2.0 license:
+
+- `DensitySquareContour.lean`
+- `DensitySquareEquation.lean`
+- `DensitySquareConjugation.lean`
+
+The source character completion is replaced by the locally proved entire
+xi completion. The local rectangle calculation uses `dslope` to isolate the
+central simple pole and reuses the already ported PNT+ rectangle residue API
+([fixed source and license](pnt-provenance.md)); no additional PNT+ source is
+copied. Conjugation gives the pointwise fourth-power reduction for zeta.
+The normalized contour mean estimate is still open; this is not a proof of
+the fourth-moment theorem or the Ingham/Huxley estimates.
+
+Contour-addition local validation: 4,132 build jobs, all 3,311 project theorem
+declarations audited (30 added after the moment-kernel checkpoint), 157 Lean
+files without executable placeholders, thirty-three Layer 4 and nine Layer 3
+consumer checks. Both independent theorem inventories match the audit targets.

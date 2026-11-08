@@ -84,14 +84,15 @@ for Ingham/Huxley remain to be proved.
 The high-tail energy now has explicit X^(1−2σ) decay, and actual detection
 also bounds the full multiplicity-weighted count with its fixed low-height
 term. An entire self-dual xi square, sharp Gamma quotients and an integrable
-Gaussian envelope prepare the critical-line moment contour; the fourth-moment
-theorem remains open. [Proof chain](docs/layer4-moment-kernel.md).
+Gaussian envelope now justify an exact contour functional equation and a
+pointwise reduction `|ζ(s)|⁴ ≤ 4|xiSmoothedZetaSquare(s)|²` on Re(s)=1/2.
+The normalized contour mean bound and fourth-moment theorem remain open. [Proof chain](docs/layer4-moment-kernel.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,131 build jobs**, all **3,281 project theorem declarations**
-audited with only the three standard axioms, **156 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **38 independent consumer checks**
-(twenty-nine Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+Validation: **4,132 build jobs**, all **3,311 project theorem declarations**
+audited with only the three standard axioms, **157 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **42 independent consumer checks**
+(thirty-three Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
@@ -470,6 +471,8 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Density.dirichlet_large_sample_card_le` / `halasz_montgomery_card_le` | Actual separated-point counts and the finite Gram large-value inequality | **proved**; spacing/threshold or off-diagonal kernel hypotheses explicit | [DirichletSampling.lean](Legendre/DirichletSampling.lean), [HalaszMontgomery.lean](Legendre/HalaszMontgomery.lean) |
 | `Legendre.Zeta.exists_density_separated_representatives` | One-separated zero representatives retain the complete analytic multiplicity count | **proved**; one absolute logarithmic mass coefficient | [ZetaDensitySelection.lean](Legendre/ZetaDensitySelection.lean) |
 | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | Explicit detector-to-density count reduction | **proved conditional theorem**; analytic detector property remains a hypothesis | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
+| `Legendre.Zeta.zetaXi_square_equation` | Exact Gaussian identity Xi(s)²=I(s)+I(1−s), Re(s)=1/2 | **proved**; integrability, horizontal limits and central residue included | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
+| `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; the contour mean estimate and fourth-moment theorem remain open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -774,6 +777,10 @@ this repository.
   [`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) generalizes
   `DensityGaussianEnvelope.lean` to the sixth-degree polynomial envelope
   needed after removing the two completed poles.
+  [`XiSquareContour.lean`](Legendre/XiSquareContour.lean) adapts the contour,
+  reflection and conjugation organization of `ZeroDensity/DensitySquareContour.lean`,
+  `DensitySquareEquation.lean` and `DensitySquareConjugation.lean` to this entire
+  xi numerator, reusing the already credited PNT+ rectangle residue API.
   The digamma tail imports only the selected PNT+ series proof, avoiding the
   unrelated character and zero-free-region dependency chain.
   All paths are under upstream `lean/OAI/NumberTheory/Ostmann/` and use the

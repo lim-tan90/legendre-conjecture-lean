@@ -20,20 +20,7 @@ jobs:
       # installation, cache retrieval, build and audit separately observable.
       - name: Install pinned Lean
         shell: bash
-        run: |
-          set -euo pipefail
-          toolchain="$(cat lean-toolchain)"
-          case "$toolchain" in
-            leanprover/lean4:v*) version="${toolchain#leanprover/lean4:v}" ;;
-            *) echo "Unsupported toolchain: $toolchain" >&2; exit 1 ;;
-          esac
-          curl --fail --location --retry 3 \
-            "https://releases.lean-lang.org/lean4/v${version}/lean-${version}-linux.tar.zst" \
-            --output "$RUNNER_TEMP/lean.tar.zst"
-          tar --zstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/lean-${version}-linux/bin" >> "$GITHUB_PATH"
-          "$RUNNER_TEMP/lean-${version}-linux/bin/lean" --version
-          "$RUNNER_TEMP/lean-${version}-linux/bin/lake" --version
+        run: bash scripts/install-lean-ci.sh
 
       - name: Get pinned mathlib cache
         run: lake exe cache get
