@@ -400,6 +400,9 @@ exponent consequences, rather than all stronger conclusions of their papers.
 The final Sorenson–Webster range is `7.05×10^13`; arXiv v1 has `3.33×10^13`.
 [Sources, apparent introductory typos and limits](docs/literature-comparators.md#corrections-and-source-limitations).
 No proof gap in the original prime-gap theorems has been established.
+The completed Layer 2 `c/log T` zero-free region also does not by itself
+supply the stronger `A log log T/log T` input in Ingham’s original
+short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 

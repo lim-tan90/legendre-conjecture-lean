@@ -85,6 +85,15 @@ Paywalled originals are not described as directly verified.
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
 | 4 | Linear mean-square error, actual detection, weighted sampling, normalized xi-square pointwise reduction | Proved prerequisites; fourth moment and the Ingham/Huxley density bounds remain open |
 
+A further source-input distinction matters for fixed exponents. Ingham 1937
+Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
+`A log log T / log T` and an explicit density-logarithm loss. The completed
+Layer 2 benchmark supplies only a classical `c/log T` width. It cannot simply
+be substituted for that stronger source input. A stronger zero-free theorem,
+or a different fully proved transmission argument, remains an analytic
+obligation. “Documented Layer 2 complete” refers to its stated classical
+scope, not every hypothesis of every later paper.
+
 The two curved density specifications retain uniformity in σ and additive
 epsilon in the height exponent. The verified `huxley_global_comparator` combines
 Ingham below σ=3/4 with Huxley above σ=3/4 to recover the global `12/5` target.

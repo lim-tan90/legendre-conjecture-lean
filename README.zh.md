@@ -317,6 +317,8 @@ Iwaniec–Pintz 1984 应为 `23/42`（出版社摘要及同一综述）。
 Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.33×10^13`。
 [逐项来源、疑似引言笔误及核查限制](docs/literature-comparators.md#corrections-and-source-limitations)。
 本次没有确立原始素数间隙定理证明中的数学漏洞。
+另已明确：已完成 Layer 2 的 `c/log T` 无零区域本身不满足 Ingham 原始短区间传递
+所用的更宽 `A log log T/log T` 区域；该文献输入仍待补齐。
 
 <!-- comparator:legendre1808 -->
 ## 历史进展总览

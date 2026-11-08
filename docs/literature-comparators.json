@@ -265,7 +265,7 @@
       "comparison_type": "ZetaFoundationBenchmark",
       "comparison_term": "layer2_comparator",
       "expected": "ZetaFoundationBenchmark",
-      "note": "Analytic continuation, functional equation, nonvanishing and explicit logarithmic zero-free region."
+      "note": "Analytic continuation, functional equation, nonvanishing and explicit logarithmic zero-free region. The proved c/log T region does not by itself supply Ingham 1937 Theorem 1’s stronger A log log T/log T zero-free input."
     },
     {
       "id": "layer3",
