@@ -25,6 +25,8 @@ public import Legendre.ZetaDetectedDensity
 public import Legendre.XiGaussianEnvelope
 public import Legendre.XiSquareContour
 public import Legendre.Layer4.ZetaFourthMoment
+public import Legendre.Layer4.DetectorIntegral
+public import Legendre.Layer4.DetectorKernelLeft
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -45,4 +47,6 @@ The normalized contour mean and a sixth-log fourth moment are proved:
 integral from -T to T of |zeta(1/2+it)|^4 is O(T log^6 T).
 The height exponent is consequently 1+epsilon. The sharp log^4 bound and
 the Ingham/Huxley zero-density estimates remain open.
+The compact Mobius detector has an exact initial right-contour integral.
+Its shift across the principal zeta pole is still a separate obligation.
 -/

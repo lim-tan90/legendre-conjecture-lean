@@ -361,4 +361,41 @@ theorem layer4_fourth_moment_exponent_consumer :
   norm_num at h
   exact h
 
+/-- The compact smoothing weight vanishes exactly at its support endpoint. -/
+theorem layer4_compact_weight_endpoint_consumer :
+    Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=
+  ⟨Detector.Smooth.detectorWeight_zero 1 le_rfl,
+    Detector.Smooth.detectorWeight_zero 2 (by norm_num)⟩
+
+/-- The first nontrivial smoothing cutoff retains its exact main coefficient. -/
+theorem layer4_compact_head_consumer (s : ℂ) :
+    Detector.Smooth.detectorMean 4 s 4 = 9/32 := by
+  rw [Detector.Smooth.detectorMean_split 4 (by norm_num) s 4 (by norm_num)]
+  have he : (Finset.Icc 1 4).filter (fun n : ℕ => 4 < n) = ∅ := by
+    ext n
+    simp only [Finset.mem_filter,Finset.mem_Icc,Finset.notMem_empty,iff_false]
+    omega
+  norm_num [Detector.Smooth.detectorWeight]
+  rw [he,Finset.sum_empty]
+
+/-- Cutoff one has empty smoothed support, even with a nonempty Mobius head. -/
+theorem layer4_compact_cutoff_one_consumer (X : ℕ) (s : ℂ) :
+    Detector.Smooth.detectorMean X s 1 = 0 := by
+  simp [Detector.Smooth.detectorMean,Detector.Smooth.detectorWeight]
+
+/-- The initial contour formula holds on Re(s)=0, including the empty mollifier. -/
+theorem layer4_compact_initial_contour_consumer (Y : ℝ) (hY : 0 < Y) :
+    Detector.Smooth.detectorMean 0 0 Y = ((1/(2*Real.pi) : ℝ) : ℂ)*
+      ∫ t : ℝ, riemannZeta (2+(t : ℂ)*Complex.I)*
+        Detector.finiteSeries (ArithmeticFunction.moebius : ArithmeticFunction ℂ) 0
+          (2+(t : ℂ)*Complex.I)*
+        (Y : ℂ)^(2+(t : ℂ)*Complex.I)*Detector.Smooth.detectorKernel (2+(t : ℂ)*Complex.I) := by
+  simpa using Detector.Smooth.detectorMean_eq_integral 0 0 (by simp) Y hY
+
+/-- The critical-side kernel bound includes the extreme shift delta=1/2. -/
+theorem layer4_compact_left_endpoint_consumer (u : ℝ) :
+    ‖Detector.Smooth.detectorKernel ((-(1/2 : ℝ) : ℂ)+(u : ℂ)*Complex.I)‖ ≤
+      32*(1+|u|)^(-(3 : ℝ)) := by
+  convert! Detector.Smooth.detectorKernel_left_bound (1/2) u (by norm_num) le_rfl using 1; norm_num
+
 end Legendre.Tests

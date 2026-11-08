@@ -479,6 +479,13 @@
     "Legendre/Layer4/XiTailAssembly.lean": "layer4",
     "Legendre/Layer4/XiTailMean.lean": "layer4",
     "Legendre/Layer4/ZetaFourthMoment.lean": "layer4",
-    "Legendre/Layer4/ZetaSquareSeries.lean": "layer4"
+    "Legendre/Layer4/ZetaSquareSeries.lean": "layer4",
+    "Legendre/Layer4/DetectorCoefficients.lean": "layer4",
+    "Legendre/Layer4/DetectorIntegral.lean": "layer4",
+    "Legendre/Layer4/DetectorKernel.lean": "layer4",
+    "Legendre/Layer4/DetectorKernelLeft.lean": "layer4",
+    "Legendre/Layer4/DetectorProduct.lean": "layer4",
+    "Legendre/Layer4/DetectorSeries.lean": "layer4",
+    "Legendre/Layer4/DetectorWeight.lean": "layer4"
   }
 }

@@ -229,6 +229,13 @@ appears in both README translations. Destination paths below are relative to
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](../Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](../Legendre/Layer4/BlockWeights.lean) |
+| `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](../Legendre/Layer4/DetectorCoefficients.lean) |
+| `DensityDetectorIntegral.lean` | [DetectorIntegral.lean](../Legendre/Layer4/DetectorIntegral.lean) |
+| `DensityDetectorKernel.lean` | [DetectorKernel.lean](../Legendre/Layer4/DetectorKernel.lean) |
+| `DensityDetectorKernelLeft.lean` | [DetectorKernelLeft.lean](../Legendre/Layer4/DetectorKernelLeft.lean) |
+| `DensityMollifierProduct.lean` | [DetectorProduct.lean](../Legendre/Layer4/DetectorProduct.lean) |
+| `DensityDetectorSeries.lean` | [DetectorSeries.lean](../Legendre/Layer4/DetectorSeries.lean) |
+| `DensityDetectorWeight.lean` | [DetectorWeight.lean](../Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](../Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](../Legendre/Layer4/DyadicArithmetic.lean) |
 | `DensityDyadicPartition.lean` | [DyadicPartition.lean](../Legendre/Layer4/DyadicPartition.lean) |
@@ -269,3 +276,18 @@ Fourth-moment validation (2026-11-08): 4,164 full-build jobs, all 3,561 project
 theorem declarations audited, 189 Lean sources without executable
 placeholders, and 84 independent consumers (39 Layer 4, 9 Layer 3, 36
 literature). Both complete declaration inventories match the audit.
+
+## Initial compact-detector addition
+
+The seven additional `Detector*.lean` destinations in the inventory above
+adapt the compact weight, Mellin inversion, full Mobius convolution and
+initial right-contour series exchange at the same openai/math pin and under
+the retained Apache-2.0 license. The character twist is removed. Zeta's
+principal pole is explicitly retained as a remaining contour-shift obligation;
+no zero-detection alternative or density exponent is claimed for this slice.
+See [the exact initial identity and limits](layer4-compact-detector.md).
+
+Compact-detector validation: 4,171 full-build jobs, all 3,615 project theorem
+declarations audited, 196 Lean sources without executable placeholders and
+89 independent consumers (44 Layer 4, 9 Layer 3, 36 literature). Both complete
+declaration inventories agree with the audit and parsed axiom output.

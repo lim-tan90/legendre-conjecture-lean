@@ -451,8 +451,11 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.50 | Main segment and summable dyadic tails | `Legendre.Zeta.xiFiniteSquare_head_mean`, `xiFiniteSquare_dyadic_mean`, `xiFiniteSquare_partial_mean` | **proved**, head log^6 and tail (j+2)^3/2^j; uniform in partial length |
 | 4.51 | Actual infinite contour mean | `Legendre.Zeta.xiSquare_partial_limit`, `xiSmoothedZetaSquare_mean` | **proved**, nonnegative Fatou supplies integrability and the uniform bound |
 | 4.52 | Critical-line fourth moment and height exponent | `Legendre.Zeta.zeta_fourth_moment_log_six`, `zeta_fourth_moment_positive_log_six`, `zeta_fourth_moment_epsilon`; [Layer4/ZetaFourthMoment.lean](../Legendre/Layer4/ZetaFourthMoment.lean) | **proved**, O(T log^6 T) on [-T,T] and [0,T], hence O_epsilon(T^(1+epsilon)); sharp log^4 and Ingham/Huxley density remain open |
+| 4.53 | Compact quadratic smoothing and Mellin inversion | `Legendre.Density.Detector.Smooth.detectorWeight_hasMellin`, `detectorWeight_mellin_inversion`, `detectorKernel_left_bound` | **proved**, compact support at 1, cubic vertical decay, critical-side delta up to 1/2 |
+| 4.54 | Full truncated-Mobius divisor convolution | `Legendre.Density.Detector.Smooth.detectorCoefficient_initial`, `detectorCoefficient_harmonic_energy`, `mollifier_zeta_product` | **proved**, no second cutoff; exact coefficient cancellation and actual zeta product on Re(s)>1 |
+| 4.55 | Exact initial compact detector contour | `Legendre.Density.Detector.Smooth.detectorMean_split`, `detectorMean_eq_integral` | **proved**, arbitrary positive smoothing scale; absolute integral norms justify the exchange. Shifting across zeta's principal pole remains open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Thirty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
+| 4.validation | Forty-four independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
@@ -541,3 +544,14 @@ executable sorry, admit or sorryAx. Standalone checks cover 39 Layer 4,
 9 Layer 3 and 36 literature consumers (84 total). The current Layer 4
 comparison additionally checks the proved sixth-log fourth moment and the
 1+epsilon height exponent; the sharp log^4 and density targets remain open.
+
+### Initial compact-detector validation (2026-11-08)
+
+Full build: 4,171 jobs. All 3,615 project theorem declarations, including
+private/generated helpers, are audited against the three standard axioms.
+Both independent inventories agree exactly with the audit. All 196 Lean
+sources have zero executable sorry, admit or sorryAx. Standalone checks:
+44 Layer 4, 9 Layer 3 and 36 literature consumers, 89 total. An intentional
+bad consumer also confirms that the sixth-log proof cannot fill the sharp
+fourth-log comparator. The initial compact contour is proved; the principal
+pole shift and Ingham/Huxley density estimates remain open.

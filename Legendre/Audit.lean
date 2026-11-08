@@ -243,6 +243,13 @@ import all Legendre.DirichletMeanValue
 import all Legendre.DirichletLargeValues
 import all Legendre.ZeroDensity
 import all Legendre.Layer4
+import all Legendre.Layer4.DetectorCoefficients
+import all Legendre.Layer4.DetectorIntegral
+import all Legendre.Layer4.DetectorKernel
+import all Legendre.Layer4.DetectorKernelLeft
+import all Legendre.Layer4.DetectorProduct
+import all Legendre.Layer4.DetectorSeries
+import all Legendre.Layer4.DetectorWeight
 import all Legendre.Layer4.BlockCauchy
 import all Legendre.Layer4.BlockWeights
 import all Legendre.Layer4.DivisorEnergy
@@ -4009,3 +4016,59 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_smoothed_zero_term_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_translated_subset_mean_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Zeta.zetaSquareCoefficient.eq_1"
+
+-- Compact Mobius detector: complete new declaration inventory.
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_energy
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_harmonic_energy
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_initial
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_norm
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_one
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_small
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_summable
+#print axioms Legendre.Density.Detector.Smooth.detectorKernel_high_bound
+#print axioms Legendre.Density.Detector.Smooth.detectorKernel_left_bound
+#print axioms Legendre.Density.Detector.Smooth.detectorKernel_line_bound
+#print axioms Legendre.Density.Detector.Smooth.detectorKernel_verticalIntegrable
+#print axioms Legendre.Density.Detector.Smooth.detectorMean_eq_integral
+#print axioms Legendre.Density.Detector.Smooth.detectorMean_split
+#print axioms Legendre.Density.Detector.Smooth.detectorMean_tsum
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm._proof_1
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm.eq_1
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm_continuous
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm_integrable
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm_inversion
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm_norm
+#print axioms Legendre.Density.Detector.Smooth.detectorVerticalTerm_summable_norm
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight._proof_1
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight.eq_1
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_at_one_div
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_continuous
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_eq
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_hasMellin
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_mellin_inversion
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_nonneg
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_zero
+#print axioms Legendre.Density.Detector.Smooth.detector_convolution
+#print axioms Legendre.Density.Detector.Smooth.mobiusCutoff_eq_truncate
+#print axioms Legendre.Density.Detector.Smooth.mobiusCutoff_norm
+#print axioms Legendre.Density.Detector.Smooth.mollifier_eq_LSeries
+#print axioms Legendre.Density.Detector.Smooth.mollifier_zeta_product
+#audit_private_axioms "_private.Legendre.Layer4.DetectorCoefficients.0.Legendre.Density.Detector.Smooth.detectorCoefficient_small._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorIntegral.0.Legendre.Density.Detector.Smooth.detectorVerticalTerm_continuous._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_split._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_split._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_split._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_split._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_tsum._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorSeries.0.Legendre.Density.Detector.Smooth.detectorMean_tsum._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.Smooth.detectorMean.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.Smooth.detectorWeight.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_cutoff_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_head_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_head_consumer._proof_1_4"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_head_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_head_consumer._simp_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_head_consumer._simp_1_3"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_initial_contour_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_left_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_weight_endpoint_consumer"

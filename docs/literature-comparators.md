@@ -288,10 +288,10 @@ also be added to the complete module coverage map.
 
 ## Validation
 
-The complete build has 4,164 jobs and the axiom audit covers all 3,561 distinct
-project theorem declarations. All 189 Lean source files are free of executable
+The complete build has 4,171 jobs and the axiom audit covers all 3,615 distinct
+project theorem declarations. All 196 Lean source files are free of executable
 placeholders. The 24 catalog/closed-proof consumers, 12 literature regression
-guards, 39 Layer 4 consumers and 9 Layer 3 consumers compile independently.
+guards, 44 Layer 4 consumers and 9 Layer 3 consumers compile independently.
 The independent module-data and full-environment theorem inventories are checked
 against the parsed audit output. Intentional bad fixtures verify that Lean
 rejects the old unsupported exponent, an open density bridge used as a closed

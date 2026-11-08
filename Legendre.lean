@@ -159,5 +159,12 @@ import Legendre.Layer4.XiTailAssembly
 import Legendre.Layer4.XiTailMean
 import Legendre.Layer4.ZetaFourthMoment
 import Legendre.Layer4.ZetaSquareSeries
+import Legendre.Layer4.DetectorCoefficients
+import Legendre.Layer4.DetectorIntegral
+import Legendre.Layer4.DetectorKernel
+import Legendre.Layer4.DetectorKernelLeft
+import Legendre.Layer4.DetectorProduct
+import Legendre.Layer4.DetectorSeries
+import Legendre.Layer4.DetectorWeight
 import Legendre.Literature
 import Legendre.Audit
