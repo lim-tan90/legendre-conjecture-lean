@@ -73,4 +73,3 @@ theorem real_symmetric_quadratic_upper (v : ι → ι → ℝ)
 end LargeSieve
 
 end Legendre
-

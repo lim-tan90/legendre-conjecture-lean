@@ -45,4 +45,3 @@ def PublishedAdditiveLargeSieve : Prop :=
 end LargeSieve
 
 end Legendre
-

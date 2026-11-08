@@ -134,6 +134,8 @@ explicit hypothesis of a conditional theorem.
 
 ## Checkpoint validation (2026-11-08)
 
+Verified source checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
+
 Full build: **4,097 jobs**. The audit covers **all 3,022 project theorem
 declarations**, including private/generated helpers. It adds 176 declarations
 to the previous 2,846-target audit. Independent module-data and full-environment

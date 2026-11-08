@@ -79,4 +79,3 @@ namespace LargeSieve
 end LargeSieve
 
 end Legendre
-

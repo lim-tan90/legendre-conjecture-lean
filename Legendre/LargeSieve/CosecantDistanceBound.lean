@@ -61,4 +61,3 @@ noncomputable def cosecantRowWeight (t : ℝ) : ℝ :=
 end LargeSieve
 
 end Legendre
-

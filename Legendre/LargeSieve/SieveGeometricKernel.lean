@@ -80,4 +80,3 @@ noncomputable def sieveHalfPhase (t : ℝ) : ℂ :=
 end LargeSieve
 
 end Legendre
-

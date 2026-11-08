@@ -81,6 +81,7 @@ Validation: **4,097 build jobs**, all **3,022 project theorem declarations**
 audited with only the three standard axioms, **125 Lean files** with zero
 executable `sorry`/`admit`/`sorryAx`, and **25 independent consumer checks**
 (sixteen Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+Verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
 [Large sieve, separated samples and weighted detection](docs/layer4-large-sieve.md).

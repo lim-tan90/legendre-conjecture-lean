@@ -111,4 +111,3 @@ theorem exists_separated_selection (s : Finset ι) (c : ι → κ) (γ : ι → 
 end LargeSieve
 
 end Legendre
-

@@ -86,4 +86,3 @@ noncomputable def reducedFractionPoint (Q : ℕ) (s : ReducedFractionIndex Q) : 
 end LargeSieve
 
 end Legendre
-

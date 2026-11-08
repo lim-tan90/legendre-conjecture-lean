@@ -41,4 +41,3 @@ theorem hermitian_eigenvector_commutator {A : Matrix ι ι ℂ} (hA : A.IsHermit
 end LargeSieve
 
 end Legendre
-

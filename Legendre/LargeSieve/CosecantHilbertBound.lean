@@ -86,4 +86,3 @@ omit [Fintype ι] [DecidableEq ι] in
 end LargeSieve
 
 end Legendre
-

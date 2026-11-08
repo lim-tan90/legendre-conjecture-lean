@@ -51,4 +51,3 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 end LargeSieve
 
 end Legendre
-

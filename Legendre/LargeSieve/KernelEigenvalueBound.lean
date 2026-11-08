@@ -100,4 +100,3 @@ omit [DecidableEq ι] in
 end LargeSieve
 
 end Legendre
-

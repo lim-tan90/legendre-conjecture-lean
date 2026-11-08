@@ -67,6 +67,7 @@
 验证：**4,097 项构建**、**全部 3,022 个项目定理声明**的公理审计（仅三项标准公理）、
 **125 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
 **25 项独立使用检查**（Layer 4 十六项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+已验证大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
 [大筛、间隔采样与带权零点检测](docs/layer4-large-sieve.md)。

@@ -94,4 +94,3 @@ theorem sine_cosecant_majorant {x : ℝ} (hx : 0 < x) (hxp : x ≤ Real.pi / 2) 
 end LargeSieve
 
 end Legendre
-

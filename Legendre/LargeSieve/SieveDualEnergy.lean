@@ -99,4 +99,3 @@ omit [Fintype ι] in
 end LargeSieve
 
 end Legendre
-

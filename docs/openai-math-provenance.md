@@ -71,6 +71,8 @@ ported sampling lemma supplies the separated finite-sum specialization.
 
 ## Scope and verification
 
+Verified source checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
+
 This slice proves the finite additive large sieve with coefficient `M+Q²`,
 a separated-sample bound, finite Gram/Halasz--Montgomery inequalities, and a
 multiplicity-preserving reduction from a hypothesized Dirichlet-polynomial

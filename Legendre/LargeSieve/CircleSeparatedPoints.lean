@@ -81,4 +81,3 @@ def CircleSeparated {ι : Type*} (x : ι → ℝ) (δ : ℝ) : Prop :=
 end LargeSieve
 
 end Legendre
-

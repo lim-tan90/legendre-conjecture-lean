@@ -50,4 +50,3 @@ noncomputable def sievePhaseMatrix {ι : Type*} (x : ι → ℝ) (M : ℕ) (J : 
 end LargeSieve
 
 end Legendre
-
