@@ -151,6 +151,8 @@ bound and exponential integral are invoked as library theorems.
 
 ## Validation (2026-11-08)
 
+Verified proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
+
 Full `lake build`: **4,062 jobs**. The exhaustive audit covers **2,846 project
 theorem declarations**, including all 90 public/private/generated targets
 added in this slice. Independent module-data and full-environment enumerations

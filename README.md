@@ -79,6 +79,7 @@ Validation: **4,062 build jobs**, all **2,846 project theorem declarations**
 audited with only the three standard axioms, **93 Lean files** with zero
 executable `sorry`/`admit`/`sorryAx`, and **18 independent consumer checks**
 (nine Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+Verified Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Exact statements, proof chain and remaining obligations](docs/layer4-mean-values.md).
 
 </details>
