@@ -107,4 +107,15 @@ import Legendre.SeparatedMeanValue
 import Legendre.DirichletMeanValueSharp
 import Legendre.DirichletSamplingSharp
 import Legendre.ZeroDetectionSharp
+import Legendre.ZeroDetector.Mollifier
+import Legendre.ZeroDetector.FiniteMollifier
+import Legendre.ZeroDetector.BetaVariation
+import Legendre.ZeroDetector.FrequencyLCM
+import Legendre.ZeroDetector.DivisorSquareMean
+import Legendre.ZeroDetector.CoefficientEnergy
+import Legendre.ZeroDetector.ActualZetaDetector
+import Legendre.ZeroDetector.DetectorSamples
+import Legendre.ZetaFiniteEuler
+import Legendre.ComplexDirichlet
+import Legendre.ComplexDirichletSampling
 import Legendre.Audit

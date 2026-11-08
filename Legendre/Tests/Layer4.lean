@@ -182,4 +182,59 @@ theorem layer4_sharp_zero_energy_detector_consumer (σ : ℝ) {T : ℝ} (hT : 7 
   exact_mod_cast le_antisymm h (Nat.cast_nonneg (Zeta.zeroDensityCount σ T) :
     (0 : ℝ) ≤ Zeta.zeroDensityCount σ T)
 
+/-- A minimal nontrivial mollifier has a surviving upper endpoint coefficient. -/
+theorem layer4_mollifier_endpoint_consumer (s : ℂ) :
+    Detector.detectorPolynomial 2 2 s = -(4 : ℂ)^(-s) := by
+  have h := Detector.finite_mollifier_identity (X := 2) (N := 2) (by norm_num) (by norm_num) s
+  have hm : Detector.finiteSeries (ArithmeticFunction.moebius : ArithmeticFunction ℂ) 2 s =
+      1-(2 : ℂ)^(-s) := by
+    norm_num [Detector.finiteSeries,Finset.sum_Icc_succ_top,
+      ArithmeticFunction.intCoe_apply,ArithmeticFunction.moebius_apply_prime Nat.prime_two]
+    ring
+  have hz : Detector.finiteSeries (ArithmeticFunction.zeta : ArithmeticFunction ℂ) 2 s =
+      1+(2 : ℂ)^(-s) := by
+    rw [Detector.finiteSeries_zeta_eq]
+    norm_num [Finset.sum_Icc_succ_top]
+  rw [hm,hz] at h
+  have hp : (2 : ℂ)^(-s)*(2 : ℂ)^(-s) = (4 : ℂ)^(-s) := by
+    convert! (Complex.natCast_mul_natCast_cpow 2 2 (-s)).symm using 1 <;> norm_num
+  linear_combination -h-hp
+
+/-- The finite Euler formula at cutoff one agrees with the earlier centered formula. -/
+theorem layer4_euler_cutoff_one_consumer {s : ℂ} (hs : 0 < s.re) (hs1 : s ≠ 1) :
+    riemannZeta s = 1/(s-1)+(1/2 : ℂ)-s*Zeta.zetaEulerTail 1 s := by
+  have h := Zeta.riemannZeta_eq_finite_euler (N := 1) (by norm_num) hs hs1
+  norm_num at h
+  convert! h using 1
+  ring
+
+/-- Actual counted zeros trigger the detector alternative through the public interface. -/
+theorem layer4_actual_zero_detector_consumer {H : ℕ} (hH : 1 ≤ H) {σ : ℝ}
+    (hσ : 1/2 ≤ σ) {ρ : ℂ} (hρ : ρ ∈ Zeta.zerosRightOf σ H) :
+    3/8 ≤ ‖Detector.detectorPolynomial 2 (Detector.zetaDetectorLength H 2) ρ‖ ∨
+      3/8 ≤ ‖Detector.poleCompensation 2 (Detector.zetaDetectorLength H 2) ρ‖ := by
+  have hρ1 : ρ ≠ 1 := by
+    intro he
+    have hh := hρ.1.1.2.2
+    simp only [he,Complex.one_re,lt_self_iff_false] at hh
+  exact Detector.actual_zero_detector_alternative hH (by norm_num) hρ.1.1.1 hρ1
+    (hσ.trans hρ.2) hρ.1.1.2.2.le (by rw [abs_of_pos hρ.1.2.1]; exact hρ.1.2.2)
+
+/-- Two distinct real parts, including both strip boundaries, are permitted. -/
+theorem layer4_varying_real_parts_consumer (a : ℕ → ℂ) :
+    (∑ i : Fin 2, ‖complexDirichletPolynomial 2 a
+      (((if i = 0 then (1/2 : ℝ) else 1) : ℂ)+(i.val : ℂ)*Complex.I)‖^2) ≤
+      (2+(Real.log 2)^2)*(1+2*Real.log 2)*(2+4*Real.pi)*
+        coefficientEnergy (Finset.Icc 1 2) (verticalCoefficients a (1/2)) := by
+  have h := sum_complexDirichletPolynomial_samples_le Finset.univ
+    (fun i : Fin 2 => (i.val : ℝ)) (fun i : Fin 2 => if i = 0 then (1/2 : ℝ) else 1)
+    2 a (by norm_num) (δ := 1) (L := 0) (U := 2) (σ := 1/2) (b := 1)
+    (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)
+  norm_num only [inv_one,sub_zero,Complex.ofReal_natCast] at h
+  rw [show (2 : ℝ)+2*Real.pi*2 = 2+4*Real.pi by ring] at h
+  exact h
+
 end Legendre.Tests

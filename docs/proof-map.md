@@ -425,8 +425,14 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.30 | Linear Dirichlet mean-square error | `Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear`; [DirichletMeanValueSharp.lean](../Legendre/DirichletMeanValueSharp.lean) | **proved**; 2πN energy error, all endpoints, N=0 included |
 | 4.31 | Optimized separated sampling | `Legendre.Density.sum_dirichletPolynomial_samples_le_linear_log`, `dirichlet_large_sample_card_le_linear_log`; [DirichletSamplingSharp.lean](../Legendre/DirichletSamplingSharp.lean) | **proved**; factor δ⁻¹+2 log N for N>1, linear length error |
 | 4.32 | Improved detector-to-density reduction | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector_linear_log`; [ZeroDetectionSharp.lean](../Legendre/ZeroDetectionSharp.lean) | **proved conditional theorem**; analytic detector property remains explicit |
+| 4.33 | Finite Euler summation with the principal pole retained | `Legendre.Zeta.riemannZeta_eq_finite_euler`, `norm_riemannZeta_sub_finite_euler_le`; [ZetaFiniteEuler.lean](../Legendre/ZetaFiniteEuler.lean) | **proved**; Re(s)>0, N≥1, explicit half-unit remainder |
+| 4.34 | Möbius cancellation and exact finite mollifier product | `Legendre.Density.Detector.finite_mollifier_identity`; [FiniteMollifier.lean](../Legendre/ZeroDetector/FiniteMollifier.lean) | **proved**; all complex arguments, low coefficients cancel, support and divisor bounds |
+| 4.35 | Actual compensated zero detector | `Legendre.Density.Detector.actual_zero_detector_alternative`; [ActualZetaDetector.lean](../Legendre/ZeroDetector/ActualZetaDetector.lean) | **proved**; length (32HX)², remainder 9/64, both detection branches retained |
+| 4.36 | Varying-real-part complex sampling | `Legendre.Density.sum_complexDirichletPolynomial_samples_le`; [ComplexDirichletSampling.lean](../Legendre/ComplexDirichletSampling.lean) | **proved**; ordinates separated, independently varying real parts in a strip of width ≤1 |
+| 4.37 | Reciprocal-lcm, divisor-square mean and dyadic energy | `Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_mean`, `mollifier_dyadic_energy_le`; [CoefficientEnergy.lean](../Legendre/ZeroDetector/CoefficientEnergy.lean) | **proved**; explicit M log³M and U^(1−2σ) bounds |
+| 4.38 | Actual separated zero sample bound | `Legendre.Density.Detector.actual_zero_sample_card_le`; [DetectorSamples.lean](../Legendre/ZeroDetector/DetectorSamples.lean) | **proved**; both detector energies and polar weight explicit; required Ingham/Huxley exponents still open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Nineteen independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector; all declarations audited |
+| 4.validation | Twenty-three independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros and mixed real parts; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -452,11 +458,11 @@ The parsed axiom output matches the complete Lean-environment enumeration exactl
 contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
-Layer 4 linear-mean-value validation (2026-11-08): full build passed
-4,102 jobs, and all 3,052 project theorem declarations are audited, including
-30 additional public/private/generated declarations after the large-sieve checkpoint. The complete module-data theorem inventory
-agrees with the parsed audit output exactly. All 130 project Lean files have
-zero executable placeholders. Nineteen Layer 4 consumers and all nine
+Layer 4 actual-detector validation (2026-11-08): full build passed
+4,113 jobs, and all 3,158 project theorem declarations are audited, including
+106 additional public/private/generated declarations after the linear-mean-square checkpoint. The complete module-data theorem inventory
+agrees with the parsed audit output exactly. All 141 project Lean files have
+zero executable placeholders. Twenty-three Layer 4 consumers and all nine
 Layer 3 regression consumers compile and pass standalone checks in CI.
 See [the precise estimates and remaining obligations](layer4-linear-mean-value.md).
 

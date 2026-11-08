@@ -39,6 +39,39 @@ one Ostmann `Quadratic` module, one Ostmann `Characters` module, one Ostmann
 | [`lean/OAI/NumberTheory/Ostmann/Quadratic/KernelEigenvalueBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Quadratic/KernelEigenvalueBound.lean) | [Legendre/LargeSieve/KernelEigenvalueBound.lean](../Legendre/LargeSieve/KernelEigenvalueBound.lean) |
 | [`lean/OAI/NumberTheory/Ostmann/ZeroDensity/SeparatedSelection.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/ZeroDensity/SeparatedSelection.lean) | [Legendre/LargeSieve/SeparatedSelection.lean](../Legendre/LargeSieve/SeparatedSelection.lean) |
 
+## Additional zero-detector source slice
+
+The following six additional adapted modules use the same source pin and
+retained license. The original large-sieve inventory above remains 23 files.
+Paths in the left column are under `lean/OAI/NumberTheory/Ostmann/`.
+
+| Pinned upstream path | Destination |
+|---|---|
+| `ZeroDensity/Mollifier.lean` | [ZeroDetector/Mollifier.lean](../Legendre/ZeroDetector/Mollifier.lean) |
+| `ZeroDensity/FiniteDetector.lean` and the finite product lemma in `Mollifier.lean` | [ZeroDetector/FiniteMollifier.lean](../Legendre/ZeroDetector/FiniteMollifier.lean) |
+| `ZeroDensity/BetaVariation.lean` | [ZeroDetector/BetaVariation.lean](../Legendre/ZeroDetector/BetaVariation.lean) |
+| `Arithmetic/FrequencyLCM.lean` | [ZeroDetector/FrequencyLCM.lean](../Legendre/ZeroDetector/FrequencyLCM.lean) |
+| `Arithmetic/DivisorSquareMean.lean` | [ZeroDetector/DivisorSquareMean.lean](../Legendre/ZeroDetector/DivisorSquareMean.lean) |
+| First two lemmas of `ZeroDensity/CoefficientEnergy.lean` | [ZeroDetector/CoefficientEnergy.lean](../Legendre/ZeroDetector/CoefficientEnergy.lean) |
+
+Two additional generalizations are attributed:
+
+- [ComplexDirichlet.lean](../Legendre/ComplexDirichlet.lean) removes the character
+  twist from `ZeroDensity/BetaDerivative.lean` and connects complex arguments
+  to the local mean-square interface.
+- [ActualZetaDetector.lean](../Legendre/ZeroDetector/ActualZetaDetector.lean)
+  adapts the squared-length choice from `ZeroDensity/DetectorLength.lean` and
+  the small-product organization of `ZeroDensity/ActualDetector.lean`.
+  The source's nonprincipal-character tail theorem is **not** used for zeta.
+  A locally proved finite Euler formula retains the principal pole term,
+  giving a two-branch detector rather than the source's single-branch result.
+
+[ZetaFiniteEuler.lean](../Legendre/ZetaFiniteEuler.lean),
+[ComplexDirichletSampling.lean](../Legendre/ComplexDirichletSampling.lean), and
+[DetectorSamples.lean](../Legendre/ZeroDetector/DetectorSamples.lean) are local
+applications and deductions. The Euler formula invokes the existing attributed
+PNT+ first-order Euler--Maclaurin theorem; it introduces no additional PNT+ port.
+
 ## Adaptation
 
 Upstream pins Lean v4.34.1. This project retains its existing Lean/mathlib
@@ -106,6 +139,11 @@ with the [linear mean-square slice](layer4-linear-mean-value.md): 4,102 build
 jobs, 3,052 distinct theorem declarations audited, 130 Lean files free of
 executable placeholders, nineteen Layer 4 and nine Layer 3 consumers. Only the
 three standard axioms are used. Dependency pins remain unchanged.
+
+The actual-detector slice adds 106 audited public/private/generated declarations:
+4,113 full-build jobs, all 3,158 project theorem declarations audited, 141 Lean
+files without executable placeholders, twenty-three Layer 4 and nine Layer 3
+consumers. See [the precise detector and its limits](layer4-zero-detector.md).
 
 The source inventory above is available for the repository owner's upstream
 communication; this work has not posted an upstream issue or PR.

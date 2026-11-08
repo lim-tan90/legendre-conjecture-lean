@@ -471,11 +471,15 @@ bound follow. The logarithmic zero-free region gives an unconditional
 near-one count bounded by the fixed low-height count N(3).
 The finite additive large sieve and actual separated-sample bounds are now
 proved. Finite Gram/Halasz–Montgomery inequalities and a multiplicity-preserving
-selection theorem give a conditional detector-to-density reduction. The analytic
-detector needed for Ingham/Huxley is the remaining input.
+selection theorem give a conditional detector-to-density reduction. A finite
+Euler formula with an explicit polar contribution now yields an actual two-branch
+zeta detector. Sampling permits independently varying real parts, and both
+branches are retained in a proved separated-zero sample bound. The detector
+length and large-value estimates still need improvement to reach Ingham/Huxley.
 See [initial mean values](layer4-mean-values.md),
 [the large-sieve estimates and reduction](layer4-large-sieve.md),
-[linear mean-square error and optimized sampling](layer4-linear-mean-value.md), and
+[linear mean-square error and optimized sampling](layer4-linear-mean-value.md),
+[the actual compensated detector](layer4-zero-detector.md), and
 [upstream provenance](openai-math-provenance.md).
 
 | Acceptance component | Current evidence |
@@ -484,10 +488,10 @@ See [initial mean values](layer4-mean-values.md),
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
 | Ingham zero-density theorem | **open** |
 | Huxley b=12/5 | **open** |
-| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds and weighted detector reduction **proved**; sharper analytic detector estimates **open** |
+| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; sharper analytic detector estimates **open** |
 
-Full validation: 4,102 build jobs, all 3,052 theorem declarations audited,
-130 Lean files free of executable placeholders, and nineteen Layer 4 consumers
+Full validation: 4,113 build jobs, all 3,158 theorem declarations audited,
+141 Lean files free of executable placeholders, and twenty-three Layer 4 consumers
 plus nine Layer 3 regression consumers. Both standalone checks run in CI.
 
 **Acceptance criteria.**

@@ -141,6 +141,28 @@ import all Legendre.SeparatedMeanValue
 import all Legendre.DirichletMeanValueSharp
 import all Legendre.DirichletSamplingSharp
 import all Legendre.ZeroDetectionSharp
+public import Legendre.ZeroDetector.Mollifier
+import all Legendre.ZeroDetector.Mollifier
+public import Legendre.ZeroDetector.FiniteMollifier
+import all Legendre.ZeroDetector.FiniteMollifier
+public import Legendre.ZeroDetector.BetaVariation
+import all Legendre.ZeroDetector.BetaVariation
+public import Legendre.ZeroDetector.FrequencyLCM
+import all Legendre.ZeroDetector.FrequencyLCM
+public import Legendre.ZeroDetector.DivisorSquareMean
+import all Legendre.ZeroDetector.DivisorSquareMean
+public import Legendre.ZeroDetector.CoefficientEnergy
+import all Legendre.ZeroDetector.CoefficientEnergy
+public import Legendre.ZeroDetector.ActualZetaDetector
+import all Legendre.ZeroDetector.ActualZetaDetector
+public import Legendre.ZeroDetector.DetectorSamples
+import all Legendre.ZeroDetector.DetectorSamples
+public import Legendre.ZetaFiniteEuler
+import all Legendre.ZetaFiniteEuler
+public import Legendre.ComplexDirichlet
+import all Legendre.ComplexDirichlet
+public import Legendre.ComplexDirichletSampling
+import all Legendre.ComplexDirichletSampling
 
 import all Legendre.LargeSieve.AdditiveSieveProof
 import all Legendre.LargeSieve.CircleSeparatedPoints
@@ -3400,3 +3422,111 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_reversed_interval_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_touching_samples_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_zero_energy_detector_consumer"
+
+-- Actual zeta detection and varying-real-part samples: all declarations.
+#print axioms Legendre.Density.BetaVariation.abs_norm_sq_derivative_le
+#print axioms Legendre.Density.BetaVariation.norm_sq_le_base_add_energy
+#print axioms Legendre.Density.BetaVariation.point_le_base_add_variation
+#print axioms Legendre.Density.BetaVariation.sum_norm_sq_varying_parameter_le
+#print axioms Legendre.Density.BetaVariation.sum_norm_sq_varying_parameter_le_of_uniform
+#print axioms Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_eq_double_sum
+#print axioms Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_mean
+#print axioms Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_sum_eq
+#print axioms Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisors_eq_bounded_filter
+#print axioms Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator
+#print axioms Legendre.Density.Detector.Arithmetic.FrequencyLCM.gcdCoordinates.eq_1
+#print axioms Legendre.Density.Detector.Arithmetic.FrequencyLCM.gcdCoordinates_injective
+#print axioms Legendre.Density.Detector.Arithmetic.FrequencyLCM.lcm_gcdCoordinates
+#print axioms Legendre.Density.Detector.Arithmetic.FrequencyLCM.reciprocal_lcm_sum_le
+#print axioms Legendre.Density.Detector.Arithmetic.FrequencyLCM.reciprocal_lcm_sum_le_log
+#print axioms Legendre.Density.Detector.LSeries_eq_finiteSeries_of_support
+#print axioms Legendre.Density.Detector.LSeries_truncate_eq_finiteSeries
+#print axioms Legendre.Density.Detector.actual_zero_compensated_product_le
+#print axioms Legendre.Density.Detector.actual_zero_detector_alternative
+#print axioms Legendre.Density.Detector.actual_zero_sample_card_le
+#print axioms Legendre.Density.Detector.complexSampleCoefficient._proof_1
+#print axioms Legendre.Density.Detector.complexSampleCoefficient.eq_1
+#print axioms Legendre.Density.Detector.detectorPolynomial_eq_complexDirichlet
+#print axioms Legendre.Density.Detector.detector_large_of_small_product
+#print axioms Legendre.Density.Detector.dyadic_coefficient_energy_le
+#print axioms Legendre.Density.Detector.finiteSeries_zeta_eq
+#print axioms Legendre.Density.Detector.finite_mollifier_identity
+#print axioms Legendre.Density.Detector.mollifierCoefficient.eq_1
+#print axioms Legendre.Density.Detector.mollifierCoefficient_initial
+#print axioms Legendre.Density.Detector.mollifierCoefficient_one
+#print axioms Legendre.Density.Detector.mollifierCoefficient_support
+#print axioms Legendre.Density.Detector.mollifierCoefficient_vanish
+#print axioms Legendre.Density.Detector.mollifier_dyadic_energy_le
+#print axioms Legendre.Density.Detector.mollifier_polynomial_split
+#print axioms Legendre.Density.Detector.mollifier_product
+#print axioms Legendre.Density.Detector.norm_detectorTailCoefficients_le
+#print axioms Legendre.Density.Detector.norm_moebius_le_one
+#print axioms Legendre.Density.Detector.norm_mollifierCoefficient_le
+#print axioms Legendre.Density.Detector.norm_mollifier_finiteSeries_le
+#print axioms Legendre.Density.Detector.norm_poleCompensation_le
+#print axioms Legendre.Density.Detector.poleCompensation.eq_1
+#print axioms Legendre.Density.Detector.truncate._proof_1
+#print axioms Legendre.Density.Detector.truncate_apply
+#print axioms Legendre.Density.Detector.truncated_summable
+#print axioms Legendre.Density.Detector.zetaDetectorLength.eq_1
+#print axioms Legendre.Density.Detector.zetaDetectorLength_ge
+#print axioms Legendre.Density.Detector.zetaDetectorLength_rpow_le
+#print axioms Legendre.Density.complexDirichletPolynomial_hasDerivAt_beta
+#print axioms Legendre.Density.complexDirichletPolynomial_vertical
+#print axioms Legendre.Density.complexDirichlet_large_sample_card_le
+#print axioms Legendre.Density.continuous_complexDirichletPolynomial_beta
+#print axioms Legendre.Density.logDerivativeCoefficients.eq_1
+#print axioms Legendre.Density.logDerivative_vertical_energy_le
+#print axioms Legendre.Density.norm_logDerivativeCoefficients_le
+#print axioms Legendre.Density.norm_verticalCoefficients
+#print axioms Legendre.Density.sum_complexDirichletPolynomial_samples_le
+#print axioms Legendre.Density.verticalCoefficients.eq_1
+#print axioms Legendre.Density.vertical_coefficientEnergy_mono
+#print axioms Legendre.Zeta.finite_sum_cpow_euler
+#print axioms Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le
+#print axioms Legendre.Zeta.norm_zetaCenteredFractionalPart_le_half
+#print axioms Legendre.Zeta.norm_zetaEulerTail_le
+#print axioms Legendre.Zeta.ofReal_B1_eq_zetaCenteredFractionalPart
+#print axioms Legendre.Zeta.riemannZeta_eq_finite_euler
+#print axioms Legendre.Zeta.zetaEulerTail_integrable
+#audit_private_axioms "_private.Legendre.ComplexDirichlet.0.Legendre.Density.complexDirichletPolynomial_hasDerivAt_beta._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.finiteSeries.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_actual_zero_detector_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_actual_zero_detector_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_euler_cutoff_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollifier_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_varying_real_parts_consumer"
+#audit_private_axioms "_private.Legendre.ZeroDetector.ActualZetaDetector.0.Legendre.Density.Detector.zetaDetectorLength_ge._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.CoefficientEnergy.0.Legendre.Density.Detector.dyadic_coefficient_energy_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.actual_zero_sample_card_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.actual_zero_sample_card_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.detectorPolynomial_eq_complexDirichlet._proof_1_4"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.detectorPolynomial_eq_complexDirichlet._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.detectorPolynomial_eq_complexDirichlet._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DetectorSamples.0.Legendre.Density.Detector.detectorPolynomial_eq_complexDirichlet._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisor_square_sum_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisors_eq_bounded_filter._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisors_eq_bounded_filter._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.divisors_eq_bounded_filter._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator._proof_1_5"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.DivisorSquareMean.0.Legendre.Density.Detector.Arithmetic.DivisorSquareMean.sum_dvd_indicator._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.LSeries_eq_finiteSeries_of_support._proof_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.LSeries_eq_finiteSeries_of_support._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.finiteSeries_zeta_eq._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_4"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_6"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_7"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._proof_1_8"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FiniteMollifier.0.Legendre.Density.Detector.mollifier_polynomial_split._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FrequencyLCM.0.Legendre.Density.Detector.Arithmetic.FrequencyLCM.reciprocal_lcm_sum_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.FrequencyLCM.0.Legendre.Density.Detector.Arithmetic.FrequencyLCM.reciprocal_lcm_sum_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZeroDetector.Mollifier.0.Legendre.Density.Detector.mollifierCoefficient_support._proof_1_2"
+#audit_private_axioms "_private.Legendre.ZeroDetector.Mollifier.0.Legendre.Density.Detector.mollifierCoefficient_vanish._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaFiniteEuler.0.Legendre.Zeta.finite_sum_cpow_euler._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaFiniteEuler.0.Legendre.Zeta.riemannZeta_eq_finite_euler._simp_1_1"

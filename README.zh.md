@@ -63,11 +63,15 @@
 现有有效无零区域还给出 `N(1−1/(4000000 log T),T)` 的固定低高度计数界（T≥3）。
 有限加法大筛、间隔采样及 Gram/Halász–Montgomery 接口现已证明；
 带权代表集保留零点重数，并给出条件零点检测到密度计数的传递。
+新增有限 Euler 公式导出了实际的两分支零点检测器，显式保留极点项；
+采样允许各零点实部独立变化，计数界保留两个检测分支的能量。
+达到 Ingham/Huxley 所需的高度幂次仍待证明。
+[精确检测器及剩余解析步骤](docs/layer4-zero-detector.md)。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,102 项构建**、**全部 3,052 个项目定理声明**的公理审计（仅三项标准公理）、
-**130 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**28 项独立使用检查**（Layer 4 十九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+验证：**4,113 项构建**、**全部 3,158 个项目定理声明**的公理审计（仅三项标准公理）、
+**141 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**32 项独立使用检查**（Layer 4 二十三项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -446,7 +450,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样及带权检测传递**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -612,7 +616,26 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   中的有限核与谱论证推广到实直线间隔频率。
   [`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) 将
   `SievePhaseGram.lean` 的相位扭转论证用于上述倒数核。
-  已选取的证明链已编译，并纳入整库公理审计；
+  零点检测器的系数部分另将同一固定提交中的
+  `lean/OAI/NumberTheory/Ostmann/ZeroDensity/Mollifier.lean` 改编到
+  [`ZeroDetector/Mollifier.lean`](Legendre/ZeroDetector/Mollifier.lean)，并将
+  `FiniteDetector.lean` 改编到
+  [`ZeroDetector/FiniteMollifier.lean`](Legendre/ZeroDetector/FiniteMollifier.lean)。
+  沿用上述已保留的 Apache-2.0 许可证；后者移除特征扭转，证明无扭转的有限恒等式。
+  [`ZeroDetector/ActualZetaDetector.lean`](Legendre/ZeroDetector/ActualZetaDetector.lean)
+  还改编 `DetectorLength.lean` 的长度选择及 `ActualDetector.lean` 的小乘积组织，
+  显式保留 ζ 的额外极点分支。
+  [`ZeroDetector/BetaVariation.lean`](Legendre/ZeroDetector/BetaVariation.lean)
+  改编同名文件；[`ComplexDirichlet.lean`](Legendre/ComplexDirichlet.lean)
+  改编 `BetaDerivative.lean` 中不依赖特征的求导论证。
+  系数能量部分还将上游 `lean/OAI/NumberTheory/Ostmann/` 下的
+  `Arithmetic/FrequencyLCM.lean`、`Arithmetic/DivisorSquareMean.lean` 和
+  `ZeroDensity/CoefficientEnergy.lean` 分别改编到
+  [`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean)、
+  [`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean) 和
+  [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean)。
+  来源提交和保留许可证均同上。
+  此前已选取的大筛证明链已编译，并纳入整库公理审计；
   [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
   Layer 4 的 Ingham、Huxley 密度定理仍开放。
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
