@@ -457,16 +457,16 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-08): initial infrastructure proved; Layer 4 remains open.**
+**Current state (2026-11-08): linear-error mean values and large-sieve infrastructure proved; Layer 4 remains open.**
 `import Legendre.Layer4` exports the multiplicity-weighted counting convention,
 `HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
 weakening, and a proved transfer from a hypothesized power/log density bound.
 The ε in this convention is additive in the exponent of T.
 
-The elementary Dirichlet-polynomial mean-square theorem is now proved with
-an explicit `4NH_N Σ|a(n)|²` error, independent of interval endpoints.
-Logarithmic spacing and harmonic row estimates give its `O(N log N)` length
-dependence. The exact limiting average and continuous large-value measure
+The Dirichlet-polynomial mean-square theorem now has an explicit
+`2πN Σ|a(n)|²` error, independent of interval endpoints, from a proved
+real-line Hilbert inequality. Optimized separated sampling has one log N
+loss for N>1. The earlier harmonic row-sum estimate remains available. The exact limiting average and continuous large-value measure
 bound follow. The logarithmic zero-free region gives an unconditional
 near-one count bounded by the fixed low-height count N(3).
 The finite additive large sieve and actual separated-sample bounds are now
@@ -474,7 +474,8 @@ proved. Finite Gram/Halasz–Montgomery inequalities and a multiplicity-preservi
 selection theorem give a conditional detector-to-density reduction. The analytic
 detector needed for Ingham/Huxley is the remaining input.
 See [initial mean values](layer4-mean-values.md),
-[the new estimates and reduction](layer4-large-sieve.md), and
+[the large-sieve estimates and reduction](layer4-large-sieve.md),
+[linear mean-square error and optimized sampling](layer4-linear-mean-value.md), and
 [upstream provenance](openai-math-provenance.md).
 
 | Acceptance component | Current evidence |
@@ -483,10 +484,10 @@ See [initial mean values](layer4-mean-values.md),
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
 | Ingham zero-density theorem | **open** |
 | Huxley b=12/5 | **open** |
-| Mean-value/large-value input | Elementary `O(N log N)` mean square and continuous large-value measure **proved**; finite additive large sieve, separated-point bounds and weighted detector reduction **proved**; sharper analytic detector estimates **open** |
+| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds and weighted detector reduction **proved**; sharper analytic detector estimates **open** |
 
-Full validation: 4,097 build jobs, all 3,022 theorem declarations audited,
-125 Lean files free of executable placeholders, and sixteen Layer 4 consumers
+Full validation: 4,102 build jobs, all 3,052 theorem declarations audited,
+130 Lean files free of executable placeholders, and nineteen Layer 4 consumers
 plus nine Layer 3 regression consumers. Both standalone checks run in CI.
 
 **Acceptance criteria.**

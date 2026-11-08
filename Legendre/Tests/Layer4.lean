@@ -148,4 +148,38 @@ theorem layer4_zero_detector_consumer (σ : ℝ) {T : ℝ} (hT : 7 ≤ T)
     Finset.sum_empty, mul_zero, zero_div] at h
   exact Nat.eq_zero_of_le_zero (by exact_mod_cast h)
 
+/-- The sharp theorem also controls reversed intervals and keeps its exact constant. -/
+theorem layer4_sharp_reversed_interval_consumer :
+    |(∫ t : ℝ in (10 : ℝ)..(-10 : ℝ),
+      ‖dirichletPolynomial 2 (fun _ => 1) t‖^2)+40| ≤ 8*Real.pi := by
+  have h := abs_integral_dirichletPolynomial_sub_diagonal_le_linear 2 (fun _ => 1) 10 (-10)
+  norm_num [coefficientEnergy,Finset.sum_Icc_succ_top] at h
+  convert! h using 1
+  ring
+
+/-- Optimized sampling still permits touching unit sampling intervals. -/
+theorem layer4_sharp_touching_samples_consumer :
+    (∑ i : Fin 2, ‖dirichletPolynomial 2 (fun _ => 1) (i.val : ℝ)‖^2) ≤
+      (1+2*Real.log 2)*(2+4*Real.pi)*2 := by
+  have h := sum_dirichletPolynomial_samples_le_linear_log Finset.univ
+    (fun i : Fin 2 => (i.val : ℝ)) 2 (fun _ => 1) (by norm_num)
+    (δ := 1) (L := 0) (U := 2) (by norm_num) (by norm_num)
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)
+  norm_num [coefficientEnergy,Finset.sum_Icc_succ_top] at h
+  rw [show (2 : ℝ)+2*Real.pi*2 = 2+4*Real.pi by ring] at h
+  simpa [Fin.sum_univ_two] using! h
+
+/-- Zero energy cannot detect any counted zero at a positive threshold. -/
+theorem layer4_sharp_zero_energy_detector_consumer (σ : ℝ) {T : ℝ} (hT : 7 ≤ T)
+    (hdetect : ∀ ρ : ℂ, ρ ∈ Zeta.zerosRightOf σ T →
+      1 ≤ ‖dirichletPolynomial 2 (fun _ => 0) ρ.im‖) :
+    Zeta.zeroDensityCount σ T = 0 := by
+  have h := Zeta.zeroDensityCount_le_of_dirichlet_detector_linear_log σ hT 2
+    (fun _ => 0) (by norm_num) (by norm_num : (0 : ℝ) < 1) hdetect
+  simp only [coefficientEnergy,norm_zero,zero_pow (by norm_num : (2 : ℕ) ≠ 0),
+    Finset.sum_const_zero,mul_zero,zero_div] at h
+  exact_mod_cast le_antisymm h (Nat.cast_nonneg (Zeta.zeroDensityCount σ T) :
+    (0 : ℝ) ≤ Zeta.zeroDensityCount σ T)
+
 end Legendre.Tests

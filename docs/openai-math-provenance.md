@@ -50,13 +50,26 @@ replaces the whole `Mathlib` import with selected finite-set and tactic imports.
 The mathematical statements and proof hypotheses of the selected upstream
 lemmas are retained, subject to namespace changes.
 
-Two local generalizations are also attributed:
+Four local generalizations are also attributed:
 
 - [GramLargeValues.lean](../Legendre/GramLargeValues.lean) generalizes the
   `Preliminaries/SymmetricQuadraticBound.lean` quadratic row-sum argument to
   arbitrary complex kernels with symmetric norms, and connects it to sample Grams.
 - [WeightedSeparation.lean](../Legendre/WeightedSeparation.lean) generalizes
   `ZeroDensity/SeparatedSelection.lean` from cardinality to natural-valued weights.
+
+- [ReciprocalHilbert.lean](../Legendre/ReciprocalHilbert.lean) generalizes the
+  finite-kernel eigenvalue and Hermitian spectral arguments of
+  `CosecantHilbertBound.lean` and `CircleSeparatedPoints.lean` to (x−y)⁻¹
+  on the real line.
+- [SeparatedMeanValue.lean](../Legendre/SeparatedMeanValue.lean) generalizes
+  the `SievePhaseGram.lean` coefficient-twisting argument to endpoint
+  reciprocal Hilbert forms.
+
+[DirichletMeanValueSharp.lean](../Legendre/DirichletMeanValueSharp.lean),
+[DirichletSamplingSharp.lean](../Legendre/DirichletSamplingSharp.lean), and
+[ZeroDetectionSharp.lean](../Legendre/ZeroDetectionSharp.lean) are local
+applications; see [the new estimates](layer4-linear-mean-value.md).
 
 [LargeSieve.lean](../Legendre/LargeSieve.lean),
 [SobolevSampling.lean](../Legendre/SobolevSampling.lean),
@@ -80,13 +93,19 @@ detector to N(σ,T). No upstream analytic Ingham or Huxley theorem is imported.
 The zero-detection **property** remains an explicit hypothesis until its
 analytic proof is supplied. Layer 4 is still in progress.
 
-Checkpoint validation: full build **4,097 jobs**; **3,022 distinct project
+Previous large-sieve checkpoint validation: full build **4,097 jobs**; **3,022 distinct project
 theorem declarations** audited, including all 176 public/private/generated
 declarations added in this slice. Both project-theorem enumeration methods
 match the parsed axiom output. The only axioms are `propext`, `Classical.choice`
 and `Quot.sound`. All **125 Lean files** have zero executable `sorry`, `admit`
 or `sorryAx`. Sixteen Layer 4 consumers and nine Layer 3 regression consumers
 pass both compiled and standalone checks. No dependency pin or lockfile changed.
+
+The subsequent reciprocal-kernel and endpoint-form generalizations are verified
+with the [linear mean-square slice](layer4-linear-mean-value.md): 4,102 build
+jobs, 3,052 distinct theorem declarations audited, 130 Lean files free of
+executable placeholders, nineteen Layer 4 and nine Layer 3 consumers. Only the
+three standard axioms are used. Dependency pins remain unchanged.
 
 The source inventory above is available for the repository owner's upstream
 communication; this work has not posted an upstream issue or PR.

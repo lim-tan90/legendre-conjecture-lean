@@ -6,7 +6,8 @@ large-value measure estimate, a uniform density-exponent convention and a
 near-one count are proved. The later [large-sieve and separated-sampling
 slice](layer4-large-sieve.md) adds finite additive large sieve, actual separated
 samples and weighted zero selection. Ingham's and Huxley's density theorems
-remain open.
+remain open. The subsequent [linear mean-square theorem](layer4-linear-mean-value.md)
+strengthens the error to O(N); this page retains the initial harmonic theorem.
 
 ## Dirichlet-polynomial mean square
 

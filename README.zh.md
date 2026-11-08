@@ -50,13 +50,14 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 4：定量均值估计基础已推进（2026-11-08）</strong></summary>
+<summary><strong>Layer 4：线性误差均值估计及有限大筛（2026-11-08）</strong></summary>
 
 **入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
-`(B−A)Σ|a(n)|²` 的偏差不超过 **`4NH_N Σ|a(n)|²`**，常数对两个端点统一。
-这给出显式 `O(N log N)` 误差、精确的极限均值及带 `V⁻²` 因子的连续大值集合测度界。
-对数频率间距、调和数行和估计均有证明，系数允许为任意复数。
+`(B−A)Σ|a(n)|²` 的偏差现已收紧到 **`2πN Σ|a(n)|²`**，常数对两个端点统一，
+由已证明的实直线 Hilbert 不等式推出。优化后的间隔采样在 N>1 时仅损失一个 `log N`。
+此前的调和数界、精确极限均值及连续大值测度界均保留；系数允许为任意复数，
+新均方估计包括 N=0 的空支撑情形。
 
 新增零密度指数接口，常数对 σ∈[1/2,1] 统一；已证明对数损失到 `T^ε` 的条件传递。
 现有有效无零区域还给出 `N(1−1/(4000000 log T),T)` 的固定低高度计数界（T≥3）。
@@ -64,13 +65,14 @@
 带权代表集保留零点重数，并给出条件零点检测到密度计数的传递。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,097 项构建**、**全部 3,022 个项目定理声明**的公理审计（仅三项标准公理）、
-**125 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**25 项独立使用检查**（Layer 4 十六项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
-已验证大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
+验证：**4,102 项构建**、**全部 3,052 个项目定理声明**的公理审计（仅三项标准公理）、
+**130 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**28 项独立使用检查**（Layer 4 十九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
-[大筛、间隔采样与带权零点检测](docs/layer4-large-sieve.md)。
+[大筛、间隔采样与带权零点检测](docs/layer4-large-sieve.md) ·
+[线性均方误差与优化采样](docs/layer4-linear-mean-value.md)。
 
 </details>
 
@@ -444,7 +446,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、Dirichlet 多项式的初等 `O(N log N)` 均方界及连续大值测度界；有限加法大筛、间隔采样及带权检测传递**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样及带权检测传递**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -605,6 +607,11 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   `Preliminaries/SymmetricQuadraticBound.lean` 中的行和估计论证；
   [`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) 将同一来源
   `ZeroDensity/SeparatedSelection.lean` 的覆盖论证推广到自然数权重。
+  [`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) 还将
+  `Preliminaries/CosecantHilbertBound.lean` 和 `CircleSeparatedPoints.lean`
+  中的有限核与谱论证推广到实直线间隔频率。
+  [`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) 将
+  `SievePhaseGram.lean` 的相位扭转论证用于上述倒数核。
   已选取的证明链已编译，并纳入整库公理审计；
   [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
   Layer 4 的 Ingham、Huxley 密度定理仍开放。

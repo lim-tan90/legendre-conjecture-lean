@@ -59,14 +59,15 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — initial quantitative mean-value infrastructure (2026-11-08)</strong></summary>
+<summary><strong>Layer 4 — linear-error mean values and finite large sieve (2026-11-08)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
-`(B−A)Σ|a(n)|²` is at most **`4NH_N Σ|a(n)|²`**, uniformly in both endpoints.
-This gives an explicit `O(N log N)` error, the exact limiting mean, and a
-continuous large-value measure bound with a `V⁻²` factor. Logarithmic gap
-and harmonic row-sum estimates are proved, with arbitrary complex coefficients.
+`(B−A)Σ|a(n)|²` is now at most **`2πN Σ|a(n)|²`**, uniformly in both endpoints,
+by a proved real-line Hilbert inequality. Optimized separated sampling has
+a single `log N` cost for N>1. The earlier harmonic estimate, exact limiting
+mean and continuous large-value measure bound remain available. Coefficients
+may be arbitrary complex numbers; the mean-square theorem includes N=0.
 
 The density-exponent interface has a coefficient uniform in σ∈[1/2,1].
 Logarithmic losses are absorbed into `T^ε` by a proved conditional bridge.
@@ -77,14 +78,15 @@ interfaces are now proved. Weighted selection preserves zero multiplicities
 and gives a conditional detector-to-density reduction.
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,097 build jobs**, all **3,022 project theorem declarations**
-audited with only the three standard axioms, **125 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **25 independent consumer checks**
-(sixteen Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
-Verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
+Validation: **4,102 build jobs**, all **3,052 project theorem declarations**
+audited with only the three standard axioms, **130 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **28 independent consumer checks**
+(nineteen Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI.
+Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
-[Large sieve, separated samples and weighted detection](docs/layer4-large-sieve.md).
+[Large sieve, separated samples and weighted detection](docs/layer4-large-sieve.md) ·
+[Linear mean-square error and optimized sampling](docs/layer4-linear-mean-value.md).
 
 </details>
 
@@ -525,7 +527,7 @@ This table is the roadmap, not a claim that the work is done.
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
-| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, elementary `O(N log N)` Dirichlet-polynomial mean-square and continuous large-value measure bounds; finite additive large sieve, separated samples and weighted detector reduction **proved**; **Ingham/Huxley open**; [scope](docs/layer4-large-sieve.md) |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples and weighted detector reduction **proved**; **Ingham/Huxley open**; [scope](docs/layer4-large-sieve.md) |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: paper-exact `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -720,6 +722,11 @@ this repository.
   same source project's `Preliminaries/SymmetricQuadraticBound.lean` argument;
   [`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) generalizes its
   `ZeroDensity/SeparatedSelection.lean` cover argument to natural weights.
+  [`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) generalizes the
+  finite kernel/spectral argument from `Preliminaries/CosecantHilbertBound.lean`
+  and `CircleSeparatedPoints.lean` to separated real frequencies.
+  [`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) adapts the
+  `SievePhaseGram.lean` phase-twisting argument to this reciprocal kernel.
   The selected slice builds and is included in the project-wide axiom audit;
   [exact inventory, adaptations and validation](docs/openai-math-provenance.md).
   Layer 4's Ingham and Huxley density theorems remain open.

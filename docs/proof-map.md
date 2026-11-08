@@ -420,8 +420,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.25 | Naturally weighted separated covers | `Legendre.Density.weighted_neighbor_le`, `exists_weighted_separated_representatives`; [WeightedSeparation.lean](../Legendre/WeightedSeparation.lean) | **proved**; generalizes upstream cover; natural weights retained |
 | 4.26 | Separated representatives of actual zeta zeros | `Legendre.Zeta.density_window_mass_le`, `densityLocalMassBound_le_log`, `exists_density_separated_representatives`; [ZetaDensitySelection.lean](../Legendre/ZetaDensitySelection.lean) | **proved**; full analytic multiplicities; uniform absolute logarithmic loss |
 | 4.27 | Detector-to-density reduction | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector`; [ZeroDetectionReduction.lean](../Legendre/ZeroDetectionReduction.lean) | **proved**; proved conditional theorem; analytic detector property explicit |
-| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Sixteen independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening; all declarations audited |
+| 4.28 | Real-line reciprocal Hilbert inequality | `Legendre.LargeSieve.reciprocal_hilbert_bound`; [ReciprocalHilbert.lean](../Legendre/ReciprocalHilbert.lean) | **proved**; inverse-square rows, eigenvalues and operator norm; π/δ energy constant |
+| 4.29 | Separated-frequency mean-square cancellation | `Legendre.Density.abs_integral_exponentialSum_sub_diagonal_le_separation`; [SeparatedMeanValue.lean](../Legendre/SeparatedMeanValue.lean) | **proved**; exact endpoint Hilbert forms; 2π/δ energy error |
+| 4.30 | Linear Dirichlet mean-square error | `Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear`; [DirichletMeanValueSharp.lean](../Legendre/DirichletMeanValueSharp.lean) | **proved**; 2πN energy error, all endpoints, N=0 included |
+| 4.31 | Optimized separated sampling | `Legendre.Density.sum_dirichletPolynomial_samples_le_linear_log`, `dirichlet_large_sample_card_le_linear_log`; [DirichletSamplingSharp.lean](../Legendre/DirichletSamplingSharp.lean) | **proved**; factor δ⁻¹+2 log N for N>1, linear length error |
+| 4.32 | Improved detector-to-density reduction | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector_linear_log`; [ZeroDetectionSharp.lean](../Legendre/ZeroDetectionSharp.lean) | **proved conditional theorem**; analytic detector property remains explicit |
+| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
+| 4.validation | Nineteen independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -447,13 +452,13 @@ The parsed axiom output matches the complete Lean-environment enumeration exactl
 contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
-Layer 4 initial-infrastructure validation (2026-11-08): full build passed
-4,097 jobs, and all 3,022 project theorem declarations are audited, including
-176 additional public/private/generated declarations after the initial Layer 4 slice. Two independent enumerations
-agree with the parsed audit output exactly. All 125 project Lean files have
-zero executable placeholders. Sixteen Layer 4 consumers and all nine
+Layer 4 linear-mean-value validation (2026-11-08): full build passed
+4,102 jobs, and all 3,052 project theorem declarations are audited, including
+30 additional public/private/generated declarations after the large-sieve checkpoint. The complete module-data theorem inventory
+agrees with the parsed audit output exactly. All 130 project Lean files have
+zero executable placeholders. Nineteen Layer 4 consumers and all nine
 Layer 3 regression consumers compile and pass standalone checks in CI.
-See [the precise estimates and remaining obligations](layer4-mean-values.md).
+See [the precise estimates and remaining obligations](layer4-linear-mean-value.md).
 
 ## What the audit proves — and what it does not
 

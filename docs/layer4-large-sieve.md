@@ -2,7 +2,9 @@
 
 This records the next verified slice after the [initial mean-value development](layer4-mean-values.md).
 The public import remains `import Legendre.Layer4`. Layer 4 is **in progress**:
-Ingham and Huxley density estimates remain to be proved.
+Ingham and Huxley density estimates remain to be proved. The subsequent
+[linear mean-square development](layer4-linear-mean-value.md) removes the
+harmonic error loss and optimizes the discrete sampling factor.
 
 ## Finite additive large sieve
 

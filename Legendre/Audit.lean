@@ -126,11 +126,21 @@ public import Legendre.LargeSieve.SeparatedSelection
 public import Legendre.WeightedSeparation
 public import Legendre.ZetaDensitySelection
 public import Legendre.ZeroDetectionReduction
+public import Legendre.ReciprocalHilbert
+public import Legendre.SeparatedMeanValue
+public import Legendre.DirichletMeanValueSharp
+public import Legendre.DirichletSamplingSharp
+public import Legendre.ZeroDetectionSharp
 
 import all Legendre.LargeSieve.SeparatedSelection
 import all Legendre.WeightedSeparation
 import all Legendre.ZetaDensitySelection
 import all Legendre.ZeroDetectionReduction
+import all Legendre.ReciprocalHilbert
+import all Legendre.SeparatedMeanValue
+import all Legendre.DirichletMeanValueSharp
+import all Legendre.DirichletSamplingSharp
+import all Legendre.ZeroDetectionSharp
 
 import all Legendre.LargeSieve.AdditiveSieveProof
 import all Legendre.LargeSieve.CircleSeparatedPoints
@@ -3358,3 +3368,35 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_5"
 #audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_6"
 #audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_7"
+
+-- Linear-error mean values and optimized sampling: all public/private/generated theorems.
+#print axioms Legendre.Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear
+#print axioms Legendre.Density.abs_integral_exponentialSum_sub_diagonal_le_separation
+#print axioms Legendre.Density.abs_norm_sq_derivative_le_weighted
+#print axioms Legendre.Density.dirichlet_frequencies_separated
+#print axioms Legendre.Density.dirichlet_large_sample_card_le_linear_log
+#print axioms Legendre.Density.hilbertPhaseSum.eq_1
+#print axioms Legendre.Density.integral_dirichletPolynomial_norm_sq_le_linear
+#print axioms Legendre.Density.integral_exponentialSum_hilbert_decomposition
+#print axioms Legendre.Density.norm_hilbertPhaseSum_le
+#print axioms Legendre.Density.sum_dirichletPolynomial_samples_le_linear_log
+#print axioms Legendre.Density.sum_dirichletPolynomial_samples_le_linear_weighted
+#print axioms Legendre.LargeSieve.lineSeparated_injective
+#print axioms Legendre.LargeSieve.line_inverse_square_row
+#print axioms Legendre.LargeSieve.reciprocalKernel.eq_1
+#print axioms Legendre.LargeSieve.reciprocalKernel_self
+#print axioms Legendre.LargeSieve.reciprocalKernel_skew
+#print axioms Legendre.LargeSieve.reciprocalKernel_triple
+#print axioms Legendre.LargeSieve.reciprocalMatrix.eq_1
+#print axioms Legendre.LargeSieve.reciprocalMatrix_hermitian
+#print axioms Legendre.LargeSieve.reciprocalMatrix_norm_bound
+#print axioms Legendre.LargeSieve.reciprocal_eigenvalue_bound
+#print axioms Legendre.LargeSieve.reciprocal_hilbert_bound
+#print axioms Legendre.LargeSieve.reciprocal_row_budget
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector_linear_log
+#audit_private_axioms "_private.Legendre.DirichletMeanValueSharp.0.Legendre.Density.dirichlet_frequencies_separated._proof_1_1"
+#audit_private_axioms "_private.Legendre.SeparatedMeanValue.0.Legendre.Density.integral_exponentialSum_hilbert_decomposition._simp_1_1"
+#audit_private_axioms "_private.Legendre.SeparatedMeanValue.0.Legendre.Density.integral_exponentialSum_hilbert_decomposition._simp_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_reversed_interval_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_touching_samples_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_zero_energy_detector_consumer"

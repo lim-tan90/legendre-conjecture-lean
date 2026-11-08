@@ -102,4 +102,9 @@ import Legendre.LargeSieve.SeparatedSelection
 import Legendre.WeightedSeparation
 import Legendre.ZetaDensitySelection
 import Legendre.ZeroDetectionReduction
+import Legendre.ReciprocalHilbert
+import Legendre.SeparatedMeanValue
+import Legendre.DirichletMeanValueSharp
+import Legendre.DirichletSamplingSharp
+import Legendre.ZeroDetectionSharp
 import Legendre.Audit
