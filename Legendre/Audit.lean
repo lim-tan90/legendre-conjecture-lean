@@ -93,6 +93,74 @@ public import Legendre.ZeroDensity
 public import Legendre.Layer4
 public import Legendre.Tests.Layer4
 
+public import Legendre.LargeSieve.AdditiveSieveProof
+public import Legendre.LargeSieve.CircleSeparatedPoints
+public import Legendre.LargeSieve.CosecantDistanceBound
+public import Legendre.LargeSieve.CosecantHilbertBound
+public import Legendre.LargeSieve.CosecantKernel
+public import Legendre.LargeSieve.CosecantMatrix
+public import Legendre.LargeSieve.CosecantRowSum
+public import Legendre.LargeSieve.FiniteMatrixDuality
+public import Legendre.LargeSieve.HermitianEigenvector
+public import Legendre.LargeSieve.HermitianNormBound
+public import Legendre.LargeSieve.KernelEigenvalueBound
+public import Legendre.LargeSieve.PublishedAdditiveSieve
+public import Legendre.LargeSieve.ReducedFractionSeparation
+public import Legendre.LargeSieve.SeparatedAdditiveSieve
+public import Legendre.LargeSieve.SeparatedInverseSquares
+public import Legendre.LargeSieve.SeparatedSampling
+public import Legendre.LargeSieve.SeparatedSetSquares
+public import Legendre.LargeSieve.SieveDualEnergy
+public import Legendre.LargeSieve.SieveGeometricKernel
+public import Legendre.LargeSieve.SievePhaseGram
+public import Legendre.LargeSieve.SkewKernelSquare
+public import Legendre.LargeSieve.SymmetricQuadraticBound
+public import Legendre.LargeSieve
+public import Legendre.SobolevSampling
+public import Legendre.DirichletDerivative
+public import Legendre.DirichletSampling
+public import Legendre.GramLargeValues
+public import Legendre.HalaszMontgomery
+
+public import Legendre.LargeSieve.SeparatedSelection
+public import Legendre.WeightedSeparation
+public import Legendre.ZetaDensitySelection
+public import Legendre.ZeroDetectionReduction
+
+import all Legendre.LargeSieve.SeparatedSelection
+import all Legendre.WeightedSeparation
+import all Legendre.ZetaDensitySelection
+import all Legendre.ZeroDetectionReduction
+
+import all Legendre.LargeSieve.AdditiveSieveProof
+import all Legendre.LargeSieve.CircleSeparatedPoints
+import all Legendre.LargeSieve.CosecantDistanceBound
+import all Legendre.LargeSieve.CosecantHilbertBound
+import all Legendre.LargeSieve.CosecantKernel
+import all Legendre.LargeSieve.CosecantMatrix
+import all Legendre.LargeSieve.CosecantRowSum
+import all Legendre.LargeSieve.FiniteMatrixDuality
+import all Legendre.LargeSieve.HermitianEigenvector
+import all Legendre.LargeSieve.HermitianNormBound
+import all Legendre.LargeSieve.KernelEigenvalueBound
+import all Legendre.LargeSieve.PublishedAdditiveSieve
+import all Legendre.LargeSieve.ReducedFractionSeparation
+import all Legendre.LargeSieve.SeparatedAdditiveSieve
+import all Legendre.LargeSieve.SeparatedInverseSquares
+import all Legendre.LargeSieve.SeparatedSampling
+import all Legendre.LargeSieve.SeparatedSetSquares
+import all Legendre.LargeSieve.SieveDualEnergy
+import all Legendre.LargeSieve.SieveGeometricKernel
+import all Legendre.LargeSieve.SievePhaseGram
+import all Legendre.LargeSieve.SkewKernelSquare
+import all Legendre.LargeSieve.SymmetricQuadraticBound
+import all Legendre.LargeSieve
+import all Legendre.SobolevSampling
+import all Legendre.DirichletDerivative
+import all Legendre.DirichletSampling
+import all Legendre.GramLargeValues
+import all Legendre.HalaszMontgomery
+
 import all Legendre.ExponentialKernel
 import all Legendre.ExponentialMeanValue
 import all Legendre.DirichletSpacing
@@ -3112,3 +3180,181 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_singleton_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_two_term_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.harmonic.eq_1"
+
+-- Additive large sieve, separated samples and multiplicity-preserving detection reduction.
+#print axioms Legendre.Density.abs_norm_sq_derivative_le
+#print axioms Legendre.Density.abs_sub_le_integral_abs_deriv
+#print axioms Legendre.Density.complex_quadratic_le_norm_rows
+#print axioms Legendre.Density.derivative_coefficientEnergy_le
+#print axioms Legendre.Density.dirichletDerivativeCoefficients.eq_1
+#print axioms Legendre.Density.dirichletPolynomial.eq_1
+#print axioms Legendre.Density.dirichletPolynomial_hasDerivAt
+#print axioms Legendre.Density.dirichletPolynomial_norm_sq_hasDerivAt
+#print axioms Legendre.Density.dirichlet_large_sample_card_le
+#print axioms Legendre.Density.dirichlet_large_sample_card_mul_le
+#print axioms Legendre.Density.dirichlet_mean_coefficient_nonneg
+#print axioms Legendre.Density.dirichlet_samples_le_gram_rows
+#print axioms Legendre.Density.dirichlet_unit_at_zero
+#print axioms Legendre.Density.exists_weighted_separated_representatives
+#print axioms Legendre.Density.exponential_samples_le_gram_rows
+#print axioms Legendre.Density.finite_gram_row_bound
+#print axioms Legendre.Density.gram_norm_symmetric
+#print axioms Legendre.Density.halasz_montgomery_card_le
+#print axioms Legendre.Density.halasz_montgomery_energy
+#print axioms Legendre.Density.halasz_montgomery_large_values
+#print axioms Legendre.Density.length_mul_value_le_integral
+#print axioms Legendre.Density.log_nat_nonneg
+#print axioms Legendre.Density.norm_dirichletDerivativeCoefficients
+#print axioms Legendre.Density.realPhase_hasDerivAt
+#print axioms Legendre.Density.realPhase_time_difference
+#print axioms Legendre.Density.sum_dirichletPolynomial_samples_le
+#print axioms Legendre.Density.sum_nat_weight_biUnion_le
+#print axioms Legendre.Density.sum_nat_weight_union_le
+#print axioms Legendre.Density.weighted_neighbor_le
+#print axioms Legendre.LargeSieve.additiveSieveSum.eq_1
+#print axioms Legendre.LargeSieve.additive_large_sieve
+#print axioms Legendre.LargeSieve.centeredCircleRemainder._proof_1
+#print axioms Legendre.LargeSieve.centeredCircleRemainder_bounds
+#print axioms Legendre.LargeSieve.circleSeparated_inverse_square_row
+#print axioms Legendre.LargeSieve.circleSeparated_remainders
+#print axioms Legendre.LargeSieve.circleSeparated_sine_ne_zero
+#print axioms Legendre.LargeSieve.complex_diagonal_quadratic
+#print axioms Legendre.LargeSieve.complex_self_quadratic
+#print axioms Legendre.LargeSieve.cos_quartic_upper
+#print axioms Legendre.LargeSieve.cosecantKernel.eq_1
+#print axioms Legendre.LargeSieve.cosecantKernel_self
+#print axioms Legendre.LargeSieve.cosecantKernel_skew
+#print axioms Legendre.LargeSieve.cosecantKernel_triple
+#print axioms Legendre.LargeSieve.cosecantMatrix.eq_1
+#print axioms Legendre.LargeSieve.cosecantMatrix_hermitian
+#print axioms Legendre.LargeSieve.cosecantMatrix_norm_bound
+#print axioms Legendre.LargeSieve.cosecantRowWeight._proof_1
+#print axioms Legendre.LargeSieve.cosecantRowWeight.eq_1
+#print axioms Legendre.LargeSieve.cosecantRowWeight_abs
+#print axioms Legendre.LargeSieve.cosecantRowWeight_bound
+#print axioms Legendre.LargeSieve.cosecantRowWeight_eq
+#print axioms Legendre.LargeSieve.cosecantRowWeight_shift
+#print axioms Legendre.LargeSieve.cosecant_eigenvalue_bound
+#print axioms Legendre.LargeSieve.cosecant_hilbert_bound
+#print axioms Legendre.LargeSieve.cosecant_row_sum_bound
+#print axioms Legendre.LargeSieve.cotangentKernel.eq_1
+#print axioms Legendre.LargeSieve.cotangentKernel_self
+#print axioms Legendre.LargeSieve.cotangentKernel_skew
+#print axioms Legendre.LargeSieve.disjoint_sample_intervals
+#print axioms Legendre.LargeSieve.endpoint_sample
+#print axioms Legendre.LargeSieve.exists_separated_cover
+#print axioms Legendre.LargeSieve.exists_separated_selection
+#print axioms Legendre.LargeSieve.finite_complex_cauchy_schwarz
+#print axioms Legendre.LargeSieve.finite_complex_norm_expansion
+#print axioms Legendre.LargeSieve.finite_matrix_duality
+#print axioms Legendre.LargeSieve.finite_positive_inverse_squares
+#print axioms Legendre.LargeSieve.hermitian_eigenvector_commutator
+#print axioms Legendre.LargeSieve.hermitian_eigenvector_left
+#print axioms Legendre.LargeSieve.hermitian_norm_bound
+#print axioms Legendre.LargeSieve.imaginaryKernelMatrix.eq_1
+#print axioms Legendre.LargeSieve.imaginaryKernelMatrix_hermitian
+#print axioms Legendre.LargeSieve.imaginaryKernelMatrix_square
+#print axioms Legendre.LargeSieve.imaginaryKernelMatrix_square_entry
+#print axioms Legendre.LargeSieve.kernel_eigenvalue_bound
+#print axioms Legendre.LargeSieve.matrix_quadratic_norm_bound
+#print axioms Legendre.LargeSieve.neighbor_card_le_two_local
+#print axioms Legendre.LargeSieve.ordered_separated_inverse_squares
+#print axioms Legendre.LargeSieve.ordered_separated_lower
+#print axioms Legendre.LargeSieve.positive_set_inverse_squares
+#print axioms Legendre.LargeSieve.publishedAdditiveLargeSieve
+#print axioms Legendre.LargeSieve.realPhase_eq_sieveHalfPhase
+#print axioms Legendre.LargeSieve.real_symmetric_quadratic_upper
+#print axioms Legendre.LargeSieve.reducedFractionPoint_separated
+#print axioms Legendre.LargeSieve.reducedFraction_sum
+#print axioms Legendre.LargeSieve.reducedNumerators.eq_1
+#print axioms Legendre.LargeSieve.reduced_fraction_circle_separation
+#print axioms Legendre.LargeSieve.reduced_fraction_cross_injective
+#print axioms Legendre.LargeSieve.separated_additive_sieve
+#print axioms Legendre.LargeSieve.separated_realPhase_large_sieve
+#print axioms Legendre.LargeSieve.separated_sampling
+#print axioms Legendre.LargeSieve.separated_set_inverse_squares
+#print axioms Legendre.LargeSieve.sieveAdditivePhase._proof_1
+#print axioms Legendre.LargeSieve.sieveAdditivePhase_eq_half
+#print axioms Legendre.LargeSieve.sieveHalfPhase.eq_1
+#print axioms Legendre.LargeSieve.sieveHalfPhase_add
+#print axioms Legendre.LargeSieve.sieveHalfPhase_difference
+#print axioms Legendre.LargeSieve.sieveHalfPhase_norm
+#print axioms Legendre.LargeSieve.sieveHalfPhase_sine
+#print axioms Legendre.LargeSieve.sieveHalfPhase_star
+#print axioms Legendre.LargeSieve.sieveHalfPhase_two_step
+#print axioms Legendre.LargeSieve.sieveHalfPhase_zero
+#print axioms Legendre.LargeSieve.sievePhaseMatrix._proof_1
+#print axioms Legendre.LargeSieve.sievePhaseMatrix.eq_1
+#print axioms Legendre.LargeSieve.sievePhaseMatrix_adjoint
+#print axioms Legendre.LargeSieve.sieve_dual_energy_bound
+#print axioms Legendre.LargeSieve.sieve_dual_energy_identity
+#print axioms Legendre.LargeSieve.sieve_geometric_kernel
+#print axioms Legendre.LargeSieve.sieve_geometric_kernel_mul
+#print axioms Legendre.LargeSieve.sieve_pair_kernel
+#print axioms Legendre.LargeSieve.sieve_phase_gram
+#print axioms Legendre.LargeSieve.sine_cosecant_majorant
+#print axioms Legendre.LargeSieve.skew_kernel_square_entry
+#print axioms Legendre.LargeSieve.sum_local_integrals_le
+#print axioms Legendre.LargeSieve.twistedCosecantSum.eq_1
+#print axioms Legendre.LargeSieve.twisted_cosecant_bound
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_1
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_2
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_3
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_4
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_5
+#print axioms Legendre.Zeta.densityLocalMassBound._proof_6
+#print axioms Legendre.Zeta.densityLocalMassBound_le_log
+#print axioms Legendre.Zeta.densitySelectionConstant._proof_1
+#print axioms Legendre.Zeta.densitySelectionConstant_pos
+#print axioms Legendre.Zeta.density_window_le_unit_count
+#print axioms Legendre.Zeta.density_window_mass_le
+#print axioms Legendre.Zeta.exists_density_separated_representatives
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector
+#audit_private_axioms "_private.Legendre.GramLargeValues.0.Legendre.Density.complex_quadratic_le_norm_rows._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.publishedAdditiveLargeSieve._proof_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.reducedFractionPoint_separated._proof_1_5"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.reducedFractionPoint_separated._proof_1_6"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.reducedFractionPoint_separated._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.reducedFractionPoint_separated._simp_1_3"
+#audit_private_axioms "_private.Legendre.LargeSieve.AdditiveSieveProof.0.Legendre.LargeSieve.reducedFractionPoint_separated._simp_1_4"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._proof_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_2"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_3"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_4"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_5"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_6"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_7"
+#audit_private_axioms "_private.Legendre.LargeSieve.ReducedFractionSeparation.0.Legendre.LargeSieve.reduced_fraction_circle_separation._simp_1_8"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedInverseSquares.0.Legendre.LargeSieve.ordered_separated_lower._proof_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_2"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_3"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_4"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_5"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_6"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSampling.0.Legendre.LargeSieve.separated_sampling._simp_1_7"
+#audit_private_axioms "_private.Legendre.LargeSieve.SeparatedSelection.0.Legendre.LargeSieve.exists_separated_cover._proof_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SieveDualEnergy.0.Legendre.LargeSieve.sieve_dual_energy_identity._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SieveDualEnergy.0.Legendre.LargeSieve.sieve_dual_energy_identity._simp_1_2"
+#audit_private_axioms "_private.Legendre.LargeSieve.SievePhaseGram.0.Legendre.LargeSieve.finite_complex_norm_expansion._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SkewKernelSquare.0.Legendre.LargeSieve.skew_kernel_square_entry._simp_1_1"
+#audit_private_axioms "_private.Legendre.LargeSieve.SkewKernelSquare.0.Legendre.LargeSieve.skew_kernel_square_entry._simp_1_2"
+#audit_private_axioms "_private.Legendre.LargeSieve.SymmetricQuadraticBound.0.Legendre.LargeSieve.real_symmetric_quadratic_upper._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.dirichletDerivativeCoefficients.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_additive_sieve_shift_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_constant_derivative_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_phase_normalization_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_touching_samples_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_cluster_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_cluster_consumer._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_cluster_consumer._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zero_detector_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zero_large_samples_consumer"
+#audit_private_axioms "_private.Legendre.WeightedSeparation.0.Legendre.Density.sum_nat_weight_union_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_1"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_2"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_3"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_4"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_5"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_6"
+#audit_private_axioms "_private.Legendre.ZetaDensitySelection.0.Legendre.Zeta.densityLocalMassBound_le_log._simp_1_7"

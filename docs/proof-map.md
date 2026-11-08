@@ -407,8 +407,21 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.12 | Uniform density-exponent convention and weakening | `Legendre.Zeta.HasZeroDensityEstimate`, `HasZeroDensityEstimate.mono`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; Prop definition / proved implication; epsilon additive in exponent, C before sigma |
 | 4.13 | Uniform logarithmic-loss absorption and conditional density transfer | `Legendre.Zeta.exists_log_pow_le_rpow`, `hasZeroDensityEstimate_of_log_bound`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; every fixed log power absorbed into T^epsilon; analytic density bound is a hypothesis |
 | 4.14 | Unconditional near-one density count | `Legendre.Zeta.zero_height_lt_three_of_near_one`, `zeroDensityCount_le_low_of_near_one`, `zeroDensityCount_rational_near_one`; [ZeroDensity.lean](../Legendre/ZeroDensity.lean) | **proved**; rational moving cutoff count≤fixed N(3), T≥3; no fixed-strip power saving claimed |
-| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; Ingham, Huxley, large sieve and separated-point estimates remain open |
-| 4.validation | Nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening; all declarations audited |
+| 4.15 | Finite reciprocal-square spacing and circle reduction | `Legendre.LargeSieve.positive_set_inverse_squares`, `separated_set_inverse_squares`, `circleSeparated_inverse_square_row`; [LargeSieve/SeparatedSetSquares.lean](../Legendre/LargeSieve/SeparatedSetSquares.lean) | **proved**; ported finite spacing proof chain |
+| 4.16 | Concrete skew-kernel square identity and Hermitian eigenvector cancellation | `Legendre.LargeSieve.skew_kernel_square_entry`, `kernel_eigenvalue_bound`, `hermitian_eigenvector_commutator`; [LargeSieve/KernelEigenvalueBound.lean](../Legendre/LargeSieve/KernelEigenvalueBound.lean) | **proved**; ported generic matrix identity and spectral bound |
+| 4.17 | Finite cosecant Hilbert inequality and spectral norm bound | `Legendre.LargeSieve.cosecant_eigenvalue_bound`, `cosecantMatrix_norm_bound`, `cosecant_hilbert_bound`; [LargeSieve/CosecantHilbertBound.lean](../Legendre/LargeSieve/CosecantHilbertBound.lean) | **proved**; circle-separated frequencies, explicit delta inverse |
+| 4.18 | Finite phase Gram identity and matrix duality | `Legendre.LargeSieve.sieve_phase_gram`, `sieve_dual_energy_bound`, `finite_matrix_duality`; [LargeSieve/SieveDualEnergy.lean](../Legendre/LargeSieve/SieveDualEnergy.lean) | **proved**; source proof chain, all complex coefficients |
+| 4.19 | Reduced-fraction separation and public additive large sieve | `Legendre.LargeSieve.reduced_fraction_circle_separation`, `publishedAdditiveLargeSieve`, `additive_large_sieve`, `separated_realPhase_large_sieve`; [LargeSieve.lean](../Legendre/LargeSieve.lean) | **proved**; M+Q²; zero M/Q included; phase conventions checked |
+| 4.20 | Local Sobolev bound and separated sampling intervals | `Legendre.Density.length_mul_value_le_integral`, `LargeSieve.separated_sampling`; [SobolevSampling.lean](../Legendre/SobolevSampling.lean) | **proved**; genuine integrability, half-open disjoint sample intervals |
+| 4.21 | Derivative polynomial and coefficient energy | `Legendre.Density.dirichletPolynomial_hasDerivAt`, `derivative_coefficientEnergy_le`, `abs_norm_sq_derivative_le`; [DirichletDerivative.lean](../Legendre/DirichletDerivative.lean) | **proved**; same support, derivative energy at most log²N times original energy |
+| 4.22 | Actual separated-sample energy and large-value cardinality | `Legendre.Density.sum_dirichletPolynomial_samples_le`, `dirichlet_large_sample_card_le`; [DirichletSampling.lean](../Legendre/DirichletSampling.lean) | **proved**; arbitrary finite sample sets, positive spacing and threshold |
+| 4.23 | Complex Gram row bound and Dirichlet correlation kernel | `Legendre.Density.complex_quadratic_le_norm_rows`, `finite_gram_row_bound`, `dirichlet_samples_le_gram_rows`; [GramLargeValues.lean](../Legendre/GramLargeValues.lean) | **proved**; generalizes attributed upstream quadratic argument |
+| 4.24 | Finite Halasz--Montgomery energy and large-value counts | `Legendre.Density.halasz_montgomery_energy`, `halasz_montgomery_large_values`, `halasz_montgomery_card_le`; [HalaszMontgomery.lean](../Legendre/HalaszMontgomery.lean) | **proved**; off-diagonal correlation bound explicit, no density estimate assumed |
+| 4.25 | Naturally weighted separated covers | `Legendre.Density.weighted_neighbor_le`, `exists_weighted_separated_representatives`; [WeightedSeparation.lean](../Legendre/WeightedSeparation.lean) | **proved**; generalizes upstream cover; natural weights retained |
+| 4.26 | Separated representatives of actual zeta zeros | `Legendre.Zeta.density_window_mass_le`, `densityLocalMassBound_le_log`, `exists_density_separated_representatives`; [ZetaDensitySelection.lean](../Legendre/ZetaDensitySelection.lean) | **proved**; full analytic multiplicities; uniform absolute logarithmic loss |
+| 4.27 | Detector-to-density reduction | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector`; [ZeroDetectionReduction.lean](../Legendre/ZeroDetectionReduction.lean) | **proved**; proved conditional theorem; analytic detector property explicit |
+| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
+| 4.validation | Sixteen independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening; all declarations audited |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; paper-exact form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; paper-exact form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; paper-exact form encoded, `ingham577Paper_iff` proved |
@@ -435,10 +448,10 @@ contain no executable `sorry`, `admit` or `sorryAx`. See
 [the exact uniform formula, proof chain and limits](perron-uniform-explicit-formula.md).
 
 Layer 4 initial-infrastructure validation (2026-11-08): full build passed
-4,062 jobs, and all 2,846 project theorem declarations are audited, including
-90 new public/private/generated declarations. Two independent enumerations
-agree with the parsed audit output exactly. All 93 project Lean files have
-zero executable placeholders. Nine new Layer 4 consumers and all nine
+4,097 jobs, and all 3,022 project theorem declarations are audited, including
+176 additional public/private/generated declarations after the initial Layer 4 slice. Two independent enumerations
+agree with the parsed audit output exactly. All 125 project Lean files have
+zero executable placeholders. Sixteen Layer 4 consumers and all nine
 Layer 3 regression consumers compile and pass standalone checks in CI.
 See [the precise estimates and remaining obligations](layer4-mean-values.md).
 

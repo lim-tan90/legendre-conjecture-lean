@@ -60,13 +60,16 @@
 
 新增零密度指数接口，常数对 σ∈[1/2,1] 统一；已证明对数损失到 `T^ε` 的条件传递。
 现有有效无零区域还给出 `N(1−1/(4000000 log T),T)` 的固定低高度计数界（T≥3）。
-**Ingham、Huxley、大筛及离散采样点的大值估计仍开放，Layer 4 尚未完成。**
+有限加法大筛、间隔采样及 Gram/Halász–Montgomery 接口现已证明；
+带权代表集保留零点重数，并给出条件零点检测到密度计数的传递。
+**Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,062 项构建**、**全部 2,846 个项目定理声明**的公理审计（仅三项标准公理）、
-**93 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**18 项独立使用检查**（Layer 4 九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
-已验证 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
-[精确陈述、证明链及后续任务](docs/layer4-mean-values.md)。
+验证：**4,097 项构建**、**全部 3,022 个项目定理声明**的公理审计（仅三项标准公理）、
+**125 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**25 项独立使用检查**（Layer 4 十六项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。
+初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
+[初始均值估计](docs/layer4-mean-values.md) ·
+[大筛、间隔采样与带权零点检测](docs/layer4-large-sieve.md)。
 
 </details>
 
@@ -373,6 +376,10 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | `Legendre.Density.dirichlet_large_values_measure_le` | 连续大值集合测度 ≤(区间长度+4N(1+log N))E/V² | **已证明**；A≤B、V>0；离散采样点计数仍开放 | [DirichletLargeValues.lean](Legendre/DirichletLargeValues.lean) |
 | `Legendre.Zeta.HasZeroDensityEstimate` / `hasZeroDensityEstimate_of_log_bound` | 对 σ 统一的密度约定及对数损失吸收 | Prop 定义 / **条件传递已证明**；未断言指数取值 | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
 | `Legendre.Zeta.zeroDensityCount_rational_near_one` | T≥3 时 N(1−1/(4000000 log T),T)≤N(3) | **已证明**；固定紧集计数，不是固定带内的密度定理 | [ZeroDensity.lean](Legendre/ZeroDensity.lean) |
+| `Legendre.LargeSieve.additive_large_sieve` / `separated_realPhase_large_sieve` | 系数 M+Q² 的有限加法大筛及圆周间隔形式 | **已证明**；覆盖零长度与空范围；已记录来源 | [LargeSieve.lean](Legendre/LargeSieve.lean) |
+| `Legendre.Density.dirichlet_large_sample_card_le` / `halasz_montgomery_card_le` | 真正的间隔采样点计数及有限 Gram 大值不等式 | **已证明**；明确保留间隔、阈值或非对角核假设 | [DirichletSampling.lean](Legendre/DirichletSampling.lean)、[HalaszMontgomery.lean](Legendre/HalaszMontgomery.lean) |
+| `Legendre.Zeta.exists_density_separated_representatives` | 间隔至少 1 的零点代表集控制完整解析重数计数 | **已证明**；同一绝对对数系数 | [ZetaDensitySelection.lean](Legendre/ZetaDensitySelection.lean) |
+| `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | 显式的零点检测到密度计数传递 | **条件定理已证明**；解析检测器性质仍为假设 | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -436,7 +443,7 @@ von Mangoldt 级数绝对收敛及 `-ζ′/ζ` 恒等式（`Re(s)>1`）；新增
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、Dirichlet 多项式的初等 `O(N log N)` 均方界及连续大值测度界；**Ingham、Huxley、大筛及离散大值估计仍开放**；[范围](docs/layer4-mean-values.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、Dirichlet 多项式的初等 `O(N log N)` 均方界及连续大值测度界；有限加法大筛、间隔采样及带权检测传递**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含论文精确的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -581,6 +588,25 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   原许可证保存在 [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt)。
   ψ→θ→π 的误差传递证明位于 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean)。
   详见[来源与限制](docs/pnt-provenance.md)。
+* **[openai/math](https://github.com/openai/math)** — Apache-2.0，
+  固定来源提交 `4eaee87548250b2682affda7d05d947c05554bae`。
+  [`Legendre/LargeSieve/`](Legendre/LargeSieve/) 中选取的 23 个模块包含：22 个移植自
+  `lean/OAI/NumberTheory/Ostmann/`：19 个 `Preliminaries` 模块、
+  `Quadratic/KernelEigenvalueBound.lean`、`Characters/SkewKernelSquare.lean`
+  及 `ZeroDensity/SeparatedSelection.lean`；
+  另外一个间隔采样模块来自
+  `lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`。
+  范围为有限加法大筛的证明依赖链，包含圆周间隔、有限余割 Hilbert 不等式、
+  Hermitian 矩阵及对偶性论证，以及既约分数的特化。
+  本项目调整导入、命名空间及 Lean/mathlib v4.35.0 兼容性；每个移植文件均保留来源说明。
+  原始许可证保存在 [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
+  [`GramLargeValues.lean`](Legendre/GramLargeValues.lean) 还推广了同一来源的
+  `Preliminaries/SymmetricQuadraticBound.lean` 中的行和估计论证；
+  [`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) 将同一来源
+  `ZeroDensity/SeparatedSelection.lean` 的覆盖论证推广到自然数权重。
+  已选取的证明链已编译，并纳入整库公理审计；
+  [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
+  Layer 4 的 Ingham、Huxley 密度定理仍开放。
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
   `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制

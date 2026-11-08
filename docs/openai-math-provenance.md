@@ -1,0 +1,90 @@
+# openai/math source provenance: finite large sieve and separated sampling
+
+The pinned upstream is [openai/math](https://github.com/openai/math), commit
+[`4eaee87548250b2682affda7d05d947c05554bae`](https://github.com/openai/math/commit/4eaee87548250b2682affda7d05d947c05554bae).
+It is licensed under Apache-2.0; the original text is retained in
+[licenses/openai-math-Apache-2.0.txt](../licenses/openai-math-Apache-2.0.txt).
+Both README translations contain the source, commit, license and destinations.
+Every adapted Lean file contains a source/changes notice.
+
+## Exact port inventory
+
+Twenty-three modules are selected: nineteen Ostmann `Preliminaries` modules,
+one Ostmann `Quadratic` module, one Ostmann `Characters` module, one Ostmann
+`ZeroDensity` selection module, and one Jacobsthal sampling module.
+
+| Pinned upstream path | Destination |
+|---|---|
+| [`lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean) | [Legendre/LargeSieve/SeparatedSampling.lean](../Legendre/LargeSieve/SeparatedSampling.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Characters/SkewKernelSquare.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Characters/SkewKernelSquare.lean) | [Legendre/LargeSieve/SkewKernelSquare.lean](../Legendre/LargeSieve/SkewKernelSquare.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/AdditiveSieveProof.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/AdditiveSieveProof.lean) | [Legendre/LargeSieve/AdditiveSieveProof.lean](../Legendre/LargeSieve/AdditiveSieveProof.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CircleSeparatedPoints.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CircleSeparatedPoints.lean) | [Legendre/LargeSieve/CircleSeparatedPoints.lean](../Legendre/LargeSieve/CircleSeparatedPoints.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantDistanceBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantDistanceBound.lean) | [Legendre/LargeSieve/CosecantDistanceBound.lean](../Legendre/LargeSieve/CosecantDistanceBound.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantHilbertBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantHilbertBound.lean) | [Legendre/LargeSieve/CosecantHilbertBound.lean](../Legendre/LargeSieve/CosecantHilbertBound.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantKernel.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantKernel.lean) | [Legendre/LargeSieve/CosecantKernel.lean](../Legendre/LargeSieve/CosecantKernel.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantMatrix.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantMatrix.lean) | [Legendre/LargeSieve/CosecantMatrix.lean](../Legendre/LargeSieve/CosecantMatrix.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantRowSum.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/CosecantRowSum.lean) | [Legendre/LargeSieve/CosecantRowSum.lean](../Legendre/LargeSieve/CosecantRowSum.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/FiniteMatrixDuality.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/FiniteMatrixDuality.lean) | [Legendre/LargeSieve/FiniteMatrixDuality.lean](../Legendre/LargeSieve/FiniteMatrixDuality.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/HermitianEigenvector.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/HermitianEigenvector.lean) | [Legendre/LargeSieve/HermitianEigenvector.lean](../Legendre/LargeSieve/HermitianEigenvector.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/HermitianNormBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/HermitianNormBound.lean) | [Legendre/LargeSieve/HermitianNormBound.lean](../Legendre/LargeSieve/HermitianNormBound.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/PublishedAdditiveSieve.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/PublishedAdditiveSieve.lean) | [Legendre/LargeSieve/PublishedAdditiveSieve.lean](../Legendre/LargeSieve/PublishedAdditiveSieve.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/ReducedFractionSeparation.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/ReducedFractionSeparation.lean) | [Legendre/LargeSieve/ReducedFractionSeparation.lean](../Legendre/LargeSieve/ReducedFractionSeparation.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedAdditiveSieve.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedAdditiveSieve.lean) | [Legendre/LargeSieve/SeparatedAdditiveSieve.lean](../Legendre/LargeSieve/SeparatedAdditiveSieve.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedInverseSquares.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedInverseSquares.lean) | [Legendre/LargeSieve/SeparatedInverseSquares.lean](../Legendre/LargeSieve/SeparatedInverseSquares.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedSetSquares.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SeparatedSetSquares.lean) | [Legendre/LargeSieve/SeparatedSetSquares.lean](../Legendre/LargeSieve/SeparatedSetSquares.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SieveDualEnergy.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SieveDualEnergy.lean) | [Legendre/LargeSieve/SieveDualEnergy.lean](../Legendre/LargeSieve/SieveDualEnergy.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SieveGeometricKernel.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SieveGeometricKernel.lean) | [Legendre/LargeSieve/SieveGeometricKernel.lean](../Legendre/LargeSieve/SieveGeometricKernel.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SievePhaseGram.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SievePhaseGram.lean) | [Legendre/LargeSieve/SievePhaseGram.lean](../Legendre/LargeSieve/SievePhaseGram.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Preliminaries/SymmetricQuadraticBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Preliminaries/SymmetricQuadraticBound.lean) | [Legendre/LargeSieve/SymmetricQuadraticBound.lean](../Legendre/LargeSieve/SymmetricQuadraticBound.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/Quadratic/KernelEigenvalueBound.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Quadratic/KernelEigenvalueBound.lean) | [Legendre/LargeSieve/KernelEigenvalueBound.lean](../Legendre/LargeSieve/KernelEigenvalueBound.lean) |
+| [`lean/OAI/NumberTheory/Ostmann/ZeroDensity/SeparatedSelection.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/ZeroDensity/SeparatedSelection.lean) | [Legendre/LargeSieve/SeparatedSelection.lean](../Legendre/LargeSieve/SeparatedSelection.lean) |
+
+## Adaptation
+
+Upstream pins Lean v4.34.1. This project retains its existing Lean/mathlib
+v4.35.0 pins and lockfile. Imports point to the local slice, namespaces are
+`Legendre.LargeSieve`, and module/public visibility is made explicit.
+`CosecantKernel.lean` adds explicit derivative-power and derivative-mean-value
+imports required by the newer public-import boundary. `SeparatedSelection.lean`
+replaces the whole `Mathlib` import with selected finite-set and tactic imports.
+The mathematical statements and proof hypotheses of the selected upstream
+lemmas are retained, subject to namespace changes.
+
+Two local generalizations are also attributed:
+
+- [GramLargeValues.lean](../Legendre/GramLargeValues.lean) generalizes the
+  `Preliminaries/SymmetricQuadraticBound.lean` quadratic row-sum argument to
+  arbitrary complex kernels with symmetric norms, and connects it to sample Grams.
+- [WeightedSeparation.lean](../Legendre/WeightedSeparation.lean) generalizes
+  `ZeroDensity/SeparatedSelection.lean` from cardinality to natural-valued weights.
+
+[LargeSieve.lean](../Legendre/LargeSieve.lean),
+[SobolevSampling.lean](../Legendre/SobolevSampling.lean),
+[DirichletDerivative.lean](../Legendre/DirichletDerivative.lean),
+[DirichletSampling.lean](../Legendre/DirichletSampling.lean),
+[HalaszMontgomery.lean](../Legendre/HalaszMontgomery.lean),
+[ZetaDensitySelection.lean](../Legendre/ZetaDensitySelection.lean), and
+[ZeroDetectionReduction.lean](../Legendre/ZeroDetectionReduction.lean) provide
+the local interfaces and deductions around the selected slice. The independent
+local Sobolev lemma allows arbitrary sample locations in its interval; the
+ported sampling lemma supplies the separated finite-sum specialization.
+
+## Scope and verification
+
+This slice proves the finite additive large sieve with coefficient `M+Q²`,
+a separated-sample bound, finite Gram/Halasz--Montgomery inequalities, and a
+multiplicity-preserving reduction from a hypothesized Dirichlet-polynomial
+detector to N(σ,T). No upstream analytic Ingham or Huxley theorem is imported.
+The zero-detection **property** remains an explicit hypothesis until its
+analytic proof is supplied. Layer 4 is still in progress.
+
+Checkpoint validation: full build **4,097 jobs**; **3,022 distinct project
+theorem declarations** audited, including all 176 public/private/generated
+declarations added in this slice. Both project-theorem enumeration methods
+match the parsed axiom output. The only axioms are `propext`, `Classical.choice`
+and `Quot.sound`. All **125 Lean files** have zero executable `sorry`, `admit`
+or `sorryAx`. Sixteen Layer 4 consumers and nine Layer 3 regression consumers
+pass both compiled and standalone checks. No dependency pin or lockfile changed.
+
+The source inventory above is available for the repository owner's upstream
+communication; this work has not posted an upstream issue or PR.

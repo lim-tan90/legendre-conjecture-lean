@@ -469,7 +469,13 @@ Logarithmic spacing and harmonic row estimates give its `O(N log N)` length
 dependence. The exact limiting average and continuous large-value measure
 bound follow. The logarithmic zero-free region gives an unconditional
 near-one count bounded by the fixed low-height count N(3).
-See [exact statements, proof map and validation](layer4-mean-values.md).
+The finite additive large sieve and actual separated-sample bounds are now
+proved. Finite Gram/Halasz–Montgomery inequalities and a multiplicity-preserving
+selection theorem give a conditional detector-to-density reduction. The analytic
+detector needed for Ingham/Huxley is the remaining input.
+See [initial mean values](layer4-mean-values.md),
+[the new estimates and reduction](layer4-large-sieve.md), and
+[upstream provenance](openai-math-provenance.md).
 
 | Acceptance component | Current evidence |
 |---|---|
@@ -477,10 +483,10 @@ See [exact statements, proof map and validation](layer4-mean-values.md).
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
 | Ingham zero-density theorem | **open** |
 | Huxley b=12/5 | **open** |
-| Mean-value/large-value input | Elementary `O(N log N)` mean square and continuous large-value measure **proved**; separated-point estimates and large sieve **open** |
+| Mean-value/large-value input | Elementary `O(N log N)` mean square and continuous large-value measure **proved**; finite additive large sieve, separated-point bounds and weighted detector reduction **proved**; sharper analytic detector estimates **open** |
 
-Full validation: 4,062 build jobs, all 2,846 theorem declarations audited,
-93 Lean files free of executable placeholders, and nine Layer 4 consumers
+Full validation: 4,097 build jobs, all 3,022 theorem declarations audited,
+125 Lean files free of executable placeholders, and sixteen Layer 4 consumers
 plus nine Layer 3 regression consumers. Both standalone checks run in CI.
 
 **Acceptance criteria.**

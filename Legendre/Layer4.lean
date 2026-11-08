@@ -6,6 +6,12 @@ module
 
 public import Legendre.ZeroDensity
 public import Legendre.DirichletLargeValues
+public import Legendre.LargeSieve
+public import Legendre.SobolevSampling
+public import Legendre.DirichletSampling
+public import Legendre.GramLargeValues
+public import Legendre.HalaszMontgomery
+public import Legendre.ZeroDetectionReduction
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -13,6 +19,7 @@ public import Legendre.DirichletLargeValues
 This interface exports the uniform density-exponent convention, a proved
 near-one counting bound, elementary Dirichlet-polynomial mean-square and
 continuous large-value measure estimates. Ingham and Huxley zero-density
-bounds, a separated-point large-value bound and the large sieve remain open.
+bounds, sharper large-value estimates remain open. The finite additive large sieve and
+separated-point sampling bounds are proved and exported here.
 No named density theorem or exponent value is introduced as an assumption.
 -/

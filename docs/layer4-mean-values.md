@@ -3,8 +3,10 @@
 The public interface is `import Legendre.Layer4`. This is **partial progress**
 on Layer 4: an elementary quantitative mean-square theorem, a continuous
 large-value measure estimate, a uniform density-exponent convention and a
-near-one count are proved. Ingham's and Huxley's density theorems, the large
-sieve and separated-point large-value estimates remain open.
+near-one count are proved. The later [large-sieve and separated-sampling
+slice](layer4-large-sieve.md) adds finite additive large sieve, actual separated
+samples and weighted zero selection. Ingham's and Huxley's density theorems
+remain open.
 
 ## Dirichlet-polynomial mean square
 
@@ -149,7 +151,7 @@ project interfaces. No additional PNT+ code, external proof port, package
 or dependency-lock change is introduced. Mathlib's existing harmonic-sum
 bound and exponential integral are invoked as library theorems.
 
-## Validation (2026-11-08)
+## Initial validation (2026-11-08)
 
 Verified proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 
@@ -173,7 +175,8 @@ conditional weakening from exponent 2 to 12/5.
 
 ## Next proof obligations
 
-The next analytic step is control of values at separated points and a
-zero-detection argument connecting such values to N(σ,T). Ingham's theorem,
-Huxley's 12/5 estimate, the large sieve and stronger large-value estimates
-remain unproved. The roadmap's Layer 4 acceptance criteria are unchanged.
+Separated-point sampling, the finite additive large sieve and a
+multiplicity-preserving detector-to-density reduction are proved in the
+[subsequent slice](layer4-large-sieve.md). The analytic detector estimates
+needed for Ingham and Huxley remain open. The roadmap's Layer 4 acceptance
+criteria are unchanged.
