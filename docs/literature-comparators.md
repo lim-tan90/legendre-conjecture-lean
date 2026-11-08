@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, normalized xi-square pointwise reduction | Proved prerequisites; fourth moment and the Ingham/Huxley density bounds remain open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T) and height exponent 1+epsilon | Proved prerequisites; sharp log^4 and the Ingham/Huxley density bounds remain open |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -99,8 +99,9 @@ epsilon in the height exponent. The verified `huxley_global_comparator` combines
 Ingham below σ=3/4 with Huxley above σ=3/4 to recover the global `12/5` target.
 The corresponding Guth–Maynard comparison combines its curved exponent with
 Ingham at σ=7/10 to recover `30/13`. These are conditional comparison bridges:
-the analytic density inputs are not supplied. A pointwise fourth-power reduction
-does not supply `ZetaFourthMoment`. No Layer 4 completion status is upgraded.
+the analytic density inputs are not supplied. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
+`ZetaFourthMomentExponent`; the sharper `ZetaFourthMoment` (log^4) remains
+open. No Ingham/Huxley density proof or Layer 4 completion is claimed.
 
 ### Complete source coverage
 
@@ -287,10 +288,10 @@ also be added to the complete module coverage map.
 
 ## Validation
 
-The complete build has 4,139 jobs and the axiom audit covers all 3,422 distinct
-project theorem declarations. All 164 Lean source files are free of executable
+The complete build has 4,164 jobs and the axiom audit covers all 3,561 distinct
+project theorem declarations. All 189 Lean source files are free of executable
 placeholders. The 24 catalog/closed-proof consumers, 12 literature regression
-guards, 33 Layer 4 consumers and 9 Layer 3 consumers compile independently.
+guards, 39 Layer 4 consumers and 9 Layer 3 consumers compile independently.
 The independent module-data and full-environment theorem inventories are checked
 against the parsed audit output. Intentional bad fixtures verify that Lean
 rejects the old unsupported exponent, an open density bridge used as a closed

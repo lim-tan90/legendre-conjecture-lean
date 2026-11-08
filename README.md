@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — linear-error mean values and finite large sieve (2026-11-08)</strong></summary>
+<summary><strong>Layer 4 — mean values, large sieve and sixth-log fourth moment (2026-11-08)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -96,13 +96,13 @@ also bounds the full multiplicity-weighted count with its fixed low-height
 term. An entire self-dual xi square, sharp Gamma quotients and an integrable
 Gaussian envelope now justify an exact contour functional equation and a
 pointwise reduction `|ζ(s)|⁴ ≤ 4|xiSmoothedZetaSquare(s)|²` on Re(s)=1/2.
-The normalized contour mean bound and fourth-moment theorem remain open. [Proof chain](docs/layer4-moment-kernel.md).
+The normalized contour mean and the actual fourth moment `O(T log^6 T)` are proved, hence `O_ε(T^(1+ε))` for every `ε>0`. The sharp `log^4` target remains open. [Proof chain](docs/layer4-moment-kernel.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,139 build jobs**, all **3,422 project theorem declarations**
-audited with only the three standard axioms, **164 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **42 independent consumer checks**
-(thirty-three Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
+Validation: **4,164 build jobs**, all **3,561 project theorem declarations**
+audited with only the three standard axioms, **189 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **48 independent consumer checks**
+(thirty-nine Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
 (24 catalog/closed-proof consumers and 12 semantic regression guards).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
@@ -507,7 +507,8 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Zeta.exists_density_separated_representatives` | One-separated zero representatives retain the complete analytic multiplicity count | **proved**; one absolute logarithmic mass coefficient | [ZetaDensitySelection.lean](Legendre/ZetaDensitySelection.lean) |
 | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | Explicit detector-to-density count reduction | **proved conditional theorem**; analytic detector property remains a hypothesis | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
 | `Legendre.Zeta.zetaXi_square_equation` | Exact Gaussian identity Xi(s)²=I(s)+I(1−s), Re(s)=1/2 | **proved**; integrability, horizontal limits and central residue included | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
-| `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; the contour mean estimate and fourth-moment theorem remain open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
+| `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` and Ingham/Huxley density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -826,6 +827,45 @@ this repository.
   The selected large-sieve slice builds and is included in the project-wide axiom audit;
   [exact inventory, adaptations and validation](docs/openai-math-provenance.md).
   Layer 4's Ingham and Huxley density theorems remain open.
+
+The fourth-moment proof additionally adapts the following files from
+**[openai/math](https://github.com/openai/math)**, pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, under
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/`.
+License: **Apache-2.0**, retained in
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+Every destination is under `Legendre/Layer4/` and retains its source notice.
+The specialization removes character families, uses the local xi kernel, raw
+ordinates and a wider Gaussian. No additional PNT+ source is copied.
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
+| `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
+| `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](Legendre/Layer4/DivisorEnergy.lean) |
+| `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](Legendre/Layer4/DyadicArithmetic.lean) |
+| `DensityDyadicPartition.lean` | [DyadicPartition.lean](Legendre/Layer4/DyadicPartition.lean) |
+| `GaussianContourShift.lean` | [GaussianContourShift.lean](Legendre/Layer4/GaussianContourShift.lean) |
+| `DensityGaussianFubini.lean` | [GaussianMean.lean](Legendre/Layer4/GaussianMean.lean) |
+| `DensityMomentCutoff.lean` | [MomentCutoff.lean](Legendre/Layer4/MomentCutoff.lean) |
+| `DensityGaussianCauchy.lean` | [MomentGaussian.lean](Legendre/Layer4/MomentGaussian.lean) |
+| `DensityFatou.lean` | [PositiveLimit.lean](Legendre/Layer4/PositiveLimit.lean) |
+| `DensityWeightedCauchy.lean`, `DensityGaussianCauchy.lean` | [WeightedIntegral.lean](Legendre/Layer4/WeightedIntegral.lean) |
+| `DensityDyadicMean.lean` | [XiDyadicMean.lean](Legendre/Layer4/XiDyadicMean.lean) |
+| `DensityFiniteContinuity.lean` | [XiFiniteContinuity.lean](Legendre/Layer4/XiFiniteContinuity.lean) |
+| `DensityFiniteSquareMean.lean` | [XiFiniteMean.lean](Legendre/Layer4/XiFiniteMean.lean) |
+| `DensityFiniteContourShift.lean`, `DensityFiniteSeriesBridge.lean`, `DensityFiniteSquareEnergy.lean` | [XiFiniteMellin.lean](Legendre/Layer4/XiFiniteMellin.lean) |
+| `DensityHeadCutoff.lean` | [XiHeadMean.lean](Legendre/Layer4/XiHeadMean.lean) |
+| `DensitySmoothedKernel.lean`, `DensityKernelStrip.lean`, `DensityKernelLineBound.lean`, `DensityKernelCost.lean` | [XiMellinKernel.lean](Legendre/Layer4/XiMellinKernel.lean) |
+| `DensityPartialMean.lean` | [XiPartialMean.lean](Legendre/Layer4/XiPartialMean.lean) |
+| `DensitySmoothedMean.lean` | [XiSmoothedMean.lean](Legendre/Layer4/XiSmoothedMean.lean) |
+| `DensitySquareLimit.lean` | [XiSquareLimit.lean](Legendre/Layer4/XiSquareLimit.lean) |
+| `DensitySquareTerms.lean`, `DensitySquareSeriesIntegral.lean` | [XiSquareSeries.lean](Legendre/Layer4/XiSquareSeries.lean) |
+| `DensityTailAssembly.lean` | [XiTailAssembly.lean](Legendre/Layer4/XiTailAssembly.lean) |
+| `DensityTailBlock.lean` | [XiTailMean.lean](Legendre/Layer4/XiTailMean.lean) |
+| `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
+
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
   re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other

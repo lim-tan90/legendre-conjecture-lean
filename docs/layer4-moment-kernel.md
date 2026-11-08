@@ -1,9 +1,9 @@
 # Layer 4: detector-tail energy and the critical-line moment kernel
 
 This continues the [actual zero-detector development](layer4-zero-detector.md).
-The estimates and entire Gaussian kernel below are proved. The critical-line
-fourth-moment theorem, the required sharper density exponents, and completion
-of Layer 4 remain open.
+The estimates and entire Gaussian kernel below are proved. The critical-line fourth moment with a sixth logarithmic power is now proved.
+The sharp fourth-log target, the required sharper density exponents, and
+completion of Layer 4 remain open.
 
 ## Tail energy and multiplicity-weighted density
 
@@ -150,8 +150,7 @@ inequality and the nonzero normalizer give the unconditional pointwise bound
 |ζ(s)|⁴ ≤ 4|Φ(s)|².
 ```
 
-No contour mean estimate is assumed here. Proving its height-uniform integral
-bound is the next analytic obligation for the fourth-moment theorem; the
+The height-uniform contour mean is now supplied by the proof below. The
 Ingham/Huxley estimates and completion of Layer 4 remain open.
 
 The new consumers check the residue at the removed pole s=0, equality of the
@@ -172,3 +171,45 @@ theorem declarations audited against the three standard axioms; 157 Lean
 files without executable `sorry`, `admit` or `sorryAx`; thirty-three Layer 4
 and nine Layer 3 consumers pass compiled and standalone checks. The full
 module-data theorem inventory matches the parsed axiom output exactly.
+
+## Actual fourth moment with a sixth logarithmic power
+
+The new implementation modules are in `Legendre/Layer4/`, exported through
+`Legendre.Layer4`. The proof chain is:
+
+1. `DivisorEnergy`: sum_{n<=N} d(n)^2/n <= (1+log N)^4, including N=0.
+2. `ZetaSquareSeries`, `XiSquareSeries`: absolutely convergent divisor series
+   for zeta squared on Re(s+w)=3/2, with summable integral norms.
+3. `XiMellinKernel`, `GaussianContourShift`, `XiFiniteMellin`: retain the xi
+   polynomial, absorb it into exp(-u^2/4), and move finite terms to any line
+   0<c<=1. The common cost is C (10T)^c/c, with no extra height exponent.
+4. `GaussianMean`, `XiFiniteContinuity`, `XiFiniteMean`: translated Dirichlet
+   mean values, dominated parameter continuity and justified product Fubini
+   give a finite-piece mean bounded by C cost(T,c)^2 (N+T) coefficient energy.
+5. `XiHeadMean`: c=1/log N yields C(N+T)log^6 N when N>=10T and log N>=1.
+6. `XiTailMean`, `XiDyadicMean`, `BlockWeights`, `XiTailAssembly`: c=1 on
+   distant dyadic blocks gives (j+2)^3/2^j decay; weights (3/4)^j combine
+   every finite tail with a bound independent of its length.
+7. `XiPartialMean`, `XiSquareLimit`, `PositiveLimit`, `XiSmoothedMean`:
+   summability gives the growing partial-sum limit and nonnegative Fatou
+   gives integrability and the actual infinite contour mean.
+8. `MomentCutoff`, `ZetaFourthMoment`: N=ceil(10T), T>=2 and the already
+   proved pointwise functional equation yield
+
+```
+integral_{-T}^T |zeta(1/2+it)|^4 dt <= C T (log T)^6.
+```
+
+The positive interval [0,T] inherits the bound. `zeta_fourth_moment_epsilon`
+absorbs all six logarithms into T^epsilon uniformly for T>=2. The literature
+comparators distinguish `ZetaFourthMomentLogSix` and
+`ZetaFourthMomentExponent` (proved) from `ZetaFourthMoment` (sharp log^4,
+open). This proves a moment prerequisite, not a zero-density theorem.
+
+Exact upstream filenames, pin, license and destinations are listed in both
+READMEs and [the source inventory](openai-math-provenance.md).
+
+Sixth-log moment validation (2026-11-08): full build 4,164 jobs, all 3,561
+project theorem declarations audited, 189 Lean sources without executable
+placeholders. Both independent declaration inventories agree with the audit.
+Standalone consumers: 39 Layer 4, 9 Layer 3 and 36 literature (84 total).

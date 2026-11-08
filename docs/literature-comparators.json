@@ -277,11 +277,11 @@
     },
     {
       "id": "layer4",
-      "status": "mean-square prerequisite proved; density targets open",
-      "comparison_type": "LinearMeanSquareBenchmark",
-      "comparison_term": "layer4_mean_comparator",
+      "status": "linear mean square and fourth-moment exponent proved; density targets open",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Pointwise fourth-power reduction is not the fourth moment. Ingham/Huxley density targets remain open."
+      "note": "The actual critical-line fourth moment is O(T log^6 T), hence O_epsilon(T^(1+epsilon)). The sharp log^4 comparator and the Ingham/Huxley density targets remain open."
     }
   ],
   "open_analytic_targets": [
@@ -454,6 +454,31 @@
     "Legendre/ZetaWideZeroRemoval.lean": "layer2",
     "Legendre/ZetaXi.lean": "layer4",
     "Legendre/ZetaZeroFree.lean": "layer2",
-    "Legendre/ZetaZeroRemoval.lean": "layer2"
+    "Legendre/ZetaZeroRemoval.lean": "layer2",
+    "Legendre/Layer4/BlockCauchy.lean": "layer4",
+    "Legendre/Layer4/BlockWeights.lean": "layer4",
+    "Legendre/Layer4/DivisorEnergy.lean": "layer4",
+    "Legendre/Layer4/DyadicArithmetic.lean": "layer4",
+    "Legendre/Layer4/DyadicPartition.lean": "layer4",
+    "Legendre/Layer4/GaussianContourShift.lean": "layer4",
+    "Legendre/Layer4/GaussianMean.lean": "layer4",
+    "Legendre/Layer4/MomentCutoff.lean": "layer4",
+    "Legendre/Layer4/MomentGaussian.lean": "layer4",
+    "Legendre/Layer4/PositiveLimit.lean": "layer4",
+    "Legendre/Layer4/WeightedIntegral.lean": "layer4",
+    "Legendre/Layer4/XiDyadicMean.lean": "layer4",
+    "Legendre/Layer4/XiFiniteContinuity.lean": "layer4",
+    "Legendre/Layer4/XiFiniteMean.lean": "layer4",
+    "Legendre/Layer4/XiFiniteMellin.lean": "layer4",
+    "Legendre/Layer4/XiHeadMean.lean": "layer4",
+    "Legendre/Layer4/XiMellinKernel.lean": "layer4",
+    "Legendre/Layer4/XiPartialMean.lean": "layer4",
+    "Legendre/Layer4/XiSmoothedMean.lean": "layer4",
+    "Legendre/Layer4/XiSquareLimit.lean": "layer4",
+    "Legendre/Layer4/XiSquareSeries.lean": "layer4",
+    "Legendre/Layer4/XiTailAssembly.lean": "layer4",
+    "Legendre/Layer4/XiTailMean.lean": "layer4",
+    "Legendre/Layer4/ZetaFourthMoment.lean": "layer4",
+    "Legendre/Layer4/ZetaSquareSeries.lean": "layer4"
   }
 }

@@ -259,7 +259,7 @@ theorem xiSquareIntegral_conj (s : ℂ) : xiSquareIntegral (conj s) = conj (xiSq
 noncomputable def xiSmoothedZetaSquare (s : ℂ) : ℂ := xiSquareIntegral s/xiSquareNormalizer s
 
 /-- Pointwise fourth-power reduction to one normalized Gaussian contour.
-The mean estimate for that contour is a separate remaining analytic step. -/
+The mean estimate is supplied separately in `Layer4/XiSmoothedMean.lean`. -/
 theorem riemannZeta_fourth_le_smoothed (s : ℂ) (hs : s.re = 1/2) :
     ‖riemannZeta s‖^4 ≤ 4*‖xiSmoothedZetaSquare s‖^2 := by
   have hspos : 0 < s.re := by linarith

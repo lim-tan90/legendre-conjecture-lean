@@ -108,7 +108,8 @@ theorem comparator_layer3 : ClassicalPNTError :=
   layer3_comparator
 
 /-- layer4: statement coverage. -/
-theorem comparator_layer4 : LinearMeanSquareBenchmark :=
-  layer4_mean_comparator
+theorem comparator_layer4 : LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent :=
+  ⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,
+    layer4_fourth_moment_exponent_comparator⟩
 
 end Legendre.Tests.Literature

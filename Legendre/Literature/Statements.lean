@@ -137,10 +137,21 @@ def ClassicalPNTError : Prop :=
     |Chebyshev.psi x-x| ≤ C*(x*Real.exp (-c*Real.sqrt (Real.log x))) ∧
     |PNT.primeCount x-PNT.logarithmicIntegral x| ≤ C*(x*Real.exp (-c*Real.sqrt (Real.log x)))
 
-/-- A genuine fourth-moment target. The pointwise smoothed reduction does not fill it. -/
+/-- The sharp logarithmic fourth-moment target; the sixth-log proof is weaker. -/
 def ZetaFourthMoment : Prop :=
   ∃ C > 0, ∀ T : ℝ, 2 ≤ T →
     (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤
       C*T*(Real.log T)^4
+
+/-- Proved fourth moment with a sixth logarithmic power. -/
+def ZetaFourthMomentLogSix : Prop :=
+  ∃ C > 0, ∀ T : ℝ, 2 ≤ T →
+    (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤
+      C*T*(Real.log T)^6
+
+/-- Height exponent benchmark, allowing every positive epsilon loss. -/
+def ZetaFourthMomentExponent : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C > 0, ∀ T : ℝ, 2 ≤ T →
+    (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤ C*T^(1+ε)
 
 end Legendre.Literature

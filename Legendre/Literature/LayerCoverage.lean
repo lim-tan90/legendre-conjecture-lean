@@ -33,6 +33,12 @@ theorem layer2_comparator : ZetaFoundationBenchmark :=
 
 theorem layer3_comparator : ClassicalPNTError := PNT.pnt_eventual_bound
 
+theorem layer4_fourth_moment_log_six_comparator : ZetaFourthMomentLogSix :=
+  Zeta.zeta_fourth_moment_positive_log_six
+
+theorem layer4_fourth_moment_exponent_comparator : ZetaFourthMomentExponent :=
+  Zeta.zeta_fourth_moment_epsilon
+
 /-- This rejects an invalid *bound comparison*, not the possibility of a stronger theorem. -/
 theorem layer3_no_fixed_power_comparator (c θ : ℝ) (hθ : θ < 1) :
     ¬PNT.classicalError c =O[atTop] (fun x : ℝ => x^θ) :=

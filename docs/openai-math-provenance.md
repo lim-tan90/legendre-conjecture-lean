@@ -179,7 +179,7 @@ organization of `DensityCompletedSquare.lean` and `DensitySquareGaussian.lean`.
 completed zeta function: multiplying by s(s−1) removes both completed poles.
 This retains the reflection equation and introduces only a polynomial in the
 contour shift, without an additional height power. These kernel estimates
-prepare the fourth-moment contour; the fourth-moment theorem remains open.
+prepared the fourth-moment contour; the moment was still open at that checkpoint.
 
 [XiGaussianEnvelope.lean](../Legendre/XiGaussianEnvelope.lean) additionally
 generalizes `DensityGaussianEnvelope.lean` to a sixth-degree polynomial
@@ -208,10 +208,64 @@ xi completion. The local rectangle calculation uses `dslope` to isolate the
 central simple pole and reuses the already ported PNT+ rectangle residue API
 ([fixed source and license](pnt-provenance.md)); no additional PNT+ source is
 copied. Conjugation gives the pointwise fourth-power reduction for zeta.
-The normalized contour mean estimate is still open; this is not a proof of
-the fourth-moment theorem or the Ingham/Huxley estimates.
+At that checkpoint the normalized contour mean was still open. The later
+sixth-log moment proof is recorded below; Ingham/Huxley remain open.
 
 Contour-addition local validation: 4,132 build jobs, all 3,311 project theorem
 declarations audited (30 added after the moment-kernel checkpoint), 157 Lean
 files without executable placeholders, thirty-three Layer 4 and nine Layer 3
 consumer checks. Both independent theorem inventories match the audit targets.
+
+## Sixth-log fourth-moment addition
+
+The additional files below all come from
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/` at the same pinned
+`openai/math` commit `4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0.
+The license remains in `licenses/openai-math-Apache-2.0.txt`. This table also
+appears in both README translations. Destination paths below are relative to
+`Legendre/Layer4/`.
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| `DensityBlockCauchy.lean` | [BlockCauchy.lean](../Legendre/Layer4/BlockCauchy.lean) |
+| `DensityBlockWeights.lean` | [BlockWeights.lean](../Legendre/Layer4/BlockWeights.lean) |
+| `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](../Legendre/Layer4/DivisorEnergy.lean) |
+| `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](../Legendre/Layer4/DyadicArithmetic.lean) |
+| `DensityDyadicPartition.lean` | [DyadicPartition.lean](../Legendre/Layer4/DyadicPartition.lean) |
+| `GaussianContourShift.lean` | [GaussianContourShift.lean](../Legendre/Layer4/GaussianContourShift.lean) |
+| `DensityGaussianFubini.lean` | [GaussianMean.lean](../Legendre/Layer4/GaussianMean.lean) |
+| `DensityMomentCutoff.lean` | [MomentCutoff.lean](../Legendre/Layer4/MomentCutoff.lean) |
+| `DensityGaussianCauchy.lean` | [MomentGaussian.lean](../Legendre/Layer4/MomentGaussian.lean) |
+| `DensityFatou.lean` | [PositiveLimit.lean](../Legendre/Layer4/PositiveLimit.lean) |
+| `DensityWeightedCauchy.lean`, `DensityGaussianCauchy.lean` | [WeightedIntegral.lean](../Legendre/Layer4/WeightedIntegral.lean) |
+| `DensityDyadicMean.lean` | [XiDyadicMean.lean](../Legendre/Layer4/XiDyadicMean.lean) |
+| `DensityFiniteContinuity.lean` | [XiFiniteContinuity.lean](../Legendre/Layer4/XiFiniteContinuity.lean) |
+| `DensityFiniteSquareMean.lean` | [XiFiniteMean.lean](../Legendre/Layer4/XiFiniteMean.lean) |
+| `DensityFiniteContourShift.lean`, `DensityFiniteSeriesBridge.lean`, `DensityFiniteSquareEnergy.lean` | [XiFiniteMellin.lean](../Legendre/Layer4/XiFiniteMellin.lean) |
+| `DensityHeadCutoff.lean` | [XiHeadMean.lean](../Legendre/Layer4/XiHeadMean.lean) |
+| `DensitySmoothedKernel.lean`, `DensityKernelStrip.lean`, `DensityKernelLineBound.lean`, `DensityKernelCost.lean` | [XiMellinKernel.lean](../Legendre/Layer4/XiMellinKernel.lean) |
+| `DensityPartialMean.lean` | [XiPartialMean.lean](../Legendre/Layer4/XiPartialMean.lean) |
+| `DensitySmoothedMean.lean` | [XiSmoothedMean.lean](../Legendre/Layer4/XiSmoothedMean.lean) |
+| `DensitySquareLimit.lean` | [XiSquareLimit.lean](../Legendre/Layer4/XiSquareLimit.lean) |
+| `DensitySquareTerms.lean`, `DensitySquareSeriesIntegral.lean` | [XiSquareSeries.lean](../Legendre/Layer4/XiSquareSeries.lean) |
+| `DensityTailAssembly.lean` | [XiTailAssembly.lean](../Legendre/Layer4/XiTailAssembly.lean) |
+| `DensityTailBlock.lean` | [XiTailMean.lean](../Legendre/Layer4/XiTailMean.lean) |
+| `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](../Legendre/Layer4/ZetaFourthMoment.lean) |
+| `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](../Legendre/Layer4/ZetaSquareSeries.lean) |
+
+Character families and conductor-dependent estimates are specialized to zeta.
+The local sharp translated Dirichlet mean replaces a hybrid large sieve.
+The entire xi polynomial is retained and absorbed in exp(-u^2/4); no additional
+height power is lost. Finite contours move only within positive real part;
+the full zeta series is expanded on Re(s+w)=3/2. Absolute integral norms
+justify series exchange; dyadic bounds and nonnegative Fatou justify the limit.
+The external (2*pi)^(-1) contour normalization is retained. No new PNT+ code
+is copied; the already credited rectangle API is reused.
+
+The proved result is O(T log^6 T), with a proved 1+epsilon height exponent.
+It does not establish the sharp log^4 comparator or Ingham/Huxley density.
+
+Fourth-moment validation (2026-11-08): 4,164 full-build jobs, all 3,561 project
+theorem declarations audited, 189 Lean sources without executable
+placeholders, and 84 independent consumers (39 Layer 4, 9 Layer 3, 36
+literature). Both complete declaration inventories match the audit.

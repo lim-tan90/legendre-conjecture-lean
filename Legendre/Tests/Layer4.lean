@@ -323,4 +323,42 @@ theorem layer4_xi_conjugation_endpoints_consumer :
     Zeta.zetaXi (starRingEnd ℂ 1) = starRingEnd ℂ (Zeta.zetaXi 1) :=
   ⟨Zeta.zetaXi_conj 0,Zeta.zetaXi_conj 1⟩
 
+/-- The harmonic divisor energy includes the empty cutoff. -/
+theorem layer4_divisor_energy_zero_consumer :
+    (∑ n ∈ Finset.Icc 1 (0 : ℕ), (n.divisors.card : ℝ)^2/n) ≤ 1 := by
+  simp
+
+/-- The smallest nonempty head has exactly unit coefficient energy. -/
+theorem layer4_divisor_energy_one_consumer :
+    (∑ n ∈ Finset.Icc 1 1,
+      ‖verticalCoefficients Zeta.zetaSquareCoefficient (1/2 : ℝ) n‖^2) = 1 := by
+  norm_num [verticalCoefficients,Zeta.zetaSquareCoefficient]
+
+/-- Translation does not alter the coefficient energy or add an ordinate loss. -/
+theorem layer4_translated_subset_mean_consumer (a : ℕ → ℂ) (u T : ℝ) (hT : 0 ≤ T) :
+    (∫ t in Set.Icc (-T) T, ‖Moment.subsetPolynomial {1} a (t+u)‖^2) ≤
+      (2*T+2*Real.pi)*‖a 1‖^2 := by
+  have h := Moment.subsetPolynomial_shifted_mean {1} a 1 (by simp) T u hT
+  simpa [coefficientEnergy] using h
+
+/-- The n=0 term is exactly zero, including before the series limit. -/
+theorem layer4_smoothed_zero_term_consumer (t : ℝ) :
+    Zeta.xiSquareIntegralTerm ((1/2 : ℂ)+(t : ℂ)*Complex.I) 0 = 0 := by simp
+
+/-- The moment theorem includes its smallest permitted height. -/
+theorem layer4_fourth_moment_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      (∫ t : ℝ in 0..2, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤
+        C*2*(Real.log 2)^6 := by
+  obtain ⟨C,hC,h⟩ := Zeta.zeta_fourth_moment_positive_log_six
+  exact ⟨C,hC,h 2 (by norm_num)⟩
+
+/-- A concrete height exponent follows without any density hypothesis. -/
+theorem layer4_fourth_moment_exponent_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤ C*T^(5/4 : ℝ) := by
+  have h := Zeta.zeta_fourth_moment_epsilon (1/4) (by norm_num)
+  norm_num at h
+  exact h
+
 end Legendre.Tests

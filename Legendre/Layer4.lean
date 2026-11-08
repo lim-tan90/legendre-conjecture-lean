@@ -24,6 +24,7 @@ public import Legendre.ZeroDetector.TailEnergy
 public import Legendre.ZetaDetectedDensity
 public import Legendre.XiGaussianEnvelope
 public import Legendre.XiSquareContour
+public import Legendre.Layer4.ZetaFourthMoment
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -40,5 +41,8 @@ pole compensation. Sampling allows independently varying real parts. Neither
 Ingham nor Huxley is asserted, and no exponent value is assumed. An entire
 xi square, sharp Gamma quotients, and an integrable Gaussian envelope justify
 an exact contour functional equation and pointwise fourth-power reduction.
-The contour mean bound and fourth-moment theorem remain open.
+The normalized contour mean and a sixth-log fourth moment are proved:
+integral from -T to T of |zeta(1/2+it)|^4 is O(T log^6 T).
+The height exponent is consequently 1+epsilon. The sharp log^4 bound and
+the Ingham/Huxley zero-density estimates remain open.
 -/

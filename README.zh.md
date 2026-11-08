@@ -58,7 +58,7 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 4：线性误差均值估计及有限大筛（2026-11-08）</strong></summary>
+<summary><strong>Layer 4：均值估计、大筛与六次对数四阶矩（2026-11-08）</strong></summary>
 
 **入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
@@ -78,12 +78,13 @@
 尾部能量已有显式 X^(1−2σ) 衰减，并已从实际检测器推出保留低高度项的完整带重数计数界。
 整函数 xi 的对称高斯平方核、精确 Gamma 商界及可积包络已导出精确轮廓函数方程，
 并证明临界线上 `|ζ(s)|⁴ ≤ 4|xiSmoothedZetaSquare(s)|²`。
-归一化轮廓积分的均方界及四次矩定理仍开放。[证明链](docs/layer4-moment-kernel.md)。
+已证明归一化轮廓均方界与临界线四阶矩 `O(T log^6 T)`，并导出每个 `ε>0` 的
+`O_ε(T^(1+ε))` 界；文献的尖锐 `log^4` 目标仍开放。[证明链](docs/layer4-moment-kernel.md)。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,139 项构建**、**全部 3,422 个项目定理声明**的公理审计（仅三项标准公理）、
-**164 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**42 项独立使用检查**（Layer 4 三十三项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **78 项**。
+验证：**4,164 项构建**、**全部 3,561 个项目定理声明**的公理审计（仅三项标准公理）、
+**189 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**48 项独立使用检查**（Layer 4 三十九项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **84 项**。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -419,7 +420,8 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 | `Legendre.Zeta.exists_density_separated_representatives` | 间隔至少 1 的零点代表集控制完整解析重数计数 | **已证明**；同一绝对对数系数 | [ZetaDensitySelection.lean](Legendre/ZetaDensitySelection.lean) |
 | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | 显式的零点检测到密度计数传递 | **条件定理已证明**；解析检测器性质仍为假设 | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
 | `Legendre.Zeta.zetaXi_square_equation` | Re(s)=1/2 上的精确高斯恒等式 Xi(s)²=I(s)+I(1−s) | **已证明**；含可积性、水平边极限及中心留数 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
-| `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界与四次矩定理仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
+| `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4` 及 Ingham/Huxley 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -695,6 +697,43 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   `ZeroDensity/DensitySquareContour.lean`、`DensitySquareEquation.lean` 与
   `DensitySquareConjugation.lean` 的轮廓、反射及共轭证明组织，适配整函数 xi 分子，
   复用已注明来源的 PNT+ 矩形留数接口；沿用上述 Apache-2.0 许可。
+
+四阶矩证明另改编 **[openai/math](https://github.com/openai/math)** 固定提交
+`4eaee87548250b2682affda7d05d947c05554bae` 下
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/` 的以下代码。
+许可证为 **Apache-2.0**，保留于
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
+以下本地文件均位于 `Legendre/Layer4/`，保留逐文件来源；去除特征族并接入本地 xi 核，
+使用原始纵坐标与更宽的高斯权重。没有新增移植 PNT+ 代码。
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
+| `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
+| `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](Legendre/Layer4/DivisorEnergy.lean) |
+| `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](Legendre/Layer4/DyadicArithmetic.lean) |
+| `DensityDyadicPartition.lean` | [DyadicPartition.lean](Legendre/Layer4/DyadicPartition.lean) |
+| `GaussianContourShift.lean` | [GaussianContourShift.lean](Legendre/Layer4/GaussianContourShift.lean) |
+| `DensityGaussianFubini.lean` | [GaussianMean.lean](Legendre/Layer4/GaussianMean.lean) |
+| `DensityMomentCutoff.lean` | [MomentCutoff.lean](Legendre/Layer4/MomentCutoff.lean) |
+| `DensityGaussianCauchy.lean` | [MomentGaussian.lean](Legendre/Layer4/MomentGaussian.lean) |
+| `DensityFatou.lean` | [PositiveLimit.lean](Legendre/Layer4/PositiveLimit.lean) |
+| `DensityWeightedCauchy.lean`, `DensityGaussianCauchy.lean` | [WeightedIntegral.lean](Legendre/Layer4/WeightedIntegral.lean) |
+| `DensityDyadicMean.lean` | [XiDyadicMean.lean](Legendre/Layer4/XiDyadicMean.lean) |
+| `DensityFiniteContinuity.lean` | [XiFiniteContinuity.lean](Legendre/Layer4/XiFiniteContinuity.lean) |
+| `DensityFiniteSquareMean.lean` | [XiFiniteMean.lean](Legendre/Layer4/XiFiniteMean.lean) |
+| `DensityFiniteContourShift.lean`, `DensityFiniteSeriesBridge.lean`, `DensityFiniteSquareEnergy.lean` | [XiFiniteMellin.lean](Legendre/Layer4/XiFiniteMellin.lean) |
+| `DensityHeadCutoff.lean` | [XiHeadMean.lean](Legendre/Layer4/XiHeadMean.lean) |
+| `DensitySmoothedKernel.lean`, `DensityKernelStrip.lean`, `DensityKernelLineBound.lean`, `DensityKernelCost.lean` | [XiMellinKernel.lean](Legendre/Layer4/XiMellinKernel.lean) |
+| `DensityPartialMean.lean` | [XiPartialMean.lean](Legendre/Layer4/XiPartialMean.lean) |
+| `DensitySmoothedMean.lean` | [XiSmoothedMean.lean](Legendre/Layer4/XiSmoothedMean.lean) |
+| `DensitySquareLimit.lean` | [XiSquareLimit.lean](Legendre/Layer4/XiSquareLimit.lean) |
+| `DensitySquareTerms.lean`, `DensitySquareSeriesIntegral.lean` | [XiSquareSeries.lean](Legendre/Layer4/XiSquareSeries.lean) |
+| `DensityTailAssembly.lean` | [XiTailAssembly.lean](Legendre/Layer4/XiTailAssembly.lean) |
+| `DensityTailBlock.lean` | [XiTailMean.lean](Legendre/Layer4/XiTailMean.lean) |
+| `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
+
 * **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
   Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
   `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制

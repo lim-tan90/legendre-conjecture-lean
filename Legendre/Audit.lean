@@ -243,6 +243,31 @@ import all Legendre.DirichletMeanValue
 import all Legendre.DirichletLargeValues
 import all Legendre.ZeroDensity
 import all Legendre.Layer4
+import all Legendre.Layer4.BlockCauchy
+import all Legendre.Layer4.BlockWeights
+import all Legendre.Layer4.DivisorEnergy
+import all Legendre.Layer4.DyadicArithmetic
+import all Legendre.Layer4.DyadicPartition
+import all Legendre.Layer4.GaussianContourShift
+import all Legendre.Layer4.GaussianMean
+import all Legendre.Layer4.MomentCutoff
+import all Legendre.Layer4.MomentGaussian
+import all Legendre.Layer4.PositiveLimit
+import all Legendre.Layer4.WeightedIntegral
+import all Legendre.Layer4.XiDyadicMean
+import all Legendre.Layer4.XiFiniteContinuity
+import all Legendre.Layer4.XiFiniteMean
+import all Legendre.Layer4.XiFiniteMellin
+import all Legendre.Layer4.XiHeadMean
+import all Legendre.Layer4.XiMellinKernel
+import all Legendre.Layer4.XiPartialMean
+import all Legendre.Layer4.XiSmoothedMean
+import all Legendre.Layer4.XiSquareLimit
+import all Legendre.Layer4.XiSquareSeries
+import all Legendre.Layer4.XiTailAssembly
+import all Legendre.Layer4.XiTailMean
+import all Legendre.Layer4.ZetaFourthMoment
+import all Legendre.Layer4.ZetaSquareSeries
 import all Legendre.Tests.Layer4
 
 import all Legendre.PNT.Auxiliary
@@ -3843,3 +3868,144 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.oppermann_origin_guard._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.rh_exponent_consumer"
 #audit_private_axioms "_private.Legendre.Tests.LiteratureRegression.0.Legendre.Tests.Literature.strict_nagura_consumer"
+
+-- Actual sixth-log fourth moment: complete new declaration inventory.
+#print axioms Legendre.Density.Moment.coefficientEnergy_mask
+#print axioms Legendre.Density.Moment.divisor_shifted_head
+#print axioms Legendre.Density.Moment.divisor_shifted_tail
+#print axioms Legendre.Density.Moment.divisor_square_as_sum
+#print axioms Legendre.Density.Moment.divisor_square_harmonic
+#print axioms Legendre.Density.Moment.gaussian_integral_cauchy
+#print axioms Legendre.Density.Moment.gaussian_subset_fubini
+#print axioms Legendre.Density.Moment.gaussian_subset_integrable
+#print axioms Legendre.Density.Moment.gaussian_subset_mean
+#print axioms Legendre.Density.Moment.harmonic_multiples
+#print axioms Legendre.Density.Moment.harmonic_multiples_le
+#print axioms Legendre.Density.Moment.momentBlockEnergyConstant._proof_1
+#print axioms Legendre.Density.Moment.momentBlockEnergyConstant._proof_2
+#print axioms Legendre.Density.Moment.momentBlockEnergyConstant_pos
+#print axioms Legendre.Density.Moment.momentGaussian._proof_1
+#print axioms Legendre.Density.Moment.momentGaussian_continuous
+#print axioms Legendre.Density.Moment.momentGaussian_integrable
+#print axioms Legendre.Density.Moment.momentGaussian_integral_pos
+#print axioms Legendre.Density.Moment.momentGaussian_pos
+#print axioms Legendre.Density.Moment.moment_block_energy_sum
+#print axioms Legendre.Density.Moment.moment_block_energy_summable
+#print axioms Legendre.Density.Moment.moment_block_weight_sum
+#print axioms Legendre.Density.Moment.moment_cutoff
+#print axioms Legendre.Density.Moment.moment_dyadic_fraction_bound
+#print axioms Legendre.Density.Moment.moment_dyadic_log_bound
+#print axioms Legendre.Density.Moment.moment_dyadic_partition
+#print axioms Legendre.Density.Moment.moment_integral_limit_bound
+#print axioms Legendre.Density.Moment.moment_weighted_block_mean
+#print axioms Legendre.Density.Moment.moment_weighted_sum_norm_sq
+#print axioms Legendre.Density.Moment.realPhase_add
+#print axioms Legendre.Density.Moment.subsetPolynomial_add
+#print axioms Legendre.Density.Moment.subsetPolynomial_continuous
+#print axioms Legendre.Density.Moment.subsetPolynomial_mask
+#print axioms Legendre.Density.Moment.subsetPolynomial_mean
+#print axioms Legendre.Density.Moment.subsetPolynomial_norm
+#print axioms Legendre.Density.Moment.subsetPolynomial_shifted_mean
+#print axioms Legendre.Density.Moment.verticalCoefficients_square_div
+#print axioms Legendre.Density.Moment.weighted_cauchy
+#print axioms Legendre.Literature.layer4_fourth_moment_exponent_comparator
+#print axioms Legendre.Literature.layer4_fourth_moment_log_six_comparator
+#print axioms Legendre.Zeta.LSeries_term_add
+#print axioms Legendre.Zeta.LSeries_term_vertical
+#print axioms Legendre.Zeta.divisor_self_convolution
+#print axioms Legendre.Zeta.finiteMellin_analytic
+#print axioms Legendre.Zeta.finiteMellin_norm
+#print axioms Legendre.Zeta.finiteMellin_original_polynomial
+#print axioms Legendre.Zeta.gammaReal_analytic_of_re_pos
+#print axioms Legendre.Zeta.gaussian_strip_vertical_eq
+#print axioms Legendre.Zeta.norm_two_pi_inv_le_one
+#print axioms Legendre.Zeta.polynomial_gaussian_absorb
+#print axioms Legendre.Zeta.xiFiniteKernel.eq_1
+#print axioms Legendre.Zeta.xiFiniteKernel_original_terms
+#print axioms Legendre.Zeta.xiFiniteKernel_shift
+#print axioms Legendre.Zeta.xiFiniteSquare_continuousOn
+#print axioms Legendre.Zeta.xiFiniteSquare_dyadic_mean
+#print axioms Legendre.Zeta.xiFiniteSquare_energy
+#print axioms Legendre.Zeta.xiFiniteSquare_head_mean
+#print axioms Legendre.Zeta.xiFiniteSquare_mean
+#print axioms Legendre.Zeta.xiFiniteSquare_partial_mean
+#print axioms Legendre.Zeta.xiFiniteSquare_tail_assembly
+#print axioms Legendre.Zeta.xiFiniteSquare_tail_mean
+#print axioms Legendre.Zeta.xiMellinConstant._proof_1
+#print axioms Legendre.Zeta.xiMellinConstant_pos
+#print axioms Legendre.Zeta.xiMellinCost._proof_1
+#print axioms Legendre.Zeta.xiMellinCost.eq_1
+#print axioms Legendre.Zeta.xiMellinCost_log
+#print axioms Legendre.Zeta.xiMellinCost_pos
+#print axioms Legendre.Zeta.xiMellinKernel.eq_1
+#print axioms Legendre.Zeta.xiMellinKernel_analytic
+#print axioms Legendre.Zeta.xiMellinKernel_common_bound
+#print axioms Legendre.Zeta.xiMellinKernel_line_continuous
+#print axioms Legendre.Zeta.xiMellinKernel_short_line
+#print axioms Legendre.Zeta.xiMellinKernel_strip_bound
+#print axioms Legendre.Zeta.xiMellinKernel_vertical_continuous
+#print axioms Legendre.Zeta.xiSmoothedZetaSquare_integral
+#print axioms Legendre.Zeta.xiSmoothedZetaSquare_mean
+#print axioms Legendre.Zeta.xiSmoothedZetaSquare_series
+#print axioms Legendre.Zeta.xiSquareIntegralTerm._proof_1
+#print axioms Legendre.Zeta.xiSquareIntegralTerm.eq_1
+#print axioms Legendre.Zeta.xiSquareIntegralTerm_sum
+#print axioms Legendre.Zeta.xiSquareIntegralTerm_sum_shift
+#print axioms Legendre.Zeta.xiSquareIntegralTerm_summable
+#print axioms Legendre.Zeta.xiSquareIntegralTerm_zero
+#print axioms Legendre.Zeta.xiSquareSeriesTerm.eq_1
+#print axioms Legendre.Zeta.xiSquareSeriesTerm_bound
+#print axioms Legendre.Zeta.xiSquareSeriesTerm_continuous
+#print axioms Legendre.Zeta.xiSquareSeriesTerm_integrable
+#print axioms Legendre.Zeta.xiSquareSeriesTerm_integral_summable
+#print axioms Legendre.Zeta.xiSquare_partial_limit
+#print axioms Legendre.Zeta.xi_shift_polynomial_bound
+#print axioms Legendre.Zeta.zetaSquareCoefficient.eq_1
+#print axioms Legendre.Zeta.zetaSquareCoefficient_one
+#print axioms Legendre.Zeta.zetaSquareCoefficient_summable
+#print axioms Legendre.Zeta.zetaSquareCoefficient_zero
+#print axioms Legendre.Zeta.zeta_critical_fourth_integrable
+#print axioms Legendre.Zeta.zeta_fourth_moment_epsilon
+#print axioms Legendre.Zeta.zeta_fourth_moment_log_six
+#print axioms Legendre.Zeta.zeta_fourth_moment_positive_log_six
+#print axioms Legendre.Zeta.zeta_square_LSeries
+#audit_private_axioms "_private.Legendre.Layer4.DivisorEnergy.0.Legendre.Density.Moment.divisor_shifted_tail._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DivisorEnergy.0.Legendre.Density.Moment.divisor_shifted_tail._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DivisorEnergy.0.Legendre.Density.Moment.divisor_square_as_sum._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_fraction_bound._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicArithmetic.0.Legendre.Density.Moment.moment_dyadic_log_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicPartition.0.Legendre.Density.Moment.moment_dyadic_partition._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicPartition.0.Legendre.Density.Moment.moment_dyadic_partition._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicPartition.0.Legendre.Density.Moment.moment_dyadic_partition._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicPartition.0.Legendre.Density.Moment.moment_dyadic_partition._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicPartition.0.Legendre.Density.Moment.moment_dyadic_partition._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.XiDyadicMean.0.Legendre.Zeta.xiFiniteSquare_dyadic_mean._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiFiniteMellin.0.Legendre.Zeta.finiteMellin_analytic._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.XiPartialMean.0.Legendre.Zeta.xiFiniteSquare_partial_mean._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.XiTailAssembly.0.Legendre.Zeta.xiFiniteSquare_tail_assembly._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.verticalCoefficients.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_divisor_energy_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_divisor_energy_zero_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_smoothed_zero_term_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_translated_subset_mean_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Zeta.zetaSquareCoefficient.eq_1"
