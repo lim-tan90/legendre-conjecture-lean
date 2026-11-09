@@ -85,6 +85,9 @@ theorem layer4_compensated_detector_comparator : CompensatedDetectorBenchmark :=
   exact Density.Detector.Smooth.detector_high_zero_dichotomy X hX hs hz
     (by simpa using hσ) (by simpa using hσ1) hT (by simpa using ht) hXT hY hY2
 
+/-- Closed proof of the 1940 curved density exponent, with multiplicities and uniform sigma. -/
+theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsilon
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

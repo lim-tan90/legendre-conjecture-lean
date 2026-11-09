@@ -497,4 +497,44 @@ theorem layer4_packed_mass_singleton_consumer :
   norm_num at hh
   nlinarith
 
+/-- The dyadic cover includes its top boundary and excludes the retained low range. -/
+theorem layer4_shell_boundary_consumer :
+    ∃ j ∈ Finset.range 1, 64*(2 : ℝ)^j < 128 ∧ 128 ≤ 128*(2 : ℝ)^j := by
+  exact Moment.height_shell_mem 1 128 (by norm_num) (by norm_num)
+
+/-- The balance at sigma=3/4 has the claimed height and density powers. -/
+theorem layer4_ingham_balance_consumer :
+    Moment.detectorBalanceExponent (3/4) = 6/5 ∧
+      Moment.balancedDensityExponent (3/4) = 3/5 := by
+  norm_num [Moment.detectorBalanceExponent,Moment.balancedDensityExponent]
+
+/-- Actual counts at sigma=3/4 have exponent 3/5+1/100, without a density hypothesis. -/
+theorem layer4_ingham_three_quarters_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (3/4) T : ℝ) ≤ C*T^(61/100 : ℝ) := by
+  obtain ⟨C,hC,h⟩ := Zeta.ingham_density_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! h (3/4) (by norm_num) T hT using 1 <;> norm_num
+
+/-- The included critical-line endpoint has exponent one plus epsilon. -/
+theorem layer4_ingham_critical_line_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (1/2) T : ℝ) ≤ C*T^(101/100 : ℝ) := by
+  obtain ⟨C,hC,h⟩ := Zeta.ingham_density_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! h (1/2) (by norm_num) T hT using 1 <;> norm_num
+
+/-- The lower height endpoint retains the SAME constant for every sigma. -/
+theorem layer4_ingham_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) 1,
+      (Zeta.zeroDensityCount σ 2 : ℝ) ≤ C*2^(3*(1-σ)/(2-σ)+(1/100 : ℝ)) := by
+  obtain ⟨C,hC,h⟩ := Zeta.ingham_density_epsilon (1/100) (by norm_num)
+  exact ⟨C,hC,fun σ hσ => h σ hσ 2 (by norm_num)⟩
+
+/-- The proved curved theorem supplies a closed linear density input as well. -/
+theorem layer4_density_three_consumer : Zeta.HasZeroDensityEstimate 3 :=
+  Zeta.hasZeroDensityEstimate_three
+
 end Legendre.Tests

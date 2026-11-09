@@ -73,7 +73,7 @@
 带权代表集保留零点重数，并给出条件零点检测到密度计数的传递。
 新增有限 Euler 公式导出了实际的两分支零点检测器，显式保留极点项；
 采样允许各零点实部独立变化，计数界保留两个检测分支的能量。
-达到 Ingham/Huxley 所需的高度幂次仍待证明。
+此前长检测器的较弱计数界现由下述紧支撑检测器的 Ingham 证明加强。
 [精确检测器及剩余解析步骤](docs/layer4-zero-detector.md)。
 尾部能量已有显式 X^(1−2σ) 衰减，并已从实际检测器推出保留低高度项的完整带重数计数界。
 整函数 xi 的对称高斯平方核、精确 Gamma 商界及可积包络已导出精确轮廓函数方程，
@@ -83,12 +83,20 @@
 紧支撑 Möbius 检测器已有精确初始 Mellin 轮廓积分，平滑尺度可独立于此前的平方长度选择。
 已证明移到临界线的路径移动公式，并保留精确主极点项；显式高处范围内该项足够小，
 从而得到真正的“多项式大值或临界线积分大值”零点检测分支。现已证明整线带权矩及间隔采样核求和界，进一步给出积分分支的三次幂计数界；
-多项式分支的尖锐计数与最终密度估计仍开放。[精确范围](docs/layer4-compact-detector.md)。
-**Ingham、Huxley 仍开放，Layer 4 尚未完成。**
+多项式分支现已得到
+`R ≤ C log^8(2Y+1)(Y^(2−2σ)+T X^(1−2σ))`。取 X=ceil(T)、
+Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后，已证明
+**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T`**，适用于全部 σ∈[1/2,1]、T≥2。
+因此 **Ingham 1940 曲线零密度估计的任意正 ε 指数版本已闭合证明**，常数对 σ 统一；
+`layer4_ingham_comparator` 已为闭合证明。这不等于不同的 Ingham 1937 素数短区间结论。[精确范围](docs/layer4-compact-detector.md)。
+**Huxley、Guth–Maynard 仍开放，Layer 4 尚未完成。**
 
-验证：**4,193 项构建**、**全部 3,788 个项目定理声明**的公理审计（仅三项标准公理）、
-**218 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**65 项独立使用检查**（Layer 4 五十六项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **101 项**。
+验证（2026-11-10）：**4,206 项构建**、**全部 3,874 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**231 个 Lean 文件**的实际
+`sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
+**107 项独立使用检查**全部通过：Layer 4 **62 项**、Layer 3 九项、文献对照 36 项。
+新增端点检查覆盖 σ=1/2、σ=3/4 及 T=2，并保持常数对 σ 统一；
+故意将 Ingham 证明用于 Huxley 的错误检查被 Lean 拒绝。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -426,9 +434,10 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 | `Legendre.Zeta.zetaXi_square_equation` | Re(s)=1/2 上的精确高斯恒等式 Xi(s)²=I(s)+I(1−s) | **已证明**；含可积性、水平边极限及中心留数 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；后续已补上带主极点项的路径移动 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
-| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；Ingham/Huxley 尖锐计数仍开放 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
-| `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；多项式尖锐计数与完整密度界仍开放 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
-| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4` 及 Ingham/Huxley 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；现已用于闭合 Ingham 密度证明 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 曲线密度指数 `3(1−σ)/(2−σ)+ε`，保留所有解析重数 | **已证明**，σ∈[1/2,1] 统一且 T≥2；并非 1937 素数间隙结论 | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
+| `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；现已与多项式分支共同导出 Ingham 密度 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4`、Huxley 及 Guth–Maynard 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -492,7 +501,7 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**Ingham/Huxley 仍开放**；[范围](docs/layer4-large-sieve.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**Ingham 1940 曲线密度已证明；Huxley/Guth–Maynard 仍开放**；[范围](docs/layer4-large-sieve.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含指数规范化的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -702,7 +711,7 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   来源提交和保留许可证均同上。
   此前已选取的大筛证明链已编译，并纳入整库公理审计；
   [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
-  Layer 4 的 Ingham、Huxley 密度定理仍开放。
+  紧支撑检测器现已证明 Ingham 1940 密度定理；Huxley 仍开放。
   [`XiSquareContour.lean`](Legendre/XiSquareContour.lean) 还改编了同一固定提交下
   `ZeroDensity/DensitySquareContour.lean`、`DensitySquareEquation.lean` 与
   `DensitySquareConjugation.lean` 的轮廓、反射及共轭证明组织，适配整函数 xi 分子，
@@ -719,6 +728,13 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
+| `DensityDetectorDyadicCover.lean` | [DetectorDyadicCover.lean](Legendre/Layer4/DetectorDyadicCover.lean) |
+| `DensityDetectorPolynomial.lean`, `DensityDetectorBlocks.lean` | [DetectorPolynomial.lean](Legendre/Layer4/DetectorPolynomial.lean) |
+| `DensityFiniteBlockSquare.lean` | [FiniteBlockSquare.lean](Legendre/Layer4/FiniteBlockSquare.lean) |
+| `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
+| `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
+| `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean) |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |

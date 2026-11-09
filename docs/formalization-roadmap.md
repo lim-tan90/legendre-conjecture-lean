@@ -457,7 +457,7 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-08): linear-error mean values and large-sieve infrastructure proved; Layer 4 remains open.**
+**Current state (2026-11-10): Ingham 1940 curved density is proved; Layer 4 remains incomplete.**
 `import Legendre.Layer4` exports the multiplicity-weighted counting convention,
 `HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
 weakening, and a proved transfer from a hypothesized power/log density bound.
@@ -475,11 +475,18 @@ selection theorem give a conditional detector-to-density reduction. A finite
 Euler formula with an explicit polar contribution now yields an actual two-branch
 zeta detector. Sampling permits independently varying real parts, and both
 branches are retained in a proved separated-zero sample bound. The detector
-length and large-value estimates still need improvement to reach Ingham/Huxley.
+length limitation is overcome by the compact detector described below.
 High-tail energy now has explicit X^(1−2σ) decay, and the actual detector bounds
 the full multiplicity-weighted count with a retained low-height term. An entire
 xi square, sharp Gamma quotients and an integrable Gaussian envelope prepare
-the critical-line fourth-moment contour; the fourth-moment theorem remains open.
+the critical-line fourth-moment contour. The actual O(T log^6 T) fourth moment,
+whole-line weighted moments and both detector branch counts are now proved.
+Balanced parameters, a real-height dyadic cover and restored analytic multiplicities
+prove N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T, uniformly for σ∈[1/2,1], T≥2.
+`ingham_density_epsilon` and `layer4_ingham_comparator` close the Ingham 1940
+exponent target with arbitrary positive epsilon. C is existential, not numerical.
+Huxley/Guth–Maynard and the sharp fourth-moment log^4 remain open.
+This does not prove either Ingham 1937 prime-gap statement.
 See [initial mean values](layer4-mean-values.md),
 [the large-sieve estimates and reduction](layer4-large-sieve.md),
 [linear mean-square error and optimized sampling](layer4-linear-mean-value.md),
@@ -491,13 +498,14 @@ See [initial mean values](layer4-mean-values.md),
 |---|---|
 | Definition of N(σ,T) | Already proved finite, multiplicity-weighted in Layer 2 |
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
-| Ingham zero-density theorem | **open** |
+| Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; log^10 bound, existential coefficient |
 | Huxley b=12/5 | **open** |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; sharper analytic detector estimates **open** |
 
-Full validation: 4,131 build jobs, all 3,281 theorem declarations audited,
-156 Lean files free of executable placeholders, and twenty-nine Layer 4 consumers
-plus nine Layer 3 regression consumers. Both standalone checks run in CI.
+Full validation (2026-11-10): 4,206 build jobs, all 3,874 project theorem
+declarations audited with exactly matching independent inventories, 231 Lean
+files free of executable placeholders, and 107 independent consumers
+(62 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Acceptance criteria.**
 

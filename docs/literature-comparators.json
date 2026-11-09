@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "comparison_policy": "exponents up to positive epsilon; harmless multiplicative constants and interval direction allowed; hypotheses and finite/eventual scope retained",
-  "checked_on": "2026-11-08",
+  "checked_on": "2026-11-10",
   "historical_rows": [
     {
       "id": "legendre1808",
@@ -277,15 +277,14 @@
     },
     {
       "id": "layer4",
-      "status": "linear mean square and fourth-moment exponent proved; density targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator⟩",
+      "status": "Ingham curved density and fourth-moment height exponent proved; Huxley and sharper targets open",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "The actual fourth moment is O(T log^6 T), also with a whole-line cubic weight. The compensated detector, separated kernel packing and the integral-branch cubic count are proved. Sharp polynomial-branch counts and Ingham/Huxley density remain open; sharp log^4 is not claimed."
+      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here."
     }
   ],
   "open_analytic_targets": [
-    "Ingham1940Density",
     "Huxley1972Density",
     "GuthMaynard2024Density",
     "ZetaFourthMoment"
@@ -508,6 +507,19 @@
     "Legendre/Layer4/PackedZetaMoment.lean": "layer4",
     "Legendre/Layer4/ProductCauchy.lean": "layer4",
     "Legendre/Layer4/WeightedHeightMoment.lean": "layer4",
-    "Legendre/Layer4/WeightedZetaMoment.lean": "layer4"
+    "Legendre/Layer4/WeightedZetaMoment.lean": "layer4",
+    "Legendre/Layer4/DetectorDyadicCover.lean": "layer4",
+    "Legendre/Layer4/DetectorPolynomial.lean": "layer4",
+    "Legendre/Layer4/FiniteBlockSquare.lean": "layer4",
+    "Legendre/Layer4/PolynomialBlockSampling.lean": "layer4",
+    "Legendre/Layer4/PolynomialBlockCost.lean": "layer4",
+    "Legendre/Layer4/PolynomialAlternative.lean": "layer4",
+    "Legendre/Layer4/DensityBalance.lean": "layer4",
+    "Legendre/Layer4/BalancedAlternatives.lean": "layer4",
+    "Legendre/Layer4/SeparatedShellDensity.lean": "layer4",
+    "Legendre/Layer4/NearCriticalDensity.lean": "layer4",
+    "Legendre/Layer4/DyadicHeightDensity.lean": "layer4",
+    "Legendre/Layer4/InghamMultiplicity.lean": "layer4",
+    "Legendre/Layer4/InghamDensity.lean": "layer4"
   }
 }

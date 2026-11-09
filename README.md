@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — mean values, large sieve and sixth-log moment and compensated detector (2026-11-09)</strong></summary>
+<summary><strong>Layer 4 — Ingham density, mean values and the compensated detector (2026-11-09)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -88,8 +88,7 @@ interfaces are now proved. Weighted selection preserves zero multiplicities
 and gives a conditional detector-to-density reduction. Finite Euler summation
 now supplies an actual two-branch zero detector with its principal pole term
 retained. Sampling permits independently varying real parts; the resulting
-sample bound displays both detector energies. The height exponents required
-for Ingham/Huxley remain to be proved.
+sample bound displays both detector energies. This older long-detector bound is superseded by the compact-detector Ingham proof below.
 [Exact detector and remaining analytic steps](docs/layer4-zero-detector.md).
 The high-tail energy now has explicit X^(1−2σ) decay, and actual detection
 also bounds the full multiplicity-weighted count with its fixed low-height
@@ -102,15 +101,22 @@ with its smoothing scale independent of the former squared-length choice.
 The critical-line shift is now proved with the exact principal zeta residue.
 Its explicit smallness at high ordinates gives a genuine polynomial-or-integral
 zero detector. Whole-line weighted moments and separated kernel packing now give a proved
-cubic cardinality bound for the integral alternative. The sharp polynomial
-count and the final density estimates remain open. [Exact scope](docs/layer4-compact-detector.md).
-**Ingham and Huxley remain open; Layer 4 is not complete.**
+cubic cardinality bound for the integral alternative. The polynomial branch now has
+`R ≤ C log^8(2Y+1)(Y^(2−2σ)+T X^(1−2σ))`. Balancing X=ceil(T),
+Y=T^(3/(2(2−σ))), covering heights, and restoring analytic multiplicities prove
+**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T`** for all σ∈[1/2,1], T≥2.
+Thus **Ingham 1940 density is proved with arbitrary positive height epsilon**,
+uniformly in σ; `layer4_ingham_comparator` is a closed proof. This does not
+prove the different Ingham 1937 short-interval results. [Exact scope](docs/layer4-compact-detector.md).
+**Huxley and Guth–Maynard remain open; Layer 4 is not complete.**
 
-Validation: **4,193 build jobs**, all **3,788 project theorem declarations**
-audited with only the three standard axioms, **218 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **65 independent consumer checks**
-(fifty-six Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
-(24 catalog/closed-proof consumers and 12 semantic regression guards).
+Validation (2026-11-10): **4,206 build jobs**, all **3,874 project theorem
+declarations** audited with only the three standard axioms, and **231 Lean files**
+with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
+inventories match the audit targets and actual axiom output exactly.
+All **107 independent consumers** pass: **62 Layer 4**, nine Layer 3 and
+36 literature checks. Endpoint checks include σ=1/2, σ=3/4 and T=2 with
+a constant uniform in σ. An intentional misuse of Ingham as Huxley is rejected.
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·
@@ -516,9 +522,10 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Zeta.zetaXi_square_equation` | Exact Gaussian identity Xi(s)²=I(s)+I(1−s), Re(s)=1/2 | **proved**; integrability, horizontal limits and central residue included | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; the compensated shift is supplied below | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
-| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; sharp Ingham/Huxley counts remain open | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
-| `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; sharp polynomial counts and complete density bounds remain open | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
-| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` and Ingham/Huxley density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; now used in the closed Ingham proof | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 curved density, `3(1−σ)/(2−σ)+ε`, with all analytic multiplicities | **proved**, uniform σ∈[1/2,1], all T≥2; not the 1937 prime-gap theorem | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
+| `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; both branches now yield Ingham density | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4`, Huxley and Guth–Maynard density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -586,7 +593,7 @@ This table is the roadmap, not a claim that the work is done.
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
-| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **Ingham/Huxley open**; [scope](docs/layer4-large-sieve.md) |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **initial infrastructure proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **Ingham 1940 curved density proved; Huxley/Guth–Maynard open**; [scope](docs/layer4-large-sieve.md) |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: normalized exponent `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -839,7 +846,7 @@ this repository.
   same pinned commit and retained license.
   The selected large-sieve slice builds and is included in the project-wide axiom audit;
   [exact inventory, adaptations and validation](docs/openai-math-provenance.md).
-  Layer 4's Ingham and Huxley density theorems remain open.
+  The compact detector now proves Ingham 1940 density; Huxley remains open.
 
 The fourth-moment and compact-detector proofs additionally adapt the following files from
 **[openai/math](https://github.com/openai/math)**, pinned commit
@@ -855,6 +862,13 @@ No additional PNT+ source is copied.
 
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
+| `DensityDetectorDyadicCover.lean` | [DetectorDyadicCover.lean](Legendre/Layer4/DetectorDyadicCover.lean) |
+| `DensityDetectorPolynomial.lean`, `DensityDetectorBlocks.lean` | [DetectorPolynomial.lean](Legendre/Layer4/DetectorPolynomial.lean) |
+| `DensityFiniteBlockSquare.lean` | [FiniteBlockSquare.lean](Legendre/Layer4/FiniteBlockSquare.lean) |
+| `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
+| `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
+| `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean) |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |

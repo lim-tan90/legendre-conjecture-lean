@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Proved prerequisites; sharp log^4 and the Ingham/Huxley density bounds remain open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940 curved density proved with uniform epsilon and analytic multiplicities; sharp log^4, Huxley and Guth–Maynard remain open |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -99,9 +99,9 @@ epsilon in the height exponent. The verified `huxley_global_comparator` combines
 Ingham below σ=3/4 with Huxley above σ=3/4 to recover the global `12/5` target.
 The corresponding Guth–Maynard comparison combines its curved exponent with
 Ingham at σ=7/10 to recover `30/13`. These are conditional comparison bridges:
-the analytic density inputs are not supplied. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
+the Ingham input is now supplied by `layer4_ingham_comparator`; Huxley and Guth–Maynard remain explicit open inputs. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
 `ZetaFourthMomentExponent`; the sharper `ZetaFourthMoment` (log^4) remains
-open. No Ingham/Huxley density proof or Layer 4 completion is claimed.
+open. Ingham 1940 density is proved; Layer 4 is incomplete. The 1937 short-interval comparators are still open.
 
 ### Complete source coverage
 
@@ -297,3 +297,21 @@ against the parsed audit output. Intentional bad fixtures verify that Lean
 rejects the old unsupported exponent, an open density bridge used as a closed
 proof, and a forged historical-proof label. Catalog checks reject missing
 historical IDs, unclassified source files and inconsistent proof labels.
+
+Ingham density validation (2026-11-10): full build 4,206 jobs. All 3,874
+project theorem declarations, including private/generated helpers, are audited
+against propext, Classical.choice and Quot.sound. Both independent declaration
+inventories match the audit targets and actual axiom output exactly. All 231
+Lean sources have zero executable sorry, admit or sorryAx. All 107 standalone
+consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
+cover the real-height top boundary, the balanced sigma=3/4 powers, density
+exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
+three. An intentional Ingham-as-Huxley consumer is rejected by Lean.
+
+The closed 1940 density comparator matches the height exponent cited in
+Chourasiya–Simonič, [arXiv:2507.15184v2, introduction](https://arxiv.org/html/2507.15184v2).
+The original result is Ingham, *On the estimation of N(σ,T)*, Quart. J. Math.
+os-11 (1940), [DOI 10.1093/qmath/os-11.1.201](https://doi.org/10.1093/qmath/os-11.1.201).
+The original sharp log^5 factor is not claimed: the local log^10 proof has the
+same height exponent after positive epsilon, in accordance with the repository
+comparison policy. This does not supply the 1937 short-interval theorem.

@@ -62,12 +62,12 @@ theorem layer3_power_guard (c : ℝ) :
     ¬Legendre.PNT.classicalError c =O[atTop] (fun x : ℝ => x^(525/1000 : ℝ)) :=
   layer3_no_fixed_power_comparator c _ (by norm_num)
 
-/-- The 12/5 comparison consumes both open curved estimates. -/
-theorem density_12_5_consumer (hi : Ingham1940Density) (hh : Huxley1972Density) :
-    Legendre.Zeta.HasZeroDensityEstimate (12/5) := huxley_global_comparator hi hh
+/-- The 12/5 comparison uses proved Ingham and retains the open Huxley input. -/
+theorem density_12_5_consumer (hh : Huxley1972Density) :
+    Legendre.Zeta.HasZeroDensityEstimate (12/5) := huxley_global_comparator layer4_ingham_comparator hh
 
 /-- The Guth--Maynard comparison consumes its own open curved estimate. -/
-theorem density_30_13_consumer (hi : Ingham1940Density) (hg : GuthMaynard2024Density) :
-    Legendre.Zeta.HasZeroDensityEstimate (30/13) := guthMaynard_global_comparator hi hg
+theorem density_30_13_consumer (hg : GuthMaynard2024Density) :
+    Legendre.Zeta.HasZeroDensityEstimate (30/13) := guthMaynard_global_comparator layer4_ingham_comparator hg
 
 end Legendre.Tests.Literature

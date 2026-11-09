@@ -384,6 +384,19 @@ import all Legendre.PerronFullRectangle
 import all Legendre.PerronUniformBounds
 import all Legendre.PerronFullExplicit
 
+import all Legendre.Layer4.DetectorDyadicCover
+import all Legendre.Layer4.DetectorPolynomial
+import all Legendre.Layer4.FiniteBlockSquare
+import all Legendre.Layer4.PolynomialBlockSampling
+import all Legendre.Layer4.PolynomialBlockCost
+import all Legendre.Layer4.PolynomialAlternative
+import all Legendre.Layer4.DensityBalance
+import all Legendre.Layer4.BalancedAlternatives
+import all Legendre.Layer4.SeparatedShellDensity
+import all Legendre.Layer4.NearCriticalDensity
+import all Legendre.Layer4.DyadicHeightDensity
+import all Legendre.Layer4.InghamMultiplicity
+import all Legendre.Layer4.InghamDensity
 
 /-!
 # Axiom audit
@@ -4271,3 +4284,91 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_packed_mass_singleton_consumer._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_fourth_height_two_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_mollifier_one_consumer"
+
+-- Compact polynomial branch, height cover and complete Ingham density.
+#print axioms Legendre.Density.Detector.Smooth.detectorTail_blocks
+#print axioms Legendre.Density.Detector.Smooth.detectorTail_extended
+#print axioms Legendre.Density.Detector.Smooth.detectorTail_polynomial
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_norm_le_one
+#print axioms Legendre.Density.Detector.Smooth.polynomialCoefficient.eq_1
+#print axioms Legendre.Density.Detector.Smooth.polynomialCoefficient_above
+#print axioms Legendre.Density.Detector.Smooth.polynomialCoefficient_below
+#print axioms Legendre.Density.Detector.Smooth.polynomialCoefficient_norm
+#print axioms Legendre.Density.Moment.balance_exponent_ge_one
+#print axioms Legendre.Density.Moment.balance_exponent_le_three_halves
+#print axioms Legendre.Density.Moment.balancedDensityExponent._proof_1
+#print axioms Legendre.Density.Moment.balancedDensityExponent._proof_2
+#print axioms Legendre.Density.Moment.balancedDensityExponent_ge_two_defect
+#print axioms Legendre.Density.Moment.balancedDensityExponent_le_one
+#print axioms Legendre.Density.Moment.balancedDensityExponent_nonneg
+#print axioms Legendre.Density.Moment.balanced_count_from_cube
+#print axioms Legendre.Density.Moment.balanced_detector_cutoff
+#print axioms Legendre.Density.Moment.balanced_inverse_gap
+#print axioms Legendre.Density.Moment.balanced_log_cost
+#print axioms Legendre.Density.Moment.balanced_polynomial_powers
+#print axioms Legendre.Density.Moment.balanced_power_identity
+#print axioms Legendre.Density.Moment.balanced_scale_below_half_height_square
+#print axioms Legendre.Density.Moment.block_endpoint_powers
+#print axioms Legendre.Density.Moment.block_subset_initial
+#print axioms Legendre.Density.Moment.four_logs_le_eight
+#print axioms Legendre.Density.Moment.height_log_unit
+#print axioms Legendre.Density.Moment.height_shell_card_le
+#print axioms Legendre.Density.Moment.height_shell_mem
+#print axioms Legendre.Density.Moment.height_shell_power_log
+#print axioms Legendre.Density.Moment.indexed_separated_card
+#print axioms Legendre.Density.Moment.integral_alternative_balanced
+#print axioms Legendre.Density.Moment.log_eight_unit
+#print axioms Legendre.Density.Moment.moment_detector_dyadic_cover
+#print axioms Legendre.Density.Moment.moment_finite_block_square
+#print axioms Legendre.Density.Moment.near_critical_height_power
+#print axioms Legendre.Density.Moment.near_critical_separated_count
+#print axioms Legendre.Density.Moment.one_le_two_log
+#print axioms Legendre.Density.Moment.polynomialBlockCoefficient.eq_1
+#print axioms Legendre.Density.Moment.polynomialBlockConstant._proof_1
+#print axioms Legendre.Density.Moment.polynomialBlockConstant._proof_2
+#print axioms Legendre.Density.Moment.polynomialBlockConstant._proof_3
+#print axioms Legendre.Density.Moment.polynomialBlockConstant_pos
+#print axioms Legendre.Density.Moment.polynomialBlockSamplingCost._proof_1
+#print axioms Legendre.Density.Moment.polynomialBlockSamplingCost._proof_2
+#print axioms Legendre.Density.Moment.polynomialBlockSamplingCost_nonneg
+#print axioms Legendre.Density.Moment.polynomialBlock_cost_log
+#print axioms Legendre.Density.Moment.polynomialBlock_divisor_energy
+#print axioms Legendre.Density.Moment.polynomialBlock_energy
+#print axioms Legendre.Density.Moment.polynomialBlock_mask
+#print axioms Legendre.Density.Moment.polynomialBlock_samples
+#print axioms Legendre.Density.Moment.polynomialBlock_uniform
+#print axioms Legendre.Density.Moment.polynomial_actual_block
+#print axioms Legendre.Density.Moment.polynomial_alternative_balanced
+#print axioms Legendre.Density.Moment.polynomial_alternative_count
+#print axioms Legendre.Density.Moment.real_height_dyadic_cover
+#print axioms Legendre.Density.Moment.separated_high_density
+#print axioms Legendre.Density.Moment.separated_high_shell_density
+#print axioms Legendre.Density.Moment.separated_high_shell_density_uniform
+#print axioms Legendre.Literature.layer4_ingham_comparator
+#print axioms Legendre.Zeta.hasZeroDensityEstimate_three
+#print axioms Legendre.Zeta.ingham_density_epsilon
+#print axioms Legendre.Zeta.ingham_density_log_bound
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_cutoff_sample_bound
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorPolynomial.0.Legendre.Density.Detector.Smooth.detectorTail_extended._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.InghamMultiplicity.0.Legendre.Density.Moment.height_log_unit._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.InghamMultiplicity.0.Legendre.Zeta.zeroDensityCount_le_of_cutoff_sample_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.NearCriticalDensity.0.Legendre.Density.Moment.log_eight_unit._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockCost.0.Legendre.Density.Moment.block_endpoint_powers._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockSampling.0.Legendre.Density.Moment.block_subset_initial._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockSampling.0.Legendre.Density.Moment.polynomialBlockSamplingCost_nonneg._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockSampling.0.Legendre.Density.Moment.polynomialBlock_samples._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.balancedDensityExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.detectorBalanceExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_density_three_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_balance_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_critical_line_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_shell_boundary_consumer"

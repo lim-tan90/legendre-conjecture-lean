@@ -354,3 +354,38 @@ executable placeholders. Both independent inventories match the axiom audit.
 All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
 The tests include zero height in the dyadic cover, adjacent separated samples,
 T=2 weighted moments, X=1 and the singleton packed critical mass.
+
+## Compact polynomial branch and Ingham closure (2026-11-09)
+
+Same upstream openai/math pin `4eaee87548250b2682affda7d05d947c05554bae`,
+Apache-2.0, source prefix `lean/OAI/NumberTheory/Ostmann/ZeroDensity/`.
+The license remains in `licenses/openai-math-Apache-2.0.txt`.
+
+| `DensityDetectorDyadicCover.lean` | [DetectorDyadicCover.lean](../Legendre/Layer4/DetectorDyadicCover.lean) |
+| `DensityDetectorPolynomial.lean`, `DensityDetectorBlocks.lean` | [DetectorPolynomial.lean](../Legendre/Layer4/DetectorPolynomial.lean) |
+| `DensityFiniteBlockSquare.lean` | [FiniteBlockSquare.lean](../Legendre/Layer4/FiniteBlockSquare.lean) |
+| `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](../Legendre/Layer4/PolynomialAlternative.lean) |
+| `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](../Legendre/Layer4/DensityBalance.lean) |
+| `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](../Legendre/Layer4/BalancedAlternatives.lean) |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](../Legendre/Layer4/SeparatedShellDensity.lean) |
+
+`PolynomialBlockSampling.lean`, `PolynomialBlockCost.lean`,
+`NearCriticalDensity.lean`, `DyadicHeightDensity.lean`,
+`InghamMultiplicity.lean` and `InghamDensity.lean` are local deductions.
+They specialize existing varying-real-part sampling, retain the real upper
+height endpoint, restore analytic multiplicities and absorb a log^10 loss.
+Unlike the nonprincipal character source, the zeta balance is checked against
+the explicit principal-pole constraints. No new PNT+ source is copied.
+Both default-open README provenance sections list the exact new adaptations.
+Ingham's curved exponent is now proved; Huxley/Guth–Maynard and the sharp
+fourth-moment log^4 remain open. No 1937 prime-gap theorem is asserted.
+
+Ingham density validation (2026-11-10): full build 4,206 jobs. All 3,874
+project theorem declarations, including private/generated helpers, are audited
+against propext, Classical.choice and Quot.sound. Both independent declaration
+inventories match the audit targets and actual axiom output exactly. All 231
+Lean sources have zero executable sorry, admit or sorryAx. All 107 standalone
+consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
+cover the real-height top boundary, the balanced sigma=3/4 powers, density
+exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
+three. An intentional Ingham-as-Huxley consumer is rejected by Lean.

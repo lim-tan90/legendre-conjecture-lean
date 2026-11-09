@@ -463,7 +463,12 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.62 | Uniform separated cubic kernel packing | `Legendre.Density.Moment.moment_kernel_height_packing`, `packed_zeta_fourth_moment`, `packed_mollifier_mean` | **proved**, one constant and the original height weight, no cardinality loss |
 | 4.63 | Packed literal critical-mass fourth power | `Legendre.Density.Moment.packed_critical_mass_fourth` | **proved**, (sum masses)^4 <= C R T (X+T)^2 log^6 T (1+log X)^2 |
 | 4.64 | Cubic count for the integral branch | `Legendre.Density.Moment.integral_alternative_count` | **proved**, R^3 <= C [256 Y^(1/2-sigma)/(sigma-1/2)]^4 T (X+T)^2 log^6 T (1+log X)^2; no zero-density estimate assumed |
-| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
+| 4.65 | Compact polynomial blocks and sharp branch count | `Density.Moment.polynomial_alternative_count`; [PolynomialAlternative.lean](../Legendre/Layer4/PolynomialAlternative.lean) | **proved**; R ≤ C log^8(2Y+1)(Y^(2−2σ)+T X^(1−2σ)) |
+| 4.66 | Balanced polynomial/integral branches | [BalancedAlternatives.lean](../Legendre/Layer4/BalancedAlternatives.lean) | **proved** with X=ceil(T), Y=T^(3/(2(2−σ))); principal-pole constraints retained |
+| 4.67 | Near-critical band and dyadic real-height cover | [NearCriticalDensity.lean](../Legendre/Layer4/NearCriticalDensity.lean), [DyadicHeightDensity.lean](../Legendre/Layer4/DyadicHeightDensity.lean) | **proved**; uniform sigma including 1/2; no height-power loss |
+| 4.68 | Actual multiplicities and fixed low-height count | `Zeta.ingham_density_log_bound`; [InghamMultiplicity.lean](../Legendre/Layer4/InghamMultiplicity.lean) | **proved**; all T≥2, N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T |
+| 4.69 | Ingham 1940 curved density comparator | `Zeta.ingham_density_epsilon`, `Literature.layer4_ingham_comparator`; [InghamDensity.lean](../Legendre/Layer4/InghamDensity.lean) | **proved**, closed uniform epsilon theorem; 1937 prime-gap statements remain open |
+| 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; Huxley/Guth–Maynard remain open |
 | 4.validation | Fifty-six independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
@@ -577,3 +582,13 @@ executable placeholders. Both independent inventories match the axiom audit.
 All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
 The tests include zero height in the dyadic cover, adjacent separated samples,
 T=2 weighted moments, X=1 and the singleton packed critical mass.
+
+Ingham density validation (2026-11-10): full build 4,206 jobs. All 3,874
+project theorem declarations, including private/generated helpers, are audited
+against propext, Classical.choice and Quot.sound. Both independent declaration
+inventories match the audit targets and actual axiom output exactly. All 231
+Lean sources have zero executable sorry, admit or sorryAx. All 107 standalone
+consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
+cover the real-height top boundary, the balanced sigma=3/4 powers, density
+exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
+three. An intentional Ingham-as-Huxley consumer is rejected by Lean.

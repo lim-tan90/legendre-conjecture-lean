@@ -200,3 +200,48 @@ executable placeholders. Both independent inventories match the axiom audit.
 All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
 The tests include zero height in the dyadic cover, adjacent separated samples,
 T=2 weighted moments, X=1 and the singleton packed critical mass.
+
+## Polynomial counts and the proved Ingham exponent (2026-11-09)
+
+The actual compact tail splits into dyadic blocks. The sharp varying-real-part
+sample bound and divisor energy imply, for its large-value branch,
+
+```
+R <= C (1+log(2Y+1))^8 [Y^(2-2sigma)+T X^(1-2sigma)].
+```
+
+Taking X=ceil(T), Y=T^(3/(2(2-sigma))) balances this with the integral
+alternative. On each high shell [T/2,T], T>=128, both branches give
+R <= C T^(3(1-sigma)/(2-sigma)) log^8 T. The factor 1/(sigma-1/2)
+is controlled outside the band sigma-1/2 <= 1/log T; inside it, unit
+separation supplies the same exponent with an absolute constant. This also
+includes sigma=1/2. The balance respects X<=4(T/2), Y<=(T/2)^2.
+
+A real dyadic cover with T<=2^J<=2T costs one logarithm and no power of T.
+Weighted representative selection restores every analytic zero multiplicity,
+costing one further logarithm. Zeros with ordinate <=64 are retained as
+zeroCount(64); the remaining bounded range 2<=T<128 is bounded by
+zeroCount(128). Consequently `Zeta.ingham_density_log_bound` proves
+
+```
+N(sigma,T) <= C T^(3(1-sigma)/(2-sigma)) (log T)^10
+           (1/2 <= sigma <= 1, T>=2),
+```
+
+with C uniform in sigma and T. `Zeta.ingham_density_epsilon` absorbs the
+logarithm for every positive epsilon. `Literature.layer4_ingham_comparator`
+is a closed proof of `Ingham1940Density`, rather than a conditional bridge.
+The logarithmic power is not claimed sharp. Huxley, Guth–Maynard, the sharp
+fourth-moment log^4, and Layer 4 completion remain open. Ingham's different
+1937 short-interval results remain open, including their stronger zero-free
+input. Exact adaptation paths appear in both READMEs and the provenance list.
+
+Ingham density validation (2026-11-10): full build 4,206 jobs. All 3,874
+project theorem declarations, including private/generated helpers, are audited
+against propext, Classical.choice and Quot.sound. Both independent declaration
+inventories match the audit targets and actual axiom output exactly. All 231
+Lean sources have zero executable sorry, admit or sorryAx. All 107 standalone
+consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
+cover the real-height top boundary, the balanced sigma=3/4 powers, density
+exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
+three. An intentional Ingham-as-Huxley consumer is rejected by Lean.
