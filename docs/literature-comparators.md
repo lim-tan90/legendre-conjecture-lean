@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T) and height exponent 1+epsilon | Proved prerequisites; sharp log^4 and the Ingham/Huxley density bounds remain open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Proved prerequisites; sharp log^4 and the Ingham/Huxley density bounds remain open |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -288,10 +288,10 @@ also be added to the complete module coverage map.
 
 ## Validation
 
-The complete build has 4,171 jobs and the axiom audit covers all 3,615 distinct
-project theorem declarations. All 196 Lean source files are free of executable
+The complete build has 4,180 jobs and the axiom audit covers all 3,701 distinct
+project theorem declarations. All 205 Lean source files are free of executable
 placeholders. The 24 catalog/closed-proof consumers, 12 literature regression
-guards, 44 Layer 4 consumers and 9 Layer 3 consumers compile independently.
+guards, 50 Layer 4 consumers and 9 Layer 3 consumers compile independently.
 The independent module-data and full-environment theorem inventories are checked
 against the parsed audit output. Intentional bad fixtures verify that Lean
 rejects the old unsupported exponent, an open density bridge used as a closed

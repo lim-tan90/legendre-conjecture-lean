@@ -229,12 +229,19 @@ appears in both README translations. Destination paths below are relative to
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](../Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](../Legendre/Layer4/BlockWeights.lean) |
+| `DensityDetectorDichotomy.lean` | [DetectorAlternative.lean](../Legendre/Layer4/DetectorAlternative.lean) |
+| `DensityDetectorAnalytic.lean` | [DetectorAnalytic.lean](../Legendre/Layer4/DetectorAnalytic.lean) |
 | `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](../Legendre/Layer4/DetectorCoefficients.lean) |
+| `DensityCriticalDetector.lean` | [DetectorCriticalMass.lean](../Legendre/Layer4/DetectorCriticalMass.lean) |
+| `DensityMollifierBound.lean` | [DetectorGrowth.lean](../Legendre/Layer4/DetectorGrowth.lean) |
+| `DensityDetectorHorizontal.lean` | [DetectorHorizontal.lean](../Legendre/Layer4/DetectorHorizontal.lean) |
 | `DensityDetectorIntegral.lean` | [DetectorIntegral.lean](../Legendre/Layer4/DetectorIntegral.lean) |
 | `DensityDetectorKernel.lean` | [DetectorKernel.lean](../Legendre/Layer4/DetectorKernel.lean) |
 | `DensityDetectorKernelLeft.lean` | [DetectorKernelLeft.lean](../Legendre/Layer4/DetectorKernelLeft.lean) |
 | `DensityMollifierProduct.lean` | [DetectorProduct.lean](../Legendre/Layer4/DetectorProduct.lean) |
 | `DensityDetectorSeries.lean` | [DetectorSeries.lean](../Legendre/Layer4/DetectorSeries.lean) |
+| `DensityDetectorShift.lean` | [DetectorShift.lean](../Legendre/Layer4/DetectorShift.lean) |
+| `DensityDetectorVertical.lean`, `DensityDetectorShift.lean` | [DetectorVertical.lean](../Legendre/Layer4/DetectorVertical.lean) |
 | `DensityDetectorWeight.lean` | [DetectorWeight.lean](../Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](../Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](../Legendre/Layer4/DyadicArithmetic.lean) |
@@ -291,3 +298,28 @@ Compact-detector validation: 4,171 full-build jobs, all 3,615 project theorem
 declarations audited, 196 Lean sources without executable placeholders and
 89 independent consumers (44 Layer 4, 9 Layer 3, 36 literature). Both complete
 declaration inventories agree with the audit and parsed axiom output.
+
+## Compensated detector addition (2026-11-09)
+
+The additional detector files in the inventory above retain the same
+openai/math pin `4eaee87548250b2682affda7d05d947c05554bae`, ZeroDensity
+source directory and Apache-2.0 license. The character source's entire
+L-function is replaced by the local pole-removed zeta numerator. Its zero
+is canceled by a divided difference; the principal pole at w=1-s remains
+and contributes exactly M_X(1) Y^(1-s) k(1-s). Horizontal bounds now require
+|Im(w)|>=|Im(s)|+1 to avoid that pole. Raw ordinates replace Fourier scaling.
+`DetectorRectangle.lean` and `DetectorPoleBound.lean` are local deductions,
+using the already credited PNT+ rectangle API and cubic kernel decay. No
+additional PNT+ source is copied. Both READMEs list each adapted filename
+and destination inside their default-open provenance sections.
+
+The high-zero alternative is proved with T>=64, 1<=X<=4T, 4<=Y<=T^2 and
+|Im(s)|>=T. The critical integral has an integrable cubic-weight mass bound.
+Sharp packing and counting, Ingham/Huxley density, and Layer 4 completion
+are still open; no detection estimate is assumed as an axiom.
+
+Compensated-detector validation (2026-11-09): 4,180 full-build jobs; all 3,701
+project theorem declarations audited; 205 Lean sources without executable
+placeholders. Both independent declaration inventories match the audit and
+its actual axiom output. All 95 independent consumers pass: 50 Layer 4,
+9 Layer 3 and 36 literature checks. Ingham/Huxley remain open.

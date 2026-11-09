@@ -278,10 +278,10 @@
     {
       "id": "layer4",
       "status": "linear mean square and fourth-moment exponent proved; density targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator⟩",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "The actual critical-line fourth moment is O(T log^6 T), hence O_epsilon(T^(1+epsilon)). The sharp log^4 comparator and the Ingham/Huxley density targets remain open."
+      "note": "The actual fourth moment is O(T log^6 T), hence height exponent 1+epsilon. The compensated compact detector has a proved actual-zero alternative at explicit high ordinates. Sharp branch counts and the Ingham/Huxley density targets remain open; sharp log^4 is not claimed."
     }
   ],
   "open_analytic_targets": [
@@ -486,6 +486,15 @@
     "Legendre/Layer4/DetectorKernelLeft.lean": "layer4",
     "Legendre/Layer4/DetectorProduct.lean": "layer4",
     "Legendre/Layer4/DetectorSeries.lean": "layer4",
-    "Legendre/Layer4/DetectorWeight.lean": "layer4"
+    "Legendre/Layer4/DetectorWeight.lean": "layer4",
+    "Legendre/Layer4/DetectorAlternative.lean": "layer4",
+    "Legendre/Layer4/DetectorAnalytic.lean": "layer4",
+    "Legendre/Layer4/DetectorCriticalMass.lean": "layer4",
+    "Legendre/Layer4/DetectorGrowth.lean": "layer4",
+    "Legendre/Layer4/DetectorHorizontal.lean": "layer4",
+    "Legendre/Layer4/DetectorPoleBound.lean": "layer4",
+    "Legendre/Layer4/DetectorRectangle.lean": "layer4",
+    "Legendre/Layer4/DetectorShift.lean": "layer4",
+    "Legendre/Layer4/DetectorVertical.lean": "layer4"
   }
 }

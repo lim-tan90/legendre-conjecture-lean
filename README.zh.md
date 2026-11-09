@@ -58,7 +58,7 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 4：均值估计、大筛与六次对数四阶矩（2026-11-08）</strong></summary>
+<summary><strong>Layer 4：均值估计、大筛与六次对数四阶矩及带补偿检测器（2026-11-09）</strong></summary>
 
 **入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
@@ -81,12 +81,14 @@
 已证明归一化轮廓均方界与临界线四阶矩 `O(T log^6 T)`，并导出每个 `ε>0` 的
 `O_ε(T^(1+ε))` 界；文献的尖锐 `log^4` 目标仍开放。[证明链](docs/layer4-moment-kernel.md)。
 紧支撑 Möbius 检测器已有精确初始 Mellin 轮廓积分，平滑尺度可独立于此前的平方长度选择。
-跨越 ζ 主极点的路径移动仍开放。[精确范围](docs/layer4-compact-detector.md)。
+已证明移到临界线的路径移动公式，并保留精确主极点项；显式高处范围内该项足够小，
+从而得到真正的“多项式大值或临界线积分大值”零点检测分支。三次权重临界线质量已证明可积；
+两类分支的尖锐计数仍开放。[精确范围](docs/layer4-compact-detector.md)。
 **Ingham、Huxley 仍开放，Layer 4 尚未完成。**
 
-验证：**4,171 项构建**、**全部 3,615 个项目定理声明**的公理审计（仅三项标准公理）、
-**196 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
-**53 项独立使用检查**（Layer 4 四十四项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **89 项**。
+验证：**4,180 项构建**、**全部 3,701 个项目定理声明**的公理审计（仅三项标准公理）、
+**205 个 Lean 文件**中实际 `sorry`/`admit`/`sorryAx` 均为零；
+**59 项独立使用检查**（Layer 4 五十项及 Layer 3 九项回归）全部通过，独立编译均已纳入 CI。另有 **36 项文献对照检查**（24 项清单/闭合证明检查及 12 项语义回归），合计 **95 项**。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
@@ -423,7 +425,8 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | 显式的零点检测到密度计数传递 | **条件定理已证明**；解析检测器性质仍为假设 | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
 | `Legendre.Zeta.zetaXi_square_equation` | Re(s)=1/2 上的精确高斯恒等式 Xi(s)²=I(s)+I(1−s) | **已证明**；含可积性、水平边极限及中心留数 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
-| `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；跨越 ζ 主极点的路径移动仍开放 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；后续已补上带主极点项的路径移动 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；Ingham/Huxley 尖锐计数仍开放 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4` 及 Ingham/Huxley 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
@@ -710,19 +713,26 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 许可证为 **Apache-2.0**，保留于
 [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
 以下本地文件均位于 `Legendre/Layer4/`，保留逐文件来源。四阶矩部分去除特征族并接入本地 xi 核，
-使用原始纵坐标与更宽的高斯权重；紧支撑检测器将初始轮廓特化到 ζ，跨主极点的路径移动仍开放。
+使用原始纵坐标与更宽的高斯权重；紧支撑检测器将初始轮廓特化到 ζ，路径移动已保留精确主极点项。
 没有新增移植 PNT+ 代码。
 
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
+| `DensityDetectorDichotomy.lean` | [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `DensityDetectorAnalytic.lean` | [DetectorAnalytic.lean](Legendre/Layer4/DetectorAnalytic.lean) |
 | `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](Legendre/Layer4/DetectorCoefficients.lean) |
+| `DensityCriticalDetector.lean` | [DetectorCriticalMass.lean](Legendre/Layer4/DetectorCriticalMass.lean) |
+| `DensityMollifierBound.lean` | [DetectorGrowth.lean](Legendre/Layer4/DetectorGrowth.lean) |
+| `DensityDetectorHorizontal.lean` | [DetectorHorizontal.lean](Legendre/Layer4/DetectorHorizontal.lean) |
 | `DensityDetectorIntegral.lean` | [DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `DensityDetectorKernel.lean` | [DetectorKernel.lean](Legendre/Layer4/DetectorKernel.lean) |
 | `DensityDetectorKernelLeft.lean` | [DetectorKernelLeft.lean](Legendre/Layer4/DetectorKernelLeft.lean) |
 | `DensityMollifierProduct.lean` | [DetectorProduct.lean](Legendre/Layer4/DetectorProduct.lean) |
 | `DensityDetectorSeries.lean` | [DetectorSeries.lean](Legendre/Layer4/DetectorSeries.lean) |
+| `DensityDetectorShift.lean` | [DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) |
+| `DensityDetectorVertical.lean`, `DensityDetectorShift.lean` | [DetectorVertical.lean](Legendre/Layer4/DetectorVertical.lean) |
 | `DensityDetectorWeight.lean` | [DetectorWeight.lean](Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](Legendre/Layer4/DyadicArithmetic.lean) |

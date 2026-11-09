@@ -54,6 +54,26 @@ def LinearMeanSquareBenchmark : Prop :=
 theorem layer4_mean_comparator : LinearMeanSquareBenchmark :=
   Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear
 
+/-- A proved actual-zero detector, with its numerical range visible. -/
+def CompensatedDetectorBenchmark : Prop :=
+  ∀ X : ℕ, 1 ≤ X → ∀ σ t T Y : ℝ, 1/2 < σ → σ ≤ 1 →
+    64 ≤ T → T ≤ |t| → (X : ℝ) ≤ 4*T → 4 ≤ Y → Y ≤ T^2 →
+    riemannZeta ((σ : ℂ)+(t : ℂ)*Complex.I) = 0 →
+    (1/16 : ℝ) ≤ ‖Density.Detector.Smooth.detectorTail X ((σ : ℂ)+(t : ℂ)*Complex.I) Y‖ ∨
+      (1/16 : ℝ) ≤ ‖Density.Detector.Smooth.detectorCriticalIntegral X ((σ : ℂ)+(t : ℂ)*Complex.I) Y‖
+
+theorem layer4_compensated_detector_comparator : CompensatedDetectorBenchmark := by
+  intro X hX σ t T Y hσ hσ1 hT ht hXT hY hY2 hz
+  have hs : (σ : ℂ)+(t : ℂ)*Complex.I ≠ 1 := by
+    intro he
+    have hh := congrArg Complex.im he
+    simp at hh
+    rw [hh] at ht
+    norm_num at ht
+    linarith
+  exact Density.Detector.Smooth.detector_high_zero_dichotomy X hX hs hz
+    (by simpa using hσ) (by simpa using hσ1) hT (by simpa using ht) hXT hY hY2
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

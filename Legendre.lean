@@ -166,5 +166,14 @@ import Legendre.Layer4.DetectorKernelLeft
 import Legendre.Layer4.DetectorProduct
 import Legendre.Layer4.DetectorSeries
 import Legendre.Layer4.DetectorWeight
+import Legendre.Layer4.DetectorAlternative
+import Legendre.Layer4.DetectorAnalytic
+import Legendre.Layer4.DetectorCriticalMass
+import Legendre.Layer4.DetectorGrowth
+import Legendre.Layer4.DetectorHorizontal
+import Legendre.Layer4.DetectorPoleBound
+import Legendre.Layer4.DetectorRectangle
+import Legendre.Layer4.DetectorShift
+import Legendre.Layer4.DetectorVertical
 import Legendre.Literature
 import Legendre.Audit

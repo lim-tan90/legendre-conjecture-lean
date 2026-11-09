@@ -398,4 +398,45 @@ theorem layer4_compact_left_endpoint_consumer (u : ℝ) :
       32*(1+|u|)^(-(3 : ℝ)) := by
   convert! Detector.Smooth.detectorKernel_left_bound (1/2) u (by norm_num) le_rfl using 1; norm_num
 
+/-- Empty Mobius truncation has no principal-pole contribution, at any center. -/
+theorem layer4_principal_pole_empty_consumer (s : ℂ) (Y : ℝ) :
+    Detector.Smooth.detectorPrincipalPole 0 s Y = 0 := by
+  simp [Detector.Smooth.detectorPrincipalPole,Detector.finiteSeries]
+
+/-- The actual principal-pole coefficient generally is nonzero. -/
+theorem layer4_principal_pole_nonzero_consumer (t : ℝ) :
+    Detector.Smooth.detectorPrincipalPole 1 ((3/4 : ℂ)+(t : ℂ)*Complex.I) 1 ≠ 0 := by
+  norm_num [Detector.Smooth.detectorPrincipalPole,Detector.finiteSeries,
+    Detector.Smooth.detectorKernel,Complex.ext_iff]
+
+/-- The small-pole estimate includes the exact height and cutoff endpoints. -/
+theorem layer4_principal_pole_height64_consumer :
+    ‖Detector.Smooth.detectorPrincipalPole 256 ((1/2 : ℂ)+(64 : ℂ)*Complex.I) 4096‖ ≤ 1/16 := by
+  apply Detector.Smooth.detectorPrincipalPole_small 256 _ (T := 64)
+  all_goals norm_num
+
+/-- The shifted mean keeps the principal residue with a positive sign. -/
+theorem layer4_compensated_mean_consumer (X : ℕ) (t : ℝ)
+    (hz : riemannZeta ((3/4 : ℂ)+(t : ℂ)*Complex.I) = 0) :
+    Detector.Smooth.detectorMean X ((3/4 : ℂ)+(t : ℂ)*Complex.I) 4 =
+      Detector.Smooth.detectorPrincipalPole X ((3/4 : ℂ)+(t : ℂ)*Complex.I) 4+
+        Detector.Smooth.detectorCriticalIntegral X ((3/4 : ℂ)+(t : ℂ)*Complex.I) 4 := by
+  apply Detector.Smooth.detectorMean_at_zero X _ hz
+  all_goals norm_num [Complex.ext_iff]
+
+/-- Both ordinate signs are included in the genuine high-zero alternative. -/
+theorem layer4_compact_high_zero_consumer (t : ℝ) (ht : 64 ≤ |t|)
+    (hz : riemannZeta ((3/4 : ℂ)+(t : ℂ)*Complex.I) = 0) :
+    (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail 64 ((3/4 : ℂ)+(t : ℂ)*Complex.I) 64‖ ∨
+      (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorCriticalIntegral 64 ((3/4 : ℂ)+(t : ℂ)*Complex.I) 64‖ := by
+  exact Detector.Smooth.detector_high_zero_dichotomy 64 (by norm_num)
+    (by norm_num [Complex.ext_iff]) hz (by norm_num) (by norm_num)
+    (T := 64) (by norm_num) (by simpa using ht) (by norm_num) (by norm_num) (by norm_num)
+
+/-- The cubic critical mass is genuinely integrable, including at ordinate zero. -/
+theorem layer4_critical_mass_integrable_consumer :
+    Integrable (fun u : ℝ => Detector.Smooth.criticalWeight u*
+      ‖Detector.Smooth.criticalProduct 1 0 u‖) :=
+  Detector.Smooth.criticalProduct_weighted_integrable 1 0
+
 end Legendre.Tests

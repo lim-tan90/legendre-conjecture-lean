@@ -27,6 +27,7 @@ public import Legendre.XiSquareContour
 public import Legendre.Layer4.ZetaFourthMoment
 public import Legendre.Layer4.DetectorIntegral
 public import Legendre.Layer4.DetectorKernelLeft
+public import Legendre.Layer4.DetectorCriticalMass
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -47,6 +48,9 @@ The normalized contour mean and a sixth-log fourth moment are proved:
 integral from -T to T of |zeta(1/2+it)|^4 is O(T log^6 T).
 The height exponent is consequently 1+epsilon. The sharp log^4 bound and
 the Ingham/Huxley zero-density estimates remain open.
-The compact Mobius detector has an exact initial right-contour integral.
-Its shift across the principal zeta pole is still a separate obligation.
+The compact Mobius detector has an exact initial contour and a proved shift
+to the critical line, retaining the principal zeta residue. Explicit high
+ordinates make that residue small and give a polynomial-or-integral detector.
+Uniform cubic-weight critical masses are integrable. Counting the two
+alternatives sharply enough for Ingham/Huxley remains open.
 -/

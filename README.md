@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — mean values, large sieve and sixth-log fourth moment (2026-11-08)</strong></summary>
+<summary><strong>Layer 4 — mean values, large sieve and sixth-log moment and compensated detector (2026-11-09)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -99,13 +99,16 @@ pointwise reduction `|ζ(s)|⁴ ≤ 4|xiSmoothedZetaSquare(s)|²` on Re(s)=1/2.
 The normalized contour mean and the actual fourth moment `O(T log^6 T)` are proved, hence `O_ε(T^(1+ε))` for every `ε>0`. The sharp `log^4` target remains open. [Proof chain](docs/layer4-moment-kernel.md).
 The compact Möbius detector now has an exact initial right-contour integral,
 with its smoothing scale independent of the former squared-length choice.
-The shift across zeta's principal pole is still open. [Exact scope](docs/layer4-compact-detector.md).
+The critical-line shift is now proved with the exact principal zeta residue.
+Its explicit smallness at high ordinates gives a genuine polynomial-or-integral
+zero detector. Critical-line cubic-weight masses are integrable; sharp counts
+for the two alternatives remain open. [Exact scope](docs/layer4-compact-detector.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,171 build jobs**, all **3,615 project theorem declarations**
-audited with only the three standard axioms, **196 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **53 independent consumer checks**
-(forty-four Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
+Validation: **4,180 build jobs**, all **3,701 project theorem declarations**
+audited with only the three standard axioms, **205 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **59 independent consumer checks**
+(fifty Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
 (24 catalog/closed-proof consumers and 12 semantic regression guards).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
@@ -511,7 +514,8 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Zeta.zeroDensityCount_le_of_dirichlet_detector` | Explicit detector-to-density count reduction | **proved conditional theorem**; analytic detector property remains a hypothesis | [ZeroDetectionReduction.lean](Legendre/ZeroDetectionReduction.lean) |
 | `Legendre.Zeta.zetaXi_square_equation` | Exact Gaussian identity Xi(s)²=I(s)+I(1−s), Re(s)=1/2 | **proved**; integrability, horizontal limits and central residue included | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
-| `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; crossing the principal zeta pole remains open | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; the compensated shift is supplied below | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
+| `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; sharp Ingham/Huxley counts remain open | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` and Ingham/Huxley density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
@@ -844,19 +848,26 @@ License: **Apache-2.0**, retained in
 Every destination is under `Legendre/Layer4/` and retains its source notice.
 The moment specialization removes character families, uses the local xi
 kernel, raw ordinates and a wider Gaussian. The compact detector specializes
-the initial contour to zeta and leaves its principal-pole shift open.
+the initial contour to zeta and retains the principal pole in its proved shift.
 No additional PNT+ source is copied.
 
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
+| `DensityDetectorDichotomy.lean` | [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `DensityDetectorAnalytic.lean` | [DetectorAnalytic.lean](Legendre/Layer4/DetectorAnalytic.lean) |
 | `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](Legendre/Layer4/DetectorCoefficients.lean) |
+| `DensityCriticalDetector.lean` | [DetectorCriticalMass.lean](Legendre/Layer4/DetectorCriticalMass.lean) |
+| `DensityMollifierBound.lean` | [DetectorGrowth.lean](Legendre/Layer4/DetectorGrowth.lean) |
+| `DensityDetectorHorizontal.lean` | [DetectorHorizontal.lean](Legendre/Layer4/DetectorHorizontal.lean) |
 | `DensityDetectorIntegral.lean` | [DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `DensityDetectorKernel.lean` | [DetectorKernel.lean](Legendre/Layer4/DetectorKernel.lean) |
 | `DensityDetectorKernelLeft.lean` | [DetectorKernelLeft.lean](Legendre/Layer4/DetectorKernelLeft.lean) |
 | `DensityMollifierProduct.lean` | [DetectorProduct.lean](Legendre/Layer4/DetectorProduct.lean) |
 | `DensityDetectorSeries.lean` | [DetectorSeries.lean](Legendre/Layer4/DetectorSeries.lean) |
+| `DensityDetectorShift.lean` | [DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) |
+| `DensityDetectorVertical.lean`, `DensityDetectorShift.lean` | [DetectorVertical.lean](Legendre/Layer4/DetectorVertical.lean) |
 | `DensityDetectorWeight.lean` | [DetectorWeight.lean](Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](Legendre/Layer4/DyadicArithmetic.lean) |
