@@ -117,6 +117,7 @@ inventories match the audit targets and actual axiom output exactly.
 All **107 independent consumers** pass: **62 Layer 4**, nine Layer 3 and
 36 literature checks. Endpoint checks include σ=1/2, σ=3/4 and T=2 with
 a constant uniform in σ. An intentional misuse of Ingham as Huxley is rejected.
+Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
 [Initial mean values](docs/layer4-mean-values.md) ·

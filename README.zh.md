@@ -97,6 +97,7 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 **107 项独立使用检查**全部通过：Layer 4 **62 项**、Layer 3 九项、文献对照 36 项。
 新增端点检查覆盖 σ=1/2、σ=3/4 及 T=2，并保持常数对 σ 统一；
 故意将 Ingham 证明用于 Huxley 的错误检查被 Lean 拒绝。
+本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
 [初始均值估计](docs/layer4-mean-values.md) ·
