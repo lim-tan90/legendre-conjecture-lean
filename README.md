@@ -101,14 +101,15 @@ The compact Möbius detector now has an exact initial right-contour integral,
 with its smoothing scale independent of the former squared-length choice.
 The critical-line shift is now proved with the exact principal zeta residue.
 Its explicit smallness at high ordinates gives a genuine polynomial-or-integral
-zero detector. Critical-line cubic-weight masses are integrable; sharp counts
-for the two alternatives remain open. [Exact scope](docs/layer4-compact-detector.md).
+zero detector. Whole-line weighted moments and separated kernel packing now give a proved
+cubic cardinality bound for the integral alternative. The sharp polynomial
+count and the final density estimates remain open. [Exact scope](docs/layer4-compact-detector.md).
 **Ingham and Huxley remain open; Layer 4 is not complete.**
 
-Validation: **4,180 build jobs**, all **3,701 project theorem declarations**
-audited with only the three standard axioms, **205 Lean files** with zero
-executable `sorry`/`admit`/`sorryAx`, and **59 independent consumer checks**
-(fifty Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
+Validation: **4,193 build jobs**, all **3,788 project theorem declarations**
+audited with only the three standard axioms, **218 Lean files** with zero
+executable `sorry`/`admit`/`sorryAx`, and **65 independent consumer checks**
+(fifty-six Layer 4 and nine Layer 3 regressions). Both standalone checks run in CI. The literature layer adds **36 typed consumers**
 (24 catalog/closed-proof consumers and 12 semantic regression guards).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
@@ -516,6 +517,7 @@ separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; the compensated shift is supplied below | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; sharp Ingham/Huxley counts remain open | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; sharp polynomial counts and complete density bounds remain open | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` and Ingham/Huxley density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
@@ -855,6 +857,7 @@ No additional PNT+ source is copied.
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
+| `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |
 | `DensityDetectorDichotomy.lean` | [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
 | `DensityDetectorAnalytic.lean` | [DetectorAnalytic.lean](Legendre/Layer4/DetectorAnalytic.lean) |
 | `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](Legendre/Layer4/DetectorCoefficients.lean) |
@@ -871,13 +874,25 @@ No additional PNT+ source is copied.
 | `DensityDetectorWeight.lean` | [DetectorWeight.lean](Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](Legendre/Layer4/DyadicArithmetic.lean) |
+| `DensityDyadicShells.lean` | [DyadicHeightShells.lean](Legendre/Layer4/DyadicHeightShells.lean) |
 | `DensityDyadicPartition.lean` | [DyadicPartition.lean](Legendre/Layer4/DyadicPartition.lean) |
 | `GaussianContourShift.lean` | [GaussianContourShift.lean](Legendre/Layer4/GaussianContourShift.lean) |
 | `DensityGaussianFubini.lean` | [GaussianMean.lean](Legendre/Layer4/GaussianMean.lean) |
+| `DensityHeightWeight.lean` | [HeightWeight.lean](Legendre/Layer4/HeightWeight.lean) |
+| `DensityIntegralAlternative.lean` | [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
+| `DensityKernelHeightPacking.lean` | [KernelHeightPacking.lean](Legendre/Layer4/KernelHeightPacking.lean) |
+| `DensityKernelPacking.lean` | [KernelPacking.lean](Legendre/Layer4/KernelPacking.lean) |
 | `DensityMomentCutoff.lean` | [MomentCutoff.lean](Legendre/Layer4/MomentCutoff.lean) |
+| `DensityMomentDyadic.lean` | [MomentDyadic.lean](Legendre/Layer4/MomentDyadic.lean) |
 | `DensityGaussianCauchy.lean` | [MomentGaussian.lean](Legendre/Layer4/MomentGaussian.lean) |
+| `DensityCriticalMass.lean`, `DensityPackedProduct.lean` | [PackedCriticalMass.lean](Legendre/Layer4/PackedCriticalMass.lean) |
+| `DensityPackedMoment.lean` | [PackedMoment.lean](Legendre/Layer4/PackedMoment.lean) |
+| `DensityPackedMoment.lean`, `DensityPackedCharacterMoments.lean` | [PackedZetaMoment.lean](Legendre/Layer4/PackedZetaMoment.lean) |
 | `DensityFatou.lean` | [PositiveLimit.lean](Legendre/Layer4/PositiveLimit.lean) |
+| `DensityWeightedProductCauchy.lean` | [ProductCauchy.lean](Legendre/Layer4/ProductCauchy.lean) |
+| `DensityWeightedMoment.lean` | [WeightedHeightMoment.lean](Legendre/Layer4/WeightedHeightMoment.lean) |
 | `DensityWeightedCauchy.lean`, `DensityGaussianCauchy.lean` | [WeightedIntegral.lean](Legendre/Layer4/WeightedIntegral.lean) |
+| `DensityWeightedFourth.lean`, `DensityWeightedMollifier.lean` | [WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) |
 | `DensityDyadicMean.lean` | [XiDyadicMean.lean](Legendre/Layer4/XiDyadicMean.lean) |
 | `DensityFiniteContinuity.lean` | [XiFiniteContinuity.lean](Legendre/Layer4/XiFiniteContinuity.lean) |
 | `DensityFiniteSquareMean.lean` | [XiFiniteMean.lean](Legendre/Layer4/XiFiniteMean.lean) |

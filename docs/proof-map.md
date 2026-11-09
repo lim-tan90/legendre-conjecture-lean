@@ -458,8 +458,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.57 | Compensated critical-line detector shift | `Legendre.Density.Detector.Smooth.detector_zero_contour_shift`, `detectorMean_at_zero` | **proved**, both vertical lines integrable and horizontal edges vanish beyond the shifted pole |
 | 4.58 | Explicit principal-pole smallness and genuine high-zero detection | `Legendre.Density.Detector.Smooth.detectorPrincipalPole_small`, `detector_high_zero_dichotomy` | **proved**, T>=64, |Im(s)|>=T, X<=4T, 4<=Y<=T^2; one branch is >=1/16 |
 | 4.59 | Uniform critical-line cubic masses | `Legendre.Density.Detector.Smooth.criticalProduct_weighted_integrable`, `detectorCriticalIntegral_uniform_bound` | **proved**, no named density input; sharp packing/counting remains open |
+| 4.60 | Dyadic whole-line moment transfer | `Legendre.Density.Moment.momentHeightShell_cover`, `moment_weighted_moment` | **proved**, disjoint measurable shells, summable cubic budgets and actual integrability |
+| 4.61 | Actual weighted zeta fourth and Mobius second moments | `Legendre.Density.Moment.weighted_zeta_fourth_moment`, `weighted_mollifier_mean` | **proved**, C T log^6 T and C(X+T)(1+log X) on the whole real line |
+| 4.62 | Uniform separated cubic kernel packing | `Legendre.Density.Moment.moment_kernel_height_packing`, `packed_zeta_fourth_moment`, `packed_mollifier_mean` | **proved**, one constant and the original height weight, no cardinality loss |
+| 4.63 | Packed literal critical-mass fourth power | `Legendre.Density.Moment.packed_critical_mass_fourth` | **proved**, (sum masses)^4 <= C R T (X+T)^2 log^6 T (1+log X)^2 |
+| 4.64 | Cubic count for the integral branch | `Legendre.Density.Moment.integral_alternative_count` | **proved**, R^3 <= C [256 Y^(1/2-sigma)/(sigma-1/2)]^4 T (X+T)^2 log^6 T (1+log X)^2; no zero-density estimate assumed |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports the proved infrastructure; finite additive large sieve, linear mean-square error, optimized separated samples, Gram bounds and weighted detection exported; Ingham/Huxley remain open |
-| 4.validation | Fifty independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
+| 4.validation | Fifty-six independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
@@ -565,3 +570,10 @@ project theorem declarations audited; 205 Lean sources without executable
 placeholders. Both independent declaration inventories match the audit and
 its actual axiom output. All 95 independent consumers pass: 50 Layer 4,
 9 Layer 3 and 36 literature checks. Ingham/Huxley remain open.
+
+Weighted-moment and integral-branch validation (2026-11-09): full build 4,193
+jobs, all 3,788 project theorem declarations audited, 218 Lean sources without
+executable placeholders. Both independent inventories match the axiom audit.
+All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
+The tests include zero height in the dyadic cover, adjacent separated samples,
+T=2 weighted moments, X=1 and the singleton packed critical mass.

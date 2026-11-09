@@ -243,6 +243,19 @@ import all Legendre.DirichletMeanValue
 import all Legendre.DirichletLargeValues
 import all Legendre.ZeroDensity
 import all Legendre.Layer4
+import all Legendre.Layer4.CubicIntegrability
+import all Legendre.Layer4.DyadicHeightShells
+import all Legendre.Layer4.HeightWeight
+import all Legendre.Layer4.IntegralAlternative
+import all Legendre.Layer4.KernelHeightPacking
+import all Legendre.Layer4.KernelPacking
+import all Legendre.Layer4.MomentDyadic
+import all Legendre.Layer4.PackedCriticalMass
+import all Legendre.Layer4.PackedMoment
+import all Legendre.Layer4.PackedZetaMoment
+import all Legendre.Layer4.ProductCauchy
+import all Legendre.Layer4.WeightedHeightMoment
+import all Legendre.Layer4.WeightedZetaMoment
 import all Legendre.Layer4.DetectorAlternative
 import all Legendre.Layer4.DetectorAnalytic
 import all Legendre.Layer4.DetectorCriticalMass
@@ -4169,3 +4182,92 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_principal_pole_height64_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_principal_pole_nonzero_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_principal_pole_nonzero_consumer._simp_1_4"
+
+-- Weighted whole-line moments and integral-branch count: complete inventory.
+#print axioms Legendre.Density.Moment.count_cube
+#print axioms Legendre.Density.Moment.criticalMass_eq_shift
+#print axioms Legendre.Density.Moment.criticalWeight_integrable
+#print axioms Legendre.Density.Moment.criticalWeight_le_inverse_square
+#print axioms Legendre.Density.Moment.criticalWeight_le_one
+#print axioms Legendre.Density.Moment.criticalWeight_separated_sum
+#print axioms Legendre.Density.Moment.criticalWeight_shift_integrable
+#print axioms Legendre.Density.Moment.criticalWeight_shift_integral
+#print axioms Legendre.Density.Moment.critical_mollifier_mean
+#print axioms Legendre.Density.Moment.dyadic_height_log
+#print axioms Legendre.Density.Moment.integral_alternative_count
+#print axioms Legendre.Density.Moment.mollifier_critical_continuous
+#print axioms Legendre.Density.Moment.momentHeightBall._proof_1
+#print axioms Legendre.Density.Moment.momentHeightBall_mem
+#print axioms Legendre.Density.Moment.momentHeightBall_mono
+#print axioms Legendre.Density.Moment.momentHeightEnergyConstant._proof_1
+#print axioms Legendre.Density.Moment.momentHeightEnergyConstant._proof_2
+#print axioms Legendre.Density.Moment.momentHeightEnergyConstant_pos
+#print axioms Legendre.Density.Moment.momentHeightShell.eq_1
+#print axioms Legendre.Density.Moment.momentHeightShell.eq_2
+#print axioms Legendre.Density.Moment.momentHeightShell_cover
+#print axioms Legendre.Density.Moment.momentHeightShell_disjoint
+#print axioms Legendre.Density.Moment.momentHeightShell_measurable
+#print axioms Legendre.Density.Moment.momentHeightShell_subset
+#print axioms Legendre.Density.Moment.momentHeightWeight_continuous
+#print axioms Legendre.Density.Moment.momentHeightWeight_eq
+#print axioms Legendre.Density.Moment.momentHeightWeight_nonneg
+#print axioms Legendre.Density.Moment.momentHeightWeight_shell
+#print axioms Legendre.Density.Moment.momentKernelPackingConstant._proof_1
+#print axioms Legendre.Density.Moment.momentKernelPackingConstant._proof_2
+#print axioms Legendre.Density.Moment.momentKernelPackingConstant._proof_3
+#print axioms Legendre.Density.Moment.momentKernelPackingConstant._proof_4
+#print axioms Legendre.Density.Moment.momentKernelPackingConstant_pos
+#print axioms Legendre.Density.Moment.momentShellBudget._proof_1
+#print axioms Legendre.Density.Moment.momentShellBudget._proof_2
+#print axioms Legendre.Density.Moment.momentShellBudget.eq_1
+#print axioms Legendre.Density.Moment.momentShellBudget.eq_2
+#print axioms Legendre.Density.Moment.momentShellBudget_nonneg
+#print axioms Legendre.Density.Moment.momentShellBudget_sum
+#print axioms Legendre.Density.Moment.momentShellBudget_summable
+#print axioms Legendre.Density.Moment.moment_cubic_mixed_integrable
+#print axioms Legendre.Density.Moment.moment_finite_product_cauchy
+#print axioms Legendre.Density.Moment.moment_finite_product_fourth
+#print axioms Legendre.Density.Moment.moment_height_energy_summable
+#print axioms Legendre.Density.Moment.moment_indexed_kernel_packing
+#print axioms Legendre.Density.Moment.moment_kernel_far_bound
+#print axioms Legendre.Density.Moment.moment_kernel_height_packing
+#print axioms Legendre.Density.Moment.moment_packed_moment
+#print axioms Legendre.Density.Moment.moment_packed_pointwise
+#print axioms Legendre.Density.Moment.moment_product_cauchy
+#print axioms Legendre.Density.Moment.moment_separated_card
+#print axioms Legendre.Density.Moment.moment_weighted_moment
+#print axioms Legendre.Density.Moment.moment_weighted_shell_bound
+#print axioms Legendre.Density.Moment.packed_critical_mass_fourth
+#print axioms Legendre.Density.Moment.packed_mollifier_mean
+#print axioms Legendre.Density.Moment.packed_scalar_moment
+#print axioms Legendre.Density.Moment.packed_zeta_fourth_moment
+#print axioms Legendre.Density.Moment.weighted_mollifier_mean
+#print axioms Legendre.Density.Moment.weighted_zeta_fourth_moment
+#print axioms Legendre.Density.Moment.zeta_critical_continuous
+#print axioms Legendre.Literature.layer4_weighted_moment_comparator
+#audit_private_axioms "_private.Legendre.Layer4.CubicIntegrability.0.Legendre.Density.Moment.criticalWeight_integrable._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_cover._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_disjoint._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_disjoint._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.IntegralAlternative.0.Legendre.Density.Moment.integral_alternative_count._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ProductCauchy.0.Legendre.Density.Moment.moment_finite_product_fourth._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_2"
+#audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentShellBudget.match_1.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentShellBudget.match_1.eq_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.Smooth.criticalWeight.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightBall.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightShell.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightShell.eq_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.momentHeightWeight.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_cubic_kernel_adjacent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_cubic_kernel_adjacent_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_cubic_kernel_adjacent_consumer._simp_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_height_shell_zero_scale_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_height_weight_origin_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_packed_mass_singleton_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_packed_mass_singleton_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_fourth_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_mollifier_one_consumer"

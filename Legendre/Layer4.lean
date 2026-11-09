@@ -28,6 +28,7 @@ public import Legendre.Layer4.ZetaFourthMoment
 public import Legendre.Layer4.DetectorIntegral
 public import Legendre.Layer4.DetectorKernelLeft
 public import Legendre.Layer4.DetectorCriticalMass
+public import Legendre.Layer4.IntegralAlternative
 
 /-!
 # Layer 4: verified initial zero-density and mean-value infrastructure
@@ -51,6 +52,8 @@ the Ingham/Huxley zero-density estimates remain open.
 The compact Mobius detector has an exact initial contour and a proved shift
 to the critical line, retaining the principal zeta residue. Explicit high
 ordinates make that residue small and give a polynomial-or-integral detector.
-Uniform cubic-weight critical masses are integrable. Counting the two
-alternatives sharply enough for Ingham/Huxley remains open.
+Uniform cubic-weight critical masses are integrable. Whole-line weighted
+zeta/mollifier moments and separated kernel packing give a cubic cardinality
+bound for the integral branch. Sharp polynomial-branch counts and the final
+Ingham/Huxley density estimates remain open.
 -/

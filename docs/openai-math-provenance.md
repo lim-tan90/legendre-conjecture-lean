@@ -229,6 +229,7 @@ appears in both README translations. Destination paths below are relative to
 |---|---|
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](../Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](../Legendre/Layer4/BlockWeights.lean) |
+| `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](../Legendre/Layer4/CubicIntegrability.lean) |
 | `DensityDetectorDichotomy.lean` | [DetectorAlternative.lean](../Legendre/Layer4/DetectorAlternative.lean) |
 | `DensityDetectorAnalytic.lean` | [DetectorAnalytic.lean](../Legendre/Layer4/DetectorAnalytic.lean) |
 | `DensityDetectorCoefficients.lean` | [DetectorCoefficients.lean](../Legendre/Layer4/DetectorCoefficients.lean) |
@@ -245,13 +246,25 @@ appears in both README translations. Destination paths below are relative to
 | `DensityDetectorWeight.lean` | [DetectorWeight.lean](../Legendre/Layer4/DetectorWeight.lean) |
 | `DensityHarmonicDivisors.lean`, `DensityShiftedDivisorEnergy.lean` | [DivisorEnergy.lean](../Legendre/Layer4/DivisorEnergy.lean) |
 | `DensityDyadicArithmetic.lean` | [DyadicArithmetic.lean](../Legendre/Layer4/DyadicArithmetic.lean) |
+| `DensityDyadicShells.lean` | [DyadicHeightShells.lean](../Legendre/Layer4/DyadicHeightShells.lean) |
 | `DensityDyadicPartition.lean` | [DyadicPartition.lean](../Legendre/Layer4/DyadicPartition.lean) |
 | `GaussianContourShift.lean` | [GaussianContourShift.lean](../Legendre/Layer4/GaussianContourShift.lean) |
 | `DensityGaussianFubini.lean` | [GaussianMean.lean](../Legendre/Layer4/GaussianMean.lean) |
+| `DensityHeightWeight.lean` | [HeightWeight.lean](../Legendre/Layer4/HeightWeight.lean) |
+| `DensityIntegralAlternative.lean` | [IntegralAlternative.lean](../Legendre/Layer4/IntegralAlternative.lean) |
+| `DensityKernelHeightPacking.lean` | [KernelHeightPacking.lean](../Legendre/Layer4/KernelHeightPacking.lean) |
+| `DensityKernelPacking.lean` | [KernelPacking.lean](../Legendre/Layer4/KernelPacking.lean) |
 | `DensityMomentCutoff.lean` | [MomentCutoff.lean](../Legendre/Layer4/MomentCutoff.lean) |
+| `DensityMomentDyadic.lean` | [MomentDyadic.lean](../Legendre/Layer4/MomentDyadic.lean) |
 | `DensityGaussianCauchy.lean` | [MomentGaussian.lean](../Legendre/Layer4/MomentGaussian.lean) |
+| `DensityCriticalMass.lean`, `DensityPackedProduct.lean` | [PackedCriticalMass.lean](../Legendre/Layer4/PackedCriticalMass.lean) |
+| `DensityPackedMoment.lean` | [PackedMoment.lean](../Legendre/Layer4/PackedMoment.lean) |
+| `DensityPackedMoment.lean`, `DensityPackedCharacterMoments.lean` | [PackedZetaMoment.lean](../Legendre/Layer4/PackedZetaMoment.lean) |
 | `DensityFatou.lean` | [PositiveLimit.lean](../Legendre/Layer4/PositiveLimit.lean) |
+| `DensityWeightedProductCauchy.lean` | [ProductCauchy.lean](../Legendre/Layer4/ProductCauchy.lean) |
+| `DensityWeightedMoment.lean` | [WeightedHeightMoment.lean](../Legendre/Layer4/WeightedHeightMoment.lean) |
 | `DensityWeightedCauchy.lean`, `DensityGaussianCauchy.lean` | [WeightedIntegral.lean](../Legendre/Layer4/WeightedIntegral.lean) |
+| `DensityWeightedFourth.lean`, `DensityWeightedMollifier.lean` | [WeightedZetaMoment.lean](../Legendre/Layer4/WeightedZetaMoment.lean) |
 | `DensityDyadicMean.lean` | [XiDyadicMean.lean](../Legendre/Layer4/XiDyadicMean.lean) |
 | `DensityFiniteContinuity.lean` | [XiFiniteContinuity.lean](../Legendre/Layer4/XiFiniteContinuity.lean) |
 | `DensityFiniteSquareMean.lean` | [XiFiniteMean.lean](../Legendre/Layer4/XiFiniteMean.lean) |
@@ -323,3 +336,21 @@ project theorem declarations audited; 205 Lean sources without executable
 placeholders. Both independent declaration inventories match the audit and
 its actual axiom output. All 95 independent consumers pass: 50 Layer 4,
 9 Layer 3 and 36 literature checks. Ingham/Huxley remain open.
+
+## Weighted moments and the integral branch (2026-11-09)
+
+The additional sources in the table above supply disjoint height shells,
+whole-line moment summation, separated cubic-kernel packing, weighted product
+Cauchy inequalities and the integral-alternative count. The zeta specialization
+uses raw ordinates and the already proved sixth-log fourth moment. The Mobius
+second moment follows directly from the local sharp Dirichlet mean, avoiding
+character families. The detection threshold is 1/16, hence the factor 256 in
+the integral-branch count. The upstream pin, source directory and retained
+Apache-2.0 license are unchanged. No additional PNT+ source is copied.
+
+Weighted-moment and integral-branch validation (2026-11-09): full build 4,193
+jobs, all 3,788 project theorem declarations audited, 218 Lean sources without
+executable placeholders. Both independent inventories match the axiom audit.
+All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
+The tests include zero height in the dyadic cover, adjacent separated samples,
+T=2 weighted moments, X=1 and the singleton packed critical mass.

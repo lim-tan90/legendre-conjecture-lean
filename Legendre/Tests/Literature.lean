@@ -108,8 +108,9 @@ theorem comparator_layer3 : ClassicalPNTError :=
   layer3_comparator
 
 /-- layer4: statement coverage. -/
-theorem comparator_layer4 : LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark :=
+theorem comparator_layer4 : LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark :=
   ⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,
-    layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator⟩
+    layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,
+    layer4_weighted_moment_comparator⟩
 
 end Legendre.Tests.Literature

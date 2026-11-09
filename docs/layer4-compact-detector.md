@@ -115,8 +115,8 @@ For every 1/2<sigma<=Re(s)<=1 and Y>=1, it proves the uniform bound
 |J_X(s,Y)| <= [16 Y^(1/2-sigma)/(sigma-1/2)] B_X(Im(s)).
 ```
 
-The next analytic obligations are packing these masses, proving whole-line
-weighted moments, sharply counting the polynomial branch, and balancing
+Whole-line moments, mass packing and the integral-branch count are now supplied
+below. The next obligations are the sharp polynomial count and balancing
 the parameters. The Ingham/Huxley density targets and Layer 4 completion
 remain open. The literature comparison now includes the proved compensated
 detector benchmark with its exact numerical range.
@@ -160,3 +160,43 @@ project theorem declarations audited; 205 Lean sources without executable
 placeholders. Both independent declaration inventories match the audit and
 its actual axiom output. All 95 independent consumers pass: 50 Layer 4,
 9 Layer 3 and 36 literature checks. Ingham/Huxley remain open.
+
+## Whole-line moments and the integral-branch count
+
+The weight W_T(v)=(1+|v/T|)^(-3) transfers compact-height moment bounds to
+the whole line by disjoint dyadic shells. The weighted zeta fourth moment
+is <=C T log^6 T; the weighted Mobius second moment is
+<=C(X+T)(1+log X), with actual integrability in both cases.
+
+For one-separated ordinates t_i in [-T,T], the cubic kernels satisfy
+sum_i (1+|v-t_i|)^(-3) <= K W_T(v), for one absolute K. This packing bound
+has no factor R=card(S). Weighted Cauchy inequalities then prove
+
+```
+(sum_i B_X(t_i))^4 <= C R T (X+T)^2 (log T)^6 (1+log X)^2.
+```
+
+The exact mass bound on J_X implies, for points in the integral branch
+with threshold 1/16 and sigma<=Re(s)<=1,
+
+```
+R^3 <= C [256 Y^(1/2-sigma)/(sigma-1/2)]^4
+         T (X+T)^2 (log T)^6 (1+log X)^2.
+```
+
+All constants precede the point set and parameters. This is an actual branch
+count derived from the proved moments, not an assumed zero-density bound.
+The logarithmic fourth moment remains the sixth-log variant. The polynomial
+branch and the final Ingham/Huxley estimates remain open.
+
+The additional `Layer4` files adapt the dyadic-height, weighted-moment,
+kernel-packing, product-Cauchy and integral-alternative slices of the same
+openai/math pin and Apache-2.0 license. Both READMEs and the provenance
+inventory list all exact source filenames and destinations.
+
+Weighted-moment and integral-branch validation (2026-11-09): full build 4,193
+jobs, all 3,788 project theorem declarations audited, 218 Lean sources without
+executable placeholders. Both independent inventories match the axiom audit.
+All 101 standalone consumers pass: 56 Layer 4, 9 Layer 3 and 36 literature.
+The tests include zero height in the dyadic cover, adjacent separated samples,
+T=2 weighted moments, X=1 and the singleton packed critical mass.

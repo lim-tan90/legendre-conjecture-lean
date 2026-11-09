@@ -439,4 +439,62 @@ theorem layer4_critical_mass_integrable_consumer :
       ‖Detector.Smooth.criticalProduct 1 0 u‖) :=
   Detector.Smooth.criticalProduct_weighted_integrable 1 0
 
+/-- The whole-line weight retains unit mass at ordinate zero, for every scale. -/
+theorem layer4_height_weight_origin_consumer (T : ℝ) : Moment.momentHeightWeight T 0 = 1 := by
+  simp [Moment.momentHeightWeight,Detector.Smooth.criticalWeight]
+
+/-- Zero height is excluded from the shell-cover theorem for a reason. -/
+theorem layer4_height_shell_zero_scale_consumer :
+    (⋃ j : ℕ, Moment.momentHeightShell 0 j) = ({0} : Set ℝ) := by
+  ext x
+  constructor
+  · intro hx
+    obtain ⟨j,hj⟩ := Set.mem_iUnion.mp hx
+    have hB := Moment.momentHeightShell_subset 0 j hj
+    simpa [Moment.momentHeightBall] using hB
+  · intro hx
+    apply Set.mem_iUnion.mpr
+    refine ⟨0,?_⟩
+    simpa [Moment.momentHeightShell,Moment.momentHeightBall] using hx
+
+/-- Adjacent ordinates achieve the permitted unit separation. -/
+theorem layer4_cubic_kernel_adjacent_consumer (v : ℝ) :
+    (∑ x ∈ ({0,1} : Finset ℝ), Detector.Smooth.criticalWeight (v-x)) ≤ 1+4*Real.pi^2/3 := by
+  apply Moment.criticalWeight_separated_sum
+  intro x hx y hy hxy
+  simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+  rcases hx with rfl | rfl <;> rcases hy with rfl | rfl <;> norm_num at *
+
+/-- The exact lower height bound is covered by the weighted fourth moment. -/
+theorem layer4_weighted_fourth_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧ Integrable (fun t : ℝ => Moment.momentHeightWeight 2 t*
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ∧
+      (∫ t : ℝ, Moment.momentHeightWeight 2 t*
+        ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤ C*2*(Real.log 2)^6 := by
+  obtain ⟨C,hC,h⟩ := Moment.weighted_zeta_fourth_moment
+  exact ⟨C,hC,h 2 (by norm_num)⟩
+
+/-- Cutoff one is included in the weighted Mobius second moment. -/
+theorem layer4_weighted_mollifier_one_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      (∫ t : ℝ, Moment.momentHeightWeight 2 t*
+        ‖Detector.finiteSeries (ArithmeticFunction.moebius : ArithmeticFunction ℂ) 1
+          ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2) ≤ 3*C := by
+  obtain ⟨C,hC,h⟩ := Moment.weighted_mollifier_mean
+  refine ⟨C,hC,?_⟩
+  have hh := (h 1 le_rfl 2 (by norm_num)).2
+  norm_num at hh
+  nlinarith
+
+/-- The packed critical mass is bounded even for a single point at height zero. -/
+theorem layer4_packed_mass_singleton_consumer :
+    ∃ C : ℝ, 0 < C ∧ Detector.Smooth.criticalMass 1 0^4 ≤ C*18*(Real.log 2)^6 := by
+  obtain ⟨C,hC,h⟩ := Moment.packed_critical_mass_fourth
+  refine ⟨C,hC,?_⟩
+  have hh := h 1 le_rfl 2 (by norm_num) ({0} : Finset ℝ) id
+    (by intro i hi; simp only [Finset.mem_singleton] at hi; subst i; norm_num)
+    (by intro i hi j hj hij; simp_all)
+  norm_num at hh
+  nlinarith
+
 end Legendre.Tests

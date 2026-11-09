@@ -54,6 +54,17 @@ def LinearMeanSquareBenchmark : Prop :=
 theorem layer4_mean_comparator : LinearMeanSquareBenchmark :=
   Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear
 
+/-- Whole-line cubic-weight fourth moment, including actual integrability. -/
+def WeightedFourthMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+    Integrable (fun t : ℝ => Density.Moment.momentHeightWeight T t*
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ∧
+    (∫ t : ℝ, Density.Moment.momentHeightWeight T t*
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤ C*T*(Real.log T)^6
+
+theorem layer4_weighted_moment_comparator : WeightedFourthMomentBenchmark :=
+  Density.Moment.weighted_zeta_fourth_moment
+
 /-- A proved actual-zero detector, with its numerical range visible. -/
 def CompensatedDetectorBenchmark : Prop :=
   ∀ X : ℕ, 1 ≤ X → ∀ σ t T Y : ℝ, 1/2 < σ → σ ≤ 1 →
