@@ -337,6 +337,11 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 <!-- comparator:legendre1808 -->
 ## 历史进展总览
 
+**仓库当前状态（2026-11-10）：** Layer 3 的经典 PNT 和 Layer 4 的
+**Ingham 1940 零密度指数**现已证明。下表九项历史短区间指数结果仍仅完成陈述形式化；
+已证明的 1940 密度估计尚未闭合 **Ingham 1937 的两项素数间隙结论**。
+Layer 4 仍未全部完成。
+
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
 第 2 版, Courcier, Paris, 1808）：开区间 `(n²,(n+1)²)` 中有素数。`θ < 1/2` 足以推出最终成立；
 在端点 `θ = 1/2` 还需控制常数（例如 `< 2`）。
@@ -347,13 +352,13 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 `Legendre/Conditional.lean` 中的粗粒度 `Prop`，也作为 `Legendre/Layer5.lean`
 中的 `+ε`、常数与阈值约定），但**它的证明没有形式化**。RH 与 Cramér 保留相应条件或猜想身份；对照器不会把它们当作已证明。
 
-| 步骤（按时间） | 原始文献 | 指数 θ | Lean 形式化？ | Lean 代码 |
+| 里程碑 | 原始文献 | 指数 θ | Lean 证明状态 | Lean 代码 |
 |---|---|---|---|---|
 | **Bertrand 公设** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140；证明：P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ 是 — mathlib 证明，已复用](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**  [对照](docs/literature-comparators.md#bertrand1852) <!-- comparator:bertrand1852 --> |
-| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | 不适用 — `(x, 6x/5]`，`x ≥ 25` | **[✅ 是 — 本仓库完整证明](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [对照](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | **1**（改进常数）：`(x, 6x/5]`，`x ≥ 25` | **[✅ 是 — 本仓库完整证明](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [对照](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
 | Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L291)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Statements.lean L291](Legendre/Layer5/Statements.lean#L291)**  [对照](docs/literature-comparators.md#hoheisel1930) <!-- comparator:hoheisel1930 --> |
 | Ingham 1937（Lindelöf 路线） | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L304)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Statements.lean L304](Legendre/Layer5/Statements.lean#L304)**  [对照](docs/literature-comparators.md#ingham1937lindelof) <!-- comparator:ingham1937lindelof --> |
-| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L317)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [对照](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
+| Ingham 1937（零密度路线） | 同上 | 577/925 + ε | **[❌ 素数间隙仍待证明 — 指数陈述 ✅](Legendre/Layer5/Statements.lean#L317)**；[1940 密度指数已另行证明](Legendre/Layer4/InghamDensity.lean) | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [对照](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
 | Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L330)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Statements.lean L330](Legendre/Layer5/Statements.lean#L330)**  [对照](docs/literature-comparators.md#huxley1972) <!-- comparator:huxley1972 --> |
 | Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 11/20 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L342)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Statements.lean L342](Legendre/Layer5/Statements.lean#L342)**  [对照](docs/literature-comparators.md#heathbrowniwaniec1979) <!-- comparator:heathbrowniwaniec1979 --> |
 | Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 23/42 + ε | **[❌ 否 — 无证明，指数陈述 ✅](Legendre/Layer5/Statements.lean#L355)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Statements.lean L355](Legendre/Layer5/Statements.lean#L355)**  [对照](docs/literature-comparators.md#iwaniecpintz1984) <!-- comparator:iwaniecpintz1984 --> |
@@ -375,6 +380,18 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 论文原文的 `+ε`/常数/阈值形式在 `Layer5.lean`，两者之间的等价性**已证明**。
 把假设的 `θ < 1/2` 结果化为勒让德猜想的归约本身，另行在
 **[Reduction.lean L110](Legendre/Reduction.lean#L110)** 中**证明**。
+
+支撑上述目标的解析里程碑现已完成以下部分：
+
+| 解析里程碑 | 当前已证明的估计 | Lean 证明与适用范围 |
+|---|---|---|
+| 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
+| Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
+| 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`，从而有 `≪_ε T^(1+ε)` | **✅ 已证明**：[`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean)。尖锐的 `log^4 T` 目标仍开放。 |
+
+Huxley 曲线零密度估计及全局 `12/5` 指数、Guth–Maynard 零密度估计仍**待证明**。
+[`LayerCoverage.lean`](Legendre/Literature/LayerCoverage.lean) 中的相应对照桥仍需这些
+开放的密度输入；其中的 Ingham 输入现已闭合证明。
 
 ## Lean 中真正验证了什么
 

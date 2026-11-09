@@ -420,6 +420,12 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
+**Repository status (2026-11-10).** The classical PNT in Layer 3 and the
+Ingham **1940 zero-density exponent** in Layer 4 are now proved. The nine
+historical short-interval exponent results below still have statement-level
+formalizations only. In particular, the proved 1940 density estimate does
+not close either Ingham **1937 prime-gap** result. Layer 4 remains incomplete.
+
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
 nombres*, 2nd ed., Courcier, Paris, 1808): primes in the open square intervals.
@@ -433,13 +439,13 @@ exact statement is encoded (both as a coarse `Prop` in
 `Legendre/Layer5.lean`), but **its proof is not formalized**.  The RH and
 Cramér comparators preserve their hypothesis or conjectural status.
 
-| Step (chronological) | Original literature | Exponent θ | Formalized in Lean? | Lean code |
+| Milestone | Original literature | Exponent θ | Lean proof status | Lean code |
 |---|---|---|---|---|
 | **Bertrand's postulate** | J. Bertrand, *Mémoire sur le nombre de valeurs que peut prendre une fonction quand on y permute ses variables*, J. École Polytechnique **17** (1845), 123–140; proof: P. L. Chebyshev, *Mémoire sur les nombres premiers*, J. Math. Pures Appl. **17** (1852), 366–390 | **1** | **[✅ Yes — mathlib proof, re-exported](Legendre/Bertrand.lean#L27)** | **[Bertrand.lean L27](Legendre/Bertrand.lean#L27)**  [compare](docs/literature-comparators.md#bertrand1852) <!-- comparator:bertrand1852 --> |
-| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | n/a — `(x, 6x/5]`, `x ≥ 25` | **[✅ Yes — fully proved here](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [compare](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
+| **Nagura 1952** | J. Nagura, *On the interval containing at least one prime number*, Proc. Japan Acad. **28** (1952), 177–181, [DOI 10.3792/pja/1195570997](https://doi.org/10.3792/pja/1195570997) | **1** (constant improvement): `(x, 6x/5]`, `x ≥ 25` | **[✅ Yes — fully proved here](Legendre/Nagura.lean#L50)** | **[Nagura.lean L41](Legendre/Nagura.lean#L41)** · **[L50](Legendre/Nagura.lean#L50)** · **[PsiBounds.lean L1671](Legendre/Nagura/PsiBounds.lean#L1671)**  [compare](docs/literature-comparators.md#nagura1952) <!-- comparator:nagura1952 --> |
 | Hoheisel 1930 | G. Hoheisel, *Primzahlprobleme in der Analysis*, Sitzungsber. Preuss. Akad. Wiss. (1930), 580–588 | 32999/33000 | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L291)** | **[Conditional.lean L70](Legendre/Conditional.lean#L70)** · **[Statements.lean L291](Legendre/Layer5/Statements.lean#L291)**  [compare](docs/literature-comparators.md#hoheisel1930) <!-- comparator:hoheisel1930 --> |
 | Ingham 1937 (Lindelöf route) | A. E. Ingham, *On the difference between consecutive primes*, Quart. J. Math. Oxford **8** (1937), 255–266 | 5/8 | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L304)** | **[Conditional.lean L74](Legendre/Conditional.lean#L74)** · **[Statements.lean L304](Legendre/Layer5/Statements.lean#L304)**  [compare](docs/literature-comparators.md#ingham1937lindelof) <!-- comparator:ingham1937lindelof --> |
-| Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L317)** | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [compare](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
+| Ingham 1937 (zero-density route) | same paper as above | 577/925 + ε | **[❌ Prime-gap proof open — exponent statement ✅](Legendre/Layer5/Statements.lean#L317)**; [1940 density exponent separately proved](Legendre/Layer4/InghamDensity.lean) | **[Conditional.lean L77](Legendre/Conditional.lean#L77)** · **[Statements.lean L317](Legendre/Layer5/Statements.lean#L317)**  [compare](docs/literature-comparators.md#ingham1937density) <!-- comparator:ingham1937density --> |
 | Huxley 1972 | M. N. Huxley, *On the difference between consecutive primes*, Invent. Math. **15** (1972), 164–170 | 7/12 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L330)** | **[Conditional.lean L80](Legendre/Conditional.lean#L80)** · **[Statements.lean L330](Legendre/Layer5/Statements.lean#L330)**  [compare](docs/literature-comparators.md#huxley1972) <!-- comparator:huxley1972 --> |
 | Heath-Brown–Iwaniec 1979 | D. R. Heath-Brown, H. Iwaniec, *On the difference between consecutive primes*, Invent. Math. **55** (1979), 49–69 | 11/20 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L342)** | **[Conditional.lean L83](Legendre/Conditional.lean#L83)** · **[Statements.lean L342](Legendre/Layer5/Statements.lean#L342)**  [compare](docs/literature-comparators.md#heathbrowniwaniec1979) <!-- comparator:heathbrowniwaniec1979 --> |
 | Iwaniec–Pintz 1984 | H. Iwaniec, J. Pintz, *Primes in short intervals*, Monatsh. Math. **98** (1984), 115–143 | 23/42 + ε | **[❌ No proof — exponent statement ✅](Legendre/Layer5/Statements.lean#L355)** | **[Conditional.lean L86](Legendre/Conditional.lean#L86)** · **[Statements.lean L355](Legendre/Layer5/Statements.lean#L355)**  [compare](docs/literature-comparators.md#iwaniecpintz1984) <!-- comparator:iwaniecpintz1984 --> |
@@ -463,6 +469,19 @@ The nine exponent results are **not** proved.  Their coarse `Prop`s live in
 `Layer5.lean`, and the equivalence between the two is **proved**.  The
 formalized reduction from a hypothetical `θ < 1/2` result to Legendre is
 separately **proved** in **[Reduction.lean L110](Legendre/Reduction.lean#L110)**.
+
+The completed analytic milestones supporting this program are:
+
+| Analytic milestone | Current proved estimate | Lean proof and scope |
+|---|---|---|
+| Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
+| Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
+| Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`, hence `≪_ε T^(1+ε)` | **✅ Proved**: [`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean). The sharp `log^4 T` target remains open. |
+
+Huxley's curved density estimate and global `12/5` exponent, and the
+Guth–Maynard density estimate, remain **open**. Their comparison bridges in
+[`LayerCoverage.lean`](Legendre/Literature/LayerCoverage.lean) still require
+the respective open density input; the Ingham input is now proved.
 
 ## What is actually verified in Lean
 
