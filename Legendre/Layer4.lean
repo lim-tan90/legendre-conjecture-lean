@@ -58,6 +58,25 @@ public import Legendre.Layer4.Exponential.SecondDifference
 public import Legendre.Layer4.Exponential.SeparatedIntervalCount
 public import Legendre.Layer4.Exponential.SeparatedReciprocals
 
+public import Legendre.Layer4.DistributionMomentCutoff
+public import Legendre.Layer4.Exponential.BoundedCriticalBlocks
+public import Legendre.Layer4.Exponential.CriticalBlockCount
+public import Legendre.Layer4.Exponential.CriticalPolynomialCount
+public import Legendre.Layer4.Exponential.CriticalPolynomialMoments
+public import Legendre.Layer4.Exponential.CriticalPolynomialOptimizedMoment
+public import Legendre.Layer4.Exponential.HalaszLargeValues
+public import Legendre.Layer4.Exponential.HalaszPointwise
+public import Legendre.Layer4.Exponential.HalaszScale
+public import Legendre.Layer4.Exponential.HalaszSparseCount
+public import Legendre.Layer4.Exponential.HalaszSubdivision
+public import Legendre.Layer4.Exponential.HalaszTranslation
+public import Legendre.Layer4.Exponential.HalaszTwoTermCount
+public import Legendre.Layer4.Exponential.HeightSubdivision
+public import Legendre.Layer4.FiniteDyadicMoment
+public import Legendre.Layer4.FiniteSquareLayercake
+public import Legendre.Layer4.HalaszCriticalMass
+public import Legendre.Layer4.HalaszMollifierMoment
+
 /-!
 # Layer 4: mean values, actual zero detection and Ingham density
 
@@ -73,7 +92,11 @@ multiplicity restoration prove Ingham's uniform curved density exponent
 Actual logarithmic-phase derivative tests give dyadic correlation cancellation
 C(sqrt(abs(t))+U/abs(t)) for nonzero ordinates. Harmonic packing and Gram
 duality prove unconditional Halasz energy with its R sqrt(T) term, including
-independently varying real parts. Optimized Huxley counts remain open.
+independently varying real parts. Interval subdivision and window optimization
+prove the unconditional two-term large-value count. Bounded critical-line
+polynomials and actual Mobius values have the resulting improved second
+moments, which enter the compact detector critical-mass fourth moment.
+The final Huxley density optimization remains open.
 
 The sharp fourth-moment log^4, Huxley's curved/global 12/5 estimates and
 Guth--Maynard density/large-value targets remain open. Layer 4 is incomplete.

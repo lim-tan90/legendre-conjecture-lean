@@ -415,3 +415,9 @@ declaration inventories match the audit targets and actual axiom output.
 All 246 project Lean files have zero executable placeholders. All 113
 standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
 An intentional use of the nonzero-ordinate kernel at t=0 is rejected.
+
+The subsequent height subdivision, absorption-scale optimization, unconditional
+two-term count, bounded critical-polynomial distributions, finite dyadic moments
+and actual mollifier/critical-mass improvements are local deductions under
+`Legendre/Layer4/` and `Legendre/Layer4/Exponential/`. They use the already
+credited kernel and moment APIs and add no external code port.

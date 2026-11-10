@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "comparison_policy": "exponents up to positive epsilon; harmless multiplicative constants and interval direction allowed; hypotheses and finite/eventual scope retained",
-  "checked_on": "2026-11-10",
+  "checked_on": "2026-11-11",
   "historical_rows": [
     {
       "id": "legendre1808",
@@ -278,10 +278,10 @@
     {
       "id": "layer4",
       "status": "Ingham curved density and fourth-moment height exponent proved; Huxley and sharper targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator⟩",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here. The actual logarithmic-phase kernel and unconditional Halasz energy (including independently varying real parts) are proved; interval subdivision and the final Huxley count remain open."
+      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here. The actual logarithmic-phase kernel and unconditional Halasz energy (including independently varying real parts) are proved; interval subdivision, unconditional two-term large-value counts and the improved actual mollifier/critical-mass moments are proved. The final Huxley density count remains open."
     }
   ],
   "open_analytic_targets": [
@@ -535,6 +535,24 @@
     "Legendre/Layer4/Exponential/SecondDerivativeTest.lean": "layer4",
     "Legendre/Layer4/Exponential/SecondDifference.lean": "layer4",
     "Legendre/Layer4/Exponential/SeparatedIntervalCount.lean": "layer4",
-    "Legendre/Layer4/Exponential/SeparatedReciprocals.lean": "layer4"
+    "Legendre/Layer4/Exponential/SeparatedReciprocals.lean": "layer4",
+    "Legendre/Layer4/Exponential/HeightSubdivision.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszTranslation.lean": "layer4",
+    "Legendre/Layer4/DistributionMomentCutoff.lean": "layer4",
+    "Legendre/Layer4/Exponential/BoundedCriticalBlocks.lean": "layer4",
+    "Legendre/Layer4/Exponential/CriticalBlockCount.lean": "layer4",
+    "Legendre/Layer4/Exponential/CriticalPolynomialCount.lean": "layer4",
+    "Legendre/Layer4/Exponential/CriticalPolynomialMoments.lean": "layer4",
+    "Legendre/Layer4/Exponential/CriticalPolynomialOptimizedMoment.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszLargeValues.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszPointwise.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszScale.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszSparseCount.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszSubdivision.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszTwoTermCount.lean": "layer4",
+    "Legendre/Layer4/FiniteDyadicMoment.lean": "layer4",
+    "Legendre/Layer4/FiniteSquareLayercake.lean": "layer4",
+    "Legendre/Layer4/HalaszCriticalMass.lean": "layer4",
+    "Legendre/Layer4/HalaszMollifierMoment.lean": "layer4"
   }
 }

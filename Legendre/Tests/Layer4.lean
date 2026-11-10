@@ -596,4 +596,65 @@ theorem layer4_halasz_mixed_real_parts_consumer (a : ℕ → ℂ) :
     (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)
   simpa only [Finset.card_univ,Fintype.card_fin,Nat.cast_ofNat,Nat.cast_one,mul_one] using! hh
 
+
+/-- Zero coefficient energy is included in the unconditional count. -/
+theorem layer4_halasz_zero_energy_count_consumer {ι : Type*} (S : Finset ι) (t : ι → ℝ)
+    (ht : ∀ i ∈ S, |t i| ≤ 1)
+    (hs : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|)
+    (hw : ∀ i ∈ S, (1 : ℝ) ≤ ‖∑ n ∈ (Finset.Ioc 1 2 : Finset ℕ),
+      (0 : ℂ)*(n : ℂ)^(-((t i : ℂ)*Complex.I))‖) : S = ∅ := by
+  have hh := Oscillation.halasz_complex_large_values S t (fun _ => 0)
+    1 le_rfl (fun _ => 0) 1 0 0 1 le_rfl zero_lt_one le_rfl (by norm_num)
+    (fun _ _ => ⟨le_rfl,le_rfl⟩) ht hs (by simpa using hw)
+  simp only [coefficientEnergy,verticalCoefficients,zero_mul,norm_zero,zero_pow (by norm_num : (2 : ℕ) ≠ 0),
+    Finset.sum_const_zero,Oscillation.halaszLargeValueBound,mul_zero,zero_div,add_zero] at hh
+  exact Finset.card_eq_zero.mp (by exact_mod_cast (le_antisymm hh (Nat.cast_nonneg S.card)))
+
+/-- A common translate can be arbitrarily far outside the original ordinate window. -/
+theorem layer4_halasz_shifted_mollifier_head_consumer (c : ℝ) :
+    (∑ i ∈ (Finset.univ : Finset (Fin 2)),
+      ‖Detector.finiteSeries (ArithmeticFunction.moebius : ArithmeticFunction ℂ) 1
+        ((1/2 : ℂ)+(((i.val : ℝ)+c : ℝ) : ℂ)*Complex.I)‖^2) ≤
+      Moment.halaszMollifierMomentBound 1 0 1 2 := by
+  have hh := Moment.mollifier_sampled_halasz (Finset.univ : Finset (Fin 2))
+    (fun i => (i.val : ℝ)) 1 0 le_rfl (by norm_num) 1 c le_rfl
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)
+  simpa only [Finset.card_univ,Fintype.card_fin,Nat.cast_ofNat] using! hh
+
+/-- The packed analytic bound retains the lower allowed height T=2 and cutoff X=1. -/
+theorem layer4_halasz_packed_height_two_consumer :
+    (∑ i ∈ (Finset.univ : Finset (Fin 2)), ∫ v : ℝ,
+      Detector.Smooth.criticalWeight (v-(i.val : ℝ))*
+      ‖Detector.finiteSeries (ArithmeticFunction.moebius : ArithmeticFunction ℂ) 1
+        ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^2) ≤
+      (∫ u : ℝ, Detector.Smooth.criticalWeight u)*Moment.halaszMollifierMomentBound 1 0 2 2 := by
+  have hh := (Moment.packed_mollifier_halasz (Finset.univ : Finset (Fin 2))
+    (fun i => (i.val : ℝ)) 1 0 le_rfl (by norm_num) 2 le_rfl
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)).2
+  simpa only [Finset.card_univ,Fintype.card_fin,Nat.cast_ofNat] using! hh
+
+/-- No dyadic levels are required when amplitudes include the splitting endpoint. -/
+theorem layer4_dyadic_amplitude_endpoint_consumer (x : Fin 2 → ℝ)
+    (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 2) : (∑ i, (x i)^2) ≤ 8 := by
+  have hh := Moment.finite_dyadic_second_moment (Finset.univ : Finset (Fin 2)) x
+    0 2 0 0 (by norm_num) le_rfl le_rfl
+    (by intro i hi; simpa only [pow_zero,mul_one] using hx i)
+    (by intro j hj; simp at hj)
+  convert! hh using 1 <;> norm_num
+
+/-- The optimized cutoff includes equality B=R, rather than demanding a strict gap. -/
+theorem layer4_balanced_moment_cutoff_consumer :
+    ∃ V : ℝ, 2 ≤ V ∧ V^2+8/V^4 ≤ 5 := by
+  simpa using! Moment.exists_balanced_moment_cutoff 1 1 zero_lt_one le_rfl
+
+/-- Empty sample families need no positivity assumption on the coefficient energy. -/
+theorem layer4_halasz_empty_polynomial_count_consumer :
+    ((∅ : Finset ℕ).card : ℝ) ≤ Oscillation.criticalPolynomialCountCost 1 1*
+      (1/(2 : ℝ)^2+1/(2 : ℝ)^6) := by
+  exact Oscillation.critical_polynomial_shifted_count (∅ : Finset ℕ) (fun _ => 0)
+    1 le_rfl (fun _ => 0) (by intro n; norm_num) 1 100 2 le_rfl le_rfl
+    (by simp) (by simp) (by simp)
+
 end Legendre.Tests

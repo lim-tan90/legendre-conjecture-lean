@@ -75,8 +75,64 @@ sum_j |sum_{U<n<=2U} a(n)n^(-beta_j-it_j)|^2
 ```
 
 No common vertical line is imposed on the samples. This permits use at actual
-zeros with varying real parts. Interval subdivision, optimized large-value
-counts and the final Huxley density estimate remain further obligations.
+zeros with varying real parts. Interval subdivision and the optimized two-term
+large-value count below are now proved. Final Huxley density remains open.
+
+## Optimized large values and actual mollifier moments
+
+For T>=1 and W>0, the short-window absorption scale
+`H0=W^4/(8 B^2 C^2 E_sigma^2)`, with `B=2+log^2(2U)`, and an exact finite
+height cover prove the unconditional count
+
+```
+R <= K (1+log(2U))^6 (1+log(2T))
+       [U E_sigma/W^2 + U T E_sigma^3/W^6],
+K = (18+864 C^2)(1+2C) > 0.
+```
+
+Finite Cauchy and unit separation cover the dense and zero-energy cases.
+`Literature.layer4_actual_halasz_large_values_comparator` is a closed proof
+of the independently stated benchmark. It assumes actual large values,
+unit spacing and a strip of width at most one; it assumes no kernel or density bound.
+
+For bounded coefficients, dyadic critical blocks have energy at most one.
+The full polynomial P_X then satisfies, for X>=1 and W>=2,
+
+```
+#{j: |P_X(1/2+it_j)|>=W}
+ <= K0 X (1+log X)^13 (1+log(2T)) [W^(-2)+T W^(-6)],
+K0 = 256 K 4^6 (2/log 2)^7 > 0.
+```
+
+Twisting coefficients preserves their norms, so the same bound holds for
+`t_j+c` for every common real shift c, without enlarging T.
+Finite dyadic layer summation proves
+
+```
+sum_j x_j^2 <= R V^2+4 A J+8 B/V^4
+```
+
+from the actual two-term distribution at levels V*2^j, j<J, amplitudes bounded
+by V*2^J. Choosing an amplitude V>=2 proves, for the actual Mobius polynomial,
+X<=2^J and A=4+K0 X(1+log X)^13(1+log(2T)),
+
+```
+sum_j |M_X(1/2+i(t_j+c))|^2 <= 4 A J+5 R^(2/3) (AT)^(1/3).
+```
+
+The bound includes X=1, J=0 and the empty sample family. Integrating the common
+shift against `w(u)=(1+abs(u))^(-3)` gives the corresponding packed mollifier
+mean. Combined with the proved packed zeta fourth moment and finite product
+Cauchy, this proves
+
+```
+(sum_j criticalMass(X,t_j))^4
+ <= C0 R T log^6(T) [4 A J+5 R^(2/3)(AT)^(1/3)]^2
+```
+
+for T>=2, with an existential C0>0 uniform in X,J,T and the sample family.
+All quantities are the actual integrals used by the compact detector.
+The final detector polynomial estimate and Huxley parameter balance remain open.
 
 ## Sources and public interface
 

@@ -488,7 +488,9 @@ exponent target with arbitrary positive epsilon. C is existential, not numerical
 The actual logarithmic-phase kernel C(sqrt(abs t)+U/abs t), harmonic packing
 and unconditional Halasz energy with an explicit R sqrt(T) term are now proved,
 also for independently varying real parts. See [the exact analytic input](layer4-exponential-large-values.md).
-Interval subdivision and optimized Huxley counts remain open.
+Interval subdivision, the unconditional two-term large-value count, full critical-line
+polynomial counts and improved actual mollifier/critical-mass moments are proved.
+The final Huxley density parameter optimization remains open.
 Huxley/Guth–Maynard and the sharp fourth-moment log^4 remain open.
 This does not prove either Ingham 1937 prime-gap statement.
 See [initial mean values](layer4-mean-values.md),

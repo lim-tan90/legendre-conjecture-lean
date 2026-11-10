@@ -58,7 +58,7 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 4：均值估计、大筛与六次对数四阶矩及带补偿检测器（2026-11-09）</strong></summary>
+<summary><strong>Layer 4：Ingham 密度、解析大值计数与实际检测器矩（2026-11-11）</strong></summary>
 
 **入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
@@ -91,8 +91,10 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 `layer4_ingham_comparator` 已为闭合证明。这不等于不同的 Ingham 1937 素数短区间结论。[精确范围](docs/layer4-compact-detector.md)。
 实际对数相位相关核现已证明为 `C(sqrt(|t|)+U/|t|)`；
 倒数求和的对数界与有限 Gram 对偶性进一步给出含显式 `R sqrt(T)` 项的
-无条件 Halász 能量界，也允许各样本实部独立变化。区间细分、优化大值计数
-及最终 Huxley 密度仍待完成。[精确陈述与常数](docs/layer4-exponential-large-values.md)。
+无条件 Halász 能量界，也允许各样本实部独立变化。区间细分和窗口优化现已证明
+两项大值界 `R ≪ log^6(2U) log(2T) (UE/W²+UTE³/W⁶)`。进一步得到实际 Möbius
+多项式二阶矩中的 `R^(2/3)(AT)^(1/3)` 项，对共同纵向平移一致，
+并已接入紧支撑检测器的临界质量四阶矩。最终 Huxley 密度参数优化仍待完成。[精确陈述与常数](docs/layer4-exponential-large-values.md)。
 **Huxley、Guth–Maynard 仍开放，Layer 4 尚未完成。**
 
 验证（2026-11-10）：**4,242 项构建**、**全部 4,070 个项目定理声明**
@@ -392,7 +394,8 @@ Layer 4 仍未全部完成。
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
 | Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`，从而有 `≪_ε T^(1+ε)` | **✅ 已证明**：[`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean)。尖锐的 `log^4 T` 目标仍开放。 |
-| Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分及最终 Huxley 计数仍待完成。 |
+| Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分、两项大值计数和实际 Möbius／临界质量矩的加强界均已证明；最终 Huxley 密度仍开放。 |
+| 解析大值计数及实际 Möbius 矩（Layer 4） | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`；实际 Möbius 二阶矩中的加强项 `R^(2/3)(AT)^(1/3)` | **✅ 已证明**：闭合的 [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean)、[加权 Möbius 矩](Legendre/Layer4/HalaszMollifierMoment.lean) 及[实际临界质量矩](Legendre/Layer4/HalaszCriticalMass.lean)。最终 Huxley 密度参数优化仍待完成。 |
 
 Huxley 曲线零密度估计及全局 `12/5` 指数、Guth–Maynard 零密度估计仍**待证明**。
 [`LayerCoverage.lean`](Legendre/Literature/LayerCoverage.lean) 中的相应对照桥仍需这些
@@ -458,6 +461,7 @@ Huxley 曲线零密度估计及全局 `12/5` 指数、Guth–Maynard 零密度�
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；后续已补上带主极点项的路径移动 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；现已用于闭合 Ingham 密度证明 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Density.Oscillation.halasz_complex_large_values_two_term` / `Moment.packed_critical_mass_halasz` | 无条件两项大值计数，以及实际 Möbius／临界质量矩的加强界 | **已证明**；最终 Huxley 密度仍开放 | [HalaszTwoTermCount.lean](Legendre/Layer4/Exponential/HalaszTwoTermCount.lean)、[HalaszCriticalMass.lean](Legendre/Layer4/HalaszCriticalMass.lean) |
 | `Legendre.Density.Oscillation.halasz_block_complex_energy` | 实际对数相位抵消、倒数求和的对数界，以及各样本实部可独立变化的 Halász 能量界 | **已证明**；最终 Huxley 密度仍开放 | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 曲线密度指数 `3(1−σ)/(2−σ)+ε`，保留所有解析重数 | **已证明**，σ∈[1/2,1] 统一且 T≥2；并非 1937 素数间隙结论 | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；现已与多项式分支共同导出 Ingham 密度 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
@@ -835,6 +839,9 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 | `SecondDerivativeTest.lean` | [SecondDerivativeTest.lean](Legendre/Layer4/Exponential/SecondDerivativeTest.lean) |
 | `SecondDifference.lean` | [SecondDifference.lean](Legendre/Layer4/Exponential/SecondDifference.lean) |
 | `SeparatedIntervalCount.lean` | [SeparatedIntervalCount.lean](Legendre/Layer4/Exponential/SeparatedIntervalCount.lean) |
+
+区间细分、吸收尺度优化、两项大值计数、有限二进分层求矩，以及实际
+Möbius／临界质量矩的加强界，均为本仓库的本地推导；本步骤未复制新的上游代码。
 
 </details>
 

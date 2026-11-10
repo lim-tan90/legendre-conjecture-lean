@@ -100,6 +100,23 @@ theorem layer4_actual_halasz_comparator : ActualHalaszBenchmark := by
   intro U V hU hUV hV T hT ι inst t a ht hs
   exact Density.Oscillation.halasz_block_energy t U V hU hUV hV a T hT ht hs
 
+/-- The actual two-term analytic large-value count, with variable real parts. -/
+def ActualHalaszLargeValuesBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
+    (U : ℕ), 1 ≤ U → ∀ (a : ℕ → ℂ) (T σ b W : ℝ), 1 ≤ T → 0 < W →
+    σ ≤ b → b-σ ≤ 1 → (∀ i ∈ S, β i ∈ Icc σ b) →
+    (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+    (∀ i ∈ S, W ≤ ‖∑ n ∈ Finset.Ioc U (2*U), a n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*Complex.I))‖) →
+    (S.card : ℝ) ≤ C*(1+Real.log (2*U))^6*(1+Real.log (2*T))*
+      ((U : ℝ)*Density.coefficientEnergy (Finset.Ioc U (2*U)) (Density.verticalCoefficients a σ)/W^2+
+        (U : ℝ)*T*(Density.coefficientEnergy (Finset.Ioc U (2*U)) (Density.verticalCoefficients a σ))^3/W^6)
+
+theorem layer4_actual_halasz_large_values_comparator : ActualHalaszLargeValuesBenchmark := by
+  refine ⟨Density.Oscillation.halaszCountConstant,Density.Oscillation.halaszCountConstant_pos,?_⟩
+  intro ι S t β U hU a T σ b W hT hW hσb hlen hβ ht hs hw
+  exact Density.Oscillation.halasz_complex_large_values_two_term S t β U hU a T σ b W
+    hT hW hσb hlen hβ ht hs hw
+
 /-- Closed proof of the 1940 curved density exponent, with multiplicities and uniform sigma. -/
 theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsilon
 

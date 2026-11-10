@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — Ingham density, mean values and the compensated detector (2026-11-09)</strong></summary>
+<summary><strong>Layer 4 — Ingham density, analytic large values and actual detector moments (2026-11-11)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -111,8 +111,12 @@ prove the different Ingham 1937 short-interval results. [Exact scope](docs/layer
 The actual logarithmic-phase kernel is now proved with bound
 `C(sqrt(|t|)+U/|t|)` on dyadic blocks. Harmonic packing and finite Gram duality
 give an unconditional Halasz energy bound with an explicit `R sqrt(T)` term,
-also allowing independently varying real parts. Interval subdivision and
-the optimized Huxley count remain open. [Exact statements and constants](docs/layer4-exponential-large-values.md).
+also allowing independently varying real parts. Interval subdivision and window
+optimization now prove the unconditional two-term count
+`R ≪ log^6(2U) log(2T) (UE/W²+UTE³/W⁶)`. The resulting actual Möbius second
+moment has the improved `R^(2/3)(AT)^(1/3)` term, uniformly under a common
+vertical translation, and is integrated into the compact detector critical-mass
+fourth moment. The final Huxley density optimization remains open. [Exact statements and constants](docs/layer4-exponential-large-values.md).
 **Huxley and Guth–Maynard remain open; Layer 4 is not complete.**
 
 Validation (2026-11-10): **4,242 build jobs**, all **4,070 project theorem
@@ -484,7 +488,8 @@ The completed analytic milestones supporting this program are:
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
 | Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`, hence `≪_ε T^(1+ε)` | **✅ Proved**: [`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean). The sharp `log^4 T` target remains open. |
-| Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision and the final Huxley count remain open. |
+| Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision, the two-term large-value count and improved actual Möbius/critical-mass moments are proved; final Huxley density remains open. |
+| Analytic large values and actual mollifier moments (Layer 4) | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`; improved `R^(2/3)(AT)^(1/3)` term in the actual Möbius second moment | **✅ Proved**: closed [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean), [weighted mollifier moment](Legendre/Layer4/HalaszMollifierMoment.lean) and [actual critical-mass moment](Legendre/Layer4/HalaszCriticalMass.lean). The final Huxley density optimization remains open. |
 
 Huxley's curved density estimate and global `12/5` exponent, and the
 Guth–Maynard density estimate, remain **open**. Their comparison bridges in
@@ -551,6 +556,7 @@ the respective open density input; the Ingham input is now proved.
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; the compensated shift is supplied below | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; now used in the closed Ingham proof | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Density.Oscillation.halasz_complex_large_values_two_term` / `Moment.packed_critical_mass_halasz` | Unconditional two-term large-value count and improved actual mollifier/critical-mass moments | **proved**; final Huxley density remains open | [HalaszTwoTermCount.lean](Legendre/Layer4/Exponential/HalaszTwoTermCount.lean), [HalaszCriticalMass.lean](Legendre/Layer4/HalaszCriticalMass.lean) |
 | `Legendre.Density.Oscillation.halasz_block_complex_energy` | Actual logarithmic-phase cancellation, harmonic rows and Halasz energy with independently varying real parts | **proved**; final Huxley density remains open | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 curved density, `3(1−σ)/(2−σ)+ε`, with all analytic multiplicities | **proved**, uniform σ∈[1/2,1], all T≥2; not the 1937 prime-gap theorem | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; both branches now yield Ingham density | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
@@ -975,6 +981,10 @@ visibility are adapted. The phase-sum arguments are retained.
 | `SecondDerivativeTest.lean` | [SecondDerivativeTest.lean](Legendre/Layer4/Exponential/SecondDerivativeTest.lean) |
 | `SecondDifference.lean` | [SecondDifference.lean](Legendre/Layer4/Exponential/SecondDifference.lean) |
 | `SeparatedIntervalCount.lean` | [SeparatedIntervalCount.lean](Legendre/Layer4/Exponential/SeparatedIntervalCount.lean) |
+
+Interval subdivision, absorption-scale optimization, the two-term count, finite
+dyadic moment summation and the improved actual Möbius/critical-mass moments
+are local deductions in this repository; this step copies no additional upstream code.
 
 </details>
 

@@ -397,6 +397,24 @@ import all Legendre.Layer4.NearCriticalDensity
 import all Legendre.Layer4.DyadicHeightDensity
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
+import all Legendre.Layer4.DistributionMomentCutoff
+import all Legendre.Layer4.Exponential.BoundedCriticalBlocks
+import all Legendre.Layer4.Exponential.CriticalBlockCount
+import all Legendre.Layer4.Exponential.CriticalPolynomialCount
+import all Legendre.Layer4.Exponential.CriticalPolynomialMoments
+import all Legendre.Layer4.Exponential.CriticalPolynomialOptimizedMoment
+import all Legendre.Layer4.Exponential.HalaszLargeValues
+import all Legendre.Layer4.Exponential.HalaszPointwise
+import all Legendre.Layer4.Exponential.HalaszScale
+import all Legendre.Layer4.Exponential.HalaszSparseCount
+import all Legendre.Layer4.Exponential.HalaszSubdivision
+import all Legendre.Layer4.Exponential.HalaszTranslation
+import all Legendre.Layer4.Exponential.HalaszTwoTermCount
+import all Legendre.Layer4.Exponential.HeightSubdivision
+import all Legendre.Layer4.FiniteDyadicMoment
+import all Legendre.Layer4.FiniteSquareLayercake
+import all Legendre.Layer4.HalaszCriticalMass
+import all Legendre.Layer4.HalaszMollifierMoment
 import all Legendre.Layer4.Exponential.DiscreteFirstDerivative
 import all Legendre.Layer4.Exponential.DiscreteSecondDerivative
 import all Legendre.Layer4.Exponential.HalaszComplex
@@ -4585,3 +4603,111 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer._simp_1_2"
+
+-- All declarations added by the analytic large-value and actual moment step.
+#print axioms Legendre.Density.Moment.amplitude_dyadic_cover
+#print axioms Legendre.Density.Moment.amplitude_square_dyadic
+#print axioms Legendre.Density.Moment.exists_balanced_moment_cutoff
+#print axioms Legendre.Density.Moment.finite_dyadic_second_moment
+#print axioms Legendre.Density.Moment.finite_square_layercake
+#print axioms Legendre.Density.Moment.halaszMollifierMomentBound._proof_1
+#print axioms Legendre.Density.Moment.halaszMollifierMomentBound._proof_2
+#print axioms Legendre.Density.Moment.halaszMollifierMomentBound._proof_3
+#print axioms Legendre.Density.Moment.halaszMollifierMomentBound._proof_4
+#print axioms Legendre.Density.Moment.halaszMollifierMomentBound_nonneg
+#print axioms Legendre.Density.Moment.mollifier_sampled_halasz
+#print axioms Legendre.Density.Moment.packed_critical_mass_halasz
+#print axioms Legendre.Density.Moment.packed_mollifier_halasz
+#print axioms Legendre.Density.Oscillation.block_vertical_energy_mono
+#print axioms Legendre.Density.Oscillation.bounded_polynomial_norm
+#print axioms Legendre.Density.Oscillation.complex_block_pointwise_sq
+#print axioms Legendre.Density.Oscillation.complex_block_time_shift
+#print axioms Legendre.Density.Oscillation.complex_polynomial_time_shift
+#print axioms Legendre.Density.Oscillation.criticalCutoff.eq_1
+#print axioms Legendre.Density.Oscillation.criticalCutoff_norm
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountConstant._proof_1
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountConstant._proof_2
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountConstant._proof_3
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountConstant_pos
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountCost._proof_1
+#print axioms Legendre.Density.Oscillation.criticalPolynomialCountCost_nonneg
+#print axioms Legendre.Density.Oscillation.criticalPolynomialMomentCost._proof_1
+#print axioms Legendre.Density.Oscillation.criticalPolynomialMomentCost_ge_four
+#print axioms Legendre.Density.Oscillation.critical_block_count
+#print axioms Legendre.Density.Oscillation.critical_block_energy_le_one
+#print axioms Legendre.Density.Oscillation.critical_polynomial_blocks
+#print axioms Legendre.Density.Oscillation.critical_polynomial_count
+#print axioms Legendre.Density.Oscillation.critical_polynomial_count_dyadic
+#print axioms Legendre.Density.Oscillation.critical_polynomial_extended
+#print axioms Legendre.Density.Oscillation.critical_polynomial_optimized_second_moment
+#print axioms Legendre.Density.Oscillation.critical_polynomial_second_moment
+#print axioms Legendre.Density.Oscillation.critical_polynomial_shifted_count
+#print axioms Legendre.Density.Oscillation.critical_threshold_compare
+#print axioms Legendre.Density.Oscillation.exists_large_block
+#print axioms Legendre.Density.Oscillation.halaszAbsorptionScale._proof_1
+#print axioms Legendre.Density.Oscillation.halaszAbsorptionScale_pos
+#print axioms Legendre.Density.Oscillation.halaszAbsorptionScale_sqrt
+#print axioms Legendre.Density.Oscillation.halaszCountConstant._proof_1
+#print axioms Legendre.Density.Oscillation.halaszCountConstant._proof_2
+#print axioms Legendre.Density.Oscillation.halaszCountConstant._proof_3
+#print axioms Legendre.Density.Oscillation.halaszCountConstant_pos
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound._proof_1
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound._proof_2
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound._proof_3
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound.eq_1
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound_nonneg
+#print axioms Legendre.Density.Oscillation.halaszLargeValueBound_two_term
+#print axioms Legendre.Density.Oscillation.halaszRealPartCost._proof_1
+#print axioms Legendre.Density.Oscillation.halaszRealPartCost.eq_1
+#print axioms Legendre.Density.Oscillation.halaszRealPartCost_pos
+#print axioms Legendre.Density.Oscillation.halasz_block_complex_centered
+#print axioms Legendre.Density.Oscillation.halasz_complex_card_of_scale
+#print axioms Legendre.Density.Oscillation.halasz_complex_large_values
+#print axioms Legendre.Density.Oscillation.halasz_complex_large_values_two_term
+#print axioms Legendre.Density.Oscillation.halasz_complex_sparse_count
+#print axioms Legendre.Density.Oscillation.halasz_complex_window_count
+#print axioms Legendre.Density.Oscillation.halasz_scale_absorbs
+#print axioms Legendre.Density.Oscillation.halasz_window_overhead
+#print axioms Legendre.Density.Oscillation.heightBin_centered
+#print axioms Legendre.Density.Oscillation.heightBin_cover
+#print axioms Legendre.Density.Oscillation.heightBin_subset
+#print axioms Legendre.Density.Oscillation.height_subdivision_card
+#print axioms Legendre.Density.Oscillation.norm_nat_imaginary_cpow
+#print axioms Legendre.Density.Oscillation.one_le_halaszAbsorptionScale
+#print axioms Legendre.Density.Oscillation.ordinateTwist.eq_1
+#print axioms Legendre.Density.Oscillation.ordinateTwist_energy
+#print axioms Legendre.Density.Oscillation.ordinateTwist_norm
+#print axioms Legendre.Literature.layer4_actual_halasz_large_values_comparator
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.BoundedCriticalBlocks.0.Legendre.Density.Oscillation.critical_block_energy_le_one._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.BoundedCriticalBlocks.0.Legendre.Density.Oscillation.critical_block_energy_le_one._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.BoundedCriticalBlocks.0.Legendre.Density.Oscillation.critical_polynomial_blocks._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.BoundedCriticalBlocks.0.Legendre.Density.Oscillation.exists_large_block._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalBlockCount.0.Legendre.Density.Oscillation.critical_threshold_compare._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalPolynomialCount.0.Legendre.Density.Oscillation.critical_polynomial_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszPointwise.0.Legendre.Density.Oscillation.complex_block_pointwise_sq._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszPointwise.0.Legendre.Density.Oscillation.complex_block_pointwise_sq._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTranslation.0.Legendre.Density.Oscillation.halasz_block_complex_centered._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszTwoTermCount.0.Legendre.Density.Oscillation.halaszLargeValueBound_two_term._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HeightSubdivision.0.Legendre.Density.Oscillation.heightBin_cover._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.FiniteDyadicMoment.0.Legendre.Density.Moment.finite_dyadic_second_moment._simp_1_8"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Oscillation.halaszLargeValueBound.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_balanced_moment_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_dyadic_amplitude_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_empty_polynomial_count_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_packed_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_shifted_mollifier_head_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_zero_energy_count_consumer"
