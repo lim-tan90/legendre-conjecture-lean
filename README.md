@@ -108,15 +108,22 @@ Y=T^(3/(2(2−σ))), covering heights, and restoring analytic multiplicities pro
 Thus **Ingham 1940 density is proved with arbitrary positive height epsilon**,
 uniformly in σ; `layer4_ingham_comparator` is a closed proof. This does not
 prove the different Ingham 1937 short-interval results. [Exact scope](docs/layer4-compact-detector.md).
+The actual logarithmic-phase kernel is now proved with bound
+`C(sqrt(|t|)+U/|t|)` on dyadic blocks. Harmonic packing and finite Gram duality
+give an unconditional Halasz energy bound with an explicit `R sqrt(T)` term,
+also allowing independently varying real parts. Interval subdivision and
+the optimized Huxley count remain open. [Exact statements and constants](docs/layer4-exponential-large-values.md).
 **Huxley and Guth–Maynard remain open; Layer 4 is not complete.**
 
-Validation (2026-11-10): **4,206 build jobs**, all **3,874 project theorem
-declarations** audited with only the three standard axioms, and **231 Lean files**
+Validation (2026-11-10): **4,242 build jobs**, all **4,070 project theorem
+declarations** audited with only the three standard axioms, and **246 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **107 independent consumers** pass: **62 Layer 4**, nine Layer 3 and
-36 literature checks. Endpoint checks include σ=1/2, σ=3/4 and T=2 with
-a constant uniform in σ. An intentional misuse of Ingham as Huxley is rejected.
+All **113 independent consumers** pass: **68 Layer 4**, nine Layer 3 and
+36 literature checks. Added checks cover alternating phases, negative height,
+empty blocks, the two-sided harmonic endpoint, unit-separated samples and
+independently varying real parts. Misusing the nonzero-height kernel at t=0
+is rejected by Lean.
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).
@@ -477,6 +484,7 @@ The completed analytic milestones supporting this program are:
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
 | Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`, hence `≪_ε T^(1+ε)` | **✅ Proved**: [`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean). The sharp `log^4 T` target remains open. |
+| Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision and the final Huxley count remain open. |
 
 Huxley's curved density estimate and global `12/5` exponent, and the
 Guth–Maynard density estimate, remain **open**. Their comparison bridges in
@@ -543,6 +551,7 @@ the respective open density input; the Ingham input is now proved.
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | Critical-line pointwise fourth power bounded by one normalized Gaussian contour | **proved**; contour mean and sixth-log fourth moment now supplied; sharp log^4 remains open | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | Compact Möbius detector equals its initial Mellin contour, with absolute norm control | **proved**; the compensated shift is supplied below | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | Exact critical-line shift with principal-pole contribution; polynomial-or-integral alternative at explicit high ordinates | **proved**; now used in the closed Ingham proof | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Density.Oscillation.halasz_block_complex_energy` | Actual logarithmic-phase cancellation, harmonic rows and Halasz energy with independently varying real parts | **proved**; final Huxley density remains open | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 curved density, `3(1−σ)/(2−σ)+ε`, with all analytic multiplicities | **proved**, uniform σ∈[1/2,1], all T≥2; not the 1937 prime-gap theorem | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; both branches now yield Ingham density | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4`, Huxley and Guth–Maynard density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
@@ -948,6 +957,24 @@ No additional PNT+ source is copied.
   mathlib proof is copied into this repository.
 
 
+
+The exponential-sum derivative tests additionally adapt **openai/math**,
+pinned commit `4eaee87548250b2682affda7d05d947c05554bae`, source directory
+`lean/OAI/NumberTheory/EgyptianFractions/`, **Apache-2.0**. The retained license
+is [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+Imports are restricted to the required mathlib modules; namespaces and module
+visibility are adapted. The phase-sum arguments are retained.
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| `DiscreteFirstDerivative.lean` | [DiscreteFirstDerivative.lean](Legendre/Layer4/Exponential/DiscreteFirstDerivative.lean) |
+| `DiscreteSecondDerivative.lean` | [DiscreteSecondDerivative.lean](Legendre/Layer4/Exponential/DiscreteSecondDerivative.lean) |
+| `MonotoneBlocks.lean` | [MonotoneBlocks.lean](Legendre/Layer4/Exponential/MonotoneBlocks.lean) |
+| `PhaseExtension.lean` | [PhaseExtension.lean](Legendre/Layer4/Exponential/PhaseExtension.lean) |
+| `SecondDerivativeBudget.lean` | [SecondDerivativeBudget.lean](Legendre/Layer4/Exponential/SecondDerivativeBudget.lean) |
+| `SecondDerivativeTest.lean` | [SecondDerivativeTest.lean](Legendre/Layer4/Exponential/SecondDerivativeTest.lean) |
+| `SecondDifference.lean` | [SecondDifference.lean](Legendre/Layer4/Exponential/SecondDifference.lean) |
+| `SeparatedIntervalCount.lean` | [SeparatedIntervalCount.lean](Legendre/Layer4/Exponential/SeparatedIntervalCount.lean) |
 
 </details>
 

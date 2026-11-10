@@ -537,4 +537,63 @@ theorem layer4_ingham_height_two_consumer :
 theorem layer4_density_three_consumer : Zeta.HasZeroDensityEstimate 3 :=
   Zeta.hasZeroDensityEstimate_three
 
+/-- Alternating phases have a bound independent of the number of samples. -/
+theorem layer4_first_derivative_phase_consumer (N : ℕ) :
+    ‖∑ n ∈ Finset.range (N+1), Oscillation.Tools.ExponentialSum.phase ((n : ℝ)/2)‖ ≤ 4 := by
+  have hh := Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_succ
+    (fun n : ℕ => (n : ℝ)/2) N (1/2) (by norm_num)
+    (by intro i hi; push_cast; linarith)
+    (by intro i hi; push_cast; linarith)
+    (by intro i hi j hj hij; dsimp only; push_cast; linarith)
+  convert! hh using 1 <;> norm_num
+
+/-- Negative ordinates use the same actual first-derivative bound. -/
+theorem layer4_log_negative_height_consumer :
+    ‖∑ n ∈ (Finset.Ioc 4 8 : Finset ℕ), (n : ℂ)^(-(-3 : ℂ)*Complex.I)‖ ≤ 16*Real.pi := by
+  have hh := Oscillation.logarithmic_block_first_abs 4 8 (by norm_num) (by norm_num)
+    (-3) (by norm_num) (by norm_num)
+  convert! hh using 1 <;> norm_num <;> ring
+
+/-- The dyadic boundary V=U is genuinely the empty block. -/
+theorem layer4_log_empty_block_consumer (t : ℝ) :
+    Oscillation.blockDirichletPolynomial 4 4 (fun _ => 1) t = 0 := by
+  simp [Oscillation.blockDirichletPolynomial]
+
+/-- Both signs attain the complete harmonic row at the smallest height. -/
+theorem layer4_reciprocal_height_one_consumer :
+    (∑ x ∈ ({-1,1} : Finset ℝ), 1/|x|) ≤ 2 := by
+  have hh := Oscillation.separated_reciprocals ({-1,1} : Finset ℝ) 1 le_rfl
+    (by intro x hx; simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl <;> norm_num)
+    (by intro x hx; simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+        rcases hx with rfl | rfl <;> norm_num)
+    (by intro x hx y hy hxy; simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+        rcases hx with rfl | rfl <;> rcases hy with rfl | rfl <;> norm_num at *)
+  simpa only [Real.log_one,add_zero,mul_one] using hh
+
+/-- The analytic energy bound applies at exactly unit-separated touching ordinates. -/
+theorem layer4_halasz_two_samples_consumer (a : ℕ → ℂ) :
+    (∑ i : Fin 2, ‖Oscillation.blockDirichletPolynomial 1 2 a ((i.val : ℝ)-1/2)‖^2) ≤
+      Oscillation.halaszBlockCoefficient 1 1 2*coefficientEnergy (Finset.Ioc 1 2) a := by
+  have hh := Oscillation.halasz_block_energy (fun i : Fin 2 => (i.val : ℝ)-1/2)
+    1 2 (by norm_num) (by norm_num) (by norm_num) a 1 le_rfl
+    (by intro i; fin_cases i <;> norm_num)
+    (by intro i j hij; fin_cases i <;> fin_cases j <;> norm_num at *)
+  simpa only [Fintype.card_fin,Nat.cast_ofNat] using hh
+
+/-- Mixed real parts, including the endpoint one, use the ACTUAL analytic kernel. -/
+theorem layer4_halasz_mixed_real_parts_consumer (a : ℕ → ℂ) :
+    (∑ i ∈ (Finset.univ : Finset (Fin 2)),
+      ‖∑ n ∈ Finset.Ioc 1 2, a n*(n : ℂ)^(-((((1/2 : ℝ)+(i.val : ℝ)/2 : ℝ) : ℂ)+
+        ((i.val : ℝ) : ℂ)*Complex.I))‖^2) ≤
+      (2+(Real.log 2)^2)*Oscillation.halaszBlockCoefficient 1 1 2*
+        coefficientEnergy (Finset.Ioc 1 2) (verticalCoefficients a (1/2)) := by
+  have hh := Oscillation.halasz_block_complex_energy (Finset.univ : Finset (Fin 2))
+    (fun i => (i.val : ℝ)) (fun i => (1/2 : ℝ)+(i.val : ℝ)/2)
+    1 (by norm_num) a 1 (1/2) 1 le_rfl (by norm_num) (by norm_num)
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi; fin_cases i <;> norm_num)
+    (by intro i hi j hj hij; fin_cases i <;> fin_cases j <;> norm_num at *)
+  simpa only [Finset.card_univ,Fintype.card_fin,Nat.cast_ofNat,Nat.cast_one,mul_one] using! hh
+
 end Legendre.Tests

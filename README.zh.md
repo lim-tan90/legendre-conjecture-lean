@@ -89,14 +89,18 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 **`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T`**，适用于全部 σ∈[1/2,1]、T≥2。
 因此 **Ingham 1940 曲线零密度估计的任意正 ε 指数版本已闭合证明**，常数对 σ 统一；
 `layer4_ingham_comparator` 已为闭合证明。这不等于不同的 Ingham 1937 素数短区间结论。[精确范围](docs/layer4-compact-detector.md)。
+实际对数相位相关核现已证明为 `C(sqrt(|t|)+U/|t|)`；
+倒数求和的对数界与有限 Gram 对偶性进一步给出含显式 `R sqrt(T)` 项的
+无条件 Halász 能量界，也允许各样本实部独立变化。区间细分、优化大值计数
+及最终 Huxley 密度仍待完成。[精确陈述与常数](docs/layer4-exponential-large-values.md)。
 **Huxley、Guth–Maynard 仍开放，Layer 4 尚未完成。**
 
-验证（2026-11-10）：**4,206 项构建**、**全部 3,874 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**231 个 Lean 文件**的实际
+验证（2026-11-10）：**4,242 项构建**、**全部 4,070 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**246 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**107 项独立使用检查**全部通过：Layer 4 **62 项**、Layer 3 九项、文献对照 36 项。
-新增端点检查覆盖 σ=1/2、σ=3/4 及 T=2，并保持常数对 σ 统一；
-故意将 Ingham 证明用于 Huxley 的错误检查被 Lean 拒绝。
+**113 项独立使用检查**全部通过：Layer 4 **68 项**、Layer 3 九项、文献对照 36 项。
+新增检查涵盖交替相位、负高度、空块、双侧倒数求和端点、单位间隔及混合实部；
+把非零高度核界误用于 t=0 的错误用例被 Lean 拒绝。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
@@ -388,6 +392,7 @@ Layer 4 仍未全部完成。
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
 | Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`，从而有 `≪_ε T^(1+ε)` | **✅ 已证明**：[`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean)。尖锐的 `log^4 T` 目标仍开放。 |
+| Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分及最终 Huxley 计数仍待完成。 |
 
 Huxley 曲线零密度估计及全局 `12/5` 指数、Guth–Maynard 零密度估计仍**待证明**。
 [`LayerCoverage.lean`](Legendre/Literature/LayerCoverage.lean) 中的相应对照桥仍需这些
@@ -453,6 +458,7 @@ Huxley 曲线零密度估计及全局 `12/5` 指数、Guth–Maynard 零密度�
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；后续已补上带主极点项的路径移动 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；现已用于闭合 Ingham 密度证明 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
+| `Legendre.Density.Oscillation.halasz_block_complex_energy` | 实际对数相位抵消、倒数求和的对数界，以及各样本实部可独立变化的 Halász 能量界 | **已证明**；最终 Huxley 密度仍开放 | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 曲线密度指数 `3(1−σ)/(2−σ)+ε`，保留所有解析重数 | **已证明**，σ∈[1/2,1] 统一且 T≥2；并非 1937 素数间隙结论 | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；现已与多项式分支共同导出 Ingham 密度 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4`、Huxley 及 Guth–Maynard 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
@@ -812,6 +818,23 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   mathlib 的证明。
 
 
+
+指数和导数检验另改编自 **openai/math**，固定提交
+`4eaee87548250b2682affda7d05d947c05554bae`，源目录
+`lean/OAI/NumberTheory/EgyptianFractions/`，许可 **Apache-2.0**。
+许可证保留于 [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
+仅导入所需的 mathlib 模块，适配命名空间与模块可见性，保留相位求和论证。
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| `DiscreteFirstDerivative.lean` | [DiscreteFirstDerivative.lean](Legendre/Layer4/Exponential/DiscreteFirstDerivative.lean) |
+| `DiscreteSecondDerivative.lean` | [DiscreteSecondDerivative.lean](Legendre/Layer4/Exponential/DiscreteSecondDerivative.lean) |
+| `MonotoneBlocks.lean` | [MonotoneBlocks.lean](Legendre/Layer4/Exponential/MonotoneBlocks.lean) |
+| `PhaseExtension.lean` | [PhaseExtension.lean](Legendre/Layer4/Exponential/PhaseExtension.lean) |
+| `SecondDerivativeBudget.lean` | [SecondDerivativeBudget.lean](Legendre/Layer4/Exponential/SecondDerivativeBudget.lean) |
+| `SecondDerivativeTest.lean` | [SecondDerivativeTest.lean](Legendre/Layer4/Exponential/SecondDerivativeTest.lean) |
+| `SecondDifference.lean` | [SecondDifference.lean](Legendre/Layer4/Exponential/SecondDifference.lean) |
+| `SeparatedIntervalCount.lean` | [SeparatedIntervalCount.lean](Legendre/Layer4/Exponential/SeparatedIntervalCount.lean) |
 
 </details>
 

@@ -468,8 +468,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.67 | Near-critical band and dyadic real-height cover | [NearCriticalDensity.lean](../Legendre/Layer4/NearCriticalDensity.lean), [DyadicHeightDensity.lean](../Legendre/Layer4/DyadicHeightDensity.lean) | **proved**; uniform sigma including 1/2; no height-power loss |
 | 4.68 | Actual multiplicities and fixed low-height count | `Zeta.ingham_density_log_bound`; [InghamMultiplicity.lean](../Legendre/Layer4/InghamMultiplicity.lean) | **proved**; all T≥2, N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T |
 | 4.69 | Ingham 1940 curved density comparator | `Zeta.ingham_density_epsilon`, `Literature.layer4_ingham_comparator`; [InghamDensity.lean](../Legendre/Layer4/InghamDensity.lean) | **proved**, closed uniform epsilon theorem; 1937 prime-gap statements remain open |
+| 4.70 | Kusmin--Landau and absolute second-derivative tests | [Exponential/SecondDerivativeTest.lean](../Legendre/Layer4/Exponential/SecondDerivativeTest.lean) | **proved** from derivative data; selected upstream slice credited |
+| 4.71 | Actual logarithmic-phase kernel | `Density.Oscillation.logarithmic_block_kernel`; [LogKernel.lean](../Legendre/Layer4/Exponential/LogKernel.lean) | **proved**; C(sqrt(abs t)+U/abs t), t≠0, both signs and partial dyadic blocks |
+| 4.72 | Harmonic row packing | `Density.Oscillation.separated_reciprocals`; [SeparatedReciprocals.lean](../Legendre/Layer4/Exponential/SeparatedReciprocals.lean) | **proved**; two-sided finite set, log height cost |
+| 4.73 | Analytic Halasz energy and threshold count | [HalaszEnergy.lean](../Legendre/Layer4/Exponential/HalaszEnergy.lean) | **proved**; actual kernel, explicit R sqrt(T) term and positive-denominator count |
+| 4.74 | Independently varying real parts | `Density.Oscillation.halasz_block_complex_energy`; [HalaszComplex.lean](../Legendre/Layer4/Exponential/HalaszComplex.lean) | **proved**; unit-width strip, no common real part assumed; final Huxley count remains open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; Huxley/Guth–Maynard remain open |
-| 4.validation | Fifty-six independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
+| 4.validation | Sixty-eight independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
@@ -592,3 +597,11 @@ consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
 cover the real-height top boundary, the balanced sigma=3/4 powers, density
 exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
 three. An intentional Ingham-as-Huxley consumer is rejected by Lean.
+
+Actual Halasz input validation (2026-11-10): full build 4,242 jobs; all 4,070
+project theorem declarations, including private/generated helpers, audited
+against exactly propext, Classical.choice and Quot.sound. Both independent
+declaration inventories match the audit targets and actual axiom output.
+All 246 project Lean files have zero executable placeholders. All 113
+standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
+An intentional use of the nonzero-ordinate kernel at t=0 is rejected.

@@ -42,6 +42,21 @@ public import Legendre.Layer4.NearCriticalDensity
 public import Legendre.Layer4.DyadicHeightDensity
 public import Legendre.Layer4.InghamMultiplicity
 public import Legendre.Layer4.InghamDensity
+public import Legendre.Layer4.Exponential.DiscreteFirstDerivative
+public import Legendre.Layer4.Exponential.DiscreteSecondDerivative
+public import Legendre.Layer4.Exponential.HalaszComplex
+public import Legendre.Layer4.Exponential.HalaszEnergy
+public import Legendre.Layer4.Exponential.HalaszKernel
+public import Legendre.Layer4.Exponential.LogFirstDerivative
+public import Legendre.Layer4.Exponential.LogKernel
+public import Legendre.Layer4.Exponential.LogPhase
+public import Legendre.Layer4.Exponential.MonotoneBlocks
+public import Legendre.Layer4.Exponential.PhaseExtension
+public import Legendre.Layer4.Exponential.SecondDerivativeBudget
+public import Legendre.Layer4.Exponential.SecondDerivativeTest
+public import Legendre.Layer4.Exponential.SecondDifference
+public import Legendre.Layer4.Exponential.SeparatedIntervalCount
+public import Legendre.Layer4.Exponential.SeparatedReciprocals
 
 /-!
 # Layer 4: mean values, actual zero detection and Ingham density
@@ -54,6 +69,11 @@ its principal pole retained, and a proved high-zero dichotomy. Polynomial
 and integral branch counts, balanced cutoffs, dyadic height covers and
 multiplicity restoration prove Ingham's uniform curved density exponent
 3(1-sigma)/(2-sigma)+epsilon for every epsilon>0 and T>=2.
+
+Actual logarithmic-phase derivative tests give dyadic correlation cancellation
+C(sqrt(abs(t))+U/abs(t)) for nonzero ordinates. Harmonic packing and Gram
+duality prove unconditional Halasz energy with its R sqrt(T) term, including
+independently varying real parts. Optimized Huxley counts remain open.
 
 The sharp fourth-moment log^4, Huxley's curved/global 12/5 estimates and
 Guth--Maynard density/large-value targets remain open. Layer 4 is incomplete.

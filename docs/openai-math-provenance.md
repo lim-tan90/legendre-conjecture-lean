@@ -389,3 +389,29 @@ consumers pass: 62 Layer 4, 9 Layer 3 and 36 literature. The added consumers
 cover the real-height top boundary, the balanced sigma=3/4 powers, density
 exponents at sigma=1/2 and 3/4, T=2 uniformly in sigma, and linear exponent
 three. An intentional Ingham-as-Huxley consumer is rejected by Lean.
+
+## Exponential derivative tests (2026-11-10)
+
+Source directory `lean/OAI/NumberTheory/EgyptianFractions/`, same pinned
+openai/math commit `4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0.
+Retained license: `licenses/openai-math-Apache-2.0.txt`.
+Namespace and public module visibility are adapted.
+
+| Upstream | Destination |
+|---|---|
+| `DiscreteFirstDerivative.lean` | [DiscreteFirstDerivative.lean](../Legendre/Layer4/Exponential/DiscreteFirstDerivative.lean) |
+| `DiscreteSecondDerivative.lean` | [DiscreteSecondDerivative.lean](../Legendre/Layer4/Exponential/DiscreteSecondDerivative.lean) |
+| `MonotoneBlocks.lean` | [MonotoneBlocks.lean](../Legendre/Layer4/Exponential/MonotoneBlocks.lean) |
+| `PhaseExtension.lean` | [PhaseExtension.lean](../Legendre/Layer4/Exponential/PhaseExtension.lean) |
+| `SecondDerivativeBudget.lean` | [SecondDerivativeBudget.lean](../Legendre/Layer4/Exponential/SecondDerivativeBudget.lean) |
+| `SecondDerivativeTest.lean` | [SecondDerivativeTest.lean](../Legendre/Layer4/Exponential/SecondDerivativeTest.lean) |
+| `SecondDifference.lean` | [SecondDifference.lean](../Legendre/Layer4/Exponential/SecondDifference.lean) |
+| `SeparatedIntervalCount.lean` | [SeparatedIntervalCount.lean](../Legendre/Layer4/Exponential/SeparatedIntervalCount.lean) |
+
+Actual Halasz input validation (2026-11-10): full build 4,242 jobs; all 4,070
+project theorem declarations, including private/generated helpers, audited
+against exactly propext, Classical.choice and Quot.sound. Both independent
+declaration inventories match the audit targets and actual axiom output.
+All 246 project Lean files have zero executable placeholders. All 113
+standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
+An intentional use of the nonzero-ordinate kernel at t=0 is rejected.

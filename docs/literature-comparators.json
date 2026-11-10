@@ -278,10 +278,10 @@
     {
       "id": "layer4",
       "status": "Ingham curved density and fourth-moment height exponent proved; Huxley and sharper targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator⟩",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here."
+      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here. The actual logarithmic-phase kernel and unconditional Halasz energy (including independently varying real parts) are proved; interval subdivision and the final Huxley count remain open."
     }
   ],
   "open_analytic_targets": [
@@ -520,6 +520,21 @@
     "Legendre/Layer4/NearCriticalDensity.lean": "layer4",
     "Legendre/Layer4/DyadicHeightDensity.lean": "layer4",
     "Legendre/Layer4/InghamMultiplicity.lean": "layer4",
-    "Legendre/Layer4/InghamDensity.lean": "layer4"
+    "Legendre/Layer4/InghamDensity.lean": "layer4",
+    "Legendre/Layer4/Exponential/DiscreteFirstDerivative.lean": "layer4",
+    "Legendre/Layer4/Exponential/DiscreteSecondDerivative.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszComplex.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszEnergy.lean": "layer4",
+    "Legendre/Layer4/Exponential/HalaszKernel.lean": "layer4",
+    "Legendre/Layer4/Exponential/LogFirstDerivative.lean": "layer4",
+    "Legendre/Layer4/Exponential/LogKernel.lean": "layer4",
+    "Legendre/Layer4/Exponential/LogPhase.lean": "layer4",
+    "Legendre/Layer4/Exponential/MonotoneBlocks.lean": "layer4",
+    "Legendre/Layer4/Exponential/PhaseExtension.lean": "layer4",
+    "Legendre/Layer4/Exponential/SecondDerivativeBudget.lean": "layer4",
+    "Legendre/Layer4/Exponential/SecondDerivativeTest.lean": "layer4",
+    "Legendre/Layer4/Exponential/SecondDifference.lean": "layer4",
+    "Legendre/Layer4/Exponential/SeparatedIntervalCount.lean": "layer4",
+    "Legendre/Layer4/Exponential/SeparatedReciprocals.lean": "layer4"
   }
 }

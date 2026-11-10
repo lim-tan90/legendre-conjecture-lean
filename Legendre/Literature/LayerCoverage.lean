@@ -85,6 +85,21 @@ theorem layer4_compensated_detector_comparator : CompensatedDetectorBenchmark :=
   exact Density.Detector.Smooth.detector_high_zero_dichotomy X hX hs hz
     (by simpa using hσ) (by simpa using hσ1) hT (by simpa using ht) hXT hY hY2
 
+/-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
+def ActualHalaszBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ (U V : ℕ), 1 ≤ U → U ≤ V → V ≤ 2*U →
+    ∀ T : ℝ, 1 ≤ T → ∀ {ι : Type*} [Fintype ι] (t : ι → ℝ) (a : ℕ → ℂ),
+    (∀ i, |t i| ≤ T) → (∀ i j, i ≠ j → 1 ≤ |t i-t j|) →
+    (∑ i, ‖∑ n ∈ Finset.Ioc U V, a n*(n : ℂ)^(-(t i : ℂ)*Complex.I)‖^2) ≤
+      ((U : ℝ)+C*((Fintype.card ι : ℝ)*Real.sqrt (2*T)+2*(U : ℝ)*(1+Real.log (2*T))))*
+        Density.coefficientEnergy (Finset.Ioc U V) a
+
+theorem layer4_actual_halasz_comparator : ActualHalaszBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicKernelConstant,
+    Density.Oscillation.logarithmicKernelConstant_pos,?_⟩
+  intro U V hU hUV hV T hT ι inst t a ht hs
+  exact Density.Oscillation.halasz_block_energy t U V hU hUV hV a T hT ht hs
+
 /-- Closed proof of the 1940 curved density exponent, with multiplicities and uniform sigma. -/
 theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsilon
 

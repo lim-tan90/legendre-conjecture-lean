@@ -315,3 +315,16 @@ os-11 (1940), [DOI 10.1093/qmath/os-11.1.201](https://doi.org/10.1093/qmath/os-1
 The original sharp log^5 factor is not claimed: the local log^10 proof has the
 same height exponent after positive epsilon, in accordance with the repository
 comparison policy. This does not supply the 1937 short-interval theorem.
+
+The closed `layer4_actual_halasz_comparator` also checks the proved actual
+logarithmic-phase Halasz energy, retaining its explicit R sqrt(T) and harmonic
+row terms. The mixed-real-part extension is proved. This is an analytic input;
+it does not close Huxley or Guth--Maynard density.
+
+Actual Halasz input validation (2026-11-10): full build 4,242 jobs; all 4,070
+project theorem declarations, including private/generated helpers, audited
+against exactly propext, Classical.choice and Quot.sound. Both independent
+declaration inventories match the audit targets and actual axiom output.
+All 246 project Lean files have zero executable placeholders. All 113
+standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
+An intentional use of the nonzero-ordinate kernel at t=0 is rejected.

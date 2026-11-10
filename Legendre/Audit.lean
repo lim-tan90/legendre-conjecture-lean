@@ -397,6 +397,21 @@ import all Legendre.Layer4.NearCriticalDensity
 import all Legendre.Layer4.DyadicHeightDensity
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
+import all Legendre.Layer4.Exponential.DiscreteFirstDerivative
+import all Legendre.Layer4.Exponential.DiscreteSecondDerivative
+import all Legendre.Layer4.Exponential.HalaszComplex
+import all Legendre.Layer4.Exponential.HalaszEnergy
+import all Legendre.Layer4.Exponential.HalaszKernel
+import all Legendre.Layer4.Exponential.LogFirstDerivative
+import all Legendre.Layer4.Exponential.LogKernel
+import all Legendre.Layer4.Exponential.LogPhase
+import all Legendre.Layer4.Exponential.MonotoneBlocks
+import all Legendre.Layer4.Exponential.PhaseExtension
+import all Legendre.Layer4.Exponential.SecondDerivativeBudget
+import all Legendre.Layer4.Exponential.SecondDerivativeTest
+import all Legendre.Layer4.Exponential.SecondDifference
+import all Legendre.Layer4.Exponential.SeparatedIntervalCount
+import all Legendre.Layer4.Exponential.SeparatedReciprocals
 
 /-!
 # Axiom audit
@@ -4372,3 +4387,201 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_height_two_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_three_quarters_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_shell_boundary_consumer"
+
+-- Actual logarithmic-phase cancellation and analytic Halasz energy.
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.abs_cot_pi_le
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.cot_antitone_unit
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.discrete_second_derivative_partition_bound
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.discrete_second_derivative_sqrt_bound
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.discrete_second_derivative_sqrt_bound_local
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_either
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_either_succ
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_strip
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_strip_succ
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_succ
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase._proof_1
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phaseWeight_difference_norm
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phaseWeight_identity
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phaseWeight_norm_le
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_add
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_int
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_neg
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_norm
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_step_weight
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.phase_sub_int_mul
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_sqrt_bound
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_sqrt_bound_Ico
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_sqrt_bound_positive
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_test
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_test_Ico
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.translated_sampled_increment_bounds
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.weighted_telescope
+#print axioms Legendre.Density.Oscillation.Tools.ExponentialSum.weighted_telescope_succ
+#print axioms Legendre.Density.Oscillation.Tools.adjacent_near_integer_card
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase.eq_1
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase_eq
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase_increment
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase_increment_antitone
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase_increment_eq
+#print axioms Legendre.Density.Oscillation.Tools.affineTailPhase_increment_monotone
+#print axioms Legendre.Density.Oscillation.Tools.antitone_filter_range_eq_Ico
+#print axioms Legendre.Density.Oscillation.Tools.derivative_near_integer_card
+#print axioms Legendre.Density.Oscillation.Tools.discrete_increment_bounds
+#print axioms Legendre.Density.Oscillation.Tools.exists_antitone_increment_extension
+#print axioms Legendre.Density.Oscillation.Tools.exists_monotone_increment_extension
+#print axioms Legendre.Density.Oscillation.Tools.floor_interval_card_le
+#print axioms Legendre.Density.Oscillation.Tools.monotone_filter_range_eq_Ico
+#print axioms Legendre.Density.Oscillation.Tools.nat_separated_near_integer_card
+#print axioms Legendre.Density.Oscillation.Tools.nearIntegerIndices.eq_1
+#print axioms Legendre.Density.Oscillation.Tools.near_integer_sqrt_budget
+#print axioms Legendre.Density.Oscillation.Tools.norm_sum_le_bad_card_add_good_blocks
+#print axioms Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound
+#print axioms Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local
+#print axioms Legendre.Density.Oscillation.Tools.norm_sum_monotone_block_le
+#print axioms Legendre.Density.Oscillation.Tools.phaseGoodBlock_pairwise_disjoint
+#print axioms Legendre.Density.Oscillation.Tools.phase_bad_near_integer
+#print axioms Legendre.Density.Oscillation.Tools.sampled_increment_abs_bounds
+#print axioms Legendre.Density.Oscillation.Tools.sampled_increment_bounds
+#print axioms Legendre.Density.Oscillation.Tools.sampled_increment_strictMono_or_strictAnti
+#print axioms Legendre.Density.Oscillation.Tools.second_derivative_partition_sqrt_budget
+#print axioms Legendre.Density.Oscillation.Tools.second_derivative_signed_bounds
+#print axioms Legendre.Density.Oscillation.Tools.second_difference_bounds
+#print axioms Legendre.Density.Oscillation.Tools.second_difference_eq_deriv
+#print axioms Legendre.Density.Oscillation.Tools.separated_interval_card
+#print axioms Legendre.Density.Oscillation.Tools.separated_near_integer_card
+#print axioms Legendre.Density.Oscillation.Tools.separated_near_integer_card_nat
+#print axioms Legendre.Density.Oscillation.Tools.slope_bounds_of_adjacent
+#print axioms Legendre.Density.Oscillation.blockDirichletPolynomial.eq_1
+#print axioms Legendre.Density.Oscillation.blockDirichletPolynomial_unit
+#print axioms Legendre.Density.Oscillation.block_complex_vertical
+#print axioms Legendre.Density.Oscillation.finite_positive_inverses
+#print axioms Legendre.Density.Oscillation.halaszBlockCoefficient._proof_1
+#print axioms Legendre.Density.Oscillation.halaszBlockCoefficient.eq_1
+#print axioms Legendre.Density.Oscillation.halaszBlockCoefficient_nonneg
+#print axioms Legendre.Density.Oscillation.halasz_block_card_le
+#print axioms Legendre.Density.Oscillation.halasz_block_complex_energy
+#print axioms Legendre.Density.Oscillation.halasz_block_energy
+#print axioms Legendre.Density.Oscillation.halasz_block_large_values
+#print axioms Legendre.Density.Oscillation.halasz_masked_fixed
+#print axioms Legendre.Density.Oscillation.indexed_reciprocal_row
+#print axioms Legendre.Density.Oscillation.logDerivative_mask
+#print axioms Legendre.Density.Oscillation.logarithmicKernelConstant._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicKernelConstant._proof_2
+#print axioms Legendre.Density.Oscillation.logarithmicKernelConstant_pos
+#print axioms Legendre.Density.Oscillation.logarithmicPhase._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicPhase.eq_1
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_deriv
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_eq_cpow
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_increment
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_second_bounds
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_second_deriv
+#print axioms Legendre.Density.Oscillation.logarithmicSecondConstant._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicSecondConstant._proof_2
+#print axioms Legendre.Density.Oscillation.logarithmicSecondConstant_pos
+#print axioms Legendre.Density.Oscillation.logarithmic_block_first
+#print axioms Legendre.Density.Oscillation.logarithmic_block_first_abs
+#print axioms Legendre.Density.Oscillation.logarithmic_block_kernel
+#print axioms Legendre.Density.Oscillation.logarithmic_block_neg
+#print axioms Legendre.Density.Oscillation.logarithmic_block_second
+#print axioms Legendre.Density.Oscillation.logarithmic_block_sqrt
+#print axioms Legendre.Density.Oscillation.logarithmic_increment_antitone
+#print axioms Legendre.Density.Oscillation.logarithmic_increment_bounds
+#print axioms Legendre.Density.Oscillation.logarithmic_kernel_row
+#print axioms Legendre.Density.Oscillation.logarithmic_scale_sqrt
+#print axioms Legendre.Density.Oscillation.positive_separated_reciprocals
+#print axioms Legendre.Density.Oscillation.separated_reciprocals
+#print axioms Legendre.Literature.layer4_actual_halasz_comparator
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_12"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_Icc._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_either._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_either_succ._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_succ._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_sum_bound_succ._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteFirstDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.sin_pi_lower._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteSecondDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteSecondDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteSecondDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteSecondDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.DiscreteSecondDerivative.0.Legendre.Density.Oscillation.Tools.ExponentialSum.first_derivative_Ico_bound._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszComplex.0.Legendre.Density.Oscillation.halasz_masked_fixed._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.HalaszKernel.0.Legendre.Density.Oscillation.logarithmic_kernel_row._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogFirstDerivative.0.Legendre.Density.Oscillation.logarithmic_block_first._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogFirstDerivative.0.Legendre.Density.Oscillation.logarithmic_block_first._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_eq_cpow._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmicPhase_second_bounds._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmic_block_second._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogPhase.0.Legendre.Density.Oscillation.logarithmic_block_second._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.floor_interval_card_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.monotone_filter_range_eq_Ico._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.monotone_filter_range_eq_Ico._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.norm_sum_le_near_integer_bound_local._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.phaseGoodBlock_pairwise_disjoint._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneBlocks.0.Legendre.Density.Oscillation.Tools.phaseGoodBlock_pairwise_disjoint._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_eq._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_eq._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_antitone._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_antitone._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_antitone._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_eq._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_monotone._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_monotone._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.PhaseExtension.0.Legendre.Density.Oscillation.Tools.affineTailPhase_increment_monotone._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SecondDerivativeTest.0.Legendre.Density.Oscillation.Tools.ExponentialSum.second_derivative_sqrt_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SecondDifference.0.Legendre.Density.Oscillation.Tools.discrete_increment_bounds._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.separated_interval_card._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.separated_interval_card._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.slope_bounds_of_adjacent._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.slope_bounds_of_adjacent._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.slope_bounds_of_adjacent._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedIntervalCount.0.Legendre.Density.Oscillation.Tools.slope_bounds_of_adjacent._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedReciprocals.0.Legendre.Density.Oscillation.positive_separated_reciprocals._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.SeparatedReciprocals.0.Legendre.Density.Oscillation.positive_separated_reciprocals._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Oscillation.blockDirichletPolynomial.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_first_derivative_phase_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_mixed_real_parts_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_two_samples_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_log_empty_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_log_negative_height_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_reciprocal_height_one_consumer._simp_1_2"
