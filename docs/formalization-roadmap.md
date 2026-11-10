@@ -508,10 +508,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **open** |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; sharper analytic detector estimates **open** |
 
-Full validation (2026-11-10): 4,242 build jobs, all 4,070 project theorem
-declarations audited with exactly matching independent inventories, 246 Lean
-files free of executable placeholders, and 113 independent consumers
-(68 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-11): 4,262 build jobs, all 4,176 project theorem
+declarations audited with exactly matching independent inventories, 264 Lean
+files free of executable placeholders, and 119 independent consumers
+(74 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Acceptance criteria.**
 

@@ -152,10 +152,11 @@ PNT+ code is copied.
 energy benchmark retaining the square-root-height and harmonic-row terms.
 It is not a proof of the Huxley density benchmark.
 
-Actual Halasz input validation (2026-11-10): full build 4,242 jobs; all 4,070
+Actual large-value and moment validation (2026-11-11): full build 4,262 jobs; all 4,176
 project theorem declarations, including private/generated helpers, audited
 against exactly propext, Classical.choice and Quot.sound. Both independent
 declaration inventories match the audit targets and actual axiom output.
-All 246 project Lean files have zero executable placeholders. All 113
-standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
-An intentional use of the nonzero-ordinate kernel at t=0 is rejected.
+All 264 project Lean files have zero executable placeholders. All 119
+standalone consumers pass: 74 Layer 4, 9 Layer 3 and 36 literature checks.
+Intentional uses of the nonzero-ordinate kernel at t=0 and the critical
+polynomial count below its W>=2 threshold are rejected.

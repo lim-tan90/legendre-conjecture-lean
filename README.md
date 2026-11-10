@@ -119,15 +119,16 @@ vertical translation, and is integrated into the compact detector critical-mass
 fourth moment. The final Huxley density optimization remains open. [Exact statements and constants](docs/layer4-exponential-large-values.md).
 **Huxley and Guth–Maynard remain open; Layer 4 is not complete.**
 
-Validation (2026-11-10): **4,242 build jobs**, all **4,070 project theorem
-declarations** audited with only the three standard axioms, and **246 Lean files**
+Validation (2026-11-11): **4,262 build jobs**, all **4,176 project theorem
+declarations** audited with only the three standard axioms, and **264 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **113 independent consumers** pass: **68 Layer 4**, nine Layer 3 and
-36 literature checks. Added checks cover alternating phases, negative height,
-empty blocks, the two-sided harmonic endpoint, unit-separated samples and
-independently varying real parts. Misusing the nonzero-height kernel at t=0
-is rejected by Lean.
+All **119 independent consumers** pass: **74 Layer 4**, nine Layer 3 and
+36 literature checks. New checks cover zero energy, empty samples, arbitrary
+common shifts, X=1/J=0, T=2, splitting-amplitude equality and balanced-cutoff
+equality. Applying the critical polynomial count below its W>=2 threshold is
+rejected by Lean; the nonzero-kernel t=0 misuse is also rejected.
+Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
 Previous verified large-sieve checkpoint: [`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19).
 Initial Layer 4 proof commit: [`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c).

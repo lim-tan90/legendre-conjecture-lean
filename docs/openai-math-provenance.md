@@ -421,3 +421,15 @@ two-term count, bounded critical-polynomial distributions, finite dyadic moments
 and actual mollifier/critical-mass improvements are local deductions under
 `Legendre/Layer4/` and `Legendre/Layer4/Exponential/`. They use the already
 credited kernel and moment APIs and add no external code port.
+
+
+Actual large-value and moment validation (2026-11-11): full build 4,262 jobs;
+all 4,176 project theorem declarations (including 106 added public/private/
+generated declarations) have identical module-data inventory, independent
+full-environment inventory, audit-target set and parsed actual axiom output.
+Only propext, Classical.choice and Quot.sound occur. All 264 Lean files are
+free of executable sorry/admit/sorryAx and forbidden proof shortcuts.
+All 119 standalone consumers pass: 74 Layer 4, 9 Layer 3 and 36 literature.
+Intentional uses of the nonzero-ordinate kernel at t=0 and the critical
+polynomial count below its W>=2 threshold are rejected.
+The final Huxley density estimate remains open.

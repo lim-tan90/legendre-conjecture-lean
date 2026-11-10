@@ -97,12 +97,14 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 并已接入紧支撑检测器的临界质量四阶矩。最终 Huxley 密度参数优化仍待完成。[精确陈述与常数](docs/layer4-exponential-large-values.md)。
 **Huxley、Guth–Maynard 仍开放，Layer 4 尚未完成。**
 
-验证（2026-11-10）：**4,242 项构建**、**全部 4,070 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**246 个 Lean 文件**的实际
+验证（2026-11-11）：**4,262 项构建**、**全部 4,176 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**264 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**113 项独立使用检查**全部通过：Layer 4 **68 项**、Layer 3 九项、文献对照 36 项。
-新增检查涵盖交替相位、负高度、空块、双侧倒数求和端点、单位间隔及混合实部；
-把非零高度核界误用于 t=0 的错误用例被 Lean 拒绝。
+**119 项独立使用检查**全部通过：Layer 4 **74 项**、Layer 3 九项、文献对照 36 项。
+新增检查涵盖零能量、空样本、任意共同平移、X=1/J=0、T=2、分割阈值等号及
+优化阈值等号；把临界线计数误用于 W<2 的用例被 Lean 拒绝，
+把非零高度核界误用于 t=0 的用例也被拒绝。
+本地完整验证的解析大值／矩证明提交：[`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34)。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
 初始 Layer 4 证明提交：[`4f31d764b243`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/4f31d764b243f6a093dc9cbf34a677a5ad3bc17c)。
