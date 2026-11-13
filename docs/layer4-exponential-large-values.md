@@ -1,7 +1,9 @@
 # Actual logarithmic-phase cancellation and Halasz energy
 
 This is a proved analytic input for Layer 4. Ingham 1940 density is already
-proved. Huxley density, its global 12/5 exponent and Guth--Maynard remain open.
+proved. The global Huxley 12/5 exponent is now proved as well; the stronger
+curved Huxley target and Guth--Maynard remain open. See
+[the final actual density proof](layer4-huxley-density.md).
 
 ## Derivative tests and actual Dirichlet phases
 
@@ -76,7 +78,7 @@ sum_j |sum_{U<n<=2U} a(n)n^(-beta_j-it_j)|^2
 
 No common vertical line is imposed on the samples. This permits use at actual
 zeros with varying real parts. Interval subdivision and the optimized two-term
-large-value count below are now proved. Final Huxley density remains open.
+large-value count below are now proved. The global 12/5 density consequence is now proved; the stronger curved target remains open.
 
 ## Optimized large values and actual mollifier moments
 
@@ -132,7 +134,8 @@ Cauchy, this proves
 
 for T>=2, with an existential C0>0 uniform in X,J,T and the sample family.
 All quantities are the actual integrals used by the compact detector.
-The final detector polynomial estimate and Huxley parameter balance remain open.
+The improved actual detector polynomial count and Huxley parameter balance are
+now proved in [the density assembly](layer4-huxley-density.md).
 
 ## Sources and public interface
 
@@ -150,7 +153,8 @@ PNT+ code is copied.
 
 `Literature.layer4_actual_halasz_comparator` is a closed proof of an independent
 energy benchmark retaining the square-root-height and harmonic-row terms.
-It is not a proof of the Huxley density benchmark.
+The separate `layer4_huxley_global_comparator` now proves the global density
+benchmark. The stronger curved Huxley target remains open.
 
 Actual large-value and moment validation (2026-11-11): full build 4,262 jobs; all 4,176
 project theorem declarations, including private/generated helpers, audited

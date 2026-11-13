@@ -457,7 +457,10 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-10): Ingham 1940 curved density is proved; Layer 4 remains incomplete.**
+**Current state (2026-11-13): the Layer 4 roadmap acceptance requirements are fulfilled.**
+Ingham curved density and the global Huxley 12/5 exponent are proved. The
+stronger curved Huxley, Guth–Maynard and sharp log^4 targets remain explicitly
+open; the acceptance criteria below permit clearly labelled stronger open Props.
 `import Legendre.Layer4` exports the multiplicity-weighted counting convention,
 `HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
 weakening, and a proved transfer from a hypothesized power/log density bound.
@@ -490,8 +493,11 @@ and unconditional Halasz energy with an explicit R sqrt(T) term are now proved,
 also for independently varying real parts. See [the exact analytic input](layer4-exponential-large-values.md).
 Interval subdivision, the unconditional two-term large-value count, full critical-line
 polynomial counts and improved actual mollifier/critical-mass moments are proved.
-The final Huxley density parameter optimization remains open.
-Huxley/Guth–Maynard and the sharp fourth-moment log^4 remain open.
+The improved actual detector branches, common parameter balance, height covers
+and analytic multiplicity restoration prove the global density exponent
+(12/5)(1−σ)+ε uniformly in σ∈[1/2,1], T≥2. The logarithmic form has
+(1+log T)^38. See [the full proof and scope](layer4-huxley-density.md).
+The stronger curved Huxley/Guth–Maynard and sharp fourth-moment log^4 remain open.
 This does not prove either Ingham 1937 prime-gap statement.
 See [initial mean values](layer4-mean-values.md),
 [the large-sieve estimates and reduction](layer4-large-sieve.md),
@@ -505,13 +511,13 @@ See [initial mean values](layer4-mean-values.md),
 | Definition of N(σ,T) | Already proved finite, multiplicity-weighted in Layer 2 |
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
 | Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; log^10 bound, existential coefficient |
-| Huxley b=12/5 | **open** |
-| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; sharper analytic detector estimates **open** |
+| Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
+| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
 
-Full validation (2026-11-11): 4,262 build jobs, all 4,176 project theorem
-declarations audited with exactly matching independent inventories, 264 Lean
-files free of executable placeholders, and 119 independent consumers
-(74 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-13): 4,272 build jobs, all 4,264 project theorem
+declarations audited with exactly matching independent inventories, 274 Lean
+files free of executable placeholders, and 127 independent consumers
+(82 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Acceptance criteria.**
 

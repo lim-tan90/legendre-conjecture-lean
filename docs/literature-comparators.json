@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "comparison_policy": "exponents up to positive epsilon; harmless multiplicative constants and interval direction allowed; hypotheses and finite/eventual scope retained",
-  "checked_on": "2026-11-11",
+  "checked_on": "2026-11-13",
   "historical_rows": [
     {
       "id": "legendre1808",
@@ -277,11 +277,11 @@
     },
     {
       "id": "layer4",
-      "status": "Ingham curved density and fourth-moment height exponent proved; Huxley and sharper targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator⟩",
+      "status": "roadmap acceptance proved: Ingham and global Huxley 12/5; stronger targets open",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Ingham 1940 curved density is proved unconditionally, uniformly in sigma and with analytic multiplicities, with log^10 loss or arbitrary positive height epsilon. Polynomial and integral branches, real-height cover and fixed low heights are proved. Sharp fourth-moment log^4, Huxley and Guth--Maynard remain open; no 1937 prime-gap proof follows here. The actual logarithmic-phase kernel and unconditional Halasz energy (including independently varying real parts) are proved; interval subdivision, unconditional two-term large-value counts and the improved actual mollifier/critical-mass moments are proved. The final Huxley density count remains open."
+      "note": "Ingham 1940 and global Huxley 12/5 are proved uniformly in sigma, with all analytic multiplicities and T>=2. The global proof uses actual Halasz two-term counts, both compact-detector branches, integer cutoffs and height covers, with (1+log T)^38 loss absorbed into arbitrary positive epsilon. The stronger curved Huxley1972Density, sharp log^4 fourth moment and GuthMaynard2024Density remain open. The roadmap permits explicit open stronger analytic Props; no open target is assumed in the global proof. Prime-gap theorems remain Layer 5 obligations."
     }
   ],
   "open_analytic_targets": [
@@ -553,6 +553,16 @@
     "Legendre/Layer4/FiniteDyadicMoment.lean": "layer4",
     "Legendre/Layer4/FiniteSquareLayercake.lean": "layer4",
     "Legendre/Layer4/HalaszCriticalMass.lean": "layer4",
-    "Legendre/Layer4/HalaszMollifierMoment.lean": "layer4"
+    "Legendre/Layer4/HalaszMollifierMoment.lean": "layer4",
+    "Legendre/Layer4/HalaszDivisorBlock.lean": "layer4",
+    "Legendre/Layer4/HalaszIntegralAlternative.lean": "layer4",
+    "Legendre/Layer4/HalaszPolynomialAlternative.lean": "layer4",
+    "Legendre/Layer4/HalaszUniformCosts.lean": "layer4",
+    "Legendre/Layer4/HuxleyBalance.lean": "layer4",
+    "Legendre/Layer4/HuxleyBalancedAlternatives.lean": "layer4",
+    "Legendre/Layer4/HuxleyDensity.lean": "layer4",
+    "Legendre/Layer4/HuxleyHeightDensity.lean": "layer4",
+    "Legendre/Layer4/HuxleyParameters.lean": "layer4",
+    "Legendre/Layer4/HuxleyShellDensity.lean": "layer4"
   }
 }

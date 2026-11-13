@@ -367,7 +367,7 @@ The license remains in `licenses/openai-math-Apache-2.0.txt`.
 | `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](../Legendre/Layer4/PolynomialAlternative.lean) |
 | `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](../Legendre/Layer4/DensityBalance.lean) |
 | `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](../Legendre/Layer4/BalancedAlternatives.lean) |
-| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](../Legendre/Layer4/SeparatedShellDensity.lean) |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](../Legendre/Layer4/SeparatedShellDensity.lean); its already credited finite branch assembly is reused internally in [HuxleyShellDensity.lean](../Legendre/Layer4/HuxleyShellDensity.lean), under the same pinned source and Apache-2.0 license |
 
 `PolynomialBlockSampling.lean`, `PolynomialBlockCost.lean`,
 `NearCriticalDensity.lean`, `DyadicHeightDensity.lean`,
@@ -433,3 +433,25 @@ All 119 standalone consumers pass: 74 Layer 4, 9 Layer 3 and 36 literature.
 Intentional uses of the nonzero-ordinate kernel at t=0 and the critical
 polynomial count below its W>=2 threshold are rejected.
 The final Huxley density estimate remains open.
+
+The global 12/5 density proof adds local divisor-block counts, literal integral
+counts, uniform costs, exact parameter balance, integer cutoffs and analytic
+multiplicity restoration. `HuxleyShellDensity.lean` retains attribution for
+the finite branch assembly reused from the already adapted
+`SeparatedShellDensity.lean` (source `DensitySeparatedCount.lean`,
+openai/math `4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0).
+Both READMEs list this additional destination; the upstream license is retained.
+No new upstream source file was downloaded or copied.
+
+
+Global 12/5 density validation (2026-11-13): full build 4,272 jobs. All
+4,264 project theorem declarations, including 88 added declarations (52 public
+and 36 private/generated), have identical module-data inventory, independent
+full-environment inventory, audit-target set and actual parsed axiom output.
+Only propext, Classical.choice and Quot.sound occur. All 274 project Lean files
+have zero executable sorry/admit/sorryAx and no forbidden proof shortcuts.
+All 127 independent consumers pass: 82 Layer 4, 9 Layer 3 and 36 literature.
+Lean rejects treating the new global proof as the stronger curved Huxley target,
+using the nonzero-ordinate kernel at t=0, and using the critical polynomial
+count below W=2. The roadmap acceptance criteria are fulfilled; the stronger
+curved Huxley/Guth--Maynard and sharp log^4 targets remain explicitly open.

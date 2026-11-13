@@ -413,6 +413,16 @@ import all Legendre.Layer4.Exponential.HalaszTwoTermCount
 import all Legendre.Layer4.Exponential.HeightSubdivision
 import all Legendre.Layer4.FiniteDyadicMoment
 import all Legendre.Layer4.FiniteSquareLayercake
+import all Legendre.Layer4.HalaszDivisorBlock
+import all Legendre.Layer4.HalaszIntegralAlternative
+import all Legendre.Layer4.HalaszPolynomialAlternative
+import all Legendre.Layer4.HalaszUniformCosts
+import all Legendre.Layer4.HuxleyBalance
+import all Legendre.Layer4.HuxleyBalancedAlternatives
+import all Legendre.Layer4.HuxleyDensity
+import all Legendre.Layer4.HuxleyHeightDensity
+import all Legendre.Layer4.HuxleyParameters
+import all Legendre.Layer4.HuxleyShellDensity
 import all Legendre.Layer4.HalaszCriticalMass
 import all Legendre.Layer4.HalaszMollifierMoment
 import all Legendre.Layer4.Exponential.DiscreteFirstDerivative
@@ -4711,3 +4721,93 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_packed_height_two_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_shifted_mollifier_head_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_halasz_zero_energy_count_consumer"
+
+-- Global 12/5 density: every new public, private and generated theorem.
+#print axioms Legendre.Density.Moment.count_le_of_rpow_log_bound
+#print axioms Legendre.Density.Moment.critical_integral_count_lower
+#print axioms Legendre.Density.Moment.detectorBalanceExponent.eq_1
+#print axioms Legendre.Density.Moment.divisor_block_energy_cubic
+#print axioms Legendre.Density.Moment.divisor_block_energy_linear
+#print axioms Legendre.Density.Moment.exists_large_dyadic_piece
+#print axioms Legendre.Density.Moment.halaszUniformCoverConstant._proof_1
+#print axioms Legendre.Density.Moment.halaszUniformCoverConstant._proof_2
+#print axioms Legendre.Density.Moment.halaszUniformCoverConstant_pos
+#print axioms Legendre.Density.Moment.halaszUniformMomentConstant._proof_1
+#print axioms Legendre.Density.Moment.halaszUniformMomentConstant_ge_four
+#print axioms Legendre.Density.Moment.halasz_divisor_block_count
+#print axioms Legendre.Density.Moment.halasz_moment_square
+#print axioms Legendre.Density.Moment.halasz_reciprocal_threshold
+#print axioms Legendre.Density.Moment.halasz_uniform_cover
+#print axioms Legendre.Density.Moment.halasz_uniform_fractional_cost
+#print axioms Legendre.Density.Moment.halasz_uniform_kernel_cost
+#print axioms Legendre.Density.Moment.halasz_uniform_moment_cost
+#print axioms Legendre.Density.Moment.height_log_costs
+#print axioms Legendre.Density.Moment.huxleyBalanceDenominator._proof_1
+#print axioms Legendre.Density.Moment.huxleyDetectorExponent._proof_1
+#print axioms Legendre.Density.Moment.huxleyDetectorExponent._proof_2
+#print axioms Legendre.Density.Moment.huxley_book_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_book_exponent_le_one
+#print axioms Legendre.Density.Moment.huxley_denominator_pos
+#print axioms Legendre.Density.Moment.huxley_detector_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_detector_scale
+#print axioms Legendre.Density.Moment.huxley_height_shell_power_log
+#print axioms Legendre.Density.Moment.huxley_integer_cutoffs
+#print axioms Legendre.Density.Moment.huxley_integral_exponents
+#print axioms Legendre.Density.Moment.huxley_integral_power_bounds
+#print axioms Legendre.Density.Moment.huxley_mollifier_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_polynomial_exponents
+#print axioms Legendre.Density.Moment.huxley_polynomial_powers
+#print axioms Legendre.Density.Moment.huxley_separated_high_density
+#print axioms Legendre.Density.Moment.huxley_separated_high_shell_density
+#print axioms Legendre.Density.Moment.integral_alternative_halasz_dichotomy
+#print axioms Legendre.Density.Moment.integral_alternative_huxley_balanced
+#print axioms Legendre.Density.Moment.mixed_power_count_dichotomy
+#print axioms Legendre.Density.Moment.polynomialHalaszConstant._proof_1
+#print axioms Legendre.Density.Moment.polynomialHalaszConstant._proof_2
+#print axioms Legendre.Density.Moment.polynomialHalaszConstant._proof_3
+#print axioms Legendre.Density.Moment.polynomialHalaszConstant_pos
+#print axioms Legendre.Density.Moment.polynomial_alternative_halasz_count
+#print axioms Legendre.Density.Moment.polynomial_alternative_huxley_balanced
+#print axioms Legendre.Density.Moment.polynomial_halasz_actual_block
+#print axioms Legendre.Density.Moment.real_rpow_square
+#print axioms Legendre.Literature.layer4_huxley_global_comparator
+#print axioms Legendre.Zeta.hasZeroDensityEstimate_twelve_fifths
+#print axioms Legendre.Zeta.huxley_book_density_log_bound
+#print axioms Legendre.Zeta.huxley_global_density_log_bound
+#print axioms Legendre.Zeta.ingham_exponent_le_twelve_fifths
+#audit_private_axioms "_private.Legendre.Layer4.HalaszDivisorBlock.0.Legendre.Density.Moment.halasz_divisor_block_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszIntegralAlternative.0.Legendre.Density.Moment.critical_integral_count_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPolynomialAlternative.0.Legendre.Density.Moment.exists_large_dyadic_piece._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_integral_exponents._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyBalance.0.Legendre.Density.Moment.huxley_polynomial_exponents._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyBalanceDenominator.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyBookExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyDetectorExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyMollifierExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_balance_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_balance_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_integer_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_nine_tenths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_principal_pole_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_sigma_one_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_three_quarters_consumer"

@@ -126,6 +126,8 @@ def DensityPower (f : ℝ → ℝ) : Prop :=
 
 /-- The 1940 density estimate is distinct from Ingham's 1937 prime-gap paper. -/
 def Ingham1940Density : Prop := DensityPower (fun σ => 3*(1-σ)/(2-σ))
+/-- The classical global 12/5 exponent, independently of the stronger curved target. -/
+def HuxleyGlobalDensity : Prop := DensityPower (fun σ => (12/5)*(1-σ))
 /-- Curved Huxley comparison target; combine with Ingham for a global exponent. -/
 def Huxley1972Density : Prop := DensityPower (fun σ => 3*(1-σ)/(3*σ-1))
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/

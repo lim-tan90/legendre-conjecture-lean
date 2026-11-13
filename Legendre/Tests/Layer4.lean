@@ -657,4 +657,69 @@ theorem layer4_halasz_empty_polynomial_count_consumer :
     1 le_rfl (fun _ => 0) (by intro n; norm_num) 1 100 2 le_rfl le_rfl
     (by simp) (by simp) (by simp)
 
+
+/-- The new global estimate improves the previous Ingham exponent at sigma=9/10. -/
+theorem layer4_huxley_nine_tenths_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (9/10) T : ℝ) ≤ C*T^(1/4 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.hasZeroDensityEstimate_twelve_fifths (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! hb (9/10) (by norm_num) T hT using 1 <;> norm_num
+
+/-- The switching endpoint sigma=3/4 is included in the closed global theorem. -/
+theorem layer4_huxley_three_quarters_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (3/4) T : ℝ) ≤ C*T^(61/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.hasZeroDensityEstimate_twelve_fifths (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! hb (3/4) (by norm_num) T hT using 1 <;> norm_num
+
+/-- Height two retains one constant for the entire closed sigma interval. -/
+theorem layer4_huxley_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) 1,
+      (Zeta.zeroDensityCount σ 2 : ℝ) ≤ C*2^((12/5 : ℝ)*(1-σ)+1/100) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.hasZeroDensityEstimate_twelve_fifths (1/100) (by norm_num)
+  exact ⟨C,hC,fun σ hσ => hb σ hσ 2 (by norm_num)⟩
+
+/-- The real-part endpoint one is included without discarding the low heights. -/
+theorem layer4_huxley_sigma_one_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount 1 T : ℝ) ≤ C*T^(1/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.hasZeroDensityEstimate_twelve_fifths (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! hb 1 (by norm_num) T hT using 1 <;> norm_num
+
+/-- Exact balance powers at the switching endpoint. -/
+theorem layer4_huxley_balance_three_quarters_consumer :
+    Moment.huxleyMollifierExponent (3/4) = 4/5 ∧
+    Moment.huxleyDetectorExponent (3/4) = 6/5 ∧ Moment.huxleyBookExponent (3/4) = 3/5 := by
+  norm_num [Moment.huxleyMollifierExponent,Moment.huxleyDetectorExponent,
+    Moment.huxleyBookExponent,Moment.huxleyBalanceDenominator]
+
+/-- Exact balance powers at the real-part endpoint one. -/
+theorem layer4_huxley_balance_one_consumer :
+    Moment.huxleyMollifierExponent 1 = 1/2 ∧
+    Moment.huxleyDetectorExponent 1 = 1 ∧ Moment.huxleyBookExponent 1 = 0 := by
+  norm_num [Moment.huxleyMollifierExponent,Moment.huxleyDetectorExponent,
+    Moment.huxleyBookExponent,Moment.huxleyBalanceDenominator]
+
+/-- Integer rounding preserves the useful square-root mollifier at sigma=1. -/
+theorem layer4_huxley_integer_cutoff_consumer (T : ℝ) (hT : 2 ≤ T) :
+    ∃ X J : ℕ, 1 ≤ X ∧ T^(1/2 : ℝ) ≤ X ∧ (X : ℝ) ≤ 2*T^(1/2 : ℝ) ∧
+      (X : ℝ) ≤ 2*T ∧ X ≤ 2^J ∧
+      (J : ℝ) ≤ Moment.halaszUniformCoverConstant*(1+Real.log T) := by
+  have hh := Moment.huxley_integer_cutoffs T 1 hT (by norm_num) le_rfl
+  simpa only [show Moment.huxleyMollifierExponent 1 = 1/2 by
+    norm_num [Moment.huxleyMollifierExponent,Moment.huxleyBalanceDenominator]] using! hh
+
+/-- The lowest high-shell height satisfies the literal principal-pole scale constraints. -/
+theorem layer4_huxley_principal_pole_consumer :
+    4 ≤ (128 : ℝ)^(6/5 : ℝ) ∧ (128 : ℝ)^(6/5 : ℝ) ≤ 4096 ∧
+      1+Real.log (2*(128 : ℝ)^(6/5 : ℝ)+1) ≤ 8*(1+Real.log 128) := by
+  have hh := Moment.huxley_detector_scale 128 (3/4) le_rfl (by norm_num) (by norm_num)
+  convert! hh using 1 <;> norm_num [Moment.huxleyDetectorExponent,Moment.huxleyBalanceDenominator]
+
 end Legendre.Tests

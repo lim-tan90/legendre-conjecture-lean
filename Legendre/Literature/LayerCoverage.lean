@@ -120,6 +120,10 @@ theorem layer4_actual_halasz_large_values_comparator : ActualHalaszLargeValuesBe
 /-- Closed proof of the 1940 curved density exponent, with multiplicities and uniform sigma. -/
 theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsilon
 
+/-- Closed proof of global 12/5, retaining uniform sigma, all heights and multiplicities. -/
+theorem layer4_huxley_global_comparator : HuxleyGlobalDensity :=
+  Zeta.hasZeroDensityEstimate_twelve_fifths
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

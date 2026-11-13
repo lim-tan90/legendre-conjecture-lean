@@ -77,8 +77,19 @@ public import Legendre.Layer4.FiniteSquareLayercake
 public import Legendre.Layer4.HalaszCriticalMass
 public import Legendre.Layer4.HalaszMollifierMoment
 
+public import Legendre.Layer4.HalaszDivisorBlock
+public import Legendre.Layer4.HalaszIntegralAlternative
+public import Legendre.Layer4.HalaszPolynomialAlternative
+public import Legendre.Layer4.HalaszUniformCosts
+public import Legendre.Layer4.HuxleyBalance
+public import Legendre.Layer4.HuxleyBalancedAlternatives
+public import Legendre.Layer4.HuxleyDensity
+public import Legendre.Layer4.HuxleyHeightDensity
+public import Legendre.Layer4.HuxleyParameters
+public import Legendre.Layer4.HuxleyShellDensity
+
 /-!
-# Layer 4: mean values, actual zero detection and Ingham density
+# Layer 4: actual zero detection, Ingham density and global Huxley density
 
 The public interface exports sharp real-line Dirichlet mean square, separated
 sampling with varying real parts, additive large sieve and Gram bounds.
@@ -96,9 +107,12 @@ independently varying real parts. Interval subdivision and window optimization
 prove the unconditional two-term large-value count. Bounded critical-line
 polynomials and actual Mobius values have the resulting improved second
 moments, which enter the compact detector critical-mass fourth moment.
-The final Huxley density optimization remains open.
+Improved actual polynomial and integral branch counts, a common parameter
+balance and multiplicity restoration prove the global density exponent
+(12/5)(1-sigma)+epsilon uniformly in sigma and for all T>=2.
 
-The sharp fourth-moment log^4, Huxley's curved/global 12/5 estimates and
-Guth--Maynard density/large-value targets remain open. Layer 4 is incomplete.
+The Layer 4 roadmap acceptance requirements are fulfilled. The stronger
+curved Huxley benchmark, sharp fourth-moment log^4 and Guth--Maynard targets
+remain explicitly open; they are not hypotheses of the global 12/5 proof.
 The proved 1940 density theorem does not assert Ingham's 1937 prime-gap result.
 -/
