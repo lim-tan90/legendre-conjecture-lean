@@ -111,3 +111,5 @@ Lean rejects treating the new global proof as the stronger curved Huxley target,
 using the nonzero-ordinate kernel at t=0, and using the critical polynomial
 count below W=2. The roadmap acceptance criteria are fulfilled; the stronger
 curved Huxley/Guth--Maynard and sharp log^4 targets remain explicitly open.
+
+Locally verified proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67`.

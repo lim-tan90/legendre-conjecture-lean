@@ -108,6 +108,7 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 新增检查涵盖 σ=3/4、9/10、1，高度二的共同常数，精确平衡端点、整数取整及
 最低高层高度的主极点约束。把全局定理误当成更强 Huxley 曲线结论的用例被 Lean 拒绝；
 t=0 核界及 W<2 临界计数的误用也被拒绝。
+本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
 本地完整验证的解析大值／矩证明提交：[`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34)。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
 此前已验证的大筛检查点：[`897139fbb45d`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/897139fbb45d96b98270f24bf5b196c411df1c19)。
