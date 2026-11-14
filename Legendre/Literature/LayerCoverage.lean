@@ -134,6 +134,16 @@ theorem layer4_weyl_short_sum_comparator : WeylShortSumBenchmark := by
     Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
   exact Density.Oscillation.logarithmic_block_weyl
 
+theorem layer4_weighted_weyl_comparator : WeightedWeylBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_weighted_weyl
+
+theorem layer4_general_weyl_comparator : GeneralWeylBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_general_weyl
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

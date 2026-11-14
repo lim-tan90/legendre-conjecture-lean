@@ -947,4 +947,83 @@ theorem layer4_weyl_zero_overlap_consumer :
   simpa using! Oscillation.logarithmic_shift_correlation_uniform 1 0 1 1 le_rfl (by norm_num)
     le_rfl le_rfl le_rfl 1 one_ne_zero
 
+/-- The real-part weight includes empty subintervals. -/
+theorem layer4_weighted_weyl_empty_consumer :
+    ‖∑ n ∈ Finset.Ioc (1 : ℕ) 1, (n : ℂ)^(-((1 : ℂ)+(1 : ℂ)*Complex.I))‖ ≤
+      Oscillation.logarithmicWeylConstant := by
+  simpa using! Oscillation.logarithmic_block_weighted_weyl 1 1 le_rfl le_rfl (by norm_num)
+    1 1 (by norm_num) (by norm_num) (by norm_num)
+
+/-- At beta=1/2 the power of the block length disappears. -/
+theorem layer4_weighted_weyl_critical_consumer :
+    ‖∑ n ∈ Finset.Ioc (2 : ℕ) 4, (n : ℂ)^(-((1/2 : ℂ)+(4 : ℂ)*Complex.I))‖ ≤
+      Oscillation.logarithmicWeylConstant*(4 : ℝ)^(1/6 : ℝ) := by
+  simpa using! Oscillation.logarithmic_block_weighted_weyl 2 4 (by norm_num) (by norm_num) le_rfl
+    (1/2) 4 (by norm_num) (by norm_num) (by norm_num)
+
+/-- The weighted length boundary retains its negative block exponent. -/
+theorem layer4_weighted_weyl_three_quarters_consumer :
+    ‖∑ n ∈ Finset.Ioc (4 : ℕ) 8, (n : ℂ)^(-((3/4 : ℂ)+(4 : ℂ)*Complex.I))‖ ≤
+      Oscillation.logarithmicWeylConstant*(4 : ℝ)^(-1/4 : ℝ)*(4 : ℝ)^(1/6 : ℝ) := by
+  convert! Oscillation.logarithmic_block_weighted_weyl 4 8 (by norm_num) (by norm_num) le_rfl
+    (3/4) 4 (by norm_num) (by norm_num) (by norm_num) using 1 <;> norm_num
+
+/-- A long block violating the short-sum length restriction uses the extra terms. -/
+theorem layer4_general_weyl_long_block_consumer :
+    ‖∑ n ∈ Finset.Ioc (16 : ℕ) 32, (n : ℂ)^(-(1 : ℂ)*Complex.I)‖ ≤
+      Oscillation.logarithmicWeylConstant*(Real.sqrt 16+16*(16 : ℝ)^(1/4 : ℝ)+16) := by
+  simpa using! Oscillation.logarithmic_block_general_weyl 16 32 (by norm_num) (by norm_num)
+    le_rfl 1 (by norm_num)
+
+/-- Abel's inequality preserves a concrete decreasing weight at its first value's cost. -/
+theorem layer4_monotone_weights_consumer :
+    ‖∑ n ∈ Finset.range 2, (1/((n : ℝ)+1)) • (1 : ℂ)‖ ≤ (2 : ℝ) := by
+  have hh := Oscillation.norm_sum_range_smul_antitone (fun n => 1/((n : ℝ)+1))
+    (fun _ => (1 : ℂ)) 2 2 (by norm_num) (by intro n; positivity)
+    (by
+      intro i j hij
+      exact one_div_le_one_div_of_le (by positivity) (by exact_mod_cast Nat.add_le_add_right hij 1))
+    (by
+      intro m hm
+      simpa using! (show (m : ℝ) ≤ 2 by exact_mod_cast hm))
+  simpa using! hh
+
+/-- The linear detector scale obeys the principal-pole bounds at the first high shell. -/
+theorem layer4_linear_detector_scale_consumer : (4 : ℝ) ≤ 128 ∧ (128 : ℝ) ≤ 4096 := by
+  convert! Moment.linear_detector_scale 128 le_rfl using 1 <;> norm_num
+
+/-- The longer detector's actual Type II count retains negative height exponents. -/
+theorem layer4_linear_typeII_negative_exponent_consumer :
+    ∃ C : ℝ, 0 < C ∧ ((∅ : Finset ℕ).card : ℝ) ≤ C*(128 : ℝ)^(-99/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.actual_typeII_linear_cutoff_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  have hh := hb 0 128 1 (by norm_num) le_rfl (by norm_num) 1 le_rfl
+    (by norm_num) (by norm_num) (∅ : Finset ℕ) (fun _ => 1) (fun _ => 0)
+    (by simp) (by simp) (by simp) (by simp)
+  convert! hh using 1 <;> norm_num
+
+/-- The longer detector includes the endpoint sigma=3/4 where 3-4 sigma vanishes. -/
+theorem layer4_linear_typeII_three_quarters_consumer :
+    ∃ C : ℝ, 0 < C ∧ ((∅ : Finset ℕ).card : ℝ) ≤ C*(128 : ℝ)^(1/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.actual_typeII_linear_cutoff_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  have hh := hb 0 128 (3/4) (by norm_num) le_rfl le_rfl 1 le_rfl
+    (by norm_num) (by norm_num) (∅ : Finset ℕ) (fun _ => 1) (fun _ => 0)
+    (by simp) (by simp) (by simp) (by simp)
+  convert! hh using 1 <;> norm_num
+
+/-- A zero mollifier makes the claimed critical-integral sample family have zero count. -/
+theorem layer4_linear_typeII_zero_cutoff_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → ∀ σ : ℝ, 3/4 ≤ σ →
+      ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorCriticalIntegral 0 ((β i : ℂ)+(t i : ℂ)*Complex.I) T‖) →
+      (S.card : ℝ) ≤ 0 := by
+  obtain ⟨C,hC,hb⟩ := Moment.integral_alternative_linear_height_count
+  refine ⟨C,hC,?_⟩
+  intro T hT σ hσ ι S β t ht hs hβ hw
+  simpa using! hb 0 T σ hT hσ S β t ht hs hβ hw
+
 end Legendre.Tests

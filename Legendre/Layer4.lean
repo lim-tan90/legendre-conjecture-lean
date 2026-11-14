@@ -109,6 +109,10 @@ public import Legendre.Layer4.Exponential.LogShiftBudget
 public import Legendre.Layer4.Exponential.LogDifferencing
 public import Legendre.Layer4.Exponential.WeylBudget
 public import Legendre.Layer4.Exponential.LogWeyl
+public import Legendre.Layer4.Exponential.MonotoneWeights
+public import Legendre.Layer4.Exponential.WeightedLogWeyl
+public import Legendre.Layer4.Exponential.GeneralLogWeyl
+public import Legendre.Layer4.LongDetectorTypeII
 public import Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters

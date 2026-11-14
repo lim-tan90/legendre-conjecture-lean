@@ -132,27 +132,38 @@ Ingham supplies σ≤3/4. The full curved benchmark still requires σ>5/6.
 The actual unweighted short sum now also satisfies the Weyl bound
 `C sqrt(U) abs(t)^(1/6)` for `U<=V<=2U`, `1<=abs(t)` and `U²<=4 abs(t)`.
 Its finite differencing proof and independent comparator are closed;
-connecting this input to zeta subconvexity and the remaining detector bounds
+connecting this input to the remaining Mobius-weighted polynomial branch
 is still required. [Proof and exact range](docs/layer4-weyl-short-sums.md).
+
+The weighted short sum is now bounded uniformly for every `β≥0`, with
+factor `U^(1/2−β)`. A general-length version retains all three differencing
+terms. At smoothing length `Y=T`, the actual Type II branch has the improved
+bound `C_ε T^(3−4σ+4δ+ε)` for `X≤2T^δ`, with all principal-pole constraints.
+The remaining Mobius polynomial assembly is still open.
+[Exact statements and verification](docs/layer4-weighted-long-detector.md).
 
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-14): **4,298 build jobs**, all **4,496 project theorem
-declarations** audited with only the three standard axioms, and **300 Lean files**
+Validation (2026-11-14): **4,302 build jobs**, all **4,530 project theorem
+declarations** audited with only the three standard axioms, and **304 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **156 independent consumers** pass: **111 Layer 4**, nine Layer 3 and
-36 literature checks. The 29 added consumers cover zero cutoff, empty actual
+All **165 independent consumers** pass: **120 Layer 4**, nine Layer 3 and
+36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
 the full restricted count at sigma=4/5 and 5/6, and its height-two constant.
-Nine further consumers check finite differencing endpoints, zero and negative
+Further consumers check finite differencing endpoints, zero and negative
 heights in their applicable derivative/sum statements, empty overlaps and the
 Weyl length boundary. Lean rejects dropping the Weyl height/length conditions.
 Lean rejects confusing pointwise coefficient powers with Dirichlet convolution;
 the global theorem is still not a proof of the stronger curved benchmark.
+The latest nine checks cover real-part weights, general block lengths, finite
+Abel weights and the actual Type II exponent at Y=T, including zero cutoff
+and the endpoint sigma=3/4. Dropping the beta condition or the general-length
+cost terms is rejected by Lean.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
 Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).

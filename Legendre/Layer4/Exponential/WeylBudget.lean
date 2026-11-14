@@ -67,4 +67,49 @@ theorem logarithmic_weyl_square_budget (U M : ℕ) (t s C S : ℝ)
     have hMU2 := pow_le_pow_left₀ hMp hMUr 2
     nlinarith [mul_le_mul_of_nonneg_left hUs' hUp.le]
 
+/-- Without a length restriction, retain the two extra terms instead of discarding them. -/
+theorem logarithmic_weyl_general_square_budget (U M : ℕ) (t s C S : ℝ)
+    (hU : 1 ≤ U) (hMU : M ≤ U) (ht : 1 ≤ t) (hs : 0 < s) (hs1 : 1 ≤ s)
+    (hs3 : s^3 = t) (hC : 0 ≤ C) (hS : 0 ≤ S) (hSM : S ≤ M)
+    (hvdc : ∀ H : ℕ, 1 ≤ H → H ≤ M →
+      S^2 ≤ 2*(U : ℝ)^2/H+2*(U : ℝ)*C*
+        (Real.sqrt (t*H/(U : ℝ))+(U : ℝ)*Real.sqrt ((U : ℝ)/t))) :
+    S^2 ≤ (4+2*C)*(U : ℝ)*s+2*C*(U : ℝ)^2*Real.sqrt ((U : ℝ)/t)+((U : ℝ)/s)^2 := by
+  have hUp : (0 : ℝ) < U := by exact_mod_cast (lt_of_lt_of_le Nat.zero_lt_one hU)
+  have hMp : (0 : ℝ) ≤ M := Nat.cast_nonneg M
+  have hMUr : (M : ℝ) ≤ U := by exact_mod_cast hMU
+  have htp : 0 < t := by linarith
+  have hS2 : S^2 ≤ (M : ℝ)^2 := pow_le_pow_left₀ hS hSM 2
+  by_cases hlarge : 2 ≤ (U : ℝ)/s
+  · let H := ⌊(U : ℝ)/s⌋₊
+    have hH : 1 ≤ H := Nat.floor_pos.mpr (by linarith)
+    have hHp : (0 : ℝ) < H := by exact_mod_cast (lt_of_lt_of_le Nat.zero_lt_one hH)
+    have hHhi : (H : ℝ) ≤ (U : ℝ)/s := Nat.floor_le (by positivity)
+    have hfloor : (U : ℝ)/s < (H : ℝ)+1 := Nat.lt_floor_add_one _
+    have hHlo : (U : ℝ) ≤ 2*(H : ℝ)*s := by
+      have hh : (U : ℝ)/s ≤ 2*(H : ℝ) := by linarith
+      exact (div_le_iff₀ hs).mp hh
+    by_cases hHM : H ≤ M
+    · have hlin : 2*(U : ℝ)^2/H ≤ 4*(U : ℝ)*s := by
+        apply (div_le_iff₀ hHp).mpr
+        nlinarith [mul_le_mul_of_nonneg_left hHlo (show 0 ≤ 2*(U : ℝ) by positivity)]
+      have hroot : Real.sqrt (t*H/(U : ℝ)) ≤ s := by
+        apply Real.sqrt_le_iff.mpr ⟨hs.le,?_⟩
+        apply (div_le_iff₀ hUp).mpr
+        have hh := (le_div_iff₀ hs).mp hHhi
+        nlinarith [mul_le_mul_of_nonneg_left hh (sq_nonneg s)]
+      have hh := hvdc H hH hHM
+      have hcorr := mul_le_mul_of_nonneg_left
+        (add_le_add hroot (le_rfl : (U : ℝ)*Real.sqrt ((U : ℝ)/t) ≤ _))
+        (show 0 ≤ 2*(U : ℝ)*C by positivity)
+      nlinarith [sq_nonneg ((U : ℝ)/s)]
+    · have hMH : (M : ℝ) ≤ H := by exact_mod_cast (le_of_not_ge hHM)
+      have hm := pow_le_pow_left₀ hMp (hMH.trans hHhi) 2
+      have hpos : 0 ≤ (4+2*C)*(U : ℝ)*s+2*C*(U : ℝ)^2*Real.sqrt ((U : ℝ)/t) := by positivity
+      linarith
+  · have hUs : (U : ℝ) ≤ 2*s := (div_le_iff₀ hs).mp (le_of_not_ge hlarge)
+    have hMU2 := pow_le_pow_left₀ hMp hMUr 2
+    have hpos : 0 ≤ 2*C*(U : ℝ)^2*Real.sqrt ((U : ℝ)/t)+((U : ℝ)/s)^2 := by positivity
+    nlinarith [mul_le_mul_of_nonneg_left hUs hUp.le]
+
 end Legendre.Density.Oscillation

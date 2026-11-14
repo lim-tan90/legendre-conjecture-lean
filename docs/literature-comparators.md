@@ -345,3 +345,11 @@ sum <= C sqrt(U) abs(t)^(1/6) on U<=V<=2U, abs(t)>=1 and U²<=4 abs(t).
 `layer4_weyl_short_sum_comparator` is closed and included in the generated
 Layer 4 consumer. Its range does not assert zeta subconvexity or close the
 remaining curved-density real parts above sigma=5/6.
+
+### Weighted and general-length Weyl inputs (2026-11-14)
+
+`WeightedWeylBenchmark` preserves beta>=0 and the short-length hypothesis;
+`GeneralWeylBenchmark` allows every dyadic length and keeps all three costs.
+Their closed comparators are included in the generated Layer 4 consumer.
+The actual Type II estimate at Y=T is documented separately and remains
+one branch of the detector, not a full density theorem.

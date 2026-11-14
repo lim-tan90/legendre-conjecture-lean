@@ -140,6 +140,21 @@ def WeylShortSumBenchmark : Prop :=
     ∀ t : ℝ, 1 ≤ |t| → (U : ℝ)^2 ≤ 4*|t| →
       ‖∑ n ∈ Finset.Ioc U V, (n : ℂ)^(-(t : ℂ)*Complex.I)‖ ≤
         C*Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)
+/-- Real-part weighted short sums, uniform for every beta>=0. -/
+def WeightedWeylBenchmark : Prop :=
+  ∃ C > 0, ∀ U V : ℕ, 1 ≤ U → U ≤ V → V ≤ 2*U →
+    ∀ β t : ℝ, 0 ≤ β → 1 ≤ |t| → (U : ℝ)^2 ≤ 4*|t| →
+      ‖∑ n ∈ Finset.Ioc U V, (n : ℂ)^(-((β : ℂ)+(t : ℂ)*Complex.I))‖ ≤
+        C*(U : ℝ)^(1/2-β)*|t|^(1/6 : ℝ)
+
+/-- Every dyadic length is allowed when all three differencing terms are retained. -/
+def GeneralWeylBenchmark : Prop :=
+  ∃ C > 0, ∀ U V : ℕ, 1 ≤ U → U ≤ V → V ≤ 2*U →
+    ∀ t : ℝ, 1 ≤ |t| →
+      ‖∑ n ∈ Finset.Ioc U V, (n : ℂ)^(-(t : ℂ)*Complex.I)‖ ≤
+        C*(Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)+(U : ℝ)*((U : ℝ)/|t|)^(1/4 : ℝ)+
+          (U : ℝ)/|t|^(1/3 : ℝ))
+
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 

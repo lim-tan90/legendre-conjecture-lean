@@ -514,10 +514,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
 
-Full validation (2026-11-14): 4,298 build jobs, all 4,496 project theorem
-declarations audited with exactly matching independent inventories, 300 Lean
-files free of executable placeholders, and 156 independent consumers
-(111 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-14): 4,302 build jobs, all 4,530 project theorem
+declarations audited with exactly matching independent inventories, 304 Lean
+files free of executable placeholders, and 165 independent consumers
+(120 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -533,6 +533,14 @@ abs(t)>=1 and U²<=4 abs(t). Finite differencing, exact overlaps and integer
 optimization are proved; the independent comparator is closed. Zeta
 subconvexity and the weighted-detector connections remain to be proved.
 See [the short-sum proof](layer4-weyl-short-sums.md).
+
+**Weighted sums and longer detector scale (2026-11-14).** The real-part
+weighted Weyl bound, a general-length three-term bound and the actual
+Type II estimate at Y=T are now proved. The latter has exponent
+3−4σ+4δ+epsilon for X<=2T^δ. The remaining actual Mobius polynomial
+branch and upper-range density assembly remain open; these inputs do not
+by themselves prove the full curved benchmark.
+See [the exact scope](layer4-weighted-long-detector.md).
 
 **Acceptance criteria.**
 

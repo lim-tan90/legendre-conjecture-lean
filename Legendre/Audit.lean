@@ -445,6 +445,10 @@ import all Legendre.Layer4.Exponential.LogShiftBudget
 import all Legendre.Layer4.Exponential.LogDifferencing
 import all Legendre.Layer4.Exponential.WeylBudget
 import all Legendre.Layer4.Exponential.LogWeyl
+import all Legendre.Layer4.Exponential.MonotoneWeights
+import all Legendre.Layer4.Exponential.WeightedLogWeyl
+import all Legendre.Layer4.Exponential.GeneralLogWeyl
+import all Legendre.Layer4.LongDetectorTypeII
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5075,3 +5079,39 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_length_boundary_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_negative_height_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_zero_overlap_consumer"
+
+-- Real-part weights, general-length Weyl and the actual linear-scale Type II count.
+#print axioms Legendre.Density.Moment.actual_typeII_linear_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_linear_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_linear_height_count
+#print axioms Legendre.Density.Moment.linear_detector_scale
+#print axioms Legendre.Density.Oscillation.logarithmic_block_general_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_block_weighted_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_general_weyl_square
+#print axioms Legendre.Density.Oscillation.logarithmic_weyl_general_square_budget
+#print axioms Legendre.Density.Oscillation.norm_sum_range_smul_antitone
+#print axioms Legendre.Density.Oscillation.real_weight_cpow
+#print axioms Legendre.Density.Oscillation.sum_range_offset_eq_Ioc
+#print axioms Legendre.Density.Oscillation.sum_range_weight_drop
+#print axioms Legendre.Literature.layer4_general_weyl_comparator
+#print axioms Legendre.Literature.layer4_weighted_weyl_comparator
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.GeneralLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_general_weyl._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.norm_sum_range_smul_antitone._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_4"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_general_weyl_long_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_detector_scale_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_negative_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_zero_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_monotone_weights_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_critical_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_three_quarters_consumer"
