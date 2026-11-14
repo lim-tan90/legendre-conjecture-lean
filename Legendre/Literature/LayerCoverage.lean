@@ -124,6 +124,26 @@ theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsi
 theorem layer4_huxley_global_comparator : HuxleyGlobalDensity :=
   Zeta.hasZeroDensityEstimate_twelve_fifths
 
+/-- Closed restricted curved proof; its real-part range stops at 5/6. -/
+theorem layer4_huxley_restricted_comparator : Huxley1972RestrictedDensity :=
+  Zeta.huxley_curved_restricted_density_epsilon
+
+/-- Closed actual short-sum bound, with the square-root-length hypothesis explicit. -/
+theorem layer4_weyl_short_sum_comparator : WeylShortSumBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_weyl
+
+theorem layer4_weighted_weyl_comparator : WeightedWeylBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_weighted_weyl
+
+theorem layer4_general_weyl_comparator : GeneralWeylBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_general_weyl
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

@@ -328,3 +328,28 @@ declaration inventories match the audit targets and actual axiom output.
 All 246 project Lean files have zero executable placeholders. All 113
 standalone consumers pass: 68 Layer 4, 9 Layer 3 and 36 literature checks.
 An intentional use of the nonzero-ordinate kernel at t=0 is rejected.
+
+### Restricted curved Huxley proof (2026-11-14)
+
+`Huxley1972RestrictedDensity` independently specifies the curved exponent
+3(1−σ)/(3σ−1)+epsilon, uniformly for σ∈[1/2,5/6], T>=2, with analytic
+multiplicities. `layer4_huxley_restricted_comparator` is a closed proof and is
+included in the generated Layer 4 consumer. The full `Huxley1972Density`
+benchmark remains open above σ=5/6. This does not close the Huxley 1972
+prime-gap theorem, whose Layer 5 proof is a separate obligation.
+
+### Actual short-sum Weyl input (2026-11-14)
+
+`WeylShortSumBenchmark` independently specifies norm of the actual complex
+sum <= C sqrt(U) abs(t)^(1/6) on U<=V<=2U, abs(t)>=1 and U²<=4 abs(t).
+`layer4_weyl_short_sum_comparator` is closed and included in the generated
+Layer 4 consumer. Its range does not assert zeta subconvexity or close the
+remaining curved-density real parts above sigma=5/6.
+
+### Weighted and general-length Weyl inputs (2026-11-14)
+
+`WeightedWeylBenchmark` preserves beta>=0 and the short-length hypothesis;
+`GeneralWeylBenchmark` allows every dyadic length and keeps all three costs.
+Their closed comparators are included in the generated Layer 4 consumer.
+The actual Type II estimate at Y=T is documented separately and remains
+one branch of the detector, not a full density theorem.

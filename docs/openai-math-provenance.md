@@ -455,3 +455,31 @@ Lean rejects treating the new global proof as the stronger curved Huxley target,
 using the nonzero-ordinate kernel at t=0, and using the critical polynomial
 count below W=2. The roadmap acceptance criteria are fulfilled; the stronger
 curved Huxley/Guth--Maynard and sharp log^4 targets remain explicitly open.
+
+## Divisor growth for polynomial powers (2026-11-14)
+
+Source: openai/math `4eaee87548250b2682affda7d05d947c05554bae`, directory
+`lean/OAI/NumberTheory/Ostmann/Arithmetic/`, Apache-2.0.
+`DivisorGrowthLocal.lean` and `DivisorGrowth.lean` are adapted under
+`Legendre/Layer4/Arithmetic/` with narrowed imports, the project namespace
+and public module visibility. Both READMEs list the exact upstream files and
+destinations; the license remains `licenses/openai-math-Apache-2.0.txt`.
+These subpower divisor bounds support controlling coefficients after integer
+powering. No stronger zero-density theorem is asserted by this port alone.
+
+The new `HuxleyCurvedShell.lean` also reuses the finite branch-splitting
+structure from this repository's `HuxleyShellDensity.lean`, originally adapted
+from `DensitySeparatedCount.lean` at the same pinned openai/math commit and
+under the same retained Apache-2.0 license. The powered-block analytic counts,
+small-cutoff choices and restricted curved-density proof are local deductions.
+
+## Finite differencing for logarithmic phases (2026-11-14)
+
+`FourierSecondMoment.lean` and `VanDerCorput.lean` from
+`lean/OAI/NumberTheory/EgyptianFractions/` in openai/math at
+`4eaee87548250b2682affda7d05d947c05554bae` (Apache-2.0) are adapted to
+`Legendre/Layer4/Exponential/` with the same basenames. Only imports,
+namespace and module visibility are changed. The retained license is
+`licenses/openai-math-Apache-2.0.txt`; both READMEs list the exact source URLs.
+Natural-index overlap and shifted logarithmic-derivative estimates are local
+code. This port alone asserts no new density or zeta subconvexity theorem.

@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — Ingham density and the global Huxley 12/5 exponent (2026-11-13)</strong></summary>
+<summary><strong>Layer 4 — global 12/5 density, small mollifiers and powers (2026-11-14)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -121,20 +121,49 @@ fourth moment. The improved polynomial and integral alternatives now prove
 with all analytic multiplicities. Thus `hasZeroDensityEstimate_twelve_fifths`
 and the independent `layer4_huxley_global_comparator` are closed proofs.
 [Full density proof and parameter balance](docs/layer4-huxley-density.md). [Exact statements and constants](docs/layer4-exponential-large-values.md).
+**New (2026-11-14): restricted curved Huxley density is proved.** For every
+`ε>0`, one coefficient works for all σ∈[1/2,5/6] and T≥2:
+`N(σ,T) ≤ C_ε T^(3(1−σ)/(3σ−1)+ε)`, with all analytic multiplicities.
+The proof powers actual short detector blocks, bounds their convolution
+coefficients uniformly, combines both detector branches and covers all heights;
+Ingham supplies σ≤3/4. The full curved benchmark still requires σ>5/6.
+[Exact proof, sources and remaining range](docs/layer4-small-mollifier-powers.md).
+
+The actual unweighted short sum now also satisfies the Weyl bound
+`C sqrt(U) abs(t)^(1/6)` for `U<=V<=2U`, `1<=abs(t)` and `U²<=4 abs(t)`.
+Its finite differencing proof and independent comparator are closed;
+connecting this input to the remaining Mobius-weighted polynomial branch
+is still required. [Proof and exact range](docs/layer4-weyl-short-sums.md).
+
+The weighted short sum is now bounded uniformly for every `β≥0`, with
+factor `U^(1/2−β)`. A general-length version retains all three differencing
+terms. At smoothing length `Y=T`, the actual Type II branch has the improved
+bound `C_ε T^(3−4σ+4δ+ε)` for `X≤2T^δ`, with all principal-pole constraints.
+The remaining Mobius polynomial assembly is still open.
+[Exact statements and verification](docs/layer4-weighted-long-detector.md).
+
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-13): **4,272 build jobs**, all **4,264 project theorem
-declarations** audited with only the three standard axioms, and **274 Lean files**
+Validation (2026-11-14): **4,302 build jobs**, all **4,530 project theorem
+declarations** audited with only the three standard axioms, and **304 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **127 independent consumers** pass: **82 Layer 4**, nine Layer 3 and
-36 literature checks. New checks cover sigma=3/4, 9/10 and 1, the common
-height-two constant, exact balance endpoints, integer rounding and the lowest
-high-shell principal-pole constraints. Lean rejects using the global theorem
-as the stronger curved Huxley benchmark; the t=0 kernel and W<2 critical-count
-misuses are also rejected.
+All **165 independent consumers** pass: **120 Layer 4**, nine Layer 3 and
+36 literature checks. The added consumers cover zero cutoff, empty actual
+zero families, rounding, detector height, exact convolution coefficients,
+support boundaries, uniform bounded powers, the sigma=5/6 power window,
+the full restricted count at sigma=4/5 and 5/6, and its height-two constant.
+Further consumers check finite differencing endpoints, zero and negative
+heights in their applicable derivative/sum statements, empty overlaps and the
+Weyl length boundary. Lean rejects dropping the Weyl height/length conditions.
+Lean rejects confusing pointwise coefficient powers with Dirichlet convolution;
+the global theorem is still not a proof of the stronger curved benchmark.
+The latest nine checks cover real-part weights, general block lengths, finite
+Abel weights and the actual Type II exponent at Y=T, including zero cutoff
+and the endpoint sigma=3/4. Dropping the beta condition or the general-length
+cost terms is rejected by Lean.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
 Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
@@ -440,7 +469,7 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
-**Repository status (2026-11-13).** The classical PNT in Layer 3, Ingham
+**Repository status (2026-11-14).** The classical PNT in Layer 3, Ingham
 **1940 curved density** and the **global Huxley 12/5 density exponent** in
 Layer 4 are proved. The nine
 historical short-interval exponent results below still have statement-level
@@ -448,6 +477,9 @@ formalizations only. In particular, the proved 1940 density estimate does
 not close either Ingham **1937 prime-gap** result. The Layer 4 roadmap
 acceptance requirements are fulfilled; the stronger curved Huxley and
 Guth–Maynard benchmarks remain open.
+Restricted curved density is now proved on σ∈[1/2,5/6], including all heights
+and multiplicities. The full curved benchmark above 5/6 remains open; this
+progress does not change the historical short-interval proof statuses below.
 
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -500,6 +532,7 @@ The completed analytic milestones supporting this program are:
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
 | Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
 | Global Huxley density (Layer 4) | `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` for every `ε>0` | **✅ Proved**: [`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean), closed [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean); uniform σ∈[1/2,1], T≥2, all analytic multiplicities. A stronger intermediate bound holds on σ∈[3/4,1]. The paper-exact curved Huxley benchmark remains open. |
+| Restricted curved Huxley density (Layer 4) | For every `ε>0`, `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`, σ∈[1/2,5/6] | **✅ Proved**: [`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) and closed [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean); all T≥2 and analytic multiplicities. The full benchmark for σ>5/6 remains open. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`, hence `≪_ε T^(1+ε)` | **✅ Proved**: [`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean). The sharp `log^4 T` target remains open. |
 | Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision, the two-term large-value count and improved actual Möbius/critical-mass moments are proved; the stronger curved Huxley target remains open. |
 | Analytic large values and actual mollifier moments (Layer 4) | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`; improved `R^(2/3)(AT)^(1/3)` term in the actual Möbius second moment | **✅ Proved**: closed [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean), [weighted mollifier moment](Legendre/Layer4/HalaszMollifierMoment.lean) and [actual critical-mass moment](Legendre/Layer4/HalaszCriticalMass.lean). Global 12/5 is now proved; the stronger curved Huxley target remains open. |
@@ -917,7 +950,7 @@ No additional PNT+ source is copied.
 | `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
 | `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
 | `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
-| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean); its finite branch assembly is reused internally in [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean), with the same pinned source and license |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean); its finite branch assembly is reused internally in [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean) and [HuxleyCurvedShell.lean](Legendre/Layer4/HuxleyCurvedShell.lean), with the same pinned source and license |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |
@@ -999,6 +1032,36 @@ visibility are adapted. The phase-sum arguments are retained.
 Interval subdivision, absorption-scale optimization, the two-term count, finite
 dyadic moment summation and the improved actual Möbius/critical-mass moments
 are local deductions in this repository; this step copies no additional upstream code.
+
+### Finite differencing for logarithmic phases
+
+Adapted from [openai/math](https://github.com/openai/math) at pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
+`lean/OAI/NumberTheory/EgyptianFractions/`. The original proofs of finite
+correlation expansion and interval van der Corput are retained; imports,
+namespace and module visibility are adapted. Retained license:
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+
+Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
+
+### Divisor growth for polynomial powers
+
+The coefficient-power work additionally adapts the following files from
+[openai/math](https://github.com/openai/math), pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0. Source directory:
+`lean/OAI/NumberTheory/Ostmann/Arithmetic/`. Imports, namespaces and module
+visibility are adapted; the retained license is
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
+| [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
 </details>
 

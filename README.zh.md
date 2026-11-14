@@ -58,7 +58,7 @@
 > `Conditional.lean` 中的粗粒度 `Prop` 三者等价。解析证明本身仍然**开放**。
 
 <details>
-<summary><strong>Layer 4：Ingham 密度与全局 Huxley 12/5 指数（2026-11-13）</strong></summary>
+<summary><strong>Layer 4：全局 12/5 密度、小截断及多项式幂（2026-11-14）</strong></summary>
 
 **入口：** `import Legendre.Layer4`。对于任意有限 Dirichlet 多项式
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`，已证明均方积分相对
@@ -98,16 +98,35 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 **`N(σ,T) ≤ C T^((12/5)(1−σ)) (1+log T)^38`**，对 σ∈[1/2,1]、T≥2 统一，
 保留全部解析重数。因此 `hasZeroDensityEstimate_twelve_fifths` 及独立的
 `layer4_huxley_global_comparator` 均已闭合证明。[完整密度证明与参数平衡](docs/layer4-huxley-density.md)。[精确陈述与常数](docs/layer4-exponential-large-values.md)。
+**新增（2026-11-14）：受限范围的 Huxley 曲线零密度已证明。** 对每个 `ε>0`，同一个常数
+适用于全部 σ∈[1/2,5/6]、T≥2：`N(σ,T) ≤ C_ε T^(3(1−σ)/(3σ−1)+ε)`，保留全部解析重数。
+证明对实际短检测块取整数卷积幂，统一控制系数，合并两个检测分支，并覆盖全部高度；
+σ≤3/4 由 Ingham 补齐。完整曲线 benchmark 仍有 σ>5/6 的部分待证。
+[精确证明、来源及剩余范围](docs/layer4-small-mollifier-powers.md)。
+
+实际无权短和还已证明 Weyl 界 `C sqrt(U) abs(t)^(1/6)`，条件为 `U≤V≤2U`、
+`1≤abs(t)`、`U²≤4 abs(t)`。有限差分证明及独立 comparator 均已闭合；
+将该输入接到剩余 Möbius 加权多项式分支的步骤仍待完成。[证明与精确范围](docs/layer4-weyl-short-sums.md)。
+
+带权短和现已对所有 `β≥0` 统一得到 `U^(1/2−β)` 因子；一般长度版本显式保留三项差分代价。
+在平滑长度 `Y=T` 下，实际 Type II 分支已得到 `C_ε T^(3−4σ+4δ+ε)` 界，
+适用于 `X≤2T^δ`，并保留全部主极点约束。剩余 Möbius 多项式分支的组装仍待完成。
+[精确陈述与验证](docs/layer4-weighted-long-detector.md)。
+
 **Layer 4 路线图的验收要求已齐备。** 更强的 Huxley 曲线密度、Guth–Maynard
 及尖锐四阶矩 `log^4` 仍明确标为开放目标，均未作为全局 `12/5` 证明的假设。
 
-验证（2026-11-13）：**4,272 项构建**、**全部 4,264 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**274 个 Lean 文件**的实际
+验证（2026-11-14）：**4,302 项构建**、**全部 4,530 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**304 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**127 项独立使用检查**全部通过：Layer 4 **82 项**、Layer 3 九项、文献对照 36 项。
-新增检查涵盖 σ=3/4、9/10、1，高度二的共同常数，精确平衡端点、整数取整及
-最低高层高度的主极点约束。把全局定理误当成更强 Huxley 曲线结论的用例被 Lean 拒绝；
-t=0 核界及 W<2 临界计数的误用也被拒绝。
+**165 项独立使用检查**全部通过：Layer 4 **120 项**、Layer 3 九项、文献对照 36 项。
+新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
+支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
+卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
+其他检查覆盖有限差分端点、各自适用陈述中的零及负高度、空重叠区间及 Weyl 长度边界。
+删除 Weyl 定理高度与长度条件的误用被 Lean 拒绝。
+最新九项检查覆盖实部权重、一般块长、有限 Abel 权重及 Y=T 下实际 Type II 指数，
+包括零截断与 σ=3/4 端点。删除 β 条件或遗漏一般长度代价的用例被 Lean 拒绝。
 本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
 本地完整验证的解析大值／矩证明提交：[`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34)。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
@@ -350,10 +369,12 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 <!-- comparator:legendre1808 -->
 ## 历史进展总览
 
-**仓库当前状态（2026-11-13）：** Layer 3 的经典 PNT、Layer 4 的
+**仓库当前状态（2026-11-14）：** Layer 3 的经典 PNT、Layer 4 的
 **Ingham 1940 曲线密度**与**全局 Huxley 12/5 零密度指数**均已证明。下表九项历史短区间指数结果仍仅完成陈述形式化；
 已证明的 1940 密度估计尚未闭合 **Ingham 1937 的两项素数间隙结论**。
 Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth–Maynard 目标仍开放。
+受限曲线密度现已覆盖 σ∈[1/2,5/6]、全部高度和解析重数；完整 benchmark 的 σ>5/6 部分仍开放。
+这一进展尚不改变下表历史短区间结论的证明状态。
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
 第 2 版, Courcier, Paris, 1808）：开区间 `(n²,(n+1)²)` 中有素数。`θ < 1/2` 足以推出最终成立；
@@ -401,6 +422,7 @@ Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth�
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
 | Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
 | 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；原文更强曲线 Huxley benchmark 仍开放。 |
+| 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 的 σ>5/6 部分仍开放。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`，从而有 `≪_ε T^(1+ε)` | **✅ 已证明**：[`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean)。尖锐的 `log^4 T` 目标仍开放。 |
 | Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分、两项大值计数和实际 Möbius／临界质量矩的加强界均已证明；更强的 Huxley 曲线目标仍开放。 |
 | 解析大值计数及实际 Möbius 矩（Layer 4） | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`；实际 Möbius 二阶矩中的加强项 `R^(2/3)(AT)^(1/3)` | **✅ 已证明**：闭合的 [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean)、[加权 Möbius 矩](Legendre/Layer4/HalaszMollifierMoment.lean) 及[实际临界质量矩](Legendre/Layer4/HalaszCriticalMass.lean)。全局 12/5 现已证明；更强的 Huxley 曲线目标仍开放。 |
@@ -771,7 +793,7 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 | `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
 | `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
 | `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
-| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean)；其中有限分支合并结构在本仓库内复用于 [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean)，沿用同一固定来源与许可证 |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean)；其中有限分支合并结构在本仓库内复用于 [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean) 及 [HuxleyCurvedShell.lean](Legendre/Layer4/HuxleyCurvedShell.lean)，沿用同一固定来源与许可证 |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |
@@ -851,6 +873,35 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 区间细分、吸收尺度优化、两项大值计数、有限二进分层求矩，以及实际
 Möbius／临界质量矩的加强界，均为本仓库的本地推导；本步骤未复制新的上游代码。
+
+### 对数相位所需的有限差分
+
+Adapted from [openai/math](https://github.com/openai/math) at pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
+`lean/OAI/NumberTheory/EgyptianFractions/`. The original proofs of finite
+correlation expansion and interval van der Corput are retained; imports,
+namespace and module visibility are adapted. Retained license:
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+
+Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
+
+### 多项式幂所需的除数函数增长界
+
+系数幂的工作另改编自 [openai/math](https://github.com/openai/math)，固定提交
+`4eaee87548250b2682affda7d05d947c05554bae`，许可 Apache-2.0。源目录为
+`lean/OAI/NumberTheory/Ostmann/Arithmetic/`；仅适配导入、命名空间与模块可见性。
+许可证保留于
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
+| [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
 </details>
 

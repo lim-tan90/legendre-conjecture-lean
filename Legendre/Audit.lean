@@ -420,6 +420,36 @@ import all Legendre.Layer4.HalaszUniformCosts
 import all Legendre.Layer4.HuxleyBalance
 import all Legendre.Layer4.HuxleyBalancedAlternatives
 import all Legendre.Layer4.HuxleyDensity
+import all Legendre.Layer4.IndividualCriticalFourth
+import all Legendre.Layer4.TypeIIIntegralCount
+import all Legendre.Layer4.SmallMollifierTypeII
+import all Legendre.Layer4.Arithmetic.DivisorGrowthLocal
+import all Legendre.Layer4.Arithmetic.DivisorGrowth
+import all Legendre.Layer4.Arithmetic.PolynomialPowers
+import all Legendre.Layer4.Arithmetic.BlockPolynomialPowers
+import all Legendre.Layer4.HuxleyPowerSelection
+import all Legendre.Layer4.HalaszScaledBlock
+import all Legendre.Layer4.HalaszPoweredBlock
+import all Legendre.Layer4.HuxleyPoweredLengths
+import all Legendre.Layer4.HuxleyPoweredCount
+import all Legendre.Layer4.HuxleyShortBlock
+import all Legendre.Layer4.HuxleyShortTail
+import all Legendre.Layer4.HuxleyCurvedShell
+import all Legendre.Layer4.HuxleyCurvedDensity
+import all Legendre.Layer4.Exponential.FourierSecondMoment
+import all Legendre.Layer4.Exponential.VanDerCorput
+import all Legendre.Layer4.Exponential.NaturalDifferencing
+import all Legendre.Layer4.Exponential.LogShiftDerivatives
+import all Legendre.Layer4.Exponential.LogShiftCorrelation
+import all Legendre.Layer4.Exponential.LogShiftBudget
+import all Legendre.Layer4.Exponential.LogDifferencing
+import all Legendre.Layer4.Exponential.WeylBudget
+import all Legendre.Layer4.Exponential.LogWeyl
+import all Legendre.Layer4.Exponential.MonotoneWeights
+import all Legendre.Layer4.Exponential.WeightedLogWeyl
+import all Legendre.Layer4.Exponential.GeneralLogWeyl
+import all Legendre.Layer4.LongDetectorTypeII
+import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
 import all Legendre.Layer4.HuxleyShellDensity
@@ -4811,3 +4841,277 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_principal_pole_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_sigma_one_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_three_quarters_consumer"
+
+-- Small mollifiers, exact convolution powers and independent edge-case consumers.
+#print axioms Legendre.Density.Detector.finiteSeries.eq_1
+#print axioms Legendre.Density.Moment.DivisorGrowth.divisors_card_le_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.divisors_card_pow_le_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.exists_linear_le_geometric
+#print axioms Legendre.Density.Moment.DivisorGrowth.exponent_succ_le_two_pow
+#print axioms Legendre.Density.Moment.DivisorGrowth.prime_local_divisor_bounds
+#print axioms Legendre.Density.Moment.DivisorGrowth.prod_prime_factor_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.small_prime_cost_le
+#print axioms Legendre.Density.Moment.DivisorGrowth.two_pow_primeFactors_card_le_divisors_card
+#print axioms Legendre.Density.Moment.Powers.LSeries_power
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient._proof_1
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient.eq_1
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_apply
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_norm
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support
+#print axioms Legendre.Density.Moment.Powers.block_finiteSeries
+#print axioms Legendre.Density.Moment.Powers.block_polynomial_power
+#print axioms Legendre.Density.Moment.Powers.bounded_powers_coefficients_subpower
+#print axioms Legendre.Density.Moment.Powers.convolution_divisor_norm
+#print axioms Legendre.Density.Moment.Powers.convolution_support
+#print axioms Legendre.Density.Moment.Powers.convolution_vanish_below
+#print axioms Legendre.Density.Moment.Powers.divisors_card_mono_of_dvd
+#print axioms Legendre.Density.Moment.Powers.exists_large_powered_block
+#print axioms Legendre.Density.Moment.Powers.finiteSeries_power
+#print axioms Legendre.Density.Moment.Powers.finite_support_summable
+#print axioms Legendre.Density.Moment.Powers.positive_power_vanish_below
+#print axioms Legendre.Density.Moment.Powers.power_coefficients_subpower
+#print axioms Legendre.Density.Moment.Powers.power_divisor_norm
+#print axioms Legendre.Density.Moment.Powers.power_support
+#print axioms Legendre.Density.Moment.Powers.powered_block_dyadic_decomposition
+#print axioms Legendre.Density.Moment.actual_typeII_given_cutoff_count
+#print axioms Legendre.Density.Moment.actual_typeII_small_mollifier_count
+#print axioms Legendre.Density.Moment.criticalWeightMassMajorant_pos
+#print axioms Legendre.Density.Moment.critical_mass_individual_fourth
+#print axioms Legendre.Density.Moment.huxleyCurvedExponent._proof_1
+#print axioms Legendre.Density.Moment.huxleyPowerUpper._proof_1
+#print axioms Legendre.Density.Moment.huxley_power_window_bounds
+#print axioms Legendre.Density.Moment.huxley_power_window_exponents
+#print axioms Legendre.Density.Moment.huxley_short_block_power
+#print axioms Legendre.Density.Moment.integral_alternative_individual_fourth_count
+#print axioms Legendre.Density.Moment.integral_alternative_small_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_sqrt_height_count
+#print axioms Legendre.Density.Moment.small_integer_mollifier
+#print axioms Legendre.Density.Moment.sqrt_detector_scale
+#print axioms Legendre.Density.Moment.sum_critical_mass_fourth
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.block_finiteSeries._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.DivisorGrowth.0.Legendre.Density.Moment.DivisorGrowth.two_pow_primeFactors_card_le_divisors_card._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.DivisorGrowthLocal.0.Legendre.Density.Moment.DivisorGrowth.prime_local_divisor_bounds._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.LSeries_power._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.power_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PoweredBlockDecomposition.0.Legendre.Density.Moment.Powers.powered_block_dyadic_decomposition._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_short_block_power._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.TypeIIIntegralCount.0.Legendre.Density.Moment.integral_alternative_individual_fourth_count._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyCurvedExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyPowerLower.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyPowerUpper.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_convolution_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_empty_block_power_zero_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_power_exponents_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_power_window_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_short_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_individual_fourth_zero_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_power_one_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_power_support_boundary_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_small_mollifier_zero_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sqrt_detector_minimum_height_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_typeII_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_uniform_power_coefficients_consumer"
+
+-- Actual powered-block counts and restricted curved Huxley density.
+#print axioms Legendre.Density.Moment.exists_one_add_log_pow_le_rpow
+#print axioms Legendre.Density.Moment.halasz_powered_block_count
+#print axioms Legendre.Density.Moment.halasz_powered_window_count
+#print axioms Legendre.Density.Moment.halasz_scaled_divisor_block_count
+#print axioms Legendre.Density.Moment.huxley_actual_tail_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_curved_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_curved_separated_high_density
+#print axioms Legendre.Density.Moment.huxley_curved_separated_high_shell_density
+#print axioms Legendre.Density.Moment.huxley_powered_length_terms
+#print axioms Legendre.Density.Moment.huxley_short_block_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_short_length_power
+#print axioms Legendre.Density.Moment.powered_block_uniform_amplitude
+#print axioms Legendre.Density.Moment.powered_length_log_bound
+#print axioms Legendre.Literature.layer4_huxley_restricted_comparator
+#print axioms Legendre.Zeta.huxley_curved_middle_density_epsilon
+#print axioms Legendre.Zeta.huxley_curved_restricted_density_epsilon
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredCount.0.Legendre.Density.Moment.halasz_powered_window_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyShortBlock.0.Legendre.Density.Moment.huxley_short_block_epsilon_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_empty_short_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_empty_short_block_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_first_shell_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_five_sixths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_four_fifths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_real_length_selection_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_real_length_selection_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_one_add_log_zero_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_powered_amplitude_zero_budget_consumer"
+
+-- Actual finite differencing and short logarithmic Weyl cancellation.
+#print axioms Legendre.Density.Oscillation.Tools.averaged_columns_correlation_bound
+#print axioms Legendre.Density.Oscillation.Tools.finite_complex_second_moment_bound
+#print axioms Legendre.Density.Oscillation.Tools.finite_complex_second_moment_identity
+#print axioms Legendre.Density.Oscillation.Tools.finite_complex_second_moment_normalized
+#print axioms Legendre.Density.Oscillation.Tools.intervalZeroExtension.eq_1
+#print axioms Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation
+#print axioms Legendre.Density.Oscillation.Tools.intervalZeroExtension_sum
+#print axioms Legendre.Density.Oscillation.Tools.interval_correlation_neg
+#print axioms Legendre.Density.Oscillation.Tools.norm_sum_sq_le_card_mul_sum_norm_sq
+#print axioms Legendre.Density.Oscillation.Tools.re_finset_sum
+#print axioms Legendre.Density.Oscillation.Tools.sum_int_Icc_nat
+#print axioms Legendre.Density.Oscillation.Tools.sum_shift_supported
+#print axioms Legendre.Density.Oscillation.Tools.van_der_corput_interval
+#print axioms Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact
+#print axioms Legendre.Density.Oscillation.Tools.van_der_corput_interval_normalized
+#print axioms Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval
+#print axioms Legendre.Density.Oscillation.logarithmicPhase_third_deriv
+#print axioms Legendre.Density.Oscillation.logarithmicShiftConstant._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicShiftConstant._proof_2
+#print axioms Legendre.Density.Oscillation.logarithmicShiftConstant_pos
+#print axioms Legendre.Density.Oscillation.logarithmicShiftFirst._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicShiftFirst_deriv
+#print axioms Legendre.Density.Oscillation.logarithmicShiftPhase.eq_1
+#print axioms Legendre.Density.Oscillation.logarithmicShiftPhase_correlation
+#print axioms Legendre.Density.Oscillation.logarithmicShiftPhase_deriv
+#print axioms Legendre.Density.Oscillation.logarithmicShiftSecond_bounds
+#print axioms Legendre.Density.Oscillation.logarithmicWeylConstant._proof_1
+#print axioms Legendre.Density.Oscillation.logarithmicWeylConstant._proof_2
+#print axioms Legendre.Density.Oscillation.logarithmicWeylConstant_pos
+#print axioms Legendre.Density.Oscillation.logarithmic_block_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_eq_block
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_vdc_square
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_weyl_square
+#print axioms Legendre.Density.Oscillation.logarithmic_shift_correlation_second
+#print axioms Legendre.Density.Oscillation.logarithmic_shift_correlation_uniform
+#print axioms Legendre.Density.Oscillation.logarithmic_shift_sum_second
+#print axioms Legendre.Density.Oscillation.logarithmic_shift_uniform_budget
+#print axioms Legendre.Density.Oscillation.logarithmic_weyl_square_budget
+#print axioms Legendre.Literature.WeylShortSumBenchmark._proof_1
+#print axioms Legendre.Literature.layer4_weyl_short_sum_comparator
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogDifferencing.0.Legendre.Density.Oscillation.logarithmic_prefix_eq_block._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftCorrelation.0.Legendre.Density.Oscillation.logarithmic_shift_sum_second._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftCorrelation.0.Legendre.Density.Oscillation.logarithmic_shift_sum_second._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogShiftDerivatives.0.Legendre.Density.Oscillation.logarithmicPhase_third_deriv._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.LogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weyl._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.intervalZeroExtension_correlation._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.sum_int_Icc_nat._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.sum_int_Icc_nat._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.sum_int_Icc_nat._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.NaturalDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.interval_correlation_neg._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.interval_correlation_neg._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.sum_shift_supported._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.sum_shift_supported._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.sum_shift_supported._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.sum_shift_supported._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_12"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_13"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_14"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_exact._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_normalized._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.VanDerCorput.0.Legendre.Density.Oscillation.Tools.van_der_corput_interval_normalized._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_differencing_empty_support_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_differencing_full_shift_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_log_shift_zero_derivative_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_vdc_unit_shift_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_vdc_zero_length_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_empty_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_length_boundary_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_negative_height_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_zero_overlap_consumer"
+
+-- Real-part weights, general-length Weyl and the actual linear-scale Type II count.
+#print axioms Legendre.Density.Moment.actual_typeII_linear_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_linear_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_linear_height_count
+#print axioms Legendre.Density.Moment.linear_detector_scale
+#print axioms Legendre.Density.Oscillation.logarithmic_block_general_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_block_weighted_weyl
+#print axioms Legendre.Density.Oscillation.logarithmic_prefix_general_weyl_square
+#print axioms Legendre.Density.Oscillation.logarithmic_weyl_general_square_budget
+#print axioms Legendre.Density.Oscillation.norm_sum_range_smul_antitone
+#print axioms Legendre.Density.Oscillation.real_weight_cpow
+#print axioms Legendre.Density.Oscillation.sum_range_offset_eq_Ioc
+#print axioms Legendre.Density.Oscillation.sum_range_weight_drop
+#print axioms Legendre.Literature.layer4_general_weyl_comparator
+#print axioms Legendre.Literature.layer4_weighted_weyl_comparator
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.GeneralLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_general_weyl._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.norm_sum_range_smul_antitone._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.MonotoneWeights.0.Legendre.Density.Oscillation.sum_range_offset_eq_Ioc._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogWeyl.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl._proof_1_4"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_general_weyl_long_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_detector_scale_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_negative_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_linear_typeII_zero_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_monotone_weights_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_critical_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_three_quarters_consumer"
