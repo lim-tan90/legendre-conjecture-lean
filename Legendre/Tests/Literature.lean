@@ -108,9 +108,9 @@ theorem comparator_layer3 : ClassicalPNTError :=
   layer3_comparator
 
 /-- layer4: statement coverage. -/
-theorem comparator_layer4 : LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity ∧ Huxley1972RestrictedDensity :=
+theorem comparator_layer4 : LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity ∧ Huxley1972RestrictedDensity ∧ WeylShortSumBenchmark :=
   ⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,
     layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,
-    layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator, layer4_huxley_restricted_comparator⟩
+    layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator, layer4_huxley_restricted_comparator, layer4_weyl_short_sum_comparator⟩
 
 end Legendre.Tests.Literature

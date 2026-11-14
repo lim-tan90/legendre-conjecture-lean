@@ -472,3 +472,14 @@ structure from this repository's `HuxleyShellDensity.lean`, originally adapted
 from `DensitySeparatedCount.lean` at the same pinned openai/math commit and
 under the same retained Apache-2.0 license. The powered-block analytic counts,
 small-cutoff choices and restricted curved-density proof are local deductions.
+
+## Finite differencing for logarithmic phases (2026-11-14)
+
+`FourierSecondMoment.lean` and `VanDerCorput.lean` from
+`lean/OAI/NumberTheory/EgyptianFractions/` in openai/math at
+`4eaee87548250b2682affda7d05d947c05554bae` (Apache-2.0) are adapted to
+`Legendre/Layer4/Exponential/` with the same basenames. Only imports,
+namespace and module visibility are changed. The retained license is
+`licenses/openai-math-Apache-2.0.txt`; both READMEs list the exact source URLs.
+Natural-index overlap and shifted logarithmic-derivative estimates are local
+code. This port alone asserts no new density or zeta subconvexity theorem.

@@ -104,16 +104,22 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 σ≤3/4 由 Ingham 补齐。完整曲线 benchmark 仍有 σ>5/6 的部分待证。
 [精确证明、来源及剩余范围](docs/layer4-small-mollifier-powers.md)。
 
+实际无权短和还已证明 Weyl 界 `C sqrt(U) abs(t)^(1/6)`，条件为 `U≤V≤2U`、
+`1≤abs(t)`、`U²≤4 abs(t)`。有限差分证明及独立 comparator 均已闭合；
+将该输入接到 ζ 次凸性和剩余检测器估计的步骤仍待完成。[证明与精确范围](docs/layer4-weyl-short-sums.md)。
+
 **Layer 4 路线图的验收要求已齐备。** 更强的 Huxley 曲线密度、Guth–Maynard
 及尖锐四阶矩 `log^4` 仍明确标为开放目标，均未作为全局 `12/5` 证明的假设。
 
-验证（2026-11-14）：**4,289 项构建**、**全部 4,389 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**291 个 Lean 文件**的实际
+验证（2026-11-14）：**4,298 项构建**、**全部 4,496 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**300 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**147 项独立使用检查**全部通过：Layer 4 **102 项**、Layer 3 九项、文献对照 36 项。
-新增 20 项检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
+**156 项独立使用检查**全部通过：Layer 4 **111 项**、Layer 3 九项、文献对照 36 项。
+新增 29 项检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
+另九项检查覆盖有限差分端点、各自适用陈述中的零及负高度、空重叠区间及 Weyl 长度边界。
+删除 Weyl 定理高度与长度条件的误用被 Lean 拒绝。
 本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
 本地完整验证的解析大值／矩证明提交：[`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34)。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。
@@ -860,6 +866,22 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 区间细分、吸收尺度优化、两项大值计数、有限二进分层求矩，以及实际
 Möbius／临界质量矩的加强界，均为本仓库的本地推导；本步骤未复制新的上游代码。
+
+### 对数相位所需的有限差分
+
+Adapted from [openai/math](https://github.com/openai/math) at pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
+`lean/OAI/NumberTheory/EgyptianFractions/`. The original proofs of finite
+correlation expansion and interval van der Corput are retained; imports,
+namespace and module visibility are adapted. Retained license:
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+
+Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
 
 ### 多项式幂所需的除数函数增长界
 

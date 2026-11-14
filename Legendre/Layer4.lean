@@ -100,6 +100,15 @@ public import Legendre.Layer4.HuxleyShortBlock
 public import Legendre.Layer4.HuxleyShortTail
 public import Legendre.Layer4.HuxleyCurvedShell
 public import Legendre.Layer4.HuxleyCurvedDensity
+public import Legendre.Layer4.Exponential.FourierSecondMoment
+public import Legendre.Layer4.Exponential.VanDerCorput
+public import Legendre.Layer4.Exponential.NaturalDifferencing
+public import Legendre.Layer4.Exponential.LogShiftDerivatives
+public import Legendre.Layer4.Exponential.LogShiftCorrelation
+public import Legendre.Layer4.Exponential.LogShiftBudget
+public import Legendre.Layer4.Exponential.LogDifferencing
+public import Legendre.Layer4.Exponential.WeylBudget
+public import Legendre.Layer4.Exponential.LogWeyl
 public import Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters

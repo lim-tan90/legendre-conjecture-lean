@@ -134,6 +134,12 @@ def Huxley1972Density : Prop := DensityPower (fun σ => 3*(1-σ)/(3*σ-1))
 def Huxley1972RestrictedDensity : Prop :=
   ∀ ε : ℝ, 0 < ε → ∃ C > 0, ∀ σ : ℝ, σ ∈ Icc (1/2) (5/6) →
     ∀ T : ℝ, 2 ≤ T → (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(3*σ-1)+ε)
+/-- Actual unweighted short-sum cancellation with the finite length restriction retained. -/
+def WeylShortSumBenchmark : Prop :=
+  ∃ C > 0, ∀ U V : ℕ, 1 ≤ U → U ≤ V → V ≤ 2*U →
+    ∀ t : ℝ, 1 ≤ |t| → (U : ℝ)^2 ≤ 4*|t| →
+      ‖∑ n ∈ Finset.Ioc U V, (n : ℂ)^(-(t : ℂ)*Complex.I)‖ ≤
+        C*Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 

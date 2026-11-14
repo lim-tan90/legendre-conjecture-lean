@@ -337,3 +337,11 @@ multiplicities. `layer4_huxley_restricted_comparator` is a closed proof and is
 included in the generated Layer 4 consumer. The full `Huxley1972Density`
 benchmark remains open above σ=5/6. This does not close the Huxley 1972
 prime-gap theorem, whose Layer 5 proof is a separate obligation.
+
+### Actual short-sum Weyl input (2026-11-14)
+
+`WeylShortSumBenchmark` independently specifies norm of the actual complex
+sum <= C sqrt(U) abs(t)^(1/6) on U<=V<=2U, abs(t)>=1 and U²<=4 abs(t).
+`layer4_weyl_short_sum_comparator` is closed and included in the generated
+Layer 4 consumer. Its range does not assert zeta subconvexity or close the
+remaining curved-density real parts above sigma=5/6.

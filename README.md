@@ -129,19 +129,28 @@ coefficients uniformly, combines both detector branches and covers all heights;
 Ingham supplies σ≤3/4. The full curved benchmark still requires σ>5/6.
 [Exact proof, sources and remaining range](docs/layer4-small-mollifier-powers.md).
 
+The actual unweighted short sum now also satisfies the Weyl bound
+`C sqrt(U) abs(t)^(1/6)` for `U<=V<=2U`, `1<=abs(t)` and `U²<=4 abs(t)`.
+Its finite differencing proof and independent comparator are closed;
+connecting this input to zeta subconvexity and the remaining detector bounds
+is still required. [Proof and exact range](docs/layer4-weyl-short-sums.md).
+
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-14): **4,289 build jobs**, all **4,389 project theorem
-declarations** audited with only the three standard axioms, and **291 Lean files**
+Validation (2026-11-14): **4,298 build jobs**, all **4,496 project theorem
+declarations** audited with only the three standard axioms, and **300 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **147 independent consumers** pass: **102 Layer 4**, nine Layer 3 and
-36 literature checks. The 20 added consumers cover zero cutoff, empty actual
+All **156 independent consumers** pass: **111 Layer 4**, nine Layer 3 and
+36 literature checks. The 29 added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
 the full restricted count at sigma=4/5 and 5/6, and its height-two constant.
+Nine further consumers check finite differencing endpoints, zero and negative
+heights in their applicable derivative/sum statements, empty overlaps and the
+Weyl length boundary. Lean rejects dropping the Weyl height/length conditions.
 Lean rejects confusing pointwise coefficient powers with Dirichlet convolution;
 the global theorem is still not a proof of the stronger curved benchmark.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
@@ -1012,6 +1021,22 @@ visibility are adapted. The phase-sum arguments are retained.
 Interval subdivision, absorption-scale optimization, the two-term count, finite
 dyadic moment summation and the improved actual Möbius/critical-mass moments
 are local deductions in this repository; this step copies no additional upstream code.
+
+### Finite differencing for logarithmic phases
+
+Adapted from [openai/math](https://github.com/openai/math) at pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
+`lean/OAI/NumberTheory/EgyptianFractions/`. The original proofs of finite
+correlation expansion and interval van der Corput are retained; imports,
+namespace and module visibility are adapted. Retained license:
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+
+Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
 
 ### Divisor growth for polynomial powers
 

@@ -884,4 +884,67 @@ theorem layer4_curved_real_length_selection_consumer :
   exact Moment.huxley_short_length_power 4 (1/2) (5/6) 2 (by norm_num) (by norm_num)
     (by norm_num [←Real.sqrt_eq_rpow]) (by norm_num [←Real.sqrt_eq_rpow]) (by norm_num) le_rfl
 
+/-- Zero extension over an empty interval really has zero sum for arbitrary coefficients. -/
+theorem layer4_differencing_empty_support_consumer (a : ℕ → ℂ) :
+    (∑ n ∈ Finset.Icc (1 : ℤ) 0, Oscillation.Tools.intervalZeroExtension a 0 n) = 0 := by
+  simpa using! Oscillation.Tools.intervalZeroExtension_sum a 0
+
+/-- Shifting by the entire length leaves an empty overlap, including its boundary. -/
+theorem layer4_differencing_full_shift_consumer (a : ℕ → ℂ) :
+    (∑ n ∈ Finset.Icc (1 : ℤ) 4, Oscillation.Tools.intervalZeroExtension a 4 (n+4)*
+      (starRingEnd ℂ) (Oscillation.Tools.intervalZeroExtension a 4 n)) = 0 := by
+  simpa using! Oscillation.Tools.intervalZeroExtension_correlation a 4 4 le_rfl
+
+/-- The exact ported inequality permits zero interval length before H<=N is imposed. -/
+theorem layer4_vdc_zero_length_consumer :
+    ‖∑ n ∈ Finset.Icc (1 : ℤ) 0, (0 : ℂ)‖^2 ≤ (0 : ℝ) := by
+  simpa using! Oscillation.Tools.van_der_corput_interval_exact (fun _ => 0) 0 1 le_rfl 0 le_rfl
+    (by simp) (by simp) (by simp)
+
+/-- H=1 is valid: the positive-shift hypothesis is empty, with diagonal term retained. -/
+theorem layer4_vdc_unit_shift_consumer :
+    ‖∑ n ∈ Finset.Icc 1 1, (1 : ℂ)‖^2 ≤ (2 : ℝ) := by
+  simpa using! Oscillation.Tools.van_der_corput_nat_interval (fun _ => 1) 1 1 le_rfl le_rfl
+    0 le_rfl (by simp) (by intro h hh hhH; omega)
+
+/-- The shifted derivative formula itself includes t=0, with a zero scale. -/
+theorem layer4_log_shift_zero_derivative_consumer :
+    |Oscillation.logarithmicShiftSecond 0 1 1| = 0 := by
+  have hh := Oscillation.logarithmicShiftSecond_bounds 0 1 1 1 zero_lt_one zero_lt_one
+    le_rfl le_rfl (by norm_num)
+  have hu := hh.2
+  norm_num at hu
+  simp only [hu,abs_zero]
+
+/-- Empty prefixes survive the optimized differencing scale. -/
+theorem layer4_weyl_empty_block_consumer :
+    ‖∑ n ∈ Finset.Ioc (1 : ℕ) 1, (n : ℂ)^(-(1 : ℂ)*Complex.I)‖ ≤
+      Oscillation.logarithmicWeylConstant := by
+  simpa using! Oscillation.logarithmic_block_weyl 1 1 le_rfl le_rfl (by norm_num)
+    1 (by norm_num) (by norm_num)
+
+/-- The actual complex sum is bounded at a negative ordinate too. -/
+theorem layer4_weyl_negative_height_consumer :
+    ‖∑ n ∈ Finset.Ioc (2 : ℕ) 4, (n : ℂ)^(-(-4 : ℂ)*Complex.I)‖ ≤
+      Oscillation.logarithmicWeylConstant*Real.sqrt 2*(4 : ℝ)^(1/6 : ℝ) := by
+  simpa using! Oscillation.logarithmic_block_weyl 2 4 (by norm_num) (by norm_num) le_rfl
+    (-4) (by norm_num) (by norm_num)
+
+/-- The largest permitted square-root scale is included with equality. -/
+theorem layer4_weyl_length_boundary_consumer :
+    ‖∑ n ∈ Finset.Ioc (4 : ℕ) 8, (n : ℂ)^(-(4 : ℂ)*Complex.I)‖ ≤
+      Oscillation.logarithmicWeylConstant*Real.sqrt 4*(4 : ℝ)^(1/6 : ℝ) := by
+  simpa using! Oscillation.logarithmic_block_weyl 4 8 (by norm_num) (by norm_num) le_rfl
+    4 (by norm_num) (by norm_num)
+
+/-- A zero overlap remains covered by the actual shifted-correlation bound. -/
+theorem layer4_weyl_zero_overlap_consumer :
+    ‖∑ n ∈ Finset.Icc 1 0,
+      Oscillation.Tools.ExponentialSum.phase (Oscillation.logarithmicPhase 1 (((n+1 : ℕ) : ℝ)+1))*
+        (starRingEnd ℂ) (Oscillation.Tools.ExponentialSum.phase
+          (Oscillation.logarithmicPhase 1 ((n : ℝ)+1)))‖ ≤
+      Oscillation.logarithmicShiftConstant*2 := by
+  simpa using! Oscillation.logarithmic_shift_correlation_uniform 1 0 1 1 le_rfl (by norm_num)
+    le_rfl le_rfl le_rfl 1 one_ne_zero
+
 end Legendre.Tests

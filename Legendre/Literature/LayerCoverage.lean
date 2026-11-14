@@ -128,6 +128,12 @@ theorem layer4_huxley_global_comparator : HuxleyGlobalDensity :=
 theorem layer4_huxley_restricted_comparator : Huxley1972RestrictedDensity :=
   Zeta.huxley_curved_restricted_density_epsilon
 
+/-- Closed actual short-sum bound, with the square-root-length hypothesis explicit. -/
+theorem layer4_weyl_short_sum_comparator : WeylShortSumBenchmark := by
+  refine ⟨Density.Oscillation.logarithmicWeylConstant,
+    Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
+  exact Density.Oscillation.logarithmic_block_weyl
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 
