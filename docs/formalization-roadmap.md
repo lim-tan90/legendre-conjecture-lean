@@ -457,7 +457,7 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-13): the Layer 4 roadmap acceptance requirements are fulfilled.**
+**Current state (2026-11-14): the Layer 4 roadmap acceptance requirements are fulfilled.**
 Ingham curved density and the global Huxley 12/5 exponent are proved. The
 stronger curved Huxley, Guth–Maynard and sharp log^4 targets remain explicitly
 open; the acceptance criteria below permit clearly labelled stronger open Props.
@@ -514,18 +514,18 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
 
-Full validation (2026-11-14): 4,281 build jobs, all 4,351 project theorem
-declarations audited with exactly matching independent inventories, 283 Lean
-files free of executable placeholders, and 139 independent consumers
-(94 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-14): 4,289 build jobs, all 4,389 project theorem
+declarations audited with exactly matching independent inventories, 291 Lean
+files free of executable placeholders, and 147 independent consumers
+(102 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
-**Further proved ingredients (2026-11-14).** The actual Type II branch now
-has the small-mollifier count T^(2−2σ+ε). Finite convolution powers retain
-support, have coefficients uniformly of subpower growth for k≤K, and admit
-exact dyadic decomposition. Integer-power selection and the two Halasz
-exponents fit the curved target on σ∈[3/4,5/6]. These are not a new curved
-density proof; its polynomial-branch assembly and the extra analytic input
-above σ=5/6 remain open. See [the exact scope](layer4-small-mollifier-powers.md).
+**Restricted curved density (2026-11-14).** The actual small-mollifier
+Type II count and powered Type I short-block count now combine to prove
+N(σ,T) <= C_epsilon T^(3(1−σ)/(3σ−1)+epsilon), uniformly for
+σ∈[1/2,5/6] and all T>=2, retaining analytic multiplicities. Ingham covers
+the lower real parts. The independent restricted comparator is closed.
+The full curved benchmark still requires the range σ>5/6; Guth–Maynard
+and the sharp fourth moment remain open. See [the proof](layer4-small-mollifier-powers.md).
 
 **Acceptance criteria.**
 

@@ -92,6 +92,14 @@ public import Legendre.Layer4.Arithmetic.DivisorGrowth
 public import Legendre.Layer4.Arithmetic.PolynomialPowers
 public import Legendre.Layer4.Arithmetic.BlockPolynomialPowers
 public import Legendre.Layer4.HuxleyPowerSelection
+public import Legendre.Layer4.HalaszScaledBlock
+public import Legendre.Layer4.HalaszPoweredBlock
+public import Legendre.Layer4.HuxleyPoweredLengths
+public import Legendre.Layer4.HuxleyPoweredCount
+public import Legendre.Layer4.HuxleyShortBlock
+public import Legendre.Layer4.HuxleyShortTail
+public import Legendre.Layer4.HuxleyCurvedShell
+public import Legendre.Layer4.HuxleyCurvedDensity
 public import Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters

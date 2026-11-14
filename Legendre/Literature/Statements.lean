@@ -130,6 +130,10 @@ def Ingham1940Density : Prop := DensityPower (fun σ => 3*(1-σ)/(2-σ))
 def HuxleyGlobalDensity : Prop := DensityPower (fun σ => (12/5)*(1-σ))
 /-- Curved Huxley comparison target; combine with Ingham for a global exponent. -/
 def Huxley1972Density : Prop := DensityPower (fun σ => 3*(1-σ)/(3*σ-1))
+/-- Independently stated restricted curved target; this is weaker than Huxley1972Density. -/
+def Huxley1972RestrictedDensity : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C > 0, ∀ σ : ℝ, σ ∈ Icc (1/2) (5/6) →
+    ∀ T : ℝ, 2 ≤ T → (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(3*σ-1)+ε)
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 

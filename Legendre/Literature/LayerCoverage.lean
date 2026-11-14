@@ -124,6 +124,10 @@ theorem layer4_ingham_comparator : Ingham1940Density := Zeta.ingham_density_epsi
 theorem layer4_huxley_global_comparator : HuxleyGlobalDensity :=
   Zeta.hasZeroDensityEstimate_twelve_fifths
 
+/-- Closed restricted curved proof; its real-part range stops at 5/6. -/
+theorem layer4_huxley_restricted_comparator : Huxley1972RestrictedDensity :=
+  Zeta.huxley_curved_restricted_density_epsilon
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

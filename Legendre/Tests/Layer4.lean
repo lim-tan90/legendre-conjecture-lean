@@ -815,4 +815,73 @@ theorem layer4_power_one_block_consumer (a : ℕ → ℂ) (s : ℂ) :
   simpa only [pow_one] using! Moment.Powers.powered_block_dyadic_decomposition a 1 1
     le_rfl le_rfl s
 
+/-- The curved theorem improves global 12/5 at sigma=4/5. -/
+theorem layer4_curved_four_fifths_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (4/5) T : ℝ) ≤ C*T^(307/700 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_restricted_density_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! hb (4/5) (by norm_num) T hT using 1 <;> norm_num
+
+/-- The endpoint sigma=5/6 is retained in the full, multiplicity-weighted count. -/
+theorem layer4_curved_five_sixths_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (5/6) T : ℝ) ≤ C*T^(103/300 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_restricted_density_epsilon (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  convert! hb (5/6) (by norm_num) T hT using 1 <;> norm_num
+
+/-- One common coefficient includes height two for the entire restricted sigma range. -/
+theorem layer4_curved_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) (5/6),
+      (Zeta.zeroDensityCount σ 2 : ℝ) ≤ C*2^(3*(1-σ)/(3*σ-1)+1/100) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_restricted_density_epsilon (1/100) (by norm_num)
+  exact ⟨C,hC,fun σ hσ => hb σ hσ 2 (by norm_num)⟩
+
+/-- Empty short-block samples are valid at the exact square-root length. -/
+theorem layer4_curved_empty_short_block_consumer :
+    ∃ C : ℝ, 0 < C ∧ ((∅ : Finset ℕ).card : ℝ) ≤ C*(4 : ℝ)^(103/300 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.huxley_short_block_epsilon_count 1 (1/2) (1/100)
+    (by norm_num) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  have hh := hb 4 (5/6) (by norm_num) (by norm_num) le_rfl 2
+    (by norm_num [←Real.sqrt_eq_rpow]) (by norm_num [←Real.sqrt_eq_rpow])
+    (fun _ => 0) (by intro n hn; simp) 1 zero_lt_one le_rfl
+    (∅ : Finset ℕ) (fun _ => 0) (fun _ => 1) (by simp) (by simp) (by simp) (by simp)
+  convert! hh using 1 <;> norm_num [Moment.huxleyCurvedExponent]
+
+/-- Log absorption includes the zero-th logarithmic power. -/
+theorem layer4_one_add_log_zero_power_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → 1 ≤ C*T^(1/100 : ℝ) := by
+  simpa only [pow_zero] using! Moment.exists_one_add_log_pow_le_rpow 0 (1/100) (by norm_num)
+
+/-- The coefficient-amplitude theorem includes K=0 and the convolution unit. -/
+theorem layer4_powered_amplitude_zero_budget_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ a : ℕ → ℂ, ∀ U : ℕ, 1 ≤ U →
+      (∀ n ∈ Finset.Ioc U (2*U), ‖a n‖ ≤ (n.divisors.card : ℝ)^0) → ∀ n : ℕ,
+      ‖((Moment.Powers.blockArithmeticCoefficient a U (2*U))^0) n‖ ≤ C*(n.divisors.card : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.powered_block_uniform_amplitude 0 0 (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro a U hU ha n
+  simpa using hb a U 0 hU le_rfl ha n
+
+/-- The merged detector branches include the first high shell and an empty family. -/
+theorem layer4_curved_first_shell_empty_consumer :
+    ∃ C : ℝ, 0 < C ∧ ((∅ : Finset ℕ).card : ℝ) ≤ C*(128 : ℝ)^(103/300 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.huxley_curved_separated_high_shell_density (1/100) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  have hh := hb 128 (5/6) le_rfl (by norm_num) le_rfl
+    (∅ : Finset ℕ) (fun _ => 0) (fun _ => 1) (by simp) (by simp) (by simp)
+  convert! hh using 1 <;> norm_num [Moment.huxleyCurvedExponent]
+
+/-- Real block-length selection includes both square-root equalities at T=4. -/
+theorem layer4_curved_real_length_selection_consumer :
+    ∃ k : ℕ, 1 ≤ k ∧ k ≤ Moment.huxleyPowerBudget (1/2) ∧
+      (4 : ℝ)^Moment.huxleyPowerLower (5/6) ≤ (2 : ℝ)^k ∧
+      (2 : ℝ)^k ≤ (4 : ℝ)^Moment.huxleyPowerUpper (5/6) := by
+  exact Moment.huxley_short_length_power 4 (1/2) (5/6) 2 (by norm_num) (by norm_num)
+    (by norm_num [←Real.sqrt_eq_rpow]) (by norm_num [←Real.sqrt_eq_rpow]) (by norm_num) le_rfl
+
 end Legendre.Tests

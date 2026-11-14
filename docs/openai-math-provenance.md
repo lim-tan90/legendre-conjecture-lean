@@ -466,3 +466,9 @@ and public module visibility. Both READMEs list the exact upstream files and
 destinations; the license remains `licenses/openai-math-Apache-2.0.txt`.
 These subpower divisor bounds support controlling coefficients after integer
 powering. No stronger zero-density theorem is asserted by this port alone.
+
+The new `HuxleyCurvedShell.lean` also reuses the finite branch-splitting
+structure from this repository's `HuxleyShellDensity.lean`, originally adapted
+from `DensitySeparatedCount.lean` at the same pinned openai/math commit and
+under the same retained Apache-2.0 license. The powered-block analytic counts,
+small-cutoff choices and restricted curved-density proof are local deductions.

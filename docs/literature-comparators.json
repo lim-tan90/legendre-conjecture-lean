@@ -278,10 +278,10 @@
     {
       "id": "layer4",
       "status": "roadmap acceptance proved: Ingham and global Huxley 12/5; stronger targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator⟩",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity ∧ Huxley1972RestrictedDensity",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator, layer4_huxley_restricted_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Ingham 1940 and global Huxley 12/5 are proved uniformly in sigma, with all analytic multiplicities and T>=2. The global proof uses actual Halasz two-term counts, both compact-detector branches, integer cutoffs and height covers, with (1+log T)^38 loss absorbed into arbitrary positive epsilon. The stronger curved Huxley1972Density, sharp log^4 fourth moment and GuthMaynard2024Density remain open. The roadmap permits explicit open stronger analytic Props; no open target is assumed in the global proof. Prime-gap theorems remain Layer 5 obligations."
+      "note": "Ingham 1940 and global Huxley 12/5 are proved uniformly in sigma, with all analytic multiplicities and T>=2. The global proof uses actual Halasz two-term counts, both compact-detector branches, integer cutoffs and height covers, with (1+log T)^38 loss absorbed into arbitrary positive epsilon. The stronger curved Huxley1972Density, sharp log^4 fourth moment and GuthMaynard2024Density remain open. The roadmap permits explicit open stronger analytic Props; no open target is assumed in the global proof. Prime-gap theorems remain Layer 5 obligations. The restricted curved exponent is now proved uniformly for sigma in [1/2,5/6], with all heights T>=2 and analytic multiplicities. It is not the full curved benchmark; the remaining real-part range above 5/6 stays open."
     }
   ],
   "open_analytic_targets": [
@@ -572,6 +572,14 @@
     "Legendre/Layer4/Arithmetic/PolynomialPowers.lean": "layer4",
     "Legendre/Layer4/Arithmetic/BlockPolynomialPowers.lean": "layer4",
     "Legendre/Layer4/HuxleyPowerSelection.lean": "layer4",
-    "Legendre/Layer4/Arithmetic/PoweredBlockDecomposition.lean": "layer4"
+    "Legendre/Layer4/Arithmetic/PoweredBlockDecomposition.lean": "layer4",
+    "Legendre/Layer4/HalaszScaledBlock.lean": "layer4",
+    "Legendre/Layer4/HalaszPoweredBlock.lean": "layer4",
+    "Legendre/Layer4/HuxleyPoweredLengths.lean": "layer4",
+    "Legendre/Layer4/HuxleyPoweredCount.lean": "layer4",
+    "Legendre/Layer4/HuxleyShortBlock.lean": "layer4",
+    "Legendre/Layer4/HuxleyShortTail.lean": "layer4",
+    "Legendre/Layer4/HuxleyCurvedShell.lean": "layer4",
+    "Legendre/Layer4/HuxleyCurvedDensity.lean": "layer4"
   }
 }

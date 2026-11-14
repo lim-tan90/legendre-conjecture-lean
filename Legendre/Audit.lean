@@ -428,6 +428,14 @@ import all Legendre.Layer4.Arithmetic.DivisorGrowth
 import all Legendre.Layer4.Arithmetic.PolynomialPowers
 import all Legendre.Layer4.Arithmetic.BlockPolynomialPowers
 import all Legendre.Layer4.HuxleyPowerSelection
+import all Legendre.Layer4.HalaszScaledBlock
+import all Legendre.Layer4.HalaszPoweredBlock
+import all Legendre.Layer4.HuxleyPoweredLengths
+import all Legendre.Layer4.HuxleyPoweredCount
+import all Legendre.Layer4.HuxleyShortBlock
+import all Legendre.Layer4.HuxleyShortTail
+import all Legendre.Layer4.HuxleyCurvedShell
+import all Legendre.Layer4.HuxleyCurvedDensity
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -4909,3 +4917,43 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sqrt_detector_minimum_height_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_typeII_empty_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_uniform_power_coefficients_consumer"
+
+-- Actual powered-block counts and restricted curved Huxley density.
+#print axioms Legendre.Density.Moment.exists_one_add_log_pow_le_rpow
+#print axioms Legendre.Density.Moment.halasz_powered_block_count
+#print axioms Legendre.Density.Moment.halasz_powered_window_count
+#print axioms Legendre.Density.Moment.halasz_scaled_divisor_block_count
+#print axioms Legendre.Density.Moment.huxley_actual_tail_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_curved_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_curved_separated_high_density
+#print axioms Legendre.Density.Moment.huxley_curved_separated_high_shell_density
+#print axioms Legendre.Density.Moment.huxley_powered_length_terms
+#print axioms Legendre.Density.Moment.huxley_short_block_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_short_length_power
+#print axioms Legendre.Density.Moment.powered_block_uniform_amplitude
+#print axioms Legendre.Density.Moment.powered_length_log_bound
+#print axioms Legendre.Literature.layer4_huxley_restricted_comparator
+#print axioms Legendre.Zeta.huxley_curved_middle_density_epsilon
+#print axioms Legendre.Zeta.huxley_curved_restricted_density_epsilon
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HalaszPoweredBlock.0.Legendre.Density.Moment.halasz_powered_block_count._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredCount.0.Legendre.Density.Moment.halasz_powered_window_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPoweredLengths.0.Legendre.Density.Moment.huxley_short_length_power._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyShortBlock.0.Legendre.Density.Moment.huxley_short_block_epsilon_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_empty_short_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_empty_short_block_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_first_shell_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_five_sixths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_four_fifths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_real_length_selection_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_curved_real_length_selection_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_one_add_log_zero_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_powered_amplitude_zero_budget_consumer"

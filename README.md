@@ -121,25 +121,27 @@ fourth moment. The improved polynomial and integral alternatives now prove
 with all analytic multiplicities. Thus `hasZeroDensityEstimate_twelve_fifths`
 and the independent `layer4_huxley_global_comparator` are closed proofs.
 [Full density proof and parameter balance](docs/layer4-huxley-density.md). [Exact statements and constants](docs/layer4-exponential-large-values.md).
-**New (2026-11-14):** the actual Type II detector branch with a chosen small
-integer mollifier now has the uniform sample bound `T^(2−2σ+ε)`. Exact finite
-Dirichlet convolution powers, uniform subpower coefficients, their dyadic
-pieces, and bounded power selection on σ∈[3/4,5/6] are proved.
-These are ingredients toward the curved Huxley target; they do not yet close
-that target. [Exact hypotheses, source and remaining steps](docs/layer4-small-mollifier-powers.md).
+**New (2026-11-14): restricted curved Huxley density is proved.** For every
+`ε>0`, one coefficient works for all σ∈[1/2,5/6] and T≥2:
+`N(σ,T) ≤ C_ε T^(3(1−σ)/(3σ−1)+ε)`, with all analytic multiplicities.
+The proof powers actual short detector blocks, bounds their convolution
+coefficients uniformly, combines both detector branches and covers all heights;
+Ingham supplies σ≤3/4. The full curved benchmark still requires σ>5/6.
+[Exact proof, sources and remaining range](docs/layer4-small-mollifier-powers.md).
 
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-14): **4,281 build jobs**, all **4,351 project theorem
-declarations** audited with only the three standard axioms, and **283 Lean files**
+Validation (2026-11-14): **4,289 build jobs**, all **4,389 project theorem
+declarations** audited with only the three standard axioms, and **291 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **139 independent consumers** pass: **94 Layer 4**, nine Layer 3 and
-36 literature checks. The 12 added consumers cover zero cutoff, empty actual
+All **147 independent consumers** pass: **102 Layer 4**, nine Layer 3 and
+36 literature checks. The 20 added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
-support boundaries, uniform bounded powers and the sigma=5/6 power window.
+support boundaries, uniform bounded powers, the sigma=5/6 power window,
+the full restricted count at sigma=4/5 and 5/6, and its height-two constant.
 Lean rejects confusing pointwise coefficient powers with Dirichlet convolution;
 the global theorem is still not a proof of the stronger curved benchmark.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
@@ -455,9 +457,9 @@ formalizations only. In particular, the proved 1940 density estimate does
 not close either Ingham **1937 prime-gap** result. The Layer 4 roadmap
 acceptance requirements are fulfilled; the stronger curved Huxley and
 Guth–Maynard benchmarks remain open.
-The actual Type II branch now has the small-mollifier bound `T^(2−2σ+ε)`;
-exact polynomial powers and the restricted power-selection algebra are also
-proved, without changing the historical short-interval proof statuses below.
+Restricted curved density is now proved on σ∈[1/2,5/6], including all heights
+and multiplicities. The full curved benchmark above 5/6 remains open; this
+progress does not change the historical short-interval proof statuses below.
 
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -510,6 +512,7 @@ The completed analytic milestones supporting this program are:
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
 | Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
 | Global Huxley density (Layer 4) | `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` for every `ε>0` | **✅ Proved**: [`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean), closed [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean); uniform σ∈[1/2,1], T≥2, all analytic multiplicities. A stronger intermediate bound holds on σ∈[3/4,1]. The paper-exact curved Huxley benchmark remains open. |
+| Restricted curved Huxley density (Layer 4) | For every `ε>0`, `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`, σ∈[1/2,5/6] | **✅ Proved**: [`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) and closed [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean); all T≥2 and analytic multiplicities. The full benchmark for σ>5/6 remains open. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`, hence `≪_ε T^(1+ε)` | **✅ Proved**: [`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean). The sharp `log^4 T` target remains open. |
 | Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision, the two-term large-value count and improved actual Möbius/critical-mass moments are proved; the stronger curved Huxley target remains open. |
 | Analytic large values and actual mollifier moments (Layer 4) | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`; improved `R^(2/3)(AT)^(1/3)` term in the actual Möbius second moment | **✅ Proved**: closed [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean), [weighted mollifier moment](Legendre/Layer4/HalaszMollifierMoment.lean) and [actual critical-mass moment](Legendre/Layer4/HalaszCriticalMass.lean). Global 12/5 is now proved; the stronger curved Huxley target remains open. |
@@ -927,7 +930,7 @@ No additional PNT+ source is copied.
 | `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
 | `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
 | `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
-| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean); its finite branch assembly is reused internally in [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean), with the same pinned source and license |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean); its finite branch assembly is reused internally in [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean) and [HuxleyCurvedShell.lean](Legendre/Layer4/HuxleyCurvedShell.lean), with the same pinned source and license |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |
