@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "comparison_policy": "exponents up to positive epsilon; harmless multiplicative constants and interval direction allowed; hypotheses and finite/eventual scope retained",
-  "checked_on": "2026-11-13",
+  "checked_on": "2026-11-14",
   "historical_rows": [
     {
       "id": "legendre1808",
@@ -563,6 +563,15 @@
     "Legendre/Layer4/HuxleyDensity.lean": "layer4",
     "Legendre/Layer4/HuxleyHeightDensity.lean": "layer4",
     "Legendre/Layer4/HuxleyParameters.lean": "layer4",
-    "Legendre/Layer4/HuxleyShellDensity.lean": "layer4"
+    "Legendre/Layer4/HuxleyShellDensity.lean": "layer4",
+    "Legendre/Layer4/IndividualCriticalFourth.lean": "layer4",
+    "Legendre/Layer4/TypeIIIntegralCount.lean": "layer4",
+    "Legendre/Layer4/SmallMollifierTypeII.lean": "layer4",
+    "Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean": "layer4",
+    "Legendre/Layer4/Arithmetic/DivisorGrowth.lean": "layer4",
+    "Legendre/Layer4/Arithmetic/PolynomialPowers.lean": "layer4",
+    "Legendre/Layer4/Arithmetic/BlockPolynomialPowers.lean": "layer4",
+    "Legendre/Layer4/HuxleyPowerSelection.lean": "layer4",
+    "Legendre/Layer4/Arithmetic/PoweredBlockDecomposition.lean": "layer4"
   }
 }

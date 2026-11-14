@@ -420,6 +420,15 @@ import all Legendre.Layer4.HalaszUniformCosts
 import all Legendre.Layer4.HuxleyBalance
 import all Legendre.Layer4.HuxleyBalancedAlternatives
 import all Legendre.Layer4.HuxleyDensity
+import all Legendre.Layer4.IndividualCriticalFourth
+import all Legendre.Layer4.TypeIIIntegralCount
+import all Legendre.Layer4.SmallMollifierTypeII
+import all Legendre.Layer4.Arithmetic.DivisorGrowthLocal
+import all Legendre.Layer4.Arithmetic.DivisorGrowth
+import all Legendre.Layer4.Arithmetic.PolynomialPowers
+import all Legendre.Layer4.Arithmetic.BlockPolynomialPowers
+import all Legendre.Layer4.HuxleyPowerSelection
+import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
 import all Legendre.Layer4.HuxleyShellDensity
@@ -4811,3 +4820,92 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_principal_pole_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_sigma_one_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_three_quarters_consumer"
+
+-- Small mollifiers, exact convolution powers and independent edge-case consumers.
+#print axioms Legendre.Density.Detector.finiteSeries.eq_1
+#print axioms Legendre.Density.Moment.DivisorGrowth.divisors_card_le_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.divisors_card_pow_le_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.exists_linear_le_geometric
+#print axioms Legendre.Density.Moment.DivisorGrowth.exponent_succ_le_two_pow
+#print axioms Legendre.Density.Moment.DivisorGrowth.prime_local_divisor_bounds
+#print axioms Legendre.Density.Moment.DivisorGrowth.prod_prime_factor_rpow
+#print axioms Legendre.Density.Moment.DivisorGrowth.small_prime_cost_le
+#print axioms Legendre.Density.Moment.DivisorGrowth.two_pow_primeFactors_card_le_divisors_card
+#print axioms Legendre.Density.Moment.Powers.LSeries_power
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient._proof_1
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient.eq_1
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_apply
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_norm
+#print axioms Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support
+#print axioms Legendre.Density.Moment.Powers.block_finiteSeries
+#print axioms Legendre.Density.Moment.Powers.block_polynomial_power
+#print axioms Legendre.Density.Moment.Powers.bounded_powers_coefficients_subpower
+#print axioms Legendre.Density.Moment.Powers.convolution_divisor_norm
+#print axioms Legendre.Density.Moment.Powers.convolution_support
+#print axioms Legendre.Density.Moment.Powers.convolution_vanish_below
+#print axioms Legendre.Density.Moment.Powers.divisors_card_mono_of_dvd
+#print axioms Legendre.Density.Moment.Powers.exists_large_powered_block
+#print axioms Legendre.Density.Moment.Powers.finiteSeries_power
+#print axioms Legendre.Density.Moment.Powers.finite_support_summable
+#print axioms Legendre.Density.Moment.Powers.positive_power_vanish_below
+#print axioms Legendre.Density.Moment.Powers.power_coefficients_subpower
+#print axioms Legendre.Density.Moment.Powers.power_divisor_norm
+#print axioms Legendre.Density.Moment.Powers.power_support
+#print axioms Legendre.Density.Moment.Powers.powered_block_dyadic_decomposition
+#print axioms Legendre.Density.Moment.actual_typeII_given_cutoff_count
+#print axioms Legendre.Density.Moment.actual_typeII_small_mollifier_count
+#print axioms Legendre.Density.Moment.criticalWeightMassMajorant_pos
+#print axioms Legendre.Density.Moment.critical_mass_individual_fourth
+#print axioms Legendre.Density.Moment.huxleyCurvedExponent._proof_1
+#print axioms Legendre.Density.Moment.huxleyPowerUpper._proof_1
+#print axioms Legendre.Density.Moment.huxley_power_window_bounds
+#print axioms Legendre.Density.Moment.huxley_power_window_exponents
+#print axioms Legendre.Density.Moment.huxley_short_block_power
+#print axioms Legendre.Density.Moment.integral_alternative_individual_fourth_count
+#print axioms Legendre.Density.Moment.integral_alternative_small_cutoff_epsilon
+#print axioms Legendre.Density.Moment.integral_alternative_sqrt_height_count
+#print axioms Legendre.Density.Moment.small_integer_mollifier
+#print axioms Legendre.Density.Moment.sqrt_detector_scale
+#print axioms Legendre.Density.Moment.sum_critical_mass_fourth
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_below._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.blockArithmeticCoefficient_support._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.block_finiteSeries._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.BlockPolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_vanish_below._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.DivisorGrowth.0.Legendre.Density.Moment.DivisorGrowth.two_pow_primeFactors_card_le_divisors_card._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.DivisorGrowthLocal.0.Legendre.Density.Moment.DivisorGrowth.prime_local_divisor_bounds._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.LSeries_power._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.convolution_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.finite_support_summable._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PolynomialPowers.0.Legendre.Density.Moment.Powers.power_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Arithmetic.PoweredBlockDecomposition.0.Legendre.Density.Moment.Powers.powered_block_dyadic_decomposition._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_power_window_exponents._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.HuxleyPowerSelection.0.Legendre.Density.Moment.huxley_short_block_power._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.TypeIIIntegralCount.0.Legendre.Density.Moment.integral_alternative_individual_fourth_count._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyCurvedExponent.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyPowerLower.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyPowerUpper.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_convolution_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_empty_block_power_zero_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_power_exponents_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_power_window_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_huxley_short_power_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_individual_fourth_zero_cutoff_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_power_one_block_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_power_support_boundary_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_small_mollifier_zero_exponent_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sqrt_detector_minimum_height_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_typeII_empty_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_uniform_power_coefficients_consumer"

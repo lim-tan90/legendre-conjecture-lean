@@ -84,6 +84,15 @@ public import Legendre.Layer4.HalaszUniformCosts
 public import Legendre.Layer4.HuxleyBalance
 public import Legendre.Layer4.HuxleyBalancedAlternatives
 public import Legendre.Layer4.HuxleyDensity
+public import Legendre.Layer4.IndividualCriticalFourth
+public import Legendre.Layer4.TypeIIIntegralCount
+public import Legendre.Layer4.SmallMollifierTypeII
+public import Legendre.Layer4.Arithmetic.DivisorGrowthLocal
+public import Legendre.Layer4.Arithmetic.DivisorGrowth
+public import Legendre.Layer4.Arithmetic.PolynomialPowers
+public import Legendre.Layer4.Arithmetic.BlockPolynomialPowers
+public import Legendre.Layer4.HuxleyPowerSelection
+public import Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters
 public import Legendre.Layer4.HuxleyShellDensity

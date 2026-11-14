@@ -488,8 +488,15 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.87 | Actual high-shell zero count | [HuxleyShellDensity.lean](../Legendre/Layer4/HuxleyShellDensity.lean) | **proved**; both actual branches, no assumed density input |
 | 4.88 | Complete height cover | [HuxleyHeightDensity.lean](../Legendre/Layer4/HuxleyHeightDensity.lean) | **proved**; all shell upper endpoints retained, log^37 sample count |
 | 4.89 | Global Huxley 12/5 density | [HuxleyDensity.lean](../Legendre/Layer4/HuxleyDensity.lean); `layer4_huxley_global_comparator` | **proved**; all analytic multiplicities and low heights, uniform σ∈[1/2,1], T≥2; (1+log T)^38 or arbitrary ε>0; stronger curved target remains open |
+| 4.90 | Sum of individual critical fourth powers | [IndividualCriticalFourth.lean](../Legendre/Layer4/IndividualCriticalFourth.lean) | **proved**; sum mass_i^4 <= C X^4 T log^6 T; X=0 included |
+| 4.91 | Improved actual Type II integral count | [TypeIIIntegralCount.lean](../Legendre/Layer4/TypeIIIntegralCount.lean) | **proved**; Y=sqrt(T), R <= C X^4 T^(2−2σ) log^6 T, independently varying real parts |
+| 4.92 | Small integer mollifier and actual zeros | [SmallMollifierTypeII.lean](../Legendre/Layer4/SmallMollifierTypeII.lean) | **proved**; actual Type II sample count T^(2−2σ+ε), uniform σ∈[3/4,1], T≥128, retained principal-pole constraints; not the full density count |
+| 4.93 | Divisor subpower growth | [Arithmetic/DivisorGrowth.lean](../Legendre/Layer4/Arithmetic/DivisorGrowth.lean) and local lemmas | **proved**; adapted from pinned openai/math Ostmann arithmetic modules, Apache-2.0 |
+| 4.94 | Exact finite Dirichlet convolution powers | [Arithmetic/PolynomialPowers.lean](../Legendre/Layer4/Arithmetic/PolynomialPowers.lean), [BlockPolynomialPowers.lean](../Legendre/Layer4/Arithmetic/BlockPolynomialPowers.lean) | **proved**; both support endpoints, exact finite-series identity and subpower cost uniform in f and k≤K |
+| 4.95 | Powered-block decomposition | [Arithmetic/PoweredBlockDecomposition.lean](../Legendre/Layer4/Arithmetic/PoweredBlockDecomposition.lean) | **proved**; k dyadic pieces, actual norm threshold W^k/k |
+| 4.96 | Bounded integer power selection | [HuxleyPowerSelection.lean](../Legendre/Layer4/HuxleyPowerSelection.lean) | **proved algebra only**; σ∈[3/4,5/6], k≤ceil(1/δ)+2; both Halasz exponents fit the curved target; no new curved density theorem asserted |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
-| 4.validation | Eighty-two independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
+| 4.validation | Ninety-four independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
@@ -645,3 +652,16 @@ Lean rejects treating the new global proof as the stronger curved Huxley target,
 using the nonzero-ordinate kernel at t=0, and using the critical polynomial
 count below W=2. The roadmap acceptance criteria are fulfilled; the stronger
 curved Huxley/Guth--Maynard and sharp log^4 targets remain explicitly open.
+
+Small-mollifier and power validation (2026-11-14): full build 4,281 jobs.
+All 4,351 project theorem declarations, including private/generated declarations,
+have exactly matching module-data inventory, independent full-environment
+inventory, Audit targets and parsed axiom output. Only propext,
+Classical.choice and Quot.sound occur. All 283 Lean files have zero executable
+sorry/admit/sorryAx. All 139 standalone consumers pass: 94 Layer 4, nine
+Layer 3 and 36 literature. The twelve new consumers test actual Type II
+empty samples, X=0, delta=0, T=128, the n=2 convolution square, empty-block
+power zero, the lower support boundary, uniform coefficients at k=K,
+sigma=5/6, bounded selection and single-block decomposition. A deliberate
+pointwise-power/convolution-power confusion is rejected by the Lean kernel.
+The stronger curved density and the historical prime-gap claims remain open.

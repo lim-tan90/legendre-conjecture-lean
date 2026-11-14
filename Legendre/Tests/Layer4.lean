@@ -722,4 +722,97 @@ theorem layer4_huxley_principal_pole_consumer :
   have hh := Moment.huxley_detector_scale 128 (3/4) le_rfl (by norm_num) (by norm_num)
   convert! hh using 1 <;> norm_num [Moment.huxleyDetectorExponent,Moment.huxleyBalanceDenominator]
 
+/-- Taking individual powers does not introduce a spurious nonzero mass at X=0. -/
+theorem layer4_individual_fourth_zero_cutoff_consumer :
+    ∀ T : ℝ, 2 ≤ T → ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, (Detector.Smooth.criticalMass 0 (t i))^4) ≤ 0 := by
+  obtain ⟨C,_,hb⟩ := Moment.sum_critical_mass_fourth
+  intro T hT ι S t ht hs
+  simpa using hb 0 T hT S t ht hs
+
+/-- All actual-zero and pole constraints are valid for an empty family at T=128. -/
+theorem layer4_typeII_empty_consumer :
+    ∃ C : ℝ, 0 < C ∧ ((∅ : Finset ℕ).card : ℝ) ≤ C*(128 : ℝ)^(1/10 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.actual_typeII_given_cutoff_count (1/10) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  have hh := hb 0 128 1 (by norm_num) le_rfl (by norm_num) 1 le_rfl
+    (by norm_num) (by norm_num) (∅ : Finset ℕ) (fun _ => 1) (fun _ => 0)
+    (by simp) (by simp) (by simp) (by simp)
+  convert! hh using 1 <;> norm_num
+
+/-- The selected integer cutoff includes equality at delta=0. -/
+theorem layer4_small_mollifier_zero_exponent_consumer (T : ℝ) (hT : 2 ≤ T) :
+    ∃ X : ℕ, 1 ≤ X ∧ (1 : ℝ) ≤ X ∧ (X : ℝ) ≤ 2 ∧ (X : ℝ) ≤ 2*T := by
+  simpa using! Moment.small_integer_mollifier T 0 hT le_rfl (by norm_num)
+
+/-- The first permissible high shell satisfies the square-root detector constraints. -/
+theorem layer4_sqrt_detector_minimum_height_consumer :
+    4 ≤ (128 : ℝ)^(1/2 : ℝ) ∧ (128 : ℝ)^(1/2 : ℝ) ≤ 4096 := by
+  convert! Moment.sqrt_detector_scale 128 le_rfl using 1 <;> norm_num
+
+/-- A singleton at n=2 convolves to n=4; this detects pointwise-power coercions. -/
+theorem layer4_convolution_power_consumer :
+    ((Moment.Powers.blockArithmeticCoefficient (fun _ => (1 : ℂ)) 1 2)^2) 4 = 1 ∧
+    ((Moment.Powers.blockArithmeticCoefficient (fun _ => (1 : ℂ)) 1 2)^2) 2 = 0 := by
+  have hd4 : Nat.divisorsAntidiagonal 4 = {(1,4),(2,2),(4,1)} := by decide
+  have hd2 : Nat.divisorsAntidiagonal 2 = {(1,2),(2,1)} := by decide
+  constructor
+  · rw [pow_two,ArithmeticFunction.mul_apply,hd4]
+    norm_num [Moment.Powers.blockArithmeticCoefficient_apply]
+  · rw [pow_two,ArithmeticFunction.mul_apply,hd2]
+    norm_num [Moment.Powers.blockArithmeticCoefficient_apply]
+
+/-- Power zero is the convolution unit even when the original block is empty. -/
+theorem layer4_empty_block_power_zero_consumer (s : ℂ) :
+    Detector.finiteSeries ((Moment.Powers.blockArithmeticCoefficient (fun _ => (1 : ℂ)) 2 1)^0)
+      1 s = 1 := by
+  simpa using! (Moment.Powers.block_polynomial_power (fun _ => (1 : ℂ)) 2 1 0 s).symm
+
+/-- The lower endpoint is excluded from every positive convolution power. -/
+theorem layer4_power_support_boundary_consumer (a : ℕ → ℂ) :
+    ((Moment.Powers.blockArithmeticCoefficient a 2 4)^3) 8 = 0 := by
+  exact Moment.Powers.positive_power_vanish_below _ 2
+    (Moment.Powers.blockArithmeticCoefficient_below a 2 4) 2 8 (by norm_num)
+
+/-- The subpower constant is uniform in the coefficients and includes the maximal power. -/
+theorem layer4_uniform_power_coefficients_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ f : ArithmeticFunction ℂ,
+      (∀ n, ‖f n‖ ≤ (n.divisors.card : ℝ)) → ∀ n : ℕ, 0 < n →
+      ‖(f^4) n‖ ≤ C*(n : ℝ)^(1/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.Powers.bounded_powers_coefficients_subpower 1 4 (1/100)
+    (by norm_num)
+  exact ⟨C,hC,fun f hf n hn => hb f (by simpa using hf) 4 le_rfl n hn⟩
+
+/-- The endpoint sigma=5/6 still permits a power of length exponent exactly one. -/
+theorem layer4_huxley_power_window_endpoint_consumer :
+    Moment.huxleyPowerUpper (5/6) = 1 ∧
+    (2 : ℝ)*(1/2) ≤ Moment.huxleyPowerUpper (5/6) ∧
+    Moment.huxleyPowerLower (5/6) ≤ (2 : ℝ)*(1/2) := by
+  norm_num [Moment.huxleyPowerUpper,Moment.huxleyPowerLower]
+
+/-- The bounded selection theorem retains a strictly positive lower length. -/
+theorem layer4_huxley_short_power_consumer :
+    ∃ k : ℕ, 1 ≤ k ∧ k ≤ Moment.huxleyPowerBudget (1/100) ∧
+      Moment.huxleyPowerLower (3/4) ≤ (k : ℝ)*(1/100) ∧
+      (k : ℝ)*(1/100) ≤ Moment.huxleyPowerUpper (3/4) := by
+  exact Moment.huxley_short_block_power (1/100) (1/100) (3/4)
+    (by norm_num) le_rfl (by norm_num) le_rfl (by norm_num)
+
+/-- Both large-value exponents fit the curved exponent at sigma=5/6. -/
+theorem layer4_huxley_power_exponents_endpoint_consumer :
+    (2/3 : ℝ)*(2-2*(5/6)) ≤ 1/3 ∧ 1+(2/3 : ℝ)*(4-6*(5/6)) ≤ 1/3 := by
+  have hh := Moment.huxley_power_window_exponents (5/6) (2/3)
+    (by norm_num) le_rfl (by norm_num [Moment.huxleyPowerLower,Moment.huxleyPowerUpper])
+  convert! hh using 1 <;> norm_num [Moment.huxleyCurvedExponent]
+
+/-- The k=1 decomposition preserves the original, single dyadic block exactly. -/
+theorem layer4_power_one_block_consumer (a : ℕ → ℂ) (s : ℂ) :
+    (∑ n ∈ Finset.Ioc 1 2, a n*(n : ℂ)^(-s)) =
+      ∑ j ∈ Finset.range 1, ∑ n ∈ Finset.Ioc (2^j*1^1) (2*(2^j*1^1)),
+        ((Moment.Powers.blockArithmeticCoefficient a 1 2)^1) n*(n : ℂ)^(-s) := by
+  simpa only [pow_one] using! Moment.Powers.powered_block_dyadic_decomposition a 1 1
+    le_rfl le_rfl s
+
 end Legendre.Tests

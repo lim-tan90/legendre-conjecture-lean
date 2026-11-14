@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — Ingham density and the global Huxley 12/5 exponent (2026-11-13)</strong></summary>
+<summary><strong>Layer 4 — global 12/5 density, small mollifiers and powers (2026-11-14)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -121,20 +121,27 @@ fourth moment. The improved polynomial and integral alternatives now prove
 with all analytic multiplicities. Thus `hasZeroDensityEstimate_twelve_fifths`
 and the independent `layer4_huxley_global_comparator` are closed proofs.
 [Full density proof and parameter balance](docs/layer4-huxley-density.md). [Exact statements and constants](docs/layer4-exponential-large-values.md).
+**New (2026-11-14):** the actual Type II detector branch with a chosen small
+integer mollifier now has the uniform sample bound `T^(2−2σ+ε)`. Exact finite
+Dirichlet convolution powers, uniform subpower coefficients, their dyadic
+pieces, and bounded power selection on σ∈[3/4,5/6] are proved.
+These are ingredients toward the curved Huxley target; they do not yet close
+that target. [Exact hypotheses, source and remaining steps](docs/layer4-small-mollifier-powers.md).
+
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-13): **4,272 build jobs**, all **4,264 project theorem
-declarations** audited with only the three standard axioms, and **274 Lean files**
+Validation (2026-11-14): **4,281 build jobs**, all **4,351 project theorem
+declarations** audited with only the three standard axioms, and **283 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **127 independent consumers** pass: **82 Layer 4**, nine Layer 3 and
-36 literature checks. New checks cover sigma=3/4, 9/10 and 1, the common
-height-two constant, exact balance endpoints, integer rounding and the lowest
-high-shell principal-pole constraints. Lean rejects using the global theorem
-as the stronger curved Huxley benchmark; the t=0 kernel and W<2 critical-count
-misuses are also rejected.
+All **139 independent consumers** pass: **94 Layer 4**, nine Layer 3 and
+36 literature checks. The 12 added consumers cover zero cutoff, empty actual
+zero families, rounding, detector height, exact convolution coefficients,
+support boundaries, uniform bounded powers and the sigma=5/6 power window.
+Lean rejects confusing pointwise coefficient powers with Dirichlet convolution;
+the global theorem is still not a proof of the stronger curved benchmark.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
 Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
@@ -440,7 +447,7 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
-**Repository status (2026-11-13).** The classical PNT in Layer 3, Ingham
+**Repository status (2026-11-14).** The classical PNT in Layer 3, Ingham
 **1940 curved density** and the **global Huxley 12/5 density exponent** in
 Layer 4 are proved. The nine
 historical short-interval exponent results below still have statement-level
@@ -448,6 +455,9 @@ formalizations only. In particular, the proved 1940 density estimate does
 not close either Ingham **1937 prime-gap** result. The Layer 4 roadmap
 acceptance requirements are fulfilled; the stronger curved Huxley and
 Guth–Maynard benchmarks remain open.
+The actual Type II branch now has the small-mollifier bound `T^(2−2σ+ε)`;
+exact polynomial powers and the restricted power-selection algebra are also
+proved, without changing the historical short-interval proof statuses below.
 
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -999,6 +1009,20 @@ visibility are adapted. The phase-sum arguments are retained.
 Interval subdivision, absorption-scale optimization, the two-term count, finite
 dyadic moment summation and the improved actual Möbius/critical-mass moments
 are local deductions in this repository; this step copies no additional upstream code.
+
+### Divisor growth for polynomial powers
+
+The coefficient-power work additionally adapts the following files from
+[openai/math](https://github.com/openai/math), pinned commit
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0. Source directory:
+`lean/OAI/NumberTheory/Ostmann/Arithmetic/`. Imports, namespaces and module
+visibility are adapted; the retained license is
+[`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+
+| Upstream / 上游 | Destination / 本地文件 |
+|---|---|
+| [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
+| [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
 </details>
 
