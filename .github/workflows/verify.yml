@@ -20,6 +20,10 @@ jobs:
       # installation, cache retrieval, build and audit separately observable.
       - name: Install pinned Lean
         shell: bash
+        env:
+          # Authenticate release API calls: anonymous requests share a per-IP
+          # quota and intermittently fail with HTTP 403 (curl exit code 22).
+          LEAN_CI_GITHUB_TOKEN: ${{ github.token }}
         run: bash scripts/install-lean-ci.sh
 
       - name: Get pinned mathlib cache
