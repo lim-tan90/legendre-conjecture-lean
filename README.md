@@ -251,6 +251,7 @@ N=30 localization rounding, the literal single-column sampling constant,
 exact diagonal mass and four nonzero two-point contributions. Three negative
 checks reject removing coefficient/separation bounds or treating this mean
 square as central density.
+Locally verified Heath–Brown proof commit: [`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36) ([scope and sources](docs/layer4-heath-brown-difference.md)).
 Locally verified Poisson/reflection/cubic proof commit: [`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb).
 Locally verified Lean 4.35.0 sampling/trace proof commit: [`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423) ([sources and adaptations](docs/smccolm-guth-provenance.md)).
 Locally verified full curved Huxley proof commit: [`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a) ([proof and scope](docs/layer4-full-curved-huxley.md)).

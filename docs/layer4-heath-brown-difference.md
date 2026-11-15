@@ -62,3 +62,5 @@ Three negative guards reject dropping coefficient/separation conditions or
 confusing the mean square with central density. The prior Poisson guards also
 passed. All eighteen adapted modules retain the exact pinned MIT-0 source and
 are compiled from source; the retained license blob is unchanged.
+
+Verified proof commit: [f92c79f91ec713034cc65ae341e97e321d9bdf36](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36).

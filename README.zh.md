@@ -192,6 +192,7 @@ floor 区间计数、对称实幂尾积分、平滑参数上限与向上取整�
 删除高度因子或三次迹尺度窗口、将完整反射误作中间密度的用例均被 Lean 拒绝。
 Heath–Brown 检查另覆盖零次卷积幂、N=30 的局部化取整、单列采样的字面常数、
 精确对角质量和两点集合的四项非零贡献。删除系数界或间隔条件、将该均方界误作中间密度的三个用例均被 Lean 拒绝。
+本地完整验证的 Heath–Brown 证明提交：[`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36)（[范围与来源](docs/layer4-heath-brown-difference.md)）。
 本地验证的 Poisson／反射／三次迹证明提交：[`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb)。
 本地完整验证的 Lean 4.35.0 采样／迹证明提交：[`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423)（[来源与适配](docs/smccolm-guth-provenance.md)）。
 本地完整验证的完整 Huxley 曲线证明提交：[`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a)（[证明与范围](docs/layer4-full-curved-huxley.md)）。
