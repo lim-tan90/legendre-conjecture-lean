@@ -26,7 +26,7 @@ zero dispersion, so dispersion alone cannot bound its coordinates.
 The literal finite-polynomial/coefficient-energy/trace statement is the
 independent `Literature.GuthMaynardSamplingTraceBenchmark`; the closed witness
 is `layer4_guth_sampling_trace_comparator`. This is exported through
-`import Legendre.Layer4` together with the five adapted modules.
+`import Legendre.Layer4` together with the adapted modules.
 The arbitrary-energy extension is local; the bounded-coefficient raw count
 from the source is also retained.
 
@@ -35,14 +35,15 @@ relation and negative-argument reciprocal/conjugation identity are proved.
 A nonzero matrix entry on the cutoff plateau is checked independently, as
 are the explicit left-endpoint contribution and the flat-spectrum case.
 
-This stage does not yet prove the analytic off-diagonal/Poisson estimates
-needed to bound D, or the remaining zero-density input on (7/10,4/5).
+The subsequent [Poisson/cubic step](layer4-guth-poisson-trace.md) now proves
+the first-trace estimate and removes S1 and the all-zero-mode remainder.
+S2/S3 bounds and the remaining zero-density input on (7/10,4/5) stay open.
 The full Guth--Maynard target therefore remains open. The completed full
 Huxley curve and the Guth--Maynard outer intervals remain proved.
 
 [Fixed sources, license and Lean 4.35.0 adaptations](smccolm-guth-provenance.md).
 
-Sampling-trace validation (2026-11-15): all five ported modules and their
+Initial five-module sampling-trace validation (2026-11-15): all five ported modules and their
 consumers compile from source under Lean 4.35.0 (commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc).
 The full build passes 4,324 jobs. All 4,787 project theorem declarations,
 including private/generated declarations from every port, match the two

@@ -208,6 +208,67 @@ def GuthMaynardSamplingTraceBenchmark : Prop :=
           (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)).re^3/(W.card : ℝ)^2)+
         8*(N : ℝ)^3)
 
+/-- Guth--Maynard Lemma 4.4 with literal real cutoff mass and uniform constants.
+The polynomial cardinality bound is explicit, rather than hidden in O-notation. -/
+def GuthMaynardFirstTraceBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (A J : ℕ), 1 ≤ J →
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ), 0 < N →
+      (W.card : ℝ) ≤ (N : ℝ)^A →
+      ‖Matrix.trace (Density.GuthMaynard.gmMatrix cutoff N W*
+          (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)-
+        (N : ℂ)*(W.card : ℂ)*(((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ)‖ ≤
+        K/(N : ℝ)^J
+
+/-- Uniform Fourier decay retains the full dependence on the Mellin ordinate. -/
+def GuthMaynardUniformFourierBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (q : ℕ),
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ t ξ : ℝ,
+      |ξ|^q*‖Density.GuthMaynard.gmTraceFourier cutoff t ξ‖ ≤ C*(1+|t|)^q
+
+/-- The actual cubic trace has only its two- and three-tail pieces left,
+with a literal cutoff-integral main term and the source scale/separation window. -/
+def GuthMaynardCubicRemainderBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (ε : ℝ), 0 < ε →
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ) (T : ℝ),
+      0 < N → 1 ≤ T → (N : ℝ) ≤ T → T ≤ (N : ℝ)^2 →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      ‖Matrix.trace ((Density.GuthMaynard.gmMatrix cutoff N W*
+          (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)^3)-
+        (N : ℂ)^3*(W.card : ℂ)*((((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ))^3-
+          Density.GuthMaynard.gmCubicS2 cutoff N W-
+            Density.GuthMaynard.gmCubicS3 cutoff N W‖ ≤ K/T^10
+
+/-- Complete-frequency smooth reflection for the actual scaled cubic-trace tail.
+The finite polynomial, smoothing reserve, ceiling length and quantifiers are literal. -/
+def GuthMaynardCompleteReflectionBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (A ε : ℝ), 0 < A → 0 < ε →
+    ∃ C T_min : ℝ, 0 < C ∧ 1 ≤ T_min ∧
+      ∀ (T T₀ t : ℝ) (N : ℕ),
+        T_min ≤ T → 0 < N → (N : ℝ) ≤ T →
+        T^ε ≤ T₀ → T₀ ≤ |t| → |t| ≤ 2*T₀ → |t| ≤ T →
+        ‖Density.GuthMaynard.gmTraceNonzeroTailAt cutoff N t‖ ≤
+          (N : ℝ)*C/Real.sqrt T₀*
+            (∫ u in -(T^(min (ε/16) (1/16)))..(T^(min (ε/16) (1/16))),
+              ‖∑ m ∈ Finset.Icc 1 (Nat.ceil (((1+|t|)*T^(min (ε/16) (1/16)))/(N : ℝ))),
+                (m : ℂ)^(-(((t+u : ℝ) : ℂ)*Complex.I))‖)+C/T^A
+
+/-- Only the literal ordered difference moment and the three-tail term remain
+in the cubic trace; the finite-set moment is independent of its implementation name. -/
+def GuthMaynardCubicMomentBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (ε : ℝ), 0 < ε →
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ) (T : ℝ),
+      0 < N → 1 ≤ T → (N : ℝ) ≤ T → T ≤ (N : ℝ)^2 →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      ‖Matrix.trace ((Density.GuthMaynard.gmMatrix cutoff N W*
+          (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)^3)-
+        (N : ℂ)^3*(W.card : ℂ)*((((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ))^3-
+          3*(N : ℂ)*(((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ)*
+            (((∑ t ∈ W, ∑ u ∈ W,
+              ‖Density.GuthMaynard.gmTraceNonzeroTailAt cutoff N (t-u)‖^2) : ℝ) : ℂ)-
+                Density.GuthMaynard.gmCubicS3 cutoff N W‖ ≤ K/T^10
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

@@ -240,6 +240,46 @@ theorem layer4_guth_sampling_trace_comparator : GuthMaynardSamplingTraceBenchmar
   rw [he] at hh
   exact hh
 
+/-- The first-trace comparison keeps the literal real integral and all quantifiers. -/
+theorem layer4_guth_first_trace_comparator : GuthMaynardFirstTraceBenchmark := by
+  intro cutoff A J hJ
+  simpa only [Density.GuthMaynard.gmCutoffL2Sq] using
+    Density.GuthMaynard.gmMatrix_hilbertSchmidt_trace_estimate cutoff A J hJ
+
+/-- A constant selected before t and ξ controls every ordinate and Fourier mode. -/
+theorem layer4_guth_uniform_fourier_comparator : GuthMaynardUniformFourierBenchmark :=
+  Density.GuthMaynard.gmTraceFourier_uniform_decay
+
+/-- The cubic comparison uses literal distance/interval hypotheses and the actual trace. -/
+theorem layer4_guth_cubic_remainder_comparator : GuthMaynardCubicRemainderBenchmark := by
+  intro cutoff ε hε
+  obtain ⟨K,hK,h⟩ := Density.GuthMaynard.gmMatrix_cubic_trace_two_piece_remainder cutoff ε hε
+  refine ⟨K,hK,?_⟩
+  intro N W T hN hT hNT hTN hs hi
+  simpa only [Density.GuthMaynard.gmCubicDiagonalMain,Density.GuthMaynard.gmCutoffL2Sq] using
+    h N W hN hT hNT hTN hs hi
+
+/-- The complete reflection comparator expands the smoothing/length/polynomial definitions. -/
+theorem layer4_guth_complete_reflection_comparator : GuthMaynardCompleteReflectionBenchmark := by
+  intro cutoff A ε hA hε
+  obtain ⟨C,T_min,hC,hT_min,h⟩ :=
+    Density.GuthMaynard.gmScaledQuantitativeSmoothReflection_native cutoff A ε hA hε
+  refine ⟨C,T_min,hC,hT_min,?_⟩
+  intro T T₀ t N hT hN hNT hT₀ hlo hhi ht
+  simpa only [Density.GuthMaynard.gmReflectionHeight,Density.GuthMaynard.gmReflectionEta,
+    Density.GuthMaynard.gmReflectionLength,Density.GuthMaynard.gmReflectionDirichletPoly] using
+    h hT hN hNT hT₀ hlo hhi ht
+
+/-- The remaining second moment is the literal ordered sum over the original finite set. -/
+theorem layer4_guth_cubic_moment_comparator : GuthMaynardCubicMomentBenchmark := by
+  intro cutoff ε hε
+  obtain ⟨K,hK,h⟩ := Density.GuthMaynard.gmMatrix_cubic_trace_moment_remainder cutoff ε hε
+  refine ⟨K,hK,?_⟩
+  intro N W T hN hT hNT hTN hs hi
+  simpa only [Density.GuthMaynard.gmCubicDiagonalMain,Density.GuthMaynard.gmCutoffL2Sq,
+    Density.GuthMaynard.gmTraceNonzeroDifferenceMoment_eq_source] using
+    h N W hN hT hNT hTN hs hi
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by

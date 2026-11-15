@@ -535,6 +535,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.134 | Actual Gram matrix and L2 operator norm | [SamplingMatrix.lean](../Legendre/Layer4/GuthMaynard/SamplingMatrix.lean) | **proved, ported**; sampled energy, singular values, literal kernel and cubic trace identities |
 | 4.135 | Sixth-moment dispersion alternative | [TraceDispersion.lean](../Legendre/Layer4/GuthMaynard/TraceDispersion.lean) | **proved, ported**; Jensen centering, retained average branch, sampling spectral/operator conclusions |
 | 4.136 | Actual coefficient-energy trace count | [SamplingDispersion.lean](../Legendre/Layer4/GuthMaynard/SamplingDispersion.lean); `layer4_guth_sampling_trace_comparator` | **proved**; selected finite source proofs plus local arbitrary-energy extension, R³V⁶<=E³(4D+8N³); analytic off-diagonal bounds and central density remain open |
+| 4.137 | Actual smooth Poisson and first trace | [TracePoisson.lean](../Legendre/Layer4/GuthMaynard/TracePoisson.lean); `layer4_guth_first_trace_comparator` | **proved, ported**; exact summable Poisson/Mellin formulas and O(N^-J) first-trace error, uniform for R<=N^A |
+| 4.138 | Uniform Fourier decay and finite reflection | [TraceReflection.lean](../Legendre/Layer4/GuthMaynard/TraceReflection.lean); `layer4_guth_uniform_fourier_comparator` | **proved, ported**; full ordinate dependence; signed finite reflection retains dual-polynomial cancellation; complete quantitative Lemma 6.2 is proved at 4.141 |
+| 4.139 | Exact cubic split and negligible pieces | [CubicTrace.lean](../Legendre/Layer4/GuthMaynard/CubicTrace.lean), [Separation.lean](../Legendre/Layer4/GuthMaynard/Separation.lean) | **proved, ported**; S1 O_epsilon(T^-10), all-zero-mode remainder O_epsilon(T^-100), source separation/scale hypotheses retained |
+| 4.140 | Two remaining cubic trace pieces | [CubicRemainder.lean](../Legendre/Layer4/GuthMaynard/CubicRemainder.lean); `layer4_guth_cubic_remainder_comparator` | **proved local assembly**; actual cubic trace minus N^3 R I^3, S2 and S3 is O_epsilon(T^-10); no S2/S3 bound assumed |
+| 4.141 | Complete-frequency quantitative reflection | [QuantitativeReflection.lean](../Legendre/Layer4/GuthMaynard/QuantitativeReflection.lean), [PowerTail.lean](../Legendre/Layer4/GuthMaynard/PowerTail.lean); `layer4_guth_complete_reflection_comparator` | **proved, ported**; actual scaled tail, explicit finite dual polynomial and source range, arbitrary requested power error |
+| 4.142 | S2 cyclic and off-diagonal reduction | [CubicTwoTail.lean](../Legendre/Layer4/GuthMaynard/CubicTwoTail.lean) | **proved, selected port**; S2=3*first cyclic term, diagonal split, off-diagonal O_epsilon(T^-10); required difference-moment bound remains open |
+| 4.143 | Literal difference-moment trace remainder | [CubicRemainder.lean](../Legendre/Layer4/GuthMaynard/CubicRemainder.lean); `layer4_guth_cubic_moment_comparator` | **proved local assembly**; trace(G^3)=N^3 R I^3+3 N I Q+S3+O_epsilon(T^-10), Q the actual ordered tail moment; no bound for Q or S3 assumed |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -802,3 +809,17 @@ spectrum and negative reciprocal arguments. Lean rejects dropping the
 average branch or using the finite count as the open central density input.
 The retained MIT-0 license has the exact upstream Git blob hash
 34f468585a9582c8a1d0f9440b6c0f8b5f98f2e8.
+
+Poisson/reflection/cubic validation (2026-11-15): the complete build passes
+4,332 jobs under Lean 4.35.0. All 5,180 project theorem declarations,
+including every private/generated declaration, agree exactly between the
+module-data inventory, independent environment ownership inventory, audit
+targets and parsed axiom output. Only propext, Classical.choice and Quot.sound
+occur. All 334 classified Lean files are free of executable placeholders and
+prohibited shortcuts, including Layers 0--4. All 199 independent consumers pass
+(154 Layer 4, nine Layer 3, 24 generated literature and 12 literature regressions).
+Three additional negative contract checks reject confusing reflection with
+central density, dropping the Fourier ordinate factor and removing the cubic
+scale window. Both READMEs retain five numbered repository headings with
+individually expandable default-open details. The exact upstream MIT-0 license
+blob remains 34f468585a9582c8a1d0f9440b6c0f8b5f98f2e8.

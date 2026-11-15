@@ -515,10 +515,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,324 build jobs, all 4,787 project theorem
+Full validation (2026-11-15): 4,332 build jobs, all 5,180 project theorem
 declarations audited with exactly matching independent inventories, 326 Lean
 files free of executable placeholders, and 186 independent consumers
-(141 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+(154 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -584,6 +584,20 @@ modules are ported from the pinned McColm MIT-0 source, with all adaptations
 compiled under Lean 4.35.0. The analytic off-diagonal bounds and central
 density remain open. See [scope](layer4-guth-sampling-trace.md) and
 [provenance](smccolm-guth-provenance.md).
+
+**Guth–Maynard Poisson/cubic stage (2026-11-15).** Exact Poisson/Mellin
+formulas, arbitrary-order first-trace error, uniform Fourier decay and exact
+finite signed-mode reflection are proved. The exact cubic split removes S1
+with O_epsilon(T^-10) error and the all-zero-mode remainder with
+O_epsilon(T^-100) error. A local theorem and independent comparator bound the
+actual cubic trace minus N^3 R I^3 and S2/S3 by O_epsilon(T^-10), under the
+source N<=T<=N^2 and T^epsilon separation/interval hypotheses. Twelve source
+modules are adapted to Lean 4.35.0 plus one local assembly. Complete-frequency
+quantitative reflection and S2 off-diagonal decay are now proved. The local
+assembly identifies the exact diagonal with N I times the ordered tail moment,
+leaving that moment and S3 with O_epsilon(T^-10) error. Their required bounds
+and central density remain open.
+See [exact scope](layer4-guth-poisson-trace.md).
 
 **Acceptance criteria.**
 

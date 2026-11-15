@@ -399,3 +399,16 @@ MIT-0, and all five destinations are adapted to Lean 4.35.0. The full
 Guth–Maynard and central density targets remain open: the finite sampling
 inequality does not supply the required analytic off-diagonal trace bound.
 See [exact sources and adaptations](smccolm-guth-provenance.md).
+
+### Guth–Maynard Poisson and cubic remainders (2026-11-15)
+
+Five new independent closed benchmarks retain the actual first trace and real
+cutoff integral, two-parameter Fourier decay, and the cubic trace minus its
+diagonal term and S2/S3. Their constants are selected before all scale/sample
+parameters. The cubic comparator preserves positive epsilon, N<=T<=N^2 and
+T^epsilon-separated ordinates in [0,T]. It is an analytic remainder estimate;
+it does not prove the S2/S3 bounds or the full density theorem. Complete
+quantitative reflection is independently compared with literal smoothing and
+ceiling length, and the final cubic comparator leaves the literal ordered
+nonzero-tail moment and S3, after removing the negligible S2 off-diagonal.
+See [exact statements and source scope](layer4-guth-poisson-trace.md).

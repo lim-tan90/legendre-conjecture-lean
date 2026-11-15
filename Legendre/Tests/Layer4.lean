@@ -1203,4 +1203,120 @@ theorem layer4_gm_negative_reciprocal_consumer (W : Finset ℝ) :
     GuthMaynard.gmR W (-2) = star (GuthMaynard.gmR W (-1/2)) := by
   convert GuthMaynard.gmR_reciprocal W (-1/2) (by norm_num) using 1 <;> norm_num
 
+/-- The first-trace main term is the literal real mass, with O(N^-100) error. -/
+theorem layer4_gm_poisson_first_trace_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ), 0 < N →
+      (W.card : ℝ) ≤ (N : ℝ)^3 →
+      ‖Matrix.trace (GuthMaynard.gmMatrix cutoff N W*
+        (GuthMaynard.gmMatrix cutoff N W).conjTranspose)-
+        (N : ℂ)*(W.card : ℂ)*(((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ)‖ ≤ K/(N : ℝ)^100 := by
+  simpa only [GuthMaynard.gmCutoffL2Sq] using
+    GuthMaynard.gmMatrix_hilbertSchmidt_trace_estimate_hundred cutoff 3
+
+/-- Both support endpoints vanish, even though the polynomial indexing is half-open. -/
+theorem layer4_gm_cutoff_endpoints_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    cutoff 1 = 0 ∧ cutoff 2 = 0 :=
+  ⟨GuthMaynard.gmSmoothCutoff_eq_zero_at_one cutoff,
+    GuthMaynard.gmSmoothCutoff_eq_zero_at_two cutoff⟩
+
+/-- One constant controls all ordinates and both signs of the Fourier frequency. -/
+theorem layer4_gm_uniform_fourier_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ t ξ : ℝ,
+      |ξ|^4*‖GuthMaynard.gmTraceFourier cutoff t ξ‖ ≤ C*(1+|t|)^4 :=
+  GuthMaynard.gmTraceFourier_uniform_decay cutoff 4
+
+/-- Negative Fourier frequencies reverse the ordinate and conjugate the answer. -/
+theorem layer4_gm_fourier_negative_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (t : ℝ) : GuthMaynard.gmTraceFourier cutoff t (-2) =
+      star (GuthMaynard.gmTraceFourier cutoff (-t) 2) :=
+  GuthMaynard.gmTraceFourier_neg_eq_conj cutoff t 2
+
+/-- The zero Fourier coefficient decays in either sign of the Mellin ordinate. -/
+theorem layer4_gm_zero_mode_decay_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ,
+      |t|^6*‖GuthMaynard.gmTraceFourier cutoff t 0‖ ≤ C :=
+  GuthMaynard.gmTraceFourier_zero_uniform_decay_source cutoff 6
+
+/-- The complete nonzero-mode tail is summable with explicit ordinate dependence. -/
+theorem layer4_gm_full_tail_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    ∃ K : ℝ, 0 < K ∧ ∀ N : ℕ, 0 < N → ∀ t : ℝ,
+      ‖GuthMaynard.gmTraceNonzeroTailAt cutoff N t‖ ≤ K*(1+|t|)^4/(N : ℝ)^3 := by
+  simpa only [show (4 : ℕ)-1 = 3 from rfl] using
+    GuthMaynard.gmTraceNonzeroTailAt_bound cutoff 4 (by norm_num)
+
+/-- A one-separated pair can occupy both endpoints of [0,1]. -/
+theorem layer4_gm_packing_endpoints_consumer :
+    (({0,1} : Finset ℝ).card : ℝ) ≤ 2 := by
+  have hs : GuthMaynard.IsSeparated 1 ({0,1} : Finset ℝ) := by
+    intro x hx y hy hxy
+    simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+    rcases hx with rfl | rfl <;> rcases hy with rfl | rfl <;>
+      simp_all [Real.dist_eq]
+  have hi : GuthMaynard.InBaseInterval 1 ({0,1} : Finset ℝ) := by
+    intro x hx
+    simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl <;> norm_num
+  simpa only [mul_one] using GuthMaynard.gmSeparated_card_le_two_height le_rfl hs hi
+
+/-- Any positive separation exponent gives the one-tail power saving, uniformly in scale. -/
+theorem layer4_gm_one_tail_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ) (T : ℝ),
+      0 < N → 1 ≤ (N : ℝ) → 1 ≤ T → (N : ℝ) ≤ T → T ≤ (N : ℝ)^2 →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^(1/100 : ℝ) ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      ‖GuthMaynard.gmCubicS1 cutoff N W‖ ≤ K/T^10 := by
+  obtain ⟨K,hK,h⟩ := GuthMaynard.gmCubicS1_estimate cutoff (1/100) (by norm_num)
+  exact ⟨K,hK,fun N W T hN hN1 hT hNT hTN hs hi => h N W hN hN1 hT hNT hTN hs hi⟩
+
+/-- The all-zero-mode main term is N^3 R times the cube of the actual cutoff mass. -/
+theorem layer4_gm_zero_main_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ K : ℝ, 0 < K ∧ ∀ (N : ℕ) (W : Finset ℝ) (T : ℝ),
+      0 < N → 1 ≤ T → (N : ℝ) ≤ T →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      ‖GuthMaynard.gmCubicZeroMode cutoff N W -
+        (N : ℂ)^3*(W.card : ℂ)*((((∫ x : ℝ, cutoff x^2) : ℝ) : ℂ))^3‖ ≤ K/T^100 := by
+  obtain ⟨K,hK,h⟩ := GuthMaynard.gmCubicZeroMode_main_term cutoff ε hε
+  refine ⟨K,hK,?_⟩
+  intro N W T hN hT hNT hs hi
+  simpa only [GuthMaynard.gmCubicDiagonalMain,GuthMaynard.gmCutoffL2Sq] using
+    h N W hN hT hNT hs hi
+
+/-- The smoothing reserve is capped for large epsilon, as required by scale selection. -/
+theorem layer4_gm_reflection_reserve_consumer :
+    GuthMaynard.gmReflectionEta 2 = 1/16 := by
+  norm_num [GuthMaynard.gmReflectionEta]
+
+/-- Rounding retains a positive reflected length at the smallest algebraic scale. -/
+theorem layer4_gm_reflection_ceil_consumer :
+    GuthMaynard.gmReflectionLength 1 1 1 0 = 1 := by
+  norm_num [GuthMaynard.gmReflectionLength,GuthMaynard.gmReflectionHeight]
+
+/-- The symmetric real-power tail has its exact two-sided normalization. -/
+theorem layer4_gm_symmetric_power_tail_consumer :
+    (∫ u : ℝ in (Set.Icc (-2 : ℝ) 2)ᶜ, |u|^(-(3 : ℝ))) = 1/4 := by
+  have h := GuthMaynard.integral_abs_rpow_compl_Icc
+    (a := -3) (H := 2) (by norm_num) (by norm_num)
+  norm_num [Real.rpow_neg,Real.rpow_natCast] at h ⊢
+  exact h
+
+/-- The actual scaled tail has one reflection constant for both signs of the ordinate. -/
+theorem layer4_gm_complete_reflection_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T_min : ℝ, 0 < C ∧ 1 ≤ T_min ∧ ∀ (T T₀ t : ℝ) (N : ℕ),
+      T_min ≤ T → 0 < N → (N : ℝ) ≤ T → T^ε ≤ T₀ →
+      T₀ ≤ |t| → |t| ≤ 2*T₀ → |t| ≤ T →
+      ‖GuthMaynard.gmTraceNonzeroTailAt cutoff N (-t)‖ ≤
+        (N : ℝ)*C/Real.sqrt T₀*
+          (∫ u in -(GuthMaynard.gmReflectionHeight T ε)..(GuthMaynard.gmReflectionHeight T ε),
+            ‖GuthMaynard.gmReflectionDirichletPoly (-t)
+              (GuthMaynard.gmReflectionLength T ε N (-t)) u‖)+C/T^(100 : ℝ) := by
+  obtain ⟨C,T_min,hC,hT_min,h⟩ :=
+    GuthMaynard.gmScaledQuantitativeSmoothReflection_native cutoff 100 ε (by norm_num) hε
+  refine ⟨C,T_min,hC,hT_min,?_⟩
+  intro T T₀ t N hT hN hNT hT₀ hlo hhi ht
+  exact h hT hN hNT hT₀ (by simpa only [abs_neg] using hlo)
+    (by simpa only [abs_neg] using hhi) (by simpa only [abs_neg] using ht)
+
 end Legendre.Tests

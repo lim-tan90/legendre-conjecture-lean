@@ -144,6 +144,14 @@ public import Legendre.Layer4.GuthMaynard.Definitions
 public import Legendre.Layer4.GuthMaynard.SamplingMatrix
 public import Legendre.Layer4.GuthMaynard.TraceDispersion
 public import Legendre.Layer4.GuthMaynard.SamplingDispersion
+public import Legendre.Layer4.GuthMaynard.TracePoisson
+public import Legendre.Layer4.GuthMaynard.TraceReflection
+public import Legendre.Layer4.GuthMaynard.Separation
+public import Legendre.Layer4.GuthMaynard.CubicTrace
+public import Legendre.Layer4.GuthMaynard.CubicRemainder
+public import Legendre.Layer4.GuthMaynard.PowerTail
+public import Legendre.Layer4.GuthMaynard.QuantitativeReflection
+public import Legendre.Layer4.GuthMaynard.CubicTwoTail
 
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density

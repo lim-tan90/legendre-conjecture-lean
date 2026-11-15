@@ -183,17 +183,29 @@ stronger than the classical `3/5` bound. [Exact reduction](docs/layer4-guth-mayn
 **Finite Guth–Maynard sampling (2026-11-15):** actual matrix samples now
 satisfy `R³V⁶ ≤ E³(4D+8N³)`, where E is the actual coefficient energy and
 D is the centered cubic Gram trace. The independent
-`layer4_guth_sampling_trace_comparator` is closed. All five source modules
+`layer4_guth_sampling_trace_comparator` is closed. The original five source modules
 are adapted to **Lean 4.35.0**, with exact sources and MIT-0 license recorded
 in the reuse section below. Analytic off-diagonal estimates and the central
 Guth–Maynard density target remain open.
 [Proof and scope](docs/layer4-guth-sampling-trace.md).
 
-Validation (2026-11-15): **4,324 build jobs**, all **4,787 project theorem
-declarations** audited with only the three standard axioms, and **326 Lean files**
+**Guth–Maynard Poisson/cubic trace (2026-11-15):** the exact Poisson
+formula and first-trace `O(N⁻ᴶ)` error, uniform two-parameter Fourier decay,
+and cubic `S₁/S₂/S₃` split are proved. Under `N≤T≤N²` and the source
+`T^ε` separation in `[0,T]`, the actual cubic trace differs from
+`N³ R (∫w²)³+S₂+S₃` by `Oε(T⁻¹⁰)`. Five independent comparators are
+closed. Twelve adapted source modules compile under **Lean 4.35.0**, alongside
+one local assembly; source #5 below records the exact mapping. The S₂/S₃
+bounds and central density remain open. Complete-frequency quantitative
+reflection and the negligible S₂ off-diagonal estimate are also proved;
+the actual cubic trace now leaves only its ordered tail moment and S₃.
+[Exact statements and limits](docs/layer4-guth-poisson-trace.md).
+
+Validation (2026-11-15): **4,332 build jobs**, all **5,180 project theorem
+declarations** audited with only the three standard axioms, and **334 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **186 independent consumers** pass: **141 Layer 4**, nine Layer 3 and
+All **199 independent consumers** pass: **154 Layer 4**, nine Layer 3 and
 36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
@@ -219,6 +231,11 @@ the central equivalence as a proof of the full Guth–Maynard estimate.
 Sampling consumers check a nonzero plateau entry, the literal left endpoint,
 flat-spectrum average branch and negative-axis conjugation. Lean rejects
 discarding the average branch or treating the finite trace count as central density.
+New Poisson/reflection consumers check literal real-integral normalization,
+cutoff endpoints, signed ordinates, summable full tails, floor packing, the
+symmetric power-tail integral, capped smoothing reserve and ceiling length.
+Lean rejects removing the ordinate factor or cubic scale window, and treating
+complete reflection as central density.
 Locally verified Lean 4.35.0 sampling/trace proof commit: [`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423) ([sources and adaptations](docs/smccolm-guth-provenance.md)).
 Locally verified full curved Huxley proof commit: [`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a) ([proof and scope](docs/layer4-full-curved-huxley.md)).
 Locally verified upper Type I proof commit: [`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673) ([exact scope](docs/layer4-upper-typeI.md)).
@@ -590,6 +607,7 @@ The completed analytic milestones supporting this program are:
 | Analytic milestone | Current proved estimate | Lean proof and scope |
 |---|---|---|
 | Guth–Maynard finite sampling/trace interface (Layer 4) | `R³V⁶ ≤ E³(4D+8N³)`, D the centered cubic Gram trace | **✅ Proved**: [sampling dispersion](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) and closed independent comparator. Actual polynomials, arbitrary coefficient energy; finite matrix stage only. Analytic trace estimates and central density remain open. |
+| Guth–Maynard Poisson/cubic trace (Layer 4) | `trace(G³)=N³R(∫w²)³+S₂+S₃+Oε(T⁻¹⁰)` | **✅ Proved**: [Poisson and cubic estimates](docs/layer4-guth-poisson-trace.md), five closed comparators; `N≤T≤N²`, `T^ε` separation in `[0,T]`. S₂/S₃ bounds and central density remain open. |
 | Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
@@ -1183,8 +1201,8 @@ mathlib proof is copied into this repository.
 
 - **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **Local paths:** Five adapted modules in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
-- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all five modules compile from source under Lean 4.35.0
+- **Local paths:** Twelve adapted modules and one local assembly in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
+- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all twelve adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit
 
 #### Detailed provenance and file mapping
 
@@ -1196,10 +1214,19 @@ Scott McColm’s formalization; original files:
 `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
 `TraceDispersion` supply four adapted modules; selected first-trace and
 dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
-supply `SamplingDispersion.lean`. All are adapted and compiled under the
-pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
-cubic-trace interface, while the analytic off-diagonal estimates and full
-central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+supply `SamplingDispersion.lean`. The rest of `LargeValuesPoisson`, all of
+`LargeValuesReflection` and `LargeValuesCubic` supply `TracePoisson.lean`,
+`TraceReflection.lean` and `CubicTrace.lean`; selected separation/floor-bin
+language from `Separated` and `LargeValuesLanguage` supplies `Separation.lean`.
+`QuantitativeSmoothReflection` supplies `QuantitativeReflection.lean`; two
+real-power tail lemmas from `TypeIIFourthMomentReduction` supply `PowerTail.lean`.
+Selected cyclic/diagonal and off-diagonal estimates from `LargeValuesS2` supply
+`CubicTwoTail.lean`; the elementary height-difference lemma from `HeathBrown`
+is included in `Separation.lean`. `CubicRemainder.lean` is a local assembly. All twelve ports are adapted and
+compiled from source under **Lean 4.35.0**. First-trace and one-tail analytic
+estimates, complete quantitative reflection and S₂ off-diagonal decay are now
+proved. The remaining ordered difference-moment bound, S₃ and central density
+remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 
@@ -1214,7 +1241,10 @@ released under Apache-2.0, except the files under `Legendre/Nagura/`, which are
 adapted from the MIT-licensed project
 <https://github.com/ShouqiaoW/erdos> (commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`); their original MIT license is
-retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
+retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The twelve
+adapted smccolm/Lean modules under `Legendre/Layer4/GuthMaynard/` retain
+MIT-0 headers and the [upstream license](licenses/smccolm-Lean-MIT-0.txt);
+the local `CubicRemainder.lean` assembly is Apache-2.0.
 
 ## References
 
