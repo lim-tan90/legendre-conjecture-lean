@@ -512,8 +512,14 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.111 | Real-part weighted Weyl short sums | [Exponential/WeightedLogWeyl.lean](../Legendre/Layer4/Exponential/WeightedLogWeyl.lean); `layer4_weighted_weyl_comparator` | **proved**; uniform beta≥0, norm <= C U^(1/2−beta) abs(t)^(1/6), same short-length restriction |
 | 4.112 | General-length logarithmic Weyl bound | [Exponential/GeneralLogWeyl.lean](../Legendre/Layer4/Exponential/GeneralLogWeyl.lean); `layer4_general_weyl_comparator` | **proved**; all U≥1 with three explicit terms and abs(t)≥1 |
 | 4.113 | Actual Type II bound at Y=T | [LongDetectorTypeII.lean](../Legendre/Layer4/LongDetectorTypeII.lean) | **proved**; X^4 T^(3−4σ) log^6 T and uniform small-cutoff epsilon form; actual zeros retain all principal-pole constraints; not the full density count |
+| 4.114 | Uniform real-part transfer for block prefixes | [Exponential/WeightedLogBlocks.lean](../Legendre/Layer4/Exponential/WeightedLogBlocks.lean) | **proved**; general Weyl and second-derivative bounds retain all prefixes and beta≥0 |
+| 4.115 | Actual compact monotone weight | [DetectorMonotoneWeight.lean](../Legendre/Layer4/DetectorMonotoneWeight.lean) | **proved**; real nonnegative antitone weight, uniform finite Abel transfer for every Y>0 |
+| 4.116 | Exact actual divisor-block expansion | [DetectorDivisorBlocks.lean](../Legendre/Layer4/DetectorDivisorBlocks.lean) | **proved**; common Mobius coefficient, exact (floor(U/d),floor(V/d)] and complex-power factors |
+| 4.117 | Divided endpoints and real weights | [DetectorDividedPrefixes.lean](../Legendre/Layer4/DetectorDividedPrefixes.lean) | **proved**; extra endpoint 2m+1 and uniform factor two for beta∈[0,1] |
+| 4.118 | Actual Mobius pointwise cancellation | [DetectorMobiusPointwise.lean](../Legendre/Layer4/DetectorMobiusPointwise.lean); `layer4_actual_mobius_pointwise_comparator` | **proved**; both analytic bounds for actual smoothed blocks, common X U^(−beta) cost; no density conclusion asserted |
+| 4.119 | Upper-range short window and exponent margins | [UpperHuxleyParameters.lean](../Legendre/Layer4/UpperHuxleyParameters.lean) | **proved algebra**; c=3/(4(3σ−1)), σ∈[3/4,1], bounded integer power; long-block exponents ≤−eta/8 when σ≥5/6+eta |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
-| 4.validation | One hundred and twenty independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
+| 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
 | 11 | Ingham 1937, `θ = 5/8` | `Legendre.Ingham58`, `Legendre.Ingham58Paper` | **statement only**; normalized exponent form encoded, `ingham58Paper_iff` proved |
 | 12 | Ingham 1937, `θ = 577/925 + ε` | `Legendre.Ingham577`, `Legendre.Ingham577Paper` | **statement only**; normalized exponent form encoded, `ingham577Paper_iff` proved |
@@ -720,3 +726,16 @@ The guards reject dropping beta>=0, omitting the general-length terms,
 using the restricted density proof as the full benchmark, and confusing
 pointwise powers with Dirichlet convolution. The remaining actual Mobius
 Type I assembly and density above sigma=5/6 remain open.
+
+Actual Mobius pointwise validation (2026-11-15): full build 4,308 jobs;
+all 4,618 project theorem declarations, including private/generated declarations,
+match exactly across module-data inventory, independent full-environment
+inventory, Audit targets and actual axiom output. Only the three standard
+axioms occur; all 310 Lean sources have zero executable proof placeholders.
+All 174 consumers pass (129 Layer 4, 9 Layer 3, 36 literature). Nine new
+consumers cover exact divided endpoints, zero cutoff, beta=1 rounding loss,
+actual smoothing and nonempty blocks, negative ordinates, sigma=1 power
+selection, varying-cutoff endpoints and strict exponent margins. The guards
+reject a fixed half-length upper window, removal of beta<=1, use of the
+restricted density proof as the full benchmark and pointwise/convolution
+power confusion. Full upper-range density assembly remains open.

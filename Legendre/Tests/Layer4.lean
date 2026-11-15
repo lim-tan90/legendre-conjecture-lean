@@ -1026,4 +1026,69 @@ theorem layer4_linear_typeII_zero_cutoff_consumer :
   intro T hT σ hσ ι S β t ht hs hβ hw
   simpa using! hb 0 T σ hT hσ S β t ht hs hβ hw
 
+/-- A divided block may include the extra endpoint 2 floor(U/d)+1. -/
+theorem layer4_divisor_extra_endpoint_consumer :
+    (∑ n ∈ (Finset.Ioc 5 10).filter (fun n => 3 ∣ n), n) = 15 := by
+  have hh := Detector.Smooth.sum_Ioc_divisible (M := ℕ) 3 5 10 (by norm_num) (fun n => n)
+  have he : Finset.Ioc (5/3 : ℕ) (10/3) = {2,3} := by decide
+  rw [he] at hh
+  norm_num at hh
+  exact hh
+
+/-- The empty Mobius cutoff has exactly zero block sum, for arbitrary test values. -/
+theorem layer4_mobius_zero_cutoff_expansion_consumer (U V : ℕ) (f : ℕ → ℂ) :
+    (∑ n ∈ Finset.Ioc U V, Detector.Smooth.detectorCoefficient 0 n*f n) = 0 := by
+  simpa using! Detector.Smooth.detectorCoefficient_block_expansion 0 U V f
+
+/-- The rounding weight bound includes a nonzero remainder at beta=1. -/
+theorem layer4_divided_weight_remainder_consumer :
+    (3 : ℝ)^(-1 : ℝ)*((5/3 : ℕ) : ℝ)^(-1 : ℝ) ≤ 2*(5 : ℝ)^(-1 : ℝ) := by
+  exact Detector.Smooth.divided_real_part_weight 3 5 (by norm_num) (by norm_num) 1
+    (by norm_num) le_rfl
+
+/-- Actual smoothing preserves cancellation in a concrete two-term sequence. -/
+theorem layer4_smoothed_cancelling_pair_consumer :
+    ‖∑ n ∈ Finset.Ioc (1 : ℕ) 3, Detector.Smooth.detectorWeight ((n : ℝ)/4)*
+      (if n = 2 then (1 : ℂ) else -1)‖ ≤ 1 := by
+  apply Detector.Smooth.norm_smoothed_block_of_prefix 1 3 (by norm_num) 4 1 (by norm_num)
+    zero_le_one (fun n => if n = 2 then 1 else -1)
+  intro W hW hW3
+  interval_cases W <;> norm_num [Finset.sum_Ioc_succ_top]
+
+/-- The pointwise theorem is about the actual, nonempty smoothed detector block. -/
+theorem layer4_actual_mobius_weyl_consumer :
+    ‖∑ n ∈ Finset.Ioc (1 : ℕ) 2, Detector.Smooth.polynomialCoefficient 1 4 n*
+      (n : ℂ)^(-((1/2 : ℂ)+(1 : ℂ)*Complex.I))‖ ≤ 2*(Oscillation.generalWeylCost 1 1+1) := by
+  simpa using! Detector.Smooth.polynomial_block_general_weyl 1 1 2 le_rfl le_rfl
+    (by norm_num) le_rfl (1/2) 1 4 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+/-- The second-derivative detector bound includes negative ordinates. -/
+theorem layer4_actual_mobius_second_negative_consumer :
+    ‖∑ n ∈ Finset.Ioc (1 : ℕ) 2, Detector.Smooth.polynomialCoefficient 1 4 n*
+      (n : ℂ)^(-((3/4 : ℂ)+(-1 : ℂ)*Complex.I))‖ ≤ 2*(Oscillation.secondDerivativeCost 1 (-1)+1) := by
+  simpa using! Detector.Smooth.polynomial_block_second_derivative 1 1 2 le_rfl le_rfl
+    (by norm_num) le_rfl (3/4) (-1) 4 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
+/-- At sigma=1 the shorter power window still includes its upper endpoint. -/
+theorem layer4_upper_short_power_one_consumer :
+    ∃ k : ℕ, 1 ≤ k ∧ k ≤ Moment.huxleyPowerBudget (1/8) ∧
+      Moment.huxleyPowerLower 1 ≤ (k : ℝ)*(3/8) ∧
+      (k : ℝ)*(3/8) ≤ Moment.huxleyPowerUpper 1 := by
+  exact Moment.huxley_general_short_power (1/8) (3/8) 1 (by norm_num) (by norm_num)
+    (by norm_num [Moment.huxleyShortCutoff,Moment.huxleyPowerUpper]) (by norm_num) le_rfl
+
+/-- The varying cutoff includes both exact real-part endpoints. -/
+theorem layer4_upper_cutoff_endpoints_consumer :
+    Moment.huxleyShortCutoff (3/4) = 3/5 ∧ Moment.huxleyShortCutoff 1 = 3/8 := by
+  norm_num [Moment.huxleyShortCutoff,Moment.huxleyPowerUpper]
+
+/-- Every long-block exponent has a strict saving above 5/6. -/
+theorem layer4_upper_margin_nine_tenths_consumer :
+    1/6+(1/2-(9/10 : ℝ))*Moment.huxleyShortCutoff (9/10) ≤ -(1/100 : ℝ)/8 ∧
+      -1/4+(5/4-(9/10 : ℝ))*(3/5) ≤ -(1/100 : ℝ)/8 ∧
+      -1/3+(1-(9/10 : ℝ))*(3/5) ≤ -(1/100 : ℝ)/8 ∧
+      -(9/10 : ℝ)*Moment.huxleyShortCutoff (9/10) ≤ -(1/100 : ℝ)/8 ∧
+      1/2-(9/10 : ℝ) ≤ -(1/100 : ℝ)/8 := by
+  exact Moment.huxley_upper_exponent_margins (1/100) (9/10) (by norm_num) (by norm_num) (by norm_num)
+
 end Legendre.Tests

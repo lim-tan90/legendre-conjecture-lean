@@ -449,6 +449,12 @@ import all Legendre.Layer4.Exponential.MonotoneWeights
 import all Legendre.Layer4.Exponential.WeightedLogWeyl
 import all Legendre.Layer4.Exponential.GeneralLogWeyl
 import all Legendre.Layer4.LongDetectorTypeII
+import all Legendre.Layer4.Exponential.WeightedLogBlocks
+import all Legendre.Layer4.DetectorMonotoneWeight
+import all Legendre.Layer4.DetectorDivisorBlocks
+import all Legendre.Layer4.DetectorDividedPrefixes
+import all Legendre.Layer4.DetectorMobiusPointwise
+import all Legendre.Layer4.UpperHuxleyParameters
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5115,3 +5121,93 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_critical_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_empty_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_weyl_three_quarters_consumer"
+
+-- Exact Mobius divisor blocks, smoothing, pointwise cancellation and upper window parameters.
+#print axioms Legendre.Density.Detector.Smooth.complex_block_norm_term
+#print axioms Legendre.Density.Detector.Smooth.complex_prefix_extra_endpoint
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_block_expansion
+#print axioms Legendre.Density.Detector.Smooth.detectorCoefficient_divisibility_sum
+#print axioms Legendre.Density.Detector.Smooth.detectorWeight_eq_real
+#print axioms Legendre.Density.Detector.Smooth.divided_block_endpoints
+#print axioms Legendre.Density.Detector.Smooth.divided_real_part_weight
+#print axioms Legendre.Density.Detector.Smooth.mobiusCutoff.eq_1
+#print axioms Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block
+#print axioms Legendre.Density.Detector.Smooth.norm_smoothed_block_of_prefix
+#print axioms Legendre.Density.Detector.Smooth.polynomial_block_divisor_expansion
+#print axioms Legendre.Density.Detector.Smooth.polynomial_block_general_weyl
+#print axioms Legendre.Density.Detector.Smooth.polynomial_block_of_prefix_bound
+#print axioms Legendre.Density.Detector.Smooth.polynomial_block_second_derivative
+#print axioms Legendre.Density.Detector.Smooth.realDetectorWeight._proof_1
+#print axioms Legendre.Density.Detector.Smooth.realDetectorWeight.eq_1
+#print axioms Legendre.Density.Detector.Smooth.realDetectorWeight_antitone
+#print axioms Legendre.Density.Detector.Smooth.realDetectorWeight_le_one
+#print axioms Legendre.Density.Detector.Smooth.realDetectorWeight_nonneg
+#print axioms Legendre.Density.Detector.Smooth.sum_Ioc_divisible
+#print axioms Legendre.Density.Moment.huxleyShortCutoff._proof_1
+#print axioms Legendre.Density.Moment.huxley_general_short_power
+#print axioms Legendre.Density.Moment.huxley_general_window_bounds
+#print axioms Legendre.Density.Moment.huxley_short_cutoff_bounds
+#print axioms Legendre.Density.Moment.huxley_short_cutoff_eq
+#print axioms Legendre.Density.Moment.huxley_upper_exponent_margins
+#print axioms Legendre.Density.Oscillation.generalWeylCost._proof_1
+#print axioms Legendre.Density.Oscillation.generalWeylCost._proof_2
+#print axioms Legendre.Density.Oscillation.generalWeylCost._proof_3
+#print axioms Legendre.Density.Oscillation.generalWeylCost_mono
+#print axioms Legendre.Density.Oscillation.generalWeylCost_nonneg
+#print axioms Legendre.Density.Oscillation.logarithmic_block_general_weighted
+#print axioms Legendre.Density.Oscillation.logarithmic_block_second_weighted
+#print axioms Legendre.Density.Oscillation.norm_complex_block_of_prefix
+#print axioms Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone
+#print axioms Legendre.Density.Oscillation.secondDerivativeCost_mono
+#print axioms Legendre.Density.Oscillation.secondDerivativeCost_nonneg
+#print axioms Legendre.Literature.layer4_actual_mobius_pointwise_comparator
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.complex_prefix_extra_endpoint._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.complex_prefix_extra_endpoint._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.complex_prefix_extra_endpoint._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.complex_prefix_extra_endpoint._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.divided_block_endpoints._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.divided_real_part_weight._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDividedPrefixes.0.Legendre.Density.Detector.Smooth.norm_dilated_smoothed_block._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDivisorBlocks.0.Legendre.Density.Detector.Smooth.detectorCoefficient_divisibility_sum._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDivisorBlocks.0.Legendre.Density.Detector.Smooth.detectorCoefficient_divisibility_sum._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDivisorBlocks.0.Legendre.Density.Detector.Smooth.detectorCoefficient_divisibility_sum._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorMobiusPointwise.0.Legendre.Density.Detector.Smooth.polynomial_block_of_prefix_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorMobiusPointwise.0.Legendre.Density.Detector.Smooth.polynomial_block_of_prefix_bound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_complex_block_of_prefix._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_complex_block_of_prefix._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.norm_sum_Ioc_smul_antitone._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_general_short_power._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_short_cutoff_eq._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyParameters.0.Legendre.Density.Moment.huxley_upper_exponent_margins._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.huxleyShortCutoff.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_actual_mobius_second_negative_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_actual_mobius_weyl_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_divided_weight_remainder_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_divisor_extra_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mobius_zero_cutoff_expansion_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_smoothed_cancelling_pair_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_cutoff_endpoints_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_margin_nine_tenths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_short_power_one_consumer"

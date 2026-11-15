@@ -144,6 +144,33 @@ theorem layer4_general_weyl_comparator : GeneralWeylBenchmark := by
     Density.Oscillation.logarithmicWeylConstant_pos,?_⟩
   exact Density.Oscillation.logarithmic_block_general_weyl
 
+/-- Both analytic inputs now control the actual detector, with one uniform coefficient. -/
+theorem layer4_actual_mobius_pointwise_comparator : ActualMobiusPointwiseBenchmark := by
+  have hW := Density.Oscillation.logarithmicWeylConstant_pos
+  have hS := Density.Oscillation.logarithmicSecondConstant_pos
+  let D := Density.Oscillation.logarithmicWeylConstant+Density.Oscillation.logarithmicSecondConstant+1
+  have hD : 0 < D := by dsimp [D]; linarith
+  refine ⟨2*D,by positivity,?_⟩
+  intro X U V hU hXU hUV hV β t Y hβ hβ1 ht hY
+  let A := Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)+(U : ℝ)*((U : ℝ)/|t|)^(1/4 : ℝ)+
+    (U : ℝ)/|t|^(1/3 : ℝ)
+  let B := Real.sqrt |t|+(U : ℝ)/Real.sqrt |t|
+  have hA : 0 ≤ A := by dsimp [A]; positivity
+  have hB : 0 ≤ B := by dsimp [B]; positivity
+  constructor
+  · have hh := Density.Detector.Smooth.polynomial_block_general_weyl X U V hU hXU hUV hV β t Y hβ hβ1 ht hY
+    have hb : Density.Oscillation.logarithmicWeylConstant*A+1 ≤ D*(1+A) := by dsimp [D]; nlinarith
+    have hp := mul_le_mul_of_nonneg_left hb (show 0 ≤ 2*(X : ℝ)*(U : ℝ)^(-β) by positivity)
+    apply hh.trans
+    convert hp using 1 <;> (try dsimp [A,D,Density.Oscillation.generalWeylCost]) <;> ring
+  · have htp : 0 < |t| := by linarith
+    have hh := Density.Detector.Smooth.polynomial_block_second_derivative X U V hU hXU hUV hV β t Y hβ hβ1
+      (abs_pos.mp htp) hY
+    have hb : Density.Oscillation.logarithmicSecondConstant*B+1 ≤ D*(1+B) := by dsimp [D]; nlinarith
+    have hp := mul_le_mul_of_nonneg_left hb (show 0 ≤ 2*(X : ℝ)*(U : ℝ)^(-β) by positivity)
+    apply hh.trans
+    convert hp using 1 <;> (try dsimp [B,D,Density.Oscillation.secondDerivativeCost]) <;> ring
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

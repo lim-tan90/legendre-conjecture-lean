@@ -113,6 +113,12 @@ public import Legendre.Layer4.Exponential.MonotoneWeights
 public import Legendre.Layer4.Exponential.WeightedLogWeyl
 public import Legendre.Layer4.Exponential.GeneralLogWeyl
 public import Legendre.Layer4.LongDetectorTypeII
+public import Legendre.Layer4.Exponential.WeightedLogBlocks
+public import Legendre.Layer4.DetectorMonotoneWeight
+public import Legendre.Layer4.DetectorDivisorBlocks
+public import Legendre.Layer4.DetectorDividedPrefixes
+public import Legendre.Layer4.DetectorMobiusPointwise
+public import Legendre.Layer4.UpperHuxleyParameters
 public import Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters

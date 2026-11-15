@@ -353,3 +353,11 @@ remaining curved-density real parts above sigma=5/6.
 Their closed comparators are included in the generated Layer 4 consumer.
 The actual Type II estimate at Y=T is documented separately and remains
 one branch of the detector, not a full density theorem.
+
+### Actual Mobius pointwise inputs (2026-11-15)
+
+`ActualMobiusPointwiseBenchmark` independently specifies both actual smoothed
+polynomial bounds with a common X U^(−beta) cost, beta∈[0,1], Y>0 and
+abs(t)>=1. `layer4_actual_mobius_pointwise_comparator` is closed and included
+in the generated Layer 4 consumer. Integer floors and the extra divided
+endpoint are proved. The full upper-range curved-density theorem remains open.

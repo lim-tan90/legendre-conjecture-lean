@@ -514,10 +514,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
 
-Full validation (2026-11-14): 4,302 build jobs, all 4,530 project theorem
-declarations audited with exactly matching independent inventories, 304 Lean
-files free of executable placeholders, and 165 independent consumers
-(120 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-15): 4,308 build jobs, all 4,618 project theorem
+declarations audited with exactly matching independent inventories, 310 Lean
+files free of executable placeholders, and 174 independent consumers
+(129 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -541,6 +541,14 @@ Type II estimate at Y=T are now proved. The latter has exponent
 branch and upper-range density assembly remain open; these inputs do not
 by themselves prove the full curved benchmark.
 See [the exact scope](layer4-weighted-long-detector.md).
+
+**Actual Mobius cancellation (2026-11-15).** Both pointwise analytic inputs
+now apply to the actual smoothed Mobius detector, retaining divided
+endpoints and a uniform X U^(−beta) cost on beta∈[0,1]. Power selection
+in the varying short window and upper exponent margins are also proved
+through sigma=1. Height-uniform long-block decay, short-block counts and
+full upper density assembly remain open.
+See [the actual bounds](layer4-mobius-pointwise.md).
 
 **Acceptance criteria.**
 

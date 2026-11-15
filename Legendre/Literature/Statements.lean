@@ -155,6 +155,18 @@ def GeneralWeylBenchmark : Prop :=
         C*(Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)+(U : ℝ)*((U : ℝ)/|t|)^(1/4 : ℝ)+
           (U : ℝ)/|t|^(1/3 : ℝ))
 
+/-- Pointwise cancellation of the actual Mobius and compact-weight detector coefficients. -/
+def ActualMobiusPointwiseBenchmark : Prop :=
+  ∃ C > 0, ∀ X U V : ℕ, 1 ≤ U → X ≤ U → U ≤ V → V ≤ 2*U →
+    ∀ β t Y : ℝ, 0 ≤ β → β ≤ 1 → 1 ≤ |t| → 0 < Y →
+      (‖∑ n ∈ Finset.Ioc U V, Density.Detector.Smooth.polynomialCoefficient X Y n*
+        (n : ℂ)^(-((β : ℂ)+(t : ℂ)*Complex.I))‖ ≤
+        C*(X : ℝ)*(U : ℝ)^(-β)*(1+Real.sqrt (U : ℝ)*|t|^(1/6 : ℝ)+
+          (U : ℝ)*((U : ℝ)/|t|)^(1/4 : ℝ)+(U : ℝ)/|t|^(1/3 : ℝ))) ∧
+      (‖∑ n ∈ Finset.Ioc U V, Density.Detector.Smooth.polynomialCoefficient X Y n*
+        (n : ℂ)^(-((β : ℂ)+(t : ℂ)*Complex.I))‖ ≤
+        C*(X : ℝ)*(U : ℝ)^(-β)*(1+Real.sqrt |t|+(U : ℝ)/Real.sqrt |t|))
+
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 
