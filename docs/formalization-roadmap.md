@@ -515,10 +515,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,318 build jobs, all 4,659 project theorem
-declarations audited with exactly matching independent inventories, 320 Lean
-files free of executable placeholders, and 180 independent consumers
-(135 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-15): 4,319 build jobs, all 4,667 project theorem
+declarations audited with exactly matching independent inventories, 321 Lean
+files free of executable placeholders, and 182 independent consumers
+(137 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -567,6 +567,14 @@ Both actual detector branches at Y=T, the epsilon-sized transition band,
 height covers and multiplicity selection are proved. No open analytic input
 is assumed. Guth–Maynard and the sharp log^4 moment remain open; prime-gap
 transmission stays in Layer 5. See [the full proof](layer4-full-curved-huxley.md).
+
+**Guth–Maynard outer ranges (2026-11-15).** The target exponent is now
+proved on sigma∈[1/2,7/10] union [4/5,1], retaining one coefficient,
+all T>=2 and analytic multiplicities. The full target is equivalent to the
+explicitly open central input on (7/10,4/5). At sigma=3/4 the new target
+5/9 is strictly smaller than the classical 3/5. This identifies the remaining
+analytic improvement; the equivalence is not a proof of its input.
+See [the exact reduction](layer4-guth-maynard-range.md).
 
 **Acceptance criteria.**
 

@@ -465,6 +465,7 @@ import all Legendre.Layer4.UpperHuxleyTail
 import all Legendre.Layer4.UpperHuxleyShell
 import all Legendre.Layer4.HuxleyFullShell
 import all Legendre.Layer4.HuxleyFullDensity
+import all Legendre.Layer4.GuthMaynardOuterRange
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5266,3 +5267,13 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_common_endpoints_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_height_two_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_transition_band_consumer"
+
+-- Guth--Maynard outer ranges and the explicitly open central reduction.
+#print axioms Legendre.Density.Moment.huxley_le_guth_maynard_upper
+#print axioms Legendre.Density.Moment.ingham_le_guth_maynard_lower
+#print axioms Legendre.Literature.GuthMaynard2024OuterDensity._proof_1
+#print axioms Legendre.Literature.guthMaynard_density_iff_central
+#print axioms Legendre.Literature.layer4_guth_maynard_outer_comparator
+#print axioms Legendre.Zeta.guth_maynard_outer_density_epsilon
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_guth_middle_strict_gap_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_guth_outer_common_endpoints_consumer"

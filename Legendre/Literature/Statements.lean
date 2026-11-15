@@ -183,6 +183,18 @@ def UpperHuxleyTypeIBenchmark : Prop :=
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 
+/-- The already proved outer real parts of the Guth--Maynard density target. -/
+def GuthMaynard2024OuterDensity : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C > 0, ∀ σ ∈ Icc (1/2 : ℝ) 1,
+    (σ ≤ 7/10 ∨ 4/5 ≤ σ) → ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(15*(1-σ)/(3+5*σ)+ε)
+
+/-- The remaining open Guth--Maynard input, strictly between the proved endpoints. -/
+def GuthMaynard2024CentralDensity : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C > 0, ∀ σ ∈ Ioo (7/10 : ℝ) (4/5),
+    ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(15*(1-σ)/(3+5*σ)+ε)
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

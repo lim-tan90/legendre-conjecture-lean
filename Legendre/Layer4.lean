@@ -137,6 +137,8 @@ public import Legendre.Layer4.UpperHuxleyShell
 public import Legendre.Layer4.HuxleyFullShell
 public import Legendre.Layer4.HuxleyFullDensity
 
+public import Legendre.Layer4.GuthMaynardOuterRange
+
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density
 

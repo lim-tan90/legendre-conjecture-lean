@@ -528,6 +528,8 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.127 | Actual upper zero samples at common cutoff | [UpperHuxleyShell.lean](../Legendre/Layer4/UpperHuxleyShell.lean) | **proved**; both branches at Y=T, fixed eta>0, sigma in [5/6+eta,1], common integer cutoff |
 | 4.128 | Uniform full shell across 5/6 | [HuxleyFullShell.lean](../Legendre/Layer4/HuxleyFullShell.lean) | **proved**; exponent loss at most (8/3)(sigma−5/6), epsilon-sized band, one coefficient on [3/4,1] |
 | 4.129 | Full curved Huxley density | [HuxleyFullDensity.lean](../Legendre/Layer4/HuxleyFullDensity.lean); `layer4_huxley_comparator` | **proved**; sigma in [1/2,1], all T>=2, all analytic multiplicities, arbitrary positive epsilon; Huxley prime-gap theorem remains open |
+| 4.130 | Guth–Maynard exponent on outer ranges | [GuthMaynardOuterRange.lean](../Legendre/Layer4/GuthMaynardOuterRange.lean); `layer4_guth_maynard_outer_comparator` | **proved**; sigma in [1/2,7/10] union [4/5,1], common coefficient, all T>=2 and analytic multiplicities |
+| 4.131 | Exact remaining Guth–Maynard input | `Literature.guthMaynard_density_iff_central` | **proved equivalence only**; full target iff central density on (7/10,4/5); central input and full target both remain open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -771,3 +773,13 @@ prohibited shortcuts. All 180 consumers pass (135 Layer 4, nine Layer 3,
 36 literature). New consumers share one coefficient at sigma=1/2,5/6,9/10,1,
 throughout the transition band and at T=2. Lean rejects zero epsilon and
 confusion with Guth--Maynard density or the 7/12 prime-gap claim.
+
+Guth--Maynard outer-range validation (2026-11-15): full build 4,319 jobs;
+all 4,667 theorem declarations, including private/generated declarations,
+match both independent inventories, audit targets and actual axiom output
+exactly. Only propext, Classical.choice and Quot.sound occur. All 321
+classified Lean files have no executable placeholders or prohibited
+shortcuts. All 182 consumers pass (137 Layer 4, nine Layer 3, 36 literature).
+The two joining endpoints share a coefficient; the middle-range strict gap
+is checked independently. Lean rejects treating the outer count as the
+full target or treating the central equivalence as its missing input.

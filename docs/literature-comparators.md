@@ -378,3 +378,13 @@ used. The full target is removed from `open_analytic_targets` in the catalog,
 while Guth–Maynard and the sharp log^4 fourth moment stay open. Huxley 1972's
 7/12 prime-gap comparator remains a separate open Layer 5 claim.
 See [the proof and exact scope](layer4-full-curved-huxley.md).
+
+### Guth–Maynard outer range and central reduction (2026-11-15)
+
+`GuthMaynard2024OuterDensity` is proved on [1/2,7/10] union [4/5,1],
+with one coefficient for all real parts, T>=2 and analytic multiplicities.
+`layer4_guth_maynard_outer_comparator` is a closed witness. The full target
+is equivalent to the explicitly open `GuthMaynard2024CentralDensity` on
+(7/10,4/5); both appear as open targets in the catalog. This equivalence
+does not supply its input. At sigma=3/4, the classical curves give 3/5 and
+the desired exponent is 5/9. See [the exact reduction](layer4-guth-maynard-range.md).

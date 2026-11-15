@@ -1157,4 +1157,22 @@ theorem layer4_full_huxley_height_two_consumer (ε : ℝ) (hε : 0 < ε) :
   obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_density_epsilon ε hε
   exact ⟨C,hC,fun σ hσ => hb σ hσ 2 le_rfl⟩
 
+/-- The two sharp joining real parts share one coefficient, including their endpoints. -/
+theorem layer4_guth_outer_common_endpoints_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (7/10) T : ℝ) ≤ C*T^(9/13+ε) ∧
+      (Zeta.zeroDensityCount (4/5) T : ℝ) ≤ C*T^(3/7+ε) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.guth_maynard_outer_density_epsilon ε hε
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  constructor
+  · convert hb (7/10) (by constructor <;> norm_num) (Or.inl le_rfl) T hT using 1 <;> norm_num
+  · convert hb (4/5) (by constructor <;> norm_num) (Or.inr le_rfl) T hT using 1 <;> norm_num
+
+/-- At sigma=3/4 the desired exponent is strictly smaller than both proved classical curves. -/
+theorem layer4_guth_middle_strict_gap_consumer :
+    15*(1-(3/4 : ℝ))/(3+5*(3/4)) <
+      min (3*(1-(3/4 : ℝ))/(2-3/4)) (3*(1-(3/4 : ℝ))/(3*(3/4)-1)) := by
+  norm_num
+
 end Legendre.Tests

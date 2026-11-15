@@ -173,11 +173,18 @@ curved Huxley exponent is now proved. Guth–Maynard and the sharp
 fourth-moment `log^4` remain explicit open targets. The Layer 5 Huxley
 `7/12+ε` prime-gap proof remains a separate obligation.
 
-Validation (2026-11-15): **4,318 build jobs**, all **4,659 project theorem
-declarations** audited with only the three standard axioms, and **320 Lean files**
+**Guth–Maynard outer ranges (2026-11-15):** the target exponent
+`15(1−σ)/(3+5σ)+ε` is proved on **[1/2,7/10] ∪ [4/5,1]**, with one
+coefficient for every T≥2 and all analytic multiplicities. The independent
+outer comparator is closed; the full target is equivalent to the explicitly
+open central input on **(7/10,4/5)**. At σ=3/4, its `5/9` target is strictly
+stronger than the classical `3/5` bound. [Exact reduction](docs/layer4-guth-maynard-range.md).
+
+Validation (2026-11-15): **4,319 build jobs**, all **4,667 project theorem
+declarations** audited with only the three standard axioms, and **321 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **180 independent consumers** pass: **135 Layer 4**, nine Layer 3 and
+All **182 independent consumers** pass: **137 Layer 4**, nine Layer 3 and
 36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
@@ -197,6 +204,10 @@ larger than eta/16 in long-block exclusion. Full-curve consumers use one
 constant at sigma=1/2,5/6,9/10,1, throughout the transition band and at T=2.
 Lean rejects removing positive epsilon, confusing Huxley with Guth–Maynard
 density, or using the density theorem as the 7/12 prime-gap theorem.
+Outer-range consumers check both joining exponents with the same coefficient
+and the strict middle-range gap; Lean rejects treating the outer count or
+the central equivalence as a proof of the full Guth–Maynard estimate.
+Locally verified full curved Huxley proof commit: [`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a) ([proof and scope](docs/layer4-full-curved-huxley.md)).
 Locally verified upper Type I proof commit: [`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673) ([exact scope](docs/layer4-upper-typeI.md)).
 Actual Mobius cancellation proof commit: [`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51).
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
@@ -508,7 +519,9 @@ short-interval transmission; that source obligation remains open.
 Ingham 1940, global Huxley `12/5` and **full curved Huxley density exponent**
 are proved. The full curve is uniform on σ∈[1/2,1], for every T≥2, with
 analytic multiplicities and arbitrary positive ε. Guth–Maynard density and
-the sharp `log^4` fourth moment remain open. The nine historical
+the sharp `log^4` fourth moment remain open. The Guth–Maynard outer ranges
+[1/2,7/10] and [4/5,1] are proved; its remaining input is exactly the open
+interval (7/10,4/5). The nine historical
 short-interval exponent results below still have statement-level
 formalizations only: these analytic density results do not yet close the
 Ingham 1937 or Huxley 1972 prime-gap proofs.
@@ -561,6 +574,7 @@ The completed analytic milestones supporting this program are:
 
 | Analytic milestone | Current proved estimate | Lean proof and scope |
 |---|---|---|
+| Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |

@@ -221,6 +221,31 @@ theorem huxley_global_comparator (hi : Ingham1940Density) (hh : Huxley1972Densit
       _ = (3/(3*σ-1))*(1-σ) := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right hb hnonneg
 
+/-- Ingham and full Huxley close the two outer real-part intervals. -/
+theorem layer4_guth_maynard_outer_comparator : GuthMaynard2024OuterDensity :=
+  Zeta.guth_maynard_outer_density_epsilon
+
+/-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
+theorem guthMaynard_density_iff_central :
+    GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by
+  constructor
+  · intro h ε hε
+    obtain ⟨C,hC,hb⟩ := h ε hε
+    refine ⟨C,hC,?_⟩
+    intro σ hσ T hT
+    exact hb σ ⟨by linarith [hσ.1],by linarith [hσ.2]⟩ T hT
+  · intro h ε hε
+    obtain ⟨C,hC,hout⟩ := layer4_guth_maynard_outer_comparator ε hε
+    obtain ⟨D,hD,hmid⟩ := h ε hε
+    refine ⟨C+D,by positivity,?_⟩
+    intro σ hσ T hT
+    by_cases ho : σ ≤ 7/10 ∨ 4/5 ≤ σ
+    · have hc := hout σ hσ ho T hT
+      exact hc.trans (mul_le_mul_of_nonneg_right (show C ≤ C+D by linarith) (by positivity))
+    · have hm := not_or.mp ho
+      have hc := hmid σ ⟨lt_of_not_ge hm.1,lt_of_not_ge hm.2⟩ T hT
+      exact hc.trans (mul_le_mul_of_nonneg_right (show D ≤ C+D by linarith) (by positivity))
+
 /-- The newer curved bound combines with Ingham to give 30/13, not 12/5. -/
 theorem guthMaynard_global_comparator (hi : Ingham1940Density)
     (hg : GuthMaynard2024Density) : Zeta.HasZeroDensityEstimate (30/13) := by

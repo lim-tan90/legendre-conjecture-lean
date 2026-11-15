@@ -139,10 +139,16 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 `7/12+ε` 素数间隙证明仍是独立目标。
 
-验证（2026-11-15）：**4,318 项构建**、**全部 4,659 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**320 个 Lean 文件**的实际
+**Guth–Maynard 两侧区间（2026-11-15）：** 目标指数 `15(1−σ)/(3+5σ)+ε`
+现已在 **[1/2,7/10] ∪ [4/5,1]** 上证明，同一系数覆盖全部 T≥2 与解析重数。
+独立的两侧比较器已闭合；完整目标严格等价于仍开放的 **(7/10,4/5)** 中间区间输入。
+σ=3/4 时目标为 `5/9`，严格强于现有经典界 `3/5`。
+[精确范围与等价归约](docs/layer4-guth-maynard-range.md)。
+
+验证（2026-11-15）：**4,319 项构建**、**全部 4,667 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**321 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**180 项独立使用检查**全部通过：Layer 4 **135 项**、Layer 3 九项、文献对照 36 项。
+**182 项独立使用检查**全部通过：Layer 4 **137 项**、Layer 3 九项、文献对照 36 项。
 新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
@@ -154,6 +160,9 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 在长块排除中将 η=0 或让截断指数超过 η/16 的误用均被 Lean 拒绝。
 完整曲线检查验证 σ=1/2、5/6、9/10、1、整个过渡窄带与 T=2 共用常数；
 删除 ε>0、将 Huxley 密度误作 Guth–Maynard 密度或 `7/12` 素数间隙定理的用例均被 Lean 拒绝。
+两侧区间检查验证两个连接点共用常数及中间指数的严格差距；
+将两侧计数或中间区间等价式误当成完整 Guth–Maynard 证明的用例均被 Lean 拒绝。
+本地完整验证的完整 Huxley 曲线证明提交：[`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a)（[证明与范围](docs/layer4-full-curved-huxley.md)）。
 本地完整验证的高实部 Type I 证明提交：[`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673)（[精确范围](docs/layer4-upper-typeI.md)）。
 实际 Möbius 抵消证明提交：[`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51)。
 本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
@@ -401,7 +410,8 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 **仓库当前状态（2026-11-15）：** Layer 3 的经典 PNT、Layer 4 的
 Ingham 1940、全局 Huxley `12/5` 与**完整 Huxley 曲线密度指数**均已证明。
 完整曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
-Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放。下表九项历史短区间指数结果
+Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放；Guth–Maynard 两侧的
+[1/2,7/10]、[4/5,1] 已证明，剩余输入精确位于 (7/10,4/5)。下表九项历史短区间指数结果
 仍仅完成陈述形式化；解析密度结果尚未闭合 Ingham 1937 或 Huxley 1972 的素数间隙证明。
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
@@ -447,6 +457,7 @@ Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放。下表九项历史�
 
 | 解析里程碑 | 当前已证明的估计 | Lean 证明与适用范围 |
 |---|---|---|
+| Guth–Maynard 两侧密度区间（Layer 4） | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)`，σ∈[1/2,7/10] ∪ [4/5,1] | **✅ 已证明**：[`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean) 与闭合的两侧比较器；同一系数、全部 T≥2 与解析重数。中间区间 (7/10,4/5) 及完整目标仍开放。 |
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
