@@ -219,6 +219,7 @@ the central equivalence as a proof of the full Guth–Maynard estimate.
 Sampling consumers check a nonzero plateau entry, the literal left endpoint,
 flat-spectrum average branch and negative-axis conjugation. Lean rejects
 discarding the average branch or treating the finite trace count as central density.
+Locally verified Lean 4.35.0 sampling/trace proof commit: [`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423) ([sources and adaptations](docs/smccolm-guth-provenance.md)).
 Locally verified full curved Huxley proof commit: [`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a) ([proof and scope](docs/layer4-full-curved-huxley.md)).
 Locally verified upper Type I proof commit: [`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673) ([exact scope](docs/layer4-upper-typeI.md)).
 Actual Mobius cancellation proof commit: [`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51).

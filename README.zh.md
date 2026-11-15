@@ -171,6 +171,7 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 将两侧计数或中间区间等价式误当成完整 Guth–Maynard 证明的用例均被 Lean 拒绝。
 采样检查覆盖非零平台矩阵项、精确左端点、平坦谱平均项与负轴共轭；
 删除平均项或把有限迹计数误作中间密度的用例均被 Lean 拒绝。
+本地完整验证的 Lean 4.35.0 采样／迹证明提交：[`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423)（[来源与适配](docs/smccolm-guth-provenance.md)）。
 本地完整验证的完整 Huxley 曲线证明提交：[`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a)（[证明与范围](docs/layer4-full-curved-huxley.md)）。
 本地完整验证的高实部 Type I 证明提交：[`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673)（[精确范围](docs/layer4-upper-typeI.md)）。
 实际 Möbius 抵消证明提交：[`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51)。
