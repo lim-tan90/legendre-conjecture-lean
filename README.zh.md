@@ -745,105 +745,113 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 <details open>
 <summary><strong>来源与移植详情</strong></summary>
 
-本项目优先**借鉴、移植已有的已验证形式化成果**，而不是从零重写。所有移植或改编
-的开发都记录在此：上游仓库、固定 commit、许可证，以及在本仓库中的位置。
+来源按原有登记顺序编号，新增仓库顺延。每个来源统一使用醒目的 **owner/repository** 标题，
+并列出固定提交、许可证、本地位置和适配验证；同一仓库的追加移植归入同一条目。
 
-首次使用的上游仓库须在本栏开头显著展示 **owner/repository** 仓库名。
+### 1. [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)
 
-* **新增来源：[smccolm/Lean](https://github.com/smccolm/Lean) — Guth–Maynard 有限采样与迹色散。**
-  作者 Scott McColm；原始文件位于
-  [固定提交中的 Guth–Maynard 源目录](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard)，固定提交
-  `4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
-  [许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
-  目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
-  `DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
-  `TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
-  中选取的第一迹及色散计数证明组成 `SamplingDispersion.lean`。
-  全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
-  本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
-  [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
+- **固定提交:** `d28713ac8245ca86a686b8c67370a8d19d81b242`
+- **许可证:** MIT — [retained license](Legendre/Nagura/LICENSE)
+- **本地位置:** [`Legendre/Nagura/`](Legendre/Nagura/) 与 [`Legendre/Nagura.lean`](Legendre/Nagura.lean)
+- **适配与验证:** 模块及命名空间适配、三模块合并；已在当前 Lean/mathlib 4.35.0 下验证
 
-* **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT 许可，
-  commit `d28713ac8245ca86a686b8c67370a8d19d81b242`（2026-08-02）。
-  [`Legendre/Nagura/`](Legendre/Nagura/) 与
-  [`Legendre/Nagura.lean`](Legendre/Nagura.lean) 改编自该项目的
-  `Erdos390/WholePaper/Nagura*.lean`（Nagura 1952 定理的形式化）。改动包括：
-  重命名模块/命名空间、删除依赖 PNT 的辅助结果、合并为三个模块、适配
-  mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）；数学证明
-  本身来自上游。原始 MIT 许可证保留在
-  [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
-* **[AlexKontorovich/PrimeNumberTheoremAnd（PNT+）](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)** —
-  Apache-2.0，固定提交 `127b50e33f6033e2147921167a117af96d9ba4ea`。
-  [`Legendre/PNT/`](Legendre/PNT/) 中的 14 个模块移植了 `StrongPNT` 的完整证明依赖切片，
-  保留来源和贡献者信息，适配导入、模块可见性、蓝图元数据和六处非零性反证表达。
-  原许可证保存在 [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt)。
-  ψ→θ→π 的误差传递证明位于 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean)。
-  Layer 4 另选取同一固定提交中 Robby Sneiderman 的
-  `Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`，保留正实部半平面的
-  digamma 级数及尾和辅助证明，移至
-  [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean)。
-  保留原贡献者说明及同一 Apache-2.0 许可证。
-  详见[来源与限制](docs/pnt-provenance.md)。
-* **[openai/math](https://github.com/openai/math)** — Apache-2.0，
-  固定来源提交 `4eaee87548250b2682affda7d05d947c05554bae`。
-  [`Legendre/LargeSieve/`](Legendre/LargeSieve/) 中选取的 23 个模块包含：22 个移植自
-  `lean/OAI/NumberTheory/Ostmann/`：19 个 `Preliminaries` 模块、
-  `Quadratic/KernelEigenvalueBound.lean`、`Characters/SkewKernelSquare.lean`
-  及 `ZeroDensity/SeparatedSelection.lean`；
-  另外一个间隔采样模块来自
-  `lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`。
-  范围为有限加法大筛的证明依赖链，包含圆周间隔、有限余割 Hilbert 不等式、
-  Hermitian 矩阵及对偶性论证，以及既约分数的特化。
-  本项目调整导入、命名空间及 Lean/mathlib v4.35.0 兼容性；每个移植文件均保留来源说明。
-  原始许可证保存在 [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
-  [`GramLargeValues.lean`](Legendre/GramLargeValues.lean) 还推广了同一来源的
-  `Preliminaries/SymmetricQuadraticBound.lean` 中的行和估计论证；
-  [`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) 将同一来源
-  `ZeroDensity/SeparatedSelection.lean` 的覆盖论证推广到自然数权重。
-  [`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) 还将
-  `Preliminaries/CosecantHilbertBound.lean` 和 `CircleSeparatedPoints.lean`
-  中的有限核与谱论证推广到实直线间隔频率。
-  [`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) 将
-  `SievePhaseGram.lean` 的相位扭转论证用于上述倒数核。
-  零点检测器的系数部分另将同一固定提交中的
-  `lean/OAI/NumberTheory/Ostmann/ZeroDensity/Mollifier.lean` 改编到
-  [`ZeroDetector/Mollifier.lean`](Legendre/ZeroDetector/Mollifier.lean)，并将
-  `FiniteDetector.lean` 改编到
-  [`ZeroDetector/FiniteMollifier.lean`](Legendre/ZeroDetector/FiniteMollifier.lean)。
-  沿用上述已保留的 Apache-2.0 许可证；后者移除特征扭转，证明无扭转的有限恒等式。
-  [`ZeroDetector/ActualZetaDetector.lean`](Legendre/ZeroDetector/ActualZetaDetector.lean)
-  还改编 `DetectorLength.lean` 的长度选择及 `ActualDetector.lean` 的小乘积组织，
-  显式保留 ζ 的额外极点分支。
-  [`ZeroDetector/BetaVariation.lean`](Legendre/ZeroDetector/BetaVariation.lean)
-  改编同名文件；[`ComplexDirichlet.lean`](Legendre/ComplexDirichlet.lean)
-  改编 `BetaDerivative.lean` 中不依赖特征的求导论证。
-  系数能量部分还将上游 `lean/OAI/NumberTheory/Ostmann/` 下的
-  `Arithmetic/FrequencyLCM.lean`、`Arithmetic/DivisorSquareMean.lean` 和
-  `ZeroDensity/CoefficientEnergy.lean` 分别改编到
-  [`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean)、
-  [`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean) 和
-  [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean)。
-  [`Legendre/GammaBounds/`](Legendre/GammaBounds/) 中的 Gamma 商估计还改编
-  `ZeroDensity/LogNormDerivative.lean`、`DigammaTailEstimate.lean`、
-  `SharpDigammaStrip.lean`、`GammaNormDerivative.lean`、`SharpGammaHorizontal.lean`、
-  `SharpGammaVertical.lean`、`SharpGammaRealShift.lean` 和 `GammaStripBound.lean`。
-  [`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
-  特化 `ZeroDensity/CharacterGammaShift.lean` 的标量高斯权重论证；
-  [`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) 将
-  `DensityCompletedSquare.lean` 和 `DensitySquareGaussian.lean` 的高斯平方与归一化
-  组织推广到本地证明的整函数 xi。
-  [`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) 将
-  `DensityGaussianEnvelope.lean` 推广到消去两个完成极点后所需的六次多项式包络。
-  digamma 尾和仅导入所选 PNT+ 级数证明，省去与此处无关的特征及无零区域依赖链。
-  来源提交和保留许可证均同上。
-  此前已选取的大筛证明链已编译，并纳入整库公理审计；
-  [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
-  紧支撑检测器现已证明 Ingham 1940 及全局 Huxley 12/5 密度；
-  完整 Huxley 曲线指数现已证明。
-  [`XiSquareContour.lean`](Legendre/XiSquareContour.lean) 还改编了同一固定提交下
-  `ZeroDensity/DensitySquareContour.lean`、`DensitySquareEquation.lean` 与
-  `DensitySquareConjugation.lean` 的轮廓、反射及共轭证明组织，适配整函数 xi 分子，
-  复用已注明来源的 PNT+ 矩形留数接口；沿用上述 Apache-2.0 许可。
+#### 详细来源与文件映射
+
+[`Legendre/Nagura/`](Legendre/Nagura/) 与
+[`Legendre/Nagura.lean`](Legendre/Nagura.lean) 改编自该项目的
+`Erdos390/WholePaper/Nagura*.lean`（Nagura 1952 定理的形式化）。改动包括：
+重命名模块/命名空间、删除依赖 PNT 的辅助结果、合并为三个模块、适配
+mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）；数学证明
+本身来自上游。原始 MIT 许可证保留在
+[`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
+
+### 2. [AlexKontorovich/PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
+
+- **固定提交:** `127b50e33f6033e2147921167a117af96d9ba4ea`
+- **许可证:** Apache-2.0 — [retained license](licenses/PNTplus-Apache-2.0.txt)
+- **本地位置:** [`Legendre/PNT/`](Legendre/PNT/)
+- **适配与验证:** 本地导入、模块可见性、蓝图元数据与反证表达适配；已在 Lean 4.35.0 下验证
+
+#### 详细来源与文件映射
+
+[`Legendre/PNT/`](Legendre/PNT/) 中的 14 个模块移植了 `StrongPNT` 的完整证明依赖切片，
+保留来源和贡献者信息，适配导入、模块可见性、蓝图元数据和六处非零性反证表达。
+原许可证保存在 [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt)。
+ψ→θ→π 的误差传递证明位于 [`PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean)。
+Layer 4 另选取同一固定提交中 Robby Sneiderman 的
+`Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`，保留正实部半平面的
+digamma 级数及尾和辅助证明，移至
+[`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean)。
+保留原贡献者说明及同一 Apache-2.0 许可证。
+详见[来源与限制](docs/pnt-provenance.md)。
+
+### 3. [openai/math](https://github.com/openai/math)
+
+- **固定提交:** `4eaee87548250b2682affda7d05d947c05554bae`
+- **许可证:** Apache-2.0 — [retained license](licenses/openai-math-Apache-2.0.txt)
+- **本地位置:** [`Legendre/LargeSieve/`](Legendre/LargeSieve/)、[`Legendre/ZeroDetector/`](Legendre/ZeroDetector/)、[`Legendre/GammaBounds/`](Legendre/GammaBounds/) 及 [`Legendre/Layer4/`](Legendre/Layer4/)，逐文件映射见下文
+- **适配与验证:** 本地导入、命名空间、矩阵／分析接口适配；已在 Lean 4.35.0 下验证
+
+#### 详细来源与文件映射
+
+[`Legendre/LargeSieve/`](Legendre/LargeSieve/) 中选取的 23 个模块包含：22 个移植自
+`lean/OAI/NumberTheory/Ostmann/`：19 个 `Preliminaries` 模块、
+`Quadratic/KernelEigenvalueBound.lean`、`Characters/SkewKernelSquare.lean`
+及 `ZeroDensity/SeparatedSelection.lean`；
+另外一个间隔采样模块来自
+`lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`。
+范围为有限加法大筛的证明依赖链，包含圆周间隔、有限余割 Hilbert 不等式、
+Hermitian 矩阵及对偶性论证，以及既约分数的特化。
+本项目调整导入、命名空间及 Lean/mathlib v4.35.0 兼容性；每个移植文件均保留来源说明。
+原始许可证保存在 [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt)。
+[`GramLargeValues.lean`](Legendre/GramLargeValues.lean) 还推广了同一来源的
+`Preliminaries/SymmetricQuadraticBound.lean` 中的行和估计论证；
+[`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) 将同一来源
+`ZeroDensity/SeparatedSelection.lean` 的覆盖论证推广到自然数权重。
+[`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) 还将
+`Preliminaries/CosecantHilbertBound.lean` 和 `CircleSeparatedPoints.lean`
+中的有限核与谱论证推广到实直线间隔频率。
+[`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) 将
+`SievePhaseGram.lean` 的相位扭转论证用于上述倒数核。
+零点检测器的系数部分另将同一固定提交中的
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/Mollifier.lean` 改编到
+[`ZeroDetector/Mollifier.lean`](Legendre/ZeroDetector/Mollifier.lean)，并将
+`FiniteDetector.lean` 改编到
+[`ZeroDetector/FiniteMollifier.lean`](Legendre/ZeroDetector/FiniteMollifier.lean)。
+沿用上述已保留的 Apache-2.0 许可证；后者移除特征扭转，证明无扭转的有限恒等式。
+[`ZeroDetector/ActualZetaDetector.lean`](Legendre/ZeroDetector/ActualZetaDetector.lean)
+还改编 `DetectorLength.lean` 的长度选择及 `ActualDetector.lean` 的小乘积组织，
+显式保留 ζ 的额外极点分支。
+[`ZeroDetector/BetaVariation.lean`](Legendre/ZeroDetector/BetaVariation.lean)
+改编同名文件；[`ComplexDirichlet.lean`](Legendre/ComplexDirichlet.lean)
+改编 `BetaDerivative.lean` 中不依赖特征的求导论证。
+系数能量部分还将上游 `lean/OAI/NumberTheory/Ostmann/` 下的
+`Arithmetic/FrequencyLCM.lean`、`Arithmetic/DivisorSquareMean.lean` 和
+`ZeroDensity/CoefficientEnergy.lean` 分别改编到
+[`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean)、
+[`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean) 和
+[`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean)。
+[`Legendre/GammaBounds/`](Legendre/GammaBounds/) 中的 Gamma 商估计还改编
+`ZeroDensity/LogNormDerivative.lean`、`DigammaTailEstimate.lean`、
+`SharpDigammaStrip.lean`、`GammaNormDerivative.lean`、`SharpGammaHorizontal.lean`、
+`SharpGammaVertical.lean`、`SharpGammaRealShift.lean` 和 `GammaStripBound.lean`。
+[`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
+特化 `ZeroDensity/CharacterGammaShift.lean` 的标量高斯权重论证；
+[`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) 将
+`DensityCompletedSquare.lean` 和 `DensitySquareGaussian.lean` 的高斯平方与归一化
+组织推广到本地证明的整函数 xi。
+[`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) 将
+`DensityGaussianEnvelope.lean` 推广到消去两个完成极点后所需的六次多项式包络。
+digamma 尾和仅导入所选 PNT+ 级数证明，省去与此处无关的特征及无零区域依赖链。
+来源提交和保留许可证均同上。
+此前已选取的大筛证明链已编译，并纳入整库公理审计；
+[逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
+紧支撑检测器现已证明 Ingham 1940 及全局 Huxley 12/5 密度；
+完整 Huxley 曲线指数现已证明。
+[`XiSquareContour.lean`](Legendre/XiSquareContour.lean) 还改编了同一固定提交下
+`ZeroDensity/DensitySquareContour.lean`、`DensitySquareEquation.lean` 与
+`DensitySquareConjugation.lean` 的轮廓、反射及共轭证明组织，适配整函数 xi 分子，
+复用已注明来源的 PNT+ 矩形留数接口；沿用上述 Apache-2.0 许可。
 
 四阶矩与紧支撑检测器证明另改编 **[openai/math](https://github.com/openai/math)** 固定提交
 `4eaee87548250b2682affda7d05d947c05554bae` 下
@@ -916,13 +924,6 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 | `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 | `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
 
-* **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
-  Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
-  `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
-  mathlib 的证明。
-
-
-
 指数和导数检验另改编自 **openai/math**，固定提交
 `4eaee87548250b2682affda7d05d947c05554bae`，源目录
 `lean/OAI/NumberTheory/EgyptianFractions/`，许可 **Apache-2.0**。
@@ -943,7 +944,7 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 区间细分、吸收尺度优化、两项大值计数、有限二进分层求矩，以及实际
 Möbius／临界质量矩的加强界，均为本仓库的本地推导；本步骤未复制新的上游代码。
 
-### 对数相位所需的有限差分
+#### 对数相位所需的有限差分
 
 Adapted from [openai/math](https://github.com/openai/math) at pinned commit
 `4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
@@ -959,7 +960,7 @@ namespace and module visibility are adapted. Retained license:
 
 Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
 
-### 多项式幂所需的除数函数增长界
+#### 多项式幂所需的除数函数增长界
 
 系数幂的工作另改编自 [openai/math](https://github.com/openai/math)，固定提交
 `4eaee87548250b2682affda7d05d947c05554bae`，许可 Apache-2.0。源目录为
@@ -972,6 +973,39 @@ Natural-index overlap identities and logarithmic shifted-phase estimates are loc
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
+### 4. [leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4)
+
+- **固定提交:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
+- **许可证:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
+- **本地位置:** 基础依赖；[`Legendre/Bertrand.lean`](Legendre/Bertrand.lean) 直接复用其定理
+- **适配与验证:** 通过固定依赖使用，保留原始来源；当前版本 v4.35.0
+
+#### 详细来源与文件映射
+
+Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
+`Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
+mathlib 的证明。
+
+### 5. [smccolm/Lean](https://github.com/smccolm/Lean)
+
+- **固定提交:** `4c8fb7f7816508825089230e3730b69165e5e303`
+- **许可证:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
+- **本地位置:** [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)，含五个适配模块
+- **适配与验证:** 模块可见性、复共轭、实嵌入与有限类型基数适配；五个模块均由 Lean 4.35.0 从源码编译
+
+#### 详细来源与文件映射
+
+作者 Scott McColm；原始文件位于
+[固定提交中的 Guth–Maynard 源目录](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard)，固定提交
+`4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
+[许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
+目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
+`DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
+`TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
+中选取的第一迹及色散计数证明组成 `SamplingDispersion.lean`。
+全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
+本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
+[逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
 
 </details>
 

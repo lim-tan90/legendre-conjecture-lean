@@ -894,122 +894,128 @@ repository's git identity has since been corrected to
 <details open>
 <summary><strong>Upstream sources and adaptation details</strong></summary>
 
-This project prefers to **adapt existing verified formalizations** instead of
-rewriting proofs from scratch.  Every ported or adapted development is recorded
-here with its upstream repository, pinned commit, license, and destination in
-this repository.
+Sources are numbered in the existing registration order, with new repositories appended.
+Each source has a prominent **owner/repository** heading and the same commit, license,
+local-path and adaptation fields. Further ports from the same repository stay in its entry.
 
-New upstream repositories are listed first with a prominent **owner/repository** name.
+### 1. [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)
 
-* **NEW SOURCE: [smccolm/Lean](https://github.com/smccolm/Lean) — Guth–Maynard finite sampling and trace dispersion.**
-  Scott McColm’s formalization; original files:
-  [Pinned Guth–Maynard source directory](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard), fixed commit
-  `4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
-  [license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
-  [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
-  `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
-  `TraceDispersion` supply four adapted modules; selected first-trace and
-  dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
-  supply `SamplingDispersion.lean`. All are adapted and compiled under the
-  pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
-  cubic-trace interface, while the analytic off-diagonal estimates and full
-  central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+- **Pinned commit:** `d28713ac8245ca86a686b8c67370a8d19d81b242`
+- **License:** MIT — [retained license](Legendre/Nagura/LICENSE)
+- **Local paths:** [`Legendre/Nagura/`](Legendre/Nagura/) and [`Legendre/Nagura.lean`](Legendre/Nagura.lean)
+- **Adaptation and verification:** Module/namespace adaptation and three-module assembly; verified under the current Lean/mathlib 4.35.0
 
-* **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT License,
-  commit `d28713ac8245ca86a686b8c67370a8d19d81b242` (2026-08-02).
-  The files under [`Legendre/Nagura/`](Legendre/Nagura/) and
-  [`Legendre/Nagura.lean`](Legendre/Nagura.lean) are adapted from its
-  `Erdos390/WholePaper/Nagura*.lean` modules, which formalize J. Nagura's
-  1952 theorem.  The adaptation consists of module/namespace renaming,
-  removal of PNT-dependent auxiliary results, merging into three modules, and
-  porting to mathlib v4.33.1 (re-checked against v4.35.0 when the repository was
-  upgraded in October 2026); the mathematical proof is the upstream one.
-  The original MIT license is retained in
-  [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
-* **[AlexKontorovich/PrimeNumberTheoremAnd (PNT+)](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)** —
-  Apache-2.0, commit `127b50e33f6033e2147921167a117af96d9ba4ea`.
-  Fourteen selected modules under [`Legendre/PNT/`](Legendre/PNT/) adapt the
-  complete `StrongPNT` proof dependency slice, including smoothing, Mellin
-  calculus, rectangle residues, zeta bounds and the logarithmic zero-free region.
-  Upstream proofs and contributor credits are retained; imports, module visibility,
-  blueprint metadata and six nonzero contradiction expressions were adapted.
-  The original license is in [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt).
-  The new ψ-to-θ-to-π error bridge is in
-  [`Legendre/PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean).
-  Layer 4 additionally selects Robby Sneiderman's positive-half-plane digamma
-  series and tail helpers from upstream
-  `Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`, at the same commit,
-  into [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean).
-  The original contributor notice and the same Apache-2.0 license are retained.
-  See [provenance and limits](docs/pnt-provenance.md).
-* **[openai/math](https://github.com/openai/math)** — Apache-2.0,
-  pinned commit `4eaee87548250b2682affda7d05d947c05554bae`.
-  Twenty-three selected modules under [`Legendre/LargeSieve/`](Legendre/LargeSieve/)
-  adapt the finite additive large-sieve and separated-sampling proof dependency slices.
-  Twenty-two come from
-  `lean/OAI/NumberTheory/Ostmann/`: nineteen `Preliminaries` modules,
-  `Quadratic/KernelEigenvalueBound.lean`, `Characters/SkewKernelSquare.lean`,
-  and `ZeroDensity/SeparatedSelection.lean`.
-  The additional sampling module comes from
-  `lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`.
-  The slice covers circle separation, the finite cosecant Hilbert inequality,
-  Hermitian matrix and duality arguments, and reduced-fraction specialization.
-  Imports, namespaces and Lean/mathlib v4.35.0 compatibility are adapted;
-  upstream source notices are included in every ported file. The original license
-  is retained in [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
-  [`GramLargeValues.lean`](Legendre/GramLargeValues.lean) generalizes the
-  same source project's `Preliminaries/SymmetricQuadraticBound.lean` argument;
-  [`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) generalizes its
-  `ZeroDensity/SeparatedSelection.lean` cover argument to natural weights.
-  [`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) generalizes the
-  finite kernel/spectral argument from `Preliminaries/CosecantHilbertBound.lean`
-  and `CircleSeparatedPoints.lean` to separated real frequencies.
-  [`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) adapts the
-  `SievePhaseGram.lean` phase-twisting argument to this reciprocal kernel.
-  The zero-detector coefficient work additionally adapts
-  `lean/OAI/NumberTheory/Ostmann/ZeroDensity/Mollifier.lean` to
-  [`ZeroDetector/Mollifier.lean`](Legendre/ZeroDetector/Mollifier.lean), and
-  `FiniteDetector.lean` to
-  [`ZeroDetector/FiniteMollifier.lean`](Legendre/ZeroDetector/FiniteMollifier.lean),
-  at the same pinned commit and under the same retained Apache-2.0 license.
-  The latter removes the character twist and proves the untwisted finite identity.
-  [`ZeroDetector/ActualZetaDetector.lean`](Legendre/ZeroDetector/ActualZetaDetector.lean)
-  adapts the length choice and small-product organization of `DetectorLength.lean`
-  and `ActualDetector.lean`, retaining zeta's additional pole branch.
-  [`ZeroDetector/BetaVariation.lean`](Legendre/ZeroDetector/BetaVariation.lean)
-  adapts `BetaVariation.lean`, while
-  [`ComplexDirichlet.lean`](Legendre/ComplexDirichlet.lean) adapts the
-  character-independent differentiation argument from `BetaDerivative.lean`.
-  The coefficient-energy slice also adapts
-  `Arithmetic/FrequencyLCM.lean`, `Arithmetic/DivisorSquareMean.lean` and
-  `ZeroDensity/CoefficientEnergy.lean` to
-  [`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean),
-  [`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean)
-  and [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean).
-  The Gamma-quotient slice under [`Legendre/GammaBounds/`](Legendre/GammaBounds/)
-  additionally adapts `ZeroDensity/LogNormDerivative.lean`, `DigammaTailEstimate.lean`,
-  `SharpDigammaStrip.lean`, `GammaNormDerivative.lean`, `SharpGammaHorizontal.lean`,
-  `SharpGammaVertical.lean`, `SharpGammaRealShift.lean` and `GammaStripBound.lean`.
-  [`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
-  specializes the scalar Gaussian-weight argument in `ZeroDensity/CharacterGammaShift.lean`.
-  [`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) generalizes the Gaussian
-  square/normalization organization in `DensityCompletedSquare.lean` and
-  `DensitySquareGaussian.lean`, using a locally proved entire xi function.
-  [`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) generalizes
-  `DensityGaussianEnvelope.lean` to the sixth-degree polynomial envelope
-  needed after removing the two completed poles.
-  [`XiSquareContour.lean`](Legendre/XiSquareContour.lean) adapts the contour,
-  reflection and conjugation organization of `ZeroDensity/DensitySquareContour.lean`,
-  `DensitySquareEquation.lean` and `DensitySquareConjugation.lean` to this entire
-  xi numerator, reusing the already credited PNT+ rectangle residue API.
-  The digamma tail imports only the selected PNT+ series proof, avoiding the
-  unrelated character and zero-free-region dependency chain.
-  All paths are under upstream `lean/OAI/NumberTheory/Ostmann/` and use the
-  same pinned commit and retained license.
-  The selected large-sieve slice builds and is included in the project-wide axiom audit;
-  [exact inventory, adaptations and validation](docs/openai-math-provenance.md).
-  The compact detector proves Ingham 1940 and global Huxley 12/5 density;
-  the full curved Huxley exponent is now proved.
+#### Detailed provenance and file mapping
+
+The files under [`Legendre/Nagura/`](Legendre/Nagura/) and
+[`Legendre/Nagura.lean`](Legendre/Nagura.lean) are adapted from its
+`Erdos390/WholePaper/Nagura*.lean` modules, which formalize J. Nagura's
+1952 theorem.  The adaptation consists of module/namespace renaming,
+removal of PNT-dependent auxiliary results, merging into three modules, and
+porting to mathlib v4.33.1 (re-checked against v4.35.0 when the repository was
+upgraded in October 2026); the mathematical proof is the upstream one.
+The original MIT license is retained in
+[`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
+
+### 2. [AlexKontorovich/PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
+
+- **Pinned commit:** `127b50e33f6033e2147921167a117af96d9ba4ea`
+- **License:** Apache-2.0 — [retained license](licenses/PNTplus-Apache-2.0.txt)
+- **Local paths:** [`Legendre/PNT/`](Legendre/PNT/)
+- **Adaptation and verification:** Local imports, module visibility, blueprint metadata and contradiction syntax; verified under Lean 4.35.0
+
+#### Detailed provenance and file mapping
+
+Fourteen selected modules under [`Legendre/PNT/`](Legendre/PNT/) adapt the
+complete `StrongPNT` proof dependency slice, including smoothing, Mellin
+calculus, rectangle residues, zeta bounds and the logarithmic zero-free region.
+Upstream proofs and contributor credits are retained; imports, module visibility,
+blueprint metadata and six nonzero contradiction expressions were adapted.
+The original license is in [`licenses/PNTplus-Apache-2.0.txt`](licenses/PNTplus-Apache-2.0.txt).
+The new ψ-to-θ-to-π error bridge is in
+[`Legendre/PrimeNumberTheorem.lean`](Legendre/PrimeNumberTheorem.lean).
+Layer 4 additionally selects Robby Sneiderman's positive-half-plane digamma
+series and tail helpers from upstream
+`Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`, at the same commit,
+into [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`](Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean).
+The original contributor notice and the same Apache-2.0 license are retained.
+See [provenance and limits](docs/pnt-provenance.md).
+
+### 3. [openai/math](https://github.com/openai/math)
+
+- **Pinned commit:** `4eaee87548250b2682affda7d05d947c05554bae`
+- **License:** Apache-2.0 — [retained license](licenses/openai-math-Apache-2.0.txt)
+- **Local paths:** [`Legendre/LargeSieve/`](Legendre/LargeSieve/), [`Legendre/ZeroDetector/`](Legendre/ZeroDetector/), [`Legendre/GammaBounds/`](Legendre/GammaBounds/) and [`Legendre/Layer4/`](Legendre/Layer4/); exact file mappings below
+- **Adaptation and verification:** Local imports, namespaces and matrix/analysis interfaces; verified under Lean 4.35.0
+
+#### Detailed provenance and file mapping
+
+Twenty-three selected modules under [`Legendre/LargeSieve/`](Legendre/LargeSieve/)
+adapt the finite additive large-sieve and separated-sampling proof dependency slices.
+Twenty-two come from
+`lean/OAI/NumberTheory/Ostmann/`: nineteen `Preliminaries` modules,
+`Quadratic/KernelEigenvalueBound.lean`, `Characters/SkewKernelSquare.lean`,
+and `ZeroDensity/SeparatedSelection.lean`.
+The additional sampling module comes from
+`lean/OAI/NumberTheory/Jacobsthal/Estimates/SeparatedSampling.lean`.
+The slice covers circle separation, the finite cosecant Hilbert inequality,
+Hermitian matrix and duality arguments, and reduced-fraction specialization.
+Imports, namespaces and Lean/mathlib v4.35.0 compatibility are adapted;
+upstream source notices are included in every ported file. The original license
+is retained in [`licenses/openai-math-Apache-2.0.txt`](licenses/openai-math-Apache-2.0.txt).
+[`GramLargeValues.lean`](Legendre/GramLargeValues.lean) generalizes the
+same source project's `Preliminaries/SymmetricQuadraticBound.lean` argument;
+[`WeightedSeparation.lean`](Legendre/WeightedSeparation.lean) generalizes its
+`ZeroDensity/SeparatedSelection.lean` cover argument to natural weights.
+[`ReciprocalHilbert.lean`](Legendre/ReciprocalHilbert.lean) generalizes the
+finite kernel/spectral argument from `Preliminaries/CosecantHilbertBound.lean`
+and `CircleSeparatedPoints.lean` to separated real frequencies.
+[`SeparatedMeanValue.lean`](Legendre/SeparatedMeanValue.lean) adapts the
+`SievePhaseGram.lean` phase-twisting argument to this reciprocal kernel.
+The zero-detector coefficient work additionally adapts
+`lean/OAI/NumberTheory/Ostmann/ZeroDensity/Mollifier.lean` to
+[`ZeroDetector/Mollifier.lean`](Legendre/ZeroDetector/Mollifier.lean), and
+`FiniteDetector.lean` to
+[`ZeroDetector/FiniteMollifier.lean`](Legendre/ZeroDetector/FiniteMollifier.lean),
+at the same pinned commit and under the same retained Apache-2.0 license.
+The latter removes the character twist and proves the untwisted finite identity.
+[`ZeroDetector/ActualZetaDetector.lean`](Legendre/ZeroDetector/ActualZetaDetector.lean)
+adapts the length choice and small-product organization of `DetectorLength.lean`
+and `ActualDetector.lean`, retaining zeta's additional pole branch.
+[`ZeroDetector/BetaVariation.lean`](Legendre/ZeroDetector/BetaVariation.lean)
+adapts `BetaVariation.lean`, while
+[`ComplexDirichlet.lean`](Legendre/ComplexDirichlet.lean) adapts the
+character-independent differentiation argument from `BetaDerivative.lean`.
+The coefficient-energy slice also adapts
+`Arithmetic/FrequencyLCM.lean`, `Arithmetic/DivisorSquareMean.lean` and
+`ZeroDensity/CoefficientEnergy.lean` to
+[`ZeroDetector/FrequencyLCM.lean`](Legendre/ZeroDetector/FrequencyLCM.lean),
+[`ZeroDetector/DivisorSquareMean.lean`](Legendre/ZeroDetector/DivisorSquareMean.lean)
+and [`ZeroDetector/CoefficientEnergy.lean`](Legendre/ZeroDetector/CoefficientEnergy.lean).
+The Gamma-quotient slice under [`Legendre/GammaBounds/`](Legendre/GammaBounds/)
+additionally adapts `ZeroDensity/LogNormDerivative.lean`, `DigammaTailEstimate.lean`,
+`SharpDigammaStrip.lean`, `GammaNormDerivative.lean`, `SharpGammaHorizontal.lean`,
+`SharpGammaVertical.lean`, `SharpGammaRealShift.lean` and `GammaStripBound.lean`.
+[`GammaBounds/GaussianWeight.lean`](Legendre/GammaBounds/GaussianWeight.lean)
+specializes the scalar Gaussian-weight argument in `ZeroDensity/CharacterGammaShift.lean`.
+[`XiSquareKernel.lean`](Legendre/XiSquareKernel.lean) generalizes the Gaussian
+square/normalization organization in `DensityCompletedSquare.lean` and
+`DensitySquareGaussian.lean`, using a locally proved entire xi function.
+[`XiGaussianEnvelope.lean`](Legendre/XiGaussianEnvelope.lean) generalizes
+`DensityGaussianEnvelope.lean` to the sixth-degree polynomial envelope
+needed after removing the two completed poles.
+[`XiSquareContour.lean`](Legendre/XiSquareContour.lean) adapts the contour,
+reflection and conjugation organization of `ZeroDensity/DensitySquareContour.lean`,
+`DensitySquareEquation.lean` and `DensitySquareConjugation.lean` to this entire
+xi numerator, reusing the already credited PNT+ rectangle residue API.
+The digamma tail imports only the selected PNT+ series proof, avoiding the
+unrelated character and zero-free-region dependency chain.
+All paths are under upstream `lean/OAI/NumberTheory/Ostmann/` and use the
+same pinned commit and retained license.
+The selected large-sieve slice builds and is included in the project-wide axiom audit;
+[exact inventory, adaptations and validation](docs/openai-math-provenance.md).
+The compact detector proves Ingham 1940 and global Huxley 12/5 density;
+the full curved Huxley exponent is now proved.
 
 The fourth-moment and compact-detector proofs additionally adapt the following files from
 **[openai/math](https://github.com/openai/math)**, pinned commit
@@ -1085,13 +1091,6 @@ No additional PNT+ source is copied.
 | `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 | `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
 
-* **[mathlib4](https://github.com/leanprover-community/mathlib4)** —
-  Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
-  re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
-  mathlib proof is copied into this repository.
-
-
-
 The exponential-sum derivative tests additionally adapt **openai/math**,
 pinned commit `4eaee87548250b2682affda7d05d947c05554bae`, source directory
 `lean/OAI/NumberTheory/EgyptianFractions/`, **Apache-2.0**. The retained license
@@ -1114,7 +1113,7 @@ Interval subdivision, absorption-scale optimization, the two-term count, finite
 dyadic moment summation and the improved actual Möbius/critical-mass moments
 are local deductions in this repository; this step copies no additional upstream code.
 
-### Finite differencing for logarithmic phases
+#### Finite differencing for logarithmic phases
 
 Adapted from [openai/math](https://github.com/openai/math) at pinned commit
 `4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0, source directory
@@ -1130,7 +1129,7 @@ namespace and module visibility are adapted. Retained license:
 
 Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
 
-### Divisor growth for polynomial powers
+#### Divisor growth for polynomial powers
 
 The coefficient-power work additionally adapts the following files from
 [openai/math](https://github.com/openai/math), pinned commit
@@ -1144,6 +1143,40 @@ visibility are adapted; the retained license is
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
+### 4. [leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4)
+
+- **Pinned commit:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
+- **License:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
+- **Local paths:** Base dependency; direct theorem reuse in [`Legendre/Bertrand.lean`](Legendre/Bertrand.lean)
+- **Adaptation and verification:** Pinned library dependency with source credit retained; current version v4.35.0
+
+#### Detailed provenance and file mapping
+
+Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
+re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
+mathlib proof is copied into this repository.
+
+### 5. [smccolm/Lean](https://github.com/smccolm/Lean)
+
+- **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
+- **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
+- **Local paths:** Five adapted modules in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
+- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all five modules compile from source under Lean 4.35.0
+
+#### Detailed provenance and file mapping
+
+Scott McColm’s formalization; original files:
+[Pinned Guth–Maynard source directory](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard), fixed commit
+`4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
+[license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
+[`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
+`DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
+`TraceDispersion` supply four adapted modules; selected first-trace and
+dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
+supply `SamplingDispersion.lean`. All are adapted and compiled under the
+pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
+cubic-trace interface, while the analytic off-diagonal estimates and full
+central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 
