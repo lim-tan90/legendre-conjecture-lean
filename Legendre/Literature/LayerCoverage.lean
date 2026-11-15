@@ -128,6 +128,10 @@ theorem layer4_huxley_global_comparator : HuxleyGlobalDensity :=
 theorem layer4_huxley_restricted_comparator : Huxley1972RestrictedDensity :=
   Zeta.huxley_curved_restricted_density_epsilon
 
+/-- The full independent curved benchmark is closed, uniformly through sigma=1. -/
+theorem layer4_huxley_comparator : Huxley1972Density :=
+  Zeta.huxley_curved_density_epsilon
+
 /-- Closed actual short-sum bound, with the square-root-length hypothesis explicit. -/
 theorem layer4_weyl_short_sum_comparator : WeylShortSumBenchmark := by
   refine ⟨Density.Oscillation.logarithmicWeylConstant,

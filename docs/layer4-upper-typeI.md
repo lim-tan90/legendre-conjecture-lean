@@ -61,12 +61,12 @@ which is absorbed into epsilon. Heights below the common threshold use the
 proved unit-separation bound card(S)<=2(T+1), so the final theorem covers
 **every T>=128**, rather than only sufficiently large heights.
 
-## Remaining assembly
+## Subsequent full assembly
 
-The full `Huxley1972Density` benchmark stays open. The next deductions are the
+The full `Huxley1972Density` benchmark is now proved. The
 common-cutoff Type I/Type II zero-sample split at Y=T, uniform treatment of the
 band adjacent to 5/6, a dyadic height cover and analytic multiplicity
-restoration above 5/6. The already proved restricted curve, global 12/5
+restoration above 5/6 are complete. See [the full proof](layer4-full-curved-huxley.md). The already proved restricted curve, global 12/5
 estimate and Ingham theorem remain available. Guth--Maynard, the sharp
 log^4 fourth moment and Layer 5 prime-gap results are separate open targets.
 

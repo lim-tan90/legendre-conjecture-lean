@@ -462,6 +462,9 @@ import all Legendre.Layer4.UpperHuxleyCosts
 import all Legendre.Layer4.UpperHuxleyLongBlocks
 import all Legendre.Layer4.UpperHuxleyLongExclusion
 import all Legendre.Layer4.UpperHuxleyTail
+import all Legendre.Layer4.UpperHuxleyShell
+import all Legendre.Layer4.HuxleyFullShell
+import all Legendre.Layer4.HuxleyFullDensity
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5249,3 +5252,17 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_shell_reciprocal_endpoint_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_negative_shell_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_typeI_one_consumer"
+
+-- Full curved Huxley density and independent boundary consumers.
+#print axioms Legendre.Density.Moment.huxleyCurvedExponent.eq_1
+#print axioms Legendre.Density.Moment.huxley_full_curved_exponent_bounds
+#print axioms Legendre.Density.Moment.huxley_full_separated_high_density
+#print axioms Legendre.Density.Moment.huxley_full_separated_high_shell_density
+#print axioms Legendre.Density.Moment.huxley_transition_exponent_loss
+#print axioms Legendre.Density.Moment.huxley_upper_separated_shell_density
+#print axioms Legendre.Literature.layer4_huxley_comparator
+#print axioms Legendre.Zeta.huxley_curved_density_epsilon
+#print axioms Legendre.Zeta.huxley_curved_full_upper_density_epsilon
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_common_endpoints_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_height_two_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_full_huxley_transition_band_consumer"

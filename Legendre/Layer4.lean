@@ -133,6 +133,10 @@ public import Legendre.Layer4.UpperHuxleyLongBlocks
 public import Legendre.Layer4.UpperHuxleyLongExclusion
 public import Legendre.Layer4.UpperHuxleyTail
 
+public import Legendre.Layer4.UpperHuxleyShell
+public import Legendre.Layer4.HuxleyFullShell
+public import Legendre.Layer4.HuxleyFullDensity
+
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density
 
@@ -156,8 +160,10 @@ Improved actual polynomial and integral branch counts, a common parameter
 balance and multiplicity restoration prove the global density exponent
 (12/5)(1-sigma)+epsilon uniformly in sigma and for all T>=2.
 
-The Layer 4 roadmap acceptance requirements are fulfilled. The stronger
-curved Huxley benchmark, sharp fourth-moment log^4 and Guth--Maynard targets
-remain explicitly open; they are not hypotheses of the global 12/5 proof.
+The Layer 4 roadmap acceptance requirements are fulfilled. The full curved
+Huxley benchmark is now proved on [1/2,1], for all T>=2 and all analytic
+multiplicities, allowing every positive epsilon. The sharp fourth-moment
+log^4 and Guth--Maynard targets remain explicitly open; they are not
+hypotheses of the global 12/5 or full curved Huxley proofs.
 The proved 1940 density theorem does not assert Ingham's 1937 prime-gap result.
 -/

@@ -525,6 +525,9 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.124 | Actual long Mobius-block decay | [UpperHuxleyLongBlocks.lean](../Legendre/Layer4/UpperHuxleyLongBlocks.lean) | **proved**; one absolute D, norm<=D X T^(-eta/8), beta in [sigma,1], positive arbitrary smoothing |
 | 4.125 | Uniform exclusion at the dyadic threshold | [UpperHuxleyLongExclusion.lean](../Legendre/Layer4/UpperHuxleyLongExclusion.lean) | **proved**; eta>0, delta<=eta/16 and actual J<=(2/log2) log T give strict norm<1/(16J) above a common height |
 | 4.126 | Upper-range actual Type I tail count | [UpperHuxleyTail.lean](../Legendre/Layer4/UpperHuxleyTail.lean) | **proved**; all T>=128, fixed eta>0, sigma in [5/6+eta,1], T^delta<=X<=2T^delta and 0<delta<=eta/16; closed independent comparator, full upper zero-density assembly still open |
+| 4.127 | Actual upper zero samples at common cutoff | [UpperHuxleyShell.lean](../Legendre/Layer4/UpperHuxleyShell.lean) | **proved**; both branches at Y=T, fixed eta>0, sigma in [5/6+eta,1], common integer cutoff |
+| 4.128 | Uniform full shell across 5/6 | [HuxleyFullShell.lean](../Legendre/Layer4/HuxleyFullShell.lean) | **proved**; exponent loss at most (8/3)(sigma−5/6), epsilon-sized band, one coefficient on [3/4,1] |
+| 4.129 | Full curved Huxley density | [HuxleyFullDensity.lean](../Legendre/Layer4/HuxleyFullDensity.lean); `layer4_huxley_comparator` | **proved**; sigma in [1/2,1], all T>=2, all analytic multiplicities, arbitrary positive epsilon; Huxley prime-gap theorem remains open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -758,3 +761,13 @@ tail at sigma=1, the negative shell endpoint and the sharp reciprocal loss.
 Deliberate eta=0 and excessive-cutoff misuse is rejected by type mismatch.
 No new external code was ported. Full curved upper zero-density assembly
 and its multiplicity restoration remain open.
+
+Full curved Huxley validation (2026-11-15): full build 4,318 jobs. All
+4,659 project theorem declarations, including private/generated declarations,
+match the module-data inventory, independent environment inventory, audit
+targets and actual axiom output exactly. Only the three standard axioms occur.
+All 320 classified Lean sources are free of executable placeholders and
+prohibited shortcuts. All 180 consumers pass (135 Layer 4, nine Layer 3,
+36 literature). New consumers share one coefficient at sigma=1/2,5/6,9/10,1,
+throughout the transition band and at T=2. Lean rejects zero epsilon and
+confusion with Guth--Maynard density or the 7/12 prime-gap claim.

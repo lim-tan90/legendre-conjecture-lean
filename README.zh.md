@@ -101,7 +101,7 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 **新增（2026-11-14）：受限范围的 Huxley 曲线零密度已证明。** 对每个 `ε>0`，同一个常数
 适用于全部 σ∈[1/2,5/6]、T≥2：`N(σ,T) ≤ C_ε T^(3(1−σ)/(3σ−1)+ε)`，保留全部解析重数。
 证明对实际短检测块取整数卷积幂，统一控制系数，合并两个检测分支，并覆盖全部高度；
-σ≤3/4 由 Ingham 补齐。完整曲线 benchmark 仍有 σ>5/6 的部分待证。
+σ≤3/4 由 Ingham 补齐。完整曲线 benchmark 现已包含 σ>5/6，见下文。
 [精确证明、来源及剩余范围](docs/layer4-small-mollifier-powers.md)。
 
 实际无权短和还已证明 Weyl 界 `C sqrt(U) abs(t)^(1/6)`，条件为 `U≤V≤2U`、
@@ -116,7 +116,7 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 **新增（2026-11-15）：** Weyl 与二阶导数点值估计现已控制实际 Möbius 平滑检测块，
 对 β∈[0,1] 统一保留 `X U^(−β)` 代价。精确除数改写、整数除法端点和平滑权重传递均已证明；
 随 σ 变化的短块窗口取幂选择及高实部严格指数余量也已覆盖到 σ=1。
-高实部 Type I 分支现已在远离 σ=5/6 的范围内完成计数；完整密度组装仍待完成。
+高实部 Type I 分支现已在远离 σ=5/6 的范围内完成计数；完整密度组装现已完成，见下文。
 [实际系数、界与剩余步骤](docs/layer4-mobius-pointwise.md)。
 
 **高实部 Type I 计数（2026-11-15）：** 在 `Y=T` 下，实际检测器尾项满足
@@ -124,16 +124,25 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 在 `σ∈[5/6+η,1]`、`T^δ≤X≤2T^δ` 上统一成立。
 证明计数随 σ 变化的短块、用统一高度衰减排除长块，并用单位间隔界覆盖有限高度。
 独立的 `layer4_upper_typeI_comparator` 已闭合。共同截断下的零点分支合并、
-紧邻 `5/6` 的窄带及高实部解析重数恢复仍待组装。
+紧邻 `5/6` 的窄带及高实部解析重数恢复现已组装为下述完整曲线。
 [精确范围与证明](docs/layer4-upper-typeI.md)。
 
-**Layer 4 路线图的验收要求已齐备。** 更强的 Huxley 曲线密度、Guth–Maynard
-及尖锐四阶矩 `log^4` 仍明确标为开放目标，均未作为全局 `12/5` 证明的假设。
+**完整 Huxley 曲线密度（2026-11-15）：** 对每个 `ε>0`，存在同一个 `C>0`，
+同时覆盖 **σ∈[1/2,1]、全部 T≥2 与解析重数**：
+`N(σ,T) ≤ C T^(3(1−σ)/(3σ−1)+ε)`。
+[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean)
+已闭合独立的 `layer4_huxley_comparator`。证明合并实际两条检测分支、
+`5/6` 附近的 ε 窄带、高度覆盖与解析重数选择。
+[精确陈述与证明](docs/layer4-full-curved-huxley.md)。
 
-验证（2026-11-15）：**4,315 项构建**、**全部 4,647 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**317 个 Lean 文件**的实际
+**Layer 4 路线图验收要求已齐备，完整 Huxley 曲线指数也已证明。**
+Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
+`7/12+ε` 素数间隙证明仍是独立目标。
+
+验证（2026-11-15）：**4,318 项构建**、**全部 4,659 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**320 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**177 项独立使用检查**全部通过：Layer 4 **132 项**、Layer 3 九项、文献对照 36 项。
+**180 项独立使用检查**全部通过：Layer 4 **135 项**、Layer 3 九项、文献对照 36 项。
 新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
@@ -143,6 +152,8 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 将高实部窗口误换成固定平方根窗口，或删除 β≤1 条件的用例均被 Lean 拒绝。
 新增检查覆盖 σ=1 的实际尾项计数、负高度端点及倒数因子；
 在长块排除中将 η=0 或让截断指数超过 η/16 的误用均被 Lean 拒绝。
+完整曲线检查验证 σ=1/2、5/6、9/10、1、整个过渡窄带与 T=2 共用常数；
+删除 ε>0、将 Huxley 密度误作 Guth–Maynard 密度或 `7/12` 素数间隙定理的用例均被 Lean 拒绝。
 本地完整验证的高实部 Type I 证明提交：[`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673)（[精确范围](docs/layer4-upper-typeI.md)）。
 实际 Möbius 抵消证明提交：[`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51)。
 本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
@@ -388,12 +399,10 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 ## 历史进展总览
 
 **仓库当前状态（2026-11-15）：** Layer 3 的经典 PNT、Layer 4 的
-**Ingham 1940 曲线密度**与**全局 Huxley 12/5 零密度指数**均已证明。下表九项历史短区间指数结果仍仅完成陈述形式化；
-已证明的 1940 密度估计尚未闭合 **Ingham 1937 的两项素数间隙结论**。
-Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth–Maynard 目标仍开放。
-受限曲线密度现已覆盖 σ∈[1/2,5/6]、全部高度和解析重数；完整 benchmark 的 σ>5/6 部分仍开放。
-高实部实际 Type I 分支现已在每个固定 η>0 的 [5/6+η,1] 上得到曲线指数界，包含有限高度；
-完整高实部零点密度组装仍开放。这一进展尚不改变下表历史短区间结论的证明状态。
+Ingham 1940、全局 Huxley `12/5` 与**完整 Huxley 曲线密度指数**均已证明。
+完整曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
+Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放。下表九项历史短区间指数结果
+仍仅完成陈述形式化；解析密度结果尚未闭合 Ingham 1937 或 Huxley 1972 的素数间隙证明。
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
 第 2 版, Courcier, Paris, 1808）：开区间 `(n²,(n+1)²)` 中有素数。`θ < 1/2` 足以推出最终成立；
@@ -438,16 +447,17 @@ Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth�
 
 | 解析里程碑 | 当前已证明的估计 | Lean 证明与适用范围 |
 |---|---|---|
-| 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装仍开放。 |
+| 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
+| 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
 | Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
-| 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；原文更强曲线 Huxley benchmark 仍开放。 |
-| 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 的 σ>5/6 部分仍开放。 |
+| 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；完整曲线指数 benchmark 现已证明，见下文。 |
+| 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 现已包含 σ>5/6，见下文。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^6 T`，从而有 `≪_ε T^(1+ε)` | **✅ 已证明**：[`ZetaFourthMoment.lean`](Legendre/Layer4/ZetaFourthMoment.lean)。尖锐的 `log^4 T` 目标仍开放。 |
-| Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分、两项大值计数和实际 Möbius／临界质量矩的加强界均已证明；更强的 Huxley 曲线目标仍开放。 |
-| 解析大值计数及实际 Möbius 矩（Layer 4） | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`；实际 Möbius 二阶矩中的加强项 `R^(2/3)(AT)^(1/3)` | **✅ 已证明**：闭合的 [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean)、[加权 Möbius 矩](Legendre/Layer4/HalaszMollifierMoment.lean) 及[实际临界质量矩](Legendre/Layer4/HalaszCriticalMass.lean)。全局 12/5 现已证明；更强的 Huxley 曲线目标仍开放。 |
+| Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分、两项大值计数和实际 Möbius／临界质量矩的加强界均已证明；完整 Huxley 曲线指数现已证明。 |
+| 解析大值计数及实际 Möbius 矩（Layer 4） | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`；实际 Möbius 二阶矩中的加强项 `R^(2/3)(AT)^(1/3)` | **✅ 已证明**：闭合的 [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean)、[加权 Möbius 矩](Legendre/Layer4/HalaszMollifierMoment.lean) 及[实际临界质量矩](Legendre/Layer4/HalaszCriticalMass.lean)。全局 12/5 现已证明；完整 Huxley 曲线指数现已证明。 |
 
-**全局 `12/5` 指数已证明**；更强的 Huxley 曲线密度及 Guth–Maynard 密度仍**待证明**。
+**全局 `12/5` 与完整 Huxley 曲线指数均已证明**；Guth–Maynard 密度仍**待证明**。
 [`LayerCoverage.lean`](Legendre/Literature/LayerCoverage.lean) 中的相应对照桥仍需这些
 开放的密度输入；其中的 Ingham 输入现已闭合证明。
 
@@ -511,11 +521,12 @@ Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth�
 | `Legendre.Zeta.riemannZeta_fourth_le_smoothed` | 临界线上的逐点四次幂由单个归一化高斯轮廓积分控制 | **已证明**；轮廓均方界及带六次对数损失的四阶矩已证明；尖锐四次对数界仍开放 | [XiSquareContour.lean](Legendre/XiSquareContour.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_eq_integral` | 紧支撑 Möbius 检测器与初始 Mellin 轮廓积分精确相等，保留绝对范数控制 | **已证明**；后续已补上带主极点项的路径移动 | [Layer4/DetectorIntegral.lean](Legendre/Layer4/DetectorIntegral.lean) |
 | `Legendre.Density.Detector.Smooth.detectorMean_at_zero` / `detector_high_zero_dichotomy` | 带精确主极点项的临界线路径移动，以及显式高处范围内的多项式或积分检测分支 | **已证明**；现已用于闭合 Ingham 密度证明 | [Layer4/DetectorShift.lean](Legendre/Layer4/DetectorShift.lean) · [DetectorAlternative.lean](Legendre/Layer4/DetectorAlternative.lean) |
-| `Legendre.Density.Oscillation.halasz_complex_large_values_two_term` / `Moment.packed_critical_mass_halasz` | 无条件两项大值计数，以及实际 Möbius／临界质量矩的加强界 | **已证明**；更强的 Huxley 曲线目标仍开放 | [HalaszTwoTermCount.lean](Legendre/Layer4/Exponential/HalaszTwoTermCount.lean)、[HalaszCriticalMass.lean](Legendre/Layer4/HalaszCriticalMass.lean) |
-| `Legendre.Density.Oscillation.halasz_block_complex_energy` | 实际对数相位抵消、倒数求和的对数界，以及各样本实部可独立变化的 Halász 能量界 | **已证明**；更强的 Huxley 曲线目标仍开放 | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
+| `Legendre.Density.Oscillation.halasz_complex_large_values_two_term` / `Moment.packed_critical_mass_halasz` | 无条件两项大值计数，以及实际 Möbius／临界质量矩的加强界 | **已证明**；完整 Huxley 曲线指数现已证明 | [HalaszTwoTermCount.lean](Legendre/Layer4/Exponential/HalaszTwoTermCount.lean)、[HalaszCriticalMass.lean](Legendre/Layer4/HalaszCriticalMass.lean) |
+| `Legendre.Density.Oscillation.halasz_block_complex_energy` | 实际对数相位抵消、倒数求和的对数界，以及各样本实部可独立变化的 Halász 能量界 | **已证明**；完整 Huxley 曲线指数现已证明 | [Exponential/HalaszComplex.lean](Legendre/Layer4/Exponential/HalaszComplex.lean) |
+| `Legendre.Zeta.huxley_curved_density_epsilon` / `Literature.layer4_huxley_comparator` | 完整曲线指数 `3(1−σ)/(3σ−1)+ε`，σ∈[1/2,1] 统一、全部 T≥2 与解析重数 | **已证明**；素数间隙传递是独立目标 | [Layer4/HuxleyFullDensity.lean](Legendre/Layer4/HuxleyFullDensity.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 曲线密度指数 `3(1−σ)/(2−σ)+ε`，保留所有解析重数 | **已证明**，σ∈[1/2,1] 统一且 T≥2；并非 1937 素数间隙结论 | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；现已与多项式分支共同导出 Ingham 密度 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
-| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4`、更强的 Huxley 曲线及 Guth–Maynard 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | `[-T,T]` 上实际临界线四阶矩 `O(T log^6 T)`，并给出 `[0,T]` 上的高度指数 `1+ε` | **已证明**，对所有 `T≥2` 成立；尖锐 `log^4` 与 Guth–Maynard 密度仍开放 | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -579,7 +590,7 @@ Layer 4 路线图验收要求已齐备；更强的 Huxley 曲线密度及 Guth�
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 与全局 Huxley `12/5` 及实际大值输入均已证明；更强曲线 Huxley/Guth–Maynard 与尖锐 `log^4` 仍明确标为开放目标；[范围](docs/layer4-huxley-density.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 与全局 Huxley `12/5` 及实际大值输入均已证明；完整 Huxley 曲线指数也已证明；Guth–Maynard 与尖锐 `log^4` 仍明确标为开放目标；[范围](docs/layer4-huxley-density.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含指数规范化的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -790,7 +801,7 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
   此前已选取的大筛证明链已编译，并纳入整库公理审计；
   [逐文件来源、适配与验证记录](docs/openai-math-provenance.md)。
   紧支撑检测器现已证明 Ingham 1940 及全局 Huxley 12/5 密度；
-  更强的 Huxley 曲线目标仍开放。
+  完整 Huxley 曲线指数现已证明。
   [`XiSquareContour.lean`](Legendre/XiSquareContour.lean) 还改编了同一固定提交下
   `ZeroDensity/DensitySquareContour.lean`、`DensitySquareEquation.lean` 与
   `DensitySquareConjugation.lean` 的轮廓、反射及共轭证明组织，适配整函数 xi 分子，
@@ -813,7 +824,7 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 | `DensityPolynomialAlternative.lean` | [PolynomialAlternative.lean](Legendre/Layer4/PolynomialAlternative.lean) |
 | `DensityBalanceParameters.lean`, `DensityPolynomialBalance.lean` | [DensityBalance.lean](Legendre/Layer4/DensityBalance.lean) |
 | `DensityPolynomialBalanced.lean`, `DensityIntegralBalanced.lean` | [BalancedAlternatives.lean](Legendre/Layer4/BalancedAlternatives.lean) |
-| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean)；其中有限分支合并结构在本仓库内复用于 [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean) 及 [HuxleyCurvedShell.lean](Legendre/Layer4/HuxleyCurvedShell.lean)，沿用同一固定来源与许可证 |
+| `DensitySeparatedCount.lean` | [SeparatedShellDensity.lean](Legendre/Layer4/SeparatedShellDensity.lean)；其中有限分支合并结构在本仓库内复用于 [HuxleyShellDensity.lean](Legendre/Layer4/HuxleyShellDensity.lean) 及 [HuxleyCurvedShell.lean](Legendre/Layer4/HuxleyCurvedShell.lean) 及 [UpperHuxleyShell.lean](Legendre/Layer4/UpperHuxleyShell.lean)，沿用同一固定来源与许可证 |
 | `DensityBlockCauchy.lean` | [BlockCauchy.lean](Legendre/Layer4/BlockCauchy.lean) |
 | `DensityBlockWeights.lean` | [BlockWeights.lean](Legendre/Layer4/BlockWeights.lean) |
 | `DensityCubicIntegrability.lean` | [CubicIntegrability.lean](Legendre/Layer4/CubicIntegrability.lean) |

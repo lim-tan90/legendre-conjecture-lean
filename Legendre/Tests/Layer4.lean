@@ -1124,4 +1124,37 @@ theorem layer4_shell_reciprocal_endpoint_consumer (T : ℝ) (hT : 0 < T) :
   simpa only [Real.rpow_one] using!
     Moment.shell_reciprocal_power T (T/2) 1 hT le_rfl zero_le_one le_rfl
 
+/-- One coefficient covers both real-part endpoints, the transition and an upper point. -/
+theorem layer4_full_huxley_common_endpoints_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (1/2) T : ℝ) ≤ C*T^(3+ε) ∧
+      (Zeta.zeroDensityCount (5/6) T : ℝ) ≤ C*T^(1/3+ε) ∧
+      (Zeta.zeroDensityCount (9/10) T : ℝ) ≤ C*T^(3/17+ε) ∧
+      (Zeta.zeroDensityCount 1 T : ℝ) ≤ C*T^ε := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_density_epsilon ε hε
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  refine ⟨?_,?_,?_,?_⟩
+  · convert hb (1/2) (by constructor <;> norm_num) T hT using 1 <;> norm_num
+  · convert hb (5/6) (by constructor <;> norm_num) T hT using 1 <;> norm_num
+  · convert hb (9/10) (by constructor <;> norm_num) T hT using 1 <;> norm_num
+  · convert hb 1 (by constructor <;> norm_num) T hT using 1 <;> norm_num
+
+/-- The transition-band constant is chosen before its real part and height. -/
+theorem layer4_full_huxley_transition_band_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C : ℝ, 0 < C ∧ ∀ σ : ℝ, 5/6 ≤ σ → σ ≤ min 1 (5/6+ε/16) →
+      ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(3*σ-1)+ε) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_density_epsilon ε hε
+  refine ⟨C,hC,?_⟩
+  intro σ hσlo hσhi T hT
+  exact hb σ ⟨by linarith,hσhi.trans (min_le_left _ _)⟩ T hT
+
+/-- All real-part cutoffs include the smallest permitted height with one coefficient. -/
+theorem layer4_full_huxley_height_two_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C : ℝ, 0 < C ∧ ∀ σ : ℝ, σ ∈ Set.Icc (1/2) 1 →
+      (Zeta.zeroDensityCount σ 2 : ℝ) ≤ C*(2 : ℝ)^(3*(1-σ)/(3*σ-1)+ε) := by
+  obtain ⟨C,hC,hb⟩ := Zeta.huxley_curved_density_epsilon ε hε
+  exact ⟨C,hC,fun σ hσ => hb σ hσ 2 le_rfl⟩
+
 end Legendre.Tests

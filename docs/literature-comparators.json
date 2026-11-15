@@ -277,15 +277,14 @@
     },
     {
       "id": "layer4",
-      "status": "roadmap acceptance proved: Ingham and global Huxley 12/5; stronger targets open",
-      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity ∧ Huxley1972RestrictedDensity ∧ WeylShortSumBenchmark ∧ WeightedWeylBenchmark ∧ GeneralWeylBenchmark ∧ ActualMobiusPointwiseBenchmark ∧ UpperHuxleyTypeIBenchmark",
-      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator, layer4_huxley_restricted_comparator, layer4_weyl_short_sum_comparator, layer4_weighted_weyl_comparator, layer4_general_weyl_comparator, layer4_actual_mobius_pointwise_comparator, layer4_upper_typeI_comparator⟩",
+      "status": "roadmap acceptance and full curved Huxley proved; Guth-Maynard and sharp log^4 remain open",
+      "comparison_type": "LinearMeanSquareBenchmark ∧ ZetaFourthMomentLogSix ∧ ZetaFourthMomentExponent ∧ CompensatedDetectorBenchmark ∧ WeightedFourthMomentBenchmark ∧ Ingham1940Density ∧ ActualHalaszBenchmark ∧ ActualHalaszLargeValuesBenchmark ∧ HuxleyGlobalDensity ∧ Huxley1972RestrictedDensity ∧ WeylShortSumBenchmark ∧ WeightedWeylBenchmark ∧ GeneralWeylBenchmark ∧ ActualMobiusPointwiseBenchmark ∧ UpperHuxleyTypeIBenchmark ∧ Huxley1972Density",
+      "comparison_term": "⟨layer4_mean_comparator, layer4_fourth_moment_log_six_comparator,\n  layer4_fourth_moment_exponent_comparator, layer4_compensated_detector_comparator,\n  layer4_weighted_moment_comparator, layer4_ingham_comparator, layer4_actual_halasz_comparator, layer4_actual_halasz_large_values_comparator, layer4_huxley_global_comparator, layer4_huxley_restricted_comparator, layer4_weyl_short_sum_comparator, layer4_weighted_weyl_comparator, layer4_general_weyl_comparator, layer4_actual_mobius_pointwise_comparator, layer4_upper_typeI_comparator, layer4_huxley_comparator⟩",
       "expected": "LinearMeanSquareBenchmark",
-      "note": "Ingham 1940 and global Huxley 12/5 are proved uniformly in sigma, with all analytic multiplicities and T>=2. The global proof uses actual Halasz two-term counts, both compact-detector branches, integer cutoffs and height covers, with (1+log T)^38 loss absorbed into arbitrary positive epsilon. The stronger curved Huxley1972Density, sharp log^4 fourth moment and GuthMaynard2024Density remain open. The roadmap permits explicit open stronger analytic Props; no open target is assumed in the global proof. Prime-gap theorems remain Layer 5 obligations. The restricted curved exponent is now proved uniformly for sigma in [1/2,5/6], with all heights T>=2 and analytic multiplicities. It is not the full curved benchmark; the remaining real-part range above 5/6 stays open. The actual unweighted complex-power short sum now has the Weyl bound C sqrt(U) abs(t)^(1/6) under 1<=abs(t), U^2<=4 abs(t), U<=V<=2U. This is not a zeta subconvexity theorem. Weighted short Weyl cancellation and the general-length three-term Weyl bound are proved. The actual Type II detector branch at Y=T has exponent 3-4sigma+4delta+epsilon for X<=2T^delta, with the principal-pole constraints explicit. The subsequent upper Type I count is recorded below; the full upper zero-density assembly remains open. The actual Mobius-smoothed polynomial blocks now satisfy both Weyl and second-derivative pointwise bounds, with uniform X U^(-beta) cost on beta in [0,1]. Exact divided endpoints and smoothing are proved. The upper-range varying short-window power selection is proved through sigma=1; the full upper density assembly remains open. The actual Type I branch at Y=T is now proved uniformly for sigma in [5/6+eta,1], any fixed eta>0, with X between T^delta and 2T^delta and 0<delta<=eta/16. It includes bounded heights. Near-boundary stitching, the full zero-sample shell assembly and multiplicity restoration above 5/6 remain open."
+      "note": "Ingham 1940, global Huxley 12/5 and the full curved Huxley1972Density benchmark are proved with one coefficient uniform in sigma in [1/2,1], all analytic multiplicities and all T>=2, allowing every positive epsilon. The full curved proof uses the actual common-cutoff detector branches at Y=T above 5/6+eta, an epsilon-sized transition band controlled by the proved count at 5/6, the restricted curved count below 5/6, a finite height cover and multiplicity selection. The actual Mobius/Weyl estimates, varying short-window count and uniform long-block exclusion are proved inputs, with no open analytic target assumed. GuthMaynard2024Density and the sharp log^4 fourth moment remain open. Prime-gap exponent results remain separate Layer 5 obligations."
     }
   ],
   "open_analytic_targets": [
-    "Huxley1972Density",
     "GuthMaynard2024Density",
     "ZetaFourthMoment"
   ],
@@ -606,6 +605,9 @@
     "Legendre/Layer4/UpperHuxleyCosts.lean": "layer4",
     "Legendre/Layer4/UpperHuxleyLongBlocks.lean": "layer4",
     "Legendre/Layer4/UpperHuxleyLongExclusion.lean": "layer4",
-    "Legendre/Layer4/UpperHuxleyTail.lean": "layer4"
+    "Legendre/Layer4/UpperHuxleyTail.lean": "layer4",
+    "Legendre/Layer4/UpperHuxleyShell.lean": "layer4",
+    "Legendre/Layer4/HuxleyFullShell.lean": "layer4",
+    "Legendre/Layer4/HuxleyFullDensity.lean": "layer4"
   }
 }

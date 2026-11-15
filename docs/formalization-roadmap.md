@@ -457,10 +457,10 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-14): the Layer 4 roadmap acceptance requirements are fulfilled.**
-Ingham curved density and the global Huxley 12/5 exponent are proved. The
-stronger curved Huxley, Guth–Maynard and sharp log^4 targets remain explicitly
-open; the acceptance criteria below permit clearly labelled stronger open Props.
+**Current state (2026-11-15): roadmap acceptance and the full curved Huxley exponent are proved.**
+Ingham curved density, global Huxley 12/5 and the full curve on [1/2,1],
+all T>=2 with analytic multiplicities, are proved. Guth–Maynard and sharp
+log^4 targets remain explicitly open; the acceptance criteria below permit clearly labelled stronger open Props.
 `import Legendre.Layer4` exports the multiplicity-weighted counting convention,
 `HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
 weakening, and a proved transfer from a hypothesized power/log density bound.
@@ -497,7 +497,8 @@ The improved actual detector branches, common parameter balance, height covers
 and analytic multiplicity restoration prove the global density exponent
 (12/5)(1−σ)+ε uniformly in σ∈[1/2,1], T≥2. The logarithmic form has
 (1+log T)^38. See [the full proof and scope](layer4-huxley-density.md).
-The stronger curved Huxley/Guth–Maynard and sharp fourth-moment log^4 remain open.
+The full curved Huxley exponent is now also proved. Guth–Maynard and the
+sharp fourth-moment log^4 remain open.
 This does not prove either Ingham 1937 prime-gap statement.
 See [initial mean values](layer4-mean-values.md),
 [the large-sieve estimates and reduction](layer4-large-sieve.md),
@@ -512,19 +513,19 @@ See [initial mean values](layer4-mean-values.md),
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
 | Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; log^10 bound, existential coefficient |
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
-| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
+| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,315 build jobs, all 4,647 project theorem
-declarations audited with exactly matching independent inventories, 317 Lean
-files free of executable placeholders, and 177 independent consumers
-(132 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-15): 4,318 build jobs, all 4,659 project theorem
+declarations audited with exactly matching independent inventories, 320 Lean
+files free of executable placeholders, and 180 independent consumers
+(135 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
 N(σ,T) <= C_epsilon T^(3(1−σ)/(3σ−1)+epsilon), uniformly for
 σ∈[1/2,5/6] and all T>=2, retaining analytic multiplicities. Ingham covers
 the lower real parts. The independent restricted comparator is closed.
-The full curved benchmark still requires the range σ>5/6; Guth–Maynard
+The full curve now also covers σ>5/6, as documented below; Guth–Maynard
 and the sharp fourth moment remain open. See [the proof](layer4-small-mollifier-powers.md).
 
 **Further short-sum input (2026-11-14).** Actual logarithmic sums on every
@@ -547,7 +548,7 @@ now apply to the actual smoothed Mobius detector, retaining divided
 endpoints and a uniform X U^(−beta) cost on beta∈[0,1]. Power selection
 in the varying short window and upper exponent margins are also proved
 through sigma=1. Height-uniform long-block decay and the upper Type I count
-are now proved as described below; full upper density assembly remains open.
+are now proved as described below; the full upper density assembly is now also proved.
 See [the actual bounds](layer4-mobius-pointwise.md).
 
 **Upper-range actual Type I count (2026-11-15).** At Y=T, for each fixed
@@ -555,9 +556,17 @@ eta>0, 0<delta<=eta/16 and every epsilon>0, the actual tail count has the
 curved exponent uniformly on sigma∈[5/6+eta,1], T>=128 and
 T^delta<=X<=2T^delta. Varying-window short blocks, actual long-block decay,
 dyadic threshold exclusion and bounded heights are all proved. The independent
-`layer4_upper_typeI_comparator` is closed. The common-cutoff zero-sample
-split, transition-band treatment and upper multiplicity restoration remain
-open. See [the exact statement and proof](layer4-upper-typeI.md).
+`layer4_upper_typeI_comparator` is closed. The common-cutoff zero-sample split, transition-band treatment and upper
+multiplicity restoration are now proved below. See [the exact statement and proof](layer4-upper-typeI.md).
+
+**Full curved Huxley density (2026-11-15).** `huxley_curved_density_epsilon`
+proves N(sigma,T)<=C_epsilon T^(3(1-sigma)/(3sigma-1)+epsilon), with one
+coefficient uniform on sigma∈[1/2,1], every T>=2 and analytic multiplicities.
+`layer4_huxley_comparator` closes the independent `Huxley1972Density` target.
+Both actual detector branches at Y=T, the epsilon-sized transition band,
+height covers and multiplicity selection are proved. No open analytic input
+is assumed. Guth–Maynard and the sharp log^4 moment remain open; prime-gap
+transmission stays in Layer 5. See [the full proof](layer4-full-curved-huxley.md).
 
 **Acceptance criteria.**
 

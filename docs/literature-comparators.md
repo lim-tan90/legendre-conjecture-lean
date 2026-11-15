@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940 curved density proved with uniform epsilon and analytic multiplicities; sharp log^4, Huxley and Guth–Maynard remain open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940, global Huxley 12/5 and the full curved Huxley exponent proved, uniformly in sigma, with all heights and analytic multiplicities; sharp log^4 and Guth–Maynard remain open |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -99,9 +99,12 @@ epsilon in the height exponent. The verified `huxley_global_comparator` combines
 Ingham below σ=3/4 with Huxley above σ=3/4 to recover the global `12/5` target.
 The corresponding Guth–Maynard comparison combines its curved exponent with
 Ingham at σ=7/10 to recover `30/13`. These are conditional comparison bridges:
-the Ingham input is now supplied by `layer4_ingham_comparator`; Huxley and Guth–Maynard remain explicit open inputs. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
+the Ingham and full Huxley inputs are now supplied by the closed
+`layer4_ingham_comparator` and `layer4_huxley_comparator`; Guth–Maynard
+remains an explicit open input. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
 `ZetaFourthMomentExponent`; the sharper `ZetaFourthMoment` (log^4) remains
-open. Ingham 1940 density is proved; Layer 4 is incomplete. The 1937 short-interval comparators are still open.
+open. Ingham and full curved Huxley density are proved; the stronger Layer 4
+Guth–Maynard target is still open. The 1937 short-interval comparators are still open.
 
 ### Complete source coverage
 
@@ -335,7 +338,7 @@ An intentional use of the nonzero-ordinate kernel at t=0 is rejected.
 3(1−σ)/(3σ−1)+epsilon, uniformly for σ∈[1/2,5/6], T>=2, with analytic
 multiplicities. `layer4_huxley_restricted_comparator` is a closed proof and is
 included in the generated Layer 4 consumer. The full `Huxley1972Density`
-benchmark remains open above σ=5/6. This does not close the Huxley 1972
+benchmark is now also proved above σ=5/6, as documented below. This does not close the Huxley 1972
 prime-gap theorem, whose Layer 5 proof is a separate obligation.
 
 ### Actual short-sum Weyl input (2026-11-14)
@@ -360,4 +363,18 @@ one branch of the detector, not a full density theorem.
 polynomial bounds with a common X U^(−beta) cost, beta∈[0,1], Y>0 and
 abs(t)>=1. `layer4_actual_mobius_pointwise_comparator` is closed and included
 in the generated Layer 4 consumer. Integer floors and the extra divided
-endpoint are proved. The full upper-range curved-density theorem remains open.
+endpoint are proved. The full upper-range curved-density theorem is now
+proved by the assembly below.
+
+### Full curved Huxley proof (2026-11-15)
+
+`layer4_huxley_comparator : Huxley1972Density` is a closed witness for the
+independently stated exponent 3(1-sigma)/(3sigma-1)+epsilon, uniformly on
+sigma in [1/2,1], for every T>=2 and all analytic multiplicities. The actual
+Y=T detector branches use one integer cutoff; an epsilon-sized transition
+band avoids pointwise-in-sigma constants. The proved height cover and
+multiplicity selector complete the count. No open analytic hypothesis is
+used. The full target is removed from `open_analytic_targets` in the catalog,
+while Guth–Maynard and the sharp log^4 fourth moment stay open. Huxley 1972's
+7/12 prime-gap comparator remains a separate open Layer 5 claim.
+See [the proof and exact scope](layer4-full-curved-huxley.md).

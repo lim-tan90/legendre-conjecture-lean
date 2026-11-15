@@ -483,3 +483,11 @@ namespace and module visibility are changed. The retained license is
 `licenses/openai-math-Apache-2.0.txt`; both READMEs list the exact source URLs.
 Natural-index overlap and shifted logarithmic-derivative estimates are local
 code. This port alone asserts no new density or zeta subconvexity theorem.
+
+Upper curved-density assembly (2026-11-15) locally reuses the finite branch
+split of `HuxleyCurvedShell.lean` in `UpperHuxleyShell.lean`. The original
+`DensitySeparatedCount.lean` source remains pinned to openai/math commit
+`4eaee87548250b2682affda7d05d947c05554bae`, with the same retained Apache-2.0
+license. The common Y=T balance, transition-band inequality and full curved
+height/multiplicity assembly are local deductions. No additional upstream
+files were copied in this step.
