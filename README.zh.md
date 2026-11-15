@@ -750,6 +750,9 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 
 ### 1. [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)
 
+<details open>
+<summary>固定提交、许可证、移植文件与适配说明</summary>
+
 - **固定提交:** `d28713ac8245ca86a686b8c67370a8d19d81b242`
 - **许可证:** MIT — [retained license](Legendre/Nagura/LICENSE)
 - **本地位置:** [`Legendre/Nagura/`](Legendre/Nagura/) 与 [`Legendre/Nagura.lean`](Legendre/Nagura.lean)
@@ -765,7 +768,12 @@ mathlib v4.33.1（仓库于 2026 年 10 月升级到 v4.35.0 时重新校对）�
 本身来自上游。原始 MIT 许可证保留在
 [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
 
+</details>
+
 ### 2. [AlexKontorovich/PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
+
+<details open>
+<summary>固定提交、许可证、移植文件与适配说明</summary>
 
 - **固定提交:** `127b50e33f6033e2147921167a117af96d9ba4ea`
 - **许可证:** Apache-2.0 — [retained license](licenses/PNTplus-Apache-2.0.txt)
@@ -785,7 +793,12 @@ digamma 级数及尾和辅助证明，移至
 保留原贡献者说明及同一 Apache-2.0 许可证。
 详见[来源与限制](docs/pnt-provenance.md)。
 
+</details>
+
 ### 3. [openai/math](https://github.com/openai/math)
+
+<details open>
+<summary>固定提交、许可证、移植文件与适配说明</summary>
 
 - **固定提交:** `4eaee87548250b2682affda7d05d947c05554bae`
 - **许可证:** Apache-2.0 — [retained license](licenses/openai-math-Apache-2.0.txt)
@@ -973,7 +986,12 @@ Natural-index overlap identities and logarithmic shifted-phase estimates are loc
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
+</details>
+
 ### 4. [leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4)
+
+<details open>
+<summary>固定提交、许可证、移植文件与适配说明</summary>
 
 - **固定提交:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
 - **许可证:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
@@ -986,7 +1004,12 @@ Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
 `Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
 mathlib 的证明。
 
+</details>
+
 ### 5. [smccolm/Lean](https://github.com/smccolm/Lean)
+
+<details open>
+<summary>固定提交、许可证、移植文件与适配说明</summary>
 
 - **固定提交:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **许可证:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
@@ -1006,6 +1029,8 @@ mathlib 的证明。
 全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
 本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
 [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
+
+</details>
 
 </details>
 

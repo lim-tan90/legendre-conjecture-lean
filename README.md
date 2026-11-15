@@ -900,6 +900,9 @@ local-path and adaptation fields. Further ports from the same repository stay in
 
 ### 1. [ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)
 
+<details open>
+<summary>Pinned commit, license, files and adaptation details</summary>
+
 - **Pinned commit:** `d28713ac8245ca86a686b8c67370a8d19d81b242`
 - **License:** MIT — [retained license](Legendre/Nagura/LICENSE)
 - **Local paths:** [`Legendre/Nagura/`](Legendre/Nagura/) and [`Legendre/Nagura.lean`](Legendre/Nagura.lean)
@@ -917,7 +920,12 @@ upgraded in October 2026); the mathematical proof is the upstream one.
 The original MIT license is retained in
 [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE).
 
+</details>
+
 ### 2. [AlexKontorovich/PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)
+
+<details open>
+<summary>Pinned commit, license, files and adaptation details</summary>
 
 - **Pinned commit:** `127b50e33f6033e2147921167a117af96d9ba4ea`
 - **License:** Apache-2.0 — [retained license](licenses/PNTplus-Apache-2.0.txt)
@@ -941,7 +949,12 @@ into [`Legendre/PNT/Mathlib/Analysis/SpecialFunctions/Gamma/DigammaSeries.lean`]
 The original contributor notice and the same Apache-2.0 license are retained.
 See [provenance and limits](docs/pnt-provenance.md).
 
+</details>
+
 ### 3. [openai/math](https://github.com/openai/math)
+
+<details open>
+<summary>Pinned commit, license, files and adaptation details</summary>
 
 - **Pinned commit:** `4eaee87548250b2682affda7d05d947c05554bae`
 - **License:** Apache-2.0 — [retained license](licenses/openai-math-Apache-2.0.txt)
@@ -1143,7 +1156,12 @@ visibility are adapted; the retained license is
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
+</details>
+
 ### 4. [leanprover-community/mathlib4](https://github.com/leanprover-community/mathlib4)
+
+<details open>
+<summary>Pinned commit, license, files and adaptation details</summary>
 
 - **Pinned commit:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
 - **License:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
@@ -1156,7 +1174,12 @@ Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
 re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
 mathlib proof is copied into this repository.
 
+</details>
+
 ### 5. [smccolm/Lean](https://github.com/smccolm/Lean)
+
+<details open>
+<summary>Pinned commit, license, files and adaptation details</summary>
 
 - **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
@@ -1177,6 +1200,8 @@ supply `SamplingDispersion.lean`. All are adapted and compiled under the
 pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
 cubic-trace interface, while the analytic off-diagonal estimates and full
 central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+
+</details>
 
 </details>
 

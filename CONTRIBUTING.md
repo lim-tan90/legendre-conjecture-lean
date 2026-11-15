@@ -21,7 +21,9 @@ Thanks for helping with the formalization.
    paths). Give every source a prominent numbered **owner/repository** heading,
    using the same commit/license/local-path/adaptation fields. Keep the existing
    registration order, append new repositories, and group later ports from the
-   same repository under its existing heading. Retain the upstream license text and keep the attribution in the
+   same repository under its existing heading. Keep each repository heading
+   visible and put its details in a separate `<details open>` block (expanded
+   by default). Retain the upstream license text and keep the attribution in the
    adapted files.  This is required for every port, not only for Nagura.
 
 7. **Use layer directories for new Layer 5 and later work.** Place implementation
