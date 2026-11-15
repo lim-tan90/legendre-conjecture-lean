@@ -167,6 +167,19 @@ def ActualMobiusPointwiseBenchmark : Prop :=
         (n : ℂ)^(-((β : ℂ)+(t : ℂ)*Complex.I))‖ ≤
         C*(X : ℝ)*(U : ℝ)^(-β)*(1+Real.sqrt |t|+(U : ℝ)/Real.sqrt |t|))
 
+/-- The proved upper-range Type I branch at Y=T, with all uniformity explicit. -/
+def UpperHuxleyTypeIBenchmark : Prop :=
+  ∀ η δ ε : ℝ, 0 < η → 0 < δ → δ ≤ η/16 → 0 < ε →
+    ∃ C > 0, ∀ T σ : ℝ, 128 ≤ T → 5/6+η ≤ σ → σ ≤ 1 →
+      ∀ X : ℕ, T^δ ≤ (X : ℝ) → (X : ℝ) ≤ 2*T^δ →
+      ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Density.Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*Complex.I) T‖) →
+      (S.card : ℝ) ≤ C*T^(3*(1-σ)/(3*σ-1)+ε)
+
 /-- Guth--Maynard Theorem 1.2, retaining the curved exponent. -/
 def GuthMaynard2024Density : Prop := DensityPower (fun σ => 15*(1-σ)/(3+5*σ))
 

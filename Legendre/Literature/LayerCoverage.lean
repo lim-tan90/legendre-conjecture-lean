@@ -171,6 +171,11 @@ theorem layer4_actual_mobius_pointwise_comparator : ActualMobiusPointwiseBenchma
     apply hh.trans
     convert hp using 1 <;> (try dsimp [B,D,Density.Oscillation.secondDerivativeCost]) <;> ring
 
+/-- This is the actual polynomial branch; zero counting and multiplicities are separate. -/
+theorem layer4_upper_typeI_comparator : UpperHuxleyTypeIBenchmark := by
+  intro η δ ε hη hδ hδη hε
+  exact Density.Moment.huxley_upper_actual_tail_epsilon_count η δ ε hη hδ hδη hε
+
 theorem densityPower_iff (b : ℝ) :
     DensityPower (fun σ => b*(1-σ)) ↔ Zeta.HasZeroDensityEstimate b := Iff.rfl
 

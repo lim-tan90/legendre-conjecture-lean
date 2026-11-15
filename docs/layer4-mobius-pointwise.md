@@ -109,3 +109,7 @@ axioms occur. All 310 Lean files have zero executable proof placeholders.
 All 174 standalone consumers pass (129 Layer 4, 9 Layer 3, 36 literature).
 All four deliberate contract/power-confusion guards are rejected for the
 expected type mismatch.
+
+Subsequent progress: [upper-range actual Type I count](layer4-upper-typeI.md)
+now proves the branch count away from 5/6, including uniform long-block
+exclusion and bounded heights. The full upper zero-density assembly remains open.

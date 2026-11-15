@@ -6,7 +6,7 @@ Local conversion of integer-power selection to actual Dirichlet-block lengths.
 The real-part range is retained explicitly.
 -/
 module
-public import Legendre.Layer4.HuxleyPowerSelection
+public import Legendre.Layer4.UpperHuxleyParameters
 public import Legendre.Layer4.HalaszPoweredBlock
 
 @[expose] public section
@@ -49,7 +49,7 @@ theorem huxley_short_length_power (T δ σ : ℝ) (U : ℕ) (hT : 2 ≤ T) (hδ 
 
 /-- The actual powered-length window controls both analytic count numerators. -/
 theorem huxley_powered_length_terms (T σ : ℝ) (U k K : ℕ) (hT : 2 ≤ T)
-    (hU : 1 ≤ U) (hkK : k ≤ K) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 5/6)
+    (hU : 1 ≤ U) (hkK : k ≤ K) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 1)
     (hlo : T^huxleyPowerLower σ ≤ (U : ℝ)^k)
     (hhi : (U : ℝ)^k ≤ T^huxleyPowerUpper σ) :
     (((2*U : ℕ)^k : ℝ)^(2-2*σ) ≤ (2 : ℝ)^(2*K)*T^huxleyCurvedExponent σ) ∧
@@ -57,10 +57,7 @@ theorem huxley_powered_length_terms (T σ : ℝ) (U k K : ℕ) (hT : 2 ≤ T)
   have hTp : 0 < T := by linarith
   have hUp : (0 : ℝ) < U := by exact_mod_cast (lt_of_lt_of_le Nat.zero_lt_one hU)
   have hexps := huxley_power_window_exponents σ (huxleyPowerUpper σ) hσ hσu
-    ⟨by
-      obtain ⟨hA,_,_,he⟩ := huxley_power_window_bounds σ hσ hσu
-      rw [he]
-      nlinarith,le_rfl⟩
+    ⟨(huxley_general_window_bounds σ hσ hσu).2.2.1,le_rfl⟩
   constructor
   · have h2exp : 0 ≤ 2-2*σ := by linarith
     have htwo : ((2 : ℝ)^k)^(2-2*σ) ≤ (2 : ℝ)^(2*K) := by

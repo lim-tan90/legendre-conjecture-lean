@@ -455,6 +455,13 @@ import all Legendre.Layer4.DetectorDivisorBlocks
 import all Legendre.Layer4.DetectorDividedPrefixes
 import all Legendre.Layer4.DetectorMobiusPointwise
 import all Legendre.Layer4.UpperHuxleyParameters
+import all Legendre.Layer4.HuxleyWindowBlockEpsilon
+import all Legendre.Layer4.UpperHuxleyShortBlocks
+import all Legendre.Layer4.UpperHuxleyPowerBounds
+import all Legendre.Layer4.UpperHuxleyCosts
+import all Legendre.Layer4.UpperHuxleyLongBlocks
+import all Legendre.Layer4.UpperHuxleyLongExclusion
+import all Legendre.Layer4.UpperHuxleyTail
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5211,3 +5218,34 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_cutoff_endpoints_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_margin_nine_tenths_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_short_power_one_consumer"
+
+-- Upper-range actual Type I count and its independent consumers.
+#print axioms Legendre.Density.Moment.height_monomial_le
+#print axioms Legendre.Density.Moment.huxley_actual_long_block_decay
+#print axioms Legendre.Density.Moment.huxley_long_blocks_below_threshold
+#print axioms Legendre.Density.Moment.huxley_long_cost_decay
+#print axioms Legendre.Density.Moment.huxley_long_power_bounds
+#print axioms Legendre.Density.Moment.huxley_medium_cost_decay
+#print axioms Legendre.Density.Moment.huxley_medium_power_bounds
+#print axioms Legendre.Density.Moment.huxley_upper_actual_tail_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_varying_cutoff_length_power
+#print axioms Legendre.Density.Moment.huxley_varying_short_block_epsilon_count
+#print axioms Legendre.Density.Moment.huxley_window_block_epsilon_count
+#print axioms Legendre.Density.Moment.shell_negative_power
+#print axioms Legendre.Density.Moment.shell_ratio_power
+#print axioms Legendre.Density.Moment.shell_reciprocal_power
+#print axioms Legendre.Literature.UpperHuxleyTypeIBenchmark._proof_1
+#print axioms Legendre.Literature.UpperHuxleyTypeIBenchmark._proof_2
+#print axioms Legendre.Literature.layer4_upper_typeI_comparator
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_cutoff_length_power._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyShortBlocks.0.Legendre.Density.Moment.huxley_varying_short_block_epsilon_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.UpperHuxleyTail.0.Legendre.Density.Moment.huxley_upper_actual_tail_epsilon_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_shell_reciprocal_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_negative_shell_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_upper_typeI_one_consumer"

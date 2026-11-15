@@ -518,6 +518,13 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.117 | Divided endpoints and real weights | [DetectorDividedPrefixes.lean](../Legendre/Layer4/DetectorDividedPrefixes.lean) | **proved**; extra endpoint 2m+1 and uniform factor two for beta∈[0,1] |
 | 4.118 | Actual Mobius pointwise cancellation | [DetectorMobiusPointwise.lean](../Legendre/Layer4/DetectorMobiusPointwise.lean); `layer4_actual_mobius_pointwise_comparator` | **proved**; both analytic bounds for actual smoothed blocks, common X U^(−beta) cost; no density conclusion asserted |
 | 4.119 | Upper-range short window and exponent margins | [UpperHuxleyParameters.lean](../Legendre/Layer4/UpperHuxleyParameters.lean) | **proved algebra**; c=3/(4(3σ−1)), σ∈[3/4,1], bounded integer power; long-block exponents ≤−eta/8 when σ≥5/6+eta |
+| 4.120 | Powered-window count through sigma=1 | [HuxleyWindowBlockEpsilon.lean](../Legendre/Layer4/HuxleyWindowBlockEpsilon.lean) | **proved**; selection separated from the powered count, actual d(n)^r coefficients and uniform W^(-6K) cost |
+| 4.121 | Actual varying-cutoff short blocks | [UpperHuxleyShortBlocks.lean](../Legendre/Layer4/UpperHuxleyShortBlocks.lean) | **proved**; T^delta<=U<=T^(3/(4(3sigma−1))), sigma in [3/4,1] |
+| 4.122 | Uniform real-power decay | [UpperHuxleyPowerBounds.lean](../Legendre/Layer4/UpperHuxleyPowerBounds.lean) | **proved**; all medium/long terms bounded by T^(-eta/8), with shell reciprocal losses explicit |
+| 4.123 | Actual height-shell cost normalization | [UpperHuxleyCosts.lean](../Legendre/Layer4/UpperHuxleyCosts.lean) | **proved**; T/2<=abs(t)<=T, two estimates meeting at U=T^(3/5) |
+| 4.124 | Actual long Mobius-block decay | [UpperHuxleyLongBlocks.lean](../Legendre/Layer4/UpperHuxleyLongBlocks.lean) | **proved**; one absolute D, norm<=D X T^(-eta/8), beta in [sigma,1], positive arbitrary smoothing |
+| 4.125 | Uniform exclusion at the dyadic threshold | [UpperHuxleyLongExclusion.lean](../Legendre/Layer4/UpperHuxleyLongExclusion.lean) | **proved**; eta>0, delta<=eta/16 and actual J<=(2/log2) log T give strict norm<1/(16J) above a common height |
+| 4.126 | Upper-range actual Type I tail count | [UpperHuxleyTail.lean](../Legendre/Layer4/UpperHuxleyTail.lean) | **proved**; all T>=128, fixed eta>0, sigma in [5/6+eta,1], T^delta<=X<=2T^delta and 0<delta<=eta/16; closed independent comparator, full upper zero-density assembly still open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -739,3 +746,15 @@ selection, varying-cutoff endpoints and strict exponent margins. The guards
 reject a fixed half-length upper window, removal of beta<=1, use of the
 restricted density proof as the full benchmark and pointwise/convolution
 power confusion. Full upper-range density assembly remains open.
+
+Upper-range Type I validation (2026-11-15): full build 4,315 jobs; all
+4,647 project theorem declarations (including private/generated declarations)
+match the module-data inventory, independent environment inventory, audit
+targets and actual axiom output exactly. Only propext, Classical.choice and
+Quot.sound occur. All 317 classified Lean files are free of executable
+placeholders and prohibited shortcuts. All 177 independent consumers pass
+(132 Layer 4, nine Layer 3, 36 literature). New consumers cover the actual
+tail at sigma=1, the negative shell endpoint and the sharp reciprocal loss.
+Deliberate eta=0 and excessive-cutoff misuse is rejected by type mismatch.
+No new external code was ported. Full curved upper zero-density assembly
+and its multiplicity restoration remain open.

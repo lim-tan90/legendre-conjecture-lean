@@ -124,6 +124,15 @@ public import Legendre.Layer4.HuxleyHeightDensity
 public import Legendre.Layer4.HuxleyParameters
 public import Legendre.Layer4.HuxleyShellDensity
 
+
+public import Legendre.Layer4.HuxleyWindowBlockEpsilon
+public import Legendre.Layer4.UpperHuxleyShortBlocks
+public import Legendre.Layer4.UpperHuxleyPowerBounds
+public import Legendre.Layer4.UpperHuxleyCosts
+public import Legendre.Layer4.UpperHuxleyLongBlocks
+public import Legendre.Layer4.UpperHuxleyLongExclusion
+public import Legendre.Layer4.UpperHuxleyTail
+
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density
 

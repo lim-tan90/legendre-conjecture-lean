@@ -3,7 +3,8 @@ Copyright (c) 2026 The Legendre formalization contributors.
 Released under Apache 2.0 license as described in the file LICENSE.
 
 Local integer-power selection for the classical curved density strategy.
-The range [3/4,5/6] is explicit; no density bound is asserted by this algebra.
+Fixed square-root selection uses [3/4,5/6]; the exponent algebra extends to 1.
+No density bound is asserted by this algebra.
 -/
 module
 public import Legendre.Layer4.HuxleyDensity
@@ -65,7 +66,7 @@ theorem huxley_short_block_power (δ u σ : ℝ) (hδ : 0 < δ) (hδu : δ ≤ u
       linarith
 
 /-- Both terms of the proved classical large-value estimate fit the curved exponent. -/
-theorem huxley_power_window_exponents (σ v : ℝ) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 5/6)
+theorem huxley_power_window_exponents (σ v : ℝ) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 1)
     (hv : huxleyPowerLower σ ≤ v ∧ v ≤ huxleyPowerUpper σ) :
     v*(2-2*σ) ≤ huxleyCurvedExponent σ ∧
       1+v*(4-6*σ) ≤ huxleyCurvedExponent σ := by

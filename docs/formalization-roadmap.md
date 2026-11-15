@@ -514,10 +514,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; stronger curved Huxley/Guth–Maynard Props remain explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,308 build jobs, all 4,618 project theorem
-declarations audited with exactly matching independent inventories, 310 Lean
-files free of executable placeholders, and 174 independent consumers
-(129 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+Full validation (2026-11-15): 4,315 build jobs, all 4,647 project theorem
+declarations audited with exactly matching independent inventories, 317 Lean
+files free of executable placeholders, and 177 independent consumers
+(132 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -546,9 +546,18 @@ See [the exact scope](layer4-weighted-long-detector.md).
 now apply to the actual smoothed Mobius detector, retaining divided
 endpoints and a uniform X U^(−beta) cost on beta∈[0,1]. Power selection
 in the varying short window and upper exponent margins are also proved
-through sigma=1. Height-uniform long-block decay, short-block counts and
-full upper density assembly remain open.
+through sigma=1. Height-uniform long-block decay and the upper Type I count
+are now proved as described below; full upper density assembly remains open.
 See [the actual bounds](layer4-mobius-pointwise.md).
+
+**Upper-range actual Type I count (2026-11-15).** At Y=T, for each fixed
+eta>0, 0<delta<=eta/16 and every epsilon>0, the actual tail count has the
+curved exponent uniformly on sigma∈[5/6+eta,1], T>=128 and
+T^delta<=X<=2T^delta. Varying-window short blocks, actual long-block decay,
+dyadic threshold exclusion and bounded heights are all proved. The independent
+`layer4_upper_typeI_comparator` is closed. The common-cutoff zero-sample
+split, transition-band treatment and upper multiplicity restoration remain
+open. See [the exact statement and proof](layer4-upper-typeI.md).
 
 **Acceptance criteria.**
 

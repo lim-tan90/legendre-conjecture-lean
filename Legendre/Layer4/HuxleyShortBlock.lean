@@ -98,7 +98,7 @@ theorem huxley_short_block_epsilon_count (r : ℕ) (δ ε : ℝ) (hδ : 0 < δ) 
     change C*(((2 : ℝ)^K)^η*T^(2*η)) ≤ D*T^(2*η)
     dsimp [D]
     nlinarith [Real.rpow_pos_of_pos hTp (2*η)]
-  have hc := halasz_powered_window_count S t β a U k K hU1 hk hkK T σ W A hT hσ hσu
+  have hc := halasz_powered_window_count S t β a U k K hU1 hk hkK T σ W A hT hσ (by linarith)
     hW hW1 hA hlo hhi ht hβ hs haA hw
   change (S.card : ℝ) ≤ B*A^6/W^(6*K)*T^huxleyCurvedExponent σ*(1+Real.log T)^16 at hc
   have hA6 : A^6 = D^6*T^(ε/2) := by

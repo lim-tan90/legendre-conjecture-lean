@@ -35,7 +35,7 @@ theorem powered_length_log_bound (T Y : ℝ) (K : ℕ) (hT : 2 ≤ T) (hY : 1 �
 /-- Both analytic terms now have the curved exponent, with every finite loss displayed. -/
 theorem halasz_powered_window_count {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
     (a : ℕ → ℂ) (U k K : ℕ) (hU : 1 ≤ U) (hk : 1 ≤ k) (hkK : k ≤ K)
-    (T σ W A : ℝ) (hT : 2 ≤ T) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 5/6)
+    (T σ W A : ℝ) (hT : 2 ≤ T) (hσ : 3/4 ≤ σ) (hσu : σ ≤ 1)
     (hW : 0 < W) (hW1 : W ≤ 1) (hA : 1 ≤ A)
     (hlo : T^huxleyPowerLower σ ≤ (U : ℝ)^k)
     (hhi : (U : ℝ)^k ≤ T^huxleyPowerUpper σ)

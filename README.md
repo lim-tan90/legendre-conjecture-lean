@@ -69,7 +69,7 @@
 > equivalent.  The analytic proofs themselves remain **open**.
 
 <details>
-<summary><strong>Layer 4 — restricted curved density and actual Mobius cancellation (2026-11-15)</strong></summary>
+<summary><strong>Layer 4 — restricted curved density and upper-range Type I count (2026-11-15)</strong></summary>
 
 **Import:** `import Legendre.Layer4`. For every finite Dirichlet polynomial
 `P(t)=Σ_{1≤n≤N} a(n)n^(−it)`, the proved mean-square deviation from
@@ -139,26 +139,36 @@ The weighted short sum is now bounded uniformly for every `β≥0`, with
 factor `U^(1/2−β)`. A general-length version retains all three differencing
 terms. At smoothing length `Y=T`, the actual Type II branch has the improved
 bound `C_ε T^(3−4σ+4δ+ε)` for `X≤2T^δ`, with all principal-pole constraints.
-The remaining upper-range polynomial-count assembly is still open.
+The upper-range polynomial branch is now counted away from sigma=5/6, as described below.
 [Exact statements and verification](docs/layer4-weighted-long-detector.md).
 
 **New (2026-11-15):** both Weyl and second-derivative pointwise estimates
 now control the actual Mobius-smoothed detector blocks, with a uniform
 `X U^(−β)` cost for β∈[0,1]. Exact divisor reindexing, integer-floor endpoints
 and compact smoothing are proved. The varying short-window power selection
-and strict upper exponent margins are also proved through σ=1. The full
-upper-range Type I count and density assembly remain open.
+and strict upper exponent margins are also proved through σ=1. The
+upper-range Type I branch is counted below; the full density assembly remains open.
 [Actual coefficients, bounds and remaining steps](docs/layer4-mobius-pointwise.md).
+
+**Upper-range Type I count (2026-11-15):** the actual detector tail at `Y=T`
+now satisfies `R ≤ C T^(3(1−σ)/(3σ−1)+ε)`, uniformly for
+`σ∈[5/6+η,1]`, each fixed `η>0`, `0<δ≤η/16` and
+`T^δ≤X≤2T^δ`. The proof counts the varying short window, excludes long
+blocks with uniform height decay and covers finite heights by unit separation.
+The independent `layer4_upper_typeI_comparator` is closed. The common-cutoff
+zero-sample split, the band next to `5/6` and upper-range multiplicity
+restoration remain to be assembled.
+[Exact scope and proof](docs/layer4-upper-typeI.md).
 
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The stronger
 curved Huxley benchmark, Guth–Maynard and the sharp fourth-moment `log^4` remain
 explicit open targets. None is assumed in the global `12/5` proof.
 
-Validation (2026-11-15): **4,308 build jobs**, all **4,618 project theorem
-declarations** audited with only the three standard axioms, and **310 Lean files**
+Validation (2026-11-15): **4,315 build jobs**, all **4,647 project theorem
+declarations** audited with only the three standard axioms, and **317 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **174 independent consumers** pass: **129 Layer 4**, nine Layer 3 and
+All **177 independent consumers** pass: **132 Layer 4**, nine Layer 3 and
 36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
@@ -172,6 +182,9 @@ The newest checks retain divided-floor endpoints, zero Mobius cutoff,
 actual smoothing and nonempty detector blocks, negative ordinates,
 power selection at sigma=1 and strict upper exponent margins. Lean rejects
 using a fixed half-length window for the upper range or removing beta<=1.
+New consumers check the sigma=1 actual tail count, negative shell endpoint
+and sharp reciprocal factor; Lean rejects eta=0 and a cutoff exponent
+larger than eta/16 in long-block exclusion.
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
 Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
@@ -487,7 +500,9 @@ acceptance requirements are fulfilled; the stronger curved Huxley and
 Guth–Maynard benchmarks remain open.
 Restricted curved density is now proved on σ∈[1/2,5/6], including all heights
 and multiplicities. The full curved benchmark above 5/6 remains open; this
-progress does not change the historical short-interval proof statuses below.
+progress does not change the historical short-interval proof statuses below. The actual Type I branch at Y=T now has the curved exponent uniformly on
+[5/6+eta,1] for each eta>0, including finite heights; the remaining upper
+zero-density assembly is still open.
 
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -537,6 +552,7 @@ The completed analytic milestones supporting this program are:
 
 | Analytic milestone | Current proved estimate | Lean proof and scope |
 |---|---|---|
+| Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). Full upper zero-density assembly remains open. |
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
 | Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The proved logarithmic form has `log^10 T`; the original sharp `log^5 T` is not claimed. |
 | Global Huxley density (Layer 4) | `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` for every `ε>0` | **✅ Proved**: [`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean), closed [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean); uniform σ∈[1/2,1], T≥2, all analytic multiplicities. A stronger intermediate bound holds on σ∈[3/4,1]. The paper-exact curved Huxley benchmark remains open. |

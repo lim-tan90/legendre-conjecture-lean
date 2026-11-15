@@ -804,7 +804,7 @@ theorem layer4_huxley_short_power_consumer :
 theorem layer4_huxley_power_exponents_endpoint_consumer :
     (2/3 : ℝ)*(2-2*(5/6)) ≤ 1/3 ∧ 1+(2/3 : ℝ)*(4-6*(5/6)) ≤ 1/3 := by
   have hh := Moment.huxley_power_window_exponents (5/6) (2/3)
-    (by norm_num) le_rfl (by norm_num [Moment.huxleyPowerLower,Moment.huxleyPowerUpper])
+    (by norm_num) (by norm_num) (by norm_num [Moment.huxleyPowerLower,Moment.huxleyPowerUpper])
   convert! hh using 1 <;> norm_num [Moment.huxleyCurvedExponent]
 
 /-- The k=1 decomposition preserves the original, single dyadic block exactly. -/
@@ -1090,5 +1090,38 @@ theorem layer4_upper_margin_nine_tenths_consumer :
       -(9/10 : ℝ)*Moment.huxleyShortCutoff (9/10) ≤ -(1/100 : ℝ)/8 ∧
       1/2-(9/10 : ℝ) ≤ -(1/100 : ℝ)/8 := by
   exact Moment.huxley_upper_exponent_margins (1/100) (9/10) (by norm_num) (by norm_num) (by norm_num)
+
+/-- At the right real-part endpoint the actual Type I estimate still has arbitrary epsilon. -/
+theorem layer4_upper_typeI_one_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 128 ≤ T → ∀ X : ℕ,
+      T^(1/256 : ℝ) ≤ (X : ℝ) → (X : ℝ) ≤ 2*T^(1/256 : ℝ) →
+      ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorTail X ((1 : ℂ)+(t i : ℂ)*Complex.I) T‖) →
+      (S.card : ℝ) ≤ C*T^(1/100 : ℝ) := by
+  obtain ⟨C,hC,hb⟩ := Moment.huxley_upper_actual_tail_epsilon_count (1/12) (1/256) (1/100)
+    (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT X hXlo hXhi ι S t ht hs hw
+  have hh := hb T 1 hT (by norm_num) le_rfl X hXlo hXhi S t (fun _ => 1) ht
+    (fun _ _ => ⟨le_rfl,le_rfl⟩) hs hw
+  simpa only [Moment.huxleyCurvedExponent,sub_self,mul_zero,zero_div,zero_add] using! hh
+
+/-- At a negative shell endpoint the second-derivative decay retains the same constant. -/
+theorem layer4_upper_negative_shell_consumer (T : ℝ) (U : ℕ) (hT : 2 ≤ T)
+    (hU : 1 ≤ U) (hlo : T^(3/5 : ℝ) ≤ (U : ℝ)) (hhi : (U : ℝ) ≤ T) :
+    (U : ℝ)^(-(9/10 : ℝ))*(Oscillation.secondDerivativeCost U (-T)+1) ≤
+      (3*Oscillation.logarithmicSecondConstant+1)*T^(-(1/800 : ℝ)) := by
+  have ht : T/2 ≤ |(-T)| ∧ |(-T)| ≤ T := by rw [abs_neg,abs_of_nonneg (by linarith : 0 ≤ T)]; constructor <;> linarith
+  convert Moment.huxley_long_cost_decay T U (1/100) (9/10) (-T) hT hU
+    (by norm_num) (by norm_num) (by norm_num) hlo hhi ht using 1 <;> norm_num
+
+/-- The reciprocal shell loss includes q=1, with equality at its lower height. -/
+theorem layer4_shell_reciprocal_endpoint_consumer (T : ℝ) (hT : 0 < T) :
+    1/(T/2) ≤ 2*T^(-1 : ℝ) := by
+  simpa only [Real.rpow_one] using!
+    Moment.shell_reciprocal_power T (T/2) 1 hT le_rfl zero_le_one le_rfl
 
 end Legendre.Tests
