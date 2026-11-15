@@ -180,11 +180,20 @@ outer comparator is closed; the full target is equivalent to the explicitly
 open central input on **(7/10,4/5)**. At σ=3/4, its `5/9` target is strictly
 stronger than the classical `3/5` bound. [Exact reduction](docs/layer4-guth-maynard-range.md).
 
-Validation (2026-11-15): **4,319 build jobs**, all **4,667 project theorem
-declarations** audited with only the three standard axioms, and **321 Lean files**
+**Finite Guth–Maynard sampling (2026-11-15):** actual matrix samples now
+satisfy `R³V⁶ ≤ E³(4D+8N³)`, where E is the actual coefficient energy and
+D is the centered cubic Gram trace. The independent
+`layer4_guth_sampling_trace_comparator` is closed. All five source modules
+are adapted to **Lean 4.35.0**, with exact sources and MIT-0 license recorded
+in the reuse section below. Analytic off-diagonal estimates and the central
+Guth–Maynard density target remain open.
+[Proof and scope](docs/layer4-guth-sampling-trace.md).
+
+Validation (2026-11-15): **4,324 build jobs**, all **4,787 project theorem
+declarations** audited with only the three standard axioms, and **326 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **182 independent consumers** pass: **137 Layer 4**, nine Layer 3 and
+All **186 independent consumers** pass: **141 Layer 4**, nine Layer 3 and
 36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
@@ -207,6 +216,9 @@ density, or using the density theorem as the 7/12 prime-gap theorem.
 Outer-range consumers check both joining exponents with the same coefficient
 and the strict middle-range gap; Lean rejects treating the outer count or
 the central equivalence as a proof of the full Guth–Maynard estimate.
+Sampling consumers check a nonzero plateau entry, the literal left endpoint,
+flat-spectrum average branch and negative-axis conjugation. Lean rejects
+discarding the average branch or treating the finite trace count as central density.
 Locally verified full curved Huxley proof commit: [`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a) ([proof and scope](docs/layer4-full-curved-huxley.md)).
 Locally verified upper Type I proof commit: [`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673) ([exact scope](docs/layer4-upper-typeI.md)).
 Actual Mobius cancellation proof commit: [`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51).
@@ -521,7 +533,9 @@ are proved. The full curve is uniform on σ∈[1/2,1], for every T≥2, with
 analytic multiplicities and arbitrary positive ε. Guth–Maynard density and
 the sharp `log^4` fourth moment remain open. The Guth–Maynard outer ranges
 [1/2,7/10] and [4/5,1] are proved; its remaining input is exactly the open
-interval (7/10,4/5). The nine historical
+interval (7/10,4/5). The actual finite sampling matrix and cubic trace
+dispersion stage are also proved; its analytic trace bounds remain open.
+The nine historical
 short-interval exponent results below still have statement-level
 formalizations only: these analytic density results do not yet close the
 Ingham 1937 or Huxley 1972 prime-gap proofs.
@@ -574,6 +588,7 @@ The completed analytic milestones supporting this program are:
 
 | Analytic milestone | Current proved estimate | Lean proof and scope |
 |---|---|---|
+| Guth–Maynard finite sampling/trace interface (Layer 4) | `R³V⁶ ≤ E³(4D+8N³)`, D the centered cubic Gram trace | **✅ Proved**: [sampling dispersion](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) and closed independent comparator. Actual polynomials, arbitrary coefficient energy; finite matrix stage only. Analytic trace estimates and central density remain open. |
 | Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
@@ -1111,6 +1126,19 @@ visibility are adapted; the retained license is
 |---|---|
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
+
+* **Guth–Maynard finite sampling and trace dispersion**, adapted from
+  [Scott McColm's Lean repository](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard), fixed commit
+  `4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
+  [license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
+  [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
+  `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
+  `TraceDispersion` supply four adapted modules; selected first-trace and
+  dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
+  supply `SamplingDispersion.lean`. All are adapted and compiled under the
+  pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
+  cubic-trace interface, while the analytic off-diagonal estimates and full
+  central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 

@@ -225,6 +225,21 @@ theorem huxley_global_comparator (hi : Ingham1940Density) (hh : Huxley1972Densit
 theorem layer4_guth_maynard_outer_comparator : GuthMaynard2024OuterDensity :=
   Zeta.guth_maynard_outer_density_epsilon
 
+/-- The sampling benchmark contains the literal polynomial, coefficient energy and traces. -/
+theorem layer4_guth_sampling_trace_comparator : GuthMaynardSamplingTraceBenchmark := by
+  intro cutoff N W hW b V hV hLarge
+  have hh := Density.GuthMaynard.gm_largeValues_energy_dispersion cutoff N W hW b V hV
+    (by simpa only [Density.GuthMaynard.gmSmoothDirichletPoly,
+      Density.GuthMaynard.dyadicInterval] using hLarge)
+  rw [Density.GuthMaynard.gmCubicSpectralDispersion_eq_trace] at hh
+  have he : (∑ n : Density.GuthMaynard.GMColumn N, ‖b n‖^2) =
+      ∑ n ∈ Finset.Ioc N (2*N), ‖b n‖^2 := by
+    change (∑ n : {n : ℕ // n ∈ Finset.Ioc N (2*N)}, ‖b n‖^2) = _
+    rw [Finset.univ_eq_attach]
+    exact Finset.sum_attach (Finset.Ioc N (2*N)) (fun n => ‖b n‖^2)
+  rw [he] at hh
+  exact hh
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by

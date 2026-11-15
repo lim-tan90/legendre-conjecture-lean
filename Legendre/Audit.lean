@@ -466,6 +466,11 @@ import all Legendre.Layer4.UpperHuxleyShell
 import all Legendre.Layer4.HuxleyFullShell
 import all Legendre.Layer4.HuxleyFullDensity
 import all Legendre.Layer4.GuthMaynardOuterRange
+import all Legendre.Layer4.GuthMaynard.Polynomial
+import all Legendre.Layer4.GuthMaynard.Definitions
+import all Legendre.Layer4.GuthMaynard.SamplingMatrix
+import all Legendre.Layer4.GuthMaynard.TraceDispersion
+import all Legendre.Layer4.GuthMaynard.SamplingDispersion
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -5277,3 +5282,125 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.Zeta.guth_maynard_outer_density_epsilon
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_guth_middle_strict_gap_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_guth_outer_common_endpoints_consumer"
+
+-- Finite Guth--Maynard sampling and trace dispersion, including all ported private/generated theorems.
+#print axioms Legendre.Density.GuthMaynard.ApproxAddEnergy.eq_1
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.bounded
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.equals_one
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.exists_iteratedFDeriv_bound
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.mk.inj
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.mk.injEq
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.mk.sizeOf_spec
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.nonneg
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.smooth
+#print axioms Legendre.Density.GuthMaynard.GMSmoothCutoff.support
+#print axioms Legendre.Density.GuthMaynard.Matrix.IsHermitian.l2_opNorm_le_eigenvalue
+#print axioms Legendre.Density.GuthMaynard.Matrix.IsHermitian.trace_cube_eq_sum_eigenvalues_cube
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_eq_zero_of_neg
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_le_card_pow_four
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_mono
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_nonneg
+#print axioms Legendre.Density.GuthMaynard.approximateAdditiveQuadruples.eq_1
+#print axioms Legendre.Density.GuthMaynard.approximateAdditiveQuadruples_mono
+#print axioms Legendre.Density.GuthMaynard.card_sq_le_approxAddEnergy
+#print axioms Legendre.Density.GuthMaynard.convolution_support
+#print axioms Legendre.Density.GuthMaynard.coordinate_le_trace_dispersion
+#print axioms Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max
+#print axioms Legendre.Density.GuthMaynard.dirichletPoly_translate
+#print axioms Legendre.Density.GuthMaynard.dyadicInterval.eq_1
+#print axioms Legendre.Density.GuthMaynard.exists_gmMatrixOperatorNorm_le_singularValue
+#print axioms Legendre.Density.GuthMaynard.exists_gmSmoothCutoff
+#print axioms Legendre.Density.GuthMaynard.gmCoefficientVector.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCoefficient_energy_le
+#print axioms Legendre.Density.GuthMaynard.gmCubicSpectralDispersion.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicSpectralDispersion_eq_trace
+#print axioms Legendre.Density.GuthMaynard.gmCubicSpectralDispersion_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCutoffColumnMass.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCutoffColumnMass_le
+#print axioms Legendre.Density.GuthMaynard.gmCutoffColumnMass_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmDyadicInterval_card
+#print axioms Legendre.Density.GuthMaynard.gmMatrix.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmMatrixEntry.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmMatrixOperatorNorm.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmMatrixSingularValue_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmMatrixSingularValue_sixth
+#print axioms Legendre.Density.GuthMaynard.gmMatrixSingularValue_sq
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_energy_le_operatorNorm
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_first_spectral_moment_eq
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_first_spectral_moment_le
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_first_spectral_moment_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_apply_eq_phase_sum
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_eigenvalue_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_isHermitian
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_posSemidef
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_trace_eq_cutoff_sum
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_gram_trace_expand
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_mulVec_apply
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_mul_conjTranspose_apply
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_operatorNorm_le_trace_dispersion
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_operatorNorm_sixth_le_dispersion
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_sample_energy_lower
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_singularValue_le_trace_dispersion
+#print axioms Legendre.Density.GuthMaynard.gmMatrix_singularValue_sixth_le_dispersion_max
+#print axioms Legendre.Density.GuthMaynard.gmR.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmR_one
+#print axioms Legendre.Density.GuthMaynard.gmR_reciprocal
+#print axioms Legendre.Density.GuthMaynard.gmSmoothDirichletPoly.eq_1
+#print axioms Legendre.Density.GuthMaynard.gm_largeValues_card_le_operatorNorm
+#print axioms Legendre.Density.GuthMaynard.gm_largeValues_energy_dispersion
+#print axioms Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion
+#print axioms Legendre.Density.GuthMaynard.matrix_trace_cube_expand
+#print axioms Legendre.Density.GuthMaynard.norm_conjugateCoeffs
+#print axioms Legendre.Density.GuthMaynard.norm_gmR_le_card
+#print axioms Legendre.Density.GuthMaynard.norm_gmR_reciprocal
+#print axioms Legendre.Density.GuthMaynard.norm_normalizedCoeffs_le
+#print axioms Legendre.Density.GuthMaynard.norm_phaseShiftCoeffs
+#print axioms Legendre.Density.GuthMaynard.norm_sourceDirichletPoly_conjugateCoeffs
+#print axioms Legendre.Density.GuthMaynard.phaseShiftCoeffs.eq_1
+#print axioms Legendre.Density.GuthMaynard.publishedDyadicInterval.eq_1
+#print axioms Legendre.Density.GuthMaynard.publishedSourceDirichletPoly.eq_1
+#print axioms Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_left_add
+#print axioms Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_source_of_left_eq_zero
+#print axioms Legendre.Density.GuthMaynard.sixthMoment_dispersion_nonneg
+#print axioms Legendre.Density.GuthMaynard.sixthMoment_tail_lower
+#print axioms Legendre.Density.GuthMaynard.sixthRoot_cubic_bound
+#print axioms Legendre.Density.GuthMaynard.sixthRoot_dispersion_bound
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly.eq_1
+#print axioms Legendre.Literature.layer4_guth_sampling_trace_comparator
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Definitions.0.Legendre.Density.GuthMaynard.approximateAdditiveQuadruples_mono._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Definitions.0.Legendre.Density.GuthMaynard.approximateAdditiveQuadruples_mono._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Definitions.0.Legendre.Density.GuthMaynard.card_sq_le_approxAddEnergy._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Definitions.0.Legendre.Density.GuthMaynard.card_sq_le_approxAddEnergy._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.dirichletPoly_translate._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.norm_normalizedCoeffs_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.norm_sourceDirichletPoly_conjugateCoeffs._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_left_add._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_left_add._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_left_add._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Polynomial.0.Legendre.Density.GuthMaynard.publishedSourceDirichletPoly_eq_left_add._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gmCubicSpectralDispersion_eq_trace._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gmDyadicInterval_card._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingDispersion.0.Legendre.Density.GuthMaynard.gm_largeValues_raw_dispersion._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingMatrix.0.Legendre.Density.GuthMaynard.gmCoefficient_energy_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SamplingMatrix.0.Legendre.Density.GuthMaynard.gmMatrix_gram_apply_eq_phase_sum._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.TraceDispersion.0.Legendre.Density.GuthMaynard.coordinate_sixth_le_trace_dispersion_max._simp_1_9"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GuthMaynard.dyadicInterval.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GuthMaynard.publishedDyadicInterval.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GuthMaynard.publishedSourceDirichletPoly.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GuthMaynard.sourceDirichletPoly.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_flat_spectrum_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_negative_reciprocal_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_nonzero_matrix_consumer"

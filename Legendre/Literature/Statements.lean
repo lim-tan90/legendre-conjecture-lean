@@ -195,6 +195,19 @@ def GuthMaynard2024CentralDensity : Prop :=
     ∀ T : ℝ, 2 ≤ T →
     (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(15*(1-σ)/(3+5*σ)+ε)
 
+/-- Actual finite sampling counts are controlled by centered cubic Gram traces. -/
+def GuthMaynardSamplingTraceBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (N : ℕ) (W : Finset ℝ),
+    W.Nonempty → ∀ (b : ℕ → ℂ) (V : ℝ), 0 ≤ V →
+    (∀ t ∈ W, V ≤ ‖∑ n ∈ Finset.Ioc N (2*N),
+      (cutoff ((n : ℝ)/N) : ℂ)*b n*(n : ℂ)^((t : ℂ)*Complex.I)‖) →
+    (W.card : ℝ)^3*V^6 ≤ (∑ n ∈ Finset.Ioc N (2*N), ‖b n‖^2)^3*
+      (4*((Matrix.trace ((Density.GuthMaynard.gmMatrix cutoff N W*
+          (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)^3)).re-
+        (Matrix.trace (Density.GuthMaynard.gmMatrix cutoff N W*
+          (Density.GuthMaynard.gmMatrix cutoff N W).conjTranspose)).re^3/(W.card : ℝ)^2)+
+        8*(N : ℝ)^3)
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

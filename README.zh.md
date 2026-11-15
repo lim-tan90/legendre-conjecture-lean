@@ -145,10 +145,17 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 σ=3/4 时目标为 `5/9`，严格强于现有经典界 `3/5`。
 [精确范围与等价归约](docs/layer4-guth-maynard-range.md)。
 
-验证（2026-11-15）：**4,319 项构建**、**全部 4,667 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**321 个 Lean 文件**的实际
+**Guth–Maynard 有限采样（2026-11-15）：** 实际矩阵采样现已满足
+`R³V⁶ ≤ E³(4D+8N³)`；E 为实际系数能量，D 为中心化三次 Gram 迹。
+独立的 `layer4_guth_sampling_trace_comparator` 已闭合。五个移植模块均已完成
+**Lean 4.35.0** 适配，固定来源、逐文件映射与 MIT-0 许可证见下方复用栏。
+解析非对角项和 Guth–Maynard 中间密度目标仍开放。
+[证明与范围](docs/layer4-guth-sampling-trace.md)。
+
+验证（2026-11-15）：**4,324 项构建**、**全部 4,787 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**326 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**182 项独立使用检查**全部通过：Layer 4 **137 项**、Layer 3 九项、文献对照 36 项。
+**186 项独立使用检查**全部通过：Layer 4 **141 项**、Layer 3 九项、文献对照 36 项。
 新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
@@ -162,6 +169,8 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 删除 ε>0、将 Huxley 密度误作 Guth–Maynard 密度或 `7/12` 素数间隙定理的用例均被 Lean 拒绝。
 两侧区间检查验证两个连接点共用常数及中间指数的严格差距；
 将两侧计数或中间区间等价式误当成完整 Guth–Maynard 证明的用例均被 Lean 拒绝。
+采样检查覆盖非零平台矩阵项、精确左端点、平坦谱平均项与负轴共轭；
+删除平均项或把有限迹计数误作中间密度的用例均被 Lean 拒绝。
 本地完整验证的完整 Huxley 曲线证明提交：[`940790a`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/940790a)（[证明与范围](docs/layer4-full-curved-huxley.md)）。
 本地完整验证的高实部 Type I 证明提交：[`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673)（[精确范围](docs/layer4-upper-typeI.md)）。
 实际 Möbius 抵消证明提交：[`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51)。
@@ -411,7 +420,8 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 Ingham 1940、全局 Huxley `12/5` 与**完整 Huxley 曲线密度指数**均已证明。
 完整曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
 Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放；Guth–Maynard 两侧的
-[1/2,7/10]、[4/5,1] 已证明，剩余输入精确位于 (7/10,4/5)。下表九项历史短区间指数结果
+[1/2,7/10]、[4/5,1] 已证明，剩余输入精确位于 (7/10,4/5)。实际有限采样矩阵与三次迹色散阶段也已证明，
+对应解析迹估计仍开放。下表九项历史短区间指数结果
 仍仅完成陈述形式化；解析密度结果尚未闭合 Ingham 1937 或 Huxley 1972 的素数间隙证明。
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
@@ -457,6 +467,7 @@ Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放；Guth–Maynard 两�
 
 | 解析里程碑 | 当前已证明的估计 | Lean 证明与适用范围 |
 |---|---|---|
+| Guth–Maynard 有限采样／迹接口（Layer 4） | `R³V⁶ ≤ E³(4D+8N³)`，D 为中心化三次 Gram 迹 | **✅ 已证明**：[采样色散](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) 与独立比较器已闭合；实际多项式、任意系数能量。解析迹估计与中间密度仍开放。 |
 | Guth–Maynard 两侧密度区间（Layer 4） | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)`，σ∈[1/2,7/10] ∪ [4/5,1] | **✅ 已证明**：[`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean) 与闭合的两侧比较器；同一系数、全部 T≥2 与解析重数。中间区间 (7/10,4/5) 及完整目标仍开放。 |
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
@@ -944,6 +955,18 @@ Natural-index overlap identities and logarithmic shifted-phase estimates are loc
 |---|---|
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
+
+* **Guth–Maynard 有限采样与迹色散**，移植自
+  [Scott McColm 的 Lean 仓库](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard)，固定提交
+  `4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
+  [许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
+  目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
+  `DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
+  `TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
+  中选取的第一迹及色散计数证明组成 `SamplingDispersion.lean`。
+  全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
+  本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
+  [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
 
 </details>
 

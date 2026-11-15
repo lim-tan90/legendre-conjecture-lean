@@ -1175,4 +1175,32 @@ theorem layer4_guth_middle_strict_gap_consumer :
       min (3*(1-(3/4 : ℝ))/(2-3/4)) (3*(1-(3/4 : ℝ))/(3*(3/4)-1)) := by
   norm_num
 
+/-- A matrix entry on the plateau is one: the sampling model is nonempty and nonzero. -/
+theorem layer4_gm_nonzero_matrix_consumer (cutoff : GuthMaynard.GMSmoothCutoff) :
+    GuthMaynard.gmMatrix cutoff 5 {0} ⟨0,by simp⟩
+      ⟨6,by norm_num [GuthMaynard.dyadicInterval]⟩ = 1 := by
+  change (cutoff ((6 : ℝ)/5) : ℂ)*(6 : ℂ)^((0 : ℂ)*Complex.I) = 1
+  rw [cutoff.equals_one (6/5) (by constructor <;> norm_num)]
+  simp
+
+/-- The literal closed source sum retains its left endpoint. -/
+theorem layer4_gm_closed_endpoint_consumer :
+    GuthMaynard.publishedSourceDirichletPoly 1 (fun _ => 1) 0 = 2 ∧
+      GuthMaynard.sourceDirichletPoly 1 (fun _ => 1) 0 = 1 := by
+  norm_num [GuthMaynard.publishedSourceDirichletPoly,GuthMaynard.publishedDyadicInterval,
+    GuthMaynard.sourceDirichletPoly,GuthMaynard.dyadicInterval]
+
+/-- A flat two-point spectrum has zero dispersion but needs the positive average branch. -/
+theorem layer4_gm_flat_spectrum_consumer :
+    (1 : ℝ)^6 ≤ max (4*(2-2^3/2^2)) (8*2^3/2^3) := by
+  have hh := GuthMaynard.coordinate_sixth_le_trace_dispersion_max
+    (Finset.univ : Finset (Fin 2)) (fun _ => (1 : ℝ)) 0 (Finset.mem_univ _)
+  simpa only [Finset.sum_const,Fintype.card_fin,Finset.card_univ,nsmul_eq_mul,
+    one_pow,mul_one] using! hh
+
+/-- Absolute real arguments preserve the reciprocal-conjugation identity on the negative axis. -/
+theorem layer4_gm_negative_reciprocal_consumer (W : Finset ℝ) :
+    GuthMaynard.gmR W (-2) = star (GuthMaynard.gmR W (-1/2)) := by
+  convert GuthMaynard.gmR_reciprocal W (-1/2) (by norm_num) using 1 <;> norm_num
+
 end Legendre.Tests

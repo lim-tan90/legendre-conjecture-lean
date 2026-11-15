@@ -530,6 +530,11 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.129 | Full curved Huxley density | [HuxleyFullDensity.lean](../Legendre/Layer4/HuxleyFullDensity.lean); `layer4_huxley_comparator` | **proved**; sigma in [1/2,1], all T>=2, all analytic multiplicities, arbitrary positive epsilon; Huxley prime-gap theorem remains open |
 | 4.130 | Guth–Maynard exponent on outer ranges | [GuthMaynardOuterRange.lean](../Legendre/Layer4/GuthMaynardOuterRange.lean); `layer4_guth_maynard_outer_comparator` | **proved**; sigma in [1/2,7/10] union [4/5,1], common coefficient, all T>=2 and analytic multiplicities |
 | 4.131 | Exact remaining Guth–Maynard input | `Literature.guthMaynard_density_iff_central` | **proved equivalence only**; full target iff central density on (7/10,4/5); central input and full target both remain open |
+| 4.132 | Exact dyadic source polynomials | [Polynomial.lean](../Legendre/Layer4/GuthMaynard/Polynomial.lean) | **proved, ported**; half-open versus printed closed endpoint, coefficient conjugation and phase translation |
+| 4.133 | Actual smooth sampling objects | [Definitions.lean](../Legendre/Layer4/GuthMaynard/Definitions.lean) | **proved, ported**; nonempty cutoff, actual matrix entries, approximate energy with closed tolerance |
+| 4.134 | Actual Gram matrix and L2 operator norm | [SamplingMatrix.lean](../Legendre/Layer4/GuthMaynard/SamplingMatrix.lean) | **proved, ported**; sampled energy, singular values, literal kernel and cubic trace identities |
+| 4.135 | Sixth-moment dispersion alternative | [TraceDispersion.lean](../Legendre/Layer4/GuthMaynard/TraceDispersion.lean) | **proved, ported**; Jensen centering, retained average branch, sampling spectral/operator conclusions |
+| 4.136 | Actual coefficient-energy trace count | [SamplingDispersion.lean](../Legendre/Layer4/GuthMaynard/SamplingDispersion.lean); `layer4_guth_sampling_trace_comparator` | **proved**; selected finite source proofs plus local arbitrary-energy extension, R³V⁶<=E³(4D+8N³); analytic off-diagonal bounds and central density remain open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -783,3 +788,17 @@ shortcuts. All 182 consumers pass (137 Layer 4, nine Layer 3, 36 literature).
 The two joining endpoints share a coefficient; the middle-range strict gap
 is checked independently. Lean rejects treating the outer count as the
 full target or treating the central equivalence as its missing input.
+
+Sampling-trace validation (2026-11-15): all five ported modules and their
+consumers compile from source under Lean 4.35.0 (commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc).
+The full build passes 4,324 jobs. All 4,787 project theorem declarations,
+including private/generated declarations from every port, match the two
+independent inventories, audit targets and actual axiom output exactly.
+Only propext, Classical.choice and Quot.sound occur. All 326 classified
+Lean sources have no executable placeholders or prohibited shortcuts.
+All 186 consumers pass (141 Layer 4, nine Layer 3, 36 literature). New
+consumers cover a nonzero matrix plateau, the literal left endpoint, a flat
+spectrum and negative reciprocal arguments. Lean rejects dropping the
+average branch or using the finite count as the open central density input.
+The retained MIT-0 license has the exact upstream Git blob hash
+34f468585a9582c8a1d0f9440b6c0f8b5f98f2e8.

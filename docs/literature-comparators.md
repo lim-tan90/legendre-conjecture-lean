@@ -388,3 +388,14 @@ is equivalent to the explicitly open `GuthMaynard2024CentralDensity` on
 (7/10,4/5); both appear as open targets in the catalog. This equivalence
 does not supply its input. At sigma=3/4, the classical curves give 3/5 and
 the desired exponent is 5/9. See [the exact reduction](layer4-guth-maynard-range.md).
+
+### Finite Guth–Maynard sampling comparator (2026-11-15)
+
+`GuthMaynardSamplingTraceBenchmark` independently states the actual finite
+polynomial, arbitrary coefficient energy and centered cubic Gram trace.
+`layer4_guth_sampling_trace_comparator` is closed. Its source modules are
+pinned to smccolm/Lean commit 4c8fb7f7816508825089230e3730b69165e5e303,
+MIT-0, and all five destinations are adapted to Lean 4.35.0. The full
+Guth–Maynard and central density targets remain open: the finite sampling
+inequality does not supply the required analytic off-diagonal trace bound.
+See [exact sources and adaptations](smccolm-guth-provenance.md).

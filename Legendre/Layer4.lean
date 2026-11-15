@@ -139,6 +139,12 @@ public import Legendre.Layer4.HuxleyFullDensity
 
 public import Legendre.Layer4.GuthMaynardOuterRange
 
+public import Legendre.Layer4.GuthMaynard.Polynomial
+public import Legendre.Layer4.GuthMaynard.Definitions
+public import Legendre.Layer4.GuthMaynard.SamplingMatrix
+public import Legendre.Layer4.GuthMaynard.TraceDispersion
+public import Legendre.Layer4.GuthMaynard.SamplingDispersion
+
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density
 
