@@ -899,6 +899,22 @@ rewriting proofs from scratch.  Every ported or adapted development is recorded
 here with its upstream repository, pinned commit, license, and destination in
 this repository.
 
+New upstream repositories are listed first with a prominent **owner/repository** name.
+
+* **NEW SOURCE: [smccolm/Lean](https://github.com/smccolm/Lean) — Guth–Maynard finite sampling and trace dispersion.**
+  Scott McColm’s formalization; original files:
+  [Pinned Guth–Maynard source directory](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard), fixed commit
+  `4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
+  [license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
+  [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
+  `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
+  `TraceDispersion` supply four adapted modules; selected first-trace and
+  dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
+  supply `SamplingDispersion.lean`. All are adapted and compiled under the
+  pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
+  cubic-trace interface, while the analytic off-diagonal estimates and full
+  central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+
 * **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT License,
   commit `d28713ac8245ca86a686b8c67370a8d19d81b242` (2026-08-02).
   The files under [`Legendre/Nagura/`](Legendre/Nagura/) and
@@ -1128,18 +1144,6 @@ visibility are adapted; the retained license is
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
-* **Guth–Maynard finite sampling and trace dispersion**, adapted from
-  [Scott McColm's Lean repository](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard), fixed commit
-  `4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
-  [license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
-  [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
-  `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
-  `TraceDispersion` supply four adapted modules; selected first-trace and
-  dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`
-  supply `SamplingDispersion.lean`. All are adapted and compiled under the
-  pinned **Lean 4.35.0** toolchain. This closes the finite sampling/centered
-  cubic-trace interface, while the analytic off-diagonal estimates and full
-  central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 

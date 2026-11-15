@@ -748,6 +748,21 @@ Lean 构建与公理/爆炸审计。通过后才把 `review` 合入 `master`；�
 本项目优先**借鉴、移植已有的已验证形式化成果**，而不是从零重写。所有移植或改编
 的开发都记录在此：上游仓库、固定 commit、许可证，以及在本仓库中的位置。
 
+首次使用的上游仓库须在本栏开头显著展示 **owner/repository** 仓库名。
+
+* **新增来源：[smccolm/Lean](https://github.com/smccolm/Lean) — Guth–Maynard 有限采样与迹色散。**
+  作者 Scott McColm；原始文件位于
+  [固定提交中的 Guth–Maynard 源目录](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard)，固定提交
+  `4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
+  [许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
+  目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
+  `DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
+  `TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
+  中选取的第一迹及色散计数证明组成 `SamplingDispersion.lean`。
+  全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
+  本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
+  [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
+
 * **[ShouqiaoW/erdos](https://github.com/ShouqiaoW/erdos)** — MIT 许可，
   commit `d28713ac8245ca86a686b8c67370a8d19d81b242`（2026-08-02）。
   [`Legendre/Nagura/`](Legendre/Nagura/) 与
@@ -957,17 +972,6 @@ Natural-index overlap identities and logarithmic shifted-phase estimates are loc
 | [`DivisorGrowthLocal.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowthLocal.lean) | [DivisorGrowthLocal.lean](Legendre/Layer4/Arithmetic/DivisorGrowthLocal.lean) |
 | [`DivisorGrowth.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/Ostmann/Arithmetic/DivisorGrowth.lean) | [DivisorGrowth.lean](Legendre/Layer4/Arithmetic/DivisorGrowth.lean) |
 
-* **Guth–Maynard 有限采样与迹色散**，移植自
-  [Scott McColm 的 Lean 仓库](https://github.com/smccolm/Lean/tree/4c8fb7f7816508825089230e3730b69165e5e303/Riemann%20Zeta/9.%20Zero%20Density%2C%20Large%20Values%20and%20Prime%20Transfer/71%20Guth-Maynard%2C%202026/GuthMaynard)，固定提交
-  `4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
-  [许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
-  目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
-  `DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
-  `TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
-  中选取的第一迹及色散计数证明组成 `SamplingDispersion.lean`。
-  全部移植文件均在固定的 **Lean 4.35.0** 下适配并编译。
-  本步闭合有限采样／中心化三次迹接口；解析非对角项与完整中间密度仍开放。
-  [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
 
 </details>
 

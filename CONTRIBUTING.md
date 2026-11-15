@@ -18,7 +18,8 @@ Thanks for helping with the formalization.
 6. **Record ported formalization code.**  If you port or adapt code from
    another project, add an entry to the "Reused and adapted formalizations"
    section of `README.md` (upstream URL, pinned commit, license, destination
-   paths), retain the upstream license text, and keep the attribution in the
+   paths). Display each newly used repository prominently as **owner/repository**
+   at the start of that section. Retain the upstream license text and keep the attribution in the
    adapted files.  This is required for every port, not only for Nagura.
 
 7. **Use layer directories for new Layer 5 and later work.** Place implementation
