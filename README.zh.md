@@ -143,6 +143,8 @@ Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后
 将高实部窗口误换成固定平方根窗口，或删除 β≤1 条件的用例均被 Lean 拒绝。
 新增检查覆盖 σ=1 的实际尾项计数、负高度端点及倒数因子；
 在长块排除中将 η=0 或让截断指数超过 η/16 的误用均被 Lean 拒绝。
+本地完整验证的高实部 Type I 证明提交：[`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673)（[精确范围](docs/layer4-upper-typeI.md)）。
+实际 Möbius 抵消证明提交：[`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51)。
 本地完整验证的全局 12/5 密度证明提交：`484d8dfc70c24cb715743a2fc6ca811f800f0c67`（[证明与范围](docs/layer4-huxley-density.md)）。
 本地完整验证的解析大值／矩证明提交：[`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34)。
 本地完整验证的 Ingham 证明提交：[`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de)。

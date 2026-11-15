@@ -185,6 +185,8 @@ using a fixed half-length window for the upper range or removing beta<=1.
 New consumers check the sigma=1 actual tail count, negative shell endpoint
 and sharp reciprocal factor; Lean rejects eta=0 and a cutoff exponent
 larger than eta/16 in long-block exclusion.
+Locally verified upper Type I proof commit: [`921d673`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/921d673) ([exact scope](docs/layer4-upper-typeI.md)).
+Actual Mobius cancellation proof commit: [`e85ba51`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e85ba51).
 Locally verified global 12/5 density proof commit: `484d8dfc70c24cb715743a2fc6ca811f800f0c67` ([proof and scope](docs/layer4-huxley-density.md)).
 Locally verified analytic large-value/moment proof commit: [`3c358dd2af95`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/3c358dd2af95dcc46071df0fa860cd38d0559a34).
 Locally verified Ingham proof commit: [`6e5dd7031d2c`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/6e5dd7031d2c1af9ff40aafefcc9ccca974e81de).
