@@ -280,6 +280,15 @@ theorem layer4_guth_cubic_moment_comparator : GuthMaynardCubicMomentBenchmark :=
     Density.GuthMaynard.gmTraceNonzeroDifferenceMoment_eq_source] using
     h N W hN hT hNT hTN hs hi
 
+/-- The Heath--Brown comparison expands both the source polynomial and its index set. -/
+theorem layer4_heath_brown_difference_comparator : HeathBrownDifferenceMeanSquareBenchmark := by
+  intro ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := Density.GuthMaynard.heathBrownDifferenceSetMeanSquare_native ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W a hN hT hs hi ha
+  simpa only [Density.GuthMaynard.sourceDirichletPoly,Density.GuthMaynard.dyadicInterval] using
+    h N T W a hN hT hs hi ha
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by

@@ -542,6 +542,9 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.141 | Complete-frequency quantitative reflection | [QuantitativeReflection.lean](../Legendre/Layer4/GuthMaynard/QuantitativeReflection.lean), [PowerTail.lean](../Legendre/Layer4/GuthMaynard/PowerTail.lean); `layer4_guth_complete_reflection_comparator` | **proved, ported**; actual scaled tail, explicit finite dual polynomial and source range, arbitrary requested power error |
 | 4.142 | S2 cyclic and off-diagonal reduction | [CubicTwoTail.lean](../Legendre/Layer4/GuthMaynard/CubicTwoTail.lean) | **proved, selected port**; S2=3*first cyclic term, diagonal split, off-diagonal O_epsilon(T^-10); required difference-moment bound remains open |
 | 4.143 | Literal difference-moment trace remainder | [CubicRemainder.lean](../Legendre/Layer4/GuthMaynard/CubicRemainder.lean); `layer4_guth_cubic_moment_comparator` | **proved local assembly**; trace(G^3)=N^3 R I^3+3 N I Q+S3+O_epsilon(T^-10), Q the actual ordered tail moment; no bound for Q or S3 assumed |
+| 4.144 | Actual finite powers and source localization | [FinitePowers.lean](../Legendre/Layer4/GuthMaynard/FinitePowers.lean), [Localization.lean](../Legendre/Layer4/GuthMaynard/Localization.lean) | **proved, adapted**; actual convolution coefficients, existing divisor input, exact three smooth pieces and integer rounding |
+| 4.145 | Exact mean square and logarithmic prefix inputs | [SamplingMeanSquare.lean](../Legendre/Layer4/GuthMaynard/SamplingMeanSquare.lean), [LogarithmicPrefix.lean](../Legendre/Layer4/GuthMaynard/LogarithmicPrefix.lean) | **proved, adapted**; explicit Montgomery constant, Kusmin--Landau core and unit-annulus packing |
+| 4.146 | Heath--Brown difference-set mean square | [HeathBrown.lean](../Legendre/Layer4/GuthMaynard/HeathBrown.lean), [HeathBrownReflection.lean](../Legendre/Layer4/GuthMaynard/HeathBrownReflection.lean); `layer4_heath_brown_difference_comparator` | **proved**; actual ordered pairs and arbitrary unit-bounded coefficients, T^epsilon*(R^2 N+R N^2+R^(5/4)T^(1/2)N), one constant/threshold before all scales; Poisson-tail/S2 assembly still open |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -823,3 +826,18 @@ central density, dropping the Fourier ordinate factor and removing the cubic
 scale window. Both READMEs retain five numbered repository headings with
 individually expandable default-open details. The exact upstream MIT-0 license
 blob remains 34f468585a9582c8a1d0f9440b6c0f8b5f98f2e8.
+
+Heath--Brown validation (2026-11-15): Lean 4.35.0 full build passes 4,340 jobs.
+All 5,999 project theorem declarations, including private/generated declarations,
+match the module-data inventory, independent environment-owner inventory, Audit
+targets and actual parsed axiom output exactly. Only propext, Classical.choice
+and Quot.sound occur. All 340 classified Lean files, including Layers 0--4,
+have no executable placeholders/prohibited shortcuts; no PDFs are present.
+All 204 independent consumers pass (159 Layer 4, nine Layer 3, 24 generated
+literature and 12 literature regressions). New consumers check zeroth powers,
+localization rounding at N=30, literal single-column sampling, exact diagonal
+mass and a two-point difference set with four actual nonzero contributions.
+Three negative guards reject dropping coefficient/separation conditions or
+confusing the mean square with central density. The prior Poisson guards also
+passed. All eighteen adapted modules retain the exact pinned MIT-0 source and
+are compiled from source; the retained license blob is unchanged.

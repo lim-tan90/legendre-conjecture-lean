@@ -515,10 +515,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,332 build jobs, all 5,180 project theorem
+Full validation (2026-11-15): 4,340 build jobs, all 5,999 project theorem
 declarations audited with exactly matching independent inventories, 326 Lean
 files free of executable placeholders, and 186 independent consumers
-(154 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+(159 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -598,6 +598,17 @@ assembly identifies the exact diagonal with N I times the ordered tail moment,
 leaving that moment and S3 with O_epsilon(T^-10) error. Their required bounds
 and central density remain open.
 See [exact scope](layer4-guth-poisson-trace.md).
+
+**Heath–Brown difference-set input (2026-11-15).** The actual ordered
+Dirichlet-polynomial mean square is bounded by
+C T^epsilon*(R^2 N+R N^2+R^(5/4)T^(1/2)N), with unit-bounded coefficients,
+one-separated W in [0,T], all 0<N and T beyond one uniform threshold.
+The independent literal comparator is closed. Actual convolution powers,
+exact sampling, three-block localization, smooth reflection and all-scale
+weighted-moment recurrences are proved inputs. Eighteen adapted modules
+and one local assembly are compiled under Lean 4.35.0. Conversion to the
+remaining Poisson-tail moment and full S2, S3 and central density remain open.
+See [precise scope](layer4-heath-brown-difference.md).
 
 **Acceptance criteria.**
 

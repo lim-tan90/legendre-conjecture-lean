@@ -1319,4 +1319,59 @@ theorem layer4_gm_complete_reflection_consumer (cutoff : GuthMaynard.GMSmoothCut
   exact h hT hN hNT hT₀ (by simpa only [abs_neg] using hlo)
     (by simpa only [abs_neg] using hhi) (by simpa only [abs_neg] using ht)
 
+/-- The empty convolution product has coefficient one at the target one. -/
+theorem layer4_hb_zeroth_power_consumer (N : ℕ) (a : ℕ → ℂ) :
+    GuthMaynard.finitePowCoeff N 0 a 1 = 1 := by
+  simp [GuthMaynard.finitePowCoeff]
+
+/-- The actual source localization keeps its one-sided rounding at N=30. -/
+theorem layer4_hb_localization_rounding_consumer :
+    GuthMaynard.gmSourceLeftScale 30 = 25 ∧ GuthMaynard.gmSourceRightScale 30 = 34 := by
+  norm_num [GuthMaynard.gmSourceLeftScale,GuthMaynard.gmSourceRightScale]
+
+/-- The exact Montgomery constant controls actual single-column samples. -/
+theorem layer4_hb_sampling_single_column_consumer (T : ℝ) (W : Finset ℝ) (a : ℕ → ℂ)
+    (hT : 1 ≤ T) (hs : ∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y)
+    (hi : ∀ x ∈ W, x ∈ Set.Icc 0 T) :
+    (∑ t ∈ W, ‖∑ n ∈ Finset.Ioc 1 2, a n*(n : ℂ)^(-(t : ℂ)*Complex.I)‖^2) ≤
+      (3*(2+2*(5*Real.pi+1)))*(T+1)*∑ n ∈ Finset.Ioc 1 2, ‖a n‖^2 := by
+  simpa only [Nat.cast_one,show 2*(1 : ℕ) = 2 from rfl] using
+    GuthMaynard.montgomery_mean_value_estimate 1 T W a (by norm_num) hT hs hi
+
+/-- The literal ordered-difference diagonal has exact mass R*N^2. -/
+theorem layer4_hb_diagonal_consumer (N : ℕ) (W : Finset ℝ) :
+    (∑ t ∈ W, ‖∑ n ∈ Finset.Ioc N (2*N),
+      (n : ℂ)^((((t-t : ℝ) : ℂ))*Complex.I)‖^2) = (W.card : ℝ)*(N : ℝ)^2 := by
+  simpa only [GuthMaynard.sourceDirichletPoly,GuthMaynard.dyadicInterval,one_mul] using
+    GuthMaynard.heathBrownCoefficientOne_diagonal N W
+
+/-- A real two-point difference set has four actual unit-column contributions. -/
+theorem layer4_hb_two_point_moment_consumer :
+    ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧ ∀ T : ℝ, T₀ ≤ T →
+      4 ≤ C*T^(1/100 : ℝ)*(6+(2 : ℝ)^(5/4 : ℝ)*T^(1/2 : ℝ)) := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := GuthMaynard.heathBrownDifferenceSetMeanSquare_native
+    (1/100) (by norm_num)
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro T hT
+  have hT1 : 1 ≤ T := hT₀.trans hT
+  have hs : GuthMaynard.IsSeparated 1 ({0,1} : Finset ℝ) := by
+    intro x hx y hy hxy
+    simp only [Finset.mem_insert,Finset.mem_singleton] at hx hy
+    rcases hx with rfl | rfl <;> rcases hy with rfl | rfl <;> simp_all [Real.dist_eq]
+  have hi : GuthMaynard.InBaseInterval T ({0,1} : Finset ℝ) := by
+    intro x hx
+    simp only [Finset.mem_insert,Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl <;> constructor <;> linarith
+  have hn (x : ℝ) : ‖GuthMaynard.sourceDirichletPoly 1 (fun _ => 1) x‖^2 = 1 := by
+    have hx : ‖(((2 : ℝ) : ℂ))^((x : ℂ)*Complex.I)‖ = 1 := by
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos (by norm_num : (0 : ℝ) < 2)]
+      simp
+    norm_num [GuthMaynard.sourceDirichletPoly,GuthMaynard.dyadicInterval]
+    left
+    convert hx using 1 <;> norm_num
+  have hh := h 1 T ({0,1} : Finset ℝ) (fun _ => 1) (by norm_num) hT hs hi
+    (by intro n hn; norm_num)
+  norm_num [hn] at hh
+  exact hh
+
 end Legendre.Tests

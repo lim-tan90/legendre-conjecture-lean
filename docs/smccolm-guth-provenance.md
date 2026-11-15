@@ -18,15 +18,19 @@ source, commit, source filename, license and local changes in its header.
 | `TraceDispersion.lean` | `TraceDispersion.lean` | Finite Jensen inequality, sixth-moment alternatives and the sampling singular-value/operator-norm bounds |
 | `LargeValuesPoisson.lean`: `gmMatrix_gram_trace_eq_cutoff_sum` | `SamplingDispersion.lean` | Selected finite first-trace identity only |
 | `LargeValuesFinal.lean`: cutoff column mass, first spectral moment, dispersion nonnegativity and `gm_largeValues_raw_dispersion` | `SamplingDispersion.lean` | Selected finite count only; the final Theorem 1.1 assembly is not imported |
-
 | `LargeValuesPoisson.lean` (remaining statements; first-trace identity reused) | `TracePoisson.lean` | Actual smooth kernel, Poisson/Mellin formulas, complete-mode summability and arbitrary inverse-power first-trace error |
 | `LargeValuesReflection.lean` | `TraceReflection.lean` | Uniform Fourier decay, exact signed finite-mode Mellin reflection, cancellation-preserving dual-polynomial integral bound; finite-mode identity; complete-mode bound is in QuantitativeReflection |
 | `Separated.lean`: `IsSeparated`, `InBaseInterval`; `LargeValuesLanguage.lean`: `floorImage`, `floor_injective_on_of_separated`; `HeathBrown.lean`: elementary `abs_sub_le_height_of_mem_baseInterval` | `Separation.lean` | Only the real-distance, interval and floor-bin language required by the cubic estimates |
 | `LargeValuesCubic.lean` | `CubicTrace.lean` | Exact cubic Poisson expansion and S1/S2/S3 split, negligible S1 and all-zero-mode remainder |
-
 | `TypeIIFourthMomentReduction.lean`: `integral_abs_rpow_compl_Icc`, `integrableOn_abs_rpow_compl_Icc` | `PowerTail.lean` | Only two symmetric real-power tail helpers; no contour or zero-family dependencies |
 | `QuantitativeSmoothReflection.lean` | `QuantitativeReflection.lean` | Complete-frequency Lemma 6.2 with arbitrary power error, explicit smoothing/ceiling scale and actual scaled cubic tail consumer |
 | `LargeValuesS2.lean`: conjugation/cyclic/diagonal identities, ordered difference moment, `gmCubicS2FirstOffDiagonal_quantitative`, `gmCubicS2FirstOffDiagonal_power_decay` | `CubicTwoTail.lean` | Cyclic reduction and negligible off-diagonal zero-mode terms only; no Heath--Brown moment bound or Proposition 6.1 assembly |
+| `PolynomialPowers.lean`: finite tuple/support and wide-block lemmas; `ArithmeticCoefficients.lean`: factorization count; `ClassicalPowering.lean`: finite coefficient core through line-weight norm bound | `FinitePowers.lean` | Actual arbitrary convolution coefficients; local divisor-bound bridge reuses `Moment.DivisorGrowth.divisors_card_le_rpow` |
+| `MeanValueCS.lean`, `MeanValue.lean`, `MeanValueProof.lean` | `SamplingMeanSquare.lean` | Complete finite Cauchy--Schwarz and discrete mean-square proof with the literal Montgomery constant |
+| `LargeValuesLocalization.lean` | `Localization.lean` | Three sharp-to-smooth pieces, exact masks, integer rounding, N>=30 |
+| `HeathBrown.lean` (elementary interval-difference lemma already in Separation reused) | `HeathBrown.lean` | Weighted moments, actual positive-kernel majorization, powering/transfer identities and recurrence |
+| `VanDerCorput.lean`: phase/Kusmin--Landau core (unused logarithmic derivative lemmas omitted); `TerminalTypeI.lean`: logarithmic prefix bound; `ClassicalLargeValues.lean`: annulus packing and private helper | `LogarithmicPrefix.lean` | Only the finite cancellation/packing inputs; no classical detector or terminal zeta dependency |
+| `HeathBrownReflection.lean`; `LogarithmicKernel.lean`: `dyadicInterval_eq_Ico_succ` | `HeathBrownReflection.lean` | Closed Heath--Brown weighted/coefficient-one/arbitrary bounded-coefficient difference-set mean squares, including all physical scale regimes |
 
 `CubicRemainder.lean` is a local assembly, not an additional source port. It
 bounds the actual cubic trace minus its diagonal main term and S2/S3 by
@@ -57,6 +61,14 @@ function equalities. Cubic summability explicitly exposes its function and
 casts. The full project checks also compile every private
 and generated theorem used by the adapted files.
 
+The Heath--Brown ports additionally adapt natural versus nonnegative-real
+finite-product inequalities, explicit function lambdas in interval-integral
+rewrites, complex derivative casts, dyadic index unfolding and natural-number
+cast normalization in floor/ceiling/cardinality bounds. The existing divisor
+bound supplies the local arithmetic bridge without re-porting a detector.
+Weighted-moment nonnegativity is explicit where the newer positivity tactic
+requires it. No upstream .olean files are copied.
+
 ## Local additions and exact limits
 
 The local coefficient-energy extension permits arbitrary coefficients and
@@ -73,11 +85,12 @@ so it is not silently identified with the paper's strict <1 convention.
 The finite matrix bounds need no ordinate separation; a future analytic
 large-value estimate must retain its additional separation and height conditions.
 
-Twelve destination modules are ported, with one additional local assembly.
+Eighteen destination modules are ported, with one additional local assembly.
 The larger candidate analytic dependency chain stays outside the repository.
 The first-trace, one-tail, complete quantitative reflection and S2 off-diagonal
-estimates are now proved. The Heath--Brown bound for the remaining ordered
-difference moment, S3, central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
+estimates are now proved. Heath--Brown’s actual Dirichlet-polynomial difference-set mean square is also
+proved. Its conversion into the remaining Poisson-tail moment and full S2
+assembly, S3, central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
 
 Initial five-module sampling-trace validation (2026-11-15): all five ported modules and their
 consumers compile from source under Lean 4.35.0 (commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc).
@@ -106,3 +119,18 @@ central density, dropping the Fourier ordinate factor and removing the cubic
 scale window. Both READMEs retain five numbered repository headings with
 individually expandable default-open details. The exact upstream MIT-0 license
 blob remains 34f468585a9582c8a1d0f9440b6c0f8b5f98f2e8.
+
+Heath--Brown validation (2026-11-15): Lean 4.35.0 full build passes 4,340 jobs.
+All 5,999 project theorem declarations, including private/generated declarations,
+match the module-data inventory, independent environment-owner inventory, Audit
+targets and actual parsed axiom output exactly. Only propext, Classical.choice
+and Quot.sound occur. All 340 classified Lean files, including Layers 0--4,
+have no executable placeholders/prohibited shortcuts; no PDFs are present.
+All 204 independent consumers pass (159 Layer 4, nine Layer 3, 24 generated
+literature and 12 literature regressions). New consumers check zeroth powers,
+localization rounding at N=30, literal single-column sampling, exact diagonal
+mass and a two-point difference set with four actual nonzero contributions.
+Three negative guards reject dropping coefficient/separation conditions or
+confusing the mean square with central density. The prior Poisson guards also
+passed. All eighteen adapted modules retain the exact pinned MIT-0 source and
+are compiled from source; the retained license blob is unchanged.

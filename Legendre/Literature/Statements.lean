@@ -269,6 +269,20 @@ def GuthMaynardCubicMomentBenchmark : Prop :=
               ‖Density.GuthMaynard.gmTraceNonzeroTailAt cutoff N (t-u)‖^2) : ℝ) : ℂ)-
                 Density.GuthMaynard.gmCubicS3 cutoff N W‖ ≤ K/T^10
 
+/-- Heath--Brown's actual ordered difference-set mean square, with arbitrary
+unit-bounded coefficients and one epsilon-dependent constant/threshold. -/
+def HeathBrownDifferenceMeanSquareBenchmark : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧
+    ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ) (a : ℕ → ℂ),
+      0 < N → T₀ ≤ T →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      (∀ n ∈ Finset.Ioc N (2*N), ‖a n‖ ≤ 1) →
+      (∑ t ∈ W, ∑ u ∈ W,
+        ‖∑ n ∈ Finset.Ioc N (2*N), a n*(n : ℂ)^(((t-u : ℝ) : ℂ)*Complex.I)‖^2) ≤
+          C*T^ε*((W.card : ℝ)^2*(N : ℝ)+(W.card : ℝ)*(N : ℝ)^2+
+            (W.card : ℝ)^(5/4 : ℝ)*T^(1/2 : ℝ)*(N : ℝ))
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

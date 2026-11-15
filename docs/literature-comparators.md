@@ -412,3 +412,13 @@ quantitative reflection is independently compared with literal smoothing and
 ceiling length, and the final cubic comparator leaves the literal ordered
 nonzero-tail moment and S3, after removing the negligible S2 off-diagonal.
 See [exact statements and source scope](layer4-guth-poisson-trace.md).
+
+### Heath–Brown ordered difference-set mean square (2026-11-15)
+
+`HeathBrownDifferenceMeanSquareBenchmark` uses the literal polynomial and
+three physical terms R^2 N, R N^2 and R^(5/4)T^(1/2)N, allowing every positive
+epsilon with a constant and threshold before all scales. It retains unit
+coefficient bounds, one-separated ordinates and W in [0,T]. The comparator
+is closed. This input is distinct from the Poisson-tail moment assembled in
+Guth–Maynard Proposition 6.1 and from any prime-gap exponent result.
+See [scope and verification](layer4-heath-brown-difference.md).
