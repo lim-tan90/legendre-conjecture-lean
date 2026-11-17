@@ -202,6 +202,7 @@ Heath–Brown 检查另覆盖零次卷积幂、N=30 的局部化取整、单列�
 新增 S₂/S₃ 检查覆盖 k=2 的 3/2、13/8、1/4 幂次、完整有序尾项二阶矩、空 S₂、
 单点 S₃、边界能量 6 与 14，以及无间隔前提的三倍桥接。删除 S₃ 长度窗口／余项、
 混同两种能量、将 S₂ 误作中间密度的四个用例均被 Lean 拒绝。
+本地完整验证的 S₂/S₃ 能量证明提交：[`0d99ae4`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0d99ae4c69fa8fd04faa9620936cabf18ba5e231)（[范围与来源](docs/layer4-guth-s2-s3.md)）。
 本地完整验证的 Heath–Brown 证明提交：[`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36)（[范围与来源](docs/layer4-heath-brown-difference.md)）。
 本地验证的 Poisson／反射／三次迹证明提交：[`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb)。
 本地完整验证的 Lean 4.35.0 采样／迹证明提交：[`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423)（[来源与适配](docs/smccolm-guth-provenance.md)）。

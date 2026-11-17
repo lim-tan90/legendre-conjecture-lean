@@ -82,3 +82,5 @@ energy equality and confusion with central density. All22 adapted modules
 (including the local tolerance extension) retain fixed MIT-0 source metadata
 and compile from source under Lean4.35.0; all five visible repository headings
 and default-open source details are preserved in both READMEs.
+
+Verified proof commit: [0d99ae4c69fa8fd04faa9620936cabf18ba5e231](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0d99ae4c69fa8fd04faa9620936cabf18ba5e231).
