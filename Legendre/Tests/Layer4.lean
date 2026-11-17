@@ -1374,4 +1374,81 @@ theorem layer4_hb_two_point_moment_consumer :
   norm_num [hn] at hh
   exact hh
 
+/-- k=2 retains all three S2 powers, including 13/8 and the fourth root of height. -/
+theorem layer4_gm_s2_k_two_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧ ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+      0 < N → T₀ ≤ T → (N : ℝ) ≤ T →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      ‖GuthMaynard.gmCubicS2 cutoff N W‖ ≤
+        C*T^ε*((N : ℝ)^2*(W.card : ℝ)^2+T*(N : ℝ)*(W.card : ℝ)^(3/2 : ℝ)+
+          (N : ℝ)^2*(W.card : ℝ)^(13/8 : ℝ)*T^(1/4 : ℝ)) := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := GuthMaynard.gmCubicS2_estimate cutoff (k := 2) (by norm_num) ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hN hT hNT hs hi
+  have hb := h W hN hT hNT hs hi
+  norm_num [GuthMaynard.gmS2PaperShape_eq] at hb
+  exact hb
+
+/-- The complete Poisson-tail moment has the matching k=2 powers before the outer N. -/
+theorem layer4_gm_tail_moment_k_two_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧ ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+      0 < N → T₀ ≤ T → (N : ℝ) ≤ T → W.Nonempty →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      (∑ t ∈ W, ∑ u ∈ W, ‖GuthMaynard.gmTraceNonzeroTailAt cutoff N (t-u)‖^2) ≤
+        C*T^ε*((N : ℝ)*(W.card : ℝ)^2+T*(W.card : ℝ)^(3/2 : ℝ)+
+          (N : ℝ)*(W.card : ℝ)^(13/8 : ℝ)*T^(1/4 : ℝ)) := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := GuthMaynard.gmTraceNonzeroDifferenceMoment_estimate
+    cutoff (k := 2) (by norm_num) ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hN hT hNT hW hs hi
+  have hb := h W hN hT hNT hW hs hi
+  norm_num [GuthMaynard.gmS2TracePaperShape,GuthMaynard.gmTraceNonzeroDifferenceMoment_eq_source] at hb
+  exact hb
+
+/-- Empty row sets are included in the full S2 result. -/
+theorem layer4_gm_s2_empty_consumer (cutoff : GuthMaynard.GMSmoothCutoff) (N : ℕ) :
+    GuthMaynard.gmCubicS2 cutoff N ∅ = 0 := by
+  simp [GuthMaynard.gmCubicS2]
+
+/-- A one-point actual S3 bound keeps both the admissible length window and the error. -/
+theorem layer4_gm_s3_singleton_consumer (cutoff : GuthMaynard.GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧ ∀ (N : ℕ) (T : ℝ),
+      T₀ ≤ T → 0 < N → (N : ℝ) ≤ T → T^(2/3 : ℝ) ≤ (N : ℝ) →
+      ‖GuthMaynard.gmCubicS3 cutoff N {0}‖ ≤ C*T^(2+ε)+C/T^90 := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := GuthMaynard.gmCubicS3_prop8_1_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T hT hN hNT hlo
+  have hs : GuthMaynard.IsSeparated 1 ({0} : Finset ℝ) := by simp [GuthMaynard.IsSeparated]
+  have hi : GuthMaynard.InBaseInterval T ({0} : Finset ℝ) := by
+    intro x hx
+    simp only [Finset.mem_singleton] at hx
+    subst x
+    exact ⟨le_rfl,by linarith [hT₀]⟩
+  have he : GuthMaynard.ApproxAddEnergy 1 ({0} : Finset ℝ) = 1 := by
+    unfold GuthMaynard.ApproxAddEnergy GuthMaynard.approximateAdditiveQuadruples
+    simp only [Finset.card_eq_sum_ones,Finset.sum_filter,Finset.sum_product]
+    norm_num [Finset.filter_insert,Finset.filter_singleton]
+  simpa only [he,Finset.card_singleton,Nat.cast_one,Real.sqrt_one,mul_one] using
+    h hT hN hNT hlo hs hi
+
+/-- The paper and source energies differ at the unit boundary: their values are 6 and 14. -/
+theorem layer4_gm_energy_boundary_consumer :
+    GuthMaynard.strictAddEnergy ({0,1} : Finset ℝ) = 6 ∧
+      GuthMaynard.ApproxAddEnergy 1 ({0,1} : Finset ℝ) = 14 := by
+  unfold GuthMaynard.strictAddEnergy GuthMaynard.ApproxAddEnergy
+    GuthMaynard.approximateAdditiveQuadruples
+  simp only [Finset.card_eq_sum_ones,Finset.sum_filter,Finset.sum_product]
+  norm_num [Finset.filter_insert,Finset.filter_singleton]
+
+/-- The factor-three bridge is unconditional, even for empty or unseparated finite sets. -/
+theorem layer4_gm_energy_comparison_consumer (W : Finset ℝ) :
+    GuthMaynard.strictAddEnergy W ≤ GuthMaynard.ApproxAddEnergy 1 W ∧
+      GuthMaynard.ApproxAddEnergy 1 W ≤ 3*GuthMaynard.strictAddEnergy W :=
+  ⟨GuthMaynard.strict_energy_le_closed W,GuthMaynard.closed_energy_le_three_strict W⟩
+
 end Legendre.Tests

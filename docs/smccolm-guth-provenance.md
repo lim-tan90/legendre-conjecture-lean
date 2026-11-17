@@ -31,6 +31,10 @@ source, commit, source filename, license and local changes in its header.
 | `HeathBrown.lean` (elementary interval-difference lemma already in Separation reused) | `HeathBrown.lean` | Weighted moments, actual positive-kernel majorization, powering/transfer identities and recurrence |
 | `VanDerCorput.lean`: phase/Kusmin--Landau core (unused logarithmic derivative lemmas omitted); `TerminalTypeI.lean`: logarithmic prefix bound; `ClassicalLargeValues.lean`: annulus packing and private helper | `LogarithmicPrefix.lean` | Only the finite cancellation/packing inputs; no classical detector or terminal zeta dependency |
 | `HeathBrownReflection.lean`; `LogarithmicKernel.lean`: `dyadicInterval_eq_Ico_succ` | `HeathBrownReflection.lean` | Closed Heath--Brown weighted/coefficient-one/arbitrary bounded-coefficient difference-set mean squares, including all physical scale regimes |
+| `LargeValuesS2.lean` (remaining statements; existing cyclic/diagonal/off-diagonal identities reused) | `CubicTwoTailEstimate.lean` | Complete actual Poisson-tail moment, epsilon budget and Proposition 6.1 S2 bound for every positive integer k |
+| `LargeValuesS3.lean` | `CubicThreeTail.lean` | Actual cubic three-frequency integral, Fourier decay and Proposition 8.1 energy estimate on T^(2/3)<=N<=T |
+| `DFIDivisorEpsilon.lean`: harmonic bound; `DFISourceCutoffs.lean`: unit bump; `ClassicalLargeValues.lean`: `sum_inv_distance_near_le_harmonic` | `CubicThreeTailSupport.lean` | Only these three elementary helpers; no general DFI/Kloosterman or zeta dependency chain |
+| `LargeValuesS3.lean`: floor-correlation proof, extended locally | `EnergyTolerance.lean` | Strict/closed energy comparison by factor three and paper-convention S3 consequence; local extension is explicit |
 
 `CubicRemainder.lean` is a local assembly, not an additional source port. It
 bounds the actual cubic trace minus its diagonal main term and S2/S3 by
@@ -69,6 +73,14 @@ bound supplies the local arithmetic bridge without re-porting a detector.
 Weighted-moment nonnegativity is explicit where the newer positivity tactic
 requires it. No upstream .olean files are copied.
 
+The S2/S3 ports make real norms, Mellin functions beneath integrability,
+Schwartz functions beneath iterated derivatives, zero-order Fourier indices,
+product volume measures, finite-filter membership, measurable absolute values
+and Holder factor order explicit. Two branch-elimination expressions in the
+source frequency-box complement are replaced by direct De Morgan equivalences.
+The local strict-energy extension supplies the boundary comparison missing
+from a literal identification of the source's closed-tolerance energy.
+
 ## Local additions and exact limits
 
 The local coefficient-energy extension permits arbitrary coefficients and
@@ -82,15 +94,18 @@ The source cutoff equals one on [6/5,9/5] and has support in [1,2]. Matrix
 columns are (N,2N]; the printed paper's closed sum has a separate exact
 left-endpoint term. Approximate energy in `Definitions.lean` uses <= eta,
 so it is not silently identified with the paper's strict <1 convention.
+The new EnergyTolerance extension proves E_strict<=E_closed<=3 E_strict
+and recovers the strict-energy S3 estimate up to an absolute constant.
 The finite matrix bounds need no ordinate separation; a future analytic
 large-value estimate must retain its additional separation and height conditions.
 
-Eighteen destination modules are ported, with one additional local assembly.
+Twenty-two destination modules are adapted (including the local energy-tolerance extension), with one additional local assembly.
 The larger candidate analytic dependency chain stays outside the repository.
 The first-trace, one-tail, complete quantitative reflection and S2 off-diagonal
 estimates are now proved. Heath--Brown’s actual Dirichlet-polynomial difference-set mean square is also
-proved. Its conversion into the remaining Poisson-tail moment and full S2
-assembly, S3, central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
+proved. The complete Poisson-tail moment and S2 assembly are now proved, together
+with the Proposition8.1 S3 energy input. Further affine/energy refinement,
+central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
 
 Initial five-module sampling-trace validation (2026-11-15): all five ported modules and their
 consumers compile from source under Lean 4.35.0 (commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc).
@@ -134,3 +149,19 @@ Three negative guards reject dropping coefficient/separation conditions or
 confusing the mean square with central density. The prior Poisson guards also
 passed. All eighteen adapted modules retain the exact pinned MIT-0 source and
 are compiled from source; the retained license blob is unchanged.
+
+S2/S3 validation (2026-11-17): Lean 4.35.0 full build passes 4,345 jobs.
+All 6,688 project theorem declarations, including private/generated declarations,
+agree exactly between module-data inventory, independent environment ownership,
+Audit targets and parsed axiom output. Only propext, Classical.choice and
+Quot.sound occur. All 344 classified Lean files, including Layers 0--4, have
+zero executable placeholders/prohibited shortcuts; no PDFs are present.
+All 210 independent consumers pass (165 Layer 4, nine Layer 3, 24 generated
+literature, 12 literature regressions). Added consumers cover k=2 exponents,
+complete actual tail moment, empty S2, singleton S3, strict/closed boundary
+energies 6 and 14 and the factor-three bridge without separation assumptions.
+Four negative checks reject missing S3 length/remainder conditions, false
+energy equality and confusion with central density. All22 adapted modules
+(including the local tolerance extension) retain fixed MIT-0 source metadata
+and compile from source under Lean4.35.0; all five visible repository headings
+and default-open source details are preserved in both READMEs.

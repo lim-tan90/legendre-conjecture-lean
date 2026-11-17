@@ -515,10 +515,10 @@ See [initial mean values](layer4-mean-values.md),
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 
-Full validation (2026-11-15): 4,340 build jobs, all 5,999 project theorem
+Full validation (2026-11-15): 4,345 build jobs, all 6,688 project theorem
 declarations audited with exactly matching independent inventories, 326 Lean
 files free of executable placeholders, and 186 independent consumers
-(159 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
+(165 Layer 4, 9 Layer 3, 36 literature). Only the standard three axioms occur.
 
 **Restricted curved density (2026-11-14).** The actual small-mollifier
 Type II count and powered Type I short-block count now combine to prove
@@ -609,6 +609,15 @@ weighted-moment recurrences are proved inputs. Eighteen adapted modules
 and one local assembly are compiled under Lean 4.35.0. Conversion to the
 remaining Poisson-tail moment and full S2, S3 and central density remain open.
 See [precise scope](layer4-heath-brown-difference.md).
+
+**Complete S2 and S3 energy input (2026-11-17).** The literal complete
+Poisson-tail moment and full Proposition6.1 S2 estimate are proved for every
+k>=1 and epsilon>0 with the source separation exponent, three physical powers
+and one constant/threshold. Proposition8.1's S3 energy bound is proved on
+T^(2/3)<=N<=T, with T^-90 error. The factor-three strict/closed energy
+comparison recovers the paper convention without changing powers. Four new
+independent benchmarks close; sharper affine/energy refinements and central
+density remain open. See [scope](layer4-guth-s2-s3.md).
 
 **Acceptance criteria.**
 

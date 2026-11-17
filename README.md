@@ -207,15 +207,25 @@ ordered-pair polynomial now satisfies
 The independent literal comparator is closed, with arbitrary unit-bounded
 coefficients, one-separated W in `[0,T]` and one constant/threshold before
 all scales. Eighteen source modules are adapted to **Lean 4.35.0**; source
-#5 below records each file. Conversion to the remaining Poisson-tail moment
-and full S₂, S₃ and central density remain open.
+#5 below records each file. The complete Poisson-tail/S₂ assembly is now proved below; stronger S₃
+refinements and central density remain open.
 [Proof and scope](docs/layer4-heath-brown-difference.md).
 
-Validation (2026-11-15): **4,340 build jobs**, all **5,999 project theorem
-declarations** audited with only the three standard axioms, and **340 Lean files**
+**Complete S₂ and S₃ energy input (2026-11-17):** Proposition 6.1 is
+proved for the actual two-tail trace and complete Poisson-tail moment, for
+every integer `k≥1` and `ε>0`. All three k-dependent powers and `T^ε`
+separation are retained. Proposition 8.1's S₃ energy bound is proved on
+`T^(2/3)≤N≤T`, including the `T⁻⁹⁰` remainder. A local proof shows
+`E_<1≤E_≤1≤3E_<1`, recovering the paper's strict energy convention up to
+an absolute constant. Four independent comparators are closed. The sharper
+affine/energy refinements and central density remain open.
+[Exact statements and boundary checks](docs/layer4-guth-s2-s3.md).
+
+Validation (2026-11-17): **4,345 build jobs**, all **6,688 project theorem
+declarations** audited with only the three standard axioms, and **344 Lean files**
 with zero executable `sorry`/`admit`/`sorryAx`. Both independent declaration
 inventories match the audit targets and actual axiom output exactly.
-All **204 independent consumers** pass: **159 Layer 4**, nine Layer 3 and
+All **210 independent consumers** pass: **165 Layer 4**, nine Layer 3 and
 36 literature checks. The added consumers cover zero cutoff, empty actual
 zero families, rounding, detector height, exact convolution coefficients,
 support boundaries, uniform bounded powers, the sigma=5/6 power window,
@@ -251,6 +261,11 @@ N=30 localization rounding, the literal single-column sampling constant,
 exact diagonal mass and four nonzero two-point contributions. Three negative
 checks reject removing coefficient/separation bounds or treating this mean
 square as central density.
+New S₂/S₃ checks verify the k=2 powers 3/2, 13/8 and 1/4, the complete
+ordered tail moment, empty S₂, singleton S₃, boundary energies 6 versus 14
+and the unconditional factor-three bridge. Four negative contract checks
+reject dropping the S₃ length window or remainder, equating the energies,
+or treating S₂ as central density.
 Locally verified Heath–Brown proof commit: [`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36) ([scope and sources](docs/layer4-heath-brown-difference.md)).
 Locally verified Poisson/reflection/cubic proof commit: [`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb).
 Locally verified Lean 4.35.0 sampling/trace proof commit: [`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423) ([sources and adaptations](docs/smccolm-guth-provenance.md)).
@@ -625,7 +640,9 @@ The completed analytic milestones supporting this program are:
 |---|---|---|
 | Guth–Maynard finite sampling/trace interface (Layer 4) | `R³V⁶ ≤ E³(4D+8N³)`, D the centered cubic Gram trace | **✅ Proved**: [sampling dispersion](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) and closed independent comparator. Actual polynomials, arbitrary coefficient energy; finite matrix stage only. Analytic trace estimates and central density remain open. |
 | Guth–Maynard Poisson/cubic trace (Layer 4) | `trace(G³)=N³R(∫w²)³+S₂+S₃+Oε(T⁻¹⁰)` | **✅ Proved**: [Poisson and cubic estimates](docs/layer4-guth-poisson-trace.md), five closed comparators; `N≤T≤N²`, `T^ε` separation in `[0,T]`. S₂/S₃ bounds and central density remain open. |
-| Heath–Brown difference-set input (Layer 4) | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ Proved**: [actual ordered-pair mean square](docs/layer4-heath-brown-difference.md), closed literal comparator; arbitrary unit-bounded coefficients and source separation/height conditions. Poisson-tail/S₂ assembly and central density remain open. |
+| Heath–Brown difference-set input (Layer 4) | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ Proved**: [actual ordered-pair mean square](docs/layer4-heath-brown-difference.md), closed literal comparator; arbitrary unit-bounded coefficients and source separation/height conditions. Poisson-tail/S₂ assembly is now proved below; central density remains open. |
+| Complete Guth–Maynard S₂ (Layer 4) | `T^ε(N²R²+TNR^(2−1/k)+N²R^(2−3/(4k))T^(1/(2k)))` | **✅ Proved**: [Proposition6.1 and literal complete tail moment](docs/layer4-guth-s2-s3.md), k≥1 and source separation/height conditions. |
+| Guth–Maynard S₃ energy input (Layer 4) | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ Proved**: [Proposition8.1](docs/layer4-guth-s2-s3.md), `T^(2/3)≤N≤T`; strict-energy convention recovered by a factor-three bridge. Sharper energy/affine refinement and central density remain open. |
 | Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
@@ -1219,8 +1236,8 @@ mathlib proof is copied into this repository.
 
 - **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **Local paths:** Eighteen adapted modules and one local assembly in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
-- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all eighteen adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit
+- **Local paths:** Twenty-two adapted modules and one local assembly in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
+- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all twenty-two adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit; S₂/S₃ also normalize finite filters, product measures, measurable functions and Holder factors
 
 #### Detailed provenance and file mapping
 
@@ -1249,11 +1266,18 @@ is included in `Separation.lean`. `CubicRemainder.lean` is a local assembly. Sel
 bound from `TerminalTypeI` and annulus packing from `ClassicalLargeValues`
 supply `LogarithmicPrefix.lean`. `HeathBrownReflection` plus the elementary
 interval-index helper from `LogarithmicKernel` supply
-`HeathBrownReflection.lean`. All eighteen ports are adapted and
+`HeathBrownReflection.lean`. The remaining `LargeValuesS2` supplies
+`CubicTwoTailEstimate.lean`; `LargeValuesS3` supplies `CubicThreeTail.lean`.
+The harmonic bound from `DFIDivisorEpsilon`, unit bump from `DFISourceCutoffs`
+and reciprocal-distance lemma from `ClassicalLargeValues` supply only
+`CubicThreeTailSupport.lean`. `EnergyTolerance.lean` adapts the floor-correlation
+proof and adds the local strict/closed energy bridge. All twenty-two adapted
+modules, including that local extension, are
 compiled from source under **Lean 4.35.0**. First-trace and one-tail analytic
 estimates, complete quantitative reflection and S₂ off-diagonal decay are now
 proved. The actual Heath–Brown Dirichlet-polynomial difference-set mean square is
-also proved. The remaining Poisson-tail moment/S₂ assembly, S₃ and central
+also proved. The complete Poisson-tail moment/S₂ assembly and Proposition8.1 S₃
+energy input are now proved. Sharper affine/energy refinements and central
 density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
@@ -1268,7 +1292,7 @@ mathematical statements, and links to the publishers/arXiv. Original contributio
 released under Apache-2.0. Files under `Legendre/Nagura/` are adapted from the MIT-licensed project
 <https://github.com/ShouqiaoW/erdos> (commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`); their original MIT license is
-retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The eighteen
+retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The twenty-two
 adapted smccolm/Lean modules under `Legendre/Layer4/GuthMaynard/` retain
 MIT-0 headers and the [upstream license](licenses/smccolm-Lean-MIT-0.txt);
 the local `CubicRemainder.lean` assembly is Apache-2.0.

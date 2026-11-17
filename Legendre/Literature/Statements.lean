@@ -283,6 +283,61 @@ def HeathBrownDifferenceMeanSquareBenchmark : Prop :=
           C*T^ε*((W.card : ℝ)^2*(N : ℝ)+(W.card : ℝ)*(N : ℝ)^2+
             (W.card : ℝ)^(5/4 : ℝ)*T^(1/2 : ℝ)*(N : ℝ))
 
+/-- Literal complete Poisson-tail difference moment, with the source
+separation exponent and all three physical powers retained. -/
+def GuthMaynardPoissonTailMomentBenchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (k : ℕ), 0 < k →
+    ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+        0 < N → T₀ ≤ T → (N : ℝ) ≤ T → W.Nonempty →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        (∑ t ∈ W, ∑ u ∈ W,
+          ‖Density.GuthMaynard.gmTraceNonzeroTailAt cutoff N (t-u)‖^2) ≤
+            C*T^ε*((N : ℝ)*(W.card : ℝ)^2+
+              T*(W.card : ℝ)^(2-1/(k : ℝ))+
+              (N : ℝ)*(W.card : ℝ)^(2-3/(4*(k : ℝ)))*T^(1/(2*(k : ℝ))))
+
+/-- Guth--Maynard Proposition 6.1 for the actual two-tail cubic trace. -/
+def GuthMaynardS2Benchmark : Prop :=
+  ∀ (cutoff : Density.GuthMaynard.GMSmoothCutoff) (k : ℕ), 0 < k →
+    ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+        0 < N → T₀ ≤ T → (N : ℝ) ≤ T →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → T^ε ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        ‖Density.GuthMaynard.gmCubicS2 cutoff N W‖ ≤
+          C*T^ε*((N : ℝ)^2*(W.card : ℝ)^2+
+            T*(N : ℝ)*(W.card : ℝ)^(2-1/(k : ℝ))+
+            (N : ℝ)^2*(W.card : ℝ)^(2-3/(4*(k : ℝ)))*T^(1/(2*(k : ℝ))))
+
+/-- Proposition 8.1 with literal closed-tolerance energy; the paper's strict
+energy convention remains separately documented. -/
+def GuthMaynardS3EnergyBenchmark : Prop :=
+  ∀ cutoff : Density.GuthMaynard.GMSmoothCutoff,
+    ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+        T₀ ≤ T → 0 < N → (N : ℝ) ≤ T → T^(2/3 : ℝ) ≤ (N : ℝ) →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        ‖Density.GuthMaynard.gmCubicS3 cutoff N W‖ ≤
+          C*T^(2+ε)*Real.sqrt (W.card : ℝ)*
+            Real.sqrt (((((W ×ˢ W) ×ˢ (W ×ˢ W)).filter fun q =>
+              |q.1.1+q.1.2-q.2.1-q.2.2| ≤ 1).card : ℝ))+C/T^90
+
+/-- The paper's strict-tolerance Proposition 8.1 energy form, up to constants. -/
+def GuthMaynardStrictS3EnergyBenchmark : Prop :=
+  ∀ cutoff : Density.GuthMaynard.GMSmoothCutoff,
+    ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+        T₀ ≤ T → 0 < N → (N : ℝ) ≤ T → T^(2/3 : ℝ) ≤ (N : ℝ) →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        ‖Density.GuthMaynard.gmCubicS3 cutoff N W‖ ≤
+          C*T^(2+ε)*Real.sqrt (W.card : ℝ)*
+            Real.sqrt (((((W ×ˢ W) ×ˢ (W ×ˢ W)).filter fun q =>
+              |q.1.1+q.1.2-q.2.1-q.2.2| < 1).card : ℝ))+C/T^90
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

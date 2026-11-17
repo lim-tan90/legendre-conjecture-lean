@@ -289,6 +289,40 @@ theorem layer4_heath_brown_difference_comparator : HeathBrownDifferenceMeanSquar
   simpa only [Density.GuthMaynard.sourceDirichletPoly,Density.GuthMaynard.dyadicInterval] using
     h N T W a hN hT hs hi ha
 
+/-- Closed trace-moment comparison with the finite-set sum unfolded. -/
+theorem layer4_guth_poisson_tail_moment_comparator : GuthMaynardPoissonTailMomentBenchmark := by
+  intro cutoff k hk ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := Density.GuthMaynard.gmTraceNonzeroDifferenceMoment_estimate cutoff hk ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hN hT hNT hW hs hi
+  simpa only [Density.GuthMaynard.gmTraceNonzeroDifferenceMoment_eq_source,
+    Density.GuthMaynard.gmS2TracePaperShape] using h W hN hT hNT hW hs hi
+
+/-- All three literal Proposition 6.1 powers are checked independently. -/
+theorem layer4_guth_s2_comparator : GuthMaynardS2Benchmark := by
+  intro cutoff k hk ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := Density.GuthMaynard.gmCubicS2_estimate cutoff hk ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hN hT hNT hs hi
+  simpa only [Density.GuthMaynard.gmS2PaperShape_eq] using h W hN hT hNT hs hi
+
+/-- The energy convention and admissible length window are literal in the comparison. -/
+theorem layer4_guth_s3_energy_comparator : GuthMaynardS3EnergyBenchmark := by
+  intro cutoff ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := Density.GuthMaynard.gmCubicS3_prop8_1_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hT hN hNT hlo hs hi
+  simpa only [Density.GuthMaynard.ApproxAddEnergy,Density.GuthMaynard.approximateAdditiveQuadruples] using
+    h hT hN hNT hlo hs hi
+
+/-- The tolerance bridge recovers the paper's literal strict-energy convention. -/
+theorem layer4_guth_s3_strict_energy_comparator : GuthMaynardStrictS3EnergyBenchmark := by
+  intro cutoff ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := Density.GuthMaynard.gmCubicS3_prop8_1_strict_energy cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hT hN hNT hlo hs hi
+  simpa only [Density.GuthMaynard.strictAddEnergy] using h hT hN hNT hlo hs hi
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by

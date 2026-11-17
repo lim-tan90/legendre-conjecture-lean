@@ -165,13 +165,20 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 `sum[t,u∈W] |D(t−u)|² ≪ε T^ε(R²N+RN²+R^(5/4)T^(1/2)N)`。
 独立的字面比较器已闭合，保留任意模长不超过 1 的系数、`[0,T]` 中点间距至少为 1 的集合，
 以及先于全部尺度选取的统一常数／阈值。十八个移植模块均完成 **Lean 4.35.0** 适配，
-逐文件来源在下方 #5。剩余 Poisson 尾项二阶矩及完整 `S₂` 组装、`S₃` 和中间密度仍开放。
+逐文件来源在下方 #5。完整 Poisson 尾项／`S₂` 组装现已在下方证明；更强 `S₃` 精化及中间密度仍开放。
 [证明与精确范围](docs/layer4-heath-brown-difference.md)。
 
-验证（2026-11-15）：**4,340 项构建**、**全部 5,999 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**340 个 Lean 文件**的实际
+**完整 S₂ 与 S₃ 能量输入（2026-11-17）：** 已证明实际二尾迹与完整 Poisson 尾项
+二阶矩的 Proposition 6.1，保留任意整数 `k≥1`、`ε>0`、三个随 k 变化的幂次及
+`T^ε` 间隔条件。Proposition 8.1 的 S₃ 能量界在 `T^(2/3)≤N≤T` 上成立，保留
+`T⁻⁹⁰` 余项。新增局部证明 `E_<1≤E_≤1≤3E_<1`，只付出绝对常数即恢复论文严格
+能量约定。四个独立比较器已闭合；更强的仿射／能量精化及中间密度仍开放。
+[精确陈述与边界检查](docs/layer4-guth-s2-s3.md)。
+
+验证（2026-11-17）：**4,345 项构建**、**全部 6,688 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**344 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**204 项独立使用检查**全部通过：Layer 4 **159 项**、Layer 3 九项、文献对照 36 项。
+**210 项独立使用检查**全部通过：Layer 4 **165 项**、Layer 3 九项、文献对照 36 项。
 新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
@@ -192,6 +199,9 @@ floor 区间计数、对称实幂尾积分、平滑参数上限与向上取整�
 删除高度因子或三次迹尺度窗口、将完整反射误作中间密度的用例均被 Lean 拒绝。
 Heath–Brown 检查另覆盖零次卷积幂、N=30 的局部化取整、单列采样的字面常数、
 精确对角质量和两点集合的四项非零贡献。删除系数界或间隔条件、将该均方界误作中间密度的三个用例均被 Lean 拒绝。
+新增 S₂/S₃ 检查覆盖 k=2 的 3/2、13/8、1/4 幂次、完整有序尾项二阶矩、空 S₂、
+单点 S₃、边界能量 6 与 14，以及无间隔前提的三倍桥接。删除 S₃ 长度窗口／余项、
+混同两种能量、将 S₂ 误作中间密度的四个用例均被 Lean 拒绝。
 本地完整验证的 Heath–Brown 证明提交：[`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36)（[范围与来源](docs/layer4-heath-brown-difference.md)）。
 本地验证的 Poisson／反射／三次迹证明提交：[`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb)。
 本地完整验证的 Lean 4.35.0 采样／迹证明提交：[`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423)（[来源与适配](docs/smccolm-guth-provenance.md)）。
@@ -493,7 +503,9 @@ Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放；Guth–Maynard 两�
 |---|---|---|
 | Guth–Maynard 有限采样／迹接口（Layer 4） | `R³V⁶ ≤ E³(4D+8N³)`，D 为中心化三次 Gram 迹 | **✅ 已证明**：[采样色散](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) 与独立比较器已闭合；实际多项式、任意系数能量。解析迹估计与中间密度仍开放。 |
 | Guth–Maynard Poisson／三次迹（Layer 4） | `trace(G³)=N³R(∫w²)³+S₂+S₃+Oε(T⁻¹⁰)` | **✅ 已证明**：[Poisson 与三次迹估计](docs/layer4-guth-poisson-trace.md)，五个闭合比较器；保留 `N≤T≤N²`、`[0,T]` 区间及 `T^ε` 间隔条件。`S₂/S₃` 界和中间密度仍开放。 |
-| Heath–Brown 差分集输入（Layer 4） | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ 已证明**：[实际有序对均方](docs/layer4-heath-brown-difference.md)与闭合字面比较器；保留系数、间隔与高度条件。Poisson 尾项／`S₂` 组装及中间密度仍开放。 |
+| Heath–Brown 差分集输入（Layer 4） | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ 已证明**：[实际有序对均方](docs/layer4-heath-brown-difference.md)与闭合字面比较器；保留系数、间隔与高度条件。Poisson 尾项／`S₂` 组装现已在下方证明；中间密度仍开放。 |
+| 完整 Guth–Maynard S₂（Layer 4） | `T^ε(N²R²+TNR^(2−1/k)+N²R^(2−3/(4k))T^(1/(2k)))` | **✅ 已证明**：[Proposition6.1 与实际完整尾项二阶矩](docs/layer4-guth-s2-s3.md)，保留 k≥1、间隔与高度条件。 |
+| Guth–Maynard S₃ 能量输入（Layer 4） | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ 已证明**：[Proposition8.1](docs/layer4-guth-s2-s3.md)，保留 `T^(2/3)≤N≤T`；三倍能量桥接恢复严格约定。更强仿射／能量精化和中间密度仍开放。 |
 | Guth–Maynard 两侧密度区间（Layer 4） | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)`，σ∈[1/2,7/10] ∪ [4/5,1] | **✅ 已证明**：[`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean) 与闭合的两侧比较器；同一系数、全部 T≥2 与解析重数。中间区间 (7/10,4/5) 及完整目标仍开放。 |
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
@@ -1038,8 +1050,8 @@ mathlib 的证明。
 
 - **固定提交:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **许可证:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **本地位置:** [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)，含十八个适配模块及一个本地组装模块
-- **适配与验证:** 模块可见性、复共轭、实嵌入与有限类型基数适配；十八个移植模块均由 Lean 4.35.0 从源码编译；新增 Schwartz 函数、Fourier 指标、积分共轭及导数接口适配
+- **本地位置:** [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)，含二十二个适配模块及一个本地组装模块
+- **适配与验证:** 模块可见性、复共轭、实嵌入与有限类型基数适配；二十二个适配模块均由 Lean 4.35.0 从源码编译；新增 Schwartz 函数、Fourier 指标、积分共轭及导数接口适配；S₂/S₃ 另适配有限过滤、乘积测度、可测函数及 Holder 因子
 
 #### 详细来源与文件映射
 
@@ -1064,10 +1076,15 @@ mathlib 的证明。
 `VanDerCorput` 的 Kusmin–Landau 核心、`TerminalTypeI` 的前缀界及 `ClassicalLargeValues`
 的单位环带计数对应 `LogarithmicPrefix.lean`；`HeathBrownReflection` 及 `LogarithmicKernel`
 的初等区间指标引理对应 `HeathBrownReflection.lean`。
-十八个移植模块均已在 **Lean 4.35.0** 下从源码编译，适配覆盖 Schwartz 函数转换、
+其余 `LargeValuesS2` 对应 `CubicTwoTailEstimate.lean`；`LargeValuesS3` 对应
+`CubicThreeTail.lean`；`DFIDivisorEpsilon` 的调和数界、`DFISourceCutoffs` 的单位 bump
+及 `ClassicalLargeValues` 的倒数距离界仅对应 `CubicThreeTailSupport.lean`。
+`EnergyTolerance.lean` 适配 floor 相关计数证明，并加入本地严格／闭合容差桥接。
+二十二个适配模块（含该本地扩展）均已在 **Lean 4.35.0** 下从源码编译，适配覆盖 Schwartz 函数转换、
 Fourier 求和指标、积分共轭、导数函数及类型转换。第一迹与单尾项解析界现已证明，
 完整定量反射、`S₂` 非对角余项及实际 Heath–Brown 多项式差分集均方也已证明；
-剩余 Poisson 尾项二阶矩／完整 `S₂` 组装、`S₃` 所需界及中间密度仍开放。
+完整 Poisson 尾项二阶矩／`S₂` 组装及 Proposition8.1 的 `S₃` 能量输入现已证明；
+更强的仿射／能量精化及中间密度仍开放。
 [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
 
 </details>
@@ -1082,7 +1099,7 @@ Fourier 求和指标、积分共轭、导数函数及类型转换。第一迹与
 MIT 许可项目 <https://github.com/ShouqiaoW/erdos>（commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`），原始 MIT 许可证保留在
 [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
-`Legendre/Layer4/GuthMaynard/` 下十八个 smccolm/Lean 移植模块保留 MIT-0 声明及
+`Legendre/Layer4/GuthMaynard/` 下二十二个 smccolm/Lean 适配模块保留 MIT-0 声明及
 [原始许可证](licenses/smccolm-Lean-MIT-0.txt)；本地 `CubicRemainder.lean` 组装模块为 Apache-2.0。
 
 ## 参考文献

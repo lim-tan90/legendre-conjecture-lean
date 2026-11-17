@@ -158,6 +158,10 @@ public import Legendre.Layer4.GuthMaynard.Localization
 public import Legendre.Layer4.GuthMaynard.HeathBrown
 public import Legendre.Layer4.GuthMaynard.LogarithmicPrefix
 public import Legendre.Layer4.GuthMaynard.HeathBrownReflection
+public import Legendre.Layer4.GuthMaynard.CubicTwoTailEstimate
+public import Legendre.Layer4.GuthMaynard.CubicThreeTailSupport
+public import Legendre.Layer4.GuthMaynard.CubicThreeTail
+public import Legendre.Layer4.GuthMaynard.EnergyTolerance
 
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density

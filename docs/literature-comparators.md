@@ -422,3 +422,13 @@ coefficient bounds, one-separated ordinates and W in [0,T]. The comparator
 is closed. This input is distinct from the Poisson-tail moment assembled in
 Guth–Maynard Proposition 6.1 and from any prime-gap exponent result.
 See [scope and verification](layer4-heath-brown-difference.md).
+
+### Complete S2 and the S3 energy input (2026-11-17)
+
+The closed S2 and Poisson-tail moment comparators preserve all three powers
+parameterized by k>=1, positive epsilon, T^epsilon separation, and one uniform
+constant/threshold. The S3 energy comparator preserves T^(2/3)<=N<=T and
+T^-90. The source's closed tolerance <=1 and the paper's strict <1 are recorded
+separately; a proved factor-three comparison changes only the absolute
+constant. Sharper energy/affine refinement and central density remain open.
+See [statements and boundary conventions](layer4-guth-s2-s3.md).
