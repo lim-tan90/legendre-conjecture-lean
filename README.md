@@ -284,6 +284,7 @@ and the unconditional factor-three bridge. Four negative contract checks
 reject dropping the S₃ length window or remainder, equating the energies,
 or treating S₂ as central density.
 Locally verified S₂/S₃ energy proof commit: [`0d99ae4`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/0d99ae4c69fa8fd04faa9620936cabf18ba5e231) ([scope and sources](docs/layer4-guth-s2-s3.md)).
+Locally verified affine/energy proof commit: [`e2bd19e`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/e2bd19e53afeb6cdf589f64144507a7752409999) ([scope and sources](docs/layer4-guth-affine-energy.md)).
 Locally verified Heath–Brown proof commit: [`f92c79f`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/f92c79f91ec713034cc65ae341e97e321d9bdf36) ([scope and sources](docs/layer4-heath-brown-difference.md)).
 Locally verified Poisson/reflection/cubic proof commit: [`bf0bbeb`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/bf0bbeb).
 Locally verified Lean 4.35.0 sampling/trace proof commit: [`19af423`](https://github.com/lim-tan90/legendre-conjecture-lean/commit/19af423) ([sources and adaptations](docs/smccolm-guth-provenance.md)).
