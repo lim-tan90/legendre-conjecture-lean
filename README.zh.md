@@ -172,13 +172,24 @@ Guth–Maynard 密度及尖锐四阶矩 `log^4` 仍开放；Layer 5 的 Huxley
 二阶矩的 Proposition 6.1，保留任意整数 `k≥1`、`ε>0`、三个随 k 变化的幂次及
 `T^ε` 间隔条件。Proposition 8.1 的 S₃ 能量界在 `T^(2/3)≤N≤T` 上成立，保留
 `T⁻⁹⁰` 余项。新增局部证明 `E_<1≤E_≤1≤3E_<1`，只付出绝对常数即恢复论文严格
-能量约定。四个独立比较器已闭合；更强的仿射／能量精化及中间密度仍开放。
+能量约定。四个独立比较器已闭合；后续仿射／能量精化见下方新增结果，中间密度仍开放。
 [精确陈述与边界检查](docs/layer4-guth-s2-s3.md)。
 
-验证（2026-11-17）：**4,345 项构建**、**全部 6,688 个项目定理声明**
-的公理审计通过，仅依赖三项标准公理；**344 个 Lean 文件**的实际
+**仿射迭代与 S₃／能量精化（2026-11-17）：** 已证明 Proposition9.1 的实际有限仿射积分界，
+并证明常数先于高度及源函数选取的高度族版本。实际归一化 R² 平滑源满足该族条件。
+Proposition10.1 给出 `|S₃| ≪ε T^(2+ε)R^(3/2)+T^(1+ε)N√(RE)+Oε(T⁻⁹⁰)`；
+Proposition11.1 给出实际大值集合的能量界，代入后得到 Proposition11.2 的四项 S₃ 界。
+五个新的独立比较器保留系数、间隔、尺度、能量容差及余项；最终大值估计和中间密度组装仍开放。
+七个新增移植模块的具体来源列在下方 **#5 smccolm/Lean**，均完成 **Lean 4.35.0** 适配。
+[精确公式、常数量词与来源](docs/layer4-guth-affine-energy.md)。
+新增八个消费端检查负缩放、平移边界、零源、精确平滑质量、gcd 除法端点、单点 S₃
+及 `σ=3/4` 时的能量／S₃ 幂次。六项反向契约检查拒绝删除系数界、间隔、`T^(3/4)`
+窗口、Fourier 族条件、`T⁻⁹⁰` 余项，或把仿射界当作中间密度证明。
+
+验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
+的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
 `sorry`/`admit`/`sorryAx` 均为零。两份独立定理清单、审计目标与实际公理输出完全一致。
-**210 项独立使用检查**全部通过：Layer 4 **165 项**、Layer 3 九项、文献对照 36 项。
+**218 项独立使用检查**全部通过：Layer 4 **173 项**、Layer 3 九项、文献对照 36 项。
 新增检查覆盖零截断、空实际零点集、取整、检测器高度、卷积的具体系数、
 支撑边界、有界幂的统一性、σ=5/6 的幂窗口，以及 σ=4/5、5/6 的完整受限曲线计数和高度二的共同常数。把逐点系数幂误当成 Dirichlet
 卷积幂的用例被 Lean 拒绝；全局定理仍不等于更强的曲线 benchmark。
@@ -507,6 +518,7 @@ Guth–Maynard 密度与尖锐四阶矩 `log^4` 仍开放；Guth–Maynard 两�
 | Heath–Brown 差分集输入（Layer 4） | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ 已证明**：[实际有序对均方](docs/layer4-heath-brown-difference.md)与闭合字面比较器；保留系数、间隔与高度条件。Poisson 尾项／`S₂` 组装现已在下方证明；中间密度仍开放。 |
 | 完整 Guth–Maynard S₂（Layer 4） | `T^ε(N²R²+TNR^(2−1/k)+N²R^(2−3/(4k))T^(1/(2k)))` | **✅ 已证明**：[Proposition6.1 与实际完整尾项二阶矩](docs/layer4-guth-s2-s3.md)，保留 k≥1、间隔与高度条件。 |
 | Guth–Maynard S₃ 能量输入（Layer 4） | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ 已证明**：[Proposition8.1](docs/layer4-guth-s2-s3.md)，保留 `T^(2/3)≤N≤T`；三倍能量桥接恢复严格约定。更强仿射／能量精化和中间密度仍开放。 |
+| Guth–Maynard 仿射／能量精化（Layer 4） | Proposition9.1、10.1、11.1、11.2 | **✅ 已证明**：[实际仿射积分、统一高度族及 S₃ 四项界](docs/layer4-guth-affine-energy.md)；五个独立比较器，保留全部尺度／系数条件及余项。最终大值估计和中间密度仍开放。 |
 | Guth–Maynard 两侧密度区间（Layer 4） | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)`，σ∈[1/2,7/10] ∪ [4/5,1] | **✅ 已证明**：[`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean) 与闭合的两侧比较器；同一系数、全部 T≥2 与解析重数。中间区间 (7/10,4/5) 及完整目标仍开放。 |
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
@@ -1051,8 +1063,8 @@ mathlib 的证明。
 
 - **固定提交:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **许可证:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **本地位置:** [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)，含二十二个适配模块及一个本地组装模块
-- **适配与验证:** 模块可见性、复共轭、实嵌入与有限类型基数适配；二十二个适配模块均由 Lean 4.35.0 从源码编译；新增 Schwartz 函数、Fourier 指标、积分共轭及导数接口适配；S₂/S₃ 另适配有限过滤、乘积测度、可测函数及 Holder 因子
+- **本地位置:** [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)，含二十九个适配模块及一个本地组装模块
+- **适配与验证:** 模块可见性、复共轭、实嵌入与有限类型基数适配；二十九个适配模块均由 Lean 4.35.0 从源码编译；新增 Schwartz 函数、Fourier 指标、积分共轭及导数接口适配；S₂/S₃ 另适配有限过滤、乘积测度、可测函数及 Holder 因子
 
 #### 详细来源与文件映射
 
@@ -1081,11 +1093,19 @@ mathlib 的证明。
 `CubicThreeTail.lean`；`DFIDivisorEpsilon` 的调和数界、`DFISourceCutoffs` 的单位 bump
 及 `ClassicalLargeValues` 的倒数距离界仅对应 `CubicThreeTailSupport.lean`。
 `EnergyTolerance.lean` 适配 floor 相关计数证明，并加入本地严格／闭合容差桥接。
-二十二个适配模块（含该本地扩展）均已在 **Lean 4.35.0** 下从源码编译，适配覆盖 Schwartz 函数转换、
+新增七个模块继续使用同一来源：`LargeValuesLanguage` → `AffineLanguage.lean`；
+`LargeValuesAffine` → `AffineTransform.lean`；`LargeValuesAffineIteration` →
+`AffineIteration.lean`；`LargeValuesAffineHeight` → `AffineHeight.lean`；
+`LargeValuesS3Refined` → `CubicThreeTailRefined.lean`；`LargeValuesEnergy` →
+`EnergyDecomposition.lean`；`LargeValuesEnergyFinal` → `EnergyFinal.lean`。
+适配显式处理实／复标量、Schwartz 函数、Fourier 指标、乘积测度、Holder 指数及有限望远镜求和，
+复用已有均方、有限和 Cauchy–Schwarz、floor 单射与对数幂吸收证明。
+二十九个适配模块（含该本地扩展）均已在 **Lean 4.35.0** 下从源码编译，适配覆盖 Schwartz 函数转换、
 Fourier 求和指标、积分共轭、导数函数及类型转换。第一迹与单尾项解析界现已证明，
 完整定量反射、`S₂` 非对角余项及实际 Heath–Brown 多项式差分集均方也已证明；
 完整 Poisson 尾项二阶矩／`S₂` 组装及 Proposition8.1 的 `S₃` 能量输入现已证明；
-更强的仿射／能量精化及中间密度仍开放。
+仿射 Proposition9.1、实际尺度 Proposition10.1、能量 Proposition11.1 及代入后的
+S₃ Proposition11.2 现已证明；最终大值估计组装及中间密度仍开放。
 [逐文件来源与适配说明](docs/smccolm-guth-provenance.md)。
 
 </details>
@@ -1100,7 +1120,7 @@ Fourier 求和指标、积分共轭、导数函数及类型转换。第一迹与
 MIT 许可项目 <https://github.com/ShouqiaoW/erdos>（commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`），原始 MIT 许可证保留在
 [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE)。
-`Legendre/Layer4/GuthMaynard/` 下二十二个 smccolm/Lean 适配模块保留 MIT-0 声明及
+`Legendre/Layer4/GuthMaynard/` 下二十九个 smccolm/Lean 适配模块保留 MIT-0 声明及
 [原始许可证](licenses/smccolm-Lean-MIT-0.txt)；本地 `CubicRemainder.lean` 组装模块为 Apache-2.0。
 
 ## 参考文献

@@ -546,8 +546,14 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.145 | Exact mean square and logarithmic prefix inputs | [SamplingMeanSquare.lean](../Legendre/Layer4/GuthMaynard/SamplingMeanSquare.lean), [LogarithmicPrefix.lean](../Legendre/Layer4/GuthMaynard/LogarithmicPrefix.lean) | **proved, adapted**; explicit Montgomery constant, Kusmin--Landau core and unit-annulus packing |
 | 4.146 | Heath--Brown difference-set mean square | [HeathBrown.lean](../Legendre/Layer4/GuthMaynard/HeathBrown.lean), [HeathBrownReflection.lean](../Legendre/Layer4/GuthMaynard/HeathBrownReflection.lean); `layer4_heath_brown_difference_comparator` | **proved**; actual ordered pairs and arbitrary unit-bounded coefficients, T^epsilon*(R^2 N+R N^2+R^(5/4)T^(1/2)N), one constant/threshold before all scales; Poisson-tail/S2 assembly still open |
 | 4.147 | Complete Poisson-tail moment and S2 | [CubicTwoTailEstimate.lean](../Legendre/Layer4/GuthMaynard/CubicTwoTailEstimate.lean); `layer4_guth_poisson_tail_moment_comparator`, `layer4_guth_s2_comparator` | **proved, adapted**; all three k-dependent physical powers, actual complete tails, T^epsilon separation and uniform epsilon budget |
-| 4.148 | S3 energy input | [CubicThreeTail.lean](../Legendre/Layer4/GuthMaynard/CubicThreeTail.lean), [CubicThreeTailSupport.lean](../Legendre/Layer4/GuthMaynard/CubicThreeTailSupport.lean) | **proved, adapted**; Proposition8.1 with actual three-tail trace, one-separated W, T^(2/3)<=N<=T and T^-90 error; sharper energy/affine refinements remain open |
+| 4.148 | S3 energy input | [CubicThreeTail.lean](../Legendre/Layer4/GuthMaynard/CubicThreeTail.lean), [CubicThreeTailSupport.lean](../Legendre/Layer4/GuthMaynard/CubicThreeTailSupport.lean) | **proved, adapted**; Proposition8.1 with actual three-tail trace, one-separated W, T^(2/3)<=N<=T and T^-90 error; stronger affine/energy refinements are proved in rows4.150--4.154 |
 | 4.149 | Strict versus closed additive energy | [EnergyTolerance.lean](../Legendre/Layer4/GuthMaynard/EnergyTolerance.lean) | **proved local extension**; E_strict<=E_closed<=3 E_strict, paper-convention S3 bound up to an absolute constant; definitions are not equated |
+| 4.150 | Literal finite affine functional | [AffineLanguage.lean](../Legendre/Layer4/GuthMaynard/AffineLanguage.lean), [AffineTransform.lean](../Legendre/Layer4/GuthMaynard/AffineTransform.lean) | **proved, adapted**; actual affine shells, sharp/smooth majorization, Poisson and convolution identities |
+| 4.151 | Finite smoothing descent and uniform affine bound | [AffineIteration.lean](../Legendre/Layer4/GuthMaynard/AffineIteration.lean), [AffineHeight.lean](../Legendre/Layer4/GuthMaynard/AffineHeight.lean) | **proved, adapted**; Lemma9.2, fixed-source and corrected height-family Proposition9.1; two independent benchmarks |
+| 4.152 | Actual normalized R-square and selected S3 block | [CubicThreeTailRefined.lean](../Legendre/Layer4/GuthMaynard/CubicThreeTailRefined.lean) | **proved, adapted**; actual source supplies the uniform Fourier mass family; reflected centers retained |
+| 4.153 | Energy and gcd slices | [EnergyDecomposition.lean](../Legendre/Layer4/GuthMaynard/EnergyDecomposition.lean) | **proved, adapted**; exact coefficient-preserving reflection, difference bins, gcd decomposition and slice estimates |
+| 4.154 | Physical S3/energy assembly | [EnergyFinal.lean](../Legendre/Layer4/GuthMaynard/EnergyFinal.lean) | **proved, adapted**; natural-division endpoint correction, Propositions10.1/11.1/11.2 with literal independent benchmarks; final large-values/central density remain open |
+
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; stronger curved Huxley/Guth–Maynard remain open |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -860,3 +866,21 @@ energy equality and confusion with central density. All22 adapted modules
 (including the local tolerance extension) retain fixed MIT-0 source metadata
 and compile from source under Lean4.35.0; all five visible repository headings
 and default-open source details are preserved in both READMEs.
+
+
+Affine/energy validation (2026-11-17): Lean4.35.0 full build passes 4,362 jobs.
+All 8,268 project theorem declarations, including private/generated declarations,
+agree exactly between module-data enumeration, independent environment ownership,
+Audit targets and parsed axiom output. Only propext, Classical.choice and
+Quot.sound occur. All 351 classified Lean files, including Layers 0--4, contain
+no executable placeholders/prohibited shortcuts; no PDFs are present.
+All 218 independent consumers pass (173 Layer 4, nine Layer 3, 24 generated
+literature and 12 literature regressions). Eight new consumers check negative
+scaling, translated boundary energy, zero source, exact smoothing mass,
+natural-division endpoints, singleton refined S3 and sigma=3/4 energy/S3 powers.
+Six negative contract checks reject deleting coefficient, separation, T^(3/4)
+window, Fourier-family or T^-90 remainder conditions, or confusing the affine
+bound with central density. All 29 adapted modules retain the exact source pin
+and MIT-0 metadata; the license blob is unchanged. The seven new original
+source blobs match the pinned Git tree. Both READMEs retain the same five
+prominent numbered repository headings and individual default-open details.

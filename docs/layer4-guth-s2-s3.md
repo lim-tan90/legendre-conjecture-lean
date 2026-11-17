@@ -50,8 +50,9 @@ constant in the square-root energy bound and preserves every power of T,R,N.
 The two energy definitions are not equated: for W={0,1}, they are 6 and 14.
 
 The strict and closed literal independent benchmarks retain the length window,
-real coefficient energy and T^-90 remainder. Further affine/energy refinement
-and final large-value/density assembly remain open. In particular this step
+real coefficient energy and T^-90 remainder. The subsequent
+[affine/energy refinement](layer4-guth-affine-energy.md) is now proved;
+final large-value/density assembly remains open. In particular this step
 does not close central density on (7/10,4/5) or prove a prime-gap exponent.
 
 ## Sources and adaptation

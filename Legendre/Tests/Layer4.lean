@@ -1451,4 +1451,104 @@ theorem layer4_gm_energy_comparison_consumer (W : Finset ℝ) :
       GuthMaynard.ApproxAddEnergy 1 W ≤ 3*GuthMaynard.strictAddEnergy W :=
   ⟨GuthMaynard.strict_energy_le_closed W,GuthMaynard.closed_energy_le_three_strict W⟩
 
+open Density.GuthMaynard in
+/-- Negative scales require the absolute scale in the tolerance. -/
+theorem layer4_gm_affine_negative_scale_consumer (W : Finset ℝ) :
+    ApproxAddEnergy 2 (gmScale (-2) W) = ApproxAddEnergy 1 W := by
+  simpa using approxAddEnergy_scale 1 (-2) (by norm_num) W
+
+open Density.GuthMaynard in
+/-- Translation retains closed boundary contributions. -/
+theorem layer4_gm_affine_translated_boundary_consumer :
+    ApproxAddEnergy 1 ({17,18} : Finset ℝ) = 14 := by
+  unfold ApproxAddEnergy approximateAdditiveQuadruples
+  simp only [Finset.card_eq_sum_ones,Finset.sum_filter,Finset.sum_product]
+  norm_num [Finset.filter_insert,Finset.filter_singleton]
+
+open Density.GuthMaynard in
+/-- The selected-scale functional vanishes for the zero source. -/
+theorem layer4_gm_affine_zero_source_consumer (M : ℕ) (hM : 0 < M) :
+    gmAffineJ (fun _ : ℝ => 0) M = 0 := by
+  apply le_antisymm
+  · have h := gmAffineJ_le_crude (f := fun _ : ℝ => 0) (by simp) hM
+    simpa using h
+  · exact gmAffineJ_nonneg (fun _ : ℝ => 0) hM
+
+open Density.GuthMaynard in
+/-- The actual smoother preserves the exact cutoff mass factor. -/
+theorem layer4_gm_affine_mass_consumer (T : ℝ) (hT : 0 < T) (f : SchwartzMap ℝ ℝ) :
+    (∫ u : ℝ, gmAffineTildeSchwartz T hT f u) =
+      (∫ x : ℝ, T*gmCubicLocalBump (T*x))*(∫ x : ℝ, f x) :=
+  integral_gmAffineTildeSchwartz_eq_mul T hT f
+
+open Density.GuthMaynard in
+/-- Natural gcd division really needs the possible endpoint 2M+1. -/
+theorem layer4_gm_gcd_rounding_consumer :
+    gmDyadicIntervalPlus 2 = ({3,4,5} : Finset ℕ) ∧
+      gmDyadicIntervalPlus 0 = ({1} : Finset ℕ) := by
+  constructor <;> ext n <;> simp [gmDyadicIntervalPlus] <;> omega
+
+open Density.GuthMaynard in
+/-- A singleton tests both terms of Proposition 10.1 and its negligible remainder. -/
+theorem layer4_gm_refined_s3_singleton_consumer (cutoff : GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 4096 ≤ T₀ ∧ ∀ (N : ℕ) (T : ℝ),
+      T₀ ≤ T → 0 < N → (N : ℝ) ≤ T → T^(2/3 : ℝ) ≤ (N : ℝ) →
+      ‖gmCubicS3 cutoff N {0}‖ ≤ C*(T^(2+ε)+T^(1+ε)*(N : ℝ))+C/T^90 := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmCubicS3_prop10_1_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T hT hN hNT hlo
+  have hs : IsSeparated 1 ({0} : Finset ℝ) := by simp [IsSeparated]
+  have hi : InBaseInterval T ({0} : Finset ℝ) := by
+    intro x hx
+    simp only [Finset.mem_singleton] at hx
+    subst x
+    exact ⟨le_rfl,by linarith [hT₀]⟩
+  have he : ApproxAddEnergy 1 ({0} : Finset ℝ) = 1 := by
+    unfold ApproxAddEnergy approximateAdditiveQuadruples
+    simp only [Finset.card_eq_sum_ones,Finset.sum_filter,Finset.sum_product]
+    norm_num [Finset.filter_insert,Finset.filter_singleton]
+  simpa only [he,Finset.card_singleton,Nat.cast_one,Real.sqrt_one,mul_one] using
+    h hT hN hNT hlo hs hi
+
+open Density.GuthMaynard in
+/-- The large-value energy bound is support-local and keeps the 21/8 power. -/
+theorem layer4_gm_energy_sigma_three_quarters_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 4 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ) (b : ℕ → ℂ),
+        0 < N → T₀ ≤ T → (N : ℝ) ≤ T → T^(3/4 : ℝ) ≤ (N : ℝ) →
+        IsSeparated 1 W → InBaseInterval T W →
+        (∀ n ∈ Finset.Ioc N (2*N), ‖b n‖ ≤ 1) →
+        (∀ t ∈ W, (N : ℝ)^(3/4 : ℝ) ≤ ‖sourceDirichletPoly N b t‖) →
+        (ApproxAddEnergy 1 W : ℝ) ≤ C*T^ε*
+          ((W.card : ℝ)*(N : ℝ)+(W.card : ℝ)^(21/8 : ℝ)*T^(1/4 : ℝ)*(N : ℝ)^(-1/2 : ℝ)+
+            (W.card : ℝ)^3*(N : ℝ)^(-1/2 : ℝ)) := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmEnergy_prop11_1_native ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W b hN hT hNT hlo hs hi hb hv
+  have hh := h N T (3/4) W b hN hT hNT hlo hs hi hb hv
+  norm_num at hh ⊢
+  exact hh
+
+open Density.GuthMaynard in
+/-- Substituting sigma=3/4 checks the 29/16 frequency-cardinality exponent. -/
+theorem layer4_gm_energy_s3_sigma_three_quarters_consumer (cutoff : GMSmoothCutoff)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ C T₀ : ℝ, 0 < C ∧ 4096 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ) (b : ℕ → ℂ),
+        0 < N → T₀ ≤ T → (N : ℝ) ≤ T → T^(3/4 : ℝ) ≤ (N : ℝ) →
+        IsSeparated 1 W → InBaseInterval T W →
+        (∀ n ∈ Finset.Ioc N (2*N), ‖b n‖ ≤ 1) →
+        (∀ t ∈ W, (N : ℝ)^(3/4 : ℝ) ≤ ‖sourceDirichletPoly N b t‖) →
+        ‖gmCubicS3 cutoff N W‖ ≤ C*T^ε*
+          (T^2*(W.card : ℝ)^(3/2 : ℝ)+T*(W.card : ℝ)*(N : ℝ)^(3/2 : ℝ)+
+            T*(W.card : ℝ)^2*(N : ℝ)^(3/4 : ℝ)+
+            T^(9/8 : ℝ)*(W.card : ℝ)^(29/16 : ℝ)*(N : ℝ)^(3/4 : ℝ))+C/T^90 := by
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmCubicS3_prop11_2_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W b hN hT hNT hlo hs hi hb hv
+  have hh := h N T (3/4) W b hN hT hNT hlo hs hi hb hv
+  norm_num at hh ⊢
+  exact hh
+
 end Legendre.Tests

@@ -489,6 +489,13 @@ import all Legendre.Layer4.GuthMaynard.CubicTwoTailEstimate
 import all Legendre.Layer4.GuthMaynard.CubicThreeTailSupport
 import all Legendre.Layer4.GuthMaynard.CubicThreeTail
 import all Legendre.Layer4.GuthMaynard.EnergyTolerance
+import all Legendre.Layer4.GuthMaynard.AffineLanguage
+import all Legendre.Layer4.GuthMaynard.AffineTransform
+import all Legendre.Layer4.GuthMaynard.AffineIteration
+import all Legendre.Layer4.GuthMaynard.AffineHeight
+import all Legendre.Layer4.GuthMaynard.CubicThreeTailRefined
+import all Legendre.Layer4.GuthMaynard.EnergyDecomposition
+import all Legendre.Layer4.GuthMaynard.EnergyFinal
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -7329,3 +7336,1585 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_s3_singleton_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_s3_singleton_consumer._simp_1_2"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_tail_moment_k_two_consumer"
+
+-- Affine smoothing, height-family uniformity and physical S3/energy refinement.
+#print axioms Legendre.Density.GuthMaynard.GMAffineDepthSupported.eq_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineDepthSupported.iterationSupported
+#print axioms Legendre.Density.GuthMaynard.GMAffineFourierMassBound._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassBound._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassBound.eq_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassBound.nonneg_coefficient
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassBound.pointwise
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassProfile.atDepth_zero
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassProfileAtDepth._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineHeightFourierMassProfileAtDepth.eq_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineIterationSupported._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineLemma92RecurrenceAt._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineLemma92RecurrenceAt.toMassRecurrence
+#print axioms Legendre.Density.GuthMaynard.GMAffineSourceSupported._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineSourceSupported.depthSupported_zero
+#print axioms Legendre.Density.GuthMaynard.GMAffineSourceSupported.iterationSupported
+#print axioms Legendre.Density.GuthMaynard.GMAffineSourceSupported.supportedOn
+#print axioms Legendre.Density.GuthMaynard.GMAffineSupportedOn.iterationSupported
+#print axioms Legendre.Density.GuthMaynard.GMAffineSupportedOn.mono
+#print axioms Legendre.Density.GuthMaynard.GMAffineSupportedOn.wideDepthSupported_zero
+#print axioms Legendre.Density.GuthMaynard.GMAffineWideDepthSupported._proof_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineWideDepthSupported._proof_2
+#print axioms Legendre.Density.GuthMaynard.GMAffineWideDepthSupported.eq_1
+#print axioms Legendre.Density.GuthMaynard.GMAffineWideDepthSupported.iterationSupported
+#print axioms Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius
+#print axioms Legendre.Density.GuthMaynard.abs_affine_ratio_le
+#print axioms Legendre.Density.GuthMaynard.abs_directTriple_central_le
+#print axioms Legendre.Density.GuthMaynard.abs_directTriple_first
+#print axioms Legendre.Density.GuthMaynard.abs_gmAffinePositiveShell_le_scale
+#print axioms Legendre.Density.GuthMaynard.abs_gmAffineSignedShell_le_scale
+#print axioms Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one
+#print axioms Legendre.Density.GuthMaynard.abs_reflectedTriple_central_le
+#print axioms Legendre.Density.GuthMaynard.abs_reflectedTriple_first
+#print axioms Legendre.Density.GuthMaynard.abs_sub_gmHalfDifferenceBin_le_half
+#print axioms Legendre.Density.GuthMaynard.add_int_eq_fract_add_translated
+#print axioms Legendre.Density.GuthMaynard.affine_ratio_lower_bound
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_affine
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_le_three_card_cubed
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_mul_largeValue_sq_le_thirdMoment_raw
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_one_eq_sum_floorEnergy
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_scale
+#print axioms Legendre.Density.GuthMaynard.approxAddEnergy_translate
+#print axioms Legendre.Density.GuthMaynard.approxFloorEnergy_zero_le_addEnergy
+#print axioms Legendre.Density.GuthMaynard.card_cubed_le_gmDiscreteRatioMoment_three
+#print axioms Legendre.Density.GuthMaynard.card_filter_abs_sub_le_one_le_three
+#print axioms Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineCentralShell
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonEllRange_real_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonEllRange_real_le_source
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonPair_fiber_le_divisorsAntidiag
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonPairs_eq_sum
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonPairs_le_sum_divisors
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonPairs_real_le_of_divisor
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonProductRange_real_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonProducts_real_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineIndexSet_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineIndexSet_le_scaleProduct
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineNegFrequencyImage
+#print axioms Legendre.Density.GuthMaynard.card_gmAffinePoissonNearSet_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffinePoissonNearSet_real_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffinePositiveShell
+#print axioms Legendre.Density.GuthMaynard.card_gmAffinePositiveShell_real_le_two_mul
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineScaledNearSet_le
+#print axioms Legendre.Density.GuthMaynard.card_gmAffineSignedShell_le
+#print axioms Legendre.Density.GuthMaynard.card_gmHalfDifferenceDyadicPairFiber_lt
+#print axioms Legendre.Density.GuthMaynard.card_gmHalfDifferenceMatchedPairs_le_energy
+#print axioms Legendre.Density.GuthMaynard.card_gmHalfDifferenceTranslatedClass
+#print axioms Legendre.Density.GuthMaynard.card_gmReducedLogRatios
+#print axioms Legendre.Density.GuthMaynard.card_gmReducedRatioPairs_le_four_mul_sq
+#print axioms Legendre.Density.GuthMaynard.card_int_divisorsAntidiag_eq_two_mul_natAbs_divisors
+#print axioms Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.card_sq_le_fortyeight_mul_T_mul_integral_normalizedRWeight
+#print axioms Legendre.Density.GuthMaynard.card_sq_le_sixteen_mul_T_mul_integral_gmCubicRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.card_sq_le_sixteen_mul_T_mul_integral_gmCubicTruncatedRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.cast_card_filter_abs_sub_le_ratio
+#print axioms Legendre.Density.GuthMaynard.cast_card_gmReducedRatioPairs_le_four_mul_sq
+#print axioms Legendre.Density.GuthMaynard.conj_fourier_gmAffineComplexify_eq_integral
+#print axioms Legendre.Density.GuthMaynard.contDiffAt_ofReal_cpow_mul_I_public
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmAffineCentralWeightFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmAffineLocalBumpFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmAffineScaledBumpFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicAffineSourceFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicPairMellinAtom
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicPreSmoothingWindowComplexFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicRWeightFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicRatioBumpComplexFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmCubicTruncatedRWeightFunction
+#print axioms Legendre.Density.GuthMaynard.contDiff_gmRPhase
+#print axioms Legendre.Density.GuthMaynard.continuous_gmAffineMiddleFourierBlock
+#print axioms Legendre.Density.GuthMaynard.continuous_gmAffineMiddleTauWeight
+#print axioms Legendre.Density.GuthMaynard.continuous_gmAffineTransformSum
+#print axioms Legendre.Density.GuthMaynard.continuous_gmCubicReflectedAffineAggregate
+#print axioms Legendre.Density.GuthMaynard.continuous_gmFiniteExpSum
+#print axioms Legendre.Density.GuthMaynard.disjoint_gmAffineLowFrequencyRegion_high
+#print axioms Legendre.Density.GuthMaynard.disjoint_gmAffineLowFrequencyRegion_middle
+#print axioms Legendre.Density.GuthMaynard.disjoint_gmAffineMiddleFrequencyRegion_high
+#print axioms Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement
+#print axioms Legendre.Density.GuthMaynard.exists_bounded_gmHalfDifferenceDyadicClass
+#print axioms Legendre.Density.GuthMaynard.exists_card_gmAffineFirstPoissonPairs_middle_real_le
+#print axioms Legendre.Density.GuthMaynard.exists_card_gmAffineFirstPoissonPairs_real_le
+#print axioms Legendre.Density.GuthMaynard.exists_global_card_gmAffineFirstPoissonPairs_middle_real_le
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_explicit_frequency_regions
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_raw_lemma92
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_raw_lemma92_of_constants
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_components
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_components._proof_1
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_components_of_constants
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_recurrence
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_regionI_add_middle_add_high
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound
+#print axioms Legendre.Density.GuthMaynard.exists_gmAffineTransformIntegral_eq_J
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_J_aligned
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_J_at_cutoff
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_J_at_cutoff._proof_1
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_J_physical
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_J_physical._proof_1
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_sigmaIIReal_add_source_tails
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_sigmaIIReal_add_tails
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleFrequencyRegion_main_sq_le_sigmaIIReal_add_tail
+#print axioms Legendre.Density.GuthMaynard.exists_integral_gmAffineMiddleTauWeightedBlockRealSq_le_source_decay
+#print axioms Legendre.Density.GuthMaynard.exists_n_C_forall_gmAffineJ_le_source_lemma92_of_ratio
+#print axioms Legendre.Density.GuthMaynard.exists_n_C_forall_gmAffineJ_le_source_lemma92_of_ratio._proof_1
+#print axioms Legendre.Density.GuthMaynard.exists_n_Cdiv_forall_gmAffineLemma92HeightMassRecurrence
+#print axioms Legendre.Density.GuthMaynard.exists_n_Cdiv_forall_gmAffineLemma92MassRecurrence
+#print axioms Legendre.Density.GuthMaynard.exists_n_Cdiv_forall_gmAffineLemma92Recurrence
+#print axioms Legendre.Density.GuthMaynard.exists_nat_mul_ge_of_pos
+#print axioms Legendre.Density.GuthMaynard.exists_nat_three_halves_pow_mul_ge_hundred
+#print axioms Legendre.Density.GuthMaynard.exists_norm_gmAffineMiddleFourierBlockReal_le_source_decay
+#print axioms Legendre.Density.GuthMaynard.exists_sum_gmAffineMiddleBlockMass_neg_le_sigmaIIReal_add_source_tail
+#print axioms Legendre.Density.GuthMaynard.exists_sum_gmAffineMiddleTail_mass_le_source_decay
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_card_gmAffineFirstPoissonPairs_middle_real_le
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_constants_gmAffineLemma92Components
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_constants_gmAffineLemma92Components_with_tail_product
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_constants_gmAffineLemma92Recurrence
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_gmAffineJ_le_finite_descent
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_gmAffineJ_le_height_finite_descent
+#print axioms Legendre.Density.GuthMaynard.exists_uniform_gmAffineJ_le_source_lemma92
+#print axioms Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction
+#print axioms Legendre.Density.GuthMaynard.finset_sum_comp_le_sum_of_injOn
+#print axioms Legendre.Density.GuthMaynard.floorAdditiveDefect.eq_1
+#print axioms Legendre.Density.GuthMaynard.floorAdditiveDefect_mem_Icc
+#print axioms Legendre.Density.GuthMaynard.floorAdditiveQuadruple.eq_1
+#print axioms Legendre.Density.GuthMaynard.four_mul_add_two_rpow_le_six_mul
+#print axioms Legendre.Density.GuthMaynard.fourierDeweightFiniteBlock_logShift_coeffs_native
+#print axioms Legendre.Density.GuthMaynard.fourier_gmAffineComplexify_eq_integral
+#print axioms Legendre.Density.GuthMaynard.fourier_gmAffineComplexify_normalizedRWeight
+#print axioms Legendre.Density.GuthMaynard.fourier_gmAffineComplexify_tilde
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_near_add_far
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_tau
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_polynomial_decay
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralShell.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralShell_subset_smooth
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeightFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeightSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeightSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeightSchwartz_int_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight_eq_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight_eq_zero_of_not_mem
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineCentralWeight_poisson
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_cubicRWeight_eq_pair_sum
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_normalizedRWeight_eq_affineTerm
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_normalizedRWeight_eq_affineTerm._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_normalizedRWeight_eq_affineTerm._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_tilde_eq_convolution
+#print axioms Legendre.Density.GuthMaynard.gmAffineComplexify_truncatedRWeight_eq_mul
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonEllRange.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonPairTerm.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonPairTerm_eq_middleBlock
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonPair_product_ne_zero
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonPairs.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonProductRange.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonProducts_subset_range
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonRadius._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonRadius_card_factor_mul_scale_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonRadius_le_of_scale
+#print axioms Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierDecayAt_of_one_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierDecayEnvelope_le_source
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierDecayEnvelope_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierPair_eq_iteratedIntegral
+#print axioms Legendre.Density.GuthMaynard.gmAffineFourierPair_eq_prodIntegral
+#print axioms Legendre.Density.GuthMaynard.gmAffineHighFrequencyIntegralFactor_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineHighFrequencyRegion.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineHighFrequencyRegion_eq_union
+#print axioms Legendre.Density.GuthMaynard.gmAffineImage_eq_translate_scale
+#print axioms Legendre.Density.GuthMaynard.gmAffineIndexSet.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineInitialFourierMassProfile_atDepth_zero
+#print axioms Legendre.Density.GuthMaynard.gmAffineInitialFourierMassProfile_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineIntegralValues_nonempty
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationCorePower_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationDoubleSix_rpow_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationEta._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationEta_le_delta_div_twenty
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationEta_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationEta_pos
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationQ_cube_eq
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationQ_cube_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationQ_mul_M_le_four_Y
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIIFirstTail_scale_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIIHighTail_scale_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIII_height_scale_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIII_scale_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIII_source_scale_eq
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIIScaleFactor_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIISecondTail_height_ratio_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineIterationRegionIISecondTail_scale_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIteration_M_pow_add_three_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIteration_M_pow_four_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIteration_M_pow_three_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineIteration_Y_add_Q_add_one_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineJ.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineJ_le_crude
+#print axioms Legendre.Density.GuthMaynard.gmAffineJ_le_proposition9_base
+#print axioms Legendre.Density.GuthMaynard.gmAffineJ_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineLemma92ComponentsAt_to_heightMassRecurrence
+#print axioms Legendre.Density.GuthMaynard.gmAffineLemma92ComponentsAt_to_heightMassRecurrence._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLemma92ComponentsAt_to_recurrence
+#print axioms Legendre.Density.GuthMaynard.gmAffineLemma92ComponentsAt_to_recurrence._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpDual.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpDual_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpDual_polynomial_decay
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourierSup._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourierSup_pos
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourierTailConstant.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourierTailConstant_bound
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourierTailConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFourier_polynomial_decay
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineLocalBumpSchwartz_one_on_dyadicLog
+#print axioms Legendre.Density.GuthMaynard.gmAffineLowFrequencyRegion.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineLowFrequencyRegion_eq_Icc
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleBlockMass_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleCenter.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleCore_subset_frequencySupport
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleEllSource_eq_equation97
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFarSourceConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_natCast
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFrequencyRegion.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleFrequencySupport.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleNearKernelNormSum._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleNearKernelNormSum.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleNearKernelNormSum_le_physical
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddlePairPhase_exp_eq_Z₁_mul_Z₂
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTail.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_eq_zero_of_not_mem
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_le_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_one
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_one_of_abs_lt
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleWeightedComponent_eq_Z₁
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleZ₂Finite_support_eq_Z₂
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_eq_near_add_far
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled
+#print axioms Legendre.Density.GuthMaynard.gmAffineM₂FourierBlock_eq_middleBlock
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonEnvelopes_le_mass
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarFourier.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMajorant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMajorant._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMode.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_exception
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_majorant
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarSeries.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonFarTerm.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonMainFourier.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonMainFourier_eq_sum_pairs
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonNearKernelEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonNearKernelEnvelope_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonNearTerm.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonNearTerm_eq_zero_of_not_mem
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonTailKernelEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePoissonTailKernelEnvelope_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffinePositiveShell.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffinePositiveShell_ne_zero
+#print axioms Legendre.Density.GuthMaynard.gmAffinePositiveShell_scale_le_abs
+#print axioms Legendre.Density.GuthMaynard.gmAffinePositiveTransformSum_le_transformSum
+#print axioms Legendre.Density.GuthMaynard.gmAffinePositiveTransformSum_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIFarConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIFarConstant._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIFarConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIICoreConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIICoreConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIFirstPoissonTail_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIHighTail_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIEnvelopeConstant_le_mass
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIEnvelopeConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIEnvelopeMassConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIKernelConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIKernelConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIKernelEnvelope_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIIRawBound_le_source
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIISourceBound_le_constant
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIISourceBound_le_heightMass
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIPrefactor_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIRawBound._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIRawBound._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIIRawBound_eq_core_add_tail
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIISecondPoissonTail_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailAbsorptionConstant_le_invariant
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailAbsorptionConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailInvariantBound_le_mass_sq
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailInvariantBound_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailMassConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailRawBound_le_source
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound_le_constant
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound_le_heightMass
+#print axioms Legendre.Density.GuthMaynard.gmAffineRegionIITailSourceBound_le_scale_ratios
+#print axioms Legendre.Density.GuthMaynard.gmAffineRetainedFirstPoissonPairSquare.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineRetainedFirstPoissonPairSquare_eq_scaled_profile
+#print axioms Legendre.Density.GuthMaynard.gmAffineRetainedNeighborhoodSum_le_positiveTransform
+#print axioms Legendre.Density.GuthMaynard.gmAffineRetainedNeighborhoodSum_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaleTriples.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaleTriples_nonempty
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpDual.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpDual.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_near_add_far
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_polynomial_decay
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBumpSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledBump_poisson
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledFarSeries.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledFarTerm.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledNearTerm.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineScaledNearTerm_eq_zero_of_not_mem
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonCutoff_div_Q_eq
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonCutoff_div_scale_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonCutoff_ge_Q
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonCutoff_pos
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonCutoff_width
+#print axioms Legendre.Density.GuthMaynard.gmAffineSecondPoissonSmoothingScale_ge
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIAtWidth_eq_finiteSupport
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIAtWidth_eq_real
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIEquation97_eq_integral_integrand
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIFarCoefficient_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIFarEnvelope_eq_coefficient_mul
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIFinite_eq_equation97
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIFinite_eq_expandedFourierPairs
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIFinite_eq_expanded_Z₁_Z₂_integrands
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIINearEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIINearEnvelope_le_physical
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIPhysicalEnvelope.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIReal_eq_finiteSupport
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIReal_one_eq_sigmaII
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaIIReal_scale_window
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaII_eq_equation97
+#print axioms Legendre.Density.GuthMaynard.gmAffineSigmaII_eq_finiteSupport
+#print axioms Legendre.Density.GuthMaynard.gmAffineSignedShell.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSignedShell_ne_zero
+#print axioms Legendre.Density.GuthMaynard.gmAffineSignedShell_scale_le_abs
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothCentralShell.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz_fourier
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz_fourier_eq_main_add_far
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz_fourier_poisson
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSchwartz_fourier_regroup
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothTransformSum_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothingKernel._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothingKernel.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothingKernel.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineTerm.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartzTotal.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartzTotal_apply_of_ne
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartzTotal_fourier_of_ne
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_fourierDecayAt
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_iterationSupported
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeIterate_zero
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz._proof_6
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_apply_sub
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_depthSupported_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_eq_zero_of_not_mem_support
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_eq_zero_of_not_mem_support._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_fourierMassBound
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_fourierMassProfile
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_fourierMassProfileAtDepth_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_heightFourierMassBound
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_heightFourierMassFamilyAtDepth_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_heightFourierMassProfileAtDepth_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_iterationSupported
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_weighted_norms_le_sixteen
+#print axioms Legendre.Density.GuthMaynard.gmAffineTildeSchwartz_wideDepthSupported_succ
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_J
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude_scales
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_indexSum
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_smooth_fourier
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformSum.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformSum_eq_indexSum
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformSum_le_smooth
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformSum_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmAffineTransformSum_sq_le
+#print axioms Legendre.Density.GuthMaynard.gmAffineTranslationPhaseSum._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmAffineTranslationPhaseSum_eq_tsum
+#print axioms Legendre.Density.GuthMaynard.gmAffineTranslationPhaseSum_poisson
+#print axioms Legendre.Density.GuthMaynard.gmAffineUnitInterval.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmAffine_finite_exponent_descent
+#print axioms Legendre.Density.GuthMaynard.gmAffine_frequency_regions_union
+#print axioms Legendre.Density.GuthMaynard.gmAffine_mixed_weight_le
+#print axioms Legendre.Density.GuthMaynard.gmAffine_proposition9_1_height_family_native
+#print axioms Legendre.Density.GuthMaynard.gmAffine_proposition9_1_native
+#print axioms Legendre.Density.GuthMaynard.gmAffine_proposition9_finite_induction
+#print axioms Legendre.Density.GuthMaynard.gmApproxAddEnergy_largeValues_native
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineSourceFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineSourceSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineSourceSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineSourceSchwartz_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineTerminalScale_le_height_four
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineTerminalScale_le_ratio
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow_eq_zero_of_not_mem_Icc
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicAffineWindow_one
+#print axioms Legendre.Density.GuthMaynard.gmCubicCoherenceRadius._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicCoherenceRadius_pos
+#print axioms Legendre.Density.GuthMaynard.gmCubicDirectAffineScales_mem_terminal
+#print axioms Legendre.Density.GuthMaynard.gmCubicDyadicFrequencyBlock_denominator_split
+#print axioms Legendre.Density.GuthMaynard.gmCubicLocalBump_eq_one_of_mem_gmAffineMiddleCore
+#print axioms Legendre.Density.GuthMaynard.gmCubicLocalBump_middleFrequency_eq_zero_of_not_mem
+#print axioms Legendre.Density.GuthMaynard.gmCubicLocalBump_mul_fourierPairIntegral_eq_tripleKernel
+#print axioms Legendre.Density.GuthMaynard.gmCubicMellinDerivativePower_le
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSourceSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSourceSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSource_eq_original_on_activeInterval
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSource_eq_original_on_sourceInterval
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSource_heightFourierMassFamilyAtDepth_zero
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSource_proposition9_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeAffineSource_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmCubicNativeHeightProfileConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNegativeDenominatorBlock.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSourceSchwartz._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSourceSchwartz._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSourceSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSourceSchwartz.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSourceSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_directTriple
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_eq_original
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_heightFourierMassFamilyAtDepth_zero
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_proposition9_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_reflectedTriple
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedAffineSource_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_affine
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_neg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_pos
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_mem_indexSet
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedHeightProfileConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedHeightProfileConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedNativeHeightProfileConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedNativeHeightProfileConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeightSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeight_heightFourierMassFamilyAtDepth_zero
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedRWeight_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_affine
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_neg
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_pos
+#print axioms Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_mem_indexSet
+#print axioms Legendre.Density.GuthMaynard.gmCubicPairMellinAtom.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicPairMellinAtom_eq_exp
+#print axioms Legendre.Density.GuthMaynard.gmCubicPairMellinDerivativeConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicPairMellinDerivativeConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicPositiveDenominatorBlock.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindowComplexFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindowComplexSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow_eq_zero_of_not_mem_Icc
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow_one
+#print axioms Legendre.Density.GuthMaynard.gmCubicPreSmoothingWindow_one_wide
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFourierConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFourierConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFunction._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFunction._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFunction._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightFunction_eq
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightSchwartz_ge_card_sq_half_on_coherenceInterval
+#print axioms Legendre.Density.GuthMaynard.gmCubicRWeightSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicRatioBumpComplexFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicRatioBumpComplexSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicReflectedAffineAggregate_eq_scaleSum
+#print axioms Legendre.Density.GuthMaynard.gmCubicReflectedAffineAggregate_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3_prop10_1_native
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3_prop10_1_physical_explicit
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3_prop10_1_selected_explicit
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3_prop11_2_native
+#print axioms Legendre.Density.GuthMaynard.gmCubicSelectedScale_first_le
+#print axioms Legendre.Density.GuthMaynard.gmCubicSelectedScale_second_le
+#print axioms Legendre.Density.GuthMaynard.gmCubicSelectedSmoothedBlock_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicSelectedSmoothedBlock_pointwise_affine_le
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedR.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedRSqSchwartz.congr_simp
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedRSqSchwartz.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedRSqSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedRSqSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicSmoothedRSq_le_affineSource_on_sourceInterval
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedHeightProfileConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightDerivativeConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightFourierConstant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightFunction.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightSchwartz_apply
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightSchwartz_ge_card_sq_half_on_coherenceInterval
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeightSchwartz_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeight_heightFourierMassFamilyAtDepth_zero
+#print axioms Legendre.Density.GuthMaynard.gmCubicTruncatedRWeight_supportedOn
+#print axioms Legendre.Density.GuthMaynard.gmCubicWideFourthConstant.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicWideFourthConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmCubicWideL2Constant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmCubicWideL2Constant_pos
+#print axioms Legendre.Density.GuthMaynard.gmCutoff_reciprocal_term_le
+#print axioms Legendre.Density.GuthMaynard.gmDiagonalGcdThirdMoment_le
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_le_card_sq_mul_second
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_le_dyadicPairBlockMoments
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_raw_native
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioMoment.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioMoment_eq_iterated
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioMoment_eq_sum_gcdSlices
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioMoment_eq_sum_reduced
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioSecondMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_physical_native
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteSecondMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteThirdMoment_le_card_mul_second
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteThirdMoment_le_sqrt
+#print axioms Legendre.Density.GuthMaynard.gmDiscreteThirdMoment_sq_le_second_mul_fourth
+#print axioms Legendre.Density.GuthMaynard.gmDyadicIntervalPlus.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmDyadicIntervalPlus_eq_insert
+#print axioms Legendre.Density.GuthMaynard.gmDyadicMultiplicitySourceShape
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPairBlockMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPairBlockMoment_sourceShape_native
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPlusFourthMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPlusRatioMoment.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPlusRatioMoment_le
+#print axioms Legendre.Density.GuthMaynard.gmDyadicPlusSecondMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native
+#print axioms Legendre.Density.GuthMaynard.gmFiniteExpSum.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le
+#print axioms Legendre.Density.GuthMaynard.gmFourthMomentShape._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmFourthMomentShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmFourthMomentShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmGcdCutoff_bounds
+#print axioms Legendre.Density.GuthMaynard.gmGcdCutoff_le_N
+#print axioms Legendre.Density.GuthMaynard.gmGcdSlice.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced
+#print axioms Legendre.Density.GuthMaynard.gmGcdSliceThirdMoment_le_card_cubed_of_lt
+#print axioms Legendre.Density.GuthMaynard.gmGcdSliceThirdMoment_le_dyadicPlus
+#print axioms Legendre.Density.GuthMaynard.gmGcdSlice_fst_pos
+#print axioms Legendre.Density.GuthMaynard.gmGcdSlice_index_pos
+#print axioms Legendre.Density.GuthMaynard.gmGcdSlice_snd_pos
+#print axioms Legendre.Density.GuthMaynard.gmGcdSlice_to_reduced_mem
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceBinCommonIntervalMeanSquare_native
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceBinShiftedMeanSquare_native
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceBin_bounds_of_base
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceBin_mem_dyadicClass_of_pair
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceDyadicClass.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceDyadicCount_le_six_log
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceDyadicPairBlock_eq_sum_fibers
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceMatchedPairs.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity_le_card
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity_pos_of_mem
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferencePairPhase.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferencePairPhase_log_div_eq_sourcePhase
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferencePairScale_mem_range
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceTranslatedClass.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceTranslatedClass_inBase
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceTranslatedClass_separated
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceTranslatedMeanSquare_native
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifferenceTranslated_sub
+#print axioms Legendre.Density.GuthMaynard.gmHalfDifference_pair_displacement
+#print axioms Legendre.Density.GuthMaynard.gmHalfMatchedToEnergy.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmHalfMatchedToEnergy_mem
+#print axioms Legendre.Density.GuthMaynard.gmLargeFourthAggregateShape_le_paper
+#print axioms Legendre.Density.GuthMaynard.gmLargeFourthAggregateShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmLargeFourthPaperShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_eq_middle_add_diagonal
+#print axioms Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmLargePaperShapes_large_card
+#print axioms Legendre.Density.GuthMaynard.gmLargePaperShapes_native
+#print axioms Legendre.Density.GuthMaynard.gmLargePaperShapes_small_card
+#print axioms Legendre.Density.GuthMaynard.gmLargeSecondAggregateShape_le_paper
+#print axioms Legendre.Density.GuthMaynard.gmLargeSecondAggregateShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmLargeSecondPaperShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmLemma11ThreeFourierError_le
+#print axioms Legendre.Density.GuthMaynard.gmMiddleGcdThirdMoment_native
+#print axioms Legendre.Density.GuthMaynard.gmMiddleGcdThirdMoment_physical_native
+#print axioms Legendre.Density.GuthMaynard.gmMiddleGcdThirdMoment_raw
+#print axioms Legendre.Density.GuthMaynard.gmRPhase_fourth_eq_gmFiniteExpSum
+#print axioms Legendre.Density.GuthMaynard.gmRPhase_pair_frequency_le
+#print axioms Legendre.Density.GuthMaynard.gmRPhase_quad_frequency_le
+#print axioms Legendre.Density.GuthMaynard.gmRPhase_sq_eq_gmFiniteExpSum
+#print axioms Legendre.Density.GuthMaynard.gmR_ratio_pow_le_card_pow
+#print axioms Legendre.Density.GuthMaynard.gmReducedLogRatios.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmReducedLogRatios_bounds
+#print axioms Legendre.Density.GuthMaynard.gmReducedLogRatios_image_injective
+#print axioms Legendre.Density.GuthMaynard.gmReducedLogRatios_separated
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_eq_logSum
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_four_le_epsilon
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_four_le_local_raw
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_four_le_main_add_tail
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_le_plus
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_three_le_epsilon
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_two_le_epsilon
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_two_le_local_raw
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioMoment_two_le_main_add_tail
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPair_mem_plus
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_coprime
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_dilate_snd_le
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_fst_pos
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_ratio_bounds
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_ratio_separated
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_snd_pos
+#print axioms Legendre.Density.GuthMaynard.gmReducedRatioPairs_to_gcdSlice_mem
+#print axioms Legendre.Density.GuthMaynard.gmReducedThirdMoment_le_sqrt
+#print axioms Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le
+#print axioms Legendre.Density.GuthMaynard.gmSecondMomentShape._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSecondMomentShape._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmSecondMomentShape._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmSecondMomentShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmSecondMomentShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmSection11CommonRadius._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSection11CommonRadius_le_epsilonPower
+#print axioms Legendre.Density.GuthMaynard.gmSection11PairMajorant_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmSection11RawCore_le_sqrtSix
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL2Constant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL2Constant._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL2Constant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL2SliceConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL2SliceConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL3SliceConstant.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL3SliceConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL4Constant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL4Constant._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL4Constant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL4SliceConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdL4SliceConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdSumConstant_pos
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdTailConstant._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdTailConstant.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdThirdMoment_eq_reduced
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdThirdMoment_le_raw
+#print axioms Legendre.Density.GuthMaynard.gmSmallGcdThirdMoment_native
+#print axioms Legendre.Density.GuthMaynard.half_abs_intCast_le_abs_fract_add
+#print axioms Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub
+#print axioms Legendre.Density.GuthMaynard.harmonic_le_scale_rpow
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineCentralWeightFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineLocalBumpFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineMiddleTauWeight
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineScaledBumpFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmCubicAffineSourceFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmCubicPreSmoothingWindowComplexFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmCubicRWeightFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmCubicRatioBumpComplexFunction
+#print axioms Legendre.Density.GuthMaynard.hasCompactSupport_gmCubicTruncatedRWeightFunction
+#print axioms Legendre.Density.GuthMaynard.hasFiniteSupport_gmAffinePoissonNearTerm
+#print axioms Legendre.Density.GuthMaynard.hasFiniteSupport_gmAffineScaledNearTerm
+#print axioms Legendre.Density.GuthMaynard.integrableOn_gmAffineHighFrequencyRegion_abs_rpow
+#print axioms Legendre.Density.GuthMaynard.integrable_finiteExpSum_fourier_kernel
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineFourierPairKernel
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleEquation97Term
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleSourceTerm
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleTauWeightedBlockRealSq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleTauWeightedBlockRealSq_real
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleTauWeightedBlockSq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleTripleKernel
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineMiddleZ₁_integrand
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffinePositiveTransformSum_sq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineRetainedMiddleProfile
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSigmaIIEquation97Integrand
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSigmaIIFarEnvelope
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSigmaIIPhysicalEnvelope
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSmoothTransformSum_sq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSmoothTransform_fourier_sq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineSmoothingConvolution_integrand
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq
+#print axioms Legendre.Density.GuthMaynard.integrable_gmAffineTransformSum_sq_native
+#print axioms Legendre.Density.GuthMaynard.integrable_mul_gmAffineMiddlePhysicalWindowWeight
+#print axioms Legendre.Density.GuthMaynard.integrable_sourceDirichletPoly_energyFourier
+#print axioms Legendre.Density.GuthMaynard.integrable_sq_gmCubicReflectedAffineAggregate
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineHighFrequencyRegion_abs_rpow
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineHighFrequencyRegion_fourier_sq_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineHighFrequencyRegion_sq_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_sq_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_sigmaIIReal_add_source_tails_of_constants
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleFrequencyRegion_fourier_sq_le_uniform_pairs_add_far
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleFrequencyRegion_main_sq_le_uniform_pairs
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeightedBlockRealSq_eq_ofReal_mass
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeightedBlockRealSq_le_of_norm_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeightedBlockRealSq_le_source_decay_of_constant
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeightedBlockSq_eq_mass
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineMiddleTripleKernel_eq_Z₁
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffinePositiveTransformSum_sq_le_J
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineRetainedMiddleProfile_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIFarEnvelope_eq
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIFarEnvelope_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIPhysicalEnvelope_eq
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIPhysicalEnvelope_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIPhysicalEnvelope_le._proof_1
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSmoothTransformSum_sq_eq_fourier
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSmoothTransform_fourier_sq_eq_regions
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSmoothingKernelReal_eq
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineSmoothingKernelReal_le_four
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineTildeSchwartz_eq_mul
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineTildeSchwartz_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmAffineTildeSchwartz_sq_le
+#print axioms Legendre.Density.GuthMaynard.integral_gmCubicLocalBump_le_four
+#print axioms Legendre.Density.GuthMaynard.integral_gmCubicNormalizedAffineSource_le_two_secondMoment
+#print axioms Legendre.Density.GuthMaynard.integral_gmCubicNormalizedRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.integral_gmCubicRWeightSchwartz_le_secondMoment
+#print axioms Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight
+#print axioms Legendre.Density.GuthMaynard.integral_mul_gmAffinePositiveTransformSum_le
+#print axioms Legendre.Density.GuthMaynard.integral_mul_gmAffineRetainedNeighborhoodSum_le
+#print axioms Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator
+#print axioms Legendre.Density.GuthMaynard.integral_norm_iteratedFDeriv_gmAffineComplexify_cubicRWeight_le
+#print axioms Legendre.Density.GuthMaynard.integral_norm_iteratedFDeriv_gmAffineComplexify_truncatedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.integral_sq_gmCubicNormalizedAffineSource_le_six_fourthMoment
+#print axioms Legendre.Density.GuthMaynard.integral_sq_gmCubicNormalizedRWeightSchwartz
+#print axioms Legendre.Density.GuthMaynard.integral_sq_gmCubicRWeightSchwartz_le_fourthMoment
+#print axioms Legendre.Density.GuthMaynard.integral_sq_gmCubicReflectedAffineAggregate_le_sixteen_J
+#print axioms Legendre.Density.GuthMaynard.integral_sum_gmHalfDifferenceBin_sourceMoment
+#print axioms Legendre.Density.GuthMaynard.integral_sum_triple_sourceMoment
+#print axioms Legendre.Density.GuthMaynard.integral_tau_u'_u_gmAffineMiddleTripleKernel_eq_u'_u_tau
+#print axioms Legendre.Density.GuthMaynard.log_gmHalfDifferenceMultiplicity_le_log_card
+#print axioms Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock
+#print axioms Legendre.Density.GuthMaynard.mapAdditiveQuadruple.eq_1
+#print axioms Legendre.Density.GuthMaynard.mapAdditiveQuadruple_scale_mem
+#print axioms Legendre.Density.GuthMaynard.mapAdditiveQuadruple_translate_mem
+#print axioms Legendre.Density.GuthMaynard.mapAdditiveQuadruple_unscale_mem
+#print axioms Legendre.Density.GuthMaynard.mapAdditiveQuadruple_untranslate_mem
+#print axioms Legendre.Density.GuthMaynard.measurableSet_gmAffineHighFrequencyRegion
+#print axioms Legendre.Density.GuthMaynard.measurableSet_gmAffineLowFrequencyRegion
+#print axioms Legendre.Density.GuthMaynard.measurableSet_gmAffineMiddleFrequencyRegion
+#print axioms Legendre.Density.GuthMaynard.memLp_sqrt_four_of_memLp_two
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineCentralShell
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineCentralShell_of_abs_bound
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineCentralShell_of_affine_support
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineFirstPoissonEllRange_of_pair
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineFirstPoissonPairs
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineIndexSet
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineMiddleTail
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffinePoissonNearSet_iff_firstPoissonTau
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffinePoissonNearSet_of_lt
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffinePositiveShell
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineScaleTriples
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineScaledNearSet_of_lt
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineSignedShell
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineSignedShell_of_abs_bounds
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineSmoothCentralShell
+#print axioms Legendre.Density.GuthMaynard.mem_gmAffineUnitInterval_div_of_mem_scaledNear
+#print axioms Legendre.Density.GuthMaynard.mem_gmCubicNegativeDenominatorBlock
+#print axioms Legendre.Density.GuthMaynard.mem_gmCubicNegativeDenominatorBlock._simp_1
+#print axioms Legendre.Density.GuthMaynard.mem_gmCubicPositiveDenominatorBlock
+#print axioms Legendre.Density.GuthMaynard.mem_gmCubicPositiveDenominatorBlock._simp_1
+#print axioms Legendre.Density.GuthMaynard.mem_gmCubicReflectedAffineIndexSet
+#print axioms Legendre.Density.GuthMaynard.mem_gmHalfDifferenceDyadicClass
+#print axioms Legendre.Density.GuthMaynard.mem_gmHalfDifferenceDyadicClass_log
+#print axioms Legendre.Density.GuthMaynard.mul_sq_mul_rpow_five_four_factor
+#print axioms Legendre.Density.GuthMaynard.natAbs_le_abs_add_gmAffineFirstPoissonRadius
+#print axioms Legendre.Density.GuthMaynard.neg_mem_gmAffineCentralShell_of_mem_scaledNear
+#print axioms Legendre.Density.GuthMaynard.norm_fourier_gmAffineComplexify_affine_le
+#print axioms Legendre.Density.GuthMaynard.norm_fourier_gmAffineComplexify_normalizedRWeight
+#print axioms Legendre.Density.GuthMaynard.norm_fourier_gmAffineSmoothingKernel_le_four
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineCentralPoissonKernel_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineFirstPoissonPairTerm_sq_eq
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineFirstPoissonPairTerm_sq_le_scaledMiddle
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineLocalBumpFourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineMiddleFourierBlockReal_le_of_fourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineMiddleFourierBlockReal_le_seminorm
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineMiddleFourierBlockReal_le_source_decay_of_constant
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineMiddleZ₁_le_four
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineMiddleZ₂_farSeries_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonFarFourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonFarFourier_le_of_fourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonFarSeries_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonFarTerm
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonMainFourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonMainFourier_le_of_fourier_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffinePoissonMainFourier_sq_le_pairs
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledBumpDual_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledFarSeries_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_exception
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_majorant
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIEquation97Integrand_le_near_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIReal_eq_sum_mass
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIReal_le_J_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIReal_mul_width_le_J_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIReal_mul_width_le_J_add_far._proof_1
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaII_le_J_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSigmaII_le_physical_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_decay
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_envelopes
+#print axioms Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_sq_le_main_add_far
+#print axioms Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_coeffMass
+#print axioms Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localFourier_add_tail
+#print axioms Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail
+#print axioms Legendre.Density.GuthMaynard.norm_gmHalfDifferenceFiberPhase_le_multiplicity
+#print axioms Legendre.Density.GuthMaynard.norm_gmHalfDifferenceFiberPhase_lt_twoPow_succ
+#print axioms Legendre.Density.GuthMaynard.norm_gmRPhase_fourth_le_dyadicPairBlocks
+#print axioms Legendre.Density.GuthMaynard.norm_gmRPhase_fourth_le_localIntegral_add_tail
+#print axioms Legendre.Density.GuthMaynard.norm_gmRPhase_sq_eq_sum_halfDifferenceDyadicPairBlock
+#print axioms Legendre.Density.GuthMaynard.norm_gmRPhase_sq_le_localIntegral_add_tail
+#print axioms Legendre.Density.GuthMaynard.norm_gmRPhase_sub_card_le
+#print axioms Legendre.Density.GuthMaynard.norm_gmR_ge_three_fourths_card_on_coherenceInterval
+#print axioms Legendre.Density.GuthMaynard.norm_gmR_reducedRatio_eq_phase
+#print axioms Legendre.Density.GuthMaynard.norm_iteratedDeriv_gmAffineComplexify_cubicRWeight_le
+#print axioms Legendre.Density.GuthMaynard.norm_iteratedDeriv_gmAffineComplexify_truncatedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.norm_iteratedDeriv_gmCubicPairMellinAtom_le
+#print axioms Legendre.Density.GuthMaynard.norm_iteratedDeriv_ofReal_cpow_mul_I_le_eight
+#print axioms Legendre.Density.GuthMaynard.norm_sourceDirichletPoly_le_scale
+#print axioms Legendre.Density.GuthMaynard.norm_sum_gmAffineCentralPoissonKernel_near_le
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_finset_sum_sq_expand
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_gmAffineMiddleFourierBlock_sq_expand
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_gmHalfDifferenceDyadicPairBlock_sq_expand
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_gmHalfDifferenceDyadicPairBlock_sq_expand'
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_sourceDirichletPoly_one_sq_expand
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_sourceDirichletPoly_one_sq_expand'
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_sourceDirichletPoly_sq_expand
+#print axioms Legendre.Density.GuthMaynard.ofReal_norm_sourceDirichletPoly_sq_expand'
+#print axioms Legendre.Density.GuthMaynard.ofReal_sum_triple_sourceMoment_eq
+#print axioms Legendre.Density.GuthMaynard.one_le_rpow_gmAffineIterationEta
+#print axioms Legendre.Density.GuthMaynard.pow_mul_norm_fourier_gmCubicNormalizedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.pow_mul_norm_fourier_gmCubicRWeight_le
+#print axioms Legendre.Density.GuthMaynard.pow_mul_norm_fourier_gmCubicTruncatedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.pow_rpow_eq_rpow_mul_nat
+#print axioms Legendre.Density.GuthMaynard.reduced_nat_ratio_injective
+#print axioms Legendre.Density.GuthMaynard.rpow_div_pow_rpow_le_one
+#print axioms Legendre.Density.GuthMaynard.rpow_div_sq_pow_rpow_le_one
+#print axioms Legendre.Density.GuthMaynard.rpow_gmAffineIterationEta_le_self
+#print axioms Legendre.Density.GuthMaynard.seminorm_fourier_gmAffineComplexify_le_integral
+#print axioms Legendre.Density.GuthMaynard.seminorm_fourier_gmAffineComplexify_tilde_le_four
+#print axioms Legendre.Density.GuthMaynard.seminorm_fourier_gmCubicNormalizedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.seminorm_fourier_gmCubicRWeight_le
+#print axioms Legendre.Density.GuthMaynard.seminorm_fourier_gmCubicTruncatedRWeight_le
+#print axioms Legendre.Density.GuthMaynard.setIntegral_Icc_comp_mul_add
+#print axioms Legendre.Density.GuthMaynard.setIntegral_gmAffineUnitInterval_le_tilde
+#print axioms Legendre.Density.GuthMaynard.setIntegral_gmCubicSelectedSmoothedBlock_holder
+#print axioms Legendre.Density.GuthMaynard.setIntegral_gmCubicSelectedSmoothedBlock_le_six
+#print axioms Legendre.Density.GuthMaynard.setIntegral_norm_gmR_fourth_wide_le_epsilon_budget
+#print axioms Legendre.Density.GuthMaynard.setIntegral_norm_gmR_sq_wide_eq_logWeighted
+#print axioms Legendre.Density.GuthMaynard.setIntegral_norm_gmR_sq_wide_le_epsilon_budget
+#print axioms Legendre.Density.GuthMaynard.setIntegral_sq_gmCubicDirectAffineTransform_le_J
+#print axioms Legendre.Density.GuthMaynard.setIntegral_sq_gmCubicReflectedAffineAggregate_inv_le_sixtyfour_J
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_energyFourier_reproduction
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_norm_le_gmReflectionWindow_add_error
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_norm_le_gmReflectionWindow_add_error_uniform
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_norm_le_localFourier_add_tail
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_norm_sq_le_commonInterval_add_error
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_pairDifference_sq_le_commonInterval
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_pairDifference_sq_le_majorant
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_shift_eq_twisted
+#print axioms Legendre.Density.GuthMaynard.sq_setIntegral_norm_sourceDirichletPoly_le
+#print axioms Legendre.Density.GuthMaynard.sqrt_add_le_add_sqrt
+#print axioms Legendre.Density.GuthMaynard.sqrt_const_mul_rpow_le
+#print axioms Legendre.Density.GuthMaynard.sqrt_le_four_mul_sqrt_rpow_mul_sqrt
+#print axioms Legendre.Density.GuthMaynard.sqrt_mul_sqrt_add_le_add
+#print axioms Legendre.Density.GuthMaynard.sqrt_mul_sqrt_le_of_mul_le_sq
+#print axioms Legendre.Density.GuthMaynard.sqrt_pow_four_mul
+#print axioms Legendre.Density.GuthMaynard.sqrt_pow_six_mul_sq
+#print axioms Legendre.Density.GuthMaynard.sqrt_product_le_common_mul
+#print axioms Legendre.Density.GuthMaynard.sqrt_rpow_eq_rpow_half
+#print axioms Legendre.Density.GuthMaynard.sqrt_rpow_mul_rpow
+#print axioms Legendre.Density.GuthMaynard.sqrt_rpow_mul_rpow_mul_rpow
+#print axioms Legendre.Density.GuthMaynard.stronglyMeasurable_gmAffineTransformSum
+#print axioms Legendre.Density.GuthMaynard.sum_Icc_inv_sub_inv_succ
+#print axioms Legendre.Density.GuthMaynard.sum_Icc_natDiv_le_harmonic
+#print axioms Legendre.Density.GuthMaynard.sum_Icc_natDiv_sq_le
+#print axioms Legendre.Density.GuthMaynard.sum_Icc_one_div_sq_le_two
+#print axioms Legendre.Density.GuthMaynard.sum_Icc_one_div_sq_tail_le
+#print axioms Legendre.Density.GuthMaynard.sum_approximateAdditiveQuadruples_le_three_mul_sum_triples
+#print axioms Legendre.Density.GuthMaynard.sum_five_last_two_to_front
+#print axioms Legendre.Density.GuthMaynard.sum_four_comm_middle_to_front
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineFirstPoissonPairTerm_sq_eq_sum_retained_range
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineFirstPoissonPairTerm_sq_eq_tsum_retained
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineFirstPoissonPairs
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleBlockMass_le_sigmaIIReal_add_tail
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleBlockMass_neg_eq_image
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleBlockMass_neg_le_sigmaIIReal_add_tail
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleCore_mass_le_norm_sigmaIIReal
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleEquation97Term_eq_Z₂Finite
+#print axioms Legendre.Density.GuthMaynard.sum_gmAffineMiddleTail_mass_le_source_decay_of_constant
+#print axioms Legendre.Density.GuthMaynard.sum_gmCubicDirectAffineSource_le_two_transform
+#print axioms Legendre.Density.GuthMaynard.sum_gmCubicReflectedAffineSource_le_two_aggregate
+#print axioms Legendre.Density.GuthMaynard.sum_gmCubicSmoothedModeIntegral_selected_eq
+#print axioms Legendre.Density.GuthMaynard.sum_gmCubicSmoothedModeIntegral_selected_le_six
+#print axioms Legendre.Density.GuthMaynard.sum_gmFourthMomentShape_le
+#print axioms Legendre.Density.GuthMaynard.sum_gmHalfDifferenceDyadicPairs_eq_sum_fibers
+#print axioms Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity
+#print axioms Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq
+#print axioms Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq_le_energy
+#print axioms Legendre.Density.GuthMaynard.sum_gmHalfDifferenceTranslatedClass_eq_bins
+#print axioms Legendre.Density.GuthMaynard.sum_gmSecondMomentShape_le
+#print axioms Legendre.Density.GuthMaynard.sum_gmSection11PairMajorant_native
+#print axioms Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le
+#print axioms Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le_sigmaIIReal_add_tail
+#print axioms Legendre.Density.GuthMaynard.sum_norm_gmHalfDifferenceDyadicPairBlock_sq_eq_sourceMoment
+#print axioms Legendre.Density.GuthMaynard.sum_range_one_div_succ_sq_le
+#print axioms Legendre.Density.GuthMaynard.sum_setIntegral_Icc_le_packing_mul_setIntegral
+#print axioms Legendre.Density.GuthMaynard.sum_smallGcd_local_scales_le
+#print axioms Legendre.Density.GuthMaynard.sum_sourceMoment_dyadicPairs_le_binMajorants
+#print axioms Legendre.Density.GuthMaynard.sum_three_source_phases_eq_gmRPhase
+#print axioms Legendre.Density.GuthMaynard.sum_three_swap_first_third
+#print axioms Legendre.Density.GuthMaynard.sum_triple_integral_sourceMoment_le
+#print axioms Legendre.Density.GuthMaynard.sum_triple_sourceMoment_le_discreteThirdMoment
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffinePoissonFarMajorant
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffinePoissonFarMode
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffinePoissonFarTerm
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffinePoissonNearTerm
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffineScaledFarMajorant
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffineScaledFarTerm
+#print axioms Legendre.Density.GuthMaynard.summable_gmAffineScaledNearTerm
+#print axioms Legendre.Density.GuthMaynard.summable_gmIntDecayProfile_floorTranslate
+#print axioms Legendre.Density.GuthMaynard.ten_mul_gmAffineIterationEta_le
+#print axioms Legendre.Density.GuthMaynard.thirtytwo_le_gmCubicSmoothingScale
+#print axioms Legendre.Density.GuthMaynard.three_fourths_card_le_norm_gmRPhase
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffineCentralPoissonKernel_eq_near_add_far
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMajorant
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMode_le
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffinePoissonNearTerm_eq_sum
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffineScaledBumpDual_eq_near_add_far
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffineScaledFarMajorant
+#print axioms Legendre.Density.GuthMaynard.tsum_gmAffineScaledNearTerm_eq_sum
+#print axioms Legendre.Density.GuthMaynard.tsum_gmIntDecayProfile_floorTranslate
+#print axioms Legendre.Density.GuthMaynard.twoPowSucc_sq_mul_dyadicClass_card_five_four_le
+#print axioms Legendre.Density.GuthMaynard.twoPowSucc_sq_mul_dyadicClass_card_le_energy
+#print axioms Legendre.Density.GuthMaynard.twoPowSucc_sq_mul_dyadicClass_card_sq_le_card_four
+#print axioms Legendre.Density.GuthMaynard.twoPow_mul_card_gmHalfDifferenceDyadicClass_le
+#print axioms Legendre.Density.GuthMaynard.twoPow_sq_mul_card_gmHalfDifferenceDyadicClass_le_energy
+#print axioms Legendre.Density.GuthMaynard.two_le_integral_gmCubicLocalBump
+#print axioms Legendre.Density.GuthMaynard.two_le_sq_div_of_three_quarters_le
+#print axioms Legendre.Density.GuthMaynard.two_mul_T_div_gmAffineSecondPoissonCutoff_le
+#print axioms Legendre.Density.GuthMaynard.two_mul_integral_le_integral_gmAffineTildeSchwartz
+#print axioms Legendre.Density.GuthMaynard.volume_real_gmAffineLowFrequencyRegion
+#print axioms Legendre.Literature.GuthMaynardAffineHeightFamilyBenchmark._proof_1
+#print axioms Legendre.Literature.GuthMaynardAffineHeightFamilyBenchmark._proof_2
+#print axioms Legendre.Literature.GuthMaynardEnergyS3Benchmark._proof_1
+#print axioms Legendre.Literature.GuthMaynardLargeValuesEnergyBenchmark._proof_1
+#print axioms Legendre.Literature.GuthMaynardRefinedS3Benchmark._proof_1
+#print axioms Legendre.Literature.layer4_guth_affine_comparator
+#print axioms Legendre.Literature.layer4_guth_affine_height_comparator
+#print axioms Legendre.Literature.layer4_guth_energy_s3_comparator
+#print axioms Legendre.Literature.layer4_guth_large_values_energy_comparator
+#print axioms Legendre.Literature.layer4_guth_refined_s3_comparator
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineHeight.0.Legendre.Density.GuthMaynard.exists_gmAffineHeightDecayConstant._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.abs_add_product_lt_gmAffineFirstPoissonRadius._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonEllRange_real_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.card_gmAffineFirstPoissonProductRange_real_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.card_gmAffinePositiveShell_real_le_two_mul._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.card_int_divisorsAntidiag_eq_two_mul_natAbs_divisors._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.card_int_divisorsAntidiag_eq_two_mul_natAbs_divisors._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineFourierDecayUniform_with_product_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_recurrence._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_gmAffineJ_le_source_lemma92_recurrence._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_n_Cdiv_forall_gmAffineLemma92Recurrence._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.exists_uniform_constants_gmAffineLemma92Recurrence._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFirstPoissonRegionI_le_source_scale._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayEnvelope_le_source._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineFourierDecayUniform._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineIteration_Y_add_Q_add_one_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineLemma92ComponentsAt_to_recurrence._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFarBound_at_source_cutoff_le._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierArgument_abs_lower._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleFourierBlockReal_scale_tau._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleNearKernelNormSum_le_physical._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_eq_zero_of_not_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_eq_zero_of_not_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineMiddleTauWeight_eq_zero_of_not_mem._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarEnvelope_le_mass_div_pow._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffinePoissonMainEnvelope_le_mass._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIICoreRawBound_le_source._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineRegionIIPrefactor_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineSigmaIIFarEnvelope_eq_coefficient_mul._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineSigmaIINearEnvelope_le_physical._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineSigmaIINearEnvelope_le_physical._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmAffineTildeIterate_supportedOn._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmCubicLocalBump_middleFrequency_eq_zero_of_not_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmCubicLocalBump_middleFrequency_eq_zero_of_not_mem._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.gmCubicLocalBump_middleFrequency_eq_zero_of_not_mem._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineMiddleTauWeight._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineMiddleTauWeight._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineMiddleTauWeight._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integrable_gmAffineRetainedFirstPoissonPairSquare._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineLowFrequencyRegion_fourier_sq_le_source_scale._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineMiddleTauWeight_blockReal_scale._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffinePositiveTransformSum_sq_le_J._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineRetainedFirstPoissonPairSquare_eq._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_gmAffineSigmaIIPhysicalEnvelope_eq._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_gmAffineMiddlePhysicalWindowWeight._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.integral_mul_middleWindowIndicator._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.mem_gmAffineFirstPoissonPairs._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.mem_gmAffineFirstPoissonPairs._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.mem_gmAffineMiddleTail._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.mem_gmAffineMiddleTail._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.norm_gmAffineSigmaIIReal_eq_sum_mass._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineIteration.0.Legendre.Density.GuthMaynard.sum_integral_gmAffineRetainedFirstPoissonPairSquare_le._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.approxAddEnergy_one_eq_sum_floorEnergy._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.approxFloorEnergy_zero_le_addEnergy._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.approxFloorEnergy_zero_le_addEnergy._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.approxFloorEnergy_zero_le_addEnergy._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.floorAdditiveDefect_mem_Icc._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.floorAdditiveDefect_mem_Icc._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_scale_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_scale_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_translate_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_translate_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_unscale_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_unscale_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_untranslate_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineLanguage.0.Legendre.Density.GuthMaynard.mapAdditiveQuadruple_untranslate_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.abs_gmAffineSignedShell_le_scale._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineCentralShell._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineCentralShell._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineIndexSet_le_scaleProduct._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineIndexSet_le_scaleProduct._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineIndexSet_le_scaleProduct._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffinePoissonNearSet_real_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffinePositiveShell._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffinePositiveShell._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.card_gmAffineSignedShell_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralPoissonKernel_eq_scaled._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralShell_subset_smooth._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralShell_subset_smooth._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralWeight_eq_zero_of_not_mem._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralWeight_eq_zero_of_not_mem._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineCentralWeight_eq_zero_of_not_mem._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineHighFrequencyRegion_eq_union._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineHighFrequencyRegion_eq_union._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineHighFrequencyRegion_eq_union._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineLowFrequencyRegion_eq_Icc._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineLowFrequencyRegion_eq_Icc._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddleZ₂_poisson._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineMiddle_cutoff_eq_scaled._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffinePoissonFarMode_le_decayProfile._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineScaledBumpDual_eq_scaled._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSignedShell_scale_le_abs._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineSmoothingKernel_apply._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_apply._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTermSchwartz_fourier._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffineTransformIntegral_le_crude._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffine_frequency_regions_union._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.gmAffine_frequency_regions_union._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.half_abs_intCast_le_abs_fract_add._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.half_abs_intCast_le_abs_fract_add._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineCentralWeightFunction._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineCentralWeightFunction._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineCentralWeightFunction._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineLocalBumpFunction._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineLocalBumpFunction._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineLocalBumpFunction._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineScaledBumpFunction._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineScaledBumpFunction._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasCompactSupport_gmAffineScaledBumpFunction._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasFiniteSupport_gmAffinePoissonNearTerm._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.hasFiniteSupport_gmAffineScaledNearTerm._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integrable_gmAffineTerm_sq._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.integral_gmAffineTerm_sq._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.mem_gmAffinePoissonNearSet_of_lt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.mem_gmAffinePoissonNearSet_of_lt._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.mem_gmAffineScaledNearSet_of_lt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.mem_gmAffineScaledNearSet_of_lt._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineScaledFarTerm_le_profile._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.norm_gmAffineSmoothTransformSchwartz_fourier_le_decayEnvelope._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.summable_gmAffinePoissonFarMajorant._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.summable_gmAffinePoissonFarMajorant._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.summable_gmAffineScaledFarMajorant._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.summable_gmAffineScaledFarMajorant._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMajorant._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMajorant._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMajorant._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffinePoissonFarMajorant._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffineScaledFarMajorant._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffineScaledFarMajorant._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffineScaledFarMajorant._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.AffineTransform.0.Legendre.Density.GuthMaynard.tsum_gmAffineScaledFarMajorant._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.abs_log_le_two_mul_abs_sub_one._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicRWeightSchwartz._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.card_sq_div_sixteen_mul_le_integral_gmCubicTruncatedRWeightSchwartz._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDirectAffineScales_mem_terminal._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDirectAffineScales_mem_terminal._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDirectAffineScales_mem_terminal._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDirectAffineScales_mem_terminal._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDyadicFrequencyBlock_denominator_split._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicDyadicFrequencyBlock_denominator_split._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_neg._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_neg._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_neg._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_neg._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_pos._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_pos._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_pos._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedDirectTriple_injective_of_denominator_pos._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_neg._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_neg._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_neg._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_neg._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_pos._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_pos._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_pos._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_injective_of_denominator_pos._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicNormalizedReflectedTriple_mem_indexSet._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.gmCubicReflectedAffineScales_mem_terminal._proof_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.integral_sq_gmCubicReflectedAffineAggregate_le_sixteen_J._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.integral_sq_gmCubicReflectedAffineAggregate_le_sixteen_J._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.integral_sq_gmCubicReflectedAffineAggregate_le_sixteen_J._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.integral_sq_gmCubicReflectedAffineAggregate_le_sixteen_J._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.log_natAbs_third_mem_Icc_of_mem_dyadicBlock._proof_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.CubicThreeTailRefined.0.Legendre.Density.GuthMaynard.setIntegral_gmCubicSelectedSmoothedBlock_holder._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_cubed_le_gmDiscreteRatioMoment_three._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_filter_abs_sub_le_two_mul_ceil_add_one._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_gmHalfDifferenceDyadicPairFiber_lt._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.card_gmReducedRatioPairs_le_four_mul_sq._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_bounded_gmHalfDifferenceDyadicClass._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.exists_gmAffineLocalBumpFourier_tail_bound._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.finiteExpSum_fourier_reproduction._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_le_dyadicPairBlockMoments._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_le_dyadicPairBlockMoments._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_12"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_13"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_14"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmDiscreteFourthMoment_native._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmFourthLocalPackingPrefactor_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSliceMoment_eq_reduced._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSlice_to_reduced_mem._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmGcdSlice_to_reduced_mem._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceDyadicPairBlock_eq_sum_fibers._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceDyadicPairBlock_eq_sum_fibers._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity_le_card._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity_le_card._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceMultiplicity_pos_of_mem._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfDifferenceTranslatedClass_separated._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfMatchedToEnergy_mem._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmHalfMatchedToEnergy_mem._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmReducedRatioPairs_ratio_separated._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmReducedRatioPairs_ratio_separated._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.gmSecondLocalPackingPrefactor_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.half_abs_sub_le_abs_log_sub._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_gmFiniteExpSum_le_localIntegral_add_tail._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.norm_sourceDirichletPoly_le_scale._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_localFourier_le_commonInterval._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyDecomposition.0.Legendre.Density.GuthMaynard.sum_gmHalfDifferenceMultiplicity_sq._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.energy_sqrt_term_rearrangement._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmCubicS3_prop10_1_native._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmCubicS3_prop10_1_native._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiagonalGcdThirdMoment_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_le_small_add_large._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDiscreteRatioThirdMoment_physical_native._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDyadicIntervalPlus_eq_insert._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDyadicIntervalPlus_eq_insert._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmDyadicIntervalPlus_eq_insert._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmEnergy_prop11_1_native._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_eq_middle_add_diagonal._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_eq_middle_add_diagonal._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_eq_middle_add_diagonal._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.gmLargeGcdThirdMoment_eq_middle_add_diagonal._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.EnergyFinal.0.Legendre.Density.GuthMaynard.sum_Icc_inv_sub_inv_succ._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.GuthMaynard.gmDyadicIntervalPlus.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_affine_mass_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_affine_negative_scale_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_affine_translated_boundary_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_affine_zero_source_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_energy_s3_sigma_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_energy_sigma_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_gcd_rounding_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_gcd_rounding_consumer._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_refined_s3_singleton_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_refined_s3_singleton_consumer._simp_1_2"

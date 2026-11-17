@@ -432,3 +432,16 @@ T^-90. The source's closed tolerance <=1 and the paper's strict <1 are recorded
 separately; a proved factor-three comparison changes only the absolute
 constant. Sharper energy/affine refinement and central density remain open.
 See [statements and boundary conventions](layer4-guth-s2-s3.md).
+
+## Guth--Maynard affine and energy refinement (2026-11-17)
+
+Five additional closed independent benchmarks check the literal finite affine
+integral (Proposition9.1), the uniform height-family profile, the physical S3
+Proposition10.1, the actual large-value energy Proposition11.1 and substituted
+S3 Proposition11.2. The height-family constant is fixed before heights and source
+functions; its Fourier derivative profile retains T^(n+2) and source mass.
+All physical scale, separation, support-only coefficient and sample conditions
+remain explicit, as does the T^-90 error. Source closed energy is a literal
+quadruple filter; its relation to the paper's strict energy is already proved.
+The final large-values and central density assembly remain open.
+See [exact formulas and scope](layer4-guth-affine-energy.md).

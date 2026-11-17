@@ -338,6 +338,90 @@ def GuthMaynardStrictS3EnergyBenchmark : Prop :=
             Real.sqrt (((((W ×ˢ W) ×ˢ (W ×ˢ W)).filter fun q =>
               |q.1.1+q.1.2-q.2.1-q.2.2| < 1).card : ℝ))+C/T^90
 
+open Density.GuthMaynard in
+/-- Proposition 9.1 tested on the literal finite affine sum, not the J abbreviation. -/
+def GuthMaynardAffineBenchmark : Prop :=
+  ∀ (f : SchwartzMap ℝ ℝ)
+    (_hf : ∀ x, 0 ≤ f x)
+    (_hs : ∀ x : ℝ, x ∉ Set.Icc (1/2 : ℝ) 2 → f x = 0)
+    (ε : ℝ), 0 < ε →
+    ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧
+      ∀ (T : ℝ) (M A B D : ℕ), T₀ ≤ T → 0 < M → (M : ℝ) ≤ T^4 →
+        1 ≤ A → A ≤ M → 1 ≤ B → B ≤ M → 1 ≤ D → D ≤ M →
+        (∫ u : ℝ, (∑ a ∈ (Finset.Icc (-(2*A : ℕ) : ℤ) (-(A : ℤ)) ∪
+            Finset.Icc (A : ℤ) (2*A)),
+          ∑ b ∈ Finset.Icc (B : ℤ) (2*B),
+          ∑ d ∈ Finset.Icc (-(8*D : ℕ) : ℤ) (8*D),
+            f (((a : ℝ)*u+d)/b))^2) ≤
+          C*T^ε*((M : ℝ)^6*(∫ x : ℝ, f x)^2+(M : ℝ)^4*∫ x : ℝ, f x^2)
+
+open Density.GuthMaynard FourierTransform in
+/-- Height-family constants are chosen before all heights and all source functions.
+The Fourier bound explicitly retains T^(n+2) and the source mass. -/
+def GuthMaynardAffineHeightFamilyBenchmark : Prop :=
+  ∀ (D : ℝ → ℕ → ℝ), (∀ ε n, 0 ≤ D ε n) →
+    ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 2 ≤ T₀ ∧
+      ∀ (T : ℝ), T₀ ≤ T → ∀ f : SchwartzMap ℝ ℝ,
+        (∀ x, 0 ≤ f x) →
+        (∀ x : ℝ, x ∉ Set.Icc (1/4 : ℝ) (9/4) → f x = 0) →
+        (∀ δ : ℝ, 0 < δ → ∀ n : ℕ,
+          SchwartzMap.seminorm ℝ n 0 (fourier (gmAffineComplexify f)) ≤
+            D δ n*T^δ*T^(n+2)*∫ x : ℝ, f x) →
+        ∀ M : ℕ, 0 < M → (M : ℝ) ≤ T^4 →
+          gmAffineJ f M ≤ C*T^ε*
+            ((M : ℝ)^6*(∫ x : ℝ, f x)^2+(M : ℝ)^4*∫ x : ℝ, f x^2)
+
+open Density.GuthMaynard in
+/-- Actual-scale Proposition 10.1, with the literal closed quadruple energy. -/
+def GuthMaynardRefinedS3Benchmark : Prop :=
+  ∀ cutoff : GMSmoothCutoff, ∀ ε : ℝ, 0 < ε →
+    ∃ C T₀ : ℝ, 0 < C ∧ 4096 ≤ T₀ ∧
+      ∀ (N : ℕ) (T : ℝ) (W : Finset ℝ),
+        T₀ ≤ T → 0 < N → (N : ℝ) ≤ T → T^(2/3 : ℝ) ≤ (N : ℝ) →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        ‖gmCubicS3 cutoff N W‖ ≤
+          C*(T^(2+ε)*Real.sqrt (W.card : ℝ)*(W.card : ℝ)+
+            T^(1+ε)*(N : ℝ)*Real.sqrt (W.card : ℝ)*
+              Real.sqrt (((((W ×ˢ W) ×ˢ (W ×ˢ W)).filter fun q =>
+                |q.1.1+q.1.2-q.2.1-q.2.2| ≤ 1).card : ℝ)))+C/T^90
+
+open Density.GuthMaynard in
+/-- Proposition 11.1 with support-only coefficient bounds, actual samples
+and literal closed quadruple energy. -/
+def GuthMaynardLargeValuesEnergyBenchmark : Prop :=
+  ∀ ε : ℝ, 0 < ε → ∃ C T₀ : ℝ, 0 < C ∧ 4 ≤ T₀ ∧
+    ∀ (N : ℕ) (T σ : ℝ) (W : Finset ℝ) (b : ℕ → ℂ),
+      0 < N → T₀ ≤ T → (N : ℝ) ≤ T → T^(3/4 : ℝ) ≤ (N : ℝ) →
+      (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+      (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+      (∀ n ∈ Finset.Ioc N (2*N), ‖b n‖ ≤ 1) →
+      (∀ t ∈ W, (N : ℝ)^σ ≤
+        ‖∑ n ∈ Finset.Ioc N (2*N), b n*(n : ℂ)^((t : ℂ)*Complex.I)‖) →
+      (((((W ×ˢ W) ×ˢ (W ×ˢ W)).filter fun q =>
+          |q.1.1+q.1.2-q.2.1-q.2.2| ≤ 1).card : ℝ)) ≤
+        C*T^ε*((W.card : ℝ)*(N : ℝ)^(4-4*σ)+
+          (W.card : ℝ)^(21/8 : ℝ)*T^(1/4 : ℝ)*(N : ℝ)^(1-2*σ)+
+          (W.card : ℝ)^3*(N : ℝ)^(1-2*σ))
+
+open Density.GuthMaynard in
+/-- Proposition 11.2 after substituting the proved energy bound into S3. -/
+def GuthMaynardEnergyS3Benchmark : Prop :=
+  ∀ cutoff : GMSmoothCutoff, ∀ ε : ℝ, 0 < ε →
+    ∃ C T₀ : ℝ, 0 < C ∧ 4096 ≤ T₀ ∧
+      ∀ (N : ℕ) (T σ : ℝ) (W : Finset ℝ) (b : ℕ → ℂ),
+        0 < N → T₀ ≤ T → (N : ℝ) ≤ T → T^(3/4 : ℝ) ≤ (N : ℝ) →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        (∀ n ∈ Finset.Ioc N (2*N), ‖b n‖ ≤ 1) →
+        (∀ t ∈ W, (N : ℝ)^σ ≤
+          ‖∑ n ∈ Finset.Ioc N (2*N), b n*(n : ℂ)^((t : ℂ)*Complex.I)‖) →
+        ‖gmCubicS3 cutoff N W‖ ≤
+          C*T^ε*(T^2*(W.card : ℝ)^(3/2 : ℝ)+
+            T*(W.card : ℝ)*(N : ℝ)^(3-2*σ)+
+            T*(W.card : ℝ)^2*(N : ℝ)^(3/2-σ)+
+            T^(9/8 : ℝ)*(W.card : ℝ)^(29/16 : ℝ)*(N : ℝ)^(3/2-σ))+C/T^90
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

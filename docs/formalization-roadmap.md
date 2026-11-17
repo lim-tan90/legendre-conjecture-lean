@@ -616,8 +616,17 @@ k>=1 and epsilon>0 with the source separation exponent, three physical powers
 and one constant/threshold. Proposition8.1's S3 energy bound is proved on
 T^(2/3)<=N<=T, with T^-90 error. The factor-three strict/closed energy
 comparison recovers the paper convention without changing powers. Four new
-independent benchmarks close; sharper affine/energy refinements and central
-density remain open. See [scope](layer4-guth-s2-s3.md).
+independent benchmarks close; subsequent affine/energy refinements are proved
+below, while central density remains open. See [scope](layer4-guth-s2-s3.md).
+
+**Affine/energy refinement (2026-11-17).** Actual finite affine integrals,
+Lemma9.2 and a finite natural-number descent prove Proposition9.1, including
+the height-aware Fourier mass family required by the actual normalized R-square
+source. Exact difference-bin/gcd decompositions and the one-point natural-division
+endpoint correction prove physical Propositions10.1,11.1 and11.2. Five new literal
+benchmarks close; final large-values and central-density assembly remain open.
+Seven additional source modules are adapted to Lean4.35.0 under the same pinned
+smccolm/Lean MIT-0 entry. See [scope and formulas](layer4-guth-affine-energy.md).
 
 **Acceptance criteria.**
 

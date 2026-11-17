@@ -162,6 +162,13 @@ public import Legendre.Layer4.GuthMaynard.CubicTwoTailEstimate
 public import Legendre.Layer4.GuthMaynard.CubicThreeTailSupport
 public import Legendre.Layer4.GuthMaynard.CubicThreeTail
 public import Legendre.Layer4.GuthMaynard.EnergyTolerance
+public import Legendre.Layer4.GuthMaynard.AffineLanguage
+public import Legendre.Layer4.GuthMaynard.AffineTransform
+public import Legendre.Layer4.GuthMaynard.AffineIteration
+public import Legendre.Layer4.GuthMaynard.AffineHeight
+public import Legendre.Layer4.GuthMaynard.CubicThreeTailRefined
+public import Legendre.Layer4.GuthMaynard.EnergyDecomposition
+public import Legendre.Layer4.GuthMaynard.EnergyFinal
 
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density

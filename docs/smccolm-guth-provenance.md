@@ -36,6 +36,14 @@ source, commit, source filename, license and local changes in its header.
 | `DFIDivisorEpsilon.lean`: harmonic bound; `DFISourceCutoffs.lean`: unit bump; `ClassicalLargeValues.lean`: `sum_inv_distance_near_le_harmonic` | `CubicThreeTailSupport.lean` | Only these three elementary helpers; no general DFI/Kloosterman or zeta dependency chain |
 | `LargeValuesS3.lean`: floor-correlation proof, extended locally | `EnergyTolerance.lean` | Strict/closed energy comparison by factor three and paper-convention S3 consequence; local extension is explicit |
 
+| `LargeValuesLanguage.lean` | `AffineLanguage.lean` | Finite translations, signed scalings, affine images and floor energy; existing floor image/injectivity reused |
+| `LargeValuesAffine.lean` | `AffineTransform.lean` | Actual finite affine sum/J, sharp-to-smooth majorant, complete Poisson and convolution identities |
+| `LargeValuesAffineIteration.lean` | `AffineIteration.lean` | Lemma9.2 three-region/tail estimates and explicit finite natural-number descent; fixed-source Proposition9.1 |
+| `LargeValuesAffineHeight.lean` | `AffineHeight.lean` | Height-aware Fourier mass family, stable smoothing profiles and uniform Proposition9.1 |
+| `LargeValuesS3Refined.lean` | `CubicThreeTailRefined.lean` | Actual normalized R-square Schwartz source, complete reflected centers and selected-block Proposition10.1 |
+| `LargeValuesEnergy.lean` | `EnergyDecomposition.lean` | Coefficient-preserving reflection, difference-bin energy, exact gcd decomposition and small/large-gcd slices |
+| `LargeValuesEnergyFinal.lean` | `EnergyFinal.lean` | Natural-division endpoint correction, gcd summation, physical Propositions10.1/11.1/11.2; existing interval-cardinality lemma reused |
+
 `CubicRemainder.lean` is a local assembly, not an additional source port. It
 bounds the actual cubic trace minus its diagonal main term and S2/S3 by
 O_epsilon(T^-10), preserving the scale, interval and separation hypotheses.
@@ -81,6 +89,18 @@ source frequency-box complement are replaced by direct De Morgan equivalences.
 The local strict-energy extension supplies the boundary comparison missing
 from a literal identification of the source's closed-tolerance energy.
 
+The affine ports additionally normalize real scalar multiplication under change
+of variables, equality of Schwartz functions below integrability/continuity,
+zero-order Fourier index projections, product-volume Fubini, explicit Holder
+output exponents and finite reciprocal telescoping. Deprecated application and
+MemLp multiplication APIs are updated. Existing finite-sum Cauchy--Schwarz,
+log-power absorption, interval-cardinality and floor-injectivity proofs are
+reused. Two zero-guard branches use direct `ite_eq_right` proofs; the energy
+bin-injectivity contradiction is discharged by its explicit floor/separation
+inequalities. No unrelated DFI or detector/zeta dependency chain is imported.
+Every original source blob for these seven files matches the exact pinned
+upstream Git tree. See [affine/energy scope](layer4-guth-affine-energy.md).
+
 ## Local additions and exact limits
 
 The local coefficient-energy extension permits arbitrary coefficients and
@@ -99,12 +119,13 @@ and recovers the strict-energy S3 estimate up to an absolute constant.
 The finite matrix bounds need no ordinate separation; a future analytic
 large-value estimate must retain its additional separation and height conditions.
 
-Twenty-two destination modules are adapted (including the local energy-tolerance extension), with one additional local assembly.
+Twenty-nine destination modules are adapted (including the local energy-tolerance extension), with one additional local assembly.
 The larger candidate analytic dependency chain stays outside the repository.
 The first-trace, one-tail, complete quantitative reflection and S2 off-diagonal
 estimates are now proved. Heath--Brown’s actual Dirichlet-polynomial difference-set mean square is also
 proved. The complete Poisson-tail moment and S2 assembly are now proved, together
-with the Proposition8.1 S3 energy input. Further affine/energy refinement,
+with the Proposition8.1 S3 energy input. The affine/height-family and gcd-energy
+chain now proves Propositions9.1,10.1,11.1 and11.2. Final large-values assembly,
 central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
 
 Initial five-module sampling-trace validation (2026-11-15): all five ported modules and their
@@ -165,3 +186,21 @@ energy equality and confusion with central density. All22 adapted modules
 (including the local tolerance extension) retain fixed MIT-0 source metadata
 and compile from source under Lean4.35.0; all five visible repository headings
 and default-open source details are preserved in both READMEs.
+
+
+Affine/energy validation (2026-11-17): Lean4.35.0 full build passes 4,362 jobs.
+All 8,268 project theorem declarations, including private/generated declarations,
+agree exactly between module-data enumeration, independent environment ownership,
+Audit targets and parsed axiom output. Only propext, Classical.choice and
+Quot.sound occur. All 351 classified Lean files, including Layers 0--4, contain
+no executable placeholders/prohibited shortcuts; no PDFs are present.
+All 218 independent consumers pass (173 Layer 4, nine Layer 3, 24 generated
+literature and 12 literature regressions). Eight new consumers check negative
+scaling, translated boundary energy, zero source, exact smoothing mass,
+natural-division endpoints, singleton refined S3 and sigma=3/4 energy/S3 powers.
+Six negative contract checks reject deleting coefficient, separation, T^(3/4)
+window, Fourier-family or T^-90 remainder conditions, or confusing the affine
+bound with central density. All 29 adapted modules retain the exact source pin
+and MIT-0 metadata; the license blob is unchanged. The seven new original
+source blobs match the pinned Git tree. Both READMEs retain the same five
+prominent numbered repository headings and individual default-open details.

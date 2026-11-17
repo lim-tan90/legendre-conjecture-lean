@@ -323,6 +323,59 @@ theorem layer4_guth_s3_strict_energy_comparator : GuthMaynardStrictS3EnergyBench
   intro N T W hT hN hNT hlo hs hi
   simpa only [Density.GuthMaynard.strictAddEnergy] using h hT hN hNT hlo hs hi
 
+open Density.GuthMaynard in
+/-- The literal selected-scale integral follows from the proved finite supremum. -/
+theorem layer4_guth_affine_comparator : GuthMaynardAffineBenchmark := by
+  intro f hf hs ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmAffine_proposition9_1_native f hf hs ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro T M A B D hT hM hMT hA hAM hB hBM hD hDM
+  have hj := gmAffineTransformIntegral_le_J (f : ℝ → ℝ) hM
+    (mem_gmAffineScaleTriples.mpr ⟨hA,hAM,hB,hBM,hD,hDM⟩)
+  have hb := hj.trans (h hT hM hMT)
+  simpa only [gmAffineTransformIntegral,gmAffineTransformSum,gmAffineTerm,
+    gmAffineSignedShell,gmAffinePositiveShell,gmAffineCentralShell,
+    Nat.cast_mul,Nat.cast_ofNat] using hb
+
+open Density.GuthMaynard in
+/-- The coefficient family is fixed before the varying physical height. -/
+theorem layer4_guth_affine_height_comparator : GuthMaynardAffineHeightFamilyBenchmark := by
+  intro D hD ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmAffine_proposition9_1_height_family_native D hD hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro T hT f hf hs hp M hM hMT
+  apply h hT f hf hs _ hM hMT
+  intro δ hδ n
+  simpa only [GMAffineHeightFourierMassBound, pow_zero, one_mul] using hp δ hδ n
+
+open Density.GuthMaynard in
+/-- The actual S3 physical-scale form retains the full negligible error. -/
+theorem layer4_guth_refined_s3_comparator : GuthMaynardRefinedS3Benchmark := by
+  intro cutoff ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmCubicS3_prop10_1_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T W hT hN hNT hlo hs hi
+  simpa only [ApproxAddEnergy,approximateAdditiveQuadruples] using h hT hN hNT hlo hs hi
+
+open Density.GuthMaynard in
+/-- A literal sample/quadruple statement checks all Proposition 11.1 powers. -/
+theorem layer4_guth_large_values_energy_comparator : GuthMaynardLargeValuesEnergyBenchmark := by
+  intro ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmEnergy_prop11_1_native ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T σ W b hN hT hNT hlo hs hi hb hv
+  simpa only [ApproxAddEnergy,approximateAdditiveQuadruples,sourceDirichletPoly,dyadicInterval] using
+    h N T σ W b hN hT hNT hlo hs hi hb hv
+
+open Density.GuthMaynard in
+/-- All four terms and source hypotheses remain visible after energy substitution. -/
+theorem layer4_guth_energy_s3_comparator : GuthMaynardEnergyS3Benchmark := by
+  intro cutoff ε hε
+  obtain ⟨C,T₀,hC,hT₀,h⟩ := gmCubicS3_prop11_2_native cutoff ε hε
+  refine ⟨C,T₀,hC,hT₀,?_⟩
+  intro N T σ W b hN hT hNT hlo hs hi hb hv
+  simpa only [sourceDirichletPoly,dyadicInterval] using h N T σ W b hN hT hNT hlo hs hi hb hv
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by
