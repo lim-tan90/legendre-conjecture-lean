@@ -375,6 +375,22 @@ theorem layer4_fourth_moment_exponent_consumer :
   norm_num at h
   exact h
 
+/-- At block length one, the log-free sampling estimate keeps the term at 2. -/
+theorem layer4_dyadic_variable_one_term_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ (S : Finset ℝ) (β : ℝ → ℝ) (a : ℂ) (T σ : ℝ),
+      1 ≤ T → 0 ≤ σ →
+      (∀ t ∈ S, |t| ≤ T) → (∀ t ∈ S, β t ∈ Set.Icc σ 1) →
+      (∀ t ∈ S, ∀ u ∈ S, t ≠ u → 1 ≤ |t-u|) →
+      (∑ t ∈ S, ‖a*(2 : ℂ)^(-((β t : ℂ)+(t : ℂ)*Complex.I))‖^2) ≤
+        C*(T+1)*‖a*(2 : ℂ)^(-(σ : ℂ))‖^2 := by
+  obtain ⟨C,hC,h⟩ := Moment.dyadic_variable_line_samples
+  refine ⟨C,hC,?_⟩
+  intro S β a T σ hT hσ ht hβ hs
+  have hb := h S id β 1 (fun _ => a) T σ (by norm_num) hT hσ ht hβ hs
+  have hI : Finset.Ioc (1 : ℕ) (2*1) = {2} := by decide
+  simpa only [hI, Finset.sum_singleton, coefficientEnergy, verticalCoefficients,
+    id_eq, Nat.cast_one, Nat.cast_ofNat] using hb
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

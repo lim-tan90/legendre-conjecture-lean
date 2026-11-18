@@ -395,6 +395,7 @@ import all Legendre.Layer4.FiniteBlockSquare
 import all Legendre.Layer4.PolynomialBlockSampling
 import all Legendre.Layer4.PolynomialBlockCost
 import all Legendre.Layer4.PolynomialAlternative
+import all Legendre.Layer4.DyadicVariableSampling
 import all Legendre.Layer4.DensityBalance
 import all Legendre.Layer4.BalancedAlternatives
 import all Legendre.Layer4.SeparatedShellDensity
@@ -9193,3 +9194,49 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.XiSharpHeadMean.0.Legendre.Zeta.xiGaussianPole_polynomial_integral._simp_1_2"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gaussian_pole_width_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_fourth_moment_height_two_consumer"
+
+-- Dyadic variable-line sampling and the sharper Ingham detector count.
+#print axioms Legendre.Density.Moment.balancedDensityExponent.eq_1
+#print axioms Legendre.Density.Moment.dyadicHorizontalFactor_mem
+#print axioms Legendre.Density.Moment.dyadicHorizontalFactor_sub_mem
+#print axioms Legendre.Density.Moment.dyadic_horizontal_twist
+#print axioms Legendre.Density.Moment.dyadic_prefix_sample_bound
+#print axioms Legendre.Density.Moment.dyadic_variable_line_samples
+#print axioms Legendre.Density.Moment.four_logs_le_of_le
+#print axioms Legendre.Density.Moment.norm_abel_dyadic_le
+#print axioms Legendre.Density.Moment.polynomial_actual_block_log_three
+#print axioms Legendre.Density.Moment.polynomial_alternative_balanced_log_five
+#print axioms Legendre.Density.Moment.polynomial_alternative_balanced_of_count
+#print axioms Legendre.Density.Moment.polynomial_alternative_count_log_five
+#print axioms Legendre.Density.Moment.polynomial_alternative_count_of_block
+#print axioms Legendre.Density.Moment.separated_high_shell_density_log_five
+#print axioms Legendre.Density.Moment.separated_high_shell_density_of_polynomial
+#print axioms Legendre.Density.Moment.sum_dyadic_prefix_range
+#print axioms Legendre.Density.Moment.sum_range_abel
+#print axioms Legendre.Literature.InghamShellLogFiveBenchmark._proof_1
+#print axioms Legendre.Literature.layer4_ingham_shell_log_five_comparator
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_horizontal_twist._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_prefix_sample_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_prefix_sample_bound._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_prefix_sample_bound._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.dyadic_variable_line_samples._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.norm_abel_dyadic_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.sum_dyadic_prefix_range._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.sum_dyadic_prefix_range._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.sum_dyadic_prefix_range._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.sum_dyadic_prefix_range._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.SeparatedShellDensity.0.Legendre.Density.Moment.four_logs_le_of_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_dyadic_variable_one_term_consumer"

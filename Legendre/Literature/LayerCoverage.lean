@@ -88,6 +88,20 @@ theorem layer4_compensated_detector_comparator : CompensatedDetectorBenchmark :=
   exact Density.Detector.Smooth.detector_high_zero_dichotomy X hX hs hz
     (by simpa using hσ) (by simpa using hσ1) hT (by simpa using ht) hXT hY hY2
 
+/-- Both detector branches on one shell, with the fifth logarithmic power. -/
+def InghamShellLogFiveBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+    1/Real.log T ≤ σ-1/2 → ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+    (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+    (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+    (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*Complex.I) = 0) →
+    (S.card : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^5
+
+theorem layer4_ingham_shell_log_five_comparator : InghamShellLogFiveBenchmark := by
+  unfold InghamShellLogFiveBenchmark
+  simpa only [Density.Moment.balancedDensityExponent] using
+    Density.Moment.separated_high_shell_density_log_five
+
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ (U V : ℕ), 1 ≤ U → U ≤ V → V ≤ 2*U →

@@ -455,3 +455,12 @@ analytic multiplicities, a uniform constant, and all heights `T ≥ 2` for
 Theorem 1.2. The independent central consumer specializes to `σ=3/4`,
 where the exponent is `5/9+ε`.
 [Proof scope](layer4-guth-central-density.md).
+
+## Ingham separated height-shell count (2026-11-19)
+
+The separated detector-shell comparator has the exponent
+`3(1−σ)/(2−σ)` and a fifth power of `log T`. It states the required
+gap `σ−1/2 ≥ 1/log T` and unit separation. The existing cumulative
+multiplicity-weighted Ingham comparator continues to cover all
+`σ∈[1/2,1]` and `T≥2` with an arbitrary positive exponent loss.
+[Exact theorem scope](layer4-ingham-shell-log-five.md).

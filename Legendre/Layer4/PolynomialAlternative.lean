@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 The block assembly adapts DensityPolynomialAlternative.lean in openai/math,
 commit 4eaee87548250b2682affda7d05d947c05554bae (Apache-2.0).
-Local sharp variable-real-part sampling gives eight logarithms for zeta.
+Dyadic variable-real-part sampling reduces the source bound to five logarithms.
 The literal compensated detector threshold is 1/16.
 Retained license: licenses/openai-math-Apache-2.0.txt.
 -/
@@ -12,11 +12,14 @@ module
 public import Legendre.Layer4.PolynomialBlockCost
 public import Legendre.Layer4.DetectorDyadicCover
 public import Legendre.Layer4.FiniteBlockSquare
+public import Legendre.Layer4.DyadicVariableSampling
 
 @[expose] public section
 namespace Legendre.Density.Moment
 open Complex Set
 open scoped BigOperators
+
+universe u
 
 theorem polynomial_actual_block {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
     (X U : ℕ) (hX : 1 ≤ X) (hXU : X ≤ U) (T Y σ : ℝ)
@@ -41,17 +44,72 @@ theorem polynomial_actual_block {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
     have := polynomialBlockConstant_pos
     positivity
 
-theorem polynomial_alternative_count :
+theorem polynomial_actual_block_log_three :
+    ∃ C : ℝ, 0 < C ∧ ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
+      (X U : ℕ), 1 ≤ X → X ≤ U → ∀ T Y σ : ℝ,
+      1 ≤ T → 2 ≤ Y → 1/2 ≤ σ → σ ≤ 1 →
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, ‖∑ n ∈ Finset.Ioc U (2*U), Detector.Smooth.polynomialCoefficient X Y n*
+        (n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2) ≤
+        C*(1+Real.log (2*Y+1))^3*(Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ)) := by
+  obtain ⟨C,hC,hb⟩ := dyadic_variable_line_samples
+  refine ⟨2*C, by positivity,?_⟩
+  intro ι S t β X U hX hXU T Y σ hT hY hσ hσ1 ht hβ hs
+  have hU : 1 ≤ U := hX.trans hXU
+  have hUp : (0 : ℝ) < U := by exact_mod_cast hU
+  let a := Detector.Smooth.polynomialCoefficient X Y
+  by_cases hUY : (U : ℝ) ≤ Y
+  · have hE := polynomialBlock_divisor_energy U hU a σ (by linarith)
+      (fun n _ => Detector.Smooth.polynomialCoefficient_norm X Y (by linarith) n)
+    rw [polynomialBlock_energy] at hE
+    have h := hb S t β U a T σ hU hT (by linarith) ht hβ hs
+    have hS := block_endpoint_powers X U hX hXU T Y σ (by linarith) hUY hσ hσ1
+    have hlog : 1+Real.log (2*(U : ℝ)) ≤ 1+Real.log (2*Y+1) :=
+      add_le_add_right (Real.log_le_log (by positivity) (by linarith)) _
+    have hlog0 : 0 ≤ 1+Real.log (2*(U : ℝ)) := by
+      have hu : (1 : ℝ) ≤ U := by exact_mod_cast hU
+      linarith [Real.log_nonneg (show 1 ≤ 2*(U : ℝ) by linarith)]
+    have hp : (U : ℝ)*(U : ℝ)^(-2*σ) = (U : ℝ)^(1-2*σ) := by
+      rw [show 1-2*σ = 1+(-2*σ) by ring, Real.rpow_add hUp, Real.rpow_one]
+    calc
+      _ ≤ C*(T+(U : ℝ))*(2*(U : ℝ)*(1+Real.log (2*U))^3*(U : ℝ)^(-2*σ)) :=
+        h.trans (mul_le_mul_of_nonneg_left hE (by positivity))
+      _ = 2*C*(1+Real.log (2*U))^3*(((U : ℝ)+T)*(U : ℝ)^(1-2*σ)) := by rw [← hp]; ring
+      _ ≤ _ := by
+        have hlogR : 0 ≤ 1+Real.log (2*Y+1) := hlog0.trans hlog
+        gcongr
+  · have hzero (i : ι) :
+        (∑ n ∈ Finset.Ioc U (2*U), a n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))) = 0 := by
+      apply Finset.sum_eq_zero
+      intro n hn
+      have hnU : (U : ℝ) < n := by exact_mod_cast (Finset.mem_Ioc.mp hn).1
+      exact mul_eq_zero.mpr (Or.inl (Detector.Smooth.polynomialCoefficient_above X n Y
+        (by linarith) (by linarith)))
+    change (∑ i ∈ S, ‖∑ n ∈ Finset.Ioc U (2*U), a n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2) ≤ _
+    simp_rw [hzero,norm_zero,zero_pow (by norm_num : 2 ≠ 0),Finset.sum_const_zero]
+    have hlog := Real.log_nonneg (show 1 ≤ 2*Y+1 by linarith)
+    positivity
+
+theorem polynomial_alternative_count_of_block (k : ℕ) (K : ℝ) (hK : 0 < K)
+    (hb : ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ)
+      (X U : ℕ), 1 ≤ X → X ≤ U → ∀ T Y σ : ℝ,
+      1 ≤ T → 2 ≤ Y → 1/2 ≤ σ → σ ≤ 1 →
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, ‖∑ n ∈ Finset.Ioc U (2*U), Detector.Smooth.polynomialCoefficient X Y n*
+        (n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2) ≤
+        K*(1+Real.log (2*Y+1))^k*(Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ))) :
     ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ Y T σ : ℝ,
-      2 ≤ Y → 1 ≤ T → 1/2 ≤ σ → σ ≤ 1 → ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+      2 ≤ Y → 1 ≤ T → 1/2 ≤ σ → σ ≤ 1 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, β i ∈ Icc σ 1) →
       (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
-      (S.card : ℝ) ≤ C*(1+Real.log (2*Y+1))^8*
+      (S.card : ℝ) ≤ C*(1+Real.log (2*Y+1))^(k+2)*
         (Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ)) := by
   let A := 2/Real.log 2
   have hA : 0 < A := by dsimp [A]; positivity
-  refine ⟨256*polynomialBlockConstant*A^2,by have := polynomialBlockConstant_pos; positivity,?_⟩
+  refine ⟨256*K*A^2,by positivity,?_⟩
   intro X hX Y T σ hY hT hσ hσ1 ι S t β ht hs hβ hlarge
   obtain ⟨J,_hJ,hcover,hJbound⟩ := moment_detector_dyadic_cover X hX Y hY
   let L := 1+Real.log (2*Y+1)
@@ -63,8 +121,8 @@ theorem polynomial_alternative_count :
     dsimp [L]
     linarith
   have hG : 0 ≤ G := by dsimp [G]; positivity
-  have hblock (j : ℕ) : (∑ i ∈ S, ‖f i j‖^2) ≤ polynomialBlockConstant*L^6*G := by
-    apply polynomial_actual_block S t β X (2^j*X) hX _ T Y σ hT hY hσ hσ1 ht hβ hs
+  have hblock (j : ℕ) : (∑ i ∈ S, ‖f i j‖^2) ≤ K*L^k*G := by
+    apply hb S t β X (2^j*X) hX _ T Y σ hT hY hσ hσ1 ht hβ hs
     exact Nat.le_mul_of_pos_left X (by positivity)
   have hlower : (S.card : ℝ)/256 ≤ ∑ i ∈ S, ‖∑ j ∈ Finset.range J, f i j‖^2 := by
     have h := Finset.sum_le_sum (s := S) (fun i hi =>
@@ -75,7 +133,7 @@ theorem polynomial_alternative_count :
         nlinarith [norm_nonneg (∑ j ∈ Finset.range J, f i j)])
     simpa only [Finset.sum_const,nsmul_eq_mul,div_eq_mul_inv,one_mul] using h
   have hupper : (∑ i ∈ S, ‖∑ j ∈ Finset.range J, f i j‖^2) ≤
-      (J : ℝ)^2*(polynomialBlockConstant*L^6*G) := by
+      (J : ℝ)^2*(K*L^k*G) := by
     apply (moment_finite_block_square S J f).trans
     have h := mul_le_mul_of_nonneg_left (Finset.sum_le_sum (s := Finset.range J) (fun j _ => hblock j))
       (Nat.cast_nonneg J : (0 : ℝ) ≤ J)
@@ -86,13 +144,35 @@ theorem polynomial_alternative_count :
     linarith
   have hJ : (J : ℝ) ≤ A*L := hJbound.trans (mul_le_mul_of_nonneg_left hlog hA.le)
   have hJ2 := pow_le_pow_left₀ (Nat.cast_nonneg J : (0 : ℝ) ≤ J) hJ 2
-  have hfinal := hlower.trans (hupper.trans (mul_le_mul_of_nonneg_right hJ2 (by
-    have := polynomialBlockConstant_pos
-    positivity)))
+  have hfinal := hlower.trans (hupper.trans (mul_le_mul_of_nonneg_right hJ2 (by positivity)))
   have hh := mul_le_mul_of_nonneg_left hfinal (by norm_num : (0 : ℝ) ≤ 256)
   convert hh using 1
   · ring
   · dsimp [L,G]
+    rw [pow_add]
     ring
+
+theorem polynomial_alternative_count :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ Y T σ : ℝ,
+      2 ≤ Y → 1 ≤ T → 1/2 ≤ σ → σ ≤ 1 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
+      (S.card : ℝ) ≤ C*(1+Real.log (2*Y+1))^8*
+        (Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ)) :=
+  polynomial_alternative_count_of_block 6 polynomialBlockConstant polynomialBlockConstant_pos
+    (fun S t β X U hX hXU T Y σ hT hY hσ hσ1 ht hβ hs =>
+      polynomial_actual_block S t β X U hX hXU T Y σ hT hY hσ hσ1 ht hβ hs)
+
+theorem polynomial_alternative_count_log_five :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ Y T σ : ℝ,
+      2 ≤ Y → 1 ≤ T → 1/2 ≤ σ → σ ≤ 1 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
+      (S.card : ℝ) ≤ C*(1+Real.log (2*Y+1))^5*
+        (Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ)) := by
+  obtain ⟨C,hC,hb⟩ := polynomial_actual_block_log_three
+  exact polynomial_alternative_count_of_block 3 C hC hb
 
 end Legendre.Density.Moment

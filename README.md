@@ -262,7 +262,14 @@ passes to the full series before summing the shells. The independent
 comparator states the literal integral on `[0,T]`.
 [Proof and scope](docs/layer4-sharp-fourth-moment.md).
 
-Current validation (2026-11-18) covers **4,375 build jobs**, **8,487 audited theorem declarations**, **362 Lean files** and **220 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Ingham detector on height shells (2026-11-19).** A log-free dyadic
+sampling bound for varying real parts reduces the polynomial branch from
+eight logarithms to five. The integral branch and actual zero detector give
+a closed fifth-log count on `[T/2,T]` when `T≥128` and
+`σ−1/2 ≥ 1/log T`, with unit-separated ordinates.
+[Exact conditions and comparator](docs/layer4-ingham-shell-log-five.md).
+
+Current validation (2026-11-19) covers **4,381 build jobs**, **8,565 audited theorem declarations**, **368 Lean files** and **223 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -622,7 +629,7 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
-**Repository status (2026-11-18).** Layer 3's classical PNT, Ingham 1940,
+**Repository status (2026-11-19).** Layer 3's classical PNT, Ingham 1940,
 the full curved Huxley and Guth–Maynard zero-density bounds, and the
 combined global `30/13` density bound are proved. The curves are uniform
 on σ∈[1/2,1] for every T≥2 with analytic multiplicities and arbitrary
@@ -1305,7 +1312,9 @@ Selected cyclic/diagonal and off-diagonal estimates from `LargeValuesS2` supply
 is included in `Separation.lean`. `CubicRemainder.lean` is a local assembly. Selected tuple/power proofs from
 `PolynomialPowers`, `ArithmeticCoefficients` and `ClassicalPowering` supply
 `FinitePowers.lean`, reusing the existing divisor bound. `MeanValueCS`,
-`MeanValue` and `MeanValueProof` supply `SamplingMeanSquare.lean`;
+`MeanValue` and `MeanValueProof` supply `SamplingMeanSquare.lean`.
+The local [dyadic variable-line sampling proof](Legendre/Layer4/DyadicVariableSampling.lean)
+uses its Montgomery sampling theorem with masked coefficients.
 `LargeValuesLocalization` supplies `Localization.lean`; `HeathBrown` supplies
 `HeathBrown.lean`. The Kusmin–Landau core from `VanDerCorput`, the prefix
 bound from `TerminalTypeI` and annulus packing from `ClassicalLargeValues`

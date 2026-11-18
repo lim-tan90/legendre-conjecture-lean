@@ -15,6 +15,8 @@ namespace Legendre.Density.Moment
 open Complex Set
 open scoped BigOperators
 
+universe u
+
 theorem four_logs_le_eight (L : ℝ) (hL : Real.log 2 ≤ L) :
     L^4 ≤ (Real.log 2)⁻¹^4*L^8 := by
   have hl : 0 < Real.log 2 := Real.log_pos (by norm_num)
@@ -25,17 +27,39 @@ theorem four_logs_le_eight (L : ℝ) (hL : Real.log 2 ≤ L) :
     _ ≤ (Real.log 2)⁻¹^4*(L^4*L^4) := by gcongr
     _ = _ := by ring
 
-theorem separated_high_shell_density :
+theorem four_logs_le_of_le (k : ℕ) (hk : 4 ≤ k) (L : ℝ) (hL : Real.log 2 ≤ L) :
+    L^4 ≤ (Real.log 2)⁻¹^(k-4)*L^k := by
+  have hl : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hp := pow_le_pow_left₀ hl.le hL (k-4)
+  have hout := mul_le_mul_of_nonneg_left hp (by positivity : 0 ≤ (Real.log 2)⁻¹^(k-4))
+  rw [← mul_pow, inv_mul_cancel₀ hl.ne', one_pow] at hout
+  have hoff : k = 4+(k-4) := by omega
+  calc
+    L^4 = 1*L^4 := by ring
+    _ ≤ ((Real.log 2)⁻¹^(k-4)*L^(k-4))*L^4 := mul_le_mul_of_nonneg_right hout (by positivity)
+    _ = _ := by
+      conv_rhs => rw [show L^k = L^4*L^(k-4) by rw [←pow_add, ←hoff]]
+      ring
+
+/-- Combine the polynomial count with the fourth-log integral count. -/
+theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)
+    (hpoly : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
+        (T^detectorBalanceExponent σ)‖) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k) :
     ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
-      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
       (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
-      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 := by
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k := by
   classical
-  obtain ⟨CP,hCP,hp⟩ := polynomial_alternative_balanced
+  obtain ⟨CP,hCP,hp⟩ := hpoly
   obtain ⟨CI,hCI,hi⟩ := integral_alternative_balanced
-  refine ⟨CP+CI*(Real.log 2)⁻¹^4,by positivity,?_⟩
+  refine ⟨CP+CI*(Real.log 2)⁻¹^(k-4),by positivity,?_⟩
   intro T σ hT hσ hσ1 hgap ι S t β ht hs hz
   obtain ⟨X,hX,hTX,hX2,hiX⟩ := hi T σ (by linarith) hσ hσ1 hgap
   let Y := T^detectorBalanceExponent σ
@@ -75,7 +99,7 @@ theorem separated_high_shell_density :
     (fun i hi j hj => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1)
     (fun i hi => ⟨(hz i (Finset.mem_filter.mp hi).1).1,(hz i (Finset.mem_filter.mp hi).1).2.1⟩) hNlarge
   have hL : Real.log 2 ≤ Real.log T := Real.log_le_log (by norm_num) (by linarith)
-  have hN' := hN.trans (mul_le_mul_of_nonneg_left (four_logs_le_eight (Real.log T) hL)
+  have hN' := hN.trans (mul_le_mul_of_nonneg_left (four_logs_le_of_le k hk (Real.log T) hL)
     (show 0 ≤ CI*T^balancedDensityExponent σ by positivity))
   have hcard : (S.card : ℝ) = (P.card : ℝ)+(N.card : ℝ) := by
     exact_mod_cast (Finset.card_filter_add_card_filter_not (s := S) (p := p)).symm
@@ -83,5 +107,23 @@ theorem separated_high_shell_density :
   have hh := add_le_add hP hN'
   convert hh using 1
   ring
+
+theorem separated_high_shell_density :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 :=
+  separated_high_shell_density_of_polynomial 8 (by norm_num) polynomial_alternative_balanced
+
+theorem separated_high_shell_density_log_five :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^5 :=
+  separated_high_shell_density_of_polynomial 5 (by norm_num) polynomial_alternative_balanced_log_five
 
 end Legendre.Density.Moment

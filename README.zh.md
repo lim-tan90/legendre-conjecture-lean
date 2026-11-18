@@ -205,7 +205,12 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 统一的 Gaussian 控制。证明复用二进尾和估计，先取完整级数的极限，再对各高度壳求和。
 独立比较器保留 `[0,T]` 上的原积分。[证明与范围](docs/layer4-sharp-fourth-moment.md)。
 
-当前验证（2026-11-18）包括 **4,375 项构建**、**8,487 个定理的公理审计**、**362 个 Lean 文件**和 **220 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**Ingham 高度壳零点检测（2026-11-19）。** 二进区间上的变实部采样界
+消除了额外的采样对数损失，多项式分支由八次对数降至五次。合并积分分支后，
+当 `T≥128`、`σ−1/2 ≥ 1/log T` 时，已得到 `[T/2,T]` 高度壳内单位间隔
+零点的五次对数计数。[精确条件与比较器](docs/layer4-ingham-shell-log-five.md)。
+
+当前验证（2026-11-19）包括 **4,381 项构建**、**8,565 个定理的公理审计**、**368 个 Lean 文件**和 **223 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -484,7 +489,7 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 <!-- comparator:legendre1808 -->
 ## 历史进展总览
 
-**仓库当前状态（2026-11-18）：** Layer 3 的经典 PNT、Ingham 1940、完整的
+**仓库当前状态（2026-11-19）：** Layer 3 的经典 PNT、Ingham 1940、完整的
 Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 界均已证明。
 曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
 尖锐四阶矩界 `O(T log^4 T)` 已对全部 `T≥2` 证明。下表九项历史短区间指数结果
@@ -1109,7 +1114,9 @@ mathlib 的证明。
 `LargeValuesS2` 的循环／对角恒等式和非对角余项估计对应 `CubicTwoTail.lean`。
 `CubicRemainder.lean` 为本地组装。`PolynomialPowers`、`ArithmeticCoefficients`、
 `ClassicalPowering` 的必要元组／幂证明对应 `FinitePowers.lean`，复用已有除数界；
-`MeanValueCS`、`MeanValue`、`MeanValueProof` 对应 `SamplingMeanSquare.lean`；
+`MeanValueCS`、`MeanValue`、`MeanValueProof` 对应 `SamplingMeanSquare.lean`。
+本地的[二进区间变实部采样证明](Legendre/Layer4/DyadicVariableSampling.lean)
+复用其中的 Montgomery 采样定理，并用系数掩码处理前缀。
 `LargeValuesLocalization` 对应 `Localization.lean`；`HeathBrown` 对应 `HeathBrown.lean`。
 `VanDerCorput` 的 Kusmin–Landau 核心、`TerminalTypeI` 的前缀界及 `ClassicalLargeValues`
 的单位环带计数对应 `LogarithmicPrefix.lean`；`HeathBrownReflection` 及 `LogarithmicKernel`

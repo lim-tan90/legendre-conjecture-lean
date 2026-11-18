@@ -559,6 +559,7 @@ and the proved bridges between the interval form, the gap form and the coarse
 | 4.158 | Guth–Maynard Theorem 1.2 and global 30/13 | [CentralDensity.lean](../Legendre/Layer4/GuthMaynard/CentralDensity.lean), [LayerCoverage.lean](../Legendre/Literature/LayerCoverage.lean) | **proved**; uniform in real part, analytic multiplicities and all T≥2 |
 
 | 4.159 | Sharp critical-line fourth-moment upper bound | `Legendre.Zeta.zeta_fourth_moment_log_four`, `zeta_fourth_moment_symmetric_log_four` and the closed `ZetaFourthMoment` comparator | **proved** for every `T≥2`, with one absolute constant and the literal integral. The Gaussian pole and remainder yield the fourth log power on shells. [Proof and scope](layer4-sharp-fourth-moment.md) |
+| 4.160 | Ingham's separated detector count on height shells | `separated_high_shell_density_log_five` and the closed `InghamShellLogFiveBenchmark` | **proved** with literal zero samples, full real-part variation, and the gap `σ−1/2 ≥ 1/log T`. Montgomery sampling and Abel summation reduce the polynomial count to five logarithms. [Exact scope](layer4-ingham-shell-log-five.md) |
 | 4.interface | Initial Layer 4 public interface | `import Legendre.Layer4` | exports proved Ingham 1940 curved density, finite additive large sieve, linear mean-square error, optimized samples, Gram bounds, weighted detection and fourth-moment height exponent; global Huxley 12/5 also proved; the full curves and global 30/13 are proved in the rows above |
 | 4.validation | One hundred and twenty-nine independent Layer 4 consumer checks | [Tests/Layer4.lean](../Legendre/Tests/Layer4.lean) | empty/singleton/two-term/coincident-frequency cases, translated interval, limiting mean, near-one cutoff, log-loss and conditional exponent weakening, reversed sharp-mean interval, optimized touching samples and zero-energy detector, nonzero mollifier endpoint, Euler cutoff one, actual counted zeros, mixed real parts, critical-line empty energy, full actual density, retained low heights, xi pole values, vertical Gamma shifts, zero-shift kernel, removed-pole rectangle residue, real-center reflection, all-ordinate fourth-power reduction and endpoint conjugation; all declarations audited; added empty harmonic energy, unit head energy, translated subset mean, zero series term, height-two moment and exponent 5/4 checks; later analytic counts also check zero energy, empty samples, arbitrary common shifts, cutoff X=1 and J=0, splitting-amplitude equality and balanced-cutoff equality |
 | 10 | Hoheisel 1930, `θ = 32999/33000` | `Legendre.Hoheisel`, `Legendre.HoheiselPaper` | **statement only**; normalized exponent form encoded, `hoheiselPaper_iff` proved |
@@ -895,3 +896,9 @@ build jobs. The two declaration inventories and the kernel audit agree on
 all 8,521 theorems, with only the three standard axioms. The source scan
 covers 367 Lean files. The 222 independent consumers include the `T=2`
 fourth-log estimate and invariance under a change of positive Mellin width.
+
+Ingham shell validation (2026-11-19). Lean 4.35.0 completed 4,381 build
+jobs. Both declaration inventories, audit targets, and kernel output
+agree on 8,565 theorems. The source scan covers 368 Lean files. The 223
+independent consumers include the one-term dyadic sample at `U=1` and
+the literal fifth-log shell bound.

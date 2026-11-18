@@ -15,16 +15,25 @@ namespace Legendre.Density.Moment
 open Complex Set
 open scoped BigOperators
 
-theorem polynomial_alternative_balanced :
+universe u
+
+theorem polynomial_alternative_balanced_of_count (k : ℕ)
+    (hcount : ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ Y T σ : ℝ,
+      2 ≤ Y → 1 ≤ T → 1/2 ≤ σ → σ ≤ 1 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
+      (S.card : ℝ) ≤ C*(1+Real.log (2*Y+1))^k*
+        (Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ))) :
     ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
-      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, β i ∈ Icc σ 1) →
       (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
         (T^detectorBalanceExponent σ)‖) →
-      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 := by
-  obtain ⟨C,hC,hb⟩ := polynomial_alternative_count
-  refine ⟨2*C*8^8,by positivity,?_⟩
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k := by
+  obtain ⟨C,hC,hb⟩ := hcount
+  refine ⟨2*C*8^k,by positivity,?_⟩
   intro T σ hT hσ hσ1 X hX hTX ι S t β ht hs hβ hlarge
   let Y := T^detectorBalanceExponent σ
   have hY : 2 ≤ Y := by
@@ -34,15 +43,36 @@ theorem polynomial_alternative_balanced :
     exact hT.trans hh
   have h := hb X hX Y T σ hY (by linarith) hσ hσ1 S t β ht hs hβ hlarge
   have hlog := balanced_log_cost T σ hT hσ hσ1
+  have hL0 : 0 ≤ Real.log T := Real.log_nonneg (by linarith)
   have hpow := balanced_polynomial_powers T X σ (by linarith) hTX hσ hσ1
   apply h.trans
   calc
-    _ ≤ C*(8*Real.log T)^8*(2*T^balancedDensityExponent σ) := by
+    _ ≤ C*(8*Real.log T)^k*(2*T^balancedDensityExponent σ) := by
       apply mul_le_mul _ hpow (by positivity) (by positivity)
       exact mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (by
         have hh := Real.log_nonneg (by linarith : 1 ≤ 2*Y+1)
-        linarith : 0 ≤ 1+Real.log (2*Y+1)) hlog 8) hC.le
-    _ = _ := by ring
+        linarith : 0 ≤ 1+Real.log (2*Y+1)) hlog k) hC.le
+    _ = _ := by rw [mul_pow]; ring
+
+theorem polynomial_alternative_balanced :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
+        (T^detectorBalanceExponent σ)‖) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 :=
+  polynomial_alternative_balanced_of_count 8 polynomial_alternative_count
+
+theorem polynomial_alternative_balanced_log_five :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
+        (T^detectorBalanceExponent σ)‖) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^5 :=
+  polynomial_alternative_balanced_of_count 5 polynomial_alternative_count_log_five
 
 theorem integral_alternative_balanced :
     ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 < σ → σ ≤ 1 →
