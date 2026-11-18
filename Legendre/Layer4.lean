@@ -169,6 +169,10 @@ public import Legendre.Layer4.GuthMaynard.AffineHeight
 public import Legendre.Layer4.GuthMaynard.CubicThreeTailRefined
 public import Legendre.Layer4.GuthMaynard.EnergyDecomposition
 public import Legendre.Layer4.GuthMaynard.EnergyFinal
+public import Legendre.Layer4.GuthMaynard.ClassicalAdapter
+public import Legendre.Layer4.GuthMaynard.SmoothAssembly
+public import Legendre.Layer4.GuthMaynard.LargeValueAssembly
+public import Legendre.Layer4.GuthMaynard.PublishedLargeValues
 
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density

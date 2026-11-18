@@ -422,6 +422,20 @@ def GuthMaynardEnergyS3Benchmark : Prop :=
             T*(W.card : ℝ)^2*(N : ℝ)^(3/2-σ)+
             T^(9/8 : ℝ)*(W.card : ℝ)^(29/16 : ℝ)*(N : ℝ)^(3/2-σ))+C/T^90
 
+/-- Guth–Maynard Theorem 1.1 with a literal closed dyadic sum and
+unit bounds only on the coefficients appearing in that sum. -/
+def GuthMaynardPublishedLargeValuesBenchmark : Prop :=
+  ∀ ε : ℝ, 0 < ε →
+    ∃ C T₀ : ℝ, 0 < C ∧ 1 ≤ T₀ ∧
+      ∀ (N : ℕ) (V T : ℝ) (b : ℕ → ℂ) (W : Finset ℝ),
+        0 < N → T₀ ≤ T → 0 < V →
+        (∀ n ∈ Finset.Icc N (2*N), ‖b n‖ ≤ 1) →
+        (∀ x ∈ W, ∀ y ∈ W, x ≠ y → 1 ≤ dist x y) →
+        (∀ x ∈ W, x ∈ Set.Icc 0 T) →
+        (∀ t ∈ W, V ≤ ‖∑ n ∈ Finset.Icc N (2*N), b n*(n : ℂ)^((t : ℂ)*Complex.I)‖) →
+        (W.card : ℝ) ≤ C*T^ε*((N : ℝ)^2*V^(-2 : ℝ) +
+          (N : ℝ)^(18/5 : ℝ)*V^(-4 : ℝ) + T*(N : ℝ)^(12/5 : ℝ)*V^(-4 : ℝ))
+
 /-- The completed Layer 3 classical PNT benchmark, with existential constants. -/
 def ClassicalPNTError : Prop :=
   ∃ c > 0, ∃ C > 0, ∃ X : ℝ, ∀ x ≥ X,

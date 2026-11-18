@@ -229,7 +229,7 @@ normalized smoothed R² source satisfies its profile. Physical Proposition10.1 g
 Proposition11.1 bounds the actual large-value set's energy, and its substitution
 proves the four-term S₃ Proposition11.2. Five new independent comparators retain
 coefficients, separation, scale windows, energy tolerance and remainder.
-Final large-values and central-density assembly remain open. All seven new
+The central-density transfer remains open. All seven
 ported modules compile under **Lean 4.35.0**; exact sources are grouped under
 **#5 smccolm/Lean** below. [Formulas, uniformity and sources](docs/layer4-guth-affine-energy.md).
 Eight new consumers check signed scaling, translated boundary energy, zero source,
@@ -237,6 +237,17 @@ exact smoother mass, gcd-division endpoints, singleton S₃ and the sigma=3/4 po
 Six negative contract checks reject removing coefficients, separation, the
 T^(3/4) window, Fourier-family profile or T^-90 remainder, or treating the affine
 bound as central density.
+
+**Guth–Maynard large values (2026-11-18).** Theorem 1.1 now has a
+Lean proof for the literal sum over `N ≤ n ≤ 2N`, with unit coefficient
+bounds on that support and one-separated ordinates in `[0,T]`. For every
+`ε > 0` the bound is
+`R ≪ε T^ε(N²/V² + N^(18/5)/V⁴ + T N^(12/5)/V⁴)`.
+The proof combines Section 12 with the complementary Montgomery and Halász
+ranges and accounts for the left endpoint separately. The independent
+comparator expands the sum and its hypotheses. The central zero-density
+transfer on `(7/10,4/5)` remains open.
+[Statement and proof scope](docs/layer4-guth-large-values.md).
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -662,7 +673,8 @@ The completed analytic milestones supporting this program are:
 | Heath–Brown difference-set input (Layer 4) | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ Proved**: [actual ordered-pair mean square](docs/layer4-heath-brown-difference.md), closed literal comparator; arbitrary unit-bounded coefficients and source separation/height conditions. Poisson-tail/S₂ assembly is now proved below; central density remains open. |
 | Complete Guth–Maynard S₂ (Layer 4) | `T^ε(N²R²+TNR^(2−1/k)+N²R^(2−3/(4k))T^(1/(2k)))` | **✅ Proved**: [Proposition6.1 and literal complete tail moment](docs/layer4-guth-s2-s3.md), k≥1 and source separation/height conditions. |
 | Guth–Maynard S₃ energy input (Layer 4) | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ Proved**: [Proposition8.1](docs/layer4-guth-s2-s3.md), `T^(2/3)≤N≤T`; strict-energy convention recovered by a factor-three bridge. Sharper energy/affine refinement is proved below; central density remains open. |
-| Guth–Maynard affine/energy refinement (Layer 4) | Propositions9.1,10.1,11.1,11.2 | **✅ Proved**: [literal affine integral, uniform height family and four-term S₃ bound](docs/layer4-guth-affine-energy.md), five independent comparators; all scale/coefficient conditions and remainder retained. Final large-values and central density remain open. |
+| Guth–Maynard affine/energy refinement (Layer 4) | Propositions9.1,10.1,11.1,11.2 | **✅ Proved**: [literal affine integral, uniform height family and four-term S₃ bound](docs/layer4-guth-affine-energy.md), five independent comparators; all scale/coefficient conditions and remainder retained. The central density transfer remains open. |
+| Guth–Maynard large values (Layer 4) | `T^ε(N²/V² + N^(18/5)/V⁴ + T N^(12/5)/V⁴)` | **✅ Proved**: [Theorem 1.1](docs/layer4-guth-large-values.md) with the literal closed sum, unit coefficient bounds on its support and one-separated samples. |
 | Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
@@ -1256,8 +1268,8 @@ mathlib proof is copied into this repository.
 
 - **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **Local paths:** Twenty-nine adapted modules and one local assembly in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
-- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all twenty-nine adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit; S₂/S₃ also normalize finite filters, product measures, measurable functions and Holder factors
+- **Local paths:** Thirty-two adapted modules and two local modules in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
+- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all thirty-two adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit; S₂/S₃ also normalize finite filters, product measures, measurable functions and Holder factors
 
 #### Detailed provenance and file mapping
 
@@ -1300,7 +1312,7 @@ this same source: `LargeValuesLanguage` → `AffineLanguage.lean`;
 Adaptations explicitly normalize real/complex scalars, Schwartz functions,
 Fourier indices, product measures, Holder exponents and finite telescoping;
 existing mean-square, finite-sum Cauchy--Schwarz, floor injectivity and log-power
-absorption proofs are reused. All twenty-nine adapted
+absorption proofs are reused. All thirty-two adapted
 modules, including that local extension, are
 compiled from source under **Lean 4.35.0**. First-trace and one-tail analytic
 estimates, complete quantitative reflection and S₂ off-diagonal decay are now
@@ -1308,7 +1320,15 @@ proved. The actual Heath–Brown Dirichlet-polynomial difference-set mean square
 also proved. The complete Poisson-tail moment/S₂ assembly and Proposition8.1 S₃
 energy input are now proved. Affine Proposition9.1, physical Proposition10.1,
 energy Proposition11.1 and substituted S3 Proposition11.2 are also proved;
-final large-values assembly and central density remain open. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+the literal Theorem 1.1 is now proved. The central density transfer remains
+open. Selected portions of `GuthMaynard/LargeValuesFinal.lean` supply
+`SmoothAssembly.lean` and `LargeValueAssembly.lean` (the latter also uses
+the Theorem 1.1 interfaces from `GuthMaynard/Statements.lean`).
+`PublicationContract.lean` supplies the Theorem 1.1 proof in
+`PublishedLargeValues.lean`. Lean 4.35.0 adaptations reuse local weighted
+selection, first spectral moments and the separated cardinality bound.
+`ClassicalAdapter.lean` derives the classical complement from existing local
+Montgomery and Halász proofs. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 
@@ -1322,10 +1342,10 @@ mathematical statements, and links to the publishers/arXiv. Original contributio
 released under Apache-2.0. Files under `Legendre/Nagura/` are adapted from the MIT-licensed project
 <https://github.com/ShouqiaoW/erdos> (commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`); their original MIT license is
-retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The twenty-nine
+retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The thirty-two
 adapted smccolm/Lean modules under `Legendre/Layer4/GuthMaynard/` retain
 MIT-0 headers and the [upstream license](licenses/smccolm-Lean-MIT-0.txt);
-the local `CubicRemainder.lean` assembly is Apache-2.0.
+the local `CubicRemainder.lean` and `ClassicalAdapter.lean` are Apache-2.0.
 
 ## References
 

@@ -376,6 +376,13 @@ theorem layer4_guth_energy_s3_comparator : GuthMaynardEnergyS3Benchmark := by
   intro N T σ W b hN hT hNT hlo hs hi hb hv
   simpa only [sourceDirichletPoly,dyadicInterval] using h N T σ W b hN hT hNT hlo hs hi hb hv
 
+open Density.GuthMaynard in
+/-- The literal closed-sum comparator uses the native endpoint bridge. -/
+theorem layer4_guth_published_large_values_comparator : GuthMaynardPublishedLargeValuesBenchmark := by
+  simpa only [PublishedGuthMaynardLargeValues, GuthMaynardPublishedLargeValuesBenchmark,
+    publishedSourceDirichletPoly, publishedDyadicInterval, IsSeparated, InBaseInterval] using
+    guthMaynardLargeValues_published_native
+
 /-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by

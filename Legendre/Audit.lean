@@ -496,6 +496,10 @@ import all Legendre.Layer4.GuthMaynard.AffineHeight
 import all Legendre.Layer4.GuthMaynard.CubicThreeTailRefined
 import all Legendre.Layer4.GuthMaynard.EnergyDecomposition
 import all Legendre.Layer4.GuthMaynard.EnergyFinal
+import all Legendre.Layer4.GuthMaynard.ClassicalAdapter
+import all Legendre.Layer4.GuthMaynard.SmoothAssembly
+import all Legendre.Layer4.GuthMaynard.LargeValueAssembly
+import all Legendre.Layer4.GuthMaynard.PublishedLargeValues
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -8918,3 +8922,135 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_gcd_rounding_consumer._proof_1_2"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_refined_s3_singleton_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_refined_s3_singleton_consumer._simp_1_2"
+
+-- Guth–Maynard large values: classical inputs, Section 12, and the closed-sum theorem.
+#print axioms Legendre.Density.GuthMaynard.GuthMaynardLargeValues._proof_1
+#print axioms Legendre.Density.GuthMaynard.GuthMaynardLargeValues._proof_2
+#print axioms Legendre.Density.GuthMaynard.GuthMaynardLargeValues._proof_3
+#print axioms Legendre.Density.GuthMaynard.GuthMaynardLargeValues._proof_4
+#print axioms Legendre.Density.GuthMaynard.GuthMaynardLargeValues._proof_5
+#print axioms Legendre.Density.GuthMaynard.InBaseInterval.eq_1
+#print axioms Legendre.Density.GuthMaynard.IsSeparated.eq_1
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues._proof_1
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues._proof_2
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues._proof_3
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues._proof_4
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues._proof_5
+#print axioms Legendre.Density.GuthMaynard.PublishedGuthMaynardLargeValues.eq_1
+#print axioms Legendre.Density.GuthMaynard.adapter_dyadic_energy_le_length
+#print axioms Legendre.Density.GuthMaynard.adapter_log_factor
+#print axioms Legendre.Density.GuthMaynard.classical_large_values_second_branch_unrestricted
+#print axioms Legendre.Density.GuthMaynard.classical_large_values_sixth_branch
+#print axioms Legendre.Density.GuthMaynard.classical_montgomery_halasz_huxley_native
+#print axioms Legendre.Density.GuthMaynard.exists_dilated_separated_subset
+#print axioms Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded
+#print axioms Legendre.Density.GuthMaynard.gmCubicS3_prop11_2_smooth
+#print axioms Legendre.Density.GuthMaynard.gmCubicSpectralDispersion_le_trace_pieces
+#print axioms Legendre.Density.GuthMaynard.gmCutoffCoeffs.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmEquation12PhysicalRootShape_specialize
+#print axioms Legendre.Density.GuthMaynard.gmEquation12PhysicalRootShape_specialize_le
+#print axioms Legendre.Density.GuthMaynard.gmProposition3_1_smooth
+#print axioms Legendre.Density.GuthMaynard.gmProposition3_1_smooth_fullHeight
+#print axioms Legendre.Density.GuthMaynard.gmProposition3_1_smooth_interval
+#print axioms Legendre.Density.GuthMaynard.gmProposition3_1_smooth_oneSeparated
+#print axioms Legendre.Density.GuthMaynard.gmProposition3_1_smooth_physical
+#print axioms Legendre.Density.GuthMaynard.gmS2PaperShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_4
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_5
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape._proof_6
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmS3PhysicalShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmScaleSet.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmScaleSet_card
+#print axioms Legendre.Density.GuthMaynard.gmSection12RawShape.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmSection12RawShape_eq_eight
+#print axioms Legendre.Density.GuthMaynard.gmSection12RawShape_nonneg
+#print axioms Legendre.Density.GuthMaynard.gmSection12RootShape._proof_1
+#print axioms Legendre.Density.GuthMaynard.gmSection12RootShape._proof_2
+#print axioms Legendre.Density.GuthMaynard.gmSection12RootShape._proof_3
+#print axioms Legendre.Density.GuthMaynard.gmSection12RootShape_le_physical
+#print axioms Legendre.Density.GuthMaynard.gmSection12_eq12_1_roots
+#print axioms Legendre.Density.GuthMaynard.gmSection12_equation12_1_smooth
+#print axioms Legendre.Density.GuthMaynard.gmSection12_raw_smooth
+#print axioms Legendre.Density.GuthMaynard.gmShiftCoeffs.eq_1
+#print axioms Legendre.Density.GuthMaynard.gmSmoothDirichletPoly_shift_eq
+#print axioms Legendre.Density.GuthMaynard.gm_classical_min_high
+#print axioms Legendre.Density.GuthMaynard.gm_classical_min_low
+#print axioms Legendre.Density.GuthMaynard.gm_classical_source_high
+#print axioms Legendre.Density.GuthMaynard.gm_classical_source_low
+#print axioms Legendre.Density.GuthMaynard.gm_classical_source_near_height
+#print axioms Legendre.Density.GuthMaynard.gm_div_three_rpow_neg_four
+#print axioms Legendre.Density.GuthMaynard.gm_each_le_eight_sum
+#print axioms Legendre.Density.GuthMaynard.gm_inv_rpow_four
+#print axioms Legendre.Density.GuthMaynard.gm_inv_rpow_two
+#print axioms Legendre.Density.GuthMaynard.gm_le_one_of_eight_terms
+#print axioms Legendre.Density.GuthMaynard.gm_mul_rpow_le_mul
+#print axioms Legendre.Density.GuthMaynard.gm_rpow_div_root
+#print axioms Legendre.Density.GuthMaynard.gm_rpow_root_bound
+#print axioms Legendre.Density.GuthMaynard.gm_rpow_scale_le_eight
+#print axioms Legendre.Density.GuthMaynard.gm_rpow_scale_le_sixteen
+#print axioms Legendre.Density.GuthMaynard.gm_solve_monomial
+#print axioms Legendre.Density.GuthMaynard.gm_source_large_values_critical
+#print axioms Legendre.Density.GuthMaynard.gm_source_scale_bounds
+#print axioms Legendre.Density.GuthMaynard.gm_source_scale_critical_lower
+#print axioms Legendre.Density.GuthMaynard.gm_source_scale_critical_upper
+#print axioms Legendre.Density.GuthMaynard.gm_source_scale_gt_one
+#print axioms Legendre.Density.GuthMaynard.guthMaynardLargeValues_native
+#print axioms Legendre.Density.GuthMaynard.guthMaynardLargeValues_neg
+#print axioms Legendre.Density.GuthMaynard.guthMaynardLargeValues_published_native
+#print axioms Legendre.Density.GuthMaynard.norm_gmCutoffCoeffs_le_one
+#print axioms Legendre.Density.GuthMaynard.norm_gmShiftCoeffs_le_one
+#print axioms Legendre.Density.GuthMaynard.rpow_log_div_log
+#print axioms Legendre.Density.GuthMaynard.rpow_three_halves_sub_log_ratio
+#print axioms Legendre.Density.GuthMaynard.rpow_three_sub_two_log_ratio
+#print axioms Legendre.Density.GuthMaynard.sourceDirichletPoly_gmCutoffCoeffs
+#print axioms Legendre.Literature.GuthMaynardPublishedLargeValuesBenchmark._proof_1
+#print axioms Legendre.Literature.GuthMaynardPublishedLargeValuesBenchmark.eq_1
+#print axioms Legendre.Literature.layer4_guth_published_large_values_comparator
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.ClassicalAdapter.0.Legendre.Density.GuthMaynard.adapter_dyadic_energy_le_length._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.LargeValueAssembly.0.Legendre.Density.GuthMaynard.gm_source_large_values_critical._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.LargeValueAssembly.0.Legendre.Density.GuthMaynard.gm_source_scale_bounds._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.LargeValueAssembly.0.Legendre.Density.GuthMaynard.gm_source_scale_bounds._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.LargeValueAssembly.0.Legendre.Density.GuthMaynard.gm_source_scale_bounds._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.LargeValueAssembly.0.Legendre.Density.GuthMaynard.gm_source_scale_gt_one._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.PublishedLargeValues.0.Legendre.Density.GuthMaynard.guthMaynardLargeValues_published_native._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.PublishedLargeValues.0.Legendre.Density.GuthMaynard.norm_restrictDyadicCoeffs_le_one"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.PublishedLargeValues.0.Legendre.Density.GuthMaynard.restrictDyadicCoeffs.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.PublishedLargeValues.0.Legendre.Density.GuthMaynard.sourceDirichletPoly_restrictDyadicCoeffs"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.exists_dilated_separated_subset._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmCubicDiagonalMain_sub_spectralAverage_bounded._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gmProposition3_1_smooth_fullHeight._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.gm_solve_monomial._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.SmoothAssembly.0.Legendre.Density.GuthMaynard.rpow_log_div_log._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer._simp_1_4"

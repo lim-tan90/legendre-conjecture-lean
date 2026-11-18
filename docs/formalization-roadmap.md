@@ -628,6 +628,11 @@ benchmarks close; final large-values and central-density assembly remain open.
 Seven additional source modules are adapted to Lean4.35.0 under the same pinned
 smccolm/Lean MIT-0 entry. See [scope and formulas](layer4-guth-affine-energy.md).
 
+**Guth–Maynard Theorem 1.1 (2026-11-18).** The literal closed-interval
+large-values estimate is proved with all three terms and the coefficient
+bound on the support. The middle zero-density range still requires the
+Section 13 transfer. See [statement and proof scope](layer4-guth-large-values.md).
+
 **Acceptance criteria.**
 
 * a formal definition of `N(σ,T)` and the zero-density exponent;

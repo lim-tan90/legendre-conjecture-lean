@@ -1551,4 +1551,32 @@ theorem layer4_gm_energy_s3_sigma_three_quarters_consumer (cutoff : GMSmoothCuto
   norm_num at hh ⊢
   exact hh
 
+open Density.GuthMaynard in
+/-- At N=1 two unit summands attain V=2, with a large off-support coefficient. -/
+theorem layer4_gm_closed_left_endpoint_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C > 0, ∃ T₀ ≥ 1, ∀ T ≥ T₀,
+      (1 : ℝ) ≤ C * T^ε * (5/16 + T/16) := by
+  obtain ⟨C, T₀, hC, hT₀, h⟩ := guthMaynardLargeValues_published_native ε hε
+  refine ⟨C, hC, T₀, hT₀, ?_⟩
+  intro T hT
+  let b (n : ℕ) : ℂ := if n = 0 then 100 else 1
+  have hcoeff (n : ℕ) (hn : n ∈ publishedDyadicInterval 1) : ‖b n‖ ≤ 1 := by
+    have hn' := (Finset.mem_Icc.mp hn).1
+    simp [b, show n ≠ 0 by omega]
+  have hval : (2 : ℝ) ≤ ‖publishedSourceDirichletPoly 1 b 0‖ := by
+    have hI : publishedDyadicInterval 1 = ({1,2} : Finset ℕ) := by decide
+    simp [publishedSourceDirichletPoly, hI, b]
+    rw [show (1 : ℂ) + 1 = 2 by norm_num]
+    norm_num
+  have hh := h 1 2 T b {0} (by norm_num) hT (by norm_num) hcoeff
+    (by simp [IsSeparated])
+    (by
+      intro x hx
+      simp only [Finset.mem_singleton] at hx
+      subst x
+      exact ⟨le_rfl, by linarith⟩)
+    (by simpa using hval)
+  norm_num [Real.rpow_neg_one, Real.rpow_neg (by norm_num : (0 : ℝ) ≤ 2)] at hh
+  convert hh using 1 <;> ring
+
 end Legendre.Tests

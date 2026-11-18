@@ -43,6 +43,9 @@ source, commit, source filename, license and local changes in its header.
 | `LargeValuesS3Refined.lean` | `CubicThreeTailRefined.lean` | Actual normalized R-square Schwartz source, complete reflected centers and selected-block Proposition10.1 |
 | `LargeValuesEnergy.lean` | `EnergyDecomposition.lean` | Coefficient-preserving reflection, difference-bin energy, exact gcd decomposition and small/large-gcd slices |
 | `LargeValuesEnergyFinal.lean` | `EnergyFinal.lean` | Natural-division endpoint correction, gcd summation, physical Propositions10.1/11.1/11.2; existing interval-cardinality lemma reused |
+| `LargeValuesFinal.lean` (smooth assembly and Section 12) | `SmoothAssembly.lean` | Diagonal cancellation, root inequalities, separated sample selection and full-height smooth Proposition 3.1 |
+| `LargeValuesFinal.lean` (complementary ranges and final assembly), `Statements.lean` (Theorem 1.1 interfaces) | `LargeValueAssembly.lean` | Exact localization and three complementary ranges; positive- and negative-phase half-open block forms |
+| `../PublicationContract.lean` (Theorem 1.1 only) | `PublishedLargeValues.lean` | Closed interval sum and support-only coefficient bound, including the small-threshold case |
 
 `CubicRemainder.lean` is a local assembly, not an additional source port. It
 bounds the actual cubic trace minus its diagonal main term and S2/S3 by
@@ -119,14 +122,13 @@ and recovers the strict-energy S3 estimate up to an absolute constant.
 The finite matrix bounds need no ordinate separation; a future analytic
 large-value estimate must retain its additional separation and height conditions.
 
-Twenty-nine destination modules are adapted (including the local energy-tolerance extension), with one additional local assembly.
+Thirty-two destination modules are adapted (including the local energy-tolerance extension), with two additional Apache-2.0 modules.
 The larger candidate analytic dependency chain stays outside the repository.
 The first-trace, one-tail, complete quantitative reflection and S2 off-diagonal
 estimates are now proved. Heath--Brown’s actual Dirichlet-polynomial difference-set mean square is also
 proved. The complete Poisson-tail moment and S2 assembly are now proved, together
 with the Proposition8.1 S3 energy input. The affine/height-family and gcd-energy
-chain now proves Propositions9.1,10.1,11.1 and11.2. Final large-values assembly,
-central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
+chain now proves Propositions9.1,10.1,11.1 and11.2. Theorem 1.1 is now proved. Central density and prime-gap transmission remain open. See [the precise new scope](layer4-guth-poisson-trace.md).
 
 Initial five-module sampling-trace validation (2026-11-15): all five ported modules and their
 consumers compile from source under Lean 4.35.0 (commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc).
@@ -204,3 +206,13 @@ bound with central density. All 29 adapted modules retain the exact source pin
 and MIT-0 metadata; the license blob is unchanged. The seven new original
 source blobs match the pinned Git tree. Both READMEs retain the same five
 prominent numbered repository headings and individual default-open details.
+
+
+For Theorem 1.1, the Lean 4.35.0 port reuses the existing spectral moments,
+weighted separated representatives, cutoff localization, and the bound
+`|W| ≤ 2T`. It specializes the local weighted selection to unit weights
+after rescaling, and proves translation directly on finite images.
+`ClassicalAdapter.lean` derives the minimum of the two classical branches
+from `SamplingMeanSquare` and `HalaszTwoTermCount` without porting another
+classical detector. The publication bridge adapts the fixed-pinned
+`PublicationContract.lean` in the parent directory of the analytic sources.
