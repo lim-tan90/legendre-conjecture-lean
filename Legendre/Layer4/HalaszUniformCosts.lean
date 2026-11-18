@@ -78,19 +78,28 @@ theorem halasz_uniform_cover (X : ℕ) (hX : 1 ≤ X) (T : ℝ) (hT : 2 ≤ T)
   have hh := hJlog.trans (mul_le_mul_of_nonneg_left hl (show 0 ≤ 2/Real.log 2 by positivity))
   convert hh using 1 <;> unfold halaszUniformCoverConstant <;> ring
 
-theorem halasz_uniform_kernel_cost (σ Y : ℝ) (hσ : 3/4 ≤ σ) (hY : 1 ≤ Y) :
-    (256*Y^(1/2-σ)/(σ-1/2))^4 ≤ (1024 : ℝ)^4*Y^(2-4*σ) := by
-  have hgap : 0 < σ-1/2 := by linarith
+/-- Uniform critical-integral cost once the gap to the critical line is bounded below. -/
+theorem halasz_uniform_kernel_cost_of_gap (σ Y d : ℝ) (hd : 0 < d)
+    (hσ : d ≤ σ-1/2) (hY : 1 ≤ Y) :
+    (256*Y^(1/2-σ)/(σ-1/2))^4 ≤ (256/d)^4*Y^(2-4*σ) := by
   have hYp : 0 < Y := by linarith
-  have hh : 256*Y^(1/2-σ)/(σ-1/2) ≤ 1024*Y^(1/2-σ) := by
-    apply (div_le_iff₀ hgap).mpr
-    have hn := Real.rpow_nonneg hYp.le (1/2-σ)
-    nlinarith
+  have hgap : 0 < σ-1/2 := hd.trans_le hσ
+  have hh : 256*Y^(1/2-σ)/(σ-1/2) ≤ (256/d)*Y^(1/2-σ) := by
+    calc
+      _ ≤ (256*Y^(1/2-σ))/d :=
+        div_le_div_of_nonneg_left (by positivity) hd hσ
+      _ = _ := by ring
   have hpow := pow_le_pow_left₀ (by positivity) hh 4
   have he : (Y^(1/2-σ))^4 = Y^(2-4*σ) := by
     rw [←Real.rpow_natCast,←Real.rpow_mul hYp.le]
-    congr 1; ring
+    congr 1
+    ring
   simpa only [mul_pow,he] using hpow
+
+theorem halasz_uniform_kernel_cost (σ Y : ℝ) (hσ : 3/4 ≤ σ) (hY : 1 ≤ Y) :
+    (256*Y^(1/2-σ)/(σ-1/2))^4 ≤ (1024 : ℝ)^4*Y^(2-4*σ) := by
+  have h := halasz_uniform_kernel_cost_of_gap σ Y (1/4) (by norm_num) (by linarith) hY
+  simpa only [show (256/(1/4) : ℝ) = 1024 by norm_num] using h
 
 theorem halasz_uniform_fractional_cost (X : ℕ) (hX : 1 ≤ X) (T : ℝ) (hT : 2 ≤ T)
     (hX2 : (X : ℝ) ≤ 2*T) :

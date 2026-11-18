@@ -565,7 +565,7 @@ coefficient uniform on sigma∈[1/2,1], every T>=2 and analytic multiplicities.
 `layer4_huxley_comparator` closes the independent `Huxley1972Density` target.
 Both actual detector branches at Y=T, the epsilon-sized transition band,
 height covers and multiplicity selection are proved. No open analytic input
-is assumed. Guth–Maynard and the sharp log^4 moment remain open; prime-gap
+is assumed. The sharp log^4 moment remains open; prime-gap
 transmission stays in Layer 5. See [the full proof](layer4-full-curved-huxley.md).
 
 **Guth–Maynard outer ranges (2026-11-15).** The target exponent is now
@@ -630,8 +630,14 @@ smccolm/Lean MIT-0 entry. See [scope and formulas](layer4-guth-affine-energy.md)
 
 **Guth–Maynard Theorem 1.1 (2026-11-18).** The literal closed-interval
 large-values estimate is proved with all three terms and the coefficient
-bound on the support. The middle zero-density range still requires the
-Section 13 transfer. See [statement and proof scope](layer4-guth-large-values.md).
+bound on the support. The next milestone supplies the Section 13 transfer. See [statement and proof scope](layer4-guth-large-values.md).
+
+**Guth–Maynard Theorem 1.2 (2026-11-18).** The actual compact detector
+and Section 13 powering yield the central interval. The combined curve is
+proved on [1/2,1] uniformly for all T≥2 with analytic multiplicities, and
+combining with Ingham proves the global 30/13 density coefficient.
+The sharp fourth-moment logarithm remains open.
+[Proof scope](layer4-guth-central-density.md).
 
 **Acceptance criteria.**
 

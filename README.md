@@ -169,15 +169,15 @@ actual detector branches, an ε-sized transition band at `5/6`, the height
 cover and multiplicity selection. [Proof and exact scope](docs/layer4-full-curved-huxley.md).
 
 **The Layer 4 roadmap acceptance requirements are fulfilled.** The full
-curved Huxley exponent is now proved. Guth–Maynard and the sharp
-fourth-moment `log^4` remain explicit open targets. The Layer 5 Huxley
+curved Huxley exponent is now proved. The sharp fourth-moment `log^4`
+remains an explicit open target. The Layer 5 Huxley
 `7/12+ε` prime-gap proof remains a separate obligation.
 
 **Guth–Maynard outer ranges (2026-11-15):** the target exponent
 `15(1−σ)/(3+5σ)+ε` is proved on **[1/2,7/10] ∪ [4/5,1]**, with one
 coefficient for every T≥2 and all analytic multiplicities. The independent
-outer comparator is closed; the full target is equivalent to the explicitly
-open central input on **(7/10,4/5)**. At σ=3/4, its `5/9` target is strictly
+outer comparator is closed; the central interval **(7/10,4/5)** is covered by
+the subsequent full proof below. At σ=3/4, its `5/9` target is strictly
 stronger than the classical `3/5` bound. [Exact reduction](docs/layer4-guth-maynard-range.md).
 
 **Finite Guth–Maynard sampling (2026-11-15):** actual matrix samples now
@@ -185,8 +185,7 @@ satisfy `R³V⁶ ≤ E³(4D+8N³)`, where E is the actual coefficient energy and
 D is the centered cubic Gram trace. The independent
 `layer4_guth_sampling_trace_comparator` is closed. The original five source modules
 are adapted to **Lean 4.35.0**, with exact sources and MIT-0 license recorded
-in the reuse section below. Analytic off-diagonal estimates and the central
-Guth–Maynard density target remain open.
+in the reuse section below. Subsequent steps below prove the analytic estimates and full density theorem.
 [Proof and scope](docs/layer4-guth-sampling-trace.md).
 
 **Guth–Maynard Poisson/cubic trace (2026-11-15):** the exact Poisson
@@ -195,8 +194,7 @@ and cubic `S₁/S₂/S₃` split are proved. Under `N≤T≤N²` and the source
 `T^ε` separation in `[0,T]`, the actual cubic trace differs from
 `N³ R (∫w²)³+S₂+S₃` by `Oε(T⁻¹⁰)`. Five independent comparators are
 closed. Twelve adapted source modules compile under **Lean 4.35.0**, alongside
-one local assembly; source #5 below records the exact mapping. The S₂/S₃
-bounds and central density remain open. Complete-frequency quantitative
+one local assembly; source #5 below records the exact mapping. The S₂/S₃ bounds and the full density theorem follow in the later steps below. Complete-frequency quantitative
 reflection and the negligible S₂ off-diagonal estimate are also proved;
 the actual cubic trace now leaves only its ordered tail moment and S₃.
 [Exact statements and limits](docs/layer4-guth-poisson-trace.md).
@@ -207,8 +205,7 @@ ordered-pair polynomial now satisfies
 The independent literal comparator is closed, with arbitrary unit-bounded
 coefficients, one-separated W in `[0,T]` and one constant/threshold before
 all scales. Eighteen source modules are adapted to **Lean 4.35.0**; source
-#5 below records each file. The complete Poisson-tail/S₂ assembly is now proved below; stronger S₃
-refinements and central density remain open.
+#5 below records each file. The complete Poisson-tail/S₂ assembly is now proved below; the later steps prove the stronger S₃ refinements and full density.
 [Proof and scope](docs/layer4-heath-brown-difference.md).
 
 **Complete S₂ and S₃ energy input (2026-11-17):** Proposition 6.1 is
@@ -218,7 +215,7 @@ separation are retained. Proposition 8.1's S₃ energy bound is proved on
 `T^(2/3)≤N≤T`, including the `T⁻⁹⁰` remainder. A local proof shows
 `E_<1≤E_≤1≤3E_<1`, recovering the paper's strict energy convention up to
 an absolute constant. Four independent comparators are closed. Subsequent
-affine/energy refinements are proved below; central density remains open.
+affine/energy refinements and the full density theorem are proved below.
 [Exact statements and boundary checks](docs/layer4-guth-s2-s3.md).
 
 **Affine iteration and S₃/energy refinement (2026-11-17):** Proposition9.1
@@ -229,7 +226,7 @@ normalized smoothed R² source satisfies its profile. Physical Proposition10.1 g
 Proposition11.1 bounds the actual large-value set's energy, and its substitution
 proves the four-term S₃ Proposition11.2. Five new independent comparators retain
 coefficients, separation, scale windows, energy tolerance and remainder.
-The central-density transfer remains open. All seven
+All seven
 ported modules compile under **Lean 4.35.0**; exact sources are grouped under
 **#5 smccolm/Lean** below. [Formulas, uniformity and sources](docs/layer4-guth-affine-energy.md).
 Eight new consumers check signed scaling, translated boundary energy, zero source,
@@ -245,9 +242,20 @@ bounds on that support and one-separated ordinates in `[0,T]`. For every
 `R ≪ε T^ε(N²/V² + N^(18/5)/V⁴ + T N^(12/5)/V⁴)`.
 The proof combines Section 12 with the complementary Montgomery and Halász
 ranges and accounts for the left endpoint separately. The independent
-comparator expands the sum and its hypotheses. The central zero-density
-transfer on `(7/10,4/5)` remains open.
+comparator expands the sum and its hypotheses.
 [Statement and proof scope](docs/layer4-guth-large-values.md).
+
+**Guth–Maynard zero density (2026-11-18).** Theorem 1.2 now holds with
+one constant for every `σ ∈ [1/2,1]` and `T ≥ 2`, counting analytic
+multiplicities:
+`N(σ,T) ≪ε T^(15(1−σ)/(3+5σ)+ε)`.
+The central proof uses the actual compact zero detector, Section 13
+power selection and the proved large-values bound. At `σ=3/4` it gives
+the exponent `5/9+ε`. Combining the curve with Ingham also gives the
+uniform `(30/13)(1−σ)+ε` exponent.
+[Proof and precise scope](docs/layer4-guth-central-density.md).
+
+Current validation (2026-11-18) covers **4,375 build jobs**, **8,487 audited theorem declarations**, **362 Lean files** and **220 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -607,14 +615,11 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
-**Repository status (2026-11-15).** Layer 3's classical PNT and Layer 4's
-Ingham 1940, global Huxley `12/5` and **full curved Huxley density exponent**
-are proved. The full curve is uniform on σ∈[1/2,1], for every T≥2, with
-analytic multiplicities and arbitrary positive ε. Guth–Maynard density and
-the sharp `log^4` fourth moment remain open. The Guth–Maynard outer ranges
-[1/2,7/10] and [4/5,1] are proved; its remaining input is exactly the open
-interval (7/10,4/5). The actual finite sampling matrix and cubic trace
-dispersion stage are also proved; its analytic trace bounds remain open.
+**Repository status (2026-11-18).** Layer 3's classical PNT, Ingham 1940,
+the full curved Huxley and Guth–Maynard zero-density bounds, and the
+combined global `30/13` density bound are proved. The curves are uniform
+on σ∈[1/2,1] for every T≥2 with analytic multiplicities and arbitrary
+positive ε. The sharp `log^4` fourth moment remains open.
 The nine historical
 short-interval exponent results below still have statement-level
 formalizations only: these analytic density results do not yet close the
@@ -668,14 +673,15 @@ The completed analytic milestones supporting this program are:
 
 | Analytic milestone | Current proved estimate | Lean proof and scope |
 |---|---|---|
-| Guth–Maynard finite sampling/trace interface (Layer 4) | `R³V⁶ ≤ E³(4D+8N³)`, D the centered cubic Gram trace | **✅ Proved**: [sampling dispersion](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) and closed independent comparator. Actual polynomials, arbitrary coefficient energy; finite matrix stage only. Analytic trace estimates and central density remain open. |
-| Guth–Maynard Poisson/cubic trace (Layer 4) | `trace(G³)=N³R(∫w²)³+S₂+S₃+Oε(T⁻¹⁰)` | **✅ Proved**: [Poisson and cubic estimates](docs/layer4-guth-poisson-trace.md), five closed comparators; `N≤T≤N²`, `T^ε` separation in `[0,T]`. S₂/S₃ bounds are now proved below; central density remains open. |
-| Heath–Brown difference-set input (Layer 4) | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ Proved**: [actual ordered-pair mean square](docs/layer4-heath-brown-difference.md), closed literal comparator; arbitrary unit-bounded coefficients and source separation/height conditions. Poisson-tail/S₂ assembly is now proved below; central density remains open. |
+| Guth–Maynard finite sampling/trace interface (Layer 4) | `R³V⁶ ≤ E³(4D+8N³)`, D the centered cubic Gram trace | **✅ Proved**: [sampling dispersion](Legendre/Layer4/GuthMaynard/SamplingDispersion.lean) and closed independent comparator. Actual polynomials, arbitrary coefficient energy; finite matrix stage only. The analytic trace estimates and density theorem are recorded below. |
+| Guth–Maynard Poisson/cubic trace (Layer 4) | `trace(G³)=N³R(∫w²)³+S₂+S₃+Oε(T⁻¹⁰)` | **✅ Proved**: [Poisson and cubic estimates](docs/layer4-guth-poisson-trace.md), five closed comparators; `N≤T≤N²`, `T^ε` separation in `[0,T]`. The S₂/S₃ bounds and density theorem are recorded below. |
+| Heath–Brown difference-set input (Layer 4) | `T^ε(R²N+RN²+R^(5/4)T^(1/2)N)` | **✅ Proved**: [actual ordered-pair mean square](docs/layer4-heath-brown-difference.md), closed literal comparator; arbitrary unit-bounded coefficients and source separation/height conditions. The Poisson-tail/S₂ assembly is proved below. |
 | Complete Guth–Maynard S₂ (Layer 4) | `T^ε(N²R²+TNR^(2−1/k)+N²R^(2−3/(4k))T^(1/(2k)))` | **✅ Proved**: [Proposition6.1 and literal complete tail moment](docs/layer4-guth-s2-s3.md), k≥1 and source separation/height conditions. |
-| Guth–Maynard S₃ energy input (Layer 4) | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ Proved**: [Proposition8.1](docs/layer4-guth-s2-s3.md), `T^(2/3)≤N≤T`; strict-energy convention recovered by a factor-three bridge. Sharper energy/affine refinement is proved below; central density remains open. |
-| Guth–Maynard affine/energy refinement (Layer 4) | Propositions9.1,10.1,11.1,11.2 | **✅ Proved**: [literal affine integral, uniform height family and four-term S₃ bound](docs/layer4-guth-affine-energy.md), five independent comparators; all scale/coefficient conditions and remainder retained. The central density transfer remains open. |
+| Guth–Maynard S₃ energy input (Layer 4) | `T^(2+ε)√R√E + O(T⁻⁹⁰)` | **✅ Proved**: [Proposition8.1](docs/layer4-guth-s2-s3.md), `T^(2/3)≤N≤T`; strict-energy convention recovered by a factor-three bridge. See the sharper energy/affine refinement below. |
+| Guth–Maynard affine/energy refinement (Layer 4) | Propositions9.1,10.1,11.1,11.2 | **✅ Proved**: [literal affine integral, uniform height family and four-term S₃ bound](docs/layer4-guth-affine-energy.md), five independent comparators; all scale/coefficient conditions and remainder retained. |
 | Guth–Maynard large values (Layer 4) | `T^ε(N²/V² + N^(18/5)/V⁴ + T N^(12/5)/V⁴)` | **✅ Proved**: [Theorem 1.1](docs/layer4-guth-large-values.md) with the literal closed sum, unit coefficient bounds on its support and one-separated samples. |
-| Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. The middle interval (7/10,4/5) and the full target remain open. |
+| Guth–Maynard outer density ranges (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,7/10] ∪ [4/5,1] | **✅ Proved**: [`guth_maynard_outer_density_epsilon`](Legendre/Layer4/GuthMaynardOuterRange.lean), closed outer comparator; uniform coefficient, all T≥2 and multiplicities. Combined with the central estimate below. |
+| Guth–Maynard full density (Layer 4) | `N(σ,T) ≪_ε T^(15(1−σ)/(3+5σ)+ε)` on [1/2,1]; combined global coefficient `30/13` | **✅ Proved**: [Theorem 1.2 and the combined bound](docs/layer4-guth-central-density.md), with uniform constants, all T≥2 and analytic multiplicities. |
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
@@ -686,10 +692,10 @@ The completed analytic milestones supporting this program are:
 | Actual Halasz analytic input (Layer 4) | Dyadic correlation `≪ sqrt(abs(t))+U/abs(t)`; energy with an explicit `R sqrt(T)` term, including mixed real parts | **✅ Proved**: [`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean). Interval subdivision, the two-term large-value count and improved actual Möbius/critical-mass moments are proved; the full curved Huxley exponent is now proved. |
 | Analytic large values and actual mollifier moments (Layer 4) | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`; improved `R^(2/3)(AT)^(1/3)` term in the actual Möbius second moment | **✅ Proved**: closed [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean), [weighted mollifier moment](Legendre/Layer4/HalaszMollifierMoment.lean) and [actual critical-mass moment](Legendre/Layer4/HalaszCriticalMass.lean). Global 12/5 is now proved; the full curved Huxley exponent is now proved. |
 
-The **global `12/5` exponent is proved**. Huxley's stronger curved density
-estimate and the Guth–Maynard density estimate remain **open**; the older
-conditional comparison bridges still require those stronger inputs. The new
-`layer4_huxley_global_comparator` is unconditional.
+The global `12/5` exponent and Huxley's full curve are proved. The
+Guth–Maynard curve and its combination with Ingham give the stronger
+global `30/13` bound.
+
 
 ## What is actually verified in Lean
 
@@ -756,7 +762,7 @@ conditional comparison bridges still require those stronger inputs. The new
 | `Legendre.Zeta.huxley_curved_density_epsilon` / `Literature.layer4_huxley_comparator` | Full curved exponent `3(1−σ)/(3σ−1)+ε`, uniform σ∈[1/2,1], all T≥2 and analytic multiplicities | **proved**; prime-gap transmission is separate | [Layer4/HuxleyFullDensity.lean](Legendre/Layer4/HuxleyFullDensity.lean) |
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 curved density, `3(1−σ)/(2−σ)+ε`, with all analytic multiplicities | **proved**, uniform σ∈[1/2,1], all T≥2; not the 1937 prime-gap theorem | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | Whole-line weighted moments, separated critical-mass fourth power and integral-branch cubic count | **proved**, actual integrals; both branches now yield Ingham density | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
-| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` and Guth–Maynard density remain open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_six` / `zeta_fourth_moment_epsilon` | Actual critical-line fourth moment `O(T log^6 T)` on `[-T,T]`, and height exponent `1+ε` on `[0,T]` | **proved**, for all `T≥2`; sharp `log^4` remains open | [Layer4/ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 
 Each row links directly to the exact declaration in the GitHub source; click the
 `Lnn` anchor to jump to that line.
@@ -824,7 +830,7 @@ This table is the roadmap, not a claim that the work is done.
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
-| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **roadmap acceptance complete**: Ingham 1940 and global Huxley `12/5` proved, with actual large-value input; full curved Huxley is proved; Guth–Maynard and sharp `log^4` remain explicit open targets; [scope](docs/layer4-huxley-density.md) |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **roadmap acceptance complete**: Ingham 1940 and global Huxley `12/5` proved, with actual large-value input; full curved Huxley, Guth–Maynard and global `30/13` are proved; sharp `log^4` remains open; [scope](docs/layer4-guth-central-density.md) |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: normalized exponent `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
@@ -1268,8 +1274,8 @@ mathlib proof is copied into this repository.
 
 - **Pinned commit:** `4c8fb7f7816508825089230e3730b69165e5e303`
 - **License:** MIT-0 — [retained license](licenses/smccolm-Lean-MIT-0.txt)
-- **Local paths:** Thirty-two adapted modules and two local modules in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
-- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all thirty-two adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit; S₂/S₃ also normalize finite filters, product measures, measurable functions and Holder factors
+- **Local paths:** Thirty-five adapted modules and six local modules in [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)
+- **Adaptation and verification:** Module visibility, complex conjugation, real embeddings and finite-type cardinality; all thirty-five adapted modules compile from source under Lean 4.35.0; Poisson/reflection adaptations make Schwartz coercions, Fourier indices, integral conjugation, derivatives and casts explicit; S₂/S₃ also normalize finite filters, product measures, measurable functions and Holder factors
 
 #### Detailed provenance and file mapping
 
@@ -1312,7 +1318,7 @@ this same source: `LargeValuesLanguage` → `AffineLanguage.lean`;
 Adaptations explicitly normalize real/complex scalars, Schwartz functions,
 Fourier indices, product measures, Holder exponents and finite telescoping;
 existing mean-square, finite-sum Cauchy--Schwarz, floor injectivity and log-power
-absorption proofs are reused. All thirty-two adapted
+absorption proofs are reused. All thirty-five adapted
 modules, including that local extension, are
 compiled from source under **Lean 4.35.0**. First-trace and one-tail analytic
 estimates, complete quantitative reflection and S₂ off-diagonal decay are now
@@ -1320,15 +1326,21 @@ proved. The actual Heath–Brown Dirichlet-polynomial difference-set mean square
 also proved. The complete Poisson-tail moment/S₂ assembly and Proposition8.1 S₃
 energy input are now proved. Affine Proposition9.1, physical Proposition10.1,
 energy Proposition11.1 and substituted S3 Proposition11.2 are also proved;
-the literal Theorem 1.1 is now proved. The central density transfer remains
-open. Selected portions of `GuthMaynard/LargeValuesFinal.lean` supply
+the literal Theorem 1.1 and the full Theorem 1.2 are now proved. Selected portions of `GuthMaynard/LargeValuesFinal.lean` supply
 `SmoothAssembly.lean` and `LargeValueAssembly.lean` (the latter also uses
 the Theorem 1.1 interfaces from `GuthMaynard/Statements.lean`).
 `PublicationContract.lean` supplies the Theorem 1.1 proof in
 `PublishedLargeValues.lean`. Lean 4.35.0 adaptations reuse local weighted
 selection, first spectral moments and the separated cardinality bound.
 `ClassicalAdapter.lean` derives the classical complement from existing local
-Montgomery and Halász proofs. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
+Montgomery and Halász proofs. For Section 13, `ExponentArithmetic.lean`
+and `CentralTypeI.lean` supply `Section13Exponent.lean`; selected dyadic
+helpers from `Pigeonhole.lean`, `PolynomialPowers.lean` and
+`CentralTypeI.lean` supply `Section13Powering.lean`.
+`FiniteDensityTransfer.lean` and `BetaDependence.lean` supply the
+finite-polynomial localization in `FixedLineLocalization.lean`.
+The local compact detector, separated sampling and zero multiplicity
+proofs complete the transfer. [Exact file mapping and adaptations](docs/smccolm-guth-provenance.md).
 
 </details>
 
@@ -1342,10 +1354,10 @@ mathematical statements, and links to the publishers/arXiv. Original contributio
 released under Apache-2.0. Files under `Legendre/Nagura/` are adapted from the MIT-licensed project
 <https://github.com/ShouqiaoW/erdos> (commit
 `d28713ac8245ca86a686b8c67370a8d19d81b242`); their original MIT license is
-retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The thirty-two
+retained in [`Legendre/Nagura/LICENSE`](Legendre/Nagura/LICENSE). The thirty-five
 adapted smccolm/Lean modules under `Legendre/Layer4/GuthMaynard/` retain
 MIT-0 headers and the [upstream license](licenses/smccolm-Lean-MIT-0.txt);
-the local `CubicRemainder.lean` and `ClassicalAdapter.lean` are Apache-2.0.
+locally authored modules in that directory retain Apache-2.0 headers.
 
 ## References
 

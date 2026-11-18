@@ -29,9 +29,8 @@ The exact source files and mapping appear in both READMEs and the provenance
 table. The three adapted modules compile from source under Lean 4.35.0.
 [Provenance and adaptations](smccolm-guth-provenance.md)
 
-Theorem 1.2 still needs the Section 13 transfer from Dirichlet polynomial
-large values to zeta zero counts in the central interval `(7/10,4/5)`.
-The existing outer ranges cover the other real parts.
+The subsequent Section 13 transfer proves the full zero-density estimate.
+[Theorem 1.2](layer4-guth-central-density.md).
 
 The local checkpoint built all 4,366 jobs and audited all 8,398 theorem
 declarations. Module data, environment ownership, audit targets and kernel

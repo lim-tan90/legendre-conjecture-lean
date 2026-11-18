@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940, global Huxley 12/5 and the full curved Huxley exponent proved, uniformly in sigma, with all heights and analytic multiplicities; sharp log^4 and Guth–Maynard remain open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940, global Huxley 12/5 and the full curved Huxley exponent proved, uniformly in sigma, with all heights and analytic multiplicities; the Guth–Maynard curve and combined global 30/13 are now proved; sharp log^4 remains open |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -445,3 +445,14 @@ remain explicit, as does the T^-90 error. Source closed energy is a literal
 quadruple filter; its relation to the paper's strict energy is already proved.
 The final large-values and central density assembly remain open.
 See [exact formulas and scope](layer4-guth-affine-energy.md).
+
+
+## Guth–Maynard Theorems 1.1 and 1.2 (2026-11-18)
+
+The literal closed-sum large-values comparator, central and full uniform
+zero-density comparators, and the combined global `30/13` comparator are closed.
+They retain the actual support and sample conditions for Theorem 1.1 and
+analytic multiplicities, a uniform constant, and all heights `T ≥ 2` for
+Theorem 1.2. The independent central consumer specializes to `σ=3/4`,
+where the exponent is `5/9+ε`.
+[Proof scope](layer4-guth-central-density.md).

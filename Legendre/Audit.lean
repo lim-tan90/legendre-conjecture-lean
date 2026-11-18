@@ -500,6 +500,13 @@ import all Legendre.Layer4.GuthMaynard.ClassicalAdapter
 import all Legendre.Layer4.GuthMaynard.SmoothAssembly
 import all Legendre.Layer4.GuthMaynard.LargeValueAssembly
 import all Legendre.Layer4.GuthMaynard.PublishedLargeValues
+import all Legendre.Layer4.GuthMaynard.Section13Exponent
+import all Legendre.Layer4.GuthMaynard.Section13Powering
+import all Legendre.Layer4.GuthMaynard.FixedLineLocalization
+import all Legendre.Layer4.GuthMaynard.ShiftedSamples
+import all Legendre.Layer4.GuthMaynard.ActualTypeI
+import all Legendre.Layer4.GuthMaynard.CentralShell
+import all Legendre.Layer4.GuthMaynard.CentralDensity
 import all Legendre.Layer4.Arithmetic.PoweredBlockDecomposition
 import all Legendre.Layer4.HuxleyHeightDensity
 import all Legendre.Layer4.HuxleyParameters
@@ -9054,3 +9061,94 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_closed_left_endpoint_consumer._simp_1_4"
+
+-- Guth–Maynard central transfer and the uniform zero-density estimates.
+#print axioms Legendre.Density.GuthMaynard.alpha._proof_1
+#print axioms Legendre.Density.GuthMaynard.alpha._proof_2
+#print axioms Legendre.Density.GuthMaynard.alpha._proof_3
+#print axioms Legendre.Density.GuthMaynard.alpha._proof_4
+#print axioms Legendre.Density.GuthMaynard.alpha._proof_5
+#print axioms Legendre.Density.GuthMaynard.alpha_pos
+#print axioms Legendre.Density.GuthMaynard.central_denominators_pos
+#print axioms Legendre.Density.GuthMaynard.denom_pos
+#print axioms Legendre.Density.GuthMaynard.differentiable_finiteDirichletSeries_add
+#print axioms Legendre.Density.GuthMaynard.dyadic_block_subset_powered_support
+#print axioms Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset
+#print axioms Legendre.Density.GuthMaynard.exists_large_dyadic_block
+#print axioms Legendre.Density.GuthMaynard.exists_nearby_large_value_finiteDirichlet
+#print axioms Legendre.Density.GuthMaynard.final_exponent_nonneg
+#print axioms Legendre.Density.GuthMaynard.first_term_exponent_identity
+#print axioms Legendre.Density.GuthMaynard.gm_actual_typeI_count
+#print axioms Legendre.Density.GuthMaynard.gm_central_separated_high_count
+#print axioms Legendre.Density.GuthMaynard.gm_central_separated_shell_count
+#print axioms Legendre.Density.GuthMaynard.gm_residual_with_cutoff_le
+#print axioms Legendre.Density.GuthMaynard.gm_section13_fixed_line_count
+#print axioms Legendre.Density.GuthMaynard.gm_section13_selected_block_count
+#print axioms Legendre.Density.GuthMaynard.gm_section13_varying_line_count
+#print axioms Legendre.Density.GuthMaynard.k_selection
+#print axioms Legendre.Density.GuthMaynard.large_values_first_term_le
+#print axioms Legendre.Density.GuthMaynard.large_values_second_term_le
+#print axioms Legendre.Density.GuthMaynard.large_values_terms_le
+#print axioms Legendre.Density.GuthMaynard.large_values_third_term_le
+#print axioms Legendre.Density.GuthMaynard.localizedFiniteDirichlet.eq_1
+#print axioms Legendre.Density.GuthMaynard.localizedFiniteDirichlet_halfPlane_bound
+#print axioms Legendre.Density.GuthMaynard.localizedFiniteDirichlet_le_mass
+#print axioms Legendre.Density.GuthMaynard.localizer_factor_gt_three_fourths
+#print axioms Legendre.Density.GuthMaynard.localizer_norm_boundary_le
+#print axioms Legendre.Density.GuthMaynard.localizer_norm_le_one
+#print axioms Legendre.Density.GuthMaynard.mean_value_exponent_le
+#print axioms Legendre.Density.GuthMaynard.mean_value_height_term_le
+#print axioms Legendre.Density.GuthMaynard.mean_value_terms_le
+#print axioms Legendre.Density.GuthMaynard.norm_finiteDirichletSeries_le_mass
+#print axioms Legendre.Density.GuthMaynard.residual_exponent_le_final
+#print axioms Legendre.Density.GuthMaynard.second_term_exponent_identity
+#print axioms Legendre.Density.GuthMaynard.selected_block_large_value_terms_le
+#print axioms Legendre.Density.GuthMaynard.selected_block_mean_value_terms_le
+#print axioms Legendre.Density.GuthMaynard.shifted_separated_image
+#print axioms Legendre.Density.GuthMaynard.third_term_exponent_identity
+#print axioms Legendre.Density.Moment.actual_typeII_given_cutoff_count_central
+#print axioms Legendre.Density.Moment.halasz_uniform_kernel_cost_of_gap
+#print axioms Legendre.Density.Moment.integral_alternative_small_cutoff_epsilon_central
+#print axioms Legendre.Density.Moment.integral_alternative_sqrt_height_count_central
+#print axioms Legendre.Literature.layer4_guth_central_comparator
+#print axioms Legendre.Literature.layer4_guth_density_comparator
+#print axioms Legendre.Literature.layer4_guth_global_30_13_comparator
+#print axioms Legendre.Zeta.guth_maynard_central_density_epsilon
+#print axioms Legendre.Zeta.guth_maynard_density_epsilon
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.first_term_exponent_identity._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.mean_value_exponent_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Exponent.0.Legendre.Density.GuthMaynard.second_term_exponent_identity._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.dyadic_block_subset_powered_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.dyadic_block_subset_powered_support._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.dyadic_block_subset_powered_support._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.exists_dyadic_block_and_subset._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.gm_section13_fixed_line_count._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.gm_section13_fixed_line_count._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.gm_section13_fixed_line_count._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.pigeonhole_real_sum"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_central_three_quarters_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_central_three_quarters_consumer._simp_1_1"

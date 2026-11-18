@@ -173,6 +173,13 @@ public import Legendre.Layer4.GuthMaynard.ClassicalAdapter
 public import Legendre.Layer4.GuthMaynard.SmoothAssembly
 public import Legendre.Layer4.GuthMaynard.LargeValueAssembly
 public import Legendre.Layer4.GuthMaynard.PublishedLargeValues
+public import Legendre.Layer4.GuthMaynard.Section13Exponent
+public import Legendre.Layer4.GuthMaynard.Section13Powering
+public import Legendre.Layer4.GuthMaynard.FixedLineLocalization
+public import Legendre.Layer4.GuthMaynard.ShiftedSamples
+public import Legendre.Layer4.GuthMaynard.ActualTypeI
+public import Legendre.Layer4.GuthMaynard.CentralShell
+public import Legendre.Layer4.GuthMaynard.CentralDensity
 
 /-!
 # Layer 4: actual zero detection, Ingham density and global Huxley density

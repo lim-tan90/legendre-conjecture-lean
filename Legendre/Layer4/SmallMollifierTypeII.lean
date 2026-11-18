@@ -41,9 +41,9 @@ theorem small_integer_mollifier (T δ : ℝ) (hT : 2 ≤ T) (hδ : 0 ≤ δ) (h�
   exact ⟨X,hX,hxl,hxu,by linarith⟩
 
 /-- Actual zeros outside the polynomial branch satisfy the improved integral count. -/
-theorem actual_typeII_given_cutoff_count :
+theorem actual_typeII_given_cutoff_count_central :
     ∀ ε : ℝ, 0 < ε → ∃ C : ℝ, 0 < C ∧ ∀ δ T σ : ℝ,
-      0 ≤ δ → 128 ≤ T → 3/4 ≤ σ → ∀ X : ℕ, 1 ≤ X →
+      0 ≤ δ → 128 ≤ T → 7/10 ≤ σ → ∀ X : ℕ, 1 ≤ X →
       (X : ℝ) ≤ 2*T → (X : ℝ) ≤ 2*T^δ →
       ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
       (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
@@ -53,7 +53,7 @@ theorem actual_typeII_given_cutoff_count :
         ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
       (S.card : ℝ) ≤ C*T^(2-2*σ+4*δ+ε) := by
   intro ε hε
-  obtain ⟨C,hC,hcount⟩ := integral_alternative_small_cutoff_epsilon ε hε
+  obtain ⟨C,hC,hcount⟩ := integral_alternative_small_cutoff_epsilon_central ε hε
   refine ⟨C,hC,?_⟩
   intro δ T σ hδ hT hσ X hX hX2 hxu ι S β t ht hs hz hnot
   have hscale := sqrt_detector_scale T hT
@@ -76,6 +76,21 @@ theorem actual_typeII_given_cutoff_count :
   exact hcount δ T σ hδ (by linarith) hσ X hxu S β t
     (fun i hi => (ht i hi).2) hs
     (fun i hi => ⟨(hz i hi).1,(hz i hi).2.1⟩) hlarge
+
+theorem actual_typeII_given_cutoff_count :
+    ∀ ε : ℝ, 0 < ε → ∃ C : ℝ, 0 < C ∧ ∀ δ T σ : ℝ,
+      0 ≤ δ → 128 ≤ T → 3/4 ≤ σ → ∀ X : ℕ, 1 ≤ X →
+      (X : ℝ) ≤ 2*T → (X : ℝ) ≤ 2*T^δ →
+      ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (∀ i ∈ S, ¬(1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
+      (S.card : ℝ) ≤ C*T^(2-2*σ+4*δ+ε) := by
+  intro ε hε
+  obtain ⟨C,hC,h⟩ := actual_typeII_given_cutoff_count_central ε hε
+  exact ⟨C,hC,fun δ T σ hδ hT hσ => h δ T σ hδ hT (by linarith)⟩
 
 /-- The chosen cutoff works uniformly for every sigma and actual high zero family. -/
 theorem actual_typeII_small_mollifier_count :

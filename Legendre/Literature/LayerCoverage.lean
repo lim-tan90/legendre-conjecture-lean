@@ -383,7 +383,17 @@ theorem layer4_guth_published_large_values_comparator : GuthMaynardPublishedLarg
     publishedSourceDirichletPoly, publishedDyadicInterval, IsSeparated, InBaseInterval] using
     guthMaynardLargeValues_published_native
 
-/-- Exactly the open middle interval remains; an equivalence does not supply its input. -/
+/-- Guth–Maynard Theorem 1.2, with the same uniform epsilon and multiplicities. -/
+theorem layer4_guth_density_comparator : GuthMaynard2024Density :=
+  Zeta.guth_maynard_density_epsilon
+
+/-- The proved central estimate includes the two transition endpoints. -/
+theorem layer4_guth_central_comparator : GuthMaynard2024CentralDensity := by
+  intro ε hε
+  obtain ⟨C,hC,h⟩ := Zeta.guth_maynard_central_density_epsilon ε hε
+  exact ⟨C,hC,fun σ hσ T hT => h σ ⟨hσ.1.le,hσ.2.le⟩ T hT⟩
+
+/-- The outer-range proof gives the equivalence with the central estimate. -/
 theorem guthMaynard_density_iff_central :
     GuthMaynard2024Density ↔ GuthMaynard2024CentralDensity := by
   constructor
@@ -424,6 +434,10 @@ theorem guthMaynard_global_comparator (hi : Ingham1940Density)
     calc
       _ = (15/(3+5*σ))*(1-σ) := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_right hb hnonneg
+
+/-- Ingham and the proved Guth–Maynard curve give the global 30/13 estimate. -/
+theorem layer4_guth_global_30_13_comparator : Zeta.HasZeroDensityEstimate (30/13) :=
+  guthMaynard_global_comparator layer4_ingham_comparator layer4_guth_density_comparator
 
 /-- Cramer's conjectural logarithmic gap has every positive power as an upper bound. -/
 theorem cramer_positive_exponent {δ : ℝ} (hδ : 0 < δ) (h : CramerGapBound) :

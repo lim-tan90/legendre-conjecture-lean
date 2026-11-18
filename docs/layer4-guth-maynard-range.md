@@ -1,6 +1,8 @@
 # Guth--Maynard: proved outer ranges and the remaining input (2026-11-15)
 
-The full Guth--Maynard density benchmark remains open. The project's proved
+The full Guth–Maynard benchmark is now proved. [Central-range proof](layer4-guth-central-density.md).
+
+The earlier outer-range checkpoint is recorded below. The project's proved
 Ingham and full Huxley curves now give its exponent on both outer intervals:
 
 ```

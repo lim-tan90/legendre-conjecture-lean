@@ -1579,4 +1579,14 @@ theorem layer4_gm_closed_left_endpoint_consumer (ε : ℝ) (hε : 0 < ε) :
   norm_num [Real.rpow_neg_one, Real.rpow_neg (by norm_num : (0 : ℝ) ≤ 2)] at hh
   convert hh using 1 <;> ring
 
+/-- The central point genuinely uses the Guth–Maynard exponent 5/9. -/
+theorem layer4_gm_central_three_quarters_consumer (ε : ℝ) (hε : 0 < ε) :
+    ∃ C > 0, ∀ T ≥ (2 : ℝ),
+      (Zeta.zeroDensityCount (3/4) T : ℝ) ≤ C*T^(5/9+ε) := by
+  obtain ⟨C,hC,h⟩ := Zeta.guth_maynard_central_density_epsilon ε hε
+  exact ⟨C,hC,fun T hT => by
+    have hh := h (3/4) (by norm_num [Set.mem_Icc]) T hT
+    norm_num at hh ⊢
+    exact hh⟩
+
 end Legendre.Tests

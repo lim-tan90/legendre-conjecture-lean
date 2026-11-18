@@ -46,8 +46,8 @@ theorem integral_alternative_individual_fourth_count :
   convert hup using 1 <;> dsimp [K] <;> ring
 
 /-- At detector scale sqrt(T), a small mollifier produces the classical Type II exponent. -/
-theorem integral_alternative_sqrt_height_count :
-    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, ∀ T σ : ℝ, 2 ≤ T → 3/4 ≤ σ →
+theorem integral_alternative_sqrt_height_count_central :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, ∀ T σ : ℝ, 2 ≤ T → 7/10 ≤ σ →
       ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
@@ -55,11 +55,13 @@ theorem integral_alternative_sqrt_height_count :
         ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
       (S.card : ℝ) ≤ C*(X : ℝ)^4*T^(2-2*σ)*(Real.log T)^6 := by
   obtain ⟨C,hC,hcount⟩ := integral_alternative_individual_fourth_count
-  refine ⟨C*1024^4,by positivity,?_⟩
+  refine ⟨C*1280^4,by positivity,?_⟩
   intro X T σ hT hσ ι S β t ht hs hβ hw
   have hTp : 0 < T := by linarith
   have hY : 1 ≤ T^(1/2 : ℝ) := Real.one_le_rpow (by linarith) (by norm_num)
-  have hk := halasz_uniform_kernel_cost σ (T^(1/2 : ℝ)) hσ hY
+  have hk₀ := halasz_uniform_kernel_cost_of_gap σ (T^(1/2 : ℝ)) (1/5)
+    (by norm_num) (by linarith) hY
+  have hk := by simpa only [show (256/(1/5) : ℝ) = 1280 by norm_num] using hk₀
   have hc := hcount X T σ (T^(1/2 : ℝ)) hT (by linarith) hY S β t ht hs hβ hw
   have he : T*(T^(1/2 : ℝ))^(2-4*σ) = T^(2-2*σ) := by
     rw [←Real.rpow_mul hTp.le]
@@ -68,14 +70,25 @@ theorem integral_alternative_sqrt_height_count :
     congr 1; ring
   apply hc.trans
   calc
-    _ ≤ C*((1024 : ℝ)^4*(T^(1/2 : ℝ))^(2-4*σ))*(X : ℝ)^4*T*(Real.log T)^6 := by gcongr
-    _ = (C*1024^4)*(X : ℝ)^4*(T*(T^(1/2 : ℝ))^(2-4*σ))*(Real.log T)^6 := by ring
+    _ ≤ C*((1280 : ℝ)^4*(T^(1/2 : ℝ))^(2-4*σ))*(X : ℝ)^4*T*(Real.log T)^6 := by gcongr
+    _ = (C*1280^4)*(X : ℝ)^4*(T*(T^(1/2 : ℝ))^(2-4*σ))*(Real.log T)^6 := by ring
     _ = _ := by rw [he]
 
+theorem integral_alternative_sqrt_height_count :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, ∀ T σ : ℝ, 2 ≤ T → 3/4 ≤ σ →
+      ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
+      (S.card : ℝ) ≤ C*(X : ℝ)^4*T^(2-2*σ)*(Real.log T)^6 := by
+  obtain ⟨C,hC,h⟩ := integral_alternative_sqrt_height_count_central
+  exact ⟨C,hC,fun X T σ hT hσ => h X T σ hT (by linarith)⟩
+
 /-- All constants are uniform in sigma and in the small-cutoff exponent delta. -/
-theorem integral_alternative_small_cutoff_epsilon :
+theorem integral_alternative_small_cutoff_epsilon_central :
     ∀ ε : ℝ, 0 < ε → ∃ C : ℝ, 0 < C ∧ ∀ δ T σ : ℝ,
-      0 ≤ δ → 2 ≤ T → 3/4 ≤ σ → ∀ X : ℕ, (X : ℝ) ≤ 2*T^δ →
+      0 ≤ δ → 2 ≤ T → 7/10 ≤ σ → ∀ X : ℕ, (X : ℝ) ≤ 2*T^δ →
       ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
@@ -83,7 +96,7 @@ theorem integral_alternative_small_cutoff_epsilon :
         ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
       (S.card : ℝ) ≤ C*T^(2-2*σ+4*δ+ε) := by
   intro ε hε
-  obtain ⟨C,hC,hcount⟩ := integral_alternative_sqrt_height_count
+  obtain ⟨C,hC,hcount⟩ := integral_alternative_sqrt_height_count_central
   obtain ⟨D,hD,hlog⟩ := Zeta.exists_log_pow_le_rpow 6 hε
   refine ⟨16*C*D,by positivity,?_⟩
   intro δ T σ hδ hT hσ X hX ι S β t ht hs hβ hw
@@ -102,5 +115,18 @@ theorem integral_alternative_small_cutoff_epsilon :
       exact mul_le_mul (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hx4 hC.le)
         (by positivity)) (hlog T hT) (by positivity) (by positivity)
     _ = _ := by rw [Real.rpow_add hTp,Real.rpow_add hTp]; ring
+
+theorem integral_alternative_small_cutoff_epsilon :
+    ∀ ε : ℝ, 0 < ε → ∃ C : ℝ, 0 < C ∧ ∀ δ T σ : ℝ,
+      0 ≤ δ → 2 ≤ T → 3/4 ≤ σ → ∀ X : ℕ, (X : ℝ) ≤ 2*T^δ →
+      ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) (T^(1/2 : ℝ))‖) →
+      (S.card : ℝ) ≤ C*T^(2-2*σ+4*δ+ε) := by
+  intro ε hε
+  obtain ⟨C,hC,h⟩ := integral_alternative_small_cutoff_epsilon_central ε hε
+  exact ⟨C,hC,fun δ T σ hδ hT hσ => h δ T σ hδ hT (by linarith)⟩
 
 end Legendre.Density.Moment
