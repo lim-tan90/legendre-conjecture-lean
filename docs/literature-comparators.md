@@ -83,7 +83,7 @@ Paywalled originals are not described as directly verified.
 | 1 | Strict Bertrand and strict real Nagura, including the finite threshold | Closed proofs; both are linear-scale results, with different constants |
 | 2 | Analytic continuation, completed reflection, nonvanishing, explicit logarithmic zero-free region | Proved prerequisites for the analytic papers; not a short-interval power theorem |
 | 3 | Classical PNT error, prime-interval and explicit-formula infrastructure | Proved prerequisite; `x exp(−c sqrt(log x))` is not `O(x^θ)` for any fixed `θ<1` |
-| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^6 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940, global Huxley 12/5 and the full curved Huxley exponent proved, uniformly in sigma, with all heights and analytic multiplicities; the Guth–Maynard curve and combined global 30/13 are now proved; sharp log^4 remains open |
+| 4 | Linear mean-square error, actual detection, weighted sampling, fourth moment O(T log^4 T), height exponent 1+epsilon, and the compensated high-zero detector | Ingham 1940, global Huxley 12/5 and the full curved Huxley exponent proved, uniformly in sigma, with all heights and analytic multiplicities; the Guth–Maynard curve and combined global 30/13 are proved |
 
 A further source-input distinction matters for fixed exponents. Ingham 1937
 Theorem 1, as quoted in Starichkova Theorem 2.1, uses a zero-free width
@@ -98,13 +98,12 @@ The two curved density specifications retain uniformity in σ and additive
 epsilon in the height exponent. The verified `huxley_global_comparator` combines
 Ingham below σ=3/4 with Huxley above σ=3/4 to recover the global `12/5` target.
 The corresponding Guth–Maynard comparison combines its curved exponent with
-Ingham at σ=7/10 to recover `30/13`. These are conditional comparison bridges:
-the Ingham and full Huxley inputs are now supplied by the closed
-`layer4_ingham_comparator` and `layer4_huxley_comparator`; Guth–Maynard
-remains an explicit open input. The actual fourth moment now supplies `ZetaFourthMomentLogSix` and
-`ZetaFourthMomentExponent`; the sharper `ZetaFourthMoment` (log^4) remains
-open. Ingham and full curved Huxley density are proved; the stronger Layer 4
-Guth–Maynard target is still open. The 1937 short-interval comparators are still open.
+Ingham at σ=7/10 to recover `30/13`. The closed Ingham, Huxley and Guth–Maynard comparators supply the analytic
+inputs to these density comparisons. The sharp fourth-moment upper bound
+closes `ZetaFourthMoment` while the existing public comparisons also cover
+`ZetaFourthMomentLogSix` and `ZetaFourthMomentExponent`. The 1937
+short-interval comparators remain open.
+[Fourth-moment proof scope](layer4-sharp-fourth-moment.md).
 
 ### Complete source coverage
 

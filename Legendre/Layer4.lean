@@ -25,6 +25,7 @@ public import Legendre.ZetaDetectedDensity
 public import Legendre.XiGaussianEnvelope
 public import Legendre.XiSquareContour
 public import Legendre.Layer4.ZetaFourthMoment
+public import Legendre.Layer4.ZetaFourthMomentSharp
 public import Legendre.Layer4.DetectorIntegral
 public import Legendre.Layer4.DetectorKernelLeft
 public import Legendre.Layer4.DetectorCriticalMass
@@ -186,7 +187,8 @@ public import Legendre.Layer4.GuthMaynard.CentralDensity
 
 The public interface exports sharp real-line Dirichlet mean square, separated
 sampling with varying real parts, additive large sieve and Gram bounds.
-An entire xi square gives a proved zeta fourth moment O(T log^6 T).
+The entire xi square and Gaussian Mellin pole subtraction give the
+critical-line fourth moment O(T log^4 T).
 The compact Mobius detector has an exact critical-line contour shift with
 its principal pole retained, and a proved high-zero dichotomy. Polynomial
 and integral branch counts, balanced cutoffs, dyadic height covers and
@@ -204,10 +206,8 @@ Improved actual polynomial and integral branch counts, a common parameter
 balance and multiplicity restoration prove the global density exponent
 (12/5)(1-sigma)+epsilon uniformly in sigma and for all T>=2.
 
-The Layer 4 roadmap acceptance requirements are fulfilled. The full curved
-Huxley benchmark is now proved on [1/2,1], for all T>=2 and all analytic
-multiplicities, allowing every positive epsilon. The sharp fourth-moment
-log^4 and Guth--Maynard targets remain explicitly open; they are not
-hypotheses of the global 12/5 or full curved Huxley proofs.
-The proved 1940 density theorem does not assert Ingham's 1937 prime-gap result.
+The full Huxley and Guth--Maynard curves hold on [1/2,1] for all T>=2
+with analytic multiplicities and arbitrary positive epsilon. The published
+Guth--Maynard large-value bound and the combined global density coefficient
+30/13 are proved. The 1937 and 1972 short-interval results are Layer 5 goals.
 -/

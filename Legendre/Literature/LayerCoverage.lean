@@ -33,6 +33,9 @@ theorem layer2_comparator : ZetaFoundationBenchmark :=
 
 theorem layer3_comparator : ClassicalPNTError := PNT.pnt_eventual_bound
 
+theorem layer4_fourth_moment_log_four_comparator : ZetaFourthMoment :=
+  Zeta.zeta_fourth_moment_log_four
+
 theorem layer4_fourth_moment_log_six_comparator : ZetaFourthMomentLogSix :=
   Zeta.zeta_fourth_moment_positive_log_six
 

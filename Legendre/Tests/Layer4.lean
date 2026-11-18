@@ -353,6 +353,20 @@ theorem layer4_fourth_moment_height_two_consumer :
   obtain ⟨C,hC,h⟩ := Zeta.zeta_fourth_moment_positive_log_six
   exact ⟨C,hC,h 2 (by norm_num)⟩
 
+/-- The sharp fourth-log estimate applies at the first allowed height. -/
+theorem layer4_sharp_fourth_moment_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      (∫ t : ℝ in 0..2, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤
+        C*2*(Real.log 2)^4 := by
+  obtain ⟨C,hC,h⟩ := Zeta.zeta_fourth_moment_log_four
+  exact ⟨C,hC,h 2 (by norm_num)⟩
+
+/-- Moving the positive Mellin line preserves the scalar pole contribution. -/
+theorem layer4_gaussian_pole_width_consumer (c d x : ℝ) (hc : 0 < c) (hd : 0 < d) :
+    Zeta.gaussianPoleCoefficient c x = Zeta.gaussianPoleCoefficient d x := by
+  unfold Zeta.gaussianPoleCoefficient
+  rw [Zeta.gaussian_pole_line_eq c x hc, Zeta.gaussian_pole_line_eq d x hd]
+
 /-- A concrete height exponent follows without any density hypothesis. -/
 theorem layer4_fourth_moment_exponent_consumer :
     ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →

@@ -39,8 +39,8 @@ bound applies with a uniform gap of at least `1/5` from the critical line.
 Its exponent including the small cutoff is `2−2σ+4/200+ε`, which lies
 below the target throughout the central range. The dyadic height cover and
 the existing weighted sampling lemma restore the count of all zeros and their
-multiplicities. The sharp `T log^4 T` fourth moment and the historical
-prime-gap transmission remain separate goals.
+multiplicities. The [sharp fourth moment](layer4-sharp-fourth-moment.md) is also proved.
+The historical prime-gap transmission is a Layer 5 goal.
 [Actual shell proof](../Legendre/Layer4/GuthMaynard/CentralShell.lean)
 
 Selected Section 13 and localization lemmas are adapted from the pinned

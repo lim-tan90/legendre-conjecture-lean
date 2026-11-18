@@ -296,6 +296,11 @@ import all Legendre.Layer4.XiSquareSeries
 import all Legendre.Layer4.XiTailAssembly
 import all Legendre.Layer4.XiTailMean
 import all Legendre.Layer4.ZetaFourthMoment
+import all Legendre.Layer4.GaussianMellinPole
+import all Legendre.Layer4.XiSmallGammaShift
+import all Legendre.Layer4.XiMellinRemainder
+import all Legendre.Layer4.XiSharpHeadMean
+import all Legendre.Layer4.ZetaFourthMomentSharp
 import all Legendre.Layer4.ZetaSquareSeries
 import all Legendre.Tests.Layer4
 
@@ -4167,7 +4172,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_5"
 #audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.XiHeadMean.0.Legendre.Zeta.xiMellinCost_log._simp_1_7"
-#audit_private_axioms "_private.Legendre.Layer4.XiPartialMean.0.Legendre.Zeta.xiFiniteSquare_partial_mean._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.XiSquareLimit.0.Legendre.Zeta.xiSquare_partial_limit._proof_1_3"
@@ -9152,3 +9156,40 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.GuthMaynard.Section13Powering.0.Legendre.Density.GuthMaynard.pigeonhole_real_sum"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_central_three_quarters_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gm_central_three_quarters_consumer._simp_1_1"
+
+-- Sharp critical-line fourth moment and its independent consumers.
+#print axioms Legendre.Density.GammaBounds.gammaReal_small_shift_signed
+#print axioms Legendre.Density.GammaBounds.sharp_gamma_log_horizontal_signed
+#print axioms Legendre.Density.Moment.momentGaussian.eq_1
+#print axioms Legendre.Literature.layer4_fourth_moment_log_four_comparator
+#print axioms Legendre.Zeta.finiteMellin.eq_1
+#print axioms Legendre.Zeta.gaussianPoleCoefficient.eq_1
+#print axioms Legendre.Zeta.gaussian_pole_line_eq
+#print axioms Legendre.Zeta.gaussian_pole_line_integrable
+#print axioms Legendre.Zeta.gaussian_pole_line_uniform
+#print axioms Legendre.Zeta.xiFiniteSquare_head_log_four
+#print axioms Legendre.Zeta.xiFiniteSquare_head_pointwise
+#print axioms Legendre.Zeta.xiFiniteSquare_partial_le_head_tail
+#print axioms Legendre.Zeta.xiFiniteSquare_shell_log_four
+#print axioms Legendre.Zeta.xiGaussianPole.eq_1
+#print axioms Legendre.Zeta.xiGaussianPole_div_cpow
+#print axioms Legendre.Zeta.xiGaussianPole_polynomial_integral
+#print axioms Legendre.Zeta.xiGaussianPole_vertical_continuous
+#print axioms Legendre.Zeta.xiPoleNormalizedDifference.eq_1
+#print axioms Legendre.Zeta.xiPoleNormalizedDifference_analytic
+#print axioms Legendre.Zeta.xiPoleNormalizedDifference_ball_bound
+#print axioms Legendre.Zeta.xiPoleNormalizedDifference_zero
+#print axioms Legendre.Zeta.xiPoleRemainder.eq_1
+#print axioms Legendre.Zeta.xiPoleRemainder_gaussian_bound
+#print axioms Legendre.Zeta.xiPoleRemainder_small
+#print axioms Legendre.Zeta.zeta_fourth_moment_log_four
+#print axioms Legendre.Zeta.zeta_fourth_moment_shell_log_four
+#print axioms Legendre.Zeta.zeta_fourth_moment_symmetric_log_four
+#audit_private_axioms "_private.Legendre.Layer4.XiMellinRemainder.0.Legendre.Zeta.xiPoleRemainder_small._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiMellinRemainder.0.Legendre.Zeta.xiPoleRemainder_small._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.XiPartialMean.0.Legendre.Zeta.xiFiniteSquare_partial_le_head_tail._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiSharpHeadMean.0.Legendre.Zeta.xiGaussianPole_div_cpow._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.XiSharpHeadMean.0.Legendre.Zeta.xiGaussianPole_div_cpow._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.XiSharpHeadMean.0.Legendre.Zeta.xiGaussianPole_polynomial_integral._simp_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_gaussian_pole_width_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_fourth_moment_height_two_consumer"

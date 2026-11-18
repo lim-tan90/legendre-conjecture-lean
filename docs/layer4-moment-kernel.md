@@ -1,9 +1,9 @@
 # Layer 4: detector-tail energy and the critical-line moment kernel
 
 This continues the [actual zero-detector development](layer4-zero-detector.md).
-The estimates and entire Gaussian kernel below are proved. The critical-line fourth moment with a sixth logarithmic power is now proved.
-The sharp fourth-log target, the required sharper density exponents, and
-completion of Layer 4 remain open.
+The estimates and entire Gaussian kernel below give the sixth-log
+fourth-moment bound. Later proofs give the [fourth-log bound](layer4-sharp-fourth-moment.md)
+and the [full Guth–Maynard curve](layer4-guth-central-density.md).
 
 ## Tail energy and multiplicity-weighted density
 
@@ -151,7 +151,7 @@ inequality and the nonzero normalizer give the unconditional pointwise bound
 ```
 
 The height-uniform contour mean is now supplied by the proof below. The
-Ingham/Huxley estimates and completion of Layer 4 remain open.
+The full Ingham and Huxley estimates are proved in the later density modules.
 
 The new consumers check the residue at the removed pole s=0, equality of the
 two smoothed terms at s=1/2, the fourth-power reduction at every real ordinate,
@@ -201,10 +201,9 @@ integral_{-T}^T |zeta(1/2+it)|^4 dt <= C T (log T)^6.
 ```
 
 The positive interval [0,T] inherits the bound. `zeta_fourth_moment_epsilon`
-absorbs all six logarithms into T^epsilon uniformly for T>=2. The literature
-comparators distinguish `ZetaFourthMomentLogSix` and
-`ZetaFourthMomentExponent` (proved) from `ZetaFourthMoment` (sharp log^4,
-open). This proves a moment prerequisite, not a zero-density theorem.
+absorbs all six logarithms into T^epsilon uniformly for T>=2. The literature comparators include `ZetaFourthMomentLogSix` and
+`ZetaFourthMomentExponent`. The later [sharp bound](layer4-sharp-fourth-moment.md)
+closes `ZetaFourthMoment`.
 
 Exact upstream filenames, pin, license and destinations are listed in both
 READMEs and [the source inventory](openai-math-provenance.md).

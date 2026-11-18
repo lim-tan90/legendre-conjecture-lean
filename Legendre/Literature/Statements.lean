@@ -442,7 +442,7 @@ def ClassicalPNTError : Prop :=
     |Chebyshev.psi x-x| ≤ C*(x*Real.exp (-c*Real.sqrt (Real.log x))) ∧
     |PNT.primeCount x-PNT.logarithmicIntegral x| ≤ C*(x*Real.exp (-c*Real.sqrt (Real.log x)))
 
-/-- The sharp logarithmic fourth-moment target; the sixth-log proof is weaker. -/
+/-- The sharp logarithmic upper bound for the critical-line fourth moment. -/
 def ZetaFourthMoment : Prop :=
   ∃ C > 0, ∀ T : ℝ, 2 ≤ T →
     (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤
