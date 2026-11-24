@@ -73,3 +73,7 @@ already gives the fifth-log estimate. Otherwise the identity
 `σ≤3/4`. Above `3/4) on a fixed strip it gives a positive lower bound
 depending only on `τ` for the exponent difference, which also absorbs
 the final logarithm. Low heights are covered by the finite count at 128.
+
+For fixed inner strips `[α,τ] ⊂ (1/2,1)`, the later sharp weighted
+fourth-moment input reduces the cumulative loss to four logarithms.
+[Inner-strip density](layer4-weighted-fourth-moment.md#cumulative-density-on-inner-strips).

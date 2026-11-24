@@ -424,6 +424,27 @@ theorem layer4_ingham_log_five_seven_eighths_consumer :
   norm_num [Moment.balancedDensityExponent] at h
   exact h
 
+/-- A fixed inner strip includes the endpoint where Ingham's exponent is 1/2. -/
+theorem layer4_ingham_log_four_four_fifths_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (4/5 : ℝ) T : ℝ) ≤ C*T^(1/2 : ℝ)*(Real.log T)^4 := by
+  obtain ⟨C,hC,hb⟩ := Zeta.ingham_density_log_four_middle (3/4) (4/5) (by norm_num) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  have h := hb (4/5) (by norm_num : (4/5 : ℝ) ∈ Set.Icc (3/4 : ℝ) (4/5)) T hT
+  norm_num [Moment.balancedDensityExponent] at h
+  exact h
+
+/-- The sharp whole-line weighted bound has actual integrability at T=2. -/
+theorem layer4_sharp_weighted_fourth_moment_height_two_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      Integrable (fun v : ℝ => Moment.momentHeightWeight 2 v*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^4) ∧
+      (∫ v : ℝ, Moment.momentHeightWeight 2 v*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^4) ≤ C*2*(Real.log 2)^4 := by
+  obtain ⟨C,hC,hb⟩ := Moment.weighted_zeta_fourth_moment_log_four
+  exact ⟨C,hC,hb 2 le_rfl⟩
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

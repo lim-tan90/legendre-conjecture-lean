@@ -466,6 +466,11 @@ multiplicity-weighted Ingham comparator continues to cover all
 [Exact theorem scope](layer4-ingham-shell-log-five.md).
 
 The cumulative logarithmic comparator supplies seven logarithms uniformly on
-`σ∈[1/2,1]`, and five on each fixed `[1/2,τ]` with `τ<1`. Both statements
+`σ∈[1/2,1]`, five on each fixed `[1/2,τ]` with `τ<1`, and four on every fixed `[α,τ] ⊂ (1/2,1)`. All statements
 count analytic multiplicities at every `T≥2`.
 [Exact statements](layer4-ingham-shell-log-five.md#cumulative-density).
+
+The sharper weighted fourth-moment and balanced integral-branch comparators
+retain whole-line integrability, the actual compensated detector, the fixed
+cutoff range and the dependence on the real-part gap.
+[Proof and exact statements](layer4-weighted-fourth-moment.md).

@@ -16,6 +16,29 @@ namespace Legendre.Density.Moment
 open Set Filter
 open scoped Topology
 
+theorem real_height_dyadic_cover (T : ℝ) (hT : 2 ≤ T) :
+    ∃ J : ℕ, T ≤ (2 : ℝ)^J ∧ (2 : ℝ)^J ≤ 2*T ∧
+      (J : ℝ) ≤ (2/Real.log 2)*Real.log T := by
+  have h2 : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  have hlog := Real.log_le_log (by norm_num : (0 : ℝ) < 2) hT
+  let J := ⌈Real.log T/Real.log 2⌉₊
+  have hl : Real.log T/Real.log 2 ≤ J := Nat.le_ceil _
+  have hu : (J : ℝ) < Real.log T/Real.log 2+1 := Nat.ceil_lt_add_one
+    (div_nonneg (Real.log_nonneg (by linarith)) h2.le)
+  have hp : T ≤ (2 : ℝ)^J := by
+    apply (Real.log_le_log_iff (by linarith : 0 < T) (by positivity)).mp
+    simpa only [Real.log_pow] using (div_le_iff₀ h2).mp hl
+  have hq : (2 : ℝ)^J ≤ 2*T := by
+    apply (Real.log_le_log_iff (by positivity) (by positivity : 0 < 2*T)).mp
+    rw [Real.log_pow, Real.log_mul (by norm_num : (2 : ℝ) ≠ 0) (by linarith : T ≠ 0)]
+    have hh := (lt_div_iff₀ h2).mp (show (J : ℝ)-1 < Real.log T/Real.log 2 by linarith)
+    nlinarith
+  refine ⟨J,hp,hq,?_⟩
+  have hh : 1 ≤ Real.log T/Real.log 2 := (le_div_iff₀ h2).mpr (by simpa using hlog)
+  have he : (2/Real.log 2)*Real.log T = 2*(Real.log T/Real.log 2) := by ring
+  rw [he]
+  linarith
+
 noncomputable def momentHeightBall (T : ℝ) (j : ℕ) : Set ℝ :=
   Icc (-((2 : ℝ) ^ j * T)) ((2 : ℝ) ^ j * T)
 

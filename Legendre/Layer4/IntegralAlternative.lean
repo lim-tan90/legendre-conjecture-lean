@@ -16,6 +16,8 @@ namespace Legendre.Density.Moment
 open Complex MeasureTheory
 open scoped BigOperators
 
+universe u
+
 theorem count_cube (R I K D : ℝ) (hR : 0 ≤ R) (hD : 0 ≤ D)
     (hlower : R ≤ K*I) (hfourth : I^4 ≤ R*D) : R^3 ≤ K^4*D := by
   by_cases hzero : R = 0
@@ -28,21 +30,26 @@ theorem count_cube (R I K D : ℝ) (hR : 0 ≤ R) (hD : 0 ≤ D)
     have hh : R*R^3 ≤ R*(K^4*D) := by nlinarith
     exact (mul_le_mul_iff_right₀ hpos).mp (by simpa only [mul_comm R] using hh)
 
-theorem integral_alternative_count :
+theorem integral_alternative_count_of_input (k : ℕ) (hinput : ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+      ∀ {ι : Type u} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, Detector.Smooth.criticalMass X (t i))^4 ≤
+        C*(S.card : ℝ)*T*((X : ℝ)+T)^2*(Real.log T)^k*(1+Real.log X)^2) :
     ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T σ Y : ℝ,
-      2 ≤ T → 1/2 < σ → 1 ≤ Y → ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+      2 ≤ T → 1/2 < σ → 1 ≤ Y → ∀ {ι : Type u} (S : Finset ι) (β t : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
       (∀ i ∈ S, (1/16 : ℝ) ≤
         ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
       (S.card : ℝ)^3 ≤ C*(256*Y^(1/2-σ)/(σ-1/2))^4*T*((X : ℝ)+T)^2*
-        (Real.log T)^6*(1+Real.log X)^2 := by
-  obtain ⟨C,hC,hb⟩ := packed_critical_mass_fourth
+        (Real.log T)^k*(1+Real.log X)^2 := by
+  obtain ⟨C,hC,hb⟩ := hinput
   refine ⟨C,hC,?_⟩
   intro X hX T σ Y hT hσ hY ι S β t ht hsep hβ hlarge
+  have hlogT : 0 ≤ Real.log T := Real.log_nonneg (by linarith)
   let I0 := ∑ i ∈ S, Detector.Smooth.criticalMass X (t i)
   let K := 256*Y^(1/2-σ)/(σ-1/2)
-  let D := C*T*((X : ℝ)+T)^2*(Real.log T)^6*(1+Real.log X)^2
+  let D := C*T*((X : ℝ)+T)^2*(Real.log T)^k*(1+Real.log X)^2
   have hlower : (S.card : ℝ) ≤ K*I0 := by
     have hsum : (∑ _i ∈ S, (1/16 : ℝ)) ≤
         ∑ i ∈ S, (16*Y^(1/2-σ)/(σ-1/2))*Detector.Smooth.criticalMass X (t i) := by
@@ -69,5 +76,27 @@ theorem integral_alternative_count :
   convert hm using 1
   dsimp [K,D]
   ring
+
+theorem integral_alternative_count :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T σ Y : ℝ,
+      2 ≤ T → 1/2 < σ → 1 ≤ Y → ∀ {ι : Type u} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
+      (S.card : ℝ)^3 ≤ C*(256*Y^(1/2-σ)/(σ-1/2))^4*T*((X : ℝ)+T)^2*
+        (Real.log T)^6*(1+Real.log X)^2 :=
+  integral_alternative_count_of_input 6 packed_critical_mass_fourth
+
+theorem integral_alternative_count_log_four :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T σ Y : ℝ,
+      2 ≤ T → 1/2 < σ → 1 ≤ Y → ∀ {ι : Type u} (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤
+        ‖Detector.Smooth.detectorCriticalIntegral X ((β i : ℂ)+(t i : ℂ)*I) Y‖) →
+      (S.card : ℝ)^3 ≤ C*(256*Y^(1/2-σ)/(σ-1/2))^4*T*((X : ℝ)+T)^2*
+        (Real.log T)^4*(1+Real.log X)^2 :=
+  integral_alternative_count_of_input 4 packed_critical_mass_fourth_log_four
 
 end Legendre.Density.Moment

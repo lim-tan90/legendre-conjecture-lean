@@ -109,12 +109,41 @@ def InghamLogarithmicDensityBenchmark : Prop :=
   (∀ τ : ℝ, τ < 1 → ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) τ, ∀ T : ℝ, 2 ≤ T →
     (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^6) ∧
   (∀ τ : ℝ, τ < 1 → ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) τ, ∀ T : ℝ, 2 ≤ T →
-    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^5)
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^5) ∧
+  (∀ α τ : ℝ, 1/2 < α → τ < 1 → ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc α τ, ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^4)
 
 theorem layer4_ingham_logarithmic_density_comparator : InghamLogarithmicDensityBenchmark := by
   unfold InghamLogarithmicDensityBenchmark
   exact ⟨Zeta.ingham_density_log_seven, Zeta.ingham_density_log_six_away_one,
-    Zeta.ingham_density_log_five_away_one⟩
+    Zeta.ingham_density_log_five_away_one, Zeta.ingham_density_log_four_middle⟩
+
+/-- Cubic height weighting preserves the fourth logarithm on the whole line. -/
+def SharpWeightedFourthMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+    Integrable (fun v : ℝ => Density.Moment.momentHeightWeight T v*
+      ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^4) ∧
+    (∫ v : ℝ, Density.Moment.momentHeightWeight T v*
+      ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^4) ≤ C*T*(Real.log T)^4
+
+theorem layer4_sharp_weighted_fourth_moment_comparator : SharpWeightedFourthMomentBenchmark :=
+  Density.Moment.weighted_zeta_fourth_moment_log_four
+
+/-- Balanced integral branch with its real-part gap left explicit. -/
+def InghamIntegralGapBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 < σ → σ ≤ 1 →
+    ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧
+    ∀ {ι : Type*} (S : Finset ι) (β t : ι → ℝ),
+    (∀ i ∈ S, |t i| ≤ T) →
+    (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+    (∀ i ∈ S, β i ∈ Icc σ 1) →
+    (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Density.Detector.Smooth.detectorCriticalIntegral X
+      ((β i : ℂ)+(t i : ℂ)*Complex.I) (T^(3/(2*(2-σ))))‖) →
+    (S.card : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(1/(σ-1/2))^(4/3 : ℝ)*(Real.log T)^2
+
+theorem layer4_ingham_integral_gap_comparator : InghamIntegralGapBenchmark := by
+  unfold InghamIntegralGapBenchmark
+  exact Density.Moment.integral_alternative_balanced_fourth_moment_by_gap
 
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=

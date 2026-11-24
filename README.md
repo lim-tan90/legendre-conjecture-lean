@@ -276,7 +276,16 @@ fixed strip `[1/2,τ]` with `τ<1`, the cumulative bound has
 `(log T)^5`, with a constant depending only on `τ`.
 [Scope and comparator](docs/layer4-ingham-shell-log-five.md#cumulative-density).
 
-Current validation (2026-11-24) covers **4,384 build jobs**, **8,609 audited theorem declarations**, **371 Lean files** and **226 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Sharp weighted moment and inner-strip density (2026-11-24).** The
+whole-line cubic height weight preserves the critical-line fourth moment
+`O(T log⁴ T)`. Its compact-detector integral branch has logarithmic
+power `10/3` under the usual real-part gap, and power `2` on each fixed
+inner strip. The full cumulative density on any fixed
+`[α,τ] ⊂ (1/2,1)` has `(log T)^4` with analytic multiplicities and
+all `T≥2`.
+[Proof and comparison statements](docs/layer4-weighted-fourth-moment.md).
+
+Current validation (2026-11-24) covers **4,385 build jobs**, **8,630 audited theorem declarations**, **372 Lean files** and **228 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -704,7 +713,7 @@ The completed analytic milestones supporting this program are:
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
-| Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The cumulative form has `log^7 T` uniformly and `log^5 T` for any fixed upper endpoint below one. [Logarithmic bounds](docs/layer4-ingham-shell-log-five.md#cumulative-density). |
+| Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The cumulative form has `log^7 T` uniformly, `log^5 T` for a fixed upper endpoint below one, and `log^4 T` on fixed inner strips. [Logarithmic bounds](docs/layer4-ingham-shell-log-five.md#cumulative-density). |
 | Global Huxley density (Layer 4) | `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` for every `ε>0` | **✅ Proved**: [`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean), closed [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean); uniform σ∈[1/2,1], T≥2, all analytic multiplicities. A stronger intermediate bound holds on σ∈[3/4,1]. The full curved exponent benchmark is now proved below. |
 | Restricted curved Huxley density (Layer 4) | For every `ε>0`, `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`, σ∈[1/2,5/6] | **✅ Proved**: [`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) and closed [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean); all T≥2 and analytic multiplicities. The full benchmark is now also proved, as listed below. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^4 T` | **✅ Proved** for all `T≥2`. [Proof and literal comparator](docs/layer4-sharp-fourth-moment.md). |
@@ -1150,6 +1159,11 @@ Every destination is under `Legendre/Layer4/` and retains its source notice.
 The moment specialization removes character families, uses the local xi
 kernel, raw ordinates and a wider Gaussian. The compact detector specializes
 the initial contour to zeta and retains the principal pole in its proved shift.
+The sharp weighted moment and integral branch use the existing
+`DensityWeightedFourth.lean`, `DensityPackedCharacterMoments.lean`
+and `DensityIntegralAlternative.lean` adaptations documented below.
+[Proof chain](docs/layer4-weighted-fourth-moment.md).
+
 The local endpoint-weighted Ingham count builds on the credited
 dyadic detector and polynomial-branch code listed below.
 [Weighted count](Legendre/Layer4/PolynomialAlternativeSplit.lean)

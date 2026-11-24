@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Legendre.Layer4.XiSharpHeadMean
 public import Legendre.Layer4.ZetaFourthMoment
-public import Legendre.Layer4.DyadicHeightDensity
+public import Legendre.Layer4.DyadicHeightShells
 public import Legendre.Layer4.XiPartialMean
 
 /-! The fourth-log bound for the critical-line fourth moment. -/

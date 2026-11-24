@@ -15,6 +15,8 @@ namespace Legendre.Density.Moment
 open Complex MeasureTheory
 open scoped BigOperators ArithmeticFunction.Moebius
 
+universe u
+
 theorem criticalMass_eq_shift (X : ℕ) (t : ℝ) : Detector.Smooth.criticalMass X t =
     ∫ v : ℝ, Detector.Smooth.criticalWeight (v-t)*‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖*
       ‖Detector.finiteSeries (μ : ArithmeticFunction ℂ) X ((1/2 : ℂ)+(v : ℂ)*I)‖ := by
@@ -29,13 +31,18 @@ theorem criticalMass_eq_shift (X : ℕ) (t : ℝ) : Detector.Smooth.criticalMass
   rw [add_comm u t]
   ring
 
-theorem packed_critical_mass_fourth :
+theorem packed_critical_mass_fourth_of_input (k : ℕ) (hinput : ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → ∀ {ι : Type u} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, Integrable (fun v => Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4)) ∧
+      (∑ i ∈ S, ∫ v, Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4) ≤ C*T*(Real.log T)^k) :
     ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
-      ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      ∀ {ι : Type u} (S : Finset ι) (t : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∑ i ∈ S, Detector.Smooth.criticalMass X (t i))^4 ≤
-        C*(S.card : ℝ)*T*((X : ℝ)+T)^2*(Real.log T)^6*(1+Real.log X)^2 := by
-  obtain ⟨C4,hC4,hfourth⟩ := packed_zeta_fourth_moment
+        C*(S.card : ℝ)*T*((X : ℝ)+T)^2*(Real.log T)^k*(1+Real.log X)^2 := by
+  obtain ⟨C4,hC4,hfourth⟩ := hinput
   obtain ⟨C2,hC2,hsecond⟩ := packed_mollifier_mean
   let W0 := 1+∫ v : ℝ, Detector.Smooth.criticalWeight v
   have hW0 : 0 < W0 := by
@@ -45,6 +52,7 @@ theorem packed_critical_mass_fourth :
     linarith
   refine ⟨W0*C4*C2^2,by positivity,?_⟩
   intro X hX T hT ι S t ht hs
+  have hlogT : 0 ≤ Real.log T := Real.log_nonneg (by linarith)
   simp_rw [criticalMass_eq_shift]
   obtain ⟨hi4,hb4⟩ := hfourth T hT S t ht hs
   obtain ⟨hiM,hbM⟩ := hsecond X hX T hT S t ht hs
@@ -76,9 +84,25 @@ theorem packed_critical_mass_fourth :
   have hMsq := pow_le_pow_left₀ hmnon hbM 2
   apply hpow.trans
   calc
-    _ ≤ ((S.card : ℝ)*W0)*(C4*T*(Real.log T)^6)*
+    _ ≤ ((S.card : ℝ)*W0)*(C4*T*(Real.log T)^k)*
         (C2*((X : ℝ)+T)*(1+Real.log X))^2 :=
       mul_le_mul hWM hMsq (sq_nonneg _) (by positivity)
     _ = _ := by ring
+
+theorem packed_critical_mass_fourth :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+      ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, Detector.Smooth.criticalMass X (t i))^4 ≤
+        C*(S.card : ℝ)*T*((X : ℝ)+T)^2*(Real.log T)^6*(1+Real.log X)^2 :=
+  packed_critical_mass_fourth_of_input 6 packed_zeta_fourth_moment
+
+theorem packed_critical_mass_fourth_log_four :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+      ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, Detector.Smooth.criticalMass X (t i))^4 ≤
+        C*(S.card : ℝ)*T*((X : ℝ)+T)^2*(Real.log T)^4*(1+Real.log X)^2 :=
+  packed_critical_mass_fourth_of_input 4 packed_zeta_fourth_moment_log_four
 
 end Legendre.Density.Moment

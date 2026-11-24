@@ -41,27 +41,26 @@ theorem four_logs_le_of_le (k : ℕ) (hk : 4 ≤ k) (L : ℝ) (hL : Real.log 2 �
       conv_rhs => rw [show L^k = L^4*L^(k-4) by rw [←pow_add, ←hoff]]
       ring
 
-/-- Retain the two terms of the detector dichotomy and their constants. -/
-theorem separated_high_shell_density_of_branches (τ : ℝ) (hτ : τ ≤ 1)
-    (P₀ : ℝ → ℝ → ℝ) (hpoly : ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ τ →
-      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+/-- Count a shell using bounds for the two branches of its detector. -/
+theorem count_high_shell_of_detector_counts {ι : Type*}
+    (T σ : ℝ) (X : ℕ) (P₀ N₀ : ℝ) (hT : 128 ≤ T) (hσ : 1/2 < σ) (hσ1 : σ ≤ 1)
+    (hX : 1 ≤ X) (hX2 : (X : ℝ) ≤ 2*T)
+    (hpoly : ∀ (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, β i ∈ Icc σ 1) →
       (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
-        (T^detectorBalanceExponent σ)‖) →
-      (S.card : ℝ) ≤ P₀ T σ) :
-    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ τ →
-      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
-      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
-      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
-      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
-      (S.card : ℝ) ≤ P₀ T σ+C*T^balancedDensityExponent σ*(Real.log T)^4 := by
+        (T^detectorBalanceExponent σ)‖) → (S.card : ℝ) ≤ P₀)
+    (hiX : ∀ (S : Finset ι) (β t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorCriticalIntegral X
+        ((β i : ℂ)+(t i : ℂ)*I) (T^detectorBalanceExponent σ)‖) → (S.card : ℝ) ≤ N₀)
+    (S : Finset ι) (t β : ι → ℝ)
+    (ht : ∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T)
+    (hs : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|)
+    (hz : ∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) :
+    (S.card : ℝ) ≤ P₀+N₀ := by
   classical
-  obtain ⟨CI,hCI,hi⟩ := integral_alternative_balanced
-  refine ⟨CI,hCI,?_⟩
-  intro T σ hT hσ hστ hgap ι S t β ht hs hz
-  have hσ1 := hστ.trans hτ
-  obtain ⟨X,hX,hTX,hX2,hiX⟩ := hi T σ (by linarith) hσ hσ1 hgap
   let Y := T^detectorBalanceExponent σ
   let p : ι → Prop := fun i => (1/16 : ℝ) ≤
     ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖
@@ -73,7 +72,7 @@ theorem separated_high_shell_density_of_branches (τ : ℝ) (hτ : τ ≤ 1)
     rw [Real.rpow_one] at h
     exact (by linarith : 4 ≤ T).trans h
   have hY2 : Y ≤ (T/2)^2 := balanced_scale_below_half_height_square T σ (by linarith) hσ1
-  have hP := hpoly T σ (by linarith) hσ.le hστ X hX hTX P t β
+  have hP := hpoly P t β
     (fun i hi => (ht i (Finset.mem_filter.mp hi).1).2)
     (fun i hi j hj => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1)
     (fun i hi => ⟨(hz i (Finset.mem_filter.mp hi).1).1,(hz i (Finset.mem_filter.mp hi).1).2.1⟩)
@@ -102,6 +101,29 @@ theorem separated_high_shell_density_of_branches (τ : ℝ) (hτ : τ ≤ 1)
     exact_mod_cast (Finset.card_filter_add_card_filter_not (s := S) (p := p)).symm
   rw [hcard]
   exact add_le_add hP hN
+
+/-- Retain the two terms of the detector dichotomy and their constants. -/
+theorem separated_high_shell_density_of_branches (τ : ℝ) (hτ : τ ≤ 1)
+    (P₀ : ℝ → ℝ → ℝ) (hpoly : ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ τ →
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
+        (T^detectorBalanceExponent σ)‖) →
+      (S.card : ℝ) ≤ P₀ T σ) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ τ →
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ P₀ T σ+C*T^balancedDensityExponent σ*(Real.log T)^4 := by
+  obtain ⟨CI,hCI,hi⟩ := integral_alternative_balanced
+  refine ⟨CI,hCI,?_⟩
+  intro T σ hT hσ hστ hgap ι S t β ht hs hz
+  have hσ1 := hστ.trans hτ
+  obtain ⟨X,hX,hTX,hX2,hiX⟩ := hi T σ (by linarith) hσ hσ1 hgap
+  exact count_high_shell_of_detector_counts T σ X _ _ hT hσ hσ1 hX hX2
+    (hpoly T σ (by linarith) hσ.le hστ X hX hTX) hiX S t β ht hs hz
 
 /-- Combine the polynomial count with the fourth-log integral count. -/
 theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)

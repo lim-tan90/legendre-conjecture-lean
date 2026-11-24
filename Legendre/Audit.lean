@@ -403,6 +403,7 @@ import all Legendre.Layer4.NearCriticalDensity
 import all Legendre.Layer4.DyadicHeightDensity
 import all Legendre.Layer4.GeometricHeightDensity
 import all Legendre.Layer4.InghamSharpLogarithms
+import all Legendre.Layer4.InghamMiddleStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
@@ -4401,7 +4402,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_cover._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_disjoint._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.DyadicHeightShells.0.Legendre.Density.Moment.momentHeightShell_disjoint._proof_1_2"
-#audit_private_axioms "_private.Legendre.Layer4.IntegralAlternative.0.Legendre.Density.Moment.integral_alternative_count._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ProductCauchy.0.Legendre.Density.Moment.moment_finite_product_fourth._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_1"
 #audit_private_axioms "_private.Legendre.Layer4.WeightedHeightMoment.0.Legendre.Density.Moment.momentHeightShell.match_1.eq_2"
@@ -9291,3 +9291,27 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.DetectorDyadicCover.0.Legendre.Density.Moment.detector_dyadic_cover_support._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorDyadicCover.0.Legendre.Density.Moment.detector_dyadic_cover_support._proof_1_2"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_five_seven_eighths_consumer"
+
+-- Sharp weighted fourth moment and inner-strip Ingham density.
+#print axioms Legendre.Density.Moment.count_high_shell_of_detector_counts
+#print axioms Legendre.Density.Moment.integral_alternative_balanced_by_gap_of_count
+#print axioms Legendre.Density.Moment.integral_alternative_balanced_fourth_moment_by_gap
+#print axioms Legendre.Density.Moment.integral_alternative_balanced_log_ten_thirds
+#print axioms Legendre.Density.Moment.integral_alternative_balanced_of_count
+#print axioms Legendre.Density.Moment.integral_alternative_count_log_four
+#print axioms Legendre.Density.Moment.integral_alternative_count_of_input
+#print axioms Legendre.Density.Moment.packed_critical_mass_fourth_log_four
+#print axioms Legendre.Density.Moment.packed_critical_mass_fourth_of_input
+#print axioms Legendre.Density.Moment.packed_zeta_fourth_moment_log_four
+#print axioms Legendre.Density.Moment.packed_zeta_fourth_moment_of_input
+#print axioms Legendre.Density.Moment.polynomial_alternative_balanced_middle
+#print axioms Legendre.Density.Moment.separated_high_density_log_three_middle
+#print axioms Legendre.Density.Moment.separated_high_shell_density_log_three_middle
+#print axioms Legendre.Density.Moment.weighted_zeta_fourth_moment_log_four
+#print axioms Legendre.Density.Moment.weighted_zeta_fourth_moment_of_input
+#print axioms Legendre.Literature.layer4_ingham_integral_gap_comparator
+#print axioms Legendre.Literature.layer4_sharp_weighted_fourth_moment_comparator
+#print axioms Legendre.Zeta.ingham_density_log_four_middle
+#audit_private_axioms "_private.Legendre.Layer4.IntegralAlternative.0.Legendre.Density.Moment.integral_alternative_count_of_input._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_four_four_fifths_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_weighted_fourth_moment_height_two_consumer"

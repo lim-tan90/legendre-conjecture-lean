@@ -84,14 +84,14 @@ end Legendre.Density.Moment
 namespace Legendre.Zeta
 open Complex Density.Moment
 
-theorem ingham_density_log_bound_of_samples (k : ℕ) (τ : ℝ) (hτ : τ ≤ 1)
-    (hsamples : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 ≤ σ → σ ≤ τ →
+theorem ingham_density_log_bound_of_samples (k : ℕ) (α τ : ℝ) (hτ : τ ≤ 1)
+    (hsamples : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → α ≤ σ → σ ≤ τ →
       ∀ {ι : Type} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, 64 < |t i| ∧ |t i| ≤ T) →
       (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
       (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k) :
-    ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) τ, ∀ T : ℝ, 2 ≤ T →
+    ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc α τ, ∀ T : ℝ, 2 ≤ T →
       (zeroDensityCount σ T : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^(k+1) := by
   classical
   obtain ⟨C,hC,hc⟩ := hsamples
@@ -135,20 +135,20 @@ theorem ingham_density_log_bound_of_samples (k : ℕ) (τ : ℝ) (hτ : τ ≤ 1
 theorem ingham_density_log_bound :
     ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) 1, ∀ T : ℝ, 2 ≤ T →
       (zeroDensityCount σ T : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^10 :=
-  ingham_density_log_bound_of_samples 9 1 le_rfl separated_high_density
+  ingham_density_log_bound_of_samples 9 (1/2) 1 le_rfl separated_high_density
 
 /-- Ingham's curved exponent with seven logarithms, uniformly in the
 real cutoff and with all analytic zero multiplicities. -/
 theorem ingham_density_log_seven :
     ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) 1, ∀ T : ℝ, 2 ≤ T →
       (zeroDensityCount σ T : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^7 :=
-  ingham_density_log_bound_of_samples 6 1 le_rfl separated_high_density_log_six
+  ingham_density_log_bound_of_samples 6 (1/2) 1 le_rfl separated_high_density_log_six
 
 /-- A fixed upper endpoint below one saves a further logarithm in the
 analytic density count. -/
 theorem ingham_density_log_six_away_one (τ : ℝ) (hτ : τ < 1) :
     ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Set.Icc (1/2 : ℝ) τ, ∀ T : ℝ, 2 ≤ T →
       (zeroDensityCount σ T : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^6 :=
-  ingham_density_log_bound_of_samples 5 τ hτ.le (separated_high_density_log_five_away_one τ hτ)
+  ingham_density_log_bound_of_samples 5 (1/2) τ hτ.le (separated_high_density_log_five_away_one τ hτ)
 
 end Legendre.Zeta

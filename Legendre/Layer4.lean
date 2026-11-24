@@ -44,6 +44,7 @@ public import Legendre.Layer4.DyadicHeightDensity
 public import Legendre.Layer4.InghamMultiplicity
 public import Legendre.Layer4.InghamDensity
 public import Legendre.Layer4.InghamSharpLogarithms
+public import Legendre.Layer4.InghamMiddleStrip
 public import Legendre.Layer4.Exponential.DiscreteFirstDerivative
 public import Legendre.Layer4.Exponential.DiscreteSecondDerivative
 public import Legendre.Layer4.Exponential.HalaszComplex

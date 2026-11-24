@@ -15,6 +15,7 @@ public import Legendre.Layer4.WeightedZetaMoment
 namespace Legendre.Density.Moment
 open Complex MeasureTheory
 open scoped BigOperators ArithmeticFunction.Moebius
+open Set
 
 theorem packed_scalar_moment {ι : Type*} (S : Finset ι) (t : ι → ℝ)
     (T : ℝ) (hT : 1 ≤ T) (ht : ∀ i ∈ S, |t i| ≤ T)
@@ -44,14 +45,18 @@ theorem packed_scalar_moment {ι : Type*} (S : Finset ι) (t : ι → ℝ)
   rw [← integral_finsetSum S hpi,← integral_const_mul]
   exact integral_mono (integrable_finsetSum S hpi) (hi.const_mul _) hpoint
 
-theorem packed_zeta_fourth_moment :
+theorem packed_zeta_fourth_moment_of_input (k : ℕ) (hinput : ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      Integrable (fun t : ℝ => momentHeightWeight T t*
+        ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)‖^4) ∧
+      (∫ t : ℝ, momentHeightWeight T t*‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)‖^4) ≤
+        C*T*(Real.log T)^k) :
     ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, Integrable (fun v => Detector.Smooth.criticalWeight (v-t i)*
         ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4)) ∧
       (∑ i ∈ S, ∫ v, Detector.Smooth.criticalWeight (v-t i)*
-        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4) ≤ C*T*(Real.log T)^6 := by
-  obtain ⟨C,hC,hb⟩ := weighted_zeta_fourth_moment
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4) ≤ C*T*(Real.log T)^k := by
+  obtain ⟨C,hC,hb⟩ := hinput
   refine ⟨momentKernelPackingConstant*C,mul_pos momentKernelPackingConstant_pos hC,?_⟩
   intro T hT ι S t ht hs
   obtain ⟨hi,hm⟩ := hb T hT
@@ -61,6 +66,24 @@ theorem packed_zeta_fourth_moment :
   refine ⟨hpi,hpm.trans ?_⟩
   have h := mul_le_mul_of_nonneg_left hm momentKernelPackingConstant_pos.le
   convert h using 1; ring
+
+theorem packed_zeta_fourth_moment :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, Integrable (fun v => Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4)) ∧
+      (∑ i ∈ S, ∫ v, Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4) ≤ C*T*(Real.log T)^6 :=
+  packed_zeta_fourth_moment_of_input 6 weighted_zeta_fourth_moment
+
+theorem packed_zeta_fourth_moment_log_four :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T → ∀ {ι : Type*} (S : Finset ι) (t : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, Integrable (fun v => Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4)) ∧
+      (∑ i ∈ S, ∫ v, Detector.Smooth.criticalWeight (v-t i)*
+        ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*I)‖^4) ≤ C*T*(Real.log T)^4 :=
+  packed_zeta_fourth_moment_of_input 4 weighted_zeta_fourth_moment_log_four
 
 theorem packed_mollifier_mean :
     ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
