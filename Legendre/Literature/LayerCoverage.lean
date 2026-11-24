@@ -102,6 +102,17 @@ theorem layer4_ingham_shell_log_five_comparator : InghamShellLogFiveBenchmark :=
   simpa only [Density.Moment.balancedDensityExponent] using
     Density.Moment.separated_high_shell_density_log_five
 
+/-- Cumulative Ingham density with logarithmic losses and analytic multiplicities. -/
+def InghamLogarithmicDensityBenchmark : Prop :=
+  (∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) 1, ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^7) ∧
+  (∀ τ : ℝ, τ < 1 → ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) τ, ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^6)
+
+theorem layer4_ingham_logarithmic_density_comparator : InghamLogarithmicDensityBenchmark := by
+  unfold InghamLogarithmicDensityBenchmark
+  exact ⟨Zeta.ingham_density_log_seven, Zeta.ingham_density_log_six_away_one⟩
+
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ (U V : ℕ), 1 ≤ U → U ≤ V → V ≤ 2*U →

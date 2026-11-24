@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 
 The proved compact detector, its two moment branches, and multiplicity
 restoration give Ingham's curved density exponent with an arbitrary positive
-height epsilon. The logarithmic power ten is not claimed to be sharp.
+height epsilon. The uniform seven-log bound is proved in InghamMultiplicity.
 -/
 module
 public import Legendre.Layer4.InghamMultiplicity
@@ -19,12 +19,12 @@ theorem ingham_density_epsilon :
       ∀ T : ℝ, 2 ≤ T →
         (zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ)+ε) := by
   intro ε hε
-  obtain ⟨C,hC,hb⟩ := ingham_density_log_bound
-  obtain ⟨D,hD,hl⟩ := exists_log_pow_le_rpow 10 hε
+  obtain ⟨C,hC,hb⟩ := ingham_density_log_seven
+  obtain ⟨D,hD,hl⟩ := exists_log_pow_le_rpow 7 hε
   refine ⟨C*D,mul_pos hC hD,?_⟩
   intro σ hσ T hT
   calc
-    _ ≤ C*T^Density.Moment.balancedDensityExponent σ*(Real.log T)^10 := hb σ hσ T hT
+    _ ≤ C*T^Density.Moment.balancedDensityExponent σ*(Real.log T)^7 := hb σ hσ T hT
     _ ≤ C*T^Density.Moment.balancedDensityExponent σ*(D*T^ε) :=
       mul_le_mul_of_nonneg_left (hl T hT) (by positivity)
     _ = _ := by

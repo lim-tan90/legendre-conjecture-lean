@@ -210,7 +210,12 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 当 `T≥128`、`σ−1/2 ≥ 1/log T` 时，已得到 `[T/2,T]` 高度壳内单位间隔
 零点的五次对数计数。[精确条件与比较器](docs/layer4-ingham-shell-log-five.md)。
 
-当前验证（2026-11-19）包括 **4,381 项构建**、**8,565 个定理的公理审计**、**368 个 Lean 文件**和 **223 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**累计 Ingham 零密度（2026-11-24）。** 已证明
+`N(σ,T) ≪ T^(3(1−σ)/(2−σ)) (log T)^7`，覆盖全部 `σ∈[1/2,1]`、
+`T≥2` 与解析重数。在固定的 `[1/2,τ]` 且 `τ<1` 上，高度壳几何求和给出
+`(log T)^6`，常数可依赖于 `τ`。[精确范围与比较器](docs/layer4-ingham-shell-log-five.md#cumulative-density)。
+
+当前验证（2026-11-24）包括 **4,382 项构建**、**8,582 个定理的公理审计**、**369 个 Lean 文件**和 **225 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -489,7 +494,7 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 <!-- comparator:legendre1808 -->
 ## 历史进展总览
 
-**仓库当前状态（2026-11-19）：** Layer 3 的经典 PNT、Ingham 1940、完整的
+**仓库当前状态（2026-11-24）：** Layer 3 的经典 PNT、Ingham 1940、完整的
 Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 界均已证明。
 曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
 尖锐四阶矩界 `O(T log^4 T)` 已对全部 `T≥2` 证明。下表九项历史短区间指数结果
@@ -550,7 +555,7 @@ Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
-| Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。已证对数形式带 `log^10 T`，未声称原文尖锐的 `log^5 T`。 |
+| Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。累计界统一带 `log^7 T`，固定上端点低于 1 时带 `log^6 T`。[对数估计](docs/layer4-ingham-shell-log-five.md#cumulative-density)。 |
 | 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；完整曲线指数 benchmark 现已证明，见下文。 |
 | 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 现已包含 σ>5/6，见下文。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^4 T` | **✅ 已证明**，覆盖全部 `T≥2`。[证明与字面比较器](docs/layer4-sharp-fourth-moment.md)。 |

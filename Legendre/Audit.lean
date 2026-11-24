@@ -401,6 +401,7 @@ import all Legendre.Layer4.BalancedAlternatives
 import all Legendre.Layer4.SeparatedShellDensity
 import all Legendre.Layer4.NearCriticalDensity
 import all Legendre.Layer4.DyadicHeightDensity
+import all Legendre.Layer4.GeometricHeightDensity
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
 import all Legendre.Layer4.DistributionMomentCutoff
@@ -4493,9 +4494,7 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_7"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorPolynomial.0.Legendre.Density.Detector.Smooth.detectorTail_extended._proof_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.InghamMultiplicity.0.Legendre.Density.Moment.height_log_unit._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.InghamMultiplicity.0.Legendre.Zeta.zeroDensityCount_le_of_cutoff_sample_bound._simp_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.NearCriticalDensity.0.Legendre.Density.Moment.log_eight_unit._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockCost.0.Legendre.Density.Moment.block_endpoint_powers._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockSampling.0.Legendre.Density.Moment.block_subset_initial._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockSampling.0.Legendre.Density.Moment.polynomialBlockSamplingCost_nonneg._proof_1_1"
@@ -9240,3 +9239,24 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.DyadicVariableSampling.0.Legendre.Density.Moment.sum_dyadic_prefix_range._simp_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.SeparatedShellDensity.0.Legendre.Density.Moment.four_logs_le_of_le._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_dyadic_variable_one_term_consumer"
+
+-- Cumulative logarithmic Ingham bounds.
+#print axioms Legendre.Density.Moment.height_shell_log_le
+#print axioms Legendre.Density.Moment.height_shell_power_log_nat
+#print axioms Legendre.Density.Moment.height_shell_rpow_geometric
+#print axioms Legendre.Density.Moment.height_shell_upper
+#print axioms Legendre.Density.Moment.log_nat_pow_unit
+#print axioms Legendre.Density.Moment.near_critical_separated_count_log
+#print axioms Legendre.Density.Moment.separated_high_density_log_five_away_one
+#print axioms Legendre.Density.Moment.separated_high_density_log_six
+#print axioms Legendre.Density.Moment.separated_high_density_of_shell
+#print axioms Legendre.Density.Moment.separated_high_density_shell_sum
+#print axioms Legendre.Density.Moment.separated_high_shell_density_uniform_log_five
+#print axioms Legendre.Density.Moment.separated_high_shell_density_uniform_of_gap
+#print axioms Legendre.Literature.layer4_ingham_logarithmic_density_comparator
+#print axioms Legendre.Zeta.ingham_density_log_bound_of_samples
+#print axioms Legendre.Zeta.ingham_density_log_seven
+#print axioms Legendre.Zeta.ingham_density_log_six_away_one
+#audit_private_axioms "_private.Legendre.Layer4.NearCriticalDensity.0.Legendre.Density.Moment.log_nat_pow_unit._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_seven_critical_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_six_three_quarters_consumer"

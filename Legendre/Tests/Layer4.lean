@@ -391,6 +391,28 @@ theorem layer4_dyadic_variable_one_term_consumer :
   simpa only [hI, Finset.sum_singleton, coefficientEnergy, verticalCoefficients,
     id_eq, Nat.cast_one, Nat.cast_ofNat] using hb
 
+/-- The full count at the critical-line endpoint, including height two. -/
+theorem layer4_ingham_log_seven_critical_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (1/2 : ℝ) T : ℝ) ≤ C*T*(Real.log T)^7 := by
+  obtain ⟨C,hC,hb⟩ := Zeta.ingham_density_log_seven
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  have h := hb (1/2) (by norm_num : (1/2 : ℝ) ∈ Set.Icc (1/2 : ℝ) 1) T hT
+  norm_num [Moment.balancedDensityExponent, Real.rpow_one] at h
+  exact h
+
+/-- The sixth-log count includes the upper endpoint of a fixed strip. -/
+theorem layer4_ingham_log_six_three_quarters_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (3/4 : ℝ) T : ℝ) ≤ C*T^(3/5 : ℝ)*(Real.log T)^6 := by
+  obtain ⟨C,hC,hb⟩ := Zeta.ingham_density_log_six_away_one (3/4) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  have h := hb (3/4) (by norm_num : (3/4 : ℝ) ∈ Set.Icc (1/2 : ℝ) (3/4)) T hT
+  norm_num [Moment.balancedDensityExponent] at h
+  exact h
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

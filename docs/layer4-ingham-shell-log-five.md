@@ -26,3 +26,25 @@ multiplicities, the existing Layer 4 theorem supplies the uniform curved
 exponent with arbitrary positive loss.
 [Balanced branch estimates](../Legendre/Layer4/BalancedAlternatives.lean)
 [Cumulative density](../Legendre/Layer4/InghamDensity.lean)
+
+## Cumulative density
+
+Write `E(σ) = 3(1−σ)/(2−σ)`. The cumulative count
+`N(σ,T) ≤ C T^E(σ) (log T)^7` holds for all `T≥2` and
+`σ∈[1/2,1]), with one absolute constant and analytic multiplicities.
+For each fixed `τ<1`, the bound on `[1/2,τ]` uses six logarithms and a
+constant depending only on `τ`.
+[Statements and proofs](../Legendre/Layer4/InghamMultiplicity.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)
+
+Unit separation bounds the sample count by a constant times the height
+in the near-critical band `σ−1/2≤1/log T`. In that band the height
+is at most a constant times `T^E(σ)`, so the five-log shell estimate
+extends to the closed real-part range. Accumulating the shells costs one
+logarithm, and restoring analytic multiplicities costs one more.
+On a fixed strip `[1/2,τ]` the height exponent is at least
+`2(1−τ)>0`, so the dyadic powers sum geometrically and eliminate
+the height-summation logarithm. The bounded-height cases are included
+using the finite count up to height 128.
+[Near-critical band](../Legendre/Layer4/NearCriticalDensity.lean)
+[Geometric sum](../Legendre/Layer4/GeometricHeightDensity.lean)

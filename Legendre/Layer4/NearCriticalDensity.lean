@@ -13,6 +13,8 @@ namespace Legendre.Density.Moment
 open Complex Set
 open scoped BigOperators
 
+universe u
+
 theorem indexed_separated_card {ι : Type*} (S : Finset ι) (t : ι → ℝ)
     (T : ℝ) (hT : 0 ≤ T) (ht : ∀ i ∈ S, |t i| ≤ T)
     (hsep : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) : (S.card : ℝ) ≤ 2*(T+1) := by
@@ -60,51 +62,89 @@ theorem near_critical_height_power (T σ : ℝ) (hT : 2 ≤ T) (hσ : 1/2 ≤ σ
       mul_le_mul_of_nonneg_left hp (Real.rpow_nonneg hTp.le _)
     _ = _ := by ring
 
-theorem log_eight_unit (T : ℝ) (hT : 2 ≤ T) :
-    1 ≤ (Real.log 2)⁻¹^8*(Real.log T)^8 := by
+theorem log_nat_pow_unit (k : ℕ) (T : ℝ) (hT : 2 ≤ T) :
+    1 ≤ (Real.log 2)⁻¹^k*(Real.log T)^k := by
   have hl : 0 < Real.log 2 := Real.log_pos (by norm_num)
   have hL := Real.log_le_log (by norm_num : (0 : ℝ) < 2) hT
-  have hp := pow_le_pow_left₀ hl.le hL 8
-  have hh := mul_le_mul_of_nonneg_left hp (show 0 ≤ (Real.log 2)⁻¹^8 by positivity)
+  have hp := pow_le_pow_left₀ hl.le hL k
+  have hh := mul_le_mul_of_nonneg_left hp (show 0 ≤ (Real.log 2)⁻¹^k by positivity)
   simpa only [← mul_pow,inv_mul_cancel₀ hl.ne',one_pow] using hh
 
-theorem near_critical_separated_count {ι : Type*} (S : Finset ι) (t : ι → ℝ)
+theorem log_eight_unit (T : ℝ) (hT : 2 ≤ T) :
+    1 ≤ (Real.log 2)⁻¹^8*(Real.log T)^8 :=
+  log_nat_pow_unit 8 T hT
+
+theorem near_critical_separated_count_log (k : ℕ) {ι : Type*} (S : Finset ι) (t : ι → ℝ)
     (T σ : ℝ) (hT : 2 ≤ T) (hσ : 1/2 ≤ σ) (hσ1 : σ ≤ 1)
     (hgap : σ-1/2 ≤ 1/Real.log T) (ht : ∀ i ∈ S, |t i| ≤ T)
     (hsep : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) :
-    (S.card : ℝ) ≤ (3*Real.exp 4*(Real.log 2)⁻¹^8)*T^balancedDensityExponent σ*(Real.log T)^8 := by
+    (S.card : ℝ) ≤ (3*Real.exp 4*(Real.log 2)⁻¹^k)*T^balancedDensityExponent σ*(Real.log T)^k := by
   have hc := indexed_separated_card S t T (by linarith) ht hsep
   have hp := near_critical_height_power T σ hT hσ hσ1 hgap
-  have hu := mul_le_mul_of_nonneg_left (log_eight_unit T hT)
+  have hu := mul_le_mul_of_nonneg_left (log_nat_pow_unit k T hT)
     (show 0 ≤ 3*Real.exp 4*T^balancedDensityExponent σ by positivity)
   have hh : (S.card : ℝ) ≤ 3*Real.exp 4*T^balancedDensityExponent σ := by nlinarith
   apply hh.trans
   convert hu using 1 <;> ring
 
-theorem separated_high_shell_density_uniform :
-    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
-      ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ),
+theorem near_critical_separated_count {ι : Type*} (S : Finset ι) (t : ι → ℝ)
+    (T σ : ℝ) (hT : 2 ≤ T) (hσ : 1/2 ≤ σ) (hσ1 : σ ≤ 1)
+    (hgap : σ-1/2 ≤ 1/Real.log T) (ht : ∀ i ∈ S, |t i| ≤ T)
+    (hsep : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) :
+    (S.card : ℝ) ≤ (3*Real.exp 4*(Real.log 2)⁻¹^8)*T^balancedDensityExponent σ*(Real.log T)^8 :=
+  near_critical_separated_count_log 8 S t T σ hT hσ hσ1 hgap ht hsep
+
+theorem separated_high_shell_density_uniform_of_gap (k : ℕ)
+    (hgapBound : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
       (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
-      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 := by
-  obtain ⟨C,hC,hb⟩ := separated_high_shell_density
-  let D := 3*Real.exp 4*(Real.log 2)⁻¹^8
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k := by
+  obtain ⟨C,hC,hb⟩ := hgapBound
+  let D := 3*Real.exp 4*(Real.log 2)⁻¹^k
   have hD : 0 < D := by dsimp [D]; positivity
   refine ⟨C+D,by positivity,?_⟩
   intro T σ hT hσ hσ1 ι S t β ht hs hz
+  have hlog : 0 ≤ Real.log T := Real.log_nonneg (by linarith)
   by_cases hgap : 1/Real.log T ≤ σ-1/2
   · have hσ' : 1/2 < σ := by
       have hh : 0 < 1/Real.log T := by apply one_div_pos.mpr; exact Real.log_pos (by linarith)
       linarith
     apply (hb T σ hT hσ' hσ1 hgap S t β ht hs hz).trans
+    change _ ≤ (C+D)*T^balancedDensityExponent σ*(Real.log T)^k
     gcongr
     linarith
-  · have hc := near_critical_separated_count S t T σ (by linarith) hσ hσ1
+  · have hc := near_critical_separated_count_log k S t T σ (by linarith) hσ hσ1
       (le_of_lt (lt_of_not_ge hgap)) (fun i hi => (ht i hi).2) hs
     apply hc.trans
     dsimp [D]
+    change _ ≤ (C+D)*T^balancedDensityExponent σ*(Real.log T)^k
     gcongr
     linarith
+
+theorem separated_high_shell_density_uniform :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^8 :=
+  separated_high_shell_density_uniform_of_gap 8 separated_high_shell_density
+
+theorem separated_high_shell_density_uniform_log_five :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^5 :=
+  separated_high_shell_density_uniform_of_gap 5 separated_high_shell_density_log_five
 
 end Legendre.Density.Moment

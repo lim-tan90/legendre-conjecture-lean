@@ -464,3 +464,8 @@ gap `σ−1/2 ≥ 1/log T` and unit separation. The existing cumulative
 multiplicity-weighted Ingham comparator continues to cover all
 `σ∈[1/2,1]` and `T≥2` with an arbitrary positive exponent loss.
 [Exact theorem scope](layer4-ingham-shell-log-five.md).
+
+The cumulative logarithmic comparator supplies seven logarithms uniformly on
+`σ∈[1/2,1]`, and six on each fixed `[1/2,τ]` with `τ<1`. Both statements
+count analytic multiplicities at every `T≥2`.
+[Exact statements](layer4-ingham-shell-log-five.md#cumulative-density).
