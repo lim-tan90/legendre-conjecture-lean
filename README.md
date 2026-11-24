@@ -104,7 +104,7 @@ zero detector. Whole-line weighted moments and separated kernel packing now give
 cubic cardinality bound for the integral alternative. The polynomial branch now has
 `R ≤ C log^8(2Y+1)(Y^(2−2σ)+T X^(1−2σ))`. Balancing X=ceil(T),
 Y=T^(3/(2(2−σ))), covering heights, and restoring analytic multiplicities prove
-**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T`** for all σ∈[1/2,1], T≥2.
+**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^7 T`** for all σ∈[1/2,1], T≥2.
 Thus **Ingham 1940 density is proved with arbitrary positive height epsilon**,
 uniformly in σ; `layer4_ingham_comparator` is a closed proof. This does not
 prove the different Ingham 1937 short-interval results. [Exact scope](docs/layer4-compact-detector.md).
@@ -285,7 +285,15 @@ inner strip. The full cumulative density on any fixed
 all `T≥2`.
 [Proof and comparison statements](docs/layer4-weighted-fourth-moment.md).
 
-Current validation (2026-11-24) covers **4,385 build jobs**, **8,630 audited theorem declarations**, **372 Lean files** and **228 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Mollified zeta and local zero multiplicities (2026-11-24).** An actual
+circle average of `|ζM_X−1|²` now bounds the analytic multiplicities in
+a smaller disk. The denominator is the Jensen factor `log(R/r)`. For a
+center with real part at least `1+2δ`, the explicit condition
+`X^δ ≥ 2(2+δ⁻¹)^2` controls the center term. The independent comparison
+states the literal integral and includes the pole-exclusion condition.
+[Proof and scope](docs/layer4-mollified-jensen.md).
+
+Current validation (2026-11-24) covers **4,387 build jobs**, **8,652 audited theorem declarations**, **374 Lean files** and **229 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -1296,14 +1304,16 @@ visibility are adapted; the retained license is
 
 - **Pinned commit:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
 - **License:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
-- **Local paths:** Base dependency; direct theorem reuse in [`Legendre/Bertrand.lean`](Legendre/Bertrand.lean)
+- **Local paths:** [`Legendre/Bertrand.lean`](Legendre/Bertrand.lean) and [`Legendre/Layer4/JensenCircleMean.lean`](Legendre/Layer4/JensenCircleMean.lean).
 - **Adaptation and verification:** Pinned library dependency with source credit retained; current version v4.35.0
 
 #### Detailed provenance and file mapping
 
-Apache-2.0.  Used as the general library.  `Legendre.bertrand` is a thin
-re-export of mathlib's `Nat.exists_prime_lt_and_le_two_mul`; no other
-mathlib proof is copied into this repository.
+Apache-2.0 is retained in the repository [license](LICENSE). Bertrand
+re-exports `Nat.exists_prime_lt_and_le_two_mul`. The divisor comparison in
+[`Mathlib/Analysis/Complex/JensenFormula.lean`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Complex/JensenFormula.lean)
+is adapted to retain the circle average, with positive real radii and Lean
+4.35.0 imports, in [`JensenCircleMean.lean`](Legendre/Layer4/JensenCircleMean.lean).
 
 </details>
 
@@ -1324,6 +1334,13 @@ Scott McColm’s formalization; original files:
 `4c8fb7f7816508825089230e3730b69165e5e303`, **MIT-0** (retained
 [license](licenses/smccolm-Lean-MIT-0.txt)). Destinations:
 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/).
+Selected squared-error detector and analytic multiplicity arguments from
+`GuthMaynard/ClassicalDensity.lean` also supply the detector in
+[`MollifiedZetaJensen.lean`](Legendre/Layer4/MollifiedZetaJensen.lean).
+This adaptation uses the local finite Möbius series and its analytic
+multiplicities under Lean 4.35.0. The center estimates and the
+circle-average comparison are proved locally.
+
 `DirichletPolynomial`, `LargeValuesDefinitions`, `LargeValuesMatrix` and
 `TraceDispersion` supply four adapted modules; selected first-trace and
 dispersion-count proofs from `LargeValuesPoisson` and `LargeValuesFinal`

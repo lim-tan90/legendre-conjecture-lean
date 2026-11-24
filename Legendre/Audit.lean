@@ -404,6 +404,8 @@ import all Legendre.Layer4.DyadicHeightDensity
 import all Legendre.Layer4.GeometricHeightDensity
 import all Legendre.Layer4.InghamSharpLogarithms
 import all Legendre.Layer4.InghamMiddleStrip
+import all Legendre.Layer4.JensenCircleMean
+import all Legendre.Layer4.MollifiedZetaJensen
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
@@ -9315,3 +9317,27 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.IntegralAlternative.0.Legendre.Density.Moment.integral_alternative_count_of_input._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_four_four_fifths_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_sharp_weighted_fourth_moment_height_two_consumer"
+
+-- Mollified zeta circle means and analytic multiplicities.
+#print axioms Legendre.Density.Detector.analyticOrderAt_squaredErrorDetector_ge_zeta
+#print axioms Legendre.Density.Detector.finiteSeries_analyticAt
+#print axioms Legendre.Density.Detector.log_norm_squaredErrorDetector_le
+#print axioms Legendre.Density.Detector.mollifiedError.eq_1
+#print axioms Legendre.Density.Detector.mollifiedError_analyticAt
+#print axioms Legendre.Density.Detector.mollifiedError_eq_tsum_tail
+#print axioms Legendre.Density.Detector.norm_mollifiedError_le_re_four
+#print axioms Legendre.Density.Detector.norm_mollifiedError_le_right_half_plane
+#print axioms Legendre.Density.Detector.norm_zetaSquare_term_eq_re
+#print axioms Legendre.Density.Detector.squaredErrorDetector_analyticAt
+#print axioms Legendre.Literature.layer4_mollified_jensen_density_comparator
+#print axioms Legendre.Zeta.sum_divisor_le_circle_log_norm
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_mollified_circle
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_mollified_circle_near_one_center
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_mollified_circle_of_center_bound
+#audit_private_axioms "_private.Legendre.Layer4.JensenCircleMean.0.Legendre.Zeta.sum_divisor_le_circle_log_norm._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.finiteSeries_analyticAt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.norm_mollifiedError_le_re_four._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.norm_mollifiedError_le_right_half_plane._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.norm_mollifiedError_le_right_half_plane._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_jensen_disk_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_jensen_disk_consumer._simp_1_1"

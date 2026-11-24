@@ -16,7 +16,7 @@ kept separate from any fixed sublinear prime-gap exponent.
 @[expose] public section
 namespace Legendre.Literature
 open Filter Set Asymptotics MeasureTheory
-open scoped Topology
+open scoped Topology ArithmeticFunction.Moebius
 
 /-- Exactly the analytic properties supplied by completed Layer 2. -/
 def ZetaFoundationBenchmark : Prop :=
@@ -144,6 +144,20 @@ def InghamIntegralGapBenchmark : Prop :=
 theorem layer4_ingham_integral_gap_comparator : InghamIntegralGapBenchmark := by
   unfold InghamIntegralGapBenchmark
   exact Density.Moment.integral_alternative_balanced_fourth_moment_by_gap
+
+/-- Local Jensen comparison for the literal mollified zeta second moment. -/
+def MollifiedJensenDensityBenchmark : Prop :=
+  ∀ X : ℕ, 1 ≤ X → ∀ δ : ℝ, 0 < δ → ∀ c : ℂ, 1+2*δ ≤ c.re →
+    2*(2+δ⁻¹)^2 ≤ (X : ℝ)^δ → ∀ r R : ℝ, 0 < r → r < R →
+    (1 : ℂ) ∉ Metric.closedBall c R →
+    ∀ S : Finset ℂ, (∀ z ∈ S, z ∈ Metric.closedBall c r) →
+    (∑ z ∈ S, (Zeta.zeroMultiplicity z : ℝ)) ≤
+      (Real.circleAverage (fun z => ‖riemannZeta z*
+        Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X z-1‖^2) c R+
+        Real.log 2)/Real.log (R/r)
+
+theorem layer4_mollified_jensen_density_comparator : MollifiedJensenDensityBenchmark :=
+  Zeta.sum_zeta_multiplicity_le_mollified_circle_near_one_center
 
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=

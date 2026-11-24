@@ -86,7 +86,7 @@
 多项式分支现已得到
 `R ≤ C log^8(2Y+1)(Y^(2−2σ)+T X^(1−2σ))`。取 X=ceil(T)、
 Y=T^(3/(2(2−σ))) 平衡两分支，覆盖全部高度并恢复解析重数后，已证明
-**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T`**，适用于全部 σ∈[1/2,1]、T≥2。
+**`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^7 T`**，适用于全部 σ∈[1/2,1]、T≥2。
 因此 **Ingham 1940 曲线零密度估计的任意正 ε 指数版本已闭合证明**，常数对 σ 统一；
 `layer4_ingham_comparator` 已为闭合证明。这不等于不同的 Ingham 1937 素数短区间结论。[精确范围](docs/layer4-compact-detector.md)。
 实际对数相位相关核现已证明为 `C(sqrt(|t|)+U/|t|)`；
@@ -221,7 +221,13 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 对任意固定 `[α,τ] ⊂ (1/2,1)`，累计密度带 `(log T)^4`，保留全部
 `T≥2` 和解析重数。[证明与比较器](docs/layer4-weighted-fourth-moment.md)。
 
-当前验证（2026-11-24）包括 **4,385 项构建**、**8,630 个定理的公理审计**、**372 个 Lean 文件**和 **228 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**Mollified zeta 与局部零点重数（2026-11-24）。** 已证明外圆上
+`|ζM_X−1|²` 的实际圆周平均控制内圆盘里的解析重数，分母保留 Jensen 因子
+`log(R/r)`。当中心实部至少为 `1+2δ` 时，显式条件
+`X^δ ≥ 2(2+δ⁻¹)^2` 控制中心项。独立比较器保留实际积分和避开极点的条件。
+[证明与范围](docs/layer4-mollified-jensen.md)。
+
+当前验证（2026-11-24）包括 **4,387 项构建**、**8,652 个定理的公理审计**、**374 个 Lean 文件**和 **229 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -1094,14 +1100,17 @@ Natural-index overlap identities and logarithmic shifted-phase estimates are loc
 
 - **固定提交:** `56a005855ea17e0b0958f73ec801ae140b0a1679` (v4.35.0)
 - **许可证:** Apache-2.0 — [upstream license](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/LICENSE)
-- **本地位置:** 基础依赖；[`Legendre/Bertrand.lean`](Legendre/Bertrand.lean) 直接复用其定理
+- **本地位置:** [`Legendre/Bertrand.lean`](Legendre/Bertrand.lean) 与 [`Legendre/Layer4/JensenCircleMean.lean`](Legendre/Layer4/JensenCircleMean.lean)。
 - **适配与验证:** 通过固定依赖使用，保留原始来源；当前版本 v4.35.0
 
 #### 详细来源与文件映射
 
-Apache-2.0，作为基础库使用。`Legendre.bertrand` 是对 mathlib
-`Nat.exists_prime_lt_and_le_two_mul` 的轻量复用；本仓库没有整段复制
-mathlib 的证明。
+Apache-2.0 文本保留在[仓库许可证](LICENSE)。Bertrand 复用
+`Nat.exists_prime_lt_and_le_two_mul`。来自
+[`Mathlib/Analysis/Complex/JensenFormula.lean`](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Complex/JensenFormula.lean)
+的零点阶数比较已适配至
+[`JensenCircleMean.lean`](Legendre/Layer4/JensenCircleMean.lean)，
+保留圆周平均、正实半径及 Lean 4.35.0 导入。
 
 </details>
 
@@ -1122,6 +1131,11 @@ mathlib 的证明。
 `4c8fb7f7816508825089230e3730b69165e5e303`，许可证 **MIT-0**，
 [许可证原文](licenses/smccolm-Lean-MIT-0.txt)已保留。
 目标目录为 [`Legendre/Layer4/GuthMaynard/`](Legendre/Layer4/GuthMaynard/)。
+`GuthMaynard/ClassicalDensity.lean` 的平方误差检测器和部分解析重数论证
+适配至 [`MollifiedZetaJensen.lean`](Legendre/Layer4/MollifiedZetaJensen.lean)，
+使用本地有限 Möbius 级数与解析重数，适配 Lean 4.35.0。
+中心估计和圆周平均比较采用本地证明。
+
 `DirichletPolynomial`、`LargeValuesDefinitions`、`LargeValuesMatrix`、
 `TraceDispersion` 对应四个适配模块；`LargeValuesPoisson` 与 `LargeValuesFinal`
 的部分第一迹与有限计数证明对应 `SamplingDispersion.lean`。其余 `LargeValuesPoisson`、

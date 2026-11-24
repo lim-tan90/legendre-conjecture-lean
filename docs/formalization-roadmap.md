@@ -485,7 +485,7 @@ xi square, sharp Gamma quotients and an integrable Gaussian envelope prepare
 the critical-line fourth-moment contour. The actual O(T log^6 T) fourth moment,
 whole-line weighted moments and both detector branch counts are now proved.
 Balanced parameters, a real-height dyadic cover and restored analytic multiplicities
-prove N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^10 T, uniformly for σ∈[1/2,1], T≥2.
+prove N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) log^7 T, uniformly for σ∈[1/2,1], T≥2.
 `ingham_density_epsilon` and `layer4_ingham_comparator` close the Ingham 1940
 exponent target with arbitrary positive epsilon. C is existential, not numerical.
 The actual logarithmic-phase kernel C(sqrt(abs t)+U/abs t), harmonic packing
@@ -511,7 +511,7 @@ See [initial mean values](layer4-mean-values.md),
 |---|---|
 | Definition of N(σ,T) | Already proved finite, multiplicity-weighted in Layer 2 |
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
-| Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; log^10 bound, existential coefficient |
+| Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; uniform log^7 bound and log^5 on each fixed strip ending below one |
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
 | Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
 

@@ -445,6 +445,26 @@ theorem layer4_sharp_weighted_fourth_moment_height_two_consumer :
   obtain ⟨C,hC,hb⟩ := Moment.weighted_zeta_fourth_moment_log_four
   exact ⟨C,hC,hb 2 le_rfl⟩
 
+/-- The Jensen bound applies to a disk reaching into the critical strip. -/
+theorem layer4_mollified_jensen_disk_consumer (X : ℕ) (hX : 1 ≤ X)
+    (T : ℝ) (hT : 4 ≤ T) (S : Finset ℂ)
+    (hS : ∀ z ∈ S, z ∈ Metric.closedBall (4+(T : ℂ)*Complex.I) (7/2)) :
+    (∑ z ∈ S, (Zeta.zeroMultiplicity z : ℝ)) ≤
+      (Real.circleAverage (fun z => ‖Detector.mollifiedError X z‖^2)
+        (4+(T : ℂ)*Complex.I) (15/4)+Real.log 2)/Real.log (15/14) := by
+  have hPole : (1 : ℂ) ∉ Metric.closedBall (4+(T : ℂ)*Complex.I) (15/4) := by
+    intro h
+    have hn : ‖(1 : ℂ)-(4+(T : ℂ)*Complex.I)‖ ≤ 15/4 := by
+      simpa only [Metric.mem_closedBall, dist_eq_norm] using h
+    have hi := (Complex.abs_im_le_norm ((1 : ℂ)-(4+(T : ℂ)*Complex.I))).trans hn
+    have he : ((1 : ℂ)-(4+(T : ℂ)*Complex.I)).im = -T := by simp [Complex.mul_im]
+    rw [he,abs_neg] at hi
+    linarith [le_abs_self T]
+  have h := Zeta.sum_zeta_multiplicity_le_mollified_circle X hX
+    (4+(T : ℂ)*Complex.I) (by simp) (7/2) (15/4) (by norm_num) (by norm_num) hPole S hS
+  norm_num at h ⊢
+  exact h
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

@@ -314,9 +314,10 @@ The closed 1940 density comparator matches the height exponent cited in
 Chourasiya–Simonič, [arXiv:2507.15184v2, introduction](https://arxiv.org/html/2507.15184v2).
 The original result is Ingham, *On the estimation of N(σ,T)*, Quart. J. Math.
 os-11 (1940), [DOI 10.1093/qmath/os-11.1.201](https://doi.org/10.1093/qmath/os-11.1.201).
-The original sharp log^5 factor is not claimed: the local log^10 proof has the
-same height exponent after positive epsilon, in accordance with the repository
-comparison policy. This does not supply the 1937 short-interval theorem.
+The cumulative bound has seven logarithms uniformly on `[1/2,1]`.
+Every fixed strip ending below one has five logarithms, and every fixed
+inner strip has four. The 1937 short-interval theorem remains a Layer 5 goal.
+[Exact logarithmic statements](layer4-ingham-shell-log-five.md#cumulative-density).
 
 The closed `layer4_actual_halasz_comparator` also checks the proved actual
 logarithmic-phase Halasz energy, retaining its explicit R sqrt(T) and harmonic
@@ -474,3 +475,8 @@ The sharper weighted fourth-moment and balanced integral-branch comparators
 retain whole-line integrability, the actual compensated detector, the fixed
 cutoff range and the dependence on the real-part gap.
 [Proof and exact statements](layer4-weighted-fourth-moment.md).
+
+The local mollified-Jensen comparison proves a bound on the analytic
+multiplicities in a disk using a literal circle average of the squared
+Möbius mollifier error. The radii, pole-exclusion, and center cutoff
+conditions remain explicit. [Exact statement](layer4-mollified-jensen.md).
