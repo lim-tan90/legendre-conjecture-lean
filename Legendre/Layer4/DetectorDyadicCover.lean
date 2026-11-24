@@ -36,4 +36,26 @@ namespace Legendre.Density.Moment
   have he : 2 * (Real.log Y / Real.log 2) = (2 / Real.log 2) * Real.log Y := by ring
   exact hjup.le.trans (hratio2.trans_eq he)
 
+/-- The minimal cover has no block whose left endpoint is past the support. -/
+theorem detector_dyadic_cover_support (X : ℕ) (hX : 1 ≤ X) (Y : ℝ) (hY : 2 ≤ Y) :
+    ∃ J : ℕ, ⌊Y⌋₊ ≤ 2^J*X ∧ (J : ℝ) ≤ (2/Real.log 2)*Real.log Y ∧
+      (∀ j ∈ Finset.range J, (2 : ℝ)^j*(X : ℝ) ≤ Y) ∧
+      (J = 0 ∨ (2 : ℝ)^J*(X : ℝ) ≤ 2*Y) := by
+  obtain ⟨M,_,hM,hMlog⟩ := moment_detector_dyadic_cover X hX Y hY
+  let h : ∃ j : ℕ, ⌊Y⌋₊ ≤ 2^j*X := ⟨M,hM⟩
+  let J := Nat.find h
+  have hJ : J ≤ M := Nat.find_min' h hM
+  have hleft (j : ℕ) (hj : j ∈ Finset.range J) : (2 : ℝ)^j*(X : ℝ) ≤ Y := by
+    have hf : 2^j*X < ⌊Y⌋₊ := Nat.lt_of_not_ge (Nat.find_min h (Finset.mem_range.mp hj))
+    have hf' : (2 : ℝ)^j*(X : ℝ) ≤ (⌊Y⌋₊ : ℝ) := by exact_mod_cast hf.le
+    exact hf'.trans (Nat.floor_le (by linarith : 0 ≤ Y))
+  refine ⟨J,Nat.find_spec h,(by exact_mod_cast hJ : (J : ℝ) ≤ M).trans hMlog,hleft,?_⟩
+  by_cases hz : J = 0
+  · exact Or.inl hz
+  · right
+    have hprev : J-1 ∈ Finset.range J := Finset.mem_range.mpr (by omega)
+    have hp := hleft (J-1) hprev
+    rw [show J = J-1+1 from by omega, pow_succ]
+    nlinarith
+
 end Legendre.Density.Moment

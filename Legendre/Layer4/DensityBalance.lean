@@ -77,23 +77,37 @@ theorem balanced_power_identity (T σ : ℝ) (hT : 0 < T) (hσ : σ < 2) :
   field_simp [hd]
   ring
 
-theorem balanced_polynomial_powers (T X σ : ℝ) (hT : 1 ≤ T) (hTX : T ≤ X)
+theorem balanced_polynomial_endpoint_powers (T X σ : ℝ) (hT : 1 ≤ T) (hTX : T ≤ X)
     (hσ : 1/2 ≤ σ) (hσ1 : σ ≤ 1) :
-    (T^detectorBalanceExponent σ)^(2-2*σ)+T*X^(1-2*σ) ≤ 2*T^balancedDensityExponent σ := by
+    (T^detectorBalanceExponent σ)^(2-2*σ) = T^balancedDensityExponent σ ∧
+      T*X^(1-2*σ) ≤ T^(2-2*σ) := by
   have hTp : 0 < T := lt_of_lt_of_le zero_lt_one hT
-  have he : (T^detectorBalanceExponent σ)^(2-2*σ) = T^balancedDensityExponent σ := by
-    rw [← Real.rpow_mul hTp.le]
+  constructor
+  · rw [← Real.rpow_mul hTp.le]
     congr 1
     unfold detectorBalanceExponent balancedDensityExponent
     have hd : 2-σ ≠ 0 := by linarith
     field_simp [hd]
-  have hx := Real.rpow_le_rpow_of_nonpos hTp hTX (by linarith : 1-2*σ ≤ 0)
-  have hb : T*T^(1-2*σ) = T^(2-2*σ) := by
-    rw [show 2-2*σ = 1+(1-2*σ) by ring,Real.rpow_add hTp,Real.rpow_one]
-  have ht := Real.rpow_le_rpow_of_exponent_le hT (balancedDensityExponent_ge_two_defect σ hσ hσ1)
-  rw [he]
-  have h := (mul_le_mul_of_nonneg_left hx hTp.le).trans (hb.le.trans ht)
+  · have hx := Real.rpow_le_rpow_of_nonpos hTp hTX (by linarith : 1-2*σ ≤ 0)
+    have hb : T*T^(1-2*σ) = T^(2-2*σ) := by
+      rw [show 2-2*σ = 1+(1-2*σ) by ring,Real.rpow_add hTp,Real.rpow_one]
+    exact (mul_le_mul_of_nonneg_left hx hTp.le).trans_eq hb
+
+theorem balanced_polynomial_powers (T X σ : ℝ) (hT : 1 ≤ T) (hTX : T ≤ X)
+    (hσ : 1/2 ≤ σ) (hσ1 : σ ≤ 1) :
+    (T^detectorBalanceExponent σ)^(2-2*σ)+T*X^(1-2*σ) ≤ 2*T^balancedDensityExponent σ := by
+  obtain ⟨hY,hX⟩ := balanced_polynomial_endpoint_powers T X σ hT hTX hσ hσ1
+  rw [hY]
+  have h := hX.trans (Real.rpow_le_rpow_of_exponent_le hT
+    (balancedDensityExponent_ge_two_defect σ hσ hσ1))
   linarith
+
+theorem balanced_exponent_defect_relation (σ : ℝ) (hσ : σ ≤ 1) :
+    balancedDensityExponent σ-(2-2*σ) = (1-σ)*(1-balancedDensityExponent σ) := by
+  unfold balancedDensityExponent
+  have h : 2-σ ≠ 0 := by linarith
+  field_simp [h]
+  ring
 
 theorem balanced_log_cost (T σ : ℝ) (hT : 2 ≤ T) (hσ : 1/2 ≤ σ) (hσ1 : σ ≤ 1) :
     1+Real.log (2*T^detectorBalanceExponent σ+1) ≤ 8*Real.log T := by

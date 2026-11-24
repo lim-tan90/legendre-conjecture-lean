@@ -41,26 +41,26 @@ theorem four_logs_le_of_le (k : ℕ) (hk : 4 ≤ k) (L : ℝ) (hL : Real.log 2 �
       conv_rhs => rw [show L^k = L^4*L^(k-4) by rw [←pow_add, ←hoff]]
       ring
 
-/-- Combine the polynomial count with the fourth-log integral count. -/
-theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)
-    (hpoly : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+/-- Retain the two terms of the detector dichotomy and their constants. -/
+theorem separated_high_shell_density_of_branches (τ : ℝ) (hτ : τ ≤ 1)
+    (P₀ : ℝ → ℝ → ℝ) (hpoly : ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ τ →
       ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, β i ∈ Icc σ 1) →
       (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
         (T^detectorBalanceExponent σ)‖) →
-      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k) :
-    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+      (S.card : ℝ) ≤ P₀ T σ) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ τ →
       1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
       (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
       (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
       (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
-      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k := by
+      (S.card : ℝ) ≤ P₀ T σ+C*T^balancedDensityExponent σ*(Real.log T)^4 := by
   classical
-  obtain ⟨CP,hCP,hp⟩ := hpoly
   obtain ⟨CI,hCI,hi⟩ := integral_alternative_balanced
-  refine ⟨CP+CI*(Real.log 2)⁻¹^(k-4),by positivity,?_⟩
-  intro T σ hT hσ hσ1 hgap ι S t β ht hs hz
+  refine ⟨CI,hCI,?_⟩
+  intro T σ hT hσ hστ hgap ι S t β ht hs hz
+  have hσ1 := hστ.trans hτ
   obtain ⟨X,hX,hTX,hX2,hiX⟩ := hi T σ (by linarith) hσ hσ1 hgap
   let Y := T^detectorBalanceExponent σ
   let p : ι → Prop := fun i => (1/16 : ℝ) ≤
@@ -73,7 +73,7 @@ theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)
     rw [Real.rpow_one] at h
     exact (by linarith : 4 ≤ T).trans h
   have hY2 : Y ≤ (T/2)^2 := balanced_scale_below_half_height_square T σ (by linarith) hσ1
-  have hP := hp T σ (by linarith) hσ.le hσ1 X hX hTX P t β
+  have hP := hpoly T σ (by linarith) hσ.le hστ X hX hTX P t β
     (fun i hi => (ht i (Finset.mem_filter.mp hi).1).2)
     (fun i hi j hj => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1)
     (fun i hi => ⟨(hz i (Finset.mem_filter.mp hi).1).1,(hz i (Finset.mem_filter.mp hi).1).2.1⟩)
@@ -98,15 +98,42 @@ theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)
     (fun i hi => (ht i (Finset.mem_filter.mp hi).1).2)
     (fun i hi j hj => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1)
     (fun i hi => ⟨(hz i (Finset.mem_filter.mp hi).1).1,(hz i (Finset.mem_filter.mp hi).1).2.1⟩) hNlarge
-  have hL : Real.log 2 ≤ Real.log T := Real.log_le_log (by norm_num) (by linarith)
-  have hN' := hN.trans (mul_le_mul_of_nonneg_left (four_logs_le_of_le k hk (Real.log T) hL)
-    (show 0 ≤ CI*T^balancedDensityExponent σ by positivity))
   have hcard : (S.card : ℝ) = (P.card : ℝ)+(N.card : ℝ) := by
     exact_mod_cast (Finset.card_filter_add_card_filter_not (s := S) (p := p)).symm
   rw [hcard]
-  have hh := add_le_add hP hN'
-  convert hh using 1
-  ring
+  exact add_le_add hP hN
+
+/-- Combine the polynomial count with the fourth-log integral count. -/
+theorem separated_high_shell_density_of_polynomial (k : ℕ) (hk : 4 ≤ k)
+    (hpoly : ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 2 ≤ T → 1/2 ≤ σ → σ ≤ 1 →
+      ∀ X : ℕ, 1 ≤ X → T ≤ X → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I)
+        (T^detectorBalanceExponent σ)‖) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k) :
+    ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →
+      1/Real.log T ≤ σ-1/2 → ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ C*T^balancedDensityExponent σ*(Real.log T)^k := by
+  obtain ⟨CP,hCP,hp⟩ := hpoly
+  obtain ⟨CI,hCI,hb⟩ := separated_high_shell_density_of_branches 1 le_rfl
+    (fun T σ => CP*T^balancedDensityExponent σ*(Real.log T)^k) hp
+  refine ⟨CP+CI*(Real.log 2)⁻¹^(k-4),by positivity,?_⟩
+  intro T σ hT hσ hσ1 hgap ι S t β ht hs hz
+  have hL : Real.log 2 ≤ Real.log T := Real.log_le_log (by norm_num) (by linarith)
+  have hN := mul_le_mul_of_nonneg_left (four_logs_le_of_le k hk (Real.log T) hL)
+    (show 0 ≤ CI*T^balancedDensityExponent σ by positivity)
+  calc
+    _ ≤ CP*T^balancedDensityExponent σ*(Real.log T)^k+
+        CI*T^balancedDensityExponent σ*(Real.log T)^4 :=
+      hb T σ hT hσ hσ1 hgap S t β ht hs hz
+    _ ≤ CP*T^balancedDensityExponent σ*(Real.log T)^k+
+        CI*T^balancedDensityExponent σ*((Real.log 2)⁻¹^(k-4)*(Real.log T)^k) :=
+      add_le_add le_rfl hN
+    _ = _ := by ring
 
 theorem separated_high_shell_density :
     ∃ C : ℝ, 0 < C ∧ ∀ T σ : ℝ, 128 ≤ T → 1/2 < σ → σ ≤ 1 →

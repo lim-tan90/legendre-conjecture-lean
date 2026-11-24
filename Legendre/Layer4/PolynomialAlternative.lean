@@ -44,6 +44,41 @@ theorem polynomial_actual_block {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
     have := polynomialBlockConstant_pos
     positivity
 
+/-- Keep the dyadic length in both power terms of the polynomial branch. -/
+theorem polynomial_actual_block_length :
+    ∃ C : ℝ, 0 < C ∧ ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
+      (X U : ℕ), 1 ≤ U → ∀ T Y σ : ℝ,
+      1 ≤ T → 2 ≤ Y → (U : ℝ) ≤ Y → 1/2 ≤ σ →
+      (∀ i ∈ S, |t i| ≤ T) → (∀ i ∈ S, β i ∈ Icc σ 1) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∑ i ∈ S, ‖∑ n ∈ Finset.Ioc U (2*U), Detector.Smooth.polynomialCoefficient X Y n*
+        (n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2) ≤
+        C*(1+Real.log (2*Y+1))^3*((U : ℝ)+T)*(U : ℝ)^(1-2*σ) := by
+  obtain ⟨C,hC,hb⟩ := dyadic_variable_line_samples
+  refine ⟨2*C,by positivity,?_⟩
+  intro ι S t β X U hU T Y σ hT hY hUY hσ ht hβ hs
+  let a := Detector.Smooth.polynomialCoefficient X Y
+  have hUp : (0 : ℝ) < U := by exact_mod_cast hU
+  have hU₁ : (1 : ℝ) ≤ U := by exact_mod_cast hU
+  have hE := polynomialBlock_divisor_energy U hU a σ (by linarith)
+    (fun n _ => Detector.Smooth.polynomialCoefficient_norm X Y (by linarith) n)
+  rw [polynomialBlock_energy] at hE
+  have h := hb S t β U a T σ hU hT (by linarith) ht hβ hs
+  have hlog : 1+Real.log (2*(U : ℝ)) ≤ 1+Real.log (2*Y+1) :=
+    add_le_add_right (Real.log_le_log (by positivity) (by linarith)) _
+  have hlog0 : 0 ≤ 1+Real.log (2*(U : ℝ)) :=
+    le_trans (by norm_num) (add_le_add_right
+      (Real.log_nonneg (show 1 ≤ 2*(U : ℝ) by linarith)) 1)
+  have hp : (U : ℝ)*(U : ℝ)^(-2*σ) = (U : ℝ)^(1-2*σ) := by
+    rw [show 1-2*σ = 1+(-2*σ) by ring, Real.rpow_add hUp, Real.rpow_one]
+  calc
+    _ ≤ C*(T+(U : ℝ))*(2*(U : ℝ)*(1+Real.log (2*U))^3*(U : ℝ)^(-2*σ)) :=
+      h.trans (mul_le_mul_of_nonneg_left hE (by positivity))
+    _ = 2*C*(1+Real.log (2*U))^3*((U : ℝ)+T)*(U : ℝ)^(1-2*σ) := by rw [← hp]; ring
+    _ ≤ _ := by
+      have hlogR : 0 ≤ 1+Real.log (2*Y+1) := hlog0.trans hlog
+      gcongr
+
 theorem polynomial_actual_block_log_three :
     ∃ C : ℝ, 0 < C ∧ ∀ {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
       (X U : ℕ), 1 ≤ X → X ≤ U → ∀ T Y σ : ℝ,
@@ -53,32 +88,19 @@ theorem polynomial_actual_block_log_three :
       (∑ i ∈ S, ‖∑ n ∈ Finset.Ioc U (2*U), Detector.Smooth.polynomialCoefficient X Y n*
         (n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2) ≤
         C*(1+Real.log (2*Y+1))^3*(Y^(2-2*σ)+T*(X : ℝ)^(1-2*σ)) := by
-  obtain ⟨C,hC,hb⟩ := dyadic_variable_line_samples
-  refine ⟨2*C, by positivity,?_⟩
+  obtain ⟨C,hC,hb⟩ := polynomial_actual_block_length
+  refine ⟨C,hC,?_⟩
   intro ι S t β X U hX hXU T Y σ hT hY hσ hσ1 ht hβ hs
   have hU : 1 ≤ U := hX.trans hXU
-  have hUp : (0 : ℝ) < U := by exact_mod_cast hU
   let a := Detector.Smooth.polynomialCoefficient X Y
   by_cases hUY : (U : ℝ) ≤ Y
-  · have hE := polynomialBlock_divisor_energy U hU a σ (by linarith)
-      (fun n _ => Detector.Smooth.polynomialCoefficient_norm X Y (by linarith) n)
-    rw [polynomialBlock_energy] at hE
-    have h := hb S t β U a T σ hU hT (by linarith) ht hβ hs
+  · have h := hb S t β X U hU T Y σ hT hY hUY hσ ht hβ hs
     have hS := block_endpoint_powers X U hX hXU T Y σ (by linarith) hUY hσ hσ1
-    have hlog : 1+Real.log (2*(U : ℝ)) ≤ 1+Real.log (2*Y+1) :=
-      add_le_add_right (Real.log_le_log (by positivity) (by linarith)) _
-    have hlog0 : 0 ≤ 1+Real.log (2*(U : ℝ)) := by
-      have hu : (1 : ℝ) ≤ U := by exact_mod_cast hU
-      linarith [Real.log_nonneg (show 1 ≤ 2*(U : ℝ) by linarith)]
-    have hp : (U : ℝ)*(U : ℝ)^(-2*σ) = (U : ℝ)^(1-2*σ) := by
-      rw [show 1-2*σ = 1+(-2*σ) by ring, Real.rpow_add hUp, Real.rpow_one]
-    calc
-      _ ≤ C*(T+(U : ℝ))*(2*(U : ℝ)*(1+Real.log (2*U))^3*(U : ℝ)^(-2*σ)) :=
-        h.trans (mul_le_mul_of_nonneg_left hE (by positivity))
-      _ = 2*C*(1+Real.log (2*U))^3*(((U : ℝ)+T)*(U : ℝ)^(1-2*σ)) := by rw [← hp]; ring
-      _ ≤ _ := by
-        have hlogR : 0 ≤ 1+Real.log (2*Y+1) := hlog0.trans hlog
-        gcongr
+    have hL : 0 ≤ 1+Real.log (2*Y+1) := by
+      linarith [Real.log_nonneg (show 1 ≤ 2*Y+1 by linarith)]
+    exact h.trans (by
+      rw [mul_assoc]
+      exact mul_le_mul_of_nonneg_left hS (by positivity))
   · have hzero (i : ι) :
         (∑ n ∈ Finset.Ioc U (2*U), a n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))) = 0 := by
       apply Finset.sum_eq_zero
@@ -90,6 +112,21 @@ theorem polynomial_actual_block_log_three :
     simp_rw [hzero,norm_zero,zero_pow (by norm_num : 2 ≠ 0),Finset.sum_const_zero]
     have hlog := Real.log_nonneg (show 1 ≤ 2*Y+1 by linarith)
     positivity
+
+theorem detectorTail_dyadic_count_lower {ι : Type*} (S : Finset ι) (t β : ι → ℝ)
+    (X J : ℕ) (hX : 1 ≤ X) (Y : ℝ) (hY : 2 ≤ Y) (hYJ : ⌊Y⌋₊ ≤ 2^J*X)
+    (hlarge : ∀ i ∈ S, (1/16 : ℝ) ≤ ‖Detector.Smooth.detectorTail X ((β i : ℂ)+(t i : ℂ)*I) Y‖) :
+    (S.card : ℝ)/256 ≤ ∑ i ∈ S,
+      ‖∑ j ∈ Finset.range J, ∑ n ∈ Finset.Ioc (2^j*X) (2*(2^j*X)),
+        Detector.Smooth.polynomialCoefficient X Y n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2 := by
+  have h := Finset.sum_le_sum (s := S) (fun i hi =>
+    show (1/256 : ℝ) ≤ ‖∑ j ∈ Finset.range J, ∑ n ∈ Finset.Ioc (2^j*X) (2*(2^j*X)),
+        Detector.Smooth.polynomialCoefficient X Y n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I))‖^2 from by
+      have hh := hlarge i hi
+      rw [Detector.Smooth.detectorTail_blocks X J hX Y (by linarith) hYJ] at hh
+      nlinarith [norm_nonneg (∑ j ∈ Finset.range J, ∑ n ∈ Finset.Ioc (2^j*X) (2*(2^j*X)),
+        Detector.Smooth.polynomialCoefficient X Y n*(n : ℂ)^(-((β i : ℂ)+(t i : ℂ)*I)))])
+  simpa only [Finset.sum_const,nsmul_eq_mul,div_eq_mul_inv,one_mul] using h
 
 theorem polynomial_alternative_count_of_block (k : ℕ) (K : ℝ) (hK : 0 < K)
     (hb : ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ)
@@ -124,14 +161,7 @@ theorem polynomial_alternative_count_of_block (k : ℕ) (K : ℝ) (hK : 0 < K)
   have hblock (j : ℕ) : (∑ i ∈ S, ‖f i j‖^2) ≤ K*L^k*G := by
     apply hb S t β X (2^j*X) hX _ T Y σ hT hY hσ hσ1 ht hβ hs
     exact Nat.le_mul_of_pos_left X (by positivity)
-  have hlower : (S.card : ℝ)/256 ≤ ∑ i ∈ S, ‖∑ j ∈ Finset.range J, f i j‖^2 := by
-    have h := Finset.sum_le_sum (s := S) (fun i hi =>
-      show (1/256 : ℝ) ≤ ‖∑ j ∈ Finset.range J, f i j‖^2 from by
-        have hh := hlarge i hi
-        rw [Detector.Smooth.detectorTail_blocks X J hX Y (by linarith) hcover] at hh
-        change (1/16 : ℝ) ≤ ‖∑ j ∈ Finset.range J, f i j‖ at hh
-        nlinarith [norm_nonneg (∑ j ∈ Finset.range J, f i j)])
-    simpa only [Finset.sum_const,nsmul_eq_mul,div_eq_mul_inv,one_mul] using h
+  have hlower := detectorTail_dyadic_count_lower S t β X J hX Y hY hcover hlarge
   have hupper : (∑ i ∈ S, ‖∑ j ∈ Finset.range J, f i j‖^2) ≤
       (J : ℝ)^2*(K*L^k*G) := by
     apply (moment_finite_block_square S J f).trans

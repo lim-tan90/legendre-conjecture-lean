@@ -48,3 +48,28 @@ the height-summation logarithm. The bounded-height cases are included
 using the finite count up to height 128.
 [Near-critical band](../Legendre/Layer4/NearCriticalDensity.lean)
 [Geometric sum](../Legendre/Layer4/GeometricHeightDensity.lean)
+
+## Fifth-log bound on fixed strips
+
+For every fixed `τ<1`, one constant `Cτ` satisfies
+`N(σ,T) ≤ Cτ T^E(σ) (log T)^5` on the closed strip `[1/2,τ]`
+for every `T≥2`, counting analytic multiplicities. The full closed interval
+through `σ=1` has the uniform seven-log bound above.
+[Fixed-strip theorem](../Legendre/Layer4/InghamSharpLogarithms.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)
+
+The polynomial count keeps the per-block endpoint powers
+`U^(2−2σ)` and `T U^(1−2σ)` before summing. Weighted Cauchy–Schwarz with
+weights `U^(1−σ)+√T U^(1/2−σ)` keeps the increasing part geometric on
+every fixed strip below one. After including the integral branch and
+summing heights, the separated count is bounded by a constant times
+`T^E(σ) (log T)^4 + T^(2−2σ) (log T)^5`. Multiplicity restoration costs
+one logarithm.
+[Polynomial estimate](../Legendre/Layer4/PolynomialAlternativeSplit.lean)
+
+If `T^(1−E(σ)) ≤ (log T)^4`, the total-zero bound `O(T log T)`
+already gives the fifth-log estimate. Otherwise the identity
+`E(σ)−(2−2σ)=(1−σ)(1−E(σ))` absorbs the final logarithm for
+`σ≤3/4`. Above `3/4) on a fixed strip it gives a positive lower bound
+depending only on `τ` for the exponent difference, which also absorbs
+the final logarithm. Low heights are covered by the finite count at 128.

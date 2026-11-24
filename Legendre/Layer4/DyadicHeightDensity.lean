@@ -107,6 +107,38 @@ theorem height_shell_power_log (H T σ : ℝ) (hH : 128 ≤ H) (hT : 2 ≤ T)
       (128*8^8)*T^balancedDensityExponent σ*(Real.log T)^8 :=
   height_shell_power_log_nat 8 H T σ hH hT hHT hσ hσ1
 
+theorem separated_high_density_shell_sum_of_count (σ : ℝ) (G : ℝ → ℝ)
+    (hc : ∀ T : ℝ, 128 ≤ T →
+      ∀ {ι : Type u} (S : Finset ι) (t β : ι → ℝ),
+      (∀ i ∈ S, T/2 ≤ |t i| ∧ |t i| ≤ T) →
+      (∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|) →
+      (∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) →
+      (S.card : ℝ) ≤ G T)
+    {ι : Type u} (S : Finset ι) (t β : ι → ℝ) (T : ℝ) (J : ℕ)
+    (hJl : T ≤ (2 : ℝ)^J)
+    (ht : ∀ i ∈ S, 64 < |t i| ∧ |t i| ≤ T)
+    (hs : ∀ i ∈ S, ∀ j ∈ S, i ≠ j → 1 ≤ |t i-t j|)
+    (hz : ∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) :
+    (S.card : ℝ) ≤ ∑ j ∈ Finset.range J, G (128*(2 : ℝ)^j) := by
+  classical
+  have hcard := height_shell_card_le S t J (fun i hi => (ht i hi).1)
+    (fun i hi => (ht i hi).2.trans (hJl.trans
+      (le_mul_of_one_le_left (by positivity) (by norm_num))))
+  apply hcard.trans
+  apply Finset.sum_le_sum
+  intro j hj
+  let F := S.filter (fun i => 64*(2 : ℝ)^j < |t i| ∧ |t i| ≤ 128*(2 : ℝ)^j)
+  let H := 128*(2 : ℝ)^j
+  have hpow : (1 : ℝ) ≤ 2^j := one_le_pow₀ (by norm_num)
+  have hH : 128 ≤ H := by dsimp [H]; linarith
+  exact hc H hH F t β
+    (by
+      intro i hi
+      have hh := (Finset.mem_filter.mp hi).2
+      exact ⟨by dsimp [H]; linarith [hh.1], hh.2⟩)
+    (fun i hi j hj hij => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1 hij)
+    (fun i hi => hz i (Finset.mem_filter.mp hi).1)
+
 /-- Sum a uniform shell count, keeping each height power before bounding
 the resulting sum. -/
 theorem separated_high_density_shell_sum (k : ℕ) (C : ℝ) (hC : 0 ≤ C)
@@ -124,27 +156,19 @@ theorem separated_high_density_shell_sum (k : ℕ) (C : ℝ) (hC : 0 ≤ C)
     (hz : ∀ i ∈ S, σ ≤ β i ∧ β i ≤ 1 ∧ riemannZeta ((β i : ℂ)+(t i : ℂ)*I) = 0) :
     (S.card : ℝ) ≤ C*(8*Real.log T)^k *
       ∑ j ∈ Finset.range J, (128*(2 : ℝ)^j)^balancedDensityExponent σ := by
-  classical
-  have hcard := height_shell_card_le S t J (fun i hi => (ht i hi).1)
-    (by intro i hi; exact (ht i hi).2.trans (by nlinarith))
+  have hcard := separated_high_density_shell_sum_of_count σ
+    (fun H => C*H^balancedDensityExponent σ*(Real.log H)^k)
+    (fun H hH {ι} S t β ht hs hz => hc H σ hH hσ hσ1 S t β ht hs hz)
+    S t β T J hJl ht hs hz
   rw [Finset.mul_sum]
   apply hcard.trans
   apply Finset.sum_le_sum
   intro j hj
-  let F := S.filter (fun i => 64*(2 : ℝ)^j < |t i| ∧ |t i| ≤ 128*(2 : ℝ)^j)
   let H := 128*(2 : ℝ)^j
   have hpow : (1 : ℝ) ≤ 2^j := one_le_pow₀ (by norm_num)
   have hH : 128 ≤ H := by dsimp [H]; linarith
-  have hF := hc H σ hH hσ hσ1 F t β
-    (by
-      intro i hi
-      have hh := (Finset.mem_filter.mp hi).2
-      exact ⟨by dsimp [H]; linarith [hh.1], hh.2⟩)
-    (fun i hi j hj hij => hs i (Finset.mem_filter.mp hi).1 j (Finset.mem_filter.mp hj).1 hij)
-    (fun i hi => hz i (Finset.mem_filter.mp hi).1)
   have hl := height_shell_log_le H T hH hT (height_shell_upper J j T hj hJu)
   calc
-    _ ≤ C*H^balancedDensityExponent σ*(Real.log H)^k := hF
     _ ≤ C*H^balancedDensityExponent σ*(8*Real.log T)^k :=
       mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (Real.log_nonneg (by linarith)) hl k)
         (by positivity)

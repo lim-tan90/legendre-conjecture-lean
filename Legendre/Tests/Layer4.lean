@@ -413,6 +413,17 @@ theorem layer4_ingham_log_six_three_quarters_consumer :
   norm_num [Moment.balancedDensityExponent] at h
   exact h
 
+/-- The five-log estimate also reaches an upper cutoff above 3/4. -/
+theorem layer4_ingham_log_five_seven_eighths_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      (Zeta.zeroDensityCount (7/8 : ℝ) T : ℝ) ≤ C*T^(1/3 : ℝ)*(Real.log T)^5 := by
+  obtain ⟨C,hC,hb⟩ := Zeta.ingham_density_log_five_away_one (7/8) (by norm_num)
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  have h := hb (7/8) (by norm_num : (7/8 : ℝ) ∈ Set.Icc (1/2 : ℝ) (7/8)) T hT
+  norm_num [Moment.balancedDensityExponent] at h
+  exact h
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

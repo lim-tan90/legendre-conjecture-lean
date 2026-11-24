@@ -402,6 +402,8 @@ import all Legendre.Layer4.SeparatedShellDensity
 import all Legendre.Layer4.NearCriticalDensity
 import all Legendre.Layer4.DyadicHeightDensity
 import all Legendre.Layer4.GeometricHeightDensity
+import all Legendre.Layer4.InghamSharpLogarithms
+import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
 import all Legendre.Layer4.DistributionMomentCutoff
@@ -4486,13 +4488,6 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.Zeta.ingham_density_epsilon
 #print axioms Legendre.Zeta.ingham_density_log_bound
 #print axioms Legendre.Zeta.zeroDensityCount_le_of_cutoff_sample_bound
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_2"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_3"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_4"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_5"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_6"
-#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_powers._simp_1_7"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorPolynomial.0.Legendre.Density.Detector.Smooth.detectorTail_extended._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.InghamMultiplicity.0.Legendre.Zeta.zeroDensityCount_le_of_cutoff_sample_bound._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.PolynomialBlockCost.0.Legendre.Density.Moment.block_endpoint_powers._proof_1_1"
@@ -9260,3 +9255,39 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.NearCriticalDensity.0.Legendre.Density.Moment.log_nat_pow_unit._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_seven_critical_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_six_three_quarters_consumer"
+
+-- Fifth-log Ingham density on fixed strips.
+#print axioms Legendre.Density.Moment.balanced_exponent_defect_relation
+#print axioms Legendre.Density.Moment.balanced_polynomial_endpoint_powers
+#print axioms Legendre.Density.Moment.detectorTail_dyadic_count_lower
+#print axioms Legendre.Density.Moment.detector_dyadic_cover_support
+#print axioms Legendre.Density.Moment.detector_dyadic_increasing_sum
+#print axioms Legendre.Density.Moment.finite_blocks_weighted_energy
+#print axioms Legendre.Density.Moment.lower_strip_absorb_tail_log
+#print axioms Legendre.Density.Moment.polynomial_actual_block_length
+#print axioms Legendre.Density.Moment.polynomial_alternative_balanced_split
+#print axioms Legendre.Density.Moment.polynomial_alternative_count_split
+#print axioms Legendre.Density.Moment.separated_high_density_shell_sum_of_count
+#print axioms Legendre.Density.Moment.separated_high_density_split
+#print axioms Legendre.Density.Moment.separated_high_shell_density_of_branches
+#print axioms Legendre.Density.Moment.separated_high_shell_density_split
+#print axioms Legendre.Zeta.ingham_density_log_five_away_one
+#print axioms Legendre.Zeta.ingham_density_log_five_up_to_three_quarters
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_high_separated_count
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_exponent_defect_relation._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DensityBalance.0.Legendre.Density.Moment.balanced_polynomial_endpoint_powers._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDyadicCover.0.Legendre.Density.Moment.detector_dyadic_cover_support._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorDyadicCover.0.Legendre.Density.Moment.detector_dyadic_cover_support._proof_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_ingham_log_five_seven_eighths_consumer"

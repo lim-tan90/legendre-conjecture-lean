@@ -51,6 +51,24 @@ theorem zeroDensityCount_le_of_cutoff_sample_bound (σ U : ℝ) {T B : ℝ} (hT 
   rw [hsplit,Nat.cast_add]
   linarith
 
+/-- Restore analytic multiplicities from one unit-separated high-zero count. -/
+theorem zeroDensityCount_le_of_high_separated_count (σ T B : ℝ) (hT : 7 ≤ T)
+    (hsamples : ∀ S : Finset ℂ,
+      (∀ ρ ∈ S, 64 < |ρ.im| ∧ |ρ.im| ≤ T) →
+      (∀ ρ ∈ S, ∀ z ∈ S, ρ ≠ z → 1 ≤ |ρ.im-z.im|) →
+      (∀ ρ ∈ S, σ ≤ ρ.re ∧ ρ.re ≤ 1 ∧ riemannZeta ρ = 0) →
+      (S.card : ℝ) ≤ B) :
+    (zeroDensityCount σ T : ℝ) ≤ (zeroCount 64 : ℝ)+2*densitySelectionConstant*Real.log T*B := by
+  apply zeroDensityCount_le_of_cutoff_sample_bound σ 64 hT
+  intro S hS hheight hsep
+  refine hsamples S ?_ hsep ?_
+  · intro ρ hρ
+    rw [abs_of_pos (hS ρ hρ).1.2.1]
+    exact ⟨hheight ρ hρ,(hS ρ hρ).1.2.2⟩
+  · intro ρ hρ
+    have hz := hS ρ hρ
+    exact ⟨hz.2,hz.1.1.2.2.le,hz.1.1.1⟩
+
 end Legendre.Zeta
 namespace Legendre.Density.Moment
 
@@ -93,19 +111,13 @@ theorem ingham_density_log_bound_of_samples (k : ℕ) (τ : ℝ) (hτ : τ ≤ 1
     dsimp [D]
     nlinarith
   by_cases hlarge : 128 ≤ T
-  · have hcount := zeroDensityCount_le_of_cutoff_sample_bound σ 64 (by linarith : 7 ≤ T)
-      (B := C*T^balancedDensityExponent σ*(Real.log T)^k) (by
-        intro S hS hheight hsep
-        apply hc T σ hlarge hσ.1 hσ.2 S Complex.im Complex.re
-        · intro ρ hρ
-          rw [abs_of_pos (hS ρ hρ).1.2.1]
-          exact ⟨hheight ρ hρ,(hS ρ hρ).1.2.2⟩
-        · exact hsep
-        · intro ρ hρ
-          have hz := hS ρ hρ
-          refine ⟨hz.2,hz.1.1.2.2.le,?_⟩
-          rw [Complex.re_add_im]
-          exact hz.1.1.1)
+  · have hcount := zeroDensityCount_le_of_high_separated_count σ T
+      (C*T^balancedDensityExponent σ*(Real.log T)^k) (by linarith) (by
+        intro S ht hs hz
+        apply hc T σ hlarge hσ.1 hσ.2 S Complex.im Complex.re ht hs
+        intro ρ hρ
+        have h := hz ρ hρ
+        exact ⟨h.1,h.2.1,by simpa only [Complex.re_add_im] using h.2.2⟩)
     have hlown : (zeroCount 64 : ℝ) ≤ (zeroCount 128 : ℝ) := by
       exact_mod_cast zeroCount_mono (show (64 : ℝ) ≤ 128 by norm_num)
     have he : 2*densitySelectionConstant*Real.log T*

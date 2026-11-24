@@ -466,6 +466,6 @@ multiplicity-weighted Ingham comparator continues to cover all
 [Exact theorem scope](layer4-ingham-shell-log-five.md).
 
 The cumulative logarithmic comparator supplies seven logarithms uniformly on
-`σ∈[1/2,1]`, and six on each fixed `[1/2,τ]` with `τ<1`. Both statements
+`σ∈[1/2,1]`, and five on each fixed `[1/2,τ]` with `τ<1`. Both statements
 count analytic multiplicities at every `T≥2`.
 [Exact statements](layer4-ingham-shell-log-five.md#cumulative-density).
