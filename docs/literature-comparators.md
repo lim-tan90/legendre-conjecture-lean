@@ -489,3 +489,7 @@ and pole terms and permits an independent center offset.
 retains each block’s length and bounds the center integral by the smaller
 of two explicit quantities.
 [Dyadic comparison](layer4-mollified-jensen.md#weighted-dyadic-second-moment).
+The index-weighted comparator charges each Dirichlet coefficient by
+`T+n`. The compact smoothing comparators retain both residues and
+the exact logarithmic cost of the critical product.
+[Weighted and smoothed estimates](layer4-mollified-jensen.md#index-weighted-second-moment).

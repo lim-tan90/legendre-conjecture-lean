@@ -216,6 +216,68 @@ def MollifiedDyadicDensityBenchmark : Prop :=
 theorem layer4_mollified_dyadic_density_comparator : MollifiedDyadicDensityBenchmark :=
   fun _ _ _ hX hXN hN _ _ _ _ => Zeta.zeroDensityCount_le_mollified_dyadic_energy hX hXN hN
 
+/-- Translated Dirichlet mean square with index-weighted off-diagonal cost. -/
+def LocalLengthMeanSquareBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ N : ℕ, ∀ (a : ℕ → ℂ) (T u : ℝ), 1 ≤ T →
+    (∫ t in Icc (u-T) (u+T), ‖Density.dirichletPolynomial N a t‖^2) ≤
+      C*∑ n ∈ Finset.Icc 1 N, (T+(n : ℝ))*‖a n‖^2
+
+theorem layer4_local_length_mean_square_comparator : LocalLengthMeanSquareBenchmark := by
+  obtain ⟨C,hC,hbound⟩ := Density.Moment.integral_subsetPolynomial_norm_sq_weighted
+  refine ⟨C,hC,?_⟩
+  intro N a T u hT
+  exact hbound T u hT (Finset.Icc 1 N) a (fun n hn => (Finset.mem_Icc.mp hn).1)
+
+/-- Weighted arithmetic-energy comparison for the actual density increment. -/
+def MollifiedWeightedDensityBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ X N : ℕ, 1 ≤ X → X ≤ N →
+    ∀ δ η U V : ℝ, 0 < δ → 0 < η → δ+2*η < 1 → δ+5*η < U → U ≤ V →
+      2*(2+η⁻¹)^2 ≤ (X : ℝ)^η →
+    let M := Density.Detector.mollifiedWeightedEnergyBound C X N
+      (1-δ-2*η) (1+δ+6*η) (U-(δ+5*η)) (V+(δ+5*η))
+    let K := (V-U+2*η)*((X : ℝ)^(-η)*(2+η⁻¹)^2)^2
+    (Zeta.zeroDensityCount (1-δ) V : ℝ) ≤ (Zeta.zeroDensityCount (1-δ) U : ℝ) +
+      (M + (4/3 : ℝ)*min M K)/(2*η*Real.log ((δ+4*η)/(δ+3*η)))
+
+theorem layer4_mollified_weighted_density_comparator : MollifiedWeightedDensityBenchmark :=
+  Zeta.zeroDensityCount_le_mollified_weighted_energy
+
+/-- Exact smoothed decomposition of the genuine mollified ζ error. -/
+def MollifiedSmoothedIdentityBenchmark : Prop :=
+  ∀ X : ℕ, 1 ≤ X → ∀ s : ℂ, s ≠ 1 → 1/2 < s.re → s.re ≤ 1 →
+    ∀ Y : ℝ, 1 ≤ Y →
+    riemannZeta s*Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X s-1 =
+      2*(Density.Detector.Smooth.detectorTail X s Y -
+        Density.Detector.Smooth.detectorCriticalIntegral X s Y -
+        Density.Detector.Smooth.detectorPrincipalPole X s Y +
+        (Density.Detector.Smooth.detectorWeight (1/Y)-1/2))
+
+theorem layer4_mollified_smoothed_identity_comparator : MollifiedSmoothedIdentityBenchmark :=
+  fun X hX _ hs hσ hσ₁ _ hY => Density.Detector.Smooth.mollifiedError_eq_smoothed_terms X hX hs hσ hσ₁ hY
+
+/-- The smoothed tail's arithmetic energy stops at the smoothing cutoff. -/
+def SmoothedTailLocalMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, ∀ Y : ℝ, 0 < Y → ∀ a T u : ℝ, 1 ≤ T →
+    (∫ t in Icc (u-T) (u+T),
+      ‖Density.Detector.Smooth.detectorTail X ((a : ℂ)+(t : ℂ)*Complex.I) Y‖^2) ≤
+      C*∑ n ∈ Finset.Ioc X ⌊Y⌋₊, (T+(n : ℝ))*(n.divisors.card : ℝ)^2*(n : ℝ)^(-2*a)
+
+theorem layer4_smoothed_tail_local_moment_comparator : SmoothedTailLocalMomentBenchmark :=
+  Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted
+
+/-- The weighted critical product keeps the (X^2) off-diagonal logarithmic power. -/
+def CriticalProductSecondMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+    let f := fun v : ℝ => Density.Moment.momentHeightWeight T v *
+      ‖riemannZeta ((1/2 : ℂ)+(v : ℂ)*Complex.I) *
+        Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X ((1/2 : ℂ)+(v : ℂ)*Complex.I)‖^2
+    let L := 1+Real.log (X*X : ℕ)
+    Integrable f ∧ (∫ v : ℝ, f v) ≤ C*Real.sqrt (T*(Real.log T)^4 * (T*L^4+(X*X : ℕ)*L^3))
+
+theorem layer4_critical_product_second_moment_comparator : CriticalProductSecondMomentBenchmark := by
+  simpa only [CriticalProductSecondMomentBenchmark, Density.Detector.Smooth.criticalProduct, zero_add] using
+    Density.Moment.weighted_criticalProduct_second_moment
+
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ (U V : ℕ), 1 ≤ U → U ≤ V → V ≤ 2*U →

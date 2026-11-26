@@ -493,6 +493,18 @@ theorem layer4_mollified_finite_energy_density_consumer {X N : ℕ} (hX : 1 ≤ 
   norm_num at h
   exact h hU hUV hscale
 
+/-- A smooth detector has an empty tail once its cutoff is below the mollifier length. -/
+theorem layer4_weighted_smoothed_empty_tail_consumer (X : ℕ) (hX : 1 ≤ X) (a u : ℝ) :
+    (∫ t in Set.Icc (u-1) (u+1),
+      ‖Detector.Smooth.detectorTail X ((a : ℂ)+(t : ℂ)*Complex.I) 1‖^2) = 0 := by
+  obtain ⟨C,_,hbound⟩ := Detector.Smooth.integral_detectorTail_norm_sq_le_weighted
+  have h := hbound X 1 (by norm_num) a 1 u le_rfl
+  have hempty : Finset.Ioc X ⌊(1 : ℝ)⌋₊ = ∅ := by
+    apply Finset.Ioc_eq_empty_of_le
+    simpa using hX
+  rw [hempty, Finset.sum_empty, mul_zero] at h
+  exact le_antisymm h (integral_nonneg fun _ => sq_nonneg _)
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

@@ -49,7 +49,11 @@ public import Legendre.Layer4.InghamMiddleStrip
 public import Legendre.Layer4.MollifiedZetaJensen
 public import Legendre.Layer4.MollifiedZetaVertical
 public import Legendre.Layer4.MollifiedZetaMeanSquare
+public import Legendre.Layer4.DirichletMeanValueWeighted
 public import Legendre.Layer4.MollifiedZetaDyadic
+public import Legendre.Layer4.MollifiedZetaWeighted
+public import Legendre.Layer4.MollifiedZetaSmoothed
+public import Legendre.Layer4.MollifierFourthMoment
 public import Legendre.Layer4.Exponential.DiscreteFirstDerivative
 public import Legendre.Layer4.Exponential.DiscreteSecondDerivative
 public import Legendre.Layer4.Exponential.HalaszComplex

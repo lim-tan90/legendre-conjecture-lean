@@ -315,7 +315,15 @@ The power of `T` stays `3(1−σ)/(2−σ)`, with all analytic
 multiplicities and `T≥2`.
 [Exact scope and comparator](docs/layer4-ingham-shell-log-five.md#explicit-shrinking-strip).
 
-Current validation (2026-11-26) covers **4,391 build jobs**, **8,700 audited theorem declarations**, **378 Lean files** and **231 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Index-weighted mean square and compact mollified error (2026-11-26).**
+The translated mean-square bound charges each coefficient by `T+n`.
+The compact contour identity includes both residues at general arguments
+with `1/2<Re s≤1` away from the pole. The smoothed tail ends at `⌊Y⌋`.
+The critical mollifier fourth moment keeps a three-log coefficient in
+its `X²` term.
+[Weighted mean square and compact smoothing](docs/layer4-mollified-jensen.md#index-weighted-second-moment).
+
+Current validation (2026-11-26) covers **4,395 build jobs**, **8,769 audited theorem declarations**, **382 Lean files** and **232 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -1264,6 +1272,10 @@ adaptation. Its scalar pole inversion and signed-shift bound are local proofs.
 | `DensityTailBlock.lean` | [XiTailMean.lean](Legendre/Layer4/XiTailMean.lean) |
 | `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 | `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
+
+The local extension of the adapted contour shift retains the origin
+residue at general arguments. It uses the existing PNT+ rectangle
+residue API. [Compact mollified identity](Legendre/Layer4/MollifiedZetaSmoothed.lean).
 
 The exponential-sum derivative tests additionally adapt **openai/math**,
 pinned commit `4eaee87548250b2682affda7d05d947c05554bae`, source directory

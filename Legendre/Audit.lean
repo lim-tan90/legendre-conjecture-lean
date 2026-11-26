@@ -409,6 +409,10 @@ import all Legendre.Layer4.MollifiedZetaJensen
 import all Legendre.Layer4.MollifiedZetaVertical
 import all Legendre.Layer4.MollifiedZetaMeanSquare
 import all Legendre.Layer4.MollifiedZetaDyadic
+import all Legendre.Layer4.DirichletMeanValueWeighted
+import all Legendre.Layer4.MollifiedZetaWeighted
+import all Legendre.Layer4.MollifiedZetaSmoothed
+import all Legendre.Layer4.MollifierFourthMoment
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -4321,15 +4325,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.DetectorHorizontal.0.Legendre.Density.Detector.Smooth.detector_high_bound._simp_1_5"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorHorizontal.0.Legendre.Density.Detector.Smooth.detector_high_bound._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorHorizontal.0.Legendre.Density.Detector.Smooth.detector_high_bound._simp_1_7"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_principal._simp_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_2"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_3"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_4"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_5"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_6"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_7"
-#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_at_zero._simp_1_8"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.Smooth.detectorKernel.eq_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Detector.Smooth.detectorPrincipalPole.eq_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_compact_high_zero_consumer"
@@ -9397,3 +9392,83 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_3"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_finite_energy_density_consumer"
+
+-- Index-weighted Dirichlet means and compact mollified moments.
+#print axioms Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues
+#print axioms Legendre.Density.Detector.Smooth.detector_contour_shift_both_poles
+#print axioms Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles
+#print axioms Legendre.Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted
+#print axioms Legendre.Density.Detector.Smooth.mollifiedError_eq_smoothed_terms
+#print axioms Legendre.Density.Detector.integral_mollifiedError_norm_sq_le_weighted_energy
+#print axioms Legendre.Density.Detector.mollifiedWeightedEnergyBound._proof_1
+#print axioms Legendre.Density.Detector.mollifierSquareCoefficient.eq_1
+#print axioms Legendre.Density.Detector.mollifier_sq_eq_finiteSeries
+#print axioms Legendre.Density.Moment.critical_mollifier_fourth_moment
+#print axioms Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted
+#print axioms Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_weighted
+#print axioms Legendre.Density.Moment.sum_log_gaussian_high_row_le
+#print axioms Legendre.Density.Moment.weighted_criticalProduct_second_moment
+#print axioms Legendre.Density.Moment.weighted_mollifier_fourth_moment
+#print axioms Legendre.Literature.CriticalProductSecondMomentBenchmark.eq_1
+#print axioms Legendre.Literature.layer4_critical_product_second_moment_comparator
+#print axioms Legendre.Literature.layer4_local_length_mean_square_comparator
+#print axioms Legendre.Literature.layer4_mollified_smoothed_identity_comparator
+#print axioms Legendre.Literature.layer4_mollified_weighted_density_comparator
+#print axioms Legendre.Literature.layer4_smoothed_tail_local_moment_comparator
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_weighted_energy
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorRectangle.0.Legendre.Density.Detector.Smooth.detector_rectangle_with_both_poles._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DetectorShift.0.Legendre.Density.Detector.Smooth.detectorMean_eq_both_residues._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.gaussianTime._proof_1"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.gaussianTime.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integrable_gaussianTime"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_phase._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_gaussianTime_subsetPolynomial_le_kernel"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.integral_subsetPolynomial_norm_sq_high_weighted._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.DirichletMeanValueWeighted.0.Legendre.Density.Moment.log_succ_gap_bounds"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothed.0.Legendre.Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothed.0.Legendre.Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothed.0.Legendre.Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothed.0.Legendre.Density.Detector.Smooth.integral_detectorTail_norm_sq_le_weighted._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Detector.mollifierSquareCoefficient_support"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Detector.mollifierSquareCoefficient_support._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Detector.norm_mollifierSquareCoefficient_le"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.critical_mollifier_fourth_moment._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.weighted_criticalProduct_second_moment._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifierFourthMoment.0.Legendre.Density.Moment.weighted_criticalProduct_second_moment._simp_1_2"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weighted_smoothed_empty_tail_consumer"

@@ -244,7 +244,13 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 同一个绝对常数适用。高度指数为 `3(1−σ)/(2−σ)`，覆盖全部解析重数和
 `T≥2`。[精确范围与比较器](docs/layer4-ingham-shell-log-five.md#explicit-shrinking-strip)。
 
-当前验证（2026-11-26）包括 **4,391 项构建**、**8,700 个定理的公理审计**、**378 个 Lean 文件**和 **231 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**按系数下标加权的均方界与紧支撑平滑公式（2026-11-26）。**
+平移窗口上的均方界按 `T+n` 控制每项系数。对 `1/2<Re s≤1` 内避开
+极点的任意点，紧支撑轮廓公式保留两个留数，平滑尾项截于 `⌊Y⌋`。
+临界线 mollifier 四阶矩的 `X²` 项保留三次对数。
+[加权均方与紧支撑平滑](docs/layer4-mollified-jensen.md#index-weighted-second-moment)。
+
+当前验证（2026-11-26）包括 **4,395 项构建**、**8,769 个定理的公理审计**、**382 个 Lean 文件**和 **232 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -1058,6 +1064,10 @@ digamma 尾和仅导入所选 PNT+ 级数证明，省去与此处无关的特征
 | `DensityTailBlock.lean` | [XiTailMean.lean](Legendre/Layer4/XiTailMean.lean) |
 | `DensityFourthMoment.lean` | [ZetaFourthMoment.lean](Legendre/Layer4/ZetaFourthMoment.lean) |
 | `DensitySquareSeries.lean` | [ZetaSquareSeries.lean](Legendre/Layer4/ZetaSquareSeries.lean) |
+
+对已适配的轮廓移动作本地推广后，一般点的原点留数也得到保留。
+这一步使用现有的 PNT+ 矩形留数接口。
+[紧支撑 mollified 恒等式](Legendre/Layer4/MollifiedZetaSmoothed.lean)。
 
 指数和导数检验另改编自 **openai/math**，固定提交
 `4eaee87548250b2682affda7d05d947c05554bae`，源目录

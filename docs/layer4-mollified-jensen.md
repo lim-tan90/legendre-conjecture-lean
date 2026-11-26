@@ -98,3 +98,46 @@ used to justify Jensen, and the center integral can also be
 controlled by the second moment. The height exponent after
 choosing the truncations and offsets remains to be optimized.
 [Dyadic mean and density theorem](../Legendre/Layer4/MollifiedZetaDyadic.lean)
+
+
+## Index-weighted second moment
+
+For any finite set of positive integers, complex coefficients `a_n`,
+`T≥1), and a real center `u`, there is an absolute constant with
+
+```
+∫_{u−T}^{u+T} |∑ a_n n^(−it)|² dt ≤ C ∑ (T+n)|a_n|².
+```
+
+A Gaussian majorant gives a rapidly decreasing kernel on the log
+frequencies. For indices above `T`, the intervals
+`(log n,log(n+1)]` control the reciprocal-index weights in its rows.
+Indices at most `T` use the linear-error mean value. In the mollified
+vertical moment, this replaces the dyadic block sum by one coefficient
+sum and retains the Euler, principal pole, and Jensen center terms.
+[Dirichlet mean square](../Legendre/Layer4/DirichletMeanValueWeighted.lean)
+[Mollified density bound](../Legendre/Layer4/MollifiedZetaWeighted.lean)
+
+## Compact smoothing and the critical product
+
+For `X≥1`, `Y≥1`, `s≠1), and `1/2<Re s≤1`, contour shifting
+gives the exact decomposition
+
+```
+E_X(s) = 2[tail_X(s,Y) − criticalIntegral_X(s,Y)
+           − principalPole_X(s,Y) + weight(1/Y) − 1/2].
+```
+
+The residue at the Mellin origin is `ζ(s)M_X(s)/2`. The weighted
+mean-square bound for the smoothed tail involves only `X<n≤⌊Y⌋`
+and the sum of `(T+n)d(n)² n^(−2 Re s)` on that range.
+[Exact identity and tail bound](../Legendre/Layer4/MollifiedZetaSmoothed.lean)
+
+Writing `L=1+log(X²)`, the mollifier fourth moment on the critical line
+is bounded by `C(T L⁴+X² L³)` with the cubic whole-line height weight.
+Cauchy–Schwarz with the proved zeta fourth moment bounds the weighted
+second moment of `ζM_X` on the critical line by
+`C√[T(log T)⁴ (T L⁴+X² L³)]`. This estimate is for the critical product
+inside the shifted integral. The compact formula above applies
+through `Re s=1` away from the pole.
+[Mollifier and critical-product moments](../Legendre/Layer4/MollifierFourthMoment.lean)
