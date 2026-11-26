@@ -145,6 +145,16 @@ theorem layer4_ingham_integral_gap_comparator : InghamIntegralGapBenchmark := by
   unfold InghamIntegralGapBenchmark
   exact Density.Moment.integral_alternative_balanced_fourth_moment_by_gap
 
+/-- Fifth-log Ingham bound on an explicit shrinking strip and in the zero-free range. -/
+def InghamShrinkingStripBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) 1, ∀ T : ℝ, 2 ≤ T →
+    (σ ≤ 9/10 ∨ 55*Real.log (1+Real.log T) ≤ (1-σ)*Real.log T ∨
+      (1-σ)*Real.log T ≤ 1/4000000) →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^5
+
+theorem layer4_ingham_shrinking_strip_comparator : InghamShrinkingStripBenchmark :=
+  Zeta.ingham_density_log_five_shrinking_strip
+
 /-- Local Jensen comparison for the literal mollified zeta second moment. -/
 def MollifiedJensenDensityBenchmark : Prop :=
   ∀ X : ℕ, 1 ≤ X → ∀ δ : ℝ, 0 < δ → ∀ c : ℂ, 1+2*δ ≤ c.re →
@@ -158,6 +168,53 @@ def MollifiedJensenDensityBenchmark : Prop :=
 
 theorem layer4_mollified_jensen_density_comparator : MollifiedJensenDensityBenchmark :=
   Zeta.sum_zeta_multiplicity_le_mollified_circle_near_one_center
+
+/-- Near-one Jensen comparison from a uniform vertical mollified second moment. -/
+def MollifiedVerticalDensityBenchmark : Prop :=
+  ∀ X : ℕ, 1 ≤ X → ∀ δ U V M : ℝ, 0 < δ → 6*δ < U → U ≤ V →
+    2*(2+δ⁻¹)^2 ≤ (X : ℝ)^δ →
+    (∀ a ∈ Icc (1-3*δ) (1+7*δ),
+      (∫ t in Icc (U-6*δ) (V+6*δ),
+        ‖riemannZeta ((a : ℂ)+(t : ℂ)*Complex.I)*
+          Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X
+            ((a : ℂ)+(t : ℂ)*Complex.I)-1‖^2) ≤ M) →
+    (Zeta.zeroDensityCount (1-δ) V : ℝ) ≤ (Zeta.zeroDensityCount (1-δ) U : ℝ) +
+      (M + (4/3 : ℝ)*(V-U+2*δ)*((X : ℝ)^(-δ)*(2+δ⁻¹)^2)^2) /
+        (2*δ*Real.log (5/4))
+
+theorem layer4_mollified_vertical_density_comparator : MollifiedVerticalDensityBenchmark :=
+  fun X hX _ _ _ _ => Zeta.zeroDensityCount_le_mollified_vertical_near_one X hX
+
+/-- Finite-energy comparison with independent choices of gap and center offset. -/
+def MollifiedFiniteEnergyDensityBenchmark : Prop :=
+  ∀ X N : ℕ, 1 ≤ X → X ≤ N → ∀ δ η U V : ℝ, 0 < δ → 0 < η → δ+2*η < 1 →
+    δ+5*η < U → U ≤ V → 2*(2+η⁻¹)^2 ≤ (X : ℝ)^η →
+    (Zeta.zeroDensityCount (1-δ) V : ℝ) ≤ (Zeta.zeroDensityCount (1-δ) U : ℝ) +
+      (Density.Detector.mollifiedVerticalBound X N (1-δ-2*η) (1+δ+6*η) (U-(δ+5*η)) (V+(δ+5*η)) +
+        (4/3 : ℝ)*(V-U+2*η)*((X : ℝ)^(-η)*(2+η⁻¹)^2)^2) /
+        (2*η*Real.log ((δ+4*η)/(δ+3*η)))
+
+theorem layer4_mollified_finite_energy_density_comparator : MollifiedFiniteEnergyDensityBenchmark :=
+  fun _ _ hX hXN _ _ _ _ => Zeta.zeroDensityCount_le_mollified_finite_energy_offset hX hXN
+
+/-- Weighted dyadic comparison, retaining the off-diagonal cost of each block. -/
+def MollifiedDyadicDensityBenchmark : Prop :=
+  ∀ X N J : ℕ, 1 ≤ X → X ≤ N → N ≤ 2^J → ∀ δ η U V : ℝ, 0 < δ → 0 < η →
+    δ+2*η < 1 → δ+5*η < U → U ≤ V → 2*(2+η⁻¹)^2 ≤ (X : ℝ)^η →
+    ∀ w : ℕ → ℝ, (∀ j ∈ Finset.range J, 0 < w j) →
+    let α := 1-δ-2*η
+    let β := 1+δ+6*η
+    let A := U-(δ+5*η)
+    let B := V+(δ+5*η)
+    let M := 2*Density.Detector.detectorDyadicMeanBound X J α (B-A) w +
+      2*(B-A)*(Density.Detector.mollifiedEulerErrorBound X N α β A B)^2
+    let C := (V-U+2*η)*((X : ℝ)^(-η)*(2+η⁻¹)^2)^2
+    (Zeta.zeroDensityCount (1-δ) V : ℝ) ≤ (Zeta.zeroDensityCount (1-δ) U : ℝ) +
+      (M + (4/3 : ℝ)*min M C) /
+        (2*η*Real.log ((δ+4*η)/(δ+3*η)))
+
+theorem layer4_mollified_dyadic_density_comparator : MollifiedDyadicDensityBenchmark :=
+  fun _ _ _ hX hXN hN _ _ _ _ => Zeta.zeroDensityCount_le_mollified_dyadic_energy hX hXN hN
 
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=

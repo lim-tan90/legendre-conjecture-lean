@@ -406,6 +406,10 @@ import all Legendre.Layer4.InghamSharpLogarithms
 import all Legendre.Layer4.InghamMiddleStrip
 import all Legendre.Layer4.JensenCircleMean
 import all Legendre.Layer4.MollifiedZetaJensen
+import all Legendre.Layer4.MollifiedZetaVertical
+import all Legendre.Layer4.MollifiedZetaMeanSquare
+import all Legendre.Layer4.MollifiedZetaDyadic
+import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
 import all Legendre.Layer4.InghamDensity
@@ -9341,3 +9345,55 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.norm_mollifiedError_le_right_half_plane._proof_1_2"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_jensen_disk_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_jensen_disk_consumer._simp_1_1"
+
+-- Height-integrated mollified Jensen bounds.
+#print axioms Legendre.Literature.MollifiedVerticalDensityBenchmark._proof_1
+#print axioms Legendre.Literature.MollifiedVerticalDensityBenchmark._proof_2
+#print axioms Legendre.Literature.MollifiedVerticalDensityBenchmark._proof_3
+#print axioms Legendre.Literature.layer4_mollified_vertical_density_comparator
+#print axioms Legendre.Zeta.integral_mollified_circleAverage_le_vertical
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_mollified_circle_with_center_error
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_vertical_near_one
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.integral_const_Icc_real"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_vertical_density_consumer"
+
+-- Dyadic mollified moments and the explicit shrinking Ingham strip.
+#print axioms Legendre.Density.Detector.detectorDyadicBlockMeanBound._proof_1
+#print axioms Legendre.Density.Detector.detectorDyadicBlockMeanBound._proof_2
+#print axioms Legendre.Density.Detector.detectorDyadicMeanBound_sqrt_weights
+#print axioms Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic
+#print axioms Legendre.Density.Detector.integral_mollifiedError_norm_sq_le_detector_and_remainder
+#print axioms Legendre.Density.Detector.integral_mollifiedError_norm_sq_le_dyadic
+#print axioms Legendre.Density.Detector.integral_mollifiedError_norm_sq_le_finite_energy
+#print axioms Legendre.Density.Detector.mollifiedEulerErrorBound._proof_1
+#print axioms Legendre.Density.Detector.norm_mollifiedError_sub_detectorPolynomial_le
+#print axioms Legendre.Density.Moment.three_fifths_defect_le_balanced_sub_huxley_book
+#print axioms Legendre.Literature.InghamShrinkingStripBenchmark._proof_1
+#print axioms Legendre.Literature.InghamShrinkingStripBenchmark._proof_2
+#print axioms Legendre.Literature.InghamShrinkingStripBenchmark._proof_3
+#print axioms Legendre.Literature.InghamShrinkingStripBenchmark._proof_4
+#print axioms Legendre.Literature.layer4_ingham_shrinking_strip_comparator
+#print axioms Legendre.Literature.layer4_mollified_dyadic_density_comparator
+#print axioms Legendre.Literature.layer4_mollified_finite_energy_density_comparator
+#print axioms Legendre.Zeta.ingham_density_log_five_shrinking_strip
+#print axioms Legendre.Zeta.integrableOn_mollifiedError_vertical
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_mollified_vertical_center_moment
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_dyadic_energy
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_finite_energy
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_finite_energy_offset
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_vertical_center_moment
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_vertical_min_center_offset
+#print axioms Legendre.Zeta.zeroDensityCount_le_mollified_vertical_near_one_offset
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaMeanSquare.0.Legendre.Density.Detector.norm_finiteSeries_moebius_le_rpow_sum"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_3"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_mollified_finite_energy_density_consumer"

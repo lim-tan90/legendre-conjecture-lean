@@ -465,6 +465,34 @@ theorem layer4_mollified_jensen_disk_consumer (X : ℕ) (hX : 1 ≤ X)
   norm_num at h ⊢
   exact h
 
+/-- The height increment at real part 19/20 uses the full analytic count. -/
+theorem layer4_mollified_vertical_density_consumer (X : ℕ) (hX : 1 ≤ X)
+    {U V M : ℝ} (hU : 3/10 < U) (hUV : U ≤ V)
+    (hscale : 968 ≤ (X : ℝ)^(1/20 : ℝ))
+    (hM : ∀ a ∈ Set.Icc (17/20 : ℝ) (27/20),
+      (∫ t in Set.Icc (U-3/10) (V+3/10),
+        ‖Detector.mollifiedError X ((a : ℂ)+(t : ℂ)*Complex.I)‖^2) ≤ M) :
+    (Zeta.zeroDensityCount (19/20) V : ℝ) ≤ (Zeta.zeroDensityCount (19/20) U : ℝ) +
+      (M + (4/3 : ℝ)*(V-U+1/10)*((X : ℝ)^(-(1/20) : ℝ)*484)^2) /
+        ((1/10)*Real.log (5/4)) := by
+  have h := Zeta.zeroDensityCount_le_mollified_vertical_near_one X hX (δ := 1/20)
+    (U := U) (V := V) (M := M)
+  norm_num at h
+  exact h hU hUV hscale (fun a ha hb => hM a ⟨ha, hb⟩)
+
+/-- The finite-energy estimate permits a center offset smaller than the target gap. -/
+theorem layer4_mollified_finite_energy_density_consumer {X N : ℕ} (hX : 1 ≤ X) (hXN : X ≤ N)
+    {U V : ℝ} (hU : 7/40 < U) (hUV : U ≤ V)
+    (hscale : 3528 ≤ (X : ℝ)^(1/40 : ℝ)) :
+    (Zeta.zeroDensityCount (19/20) V : ℝ) ≤ (Zeta.zeroDensityCount (19/20) U : ℝ) +
+      (Detector.mollifiedVerticalBound X N (9/10) (6/5) (U-7/40) (V+7/40) +
+        (4/3 : ℝ)*(V-U+1/20)*((X : ℝ)^(-(1/40) : ℝ)*1764)^2) /
+          ((1/20)*Real.log (6/5)) := by
+  have h := Zeta.zeroDensityCount_le_mollified_finite_energy_offset hX hXN
+    (δ := 1/20) (η := 1/40) (U := U) (V := V) (by norm_num) (by norm_num) (by norm_num)
+  norm_num at h
+  exact h hU hUV hscale
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

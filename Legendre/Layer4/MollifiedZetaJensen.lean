@@ -231,14 +231,13 @@ open Complex Metric Set MeromorphicOn Real
 open Density.Detector
 open scoped BigOperators
 
-/-- The actual mollified second-moment circle average bounds all zeta
-multiplicities in a smaller disk, with the Jensen radius factor explicit. -/
-theorem sum_zeta_multiplicity_le_mollified_circle_of_center_bound (X : ℕ)
+/-- Control the center term by the actual squared mollifier error. -/
+theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
     (c : ℂ) (hErr : ‖mollifiedError X c‖ ≤ 1/2) (r R : ℝ) (hr : 0 < r) (hrR : r < R)
     (hPole : (1 : ℂ) ∉ closedBall c R)
     (S : Finset ℂ) (hS : ∀ z ∈ S, z ∈ closedBall c r) :
     (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤
-      (circleAverage (fun z => ‖mollifiedError X z‖^2) c R + Real.log 2) /
+      (circleAverage (fun z => ‖mollifiedError X z‖^2) c R + (4/3 : ℝ)*‖mollifiedError X c‖^2) /
         Real.log (R/r) := by
   classical
   let F := squaredErrorDetector X
@@ -247,14 +246,20 @@ theorem sum_zeta_multiplicity_le_mollified_circle_of_center_bound (X : ℕ)
   have hf : AnalyticOnNhd ℂ F (closedBall c R) :=
     fun z hz => squaredErrorDetector_analyticAt X (hNc z hz)
   have hsmall := hf.mono (closedBall_subset_closedBall hrR.le)
-  have hFbound : 1/2 ≤ ‖F c‖ := by
-    have hE2 : ‖(mollifiedError X c)^2‖ ≤ (1/2 : ℝ)^2 := by
-      rw [pow_two,norm_mul,← pow_two]
-      exact pow_le_pow_left₀ (norm_nonneg _) hErr 2
+  let v := ‖mollifiedError X c‖^2
+  have hv : 0 ≤ v := sq_nonneg _
+  have hv₁ : v ≤ 1/4 := by
+    have h := pow_le_pow_left₀ (norm_nonneg _) hErr 2
+    norm_num at h
+    exact h
+  have hFbound : 1-v ≤ ‖F c‖ := by
+    have hE2 : ‖(mollifiedError X c)^2‖ = v := by
+      dsimp only [v]
+      rw [pow_two,norm_mul,pow_two]
     have hh := norm_sub_le (F c) (-(mollifiedError X c)^2)
     have he : F c- (-(mollifiedError X c)^2) = 1 := by dsimp [F,squaredErrorDetector]; ring
-    rw [he,norm_one,norm_neg] at hh
-    nlinarith
+    rw [he,norm_one,norm_neg,hE2] at hh
+    linarith
   have hFc : F c ≠ 0 := norm_pos_iff.mp (by linarith)
   have hF0 : analyticOrderAt F c ≠ ⊤ := by
     rw [(hf c (mem_closedBall_self hR.le)).analyticOrderAt_eq_zero.mpr hFc]
@@ -300,12 +305,36 @@ theorem sum_zeta_multiplicity_le_mollified_circle_of_center_bound (X : ℕ)
     simpa only [abs_of_pos hR] using hcont
   have hAvg := circleAverage_mono hlogInt (hcont'.circleIntegrable hR.le)
     (fun z _ => log_norm_squaredErrorDetector_le X z)
-  have hlogF : -Real.log ‖F c‖ ≤ Real.log 2 := by
-    have h := Real.log_le_log (show (0 : ℝ) < 1/2 by norm_num) hFbound
-    rw [one_div,Real.log_inv] at h
-    linarith
+  have hvp : 0 < 1-v := by linarith
+  have hlogF : -Real.log ‖F c‖ ≤ (4/3 : ℝ)*v := by
+    calc
+      _ ≤ -Real.log (1-v) := neg_le_neg (Real.log_le_log hvp hFbound)
+      _ ≤ (1-v)⁻¹-1 := by
+        simpa only [Real.log_inv] using Real.log_le_sub_one_of_pos (inv_pos.mpr hvp)
+      _ = v/(1-v) := by
+        field_simp [hvp.ne']
+        ring
+      _ ≤ v/(3/4) := div_le_div_of_nonneg_left hv (by norm_num) (by linarith)
+      _ = _ := by ring
   apply hdom.trans hJs |>.trans
   apply div_le_div_of_nonneg_right _ (Real.log_nonneg ((one_le_div hr).mpr hrR.le))
+  linarith
+
+/-- The actual mollified second-moment circle average bounds all zeta
+multiplicities in a smaller disk, with the Jensen radius factor explicit. -/
+theorem sum_zeta_multiplicity_le_mollified_circle_of_center_bound (X : ℕ)
+    (c : ℂ) (hErr : ‖mollifiedError X c‖ ≤ 1/2) (r R : ℝ) (hr : 0 < r) (hrR : r < R)
+    (hPole : (1 : ℂ) ∉ closedBall c R)
+    (S : Finset ℂ) (hS : ∀ z ∈ S, z ∈ closedBall c r) :
+    (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤
+      (circleAverage (fun z => ‖mollifiedError X z‖^2) c R + Real.log 2) /
+        Real.log (R/r) := by
+  apply (sum_zeta_multiplicity_le_mollified_circle_with_center_error X c hErr
+    r R hr hrR hPole S hS).trans
+  apply div_le_div_of_nonneg_right _ (Real.log_nonneg ((one_le_div hr).mpr hrR.le))
+  have hsq := pow_le_pow_left₀ (norm_nonneg _) hErr 2
+  have hlog := Real.le_log_one_add_of_nonneg (show (0 : ℝ) ≤ 1 by norm_num)
+  norm_num at hsq hlog
   linarith
 
 /-- At real part at least four the center bound holds for every nonempty

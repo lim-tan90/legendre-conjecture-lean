@@ -469,7 +469,9 @@ multiplicity-weighted Ingham comparator continues to cover all
 The cumulative logarithmic comparator supplies seven logarithms uniformly on
 `σ∈[1/2,1]`, five on each fixed `[1/2,τ]` with `τ<1`, and four on every fixed `[α,τ] ⊂ (1/2,1)`. All statements
 count analytic multiplicities at every `T≥2`.
-[Exact statements](layer4-ingham-shell-log-five.md#cumulative-density).
+[Exact statements](layer4-ingham-shell-log-five.md#cumulative-density). The shrinking-strip comparator gives the
+fifth-log bound with one absolute constant in its three explicit ranges.
+[Exact scope](layer4-ingham-shell-log-five.md#explicit-shrinking-strip).
 
 The sharper weighted fourth-moment and balanced integral-branch comparators
 retain whole-line integrability, the actual compensated detector, the fixed
@@ -479,4 +481,11 @@ cutoff range and the dependence on the real-part gap.
 The local mollified-Jensen comparison proves a bound on the analytic
 multiplicities in a disk using a literal circle average of the squared
 Möbius mollifier error. The radii, pole-exclusion, and center cutoff
-conditions remain explicit. [Exact statement](layer4-mollified-jensen.md).
+conditions remain explicit. [Exact statement](layer4-mollified-jensen.md). The height-integrated comparator bounds the
+full near-one density increment from the uniform vertical mollified second
+moment. [Exact statement](layer4-mollified-jensen.md#height-integrated-density-near-one). The finite-energy comparison retains the Euler
+and pole terms and permits an independent center offset.
+[Finite-energy estimate](layer4-mollified-jensen.md#finite-energy-second-moment). The weighted dyadic comparison
+retains each block’s length and bounds the center integral by the smaller
+of two explicit quantities.
+[Dyadic comparison](layer4-mollified-jensen.md#weighted-dyadic-second-moment).

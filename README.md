@@ -293,7 +293,29 @@ center with real part at least `1+2δ`, the explicit condition
 states the literal integral and includes the pole-exclusion condition.
 [Proof and scope](docs/layer4-mollified-jensen.md).
 
-Current validation (2026-11-24) covers **4,387 build jobs**, **8,652 audited theorem declarations**, **374 Lean files** and **229 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Height-integrated mollified Jensen bound (2026-11-26).** A uniform
+vertical second moment of `|ζM_X−1|²` on the enlarged strip now bounds
+`N(1−δ,V)−N(1−δ,U)`, with every analytic multiplicity and no spacing
+hypothesis. The denominator is `2δ log(5/4)`, and the center contribution
+is quadratic in the explicit mollifier tail.
+[Exact hypotheses and comparator](docs/layer4-mollified-jensen.md#height-integrated-density-near-one).
+An explicit finite-energy bound supplies the second moment from the Möbius
+coefficients, the Euler remainder and the pole term. An independent center
+offset `η` lets the integration strip start at `1−δ−2η`.
+[Finite-energy estimate](docs/layer4-mollified-jensen.md#finite-energy-second-moment).
+The weighted dyadic refinement uses each block’s own length in its
+off-diagonal factor. The center integral uses the smaller of the
+vertical moment bound and the integrated pointwise tail bound.
+[Dyadic moment and density bound](docs/layer4-mollified-jensen.md#weighted-dyadic-second-moment).
+
+**Fifth-log Ingham bound on a shrinking strip (2026-11-26).** A single
+absolute constant works for `σ≤9/10` and wherever
+`(1−σ)log T ≥ 55 log(1+log T)` or `(1−σ)log T ≤ 1/4000000`.
+The power of `T` stays `3(1−σ)/(2−σ)`, with all analytic
+multiplicities and `T≥2`.
+[Exact scope and comparator](docs/layer4-ingham-shell-log-five.md#explicit-shrinking-strip).
+
+Current validation (2026-11-26) covers **4,391 build jobs**, **8,700 audited theorem declarations**, **378 Lean files** and **231 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**

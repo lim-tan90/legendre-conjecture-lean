@@ -31,7 +31,7 @@ exponent with arbitrary positive loss.
 
 Write `E(σ) = 3(1−σ)/(2−σ)`. The cumulative count
 `N(σ,T) ≤ C T^E(σ) (log T)^7` holds for all `T≥2` and
-`σ∈[1/2,1]), with one absolute constant and analytic multiplicities.
+`σ∈[1/2,1]`, with one absolute constant and analytic multiplicities.
 For each fixed `τ<1`, the bound on `[1/2,τ]` uses six logarithms and a
 constant depending only on `τ`.
 [Statements and proofs](../Legendre/Layer4/InghamMultiplicity.lean)
@@ -70,10 +70,28 @@ one logarithm.
 If `T^(1−E(σ)) ≤ (log T)^4`, the total-zero bound `O(T log T)`
 already gives the fifth-log estimate. Otherwise the identity
 `E(σ)−(2−2σ)=(1−σ)(1−E(σ))` absorbs the final logarithm for
-`σ≤3/4`. Above `3/4) on a fixed strip it gives a positive lower bound
+`σ≤3/4`. Above `3/4` on a fixed strip it gives a positive lower bound
 depending only on `τ` for the exponent difference, which also absorbs
 the final logarithm. Low heights are covered by the finite count at 128.
 
 For fixed inner strips `[α,τ] ⊂ (1/2,1)`, the later sharp weighted
 fourth-moment input reduces the cumulative loss to four logarithms.
 [Inner-strip density](layer4-weighted-fourth-moment.md#cumulative-density-on-inner-strips).
+
+## Explicit shrinking strip
+
+One absolute constant gives `N(σ,T) ≤ C T^E(σ)(log T)^5` whenever
+`T≥2`, `1/2≤σ≤1`, and at least one of the following holds:
+
+- `σ≤9/10`.
+- `(1−σ)log T ≥ 55 log(1+log T)`.
+- `(1−σ)log T ≤ 1/4000000`.
+
+Above `9/10`, the difference between `E(σ)` and the explicit Huxley
+book exponent is at least `(3/5)(1−σ)`. Under the second condition
+this absorbs 33 of the 38 logarithms in the proved Huxley bound. The
+third condition uses the existing effective zero-free region with
+the fixed low-height count. The uniform fifth-log estimate remains
+open in the intervening band above `9/10`.
+[Proof](../Legendre/Layer4/InghamShrinkingStrip.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)
