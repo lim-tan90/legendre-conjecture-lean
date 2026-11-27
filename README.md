@@ -323,7 +323,15 @@ The critical mollifier fourth moment keeps a three-log coefficient in
 its `X²` term.
 [Weighted mean square and compact smoothing](docs/layer4-mollified-jensen.md#index-weighted-second-moment).
 
-Current validation (2026-11-26) covers **4,395 build jobs**, **8,769 audited theorem declarations**, **382 Lean files** and **232 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Actual fourth-log mollified second moment (2026-11-27).** The
+height-integrated critical term and the smoothed tail give
+`∫_{T/2}^T |ζM_X−1|² ≪ T^(3(1−α))(log T)^4` uniformly on real lines
+`α≤a≤7/6`, with `3/4≤α≤1`, `T≥16`, and one choice of
+`T≤X≤2T` for each height. If `(1−α)^2 log T≤1), the height exponent
+is `3(1−α)/(2−α)`.
+[Exact hypotheses and comparisons](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells).
+
+Current validation (2026-11-27) covers **4,399 build jobs**, **8,822 audited theorem declarations**, **386 Lean files** and **233 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -1276,6 +1284,9 @@ adaptation. Its scalar pole inversion and signed-shift bound are local proofs.
 The local extension of the adapted contour shift retains the origin
 residue at general arguments. It uses the existing PNT+ rectangle
 residue API. [Compact mollified identity](Legendre/Layer4/MollifiedZetaSmoothed.lean).
+The same contour shift now reaches real part `7/6` with both
+residues and retained vertical and horizontal decay estimates.
+[Fourth-log second moment](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells).
 
 The exponential-sum derivative tests additionally adapt **openai/math**,
 pinned commit `4eaee87548250b2682affda7d05d947c05554bae`, source directory

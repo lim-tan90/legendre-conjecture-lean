@@ -15,7 +15,7 @@ namespace Legendre.Density.Detector.Smooth
 
 open Complex
 
- theorem detectorKernel_left_bound (δ u : ℝ) (hδ : 0 < δ) (hδ2 : δ ≤ 1 / 2) :
+ theorem detectorKernel_left_bound_wide (δ u : ℝ) (hδ : 0 < δ) (hδ2 : δ ≤ 2 / 3) :
     ‖detectorKernel ((-δ : ℂ) + (u : ℂ) * I)‖ ≤
       (16 / δ) * (1 + |u|) ^ (-(3 : ℝ)) := by
   let w : ℂ := (-δ : ℂ) + (u : ℂ) * I
@@ -53,6 +53,11 @@ open Complex
   apply (div_le_div_iff₀ (by positivity : 0 < ‖w‖ * ‖w + 1‖ * ‖w + 2‖)
     (by positivity : 0 < δ * (1 + |u|) ^ 3)).mpr
   nlinarith
+
+ theorem detectorKernel_left_bound (δ u : ℝ) (hδ : 0 < δ) (hδ2 : δ ≤ 1 / 2) :
+    ‖detectorKernel ((-δ : ℂ) + (u : ℂ) * I)‖ ≤
+      (16 / δ) * (1 + |u|) ^ (-(3 : ℝ)) :=
+  detectorKernel_left_bound_wide δ u hδ (by linarith)
 
  theorem detectorKernel_high_bound (x u : ℝ) (hu : 0 < |u|) :
     ‖detectorKernel ((x : ℂ) + (u : ℂ) * I)‖ ≤ (|u| ^ 3)⁻¹ := by

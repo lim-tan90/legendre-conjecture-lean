@@ -141,3 +141,24 @@ second moment of `ζM_X` on the critical line by
 inside the shifted integral. The compact formula above applies
 through `Re s=1` away from the pole.
 [Mollifier and critical-product moments](../Legendre/Layer4/MollifierFourthMoment.lean)
+
+## Fourth-log smoothed second moment on high shells
+
+A cubic convolution estimate integrates the critical-line term over
+`[-T,T]` using the previously proved weighted critical-product second
+moment. At real parts `α≤a≤7/6` with `α>1/2`, the cost of shifting the
+line is `(Y^(1/2−α)/(α−1/2))²`. The compact contour shift retains both
+residues throughout this wider strip.
+
+Combining the critical term with the weighted polynomial bound and the
+two correction terms gives a second moment for the actual
+`E_X(a+it)=ζ(a+it)M_X(a+it)−1` on `[T/2,T]`. For `T≥16` one can
+choose the same integer `T≤X≤2T` for every `3/4≤α≤1` and every
+`α≤a≤7/6`. With smoothing length `Y=T^(3/2)`, the bound is
+`C T^(3(1−α))(log T)^4`, with one absolute constant. If
+`(1−α)^2 log T≤1`, the power of `T` can be replaced by
+`3(1−α)/(2−α)` with a uniform constant. These are estimates for
+the vertical second moment.
+[Convolution](../Legendre/Layer4/CriticalConvolution.lean)
+[Second moment](../Legendre/Layer4/MollifiedZetaSmoothedMoment.lean)
+[Choice of scale](../Legendre/Layer4/MollifiedZetaBalancedMoment.lean)

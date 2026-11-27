@@ -15,8 +15,8 @@ namespace Legendre.Density.Detector.Smooth
 open Complex MeasureTheory Set
 open scoped ArithmeticFunction.Moebius
 
-theorem zeta_strip_away_bound {z : ℂ} (hz : 1/2 ≤ z.re) (hz3 : z.re ≤ 3)
-    (hd : 1/2 ≤ ‖z-1‖) : ‖riemannZeta z‖ ≤ 4*(3+|z.im|) := by
+theorem zeta_strip_away_bound_wide {z : ℂ} {B : ℝ} (hz : 1/2 ≤ z.re) (hz3 : z.re ≤ B)
+    (hd : 1/2 ≤ ‖z-1‖) : ‖riemannZeta z‖ ≤ 4*(B+|z.im|) := by
   have hz1 : z ≠ 1 := by intro h; rw [h] at hd; norm_num at hd
   have h := Zeta.norm_riemannZeta_le_positive_re (by linarith) hz1
   have h1 : ‖z‖/‖z-1‖ ≤ 2*‖z‖ := by
@@ -25,24 +25,28 @@ theorem zeta_strip_away_bound {z : ℂ} (hz : 1/2 ≤ z.re) (hz3 : z.re ≤ 3)
   have h2 : ‖z‖/z.re ≤ 2*‖z‖ := by
     have hh := div_le_div_of_nonneg_left (norm_nonneg z) (by norm_num : (0 : ℝ) < 1/2) hz
     linarith
-  have hn : ‖z‖ ≤ 3+|z.im| := by
+  have hn : ‖z‖ ≤ B+|z.im| := by
     have hh := norm_le_abs_re_add_abs_im z
     rw [abs_of_pos (by linarith : 0 < z.re)] at hh
     linarith
   linarith
 
+theorem zeta_strip_away_bound {z : ℂ} (hz : 1/2 ≤ z.re) (hz3 : z.re ≤ 3)
+    (hd : 1/2 ≤ ‖z-1‖) : ‖riemannZeta z‖ ≤ 4*(3+|z.im|) :=
+  zeta_strip_away_bound_wide hz hz3 hd
+
 noncomputable def detectorGrowthCost (X : ℕ) (s : ℂ) (Y : ℝ) : ℝ :=
   16*(X : ℝ)*Y^2*(1+|s.im|)
 
-theorem detector_numerator_bound (X : ℕ) (s : ℂ) (hs1 : s.re ≤ 1)
+theorem detector_numerator_bound_wide (X : ℕ) (s : ℂ) (hs1 : s.re ≤ 7/6)
     {Y : ℝ} (hY : 1 ≤ Y) (x u : ℝ) (hx : 1/2-s.re ≤ x) (hx2 : x ≤ 2)
     (hd : 1/2 ≤ ‖s+((x : ℂ)+(u : ℂ)*I)-1‖) :
     ‖riemannZeta (s+((x : ℂ)+(u : ℂ)*I))*
       finiteSeries (μ : ArithmeticFunction ℂ) X (s+((x : ℂ)+(u : ℂ)*I))*
       (Y : ℂ)^((x : ℂ)+(u : ℂ)*I)‖ ≤ detectorGrowthCost X s Y*(1+|u|) := by
   have hz : 1/2 ≤ (s+((x : ℂ)+(u : ℂ)*I)).re := by simp; linarith
-  have hz3 : (s+((x : ℂ)+(u : ℂ)*I)).re ≤ 3 := by simp; linarith
-  have hL := zeta_strip_away_bound hz hz3 hd
+  have hz3 : (s+((x : ℂ)+(u : ℂ)*I)).re ≤ 4 := by simp; linarith
+  have hL := zeta_strip_away_bound_wide hz hz3 hd
   have hM := norm_mollifier_finiteSeries_le X (by linarith : 0 ≤ (s+((x : ℂ)+(u : ℂ)*I)).re)
   have hpow : ‖(Y : ℂ)^((x : ℂ)+(u : ℂ)*I)‖ ≤ Y^2 := by
     rw [Complex.norm_cpow_eq_rpow_re_of_pos (by linarith : 0 < Y)]
@@ -51,12 +55,20 @@ theorem detector_numerator_bound (X : ℕ) (s : ℂ) (hs1 : s.re ≤ 1)
     exact Real.rpow_le_rpow_of_exponent_le hY hx2
   have him : |(s+((x : ℂ)+(u : ℂ)*I)).im| ≤ |s.im|+|u| := by
     simpa using abs_add_le s.im u
-  have hb : 4*(3+|(s+((x : ℂ)+(u : ℂ)*I)).im|) ≤ 16*(1+|s.im|)*(1+|u|) := by
+  have hb : 4*(4+|(s+((x : ℂ)+(u : ℂ)*I)).im|) ≤ 16*(1+|s.im|)*(1+|u|) := by
     nlinarith [abs_nonneg s.im,abs_nonneg u,mul_nonneg (abs_nonneg s.im) (abs_nonneg u)]
   rw [norm_mul,norm_mul]
   have hh := mul_le_mul (mul_le_mul (hL.trans hb) hM (norm_nonneg _) (by positivity)) hpow
     (norm_nonneg _) (by positivity)
   convert hh using 1; unfold detectorGrowthCost; ring
+
+theorem detector_numerator_bound (X : ℕ) (s : ℂ) (hs1 : s.re ≤ 1)
+    {Y : ℝ} (hY : 1 ≤ Y) (x u : ℝ) (hx : 1/2-s.re ≤ x) (hx2 : x ≤ 2)
+    (hd : 1/2 ≤ ‖s+((x : ℂ)+(u : ℂ)*I)-1‖) :
+    ‖riemannZeta (s+((x : ℂ)+(u : ℂ)*I))*
+      finiteSeries (μ : ArithmeticFunction ℂ) X (s+((x : ℂ)+(u : ℂ)*I))*
+      (Y : ℂ)^((x : ℂ)+(u : ℂ)*I)‖ ≤ detectorGrowthCost X s Y*(1+|u|) :=
+  detector_numerator_bound_wide X s (by linarith) hY x u hx hx2 hd
 
 theorem detectorIntegrand_line_continuous (X : ℕ) (s : ℂ) {Y : ℝ} (hY : 0 < Y)
     (x : ℝ) (hsx : s.re+x ≠ 1) (hx0 : x ≠ 0) (hx1 : x ≠ -1) (hx2 : x ≠ -2) :

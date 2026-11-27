@@ -505,6 +505,19 @@ theorem layer4_weighted_smoothed_empty_tail_consumer (X : ℕ) (hX : 1 ≤ X) (a
   rw [hempty, Finset.sum_empty, mul_zero] at h
   exact le_antisymm h (integral_nonneg fun _ => sq_nonneg _)
 
+/-- The compact second moment includes the right-hand endpoint of the enlarged strip. -/
+theorem layer4_smoothed_mollified_right_endpoint_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 16 ≤ T → ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧
+      (∫ t in Set.Icc (T/2) T,
+        ‖Detector.mollifiedError X (((7/6 : ℝ) : ℂ)+(t : ℂ)*Complex.I)‖^2) ≤ C*(Real.log T)^4 := by
+  obtain ⟨C,hC,hb⟩ := Moment.smoothed_mollifiedError_shell_ingham_power
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  obtain ⟨X,hX,hXT,hXT',hh⟩ := hb T hT
+  refine ⟨X,hX,hXT,hXT',?_⟩
+  have h := hh 1 (7/6) (by norm_num) le_rfl (by norm_num) le_rfl (by norm_num)
+  simpa [Moment.balancedDensityExponent] using h
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

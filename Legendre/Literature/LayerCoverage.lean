@@ -278,6 +278,32 @@ theorem layer4_critical_product_second_moment_comparator : CriticalProductSecond
   simpa only [CriticalProductSecondMomentBenchmark, Density.Detector.Smooth.criticalProduct, zero_add] using
     Density.Moment.weighted_criticalProduct_second_moment
 
+/-- Critical-line convolution in the shifted detector, integrated over height. -/
+def CriticalIntegralSecondMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+    ∀ α a Y : ℝ, 1/2 < α → α ≤ a → a ≤ 7/6 → 1 ≤ Y →
+    let L := 1+Real.log (X*X : ℕ)
+    let f := fun t : ℝ =>
+      ‖Density.Detector.Smooth.detectorCriticalIntegral X ((a : ℂ)+(t : ℂ)*Complex.I) Y‖^2
+    IntegrableOn f (Icc (-T) T) ∧
+      (∫ t in Icc (-T) T, f t) ≤
+        C*(Y^(1/2-α)/(α-1/2))^2*Real.sqrt (T*(Real.log T)^4*(T*L^4+(X*X : ℕ)*L^3))
+
+theorem layer4_critical_integral_second_moment_comparator : CriticalIntegralSecondMomentBenchmark :=
+  Density.Detector.Smooth.detectorCriticalIntegral_second_moment
+
+/-- The genuine mollified error has the fourth-log moment on both sides of one. -/
+def SmoothedMollifiedShellMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 16 ≤ T → ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧
+    ∀ α a : ℝ, 3/4 ≤ α → α ≤ 1 → α ≤ a → a ≤ 7/6 → (1-α)^2*Real.log T ≤ 1 →
+    (∫ t in Icc (T/2) T,
+      ‖riemannZeta ((a : ℂ)+(t : ℂ)*Complex.I)*
+        Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X ((a : ℂ)+(t : ℂ)*Complex.I)-1‖^2) ≤
+      C*T^(3*(1-α)/(2-α))*(Real.log T)^4
+
+theorem layer4_smoothed_mollified_shell_moment_comparator : SmoothedMollifiedShellMomentBenchmark :=
+  Density.Moment.smoothed_mollifiedError_shell_ingham_power
+
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ (U V : ℕ), 1 ≤ U → U ≤ V → V ≤ 2*U →

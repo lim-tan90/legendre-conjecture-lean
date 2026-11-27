@@ -16,8 +16,8 @@ namespace Legendre.Density.Detector.Smooth
 open Complex MeasureTheory Filter Set
 open scoped Topology ArithmeticFunction.Moebius
 
-theorem detector_contour_shift_both_poles (X : ℕ) {s : ℂ} (hs : s ≠ 1)
-    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+theorem detector_contour_shift_both_poles_wide (X : ℕ) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 7/6)
     {Y : ℝ} (hY : 1 ≤ Y) :
     (∫ u : ℝ, detectorIntegrand X s Y (2+(u : ℂ)*I)) =
       (∫ u : ℝ, detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I))+
@@ -26,10 +26,10 @@ theorem detector_contour_shift_both_poles (X : ℕ) {s : ℂ} (hs : s ≠ 1)
   let a := 1/2-s.re
   let f := detectorIntegrand X s Y
   have hab : a ≤ 2 := by dsimp [a]; linarith
-  obtain ⟨htop,hbot⟩ := detector_horizontal_tendsto X s hσ.le hσ1 hY
-  have hr := intervalIntegral_tendsto_integral (detector_right_integrable X s hσ.le hσ1 hY)
+  obtain ⟨htop,hbot⟩ := detector_horizontal_tendsto_wide X s hσ.le hσ1 hY
+  have hr := intervalIntegral_tendsto_integral (detector_right_integrable_wide X s hσ.le hσ1 hY)
     tendsto_neg_atTop_atBot tendsto_id
-  have hl := intervalIntegral_tendsto_integral (detector_left_integrable X s hσ hσ1 hY)
+  have hl := intervalIntegral_tendsto_integral (detector_left_integrable_wide X s hσ hσ1 hY)
     tendsto_neg_atTop_atBot tendsto_id
   have hlim : Tendsto (fun T : ℝ => Zeta.xiRectangleIntegral f a 2 (-T) T) atTop
       (𝓝 (I*(∫ u : ℝ, f (2+(u : ℂ)*I))-
@@ -71,8 +71,17 @@ theorem detector_contour_shift_both_poles (X : ℕ) {s : ℂ} (hs : s ≠ 1)
   apply mul_left_cancel₀ I_ne_zero
   linear_combination he
 
-theorem detectorMean_eq_both_residues (X : ℕ) {s : ℂ} (hs : s ≠ 1)
-    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1) {Y : ℝ} (hY : 1 ≤ Y) :
+theorem detector_contour_shift_both_poles (X : ℕ) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+    {Y : ℝ} (hY : 1 ≤ Y) :
+    (∫ u : ℝ, detectorIntegrand X s Y (2+(u : ℂ)*I)) =
+      (∫ u : ℝ, detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I))+
+        (2*(Real.pi : ℂ))*
+          (detectorPrincipalPole X s Y+riemannZeta s*finiteSeries (μ : ArithmeticFunction ℂ) X s/2) :=
+  detector_contour_shift_both_poles_wide X hs hσ (by linarith) hY
+
+theorem detectorMean_eq_both_residues_wide (X : ℕ) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 7/6) {Y : ℝ} (hY : 1 ≤ Y) :
     detectorMean X s Y = (detectorPrincipalPole X s Y+riemannZeta s*finiteSeries (μ : ArithmeticFunction ℂ) X s/2)+
       (2*(Real.pi : ℂ))⁻¹*∫ u : ℝ,
         detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I) := by
@@ -80,11 +89,18 @@ theorem detectorMean_eq_both_residues (X : ℕ) {s : ℂ} (hs : s ≠ 1)
   have hc : (((1/(2*Real.pi) : ℝ) : ℂ)) = (2*(Real.pi : ℂ))⁻¹ := by simp
   rw [hc]
   change (2*(Real.pi : ℂ))⁻¹*(∫ u : ℝ, detectorIntegrand X s Y (2+(u : ℂ)*I)) = _
-  rw [detector_contour_shift_both_poles X hs hσ hσ1 hY,mul_add]
+  rw [detector_contour_shift_both_poles_wide X hs hσ hσ1 hY,mul_add]
   have hp : (2*(Real.pi : ℂ)) ≠ 0 := by simp [Real.pi_ne_zero]
   field_simp
   simp_rw [mul_comm I]
   ring
+
+theorem detectorMean_eq_both_residues (X : ℕ) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1) {Y : ℝ} (hY : 1 ≤ Y) :
+    detectorMean X s Y = (detectorPrincipalPole X s Y+riemannZeta s*finiteSeries (μ : ArithmeticFunction ℂ) X s/2)+
+      (2*(Real.pi : ℂ))⁻¹*∫ u : ℝ,
+        detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I) :=
+  detectorMean_eq_both_residues_wide X hs hσ (by linarith) hY
 
 theorem detector_zero_contour_shift (X : ℕ) {s : ℂ} (hs : s ≠ 1)
     (hz : riemannZeta s = 0) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)

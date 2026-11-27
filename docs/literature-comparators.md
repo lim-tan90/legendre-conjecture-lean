@@ -492,4 +492,7 @@ of two explicit quantities.
 The index-weighted comparator charges each Dirichlet coefficient by
 `T+n`. The compact smoothing comparators retain both residues and
 the exact logarithmic cost of the critical product.
-[Weighted and smoothed estimates](layer4-mollified-jensen.md#index-weighted-second-moment).
+[Weighted and smoothed estimates](layer4-mollified-jensen.md#index-weighted-second-moment). The height-convolution and shell comparators
+verify the actual mollified second moment up to real part `7/6`, with the
+exact curved exponent under the explicit near-one condition.
+[Fourth-log shell moment](layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells).

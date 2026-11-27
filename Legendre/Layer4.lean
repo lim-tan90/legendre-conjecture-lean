@@ -54,6 +54,10 @@ public import Legendre.Layer4.MollifiedZetaDyadic
 public import Legendre.Layer4.MollifiedZetaWeighted
 public import Legendre.Layer4.MollifiedZetaSmoothed
 public import Legendre.Layer4.MollifierFourthMoment
+public import Legendre.Layer4.CriticalConvolution
+public import Legendre.Layer4.MollifiedZetaSmoothedMoment
+public import Legendre.Layer4.SmoothedDivisorMoment
+public import Legendre.Layer4.MollifiedZetaBalancedMoment
 public import Legendre.Layer4.Exponential.DiscreteFirstDerivative
 public import Legendre.Layer4.Exponential.DiscreteSecondDerivative
 public import Legendre.Layer4.Exponential.HalaszComplex

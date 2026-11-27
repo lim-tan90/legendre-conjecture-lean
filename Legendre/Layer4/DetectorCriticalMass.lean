@@ -88,13 +88,13 @@ noncomputable def criticalMass (X : ℕ) (t : ℝ) : ℝ :=
 theorem criticalMass_nonneg (X : ℕ) (t : ℝ) : 0 ≤ criticalMass X t :=
   integral_nonneg (fun u => mul_nonneg (criticalWeight_nonneg u) (norm_nonneg _))
 
-theorem detector_critical_point_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+theorem detector_critical_point_bound_wide (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 7/6)
     {Y : ℝ} (hY : 1 ≤ Y) (u : ℝ) :
     ‖detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I)‖ ≤
       (16*Y^(1/2-s.re)/(s.re-1/2))*(criticalWeight u*‖criticalProduct X s.im u‖) := by
   have he : s+(((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I) = (1/2 : ℂ)+(s.im+u : ℝ)*I := by
     apply Complex.ext <;> simp
-  have hk := detectorKernel_left_bound (s.re-1/2) u (by linarith) (by linarith)
+  have hk := detectorKernel_left_bound_wide (s.re-1/2) u (by linarith) (by linarith)
   rw [← Complex.ofReal_neg,show -(s.re-1/2) = 1/2-s.re by ring,
     ← criticalWeight_eq_rpow] at hk
   rw [detectorIntegrand,mul_assoc,← mul_assoc,← mul_assoc,norm_mul,norm_mul,norm_mul,
@@ -107,7 +107,13 @@ theorem detector_critical_point_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (h�
         Y^(1/2-s.re) by positivity)
   convert hh using 1; simp only [criticalProduct,norm_mul]; ring
 
-theorem detectorCriticalIntegral_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+theorem detector_critical_point_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+    {Y : ℝ} (hY : 1 ≤ Y) (u : ℝ) :
+    ‖detectorIntegrand X s Y (((1/2-s.re : ℝ) : ℂ)+(u : ℂ)*I)‖ ≤
+      (16*Y^(1/2-s.re)/(s.re-1/2))*(criticalWeight u*‖criticalProduct X s.im u‖) :=
+  detector_critical_point_bound_wide X s hσ (by linarith) hY u
+
+theorem detectorCriticalIntegral_bound_wide (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 7/6)
     {Y : ℝ} (hY : 1 ≤ Y) :
     ‖detectorCriticalIntegral X s Y‖ ≤ (16*Y^(1/2-s.re)/(s.re-1/2))*criticalMass X s.im := by
   rw [detectorCriticalIntegral,norm_mul]
@@ -118,13 +124,18 @@ theorem detectorCriticalIntegral_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (h
   apply integral_mono_of_nonneg
   · exact Filter.Eventually.of_forall (fun _ => norm_nonneg _)
   · exact (criticalProduct_weighted_integrable X s.im).const_mul _
-  · exact Filter.Eventually.of_forall (detector_critical_point_bound X s hσ hσ1 hY)
+  · exact Filter.Eventually.of_forall (detector_critical_point_bound_wide X s hσ hσ1 hY)
 
-theorem detectorCriticalIntegral_uniform_bound (X : ℕ) (s : ℂ) {σ Y : ℝ}
-    (hσ : 1/2 < σ) (hσs : σ ≤ s.re) (hσ1 : s.re ≤ 1) (hY : 1 ≤ Y) :
+theorem detectorCriticalIntegral_bound (X : ℕ) (s : ℂ) (hσ : 1/2 < s.re) (hσ1 : s.re ≤ 1)
+    {Y : ℝ} (hY : 1 ≤ Y) :
+    ‖detectorCriticalIntegral X s Y‖ ≤ (16*Y^(1/2-s.re)/(s.re-1/2))*criticalMass X s.im :=
+  detectorCriticalIntegral_bound_wide X s hσ (by linarith) hY
+
+theorem detectorCriticalIntegral_uniform_bound_wide (X : ℕ) (s : ℂ) {σ Y : ℝ}
+    (hσ : 1/2 < σ) (hσs : σ ≤ s.re) (hσ1 : s.re ≤ 7/6) (hY : 1 ≤ Y) :
     ‖detectorCriticalIntegral X s Y‖ ≤
       (16*Y^(1/2-σ)/(σ-1/2))*criticalMass X s.im := by
-  apply (detectorCriticalIntegral_bound X s (hσ.trans_le hσs) hσ1 hY).trans
+  apply (detectorCriticalIntegral_bound_wide X s (hσ.trans_le hσs) hσ1 hY).trans
   apply mul_le_mul_of_nonneg_right _ (criticalMass_nonneg X s.im)
   calc
     _ ≤ (16*Y^(1/2-σ))/(s.re-1/2) := by
@@ -132,5 +143,11 @@ theorem detectorCriticalIntegral_uniform_bound (X : ℕ) (s : ℂ) {σ Y : ℝ}
       exact mul_le_mul_of_nonneg_left
         (Real.rpow_le_rpow_of_exponent_le hY (by linarith)) (by norm_num)
     _ ≤ _ := div_le_div_of_nonneg_left (by positivity) (by linarith) (by linarith)
+
+theorem detectorCriticalIntegral_uniform_bound (X : ℕ) (s : ℂ) {σ Y : ℝ}
+    (hσ : 1/2 < σ) (hσs : σ ≤ s.re) (hσ1 : s.re ≤ 1) (hY : 1 ≤ Y) :
+    ‖detectorCriticalIntegral X s Y‖ ≤
+      (16*Y^(1/2-σ)/(σ-1/2))*criticalMass X s.im :=
+  detectorCriticalIntegral_uniform_bound_wide X s hσ hσs (by linarith) hY
 
 end Legendre.Density.Detector.Smooth

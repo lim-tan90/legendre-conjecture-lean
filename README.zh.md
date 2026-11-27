@@ -250,7 +250,13 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 临界线 mollifier 四阶矩的 `X²` 项保留三次对数。
 [加权均方与紧支撑平滑](docs/layer4-mollified-jensen.md#index-weighted-second-moment)。
 
-当前验证（2026-11-26）包括 **4,395 项构建**、**8,769 个定理的公理审计**、**382 个 Lean 文件**和 **232 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**实际 mollified ζ 的四次对数二阶矩（2026-11-27）。** 将临界线积分沿高度
+积分并与平滑尾项合并后，已证明 `∫_{T/2}^T |ζM_X−1|² ≪ T^(3(1−α))(log T)^4`。
+当 `3/4≤α≤1`、`T≥16` 时，对所有 `α≤a≤7/6` 可用同一个
+`T≤X≤2T`。若 `(1−α)^2 log T≤1`，高度指数可取 `3(1−α)/(2−α)`。
+[精确条件与比较器](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells)。
+
+当前验证（2026-11-27）包括 **4,399 项构建**、**8,822 个定理的公理审计**、**386 个 Lean 文件**和 **233 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -1068,6 +1074,8 @@ digamma 尾和仅导入所选 PNT+ 级数证明，省去与此处无关的特征
 对已适配的轮廓移动作本地推广后，一般点的原点留数也得到保留。
 这一步使用现有的 PNT+ 矩形留数接口。
 [紧支撑 mollified 恒等式](Legendre/Layer4/MollifiedZetaSmoothed.lean)。
+同一轮廓移动已延伸到实部 `7/6`，保留两个留数以及水平和竖直边的衰减估计。
+[四次对数二阶矩](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells)。
 
 指数和导数检验另改编自 **openai/math**，固定提交
 `4eaee87548250b2682affda7d05d947c05554bae`，源目录

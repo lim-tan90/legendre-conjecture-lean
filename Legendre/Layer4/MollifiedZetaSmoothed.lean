@@ -14,19 +14,26 @@ open scoped ArithmeticFunction.Moebius
 
 /-- The genuine mollified error is represented by the smoothed tail,
 the shifted integral, and the two explicit corrections. -/
-theorem mollifiedError_eq_smoothed_terms (X : ℕ) (hX : 1 ≤ X) {s : ℂ} (hs : s ≠ 1)
-    (hσ : 1/2 < s.re) (hσ₁ : s.re ≤ 1) {Y : ℝ} (hY : 1 ≤ Y) :
+theorem mollifiedError_eq_smoothed_terms_wide (X : ℕ) (hX : 1 ≤ X) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ₁ : s.re ≤ 7/6) {Y : ℝ} (hY : 1 ≤ Y) :
     mollifiedError X s =
       2*(detectorTail X s Y-detectorCriticalIntegral X s Y-detectorPrincipalPole X s Y+
         (detectorWeight (1/Y)-1/2)) := by
   have hsplit := detectorMean_split X hX s Y (by linarith)
   change detectorMean X s Y = detectorWeight (1/Y)+detectorTail X s Y at hsplit
-  have h := detectorMean_eq_both_residues X hs hσ hσ₁ hY
+  have h := detectorMean_eq_both_residues_wide X hs hσ hσ₁ hY
   change detectorMean X s Y =
     (detectorPrincipalPole X s Y+riemannZeta s*finiteSeries (μ : ArithmeticFunction ℂ) X s/2)+
       detectorCriticalIntegral X s Y at h
   unfold mollifiedError
   linear_combination 2*(hsplit-h)
+
+theorem mollifiedError_eq_smoothed_terms (X : ℕ) (hX : 1 ≤ X) {s : ℂ} (hs : s ≠ 1)
+    (hσ : 1/2 < s.re) (hσ₁ : s.re ≤ 1) {Y : ℝ} (hY : 1 ≤ Y) :
+    mollifiedError X s =
+      2*(detectorTail X s Y-detectorCriticalIntegral X s Y-detectorPrincipalPole X s Y+
+        (detectorWeight (1/Y)-1/2)) :=
+  mollifiedError_eq_smoothed_terms_wide X hX hs hσ (by linarith) hY
 
 /-- The smoothed tail has a weighted mean bound with support only through
 the smoothing scale. The coefficient before index (X+1) vanishes. -/
