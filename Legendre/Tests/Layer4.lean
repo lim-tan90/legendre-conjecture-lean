@@ -518,6 +518,33 @@ theorem layer4_smoothed_mollified_right_endpoint_consumer :
   have h := hh 1 (7/6) (by norm_num) le_rfl (by norm_num) le_rfl (by norm_num)
   simpa [Moment.balancedDensityExponent] using h
 
+/-- A single fifth-log density constant covers both closed real endpoints at height two. -/
+theorem layer4_uniform_log_five_ingham_endpoints_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      (Zeta.zeroDensityCount (1/2) 2 : ℝ) ≤ 2*C*(Real.log 2)^5 ∧
+      (Zeta.zeroDensityCount 1 2 : ℝ) ≤ C*(Real.log 2)^5 := by
+  obtain ⟨C,hC,h⟩ := Zeta.ingham_density_log_five
+  refine ⟨C,hC,?_,?_⟩
+  · have hb := h (1/2) ⟨le_rfl,by norm_num⟩ 2 le_rfl
+    norm_num [Moment.balancedDensityExponent] at hb
+    simpa only [mul_comm C (2 : ℝ)] using hb
+  · have hb := h 1 ⟨by norm_num,le_rfl⟩ 2 le_rfl
+    simpa [Moment.balancedDensityExponent] using hb
+
+/-- The extended window supplies one mollifier on lines beyond the compact shift. -/
+theorem layer4_two_thirds_right_half_plane_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 16 ≤ T →
+      ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧ ∀ a : ℝ, 1 ≤ a →
+        (∫ t in Set.Icc ((1/2 : ℝ)*T^(2/3 : ℝ)) T,
+          ‖Detector.mollifiedError X ((a : ℂ)+(t : ℂ)*Complex.I)‖^2) ≤ C*(Real.log T)^4 := by
+  obtain ⟨C,hC,h⟩ := Moment.mollifiedError_two_thirds_window_log_four
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  obtain ⟨X,hX,hTX,hXT,hb⟩ := h T hT
+  refine ⟨X,hX,hTX,hXT,?_⟩
+  intro a ha
+  simpa using hb 1 a (by norm_num) le_rfl ha
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

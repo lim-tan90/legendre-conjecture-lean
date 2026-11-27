@@ -63,20 +63,23 @@ theorem analyticOrderAt_squaredErrorDetector_ge_zeta (X : ℕ) {s : ℂ} (hs : s
   rw [he,analyticOrderAt_mul (hZ.mul hM) hG,analyticOrderAt_mul hZ hM]
   exact (le_add_of_nonneg_right zero_le).trans (le_add_of_nonneg_right zero_le)
 
-theorem log_norm_squaredErrorDetector_le (X : ℕ) (s : ℂ) :
-    Real.log ‖squaredErrorDetector X s‖ ≤ ‖mollifiedError X s‖^2 := by
-  have hpow : ‖(mollifiedError X s)^2‖ = ‖mollifiedError X s‖^2 := by
+private theorem log_norm_one_sub_sq_le (z : ℂ) : Real.log ‖1-z^2‖ ≤ ‖z‖^2 := by
+  have hpow : ‖(z)^2‖ = ‖z‖^2 := by
     rw [pow_two,norm_mul,pow_two]
-  have hb : ‖squaredErrorDetector X s‖ ≤ 1+‖mollifiedError X s‖^2 := by
-    have h := norm_sub_le (1 : ℂ) ((mollifiedError X s)^2)
+  have hb : ‖(1-z^2)‖ ≤ 1+‖z‖^2 := by
+    have h := norm_sub_le (1 : ℂ) ((z)^2)
     rw [norm_one,hpow] at h
     exact h
-  rcases eq_zero_or_norm_pos (squaredErrorDetector X s) with h|h
+  rcases eq_zero_or_norm_pos ((1-z^2)) with h|h
   · simp only [h,norm_zero,Real.log_zero]
     positivity
   · exact (Real.log_le_log h hb).trans (by
-      have hh := Real.log_le_sub_one_of_pos (show 0 < 1+‖mollifiedError X s‖^2 by positivity)
+      have hh := Real.log_le_sub_one_of_pos (show 0 < 1+‖z‖^2 by positivity)
       linarith)
+
+theorem log_norm_squaredErrorDetector_le (X : ℕ) (s : ℂ) :
+    Real.log ‖squaredErrorDetector X s‖ ≤ ‖mollifiedError X s‖^2 :=
+  log_norm_one_sub_sq_le (mollifiedError X s)
 
 theorem mollifiedError_eq_tsum_tail (X : ℕ) (hX : 1 ≤ X) {s : ℂ} (hs : 1 < s.re) :
     mollifiedError X s = ∑' n : ℕ, LSeries.term (detectorCoefficient X) s (n+2) := by
@@ -231,33 +234,34 @@ open Complex Metric Set MeromorphicOn Real
 open Density.Detector
 open scoped BigOperators
 
-/-- Control the center term by the actual squared mollifier error. -/
-theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
-    (c : ℂ) (hErr : ‖mollifiedError X c‖ ≤ 1/2) (r R : ℝ) (hr : 0 < r) (hrR : r < R)
-    (hPole : (1 : ℂ) ∉ closedBall c R)
-    (S : Finset ℂ) (hS : ∀ z ∈ S, z ∈ closedBall c r) :
-    (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤
-      (circleAverage (fun z => ‖mollifiedError X z‖^2) c R + (4/3 : ℝ)*‖mollifiedError X c‖^2) /
+/-- Jensen bounds finite weights dominated by the vanishing orders of the
+squared-error detector. The error may be composed with a holomorphic map. -/
+theorem sum_weights_le_squared_error_circle (E : ℂ → ℂ) (c : ℂ)
+    (hErr : ‖E c‖ ≤ 1/2) {r R : ℝ} (hr : 0 < r) (hrR : r < R)
+    (hE : AnalyticOnNhd ℂ E (closedBall c R))
+    (S : Finset ℂ) (m : ℂ → ℕ) (hS : ∀ z ∈ S, z ∈ closedBall c r)
+    (hmult : ∀ z ∈ S, (m z : ℕ∞) ≤ analyticOrderAt (fun w => 1-(E w)^2) z) :
+    (∑ z ∈ S, (m z : ℝ)) ≤
+      (circleAverage (fun z => ‖E z‖^2) c R + (4/3 : ℝ)*‖E c‖^2) /
         Real.log (R/r) := by
   classical
-  let F := squaredErrorDetector X
+  let F := fun z => 1-(E z)^2
   have hR : 0 < R := hr.trans hrR
-  have hNc (z : ℂ) (hz : z ∈ closedBall c R) : z ≠ 1 := fun he => hPole (he ▸ hz)
-  have hf : AnalyticOnNhd ℂ F (closedBall c R) :=
-    fun z hz => squaredErrorDetector_analyticAt X (hNc z hz)
+  have hf : AnalyticOnNhd ℂ F (closedBall c R) := fun z hz =>
+    analyticAt_const.sub ((hE z hz).pow 2)
   have hsmall := hf.mono (closedBall_subset_closedBall hrR.le)
-  let v := ‖mollifiedError X c‖^2
+  let v := ‖E c‖^2
   have hv : 0 ≤ v := sq_nonneg _
   have hv₁ : v ≤ 1/4 := by
     have h := pow_le_pow_left₀ (norm_nonneg _) hErr 2
     norm_num at h
     exact h
   have hFbound : 1-v ≤ ‖F c‖ := by
-    have hE2 : ‖(mollifiedError X c)^2‖ = v := by
+    have hE2 : ‖(E c)^2‖ = v := by
       dsimp only [v]
       rw [pow_two,norm_mul,pow_two]
-    have hh := norm_sub_le (F c) (-(mollifiedError X c)^2)
-    have he : F c- (-(mollifiedError X c)^2) = 1 := by dsimp [F,squaredErrorDetector]; ring
+    have hh := norm_sub_le (F c) (-(E c)^2)
+    have he : F c- (-(E c)^2) = 1 := by dsimp [F]; ring
     rw [he,norm_one,norm_neg,hE2] at hh
     linarith
   have hFc : F c ≠ 0 := norm_pos_iff.mp (by linarith)
@@ -272,7 +276,7 @@ theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
   have hnonneg (z : ℂ) : 0 ≤ (d z : ℝ) := by
     have h : (0 : ℤ) ≤ d z := hsmall.divisor_nonneg z
     exact_mod_cast h
-  have hdom : (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤ ∑ᶠ z, (d z : ℝ) := by
+  have hdom : (∑ z ∈ S, (m z : ℝ)) ≤ ∑ᶠ z, (d z : ℝ) := by
     rw [finsum_eq_sum_of_support_subset _ (s := hds.toFinset ∪ S) (by
       intro z hz
       apply Finset.mem_union_left
@@ -284,27 +288,28 @@ theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
     intro z hz
     have hzr := hS z hz
     have hzR := closedBall_subset_closedBall hrR.le hzr
-    have hζd := analyticOrderAt_squaredErrorDetector_ge_zeta X (hNc z hzR)
-    rw [← zeroMultiplicity_cast (hNc z hzR), ← Nat.cast_analyticOrderNatAt (hFin z hzR)] at hζd
-    have hn : zeroMultiplicity z ≤ analyticOrderNatAt F z := by exact_mod_cast hζd
+    have hm := hmult z hz
+    change (m z : ℕ∞) ≤ analyticOrderAt F z at hm
+    rw [← Nat.cast_analyticOrderNatAt (hFin z hzR)] at hm
+    have hn : m z ≤ analyticOrderNatAt F z := by exact_mod_cast hm
     change _ ≤ (divisor F (closedBall c r) z : ℝ)
     rw [hsmall.divisor_apply hzr, ← Nat.cast_analyticOrderNatAt (hFin z hzR)]
     simpa only [ENat.map_natCast,WithTop.untop₀_coe,Int.cast_natCast] using
-      (Nat.cast_le.mpr hn : (zeroMultiplicity z : ℝ) ≤ analyticOrderNatAt F z)
+      (Nat.cast_le.mpr hn : (m z : ℝ) ≤ analyticOrderNatAt F z)
   have hJs := sum_divisor_le_circle_log_norm hr hrR hf hFc
   have hSphere (z : ℂ) (hz : z ∈ sphere c |R|) : z ∈ closedBall c R := by
     rw [abs_of_pos hR] at hz
     exact sphere_subset_closedBall hz
   have hlogInt : CircleIntegrable (fun z => Real.log ‖F z‖) c R :=
     (hf.mono hSphere).meromorphicOn.circleIntegrable_log_norm
-  have hcont : ContinuousOn (fun z => ‖mollifiedError X z‖^2) (sphere c |R|) := by
-    have hcont₀ : ContinuousOn (mollifiedError X) (sphere c |R|) := fun z hz =>
-      (mollifiedError_analyticAt X (hNc z (hSphere z hz))).continuousAt.continuousWithinAt
+  have hcont : ContinuousOn (fun z => ‖E z‖^2) (sphere c |R|) := by
+    have hcont₀ : ContinuousOn E (sphere c |R|) := fun z hz =>
+      (hE z (hSphere z hz)).continuousAt.continuousWithinAt
     exact hcont₀.norm.pow 2
-  have hcont' : ContinuousOn (fun z => ‖mollifiedError X z‖^2) (sphere c R) := by
+  have hcont' : ContinuousOn (fun z => ‖E z‖^2) (sphere c R) := by
     simpa only [abs_of_pos hR] using hcont
   have hAvg := circleAverage_mono hlogInt (hcont'.circleIntegrable hR.le)
-    (fun z _ => log_norm_squaredErrorDetector_le X z)
+    (fun z _ => log_norm_one_sub_sq_le (E z))
   have hvp : 0 < 1-v := by linarith
   have hlogF : -Real.log ‖F c‖ ≤ (4/3 : ℝ)*v := by
     calc
@@ -319,6 +324,23 @@ theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
   apply hdom.trans hJs |>.trans
   apply div_le_div_of_nonneg_right _ (Real.log_nonneg ((one_le_div hr).mpr hrR.le))
   linarith
+
+/-- Control the center term by the actual squared mollifier error. -/
+theorem sum_zeta_multiplicity_le_mollified_circle_with_center_error (X : ℕ)
+    (c : ℂ) (hErr : ‖mollifiedError X c‖ ≤ 1/2) (r R : ℝ) (hr : 0 < r) (hrR : r < R)
+    (hPole : (1 : ℂ) ∉ closedBall c R)
+    (S : Finset ℂ) (hS : ∀ z ∈ S, z ∈ closedBall c r) :
+    (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤
+      (circleAverage (fun z => ‖mollifiedError X z‖^2) c R + (4/3 : ℝ)*‖mollifiedError X c‖^2) /
+        Real.log (R/r) := by
+  have hE : AnalyticOnNhd ℂ (mollifiedError X) (closedBall c R) :=
+    fun z hz => mollifiedError_analyticAt X (fun he => hPole (he ▸ hz))
+  refine sum_weights_le_squared_error_circle (mollifiedError X) c hErr hr hrR hE S zeroMultiplicity hS ?_
+  intro z hz
+  have hzR := closedBall_subset_closedBall hrR.le (hS z hz)
+  have hz₀ : z ≠ 1 := fun he => hPole (he ▸ hzR)
+  rw [zeroMultiplicity_cast hz₀]
+  exact analyticOrderAt_squaredErrorDetector_ge_zeta X hz₀
 
 /-- The actual mollified second-moment circle average bounds all zeta
 multiplicities in a smaller disk, with the Jensen radius factor explicit. -/

@@ -114,28 +114,32 @@ noncomputable def smoothedMollifiedMomentBound (X : ℕ) (T α Y : ℝ) : ℝ :=
     (Y^(1/2-α)/(α-1/2))^2*Real.sqrt (T*(Real.log T)^4*(T*L^4+(X*X : ℕ)*L^3)) +
     1/T + T/Y^2
 
-/-- A high-height shell has a second moment for the genuine mollified
-error. The two residue corrections contribute (T^{-1}) and (T/Y^2). -/
-theorem smoothed_mollifiedError_shell_second_moment :
-    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 8 ≤ T → (X : ℝ) ≤ 2*T →
-      ∀ α a Y : ℝ, 1/2 < α → α ≤ a → a ≤ 7/6 → 1 ≤ Y → Y ≤ (T/2)^2 →
-      (∫ t in Icc (T/2) T, ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2) ≤
-        C*smoothedMollifiedMomentBound X T α Y := by
+set_option maxHeartbeats 500000 in
+/-- A vertical window moment from the compact shift, with the residue
+bound retained as a parameter. -/
+theorem smoothed_mollifiedError_window_second_moment :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 2 ≤ T →
+      ∀ A : ℝ, 0 < A → A ≤ T →
+      ∀ α a Y : ℝ, 1/2 < α → α ≤ a → a ≤ 7/6 → 1 ≤ Y →
+      ∀ K : ℝ, (∀ t ∈ Icc A T, ‖detectorPrincipalPole X ((a : ℂ)+(t : ℂ)*I) Y‖ ≤ K) →
+      (∫ t in Icc A T, ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2) ≤
+        C*(smoothedMollifiedMomentBound X T α Y+T*K^2) := by
   obtain ⟨P,hP,hPb⟩ := integral_detectorTail_norm_sq_le_weighted
   obtain ⟨Q,hQ,hQb⟩ := detectorCriticalIntegral_second_moment
-  let C := 1024*(P+Q+1)
-  have hC : 0 < C := by dsimp [C]; positivity
+  let D := max (max P Q) 1
+  have hD : 1 ≤ D := le_max_right _ _
+  let C := 16*D
+  have hC : 0 < C := mul_pos (by norm_num) (zero_lt_one.trans_le hD)
   refine ⟨C,hC,?_⟩
-  intro X hX T hT hXT α a Y hα hαa ha hY hYt
-  let J := Icc (T/2) T
+  intro X hX T hT A₀ hA₀ hAT α a Y hα hαa ha hY K hK
+  let J := Icc A₀ T
   let s := fun t : ℝ => (a : ℂ)+(t : ℂ)*I
   let e := fun t => ‖mollifiedError X (s t)‖^2
   let p := fun t => ‖detectorTail X (s t) Y‖^2
   let q := fun t => ‖detectorCriticalIntegral X (s t) Y‖^2
-  let B := (8/T)^2+(1/Y)^2
+  let B := K^2+(1/Y)^2
   have hTp : 0 < T := by linarith
   have hYp : 0 < Y := by linarith
-  have hhalf : T/2 ≤ T := by linarith
   have hsre (t : ℝ) : (s t).re = a := by simp [s]
   have hsim (t : ℝ) : (s t).im = t := by simp [s]
   have hj : J ⊆ Icc (-T) T := Icc_subset_Icc (by linarith) le_rfl
@@ -185,12 +189,7 @@ theorem smoothed_mollifiedError_shell_second_moment :
       linarith [ht.1]
     have hE := mollifiedError_eq_smoothed_terms_wide X hX hs
       (by rw [hsre]; exact hα.trans_le hαa) (by rw [hsre]; exact ha) hY
-    have hPole : ‖detectorPrincipalPole X (s t) Y‖ ≤ 8/T := by
-      have ht₀ : 0 ≤ t := by linarith [ht.1]
-      have hpole := detectorPrincipalPole_high_bound X (s t) (by rw [hsre]; linarith)
-        (T := T/2) (by positivity) (by rw [hsim, abs_of_nonneg ht₀]; exact ht.1)
-        (by linarith) hY hYt
-      exact hpole.trans_eq (by ring)
+    have hPole : ‖detectorPrincipalPole X (s t) Y‖ ≤ K := hK t ht
     let x := ‖detectorTail X (s t) Y‖
     let y := ‖detectorCriticalIntegral X (s t) Y‖
     let z := ‖detectorPrincipalPole X (s t) Y‖
@@ -220,35 +219,83 @@ theorem smoothed_mollifiedError_shell_second_moment :
   change (∫ t in J, e t) ≤ 16*(∫ t in J, (p+q) t+B) at h
   rw [integral_add (hpJ.add hqJ) hc] at h
   change (∫ t in J, e t) ≤ 16*((∫ t in J, p t+q t)+(∫ _ in J, B)) at h
-  rw [integral_add hpJ hqJ, setIntegral_const, measureReal_def, Real.volume_Icc, ENNReal.toReal_ofReal (sub_nonneg.mpr hhalf),
+  rw [integral_add hpJ hqJ, setIntegral_const, measureReal_def, Real.volume_Icc, ENNReal.toReal_ofReal (sub_nonneg.mpr hAT),
     smul_eq_mul] at h
   let A := ∑ n ∈ Finset.Ioc X ⌊Y⌋₊, (T+(n : ℝ))*(n.divisors.card : ℝ)^2*(n : ℝ)^(-2*α)
   let R := (Y^(1/2-α)/(α-1/2))^2*Real.sqrt (T*(Real.log T)^4*
     (T*(1+Real.log (X*X : ℕ))^4+(X*X : ℕ)*(1+Real.log (X*X : ℕ))^3))
   have hA : 0 ≤ A := Finset.sum_nonneg (fun _ _ => by positivity)
   have hR : 0 ≤ R := by dsimp [R]; positivity
-  have hBJ : (T-T/2)*B ≤ 64*(1/T)+T/Y^2 := by
-    have hh : (T-T/2)*B = 32/T+(T/2)/Y^2 := by
-      dsimp [B]
-      field_simp
-      ring
-    rw [hh]
-    have hu : (T/2)/Y^2 ≤ T/Y^2 := div_le_div_of_nonneg_right (by linarith) (by positivity)
-    apply add_le_add _ hu
-    rw [← mul_one_div]
-    exact mul_le_mul_of_nonneg_right (by norm_num) (by positivity)
-  change (∫ t in J, e t) ≤ C*(A+R+1/T+T/Y^2)
-  have h1 : (∫ t in J, e t) ≤ 16*(P*A+Q*R+64*(1/T)+T/Y^2) := by
-    have hcomb : (∫ t in J, p t)+(∫ t in J, q t)+(T-T/2)*B ≤
-        (P*A+Q*R)+(64*(1/T)+T/Y^2) :=
-      add_le_add (add_le_add hPJ (by simpa only [R, ← mul_assoc] using hQJ)) hBJ
+  have hBJ : (T-A₀)*B ≤ T*K^2+T/Y^2 := by
+    have h := mul_le_mul_of_nonneg_right (show T-A₀ ≤ T by linarith)
+      (show 0 ≤ B by dsimp [B]; positivity)
+    exact h.trans_eq (by dsimp [B]; ring)
+  change (∫ t in J, e t) ≤ C*(A+R+1/T+T/Y^2+T*K^2)
+  have h1 : (∫ t in J, e t) ≤ 16*(P*A+Q*R+T*K^2+T/Y^2) := by
+    have hcomb : (∫ t in J, p t)+(∫ t in J, q t)+(T-A₀)*B ≤
+        (P*A+Q*R)+(T*K^2+T/Y^2) :=
+      add_le_add (add_le_add hPJ (hQJ.trans_eq (mul_assoc _ _ _))) hBJ
     exact (h.trans (mul_le_mul_of_nonneg_left hcomb (by norm_num))).trans_eq (by ring)
-  exact h1.trans (by
-    dsimp only [C]
-    nlinarith [mul_nonneg hP.le hA,mul_nonneg hQ.le hR,
-      mul_nonneg hP.le hR,mul_nonneg hQ.le hA,
-      mul_nonneg hP.le (by positivity : 0 ≤ 1/T),mul_nonneg hQ.le (by positivity : 0 ≤ 1/T),
-      mul_nonneg hP.le (by positivity : 0 ≤ T/Y^2),mul_nonneg hQ.le (by positivity : 0 ≤ T/Y^2),
-      show 0 ≤ T/Y^2 by positivity])
+  have hPD : P ≤ D := (le_max_left P Q).trans (le_max_left _ _)
+  have hQD : Q ≤ D := (le_max_right P Q).trans (le_max_left _ _)
+  have hu : 0 ≤ T*K^2 := by positivity
+  have hv : 0 ≤ T/Y^2 := by positivity
+  have hw : 0 ≤ D*(1/T) := mul_nonneg (zero_le_one.trans hD) (by positivity)
+  have hsum := add_le_add
+    (add_le_add (mul_le_mul_of_nonneg_right hPD hA) (mul_le_mul_of_nonneg_right hQD hR))
+    (add_le_add (mul_le_mul_of_nonneg_right hD hu) (mul_le_mul_of_nonneg_right hD hv))
+  simp only [one_mul] at hsum
+  rw [show C*(A+R+1/T+T/Y^2+T*K^2) = 16*(D*(A+R+1/T+T/Y^2+T*K^2)) by dsimp only [C]; ring]
+  refine h1.trans (mul_le_mul_of_nonneg_left ?_ (by norm_num : 0 ≤ (16:ℝ)))
+  have hsum' : P*A+Q*R+T*K^2+T/Y^2 ≤ D*A+D*R+(D*(T*K^2)+D*(T/Y^2)) := by
+    rw [add_assoc (P*A+Q*R)]
+    exact hsum
+  calc
+    _ ≤ D*A+D*R+(D*(T*K^2)+D*(T/Y^2)) := hsum'
+    _ ≤ D*A+D*R+(D*(T*K^2)+D*(T/Y^2))+D*(1/T) := le_add_of_nonneg_right hw
+    _ = D*(A+R+1/T+T/Y^2+T*K^2) := by ring
+
+/-- A high-height shell has a second moment for the genuine mollified
+error. The two residue corrections contribute (T^{-1}) and (T/Y^2). -/
+theorem smoothed_mollifiedError_shell_second_moment :
+    ∃ C : ℝ, 0 < C ∧ ∀ X : ℕ, 1 ≤ X → ∀ T : ℝ, 8 ≤ T → (X : ℝ) ≤ 2*T →
+      ∀ α a Y : ℝ, 1/2 < α → α ≤ a → a ≤ 7/6 → 1 ≤ Y → Y ≤ (T/2)^2 →
+      (∫ t in Icc (T/2) T, ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2) ≤
+        C*smoothedMollifiedMomentBound X T α Y := by
+  obtain ⟨C,hC,hb⟩ := smoothed_mollifiedError_window_second_moment
+  refine ⟨65*C, by positivity, ?_⟩
+  intro X hX T hT hXT α a Y hα hαa ha hY hYt
+  have hTp : 0 < T := by linarith
+  have hK (t : ℝ) (ht : t ∈ Icc (T/2) T) :
+      ‖detectorPrincipalPole X ((a : ℂ)+(t : ℂ)*I) Y‖ ≤ 8/T := by
+    let s := (a : ℂ)+(t : ℂ)*I
+    have hsa : s.re = a := by simp [s]
+    have hst : s.im = t := by simp [s]
+    have hs : T/2 ≤ |s.im| := by
+      rw [hst, abs_of_nonneg (by linarith [ht.1])]
+      exact ht.1
+    have h := detectorPrincipalPole_high_bound X s
+      (by rw [hsa]; exact hα.le.trans hαa) (by linarith) hs (by linarith) hY hYt
+    rwa [show (4 : ℝ)/(T/2) = 8/T by ring] at h
+  have h := hb X hX T (by linarith) (T/2) (by linarith) (by linarith)
+    α a Y hα hαa ha hY _ hK
+  let M := smoothedMollifiedMomentBound X T α Y
+  change _ ≤ (65*C)*M
+  have hM : 1/T ≤ M := by
+    unfold M smoothedMollifiedMomentBound
+    dsimp only
+    have hsum : 0 ≤ ∑ n ∈ Finset.Ioc X ⌊Y⌋₊,
+        (T+(n : ℝ))*(n.divisors.card : ℝ)^2*(n : ℝ)^(-2*α) :=
+      Finset.sum_nonneg (fun _ _ => by positivity)
+    linarith only [hsum,
+      show 0 ≤ (Y^(1/2-α)/(α-1/2))^2*Real.sqrt (T*(Real.log T)^4*
+        (T*(1+Real.log (X*X : ℕ))^4+(X*X : ℕ)*(1+Real.log (X*X : ℕ))^3)) by positivity,
+      show 0 ≤ T/Y^2 by positivity]
+  have hKsq : T*(8/T)^2 = 64*(1/T) := by field_simp; ring
+  rw [hKsq] at h
+  exact h.trans (by
+    have hbound := mul_le_mul_of_nonneg_left hM (show 0 ≤ 64*C by positivity)
+    change C*(M+64*(1/T)) ≤ _
+    linarith only [hbound])
 
 end Legendre.Density.Detector.Smooth

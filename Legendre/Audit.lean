@@ -417,6 +417,10 @@ import all Legendre.Layer4.CriticalConvolution
 import all Legendre.Layer4.MollifiedZetaSmoothedMoment
 import all Legendre.Layer4.SmoothedDivisorMoment
 import all Legendre.Layer4.MollifiedZetaBalancedMoment
+import all Legendre.Layer4.CayleyDisk
+import all Legendre.Layer4.MollifiedZetaCayley
+import all Legendre.Layer4.MollifiedZetaRightMoment
+import all Legendre.Layer4.InghamCayleyDensity
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -9384,7 +9388,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_4"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaDyadic.0.Legendre.Density.Detector.integral_detectorPolynomial_norm_sq_le_dyadic._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaMeanSquare.0.Legendre.Density.Detector.norm_finiteSeries_moebius_le_rpow_sum"
-#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaVertical.0.Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep._simp_1_3"
@@ -9518,8 +9521,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaBalancedMoment.0.Legendre.Density.Moment.three_halves_moment_bound"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaBalancedMoment.0.Legendre.Density.Moment.three_halves_moment_bound._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothedMoment.0.Legendre.Density.Detector.Smooth.detectorWeight_head_error_le"
-#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothedMoment.0.Legendre.Density.Detector.Smooth.smoothed_mollifiedError_shell_second_moment._proof_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothedMoment.0.Legendre.Density.Detector.Smooth.smoothed_mollifiedError_shell_second_moment._simp_1_4"
 #audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothedMoment.0.Legendre.Density.Detector.Smooth.stronglyMeasurable_criticalIntegral_vertical"
 #audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.smoothed_tail_index_energy_le._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.smoothed_tail_index_energy_le._proof_1_3"
@@ -9531,3 +9532,73 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.smoothed_tail_index_energy_le._simp_1_8"
 #audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.smoothed_tail_index_energy_le._simp_1_9"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_smoothed_mollified_right_endpoint_consumer"
+
+-- Cayley density increments and the uniform fifth-log Ingham bound.
+#print axioms Legendre.Density.Detector.Smooth.smoothed_mollifiedError_window_second_moment
+#print axioms Legendre.Density.Moment.mollifiedError_right_second_moment
+#print axioms Legendre.Density.Moment.mollifiedError_two_thirds_window_log_four
+#print axioms Legendre.Density.Moment.uniform_divisor_square_tail
+#print axioms Legendre.Literature.layer4_ingham_uniform_log_five_comparator
+#print axioms Legendre.Literature.layer4_two_thirds_mollified_moment_comparator
+#print axioms Legendre.Zeta.halfPlaneDiskMap.eq_1
+#print axioms Legendre.Zeta.halfPlaneDiskMap_analyticAt
+#print axioms Legendre.Zeta.halfPlaneDiskMap_deriv_ne_zero
+#print axioms Legendre.Zeta.halfPlaneDiskMap_hasDerivAt
+#print axioms Legendre.Zeta.halfPlaneDiskMap_inverse_ne_one
+#print axioms Legendre.Zeta.halfPlaneDiskMap_of_inverse
+#print axioms Legendre.Zeta.halfPlaneDiskMap_re_gt
+#print axioms Legendre.Zeta.halfPlaneDiskMap_zero
+#print axioms Legendre.Zeta.ingham_cayley_log_five_increment
+#print axioms Legendre.Zeta.ingham_density_log_five
+#print axioms Legendre.Zeta.ingham_density_log_five_increment
+#print axioms Legendre.Zeta.integral_mollified_translatedAverage_le_vertical
+#print axioms Legendre.Zeta.log_cayley_radius_ratio_ge
+#print axioms Legendre.Zeta.norm_halfPlaneDiskInverse_le
+#print axioms Legendre.Zeta.norm_halfPlaneDiskMap_sub_center_le
+#print axioms Legendre.Zeta.sum_weights_le_squared_error_circle
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle
+#print axioms Legendre.Zeta.sum_zeta_multiplicity_le_of_height_window_bound
+#print axioms Legendre.Zeta.zeroDensityCount_le_cayley_vertical
+#print axioms Legendre.Zeta.zeroDensityCount_le_of_multiplicity_sweep
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.ingham_density_log_five_increment._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.log_one_add_le_two_sqrt"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.two_thirds_double_le"
+#audit_private_axioms "_private.Legendre.Layer4.InghamCayleyDensity.0.Legendre.Zeta.two_thirds_window_padding"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.sum_zeta_multiplicity_le_cayley_circle._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaCayley.0.Legendre.Zeta.zeroDensityCount_le_cayley_vertical._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaJensen.0.Legendre.Density.Detector.log_norm_one_sub_sq_le"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_second_moment._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_second_moment._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_second_moment._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaRightMoment.0.Legendre.Density.Moment.mollifiedError_right_tendsto._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.MollifiedZetaSmoothedMoment.0.Legendre.Density.Detector.Smooth.smoothed_mollifiedError_window_second_moment._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.uniform_divisor_square_tail._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_two_thirds_right_half_plane_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_uniform_log_five_ingham_endpoints_consumer"

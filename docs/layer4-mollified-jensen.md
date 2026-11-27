@@ -162,3 +162,26 @@ the vertical second moment.
 [Convolution](../Legendre/Layer4/CriticalConvolution.lean)
 [Second moment](../Legendre/Layer4/MollifiedZetaSmoothedMoment.lean)
 [Choice of scale](../Legendre/Layer4/MollifiedZetaBalancedMoment.lean)
+
+
+## Two-thirds-height window and Cayley count
+
+For `T≥16`, a single integer `T≤X≤2T` works for every
+`3/4≤α≤1` and every real line `a≥α`. The integral of
+`|ζ(a+it)M_X(a+it)−1|²` over `[T^(2/3)/2,T]` is bounded by
+`C T^(3(1−α))(log T)^4`. For `a≤7/6`, the compact shift uses
+`Y=T^(3/2)` and a residue bound `16/√T`. For `a≥7/6`, the
+absolutely convergent Dirichlet series starts past `X`; the
+index-weighted mean square and the divisor-square tail pass to the limit
+with a uniform `O((1+log X)^3)` bound.
+[Extended moment](../Legendre/Layer4/MollifiedZetaBalancedMoment.lean)
+[Right-hand moment](../Legendre/Layer4/MollifiedZetaRightMoment.lean)
+
+The Cayley map sends the unit disk to the half-plane right of `a` and
+fixes the real part of the center at 4. The inverse map preserves
+analytic vanishing orders. With a margin `ε∈(0,1]`, the logarithmic
+ratio of radii in Jensen's formula is at least `ε/4`.
+Vertical moments on the expanded height interval bound the integrated
+circle term, and the center term is controlled by `(9/X)^2`.
+[Cayley geometry](../Legendre/Layer4/CayleyDisk.lean)
+[Multiplicity and integrated count](../Legendre/Layer4/MollifiedZetaCayley.lean)

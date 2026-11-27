@@ -29,6 +29,8 @@ exponent with arbitrary positive loss.
 
 ## Cumulative density
 
+The current uniform result appears under [Uniform fifth-log bound](#uniform-fifth-log-bound). The earlier estimates below document the separated-sample argument.
+
 Write `E(σ) = 3(1−σ)/(2−σ)`. The cumulative count
 `N(σ,T) ≤ C T^E(σ) (log T)^7` holds for all `T≥2` and
 `σ∈[1/2,1]`, with one absolute constant and analytic multiplicities.
@@ -53,8 +55,7 @@ using the finite count up to height 128.
 
 For every fixed `τ<1`, one constant `Cτ` satisfies
 `N(σ,T) ≤ Cτ T^E(σ) (log T)^5` on the closed strip `[1/2,τ]`
-for every `T≥2`, counting analytic multiplicities. The full closed interval
-through `σ=1` has the uniform seven-log bound above.
+for every `T≥2`, counting analytic multiplicities.
 [Fixed-strip theorem](../Legendre/Layer4/InghamSharpLogarithms.lean)
 [Literal comparator](../Legendre/Literature/LayerCoverage.lean)
 
@@ -94,4 +95,29 @@ third condition uses the existing effective zero-free region with
 the fixed low-height count. The uniform fifth-log estimate remains
 open in the intervening band above `9/10`.
 [Proof](../Legendre/Layer4/InghamShrinkingStrip.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)
+
+
+## Uniform fifth-log bound
+
+There is an absolute `C>0` such that
+`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) (log T)^5` for every
+`σ∈[1/2,1]` and `T≥2`, with analytic multiplicities.
+
+For large `T` and `σ≥9/10`, put `a=σ−1/log T` and use the Cayley
+disk with center at real part 4. The extended fourth-log vertical moment
+at height `2T` bounds the circle average after the height integration.
+The Jensen denominator contributes at most a constant times `log T`.
+This yields an increment between `T^(2/3)` and `T` with height exponent
+`3(1−σ)` and five logarithms.
+
+On the ranges in the shrinking-strip result, the previously proved
+bound for the full count also bounds this increment. In the remaining
+range, `(1−σ) log T ≤ 55 log(1+log T)` gives
+`(1−σ)^2 log T ≤ 110²`. Since the difference of the linear and curved
+exponents is `3(1−σ)^2/(2−σ)`, switching to the curved exponent costs
+only an absolute constant. Iterating `T ↦ T^(2/3)` makes the logarithmic
+factor decrease by `(2/3)^5` at each step, and bounded heights are
+covered by a finite zero count.
+[Density proof](../Legendre/Layer4/InghamCayleyDensity.lean)
 [Literal comparator](../Legendre/Literature/LayerCoverage.lean)

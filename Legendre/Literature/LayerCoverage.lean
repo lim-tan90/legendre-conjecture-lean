@@ -118,6 +118,14 @@ theorem layer4_ingham_logarithmic_density_comparator : InghamLogarithmicDensityB
   exact ⟨Zeta.ingham_density_log_seven, Zeta.ingham_density_log_six_away_one,
     Zeta.ingham_density_log_five_away_one, Zeta.ingham_density_log_four_middle⟩
 
+/-- The historical fifth-log bound, uniform on the entire closed strip. -/
+def InghamUniformLogFiveBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (1/2 : ℝ) 1, ∀ T : ℝ, 2 ≤ T →
+    (Zeta.zeroDensityCount σ T : ℝ) ≤ C*T^(3*(1-σ)/(2-σ))*(Real.log T)^5
+
+theorem layer4_ingham_uniform_log_five_comparator : InghamUniformLogFiveBenchmark :=
+  Zeta.ingham_density_log_five
+
 /-- Cubic height weighting preserves the fourth logarithm on the whole line. -/
 def SharpWeightedFourthMomentBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
@@ -303,6 +311,19 @@ def SmoothedMollifiedShellMomentBenchmark : Prop :=
 
 theorem layer4_smoothed_mollified_shell_moment_comparator : SmoothedMollifiedShellMomentBenchmark :=
   Density.Moment.smoothed_mollifiedError_shell_ingham_power
+
+/-- A single mollifier gives a fourth-log moment all the way to the right of the strip. -/
+def TwoThirdsMollifiedMomentBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 16 ≤ T →
+    ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧
+    ∀ α a : ℝ, 3/4 ≤ α → α ≤ 1 → α ≤ a →
+    (∫ t in Icc ((1/2 : ℝ)*T^(2/3 : ℝ)) T,
+      ‖riemannZeta ((a : ℂ)+(t : ℂ)*Complex.I)*
+        Density.Detector.finiteSeries (μ : ArithmeticFunction ℂ) X
+          ((a : ℂ)+(t : ℂ)*Complex.I)-1‖^2) ≤ C*(T^(3*(1-α))*(Real.log T)^4)
+
+theorem layer4_two_thirds_mollified_moment_comparator : TwoThirdsMollifiedMomentBenchmark :=
+  Density.Moment.mollifiedError_two_thirds_window_log_four
 
 /-- Actual analytic Halasz energy, with the square-root-height and harmonic-row terms. -/
 def ActualHalaszBenchmark : Prop :=

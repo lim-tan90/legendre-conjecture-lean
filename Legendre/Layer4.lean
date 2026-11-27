@@ -48,6 +48,7 @@ public import Legendre.Layer4.InghamShrinkingStrip
 public import Legendre.Layer4.InghamMiddleStrip
 public import Legendre.Layer4.MollifiedZetaJensen
 public import Legendre.Layer4.MollifiedZetaVertical
+public import Legendre.Layer4.MollifiedZetaCayley
 public import Legendre.Layer4.MollifiedZetaMeanSquare
 public import Legendre.Layer4.DirichletMeanValueWeighted
 public import Legendre.Layer4.MollifiedZetaDyadic
@@ -57,7 +58,9 @@ public import Legendre.Layer4.MollifierFourthMoment
 public import Legendre.Layer4.CriticalConvolution
 public import Legendre.Layer4.MollifiedZetaSmoothedMoment
 public import Legendre.Layer4.SmoothedDivisorMoment
+public import Legendre.Layer4.MollifiedZetaRightMoment
 public import Legendre.Layer4.MollifiedZetaBalancedMoment
+public import Legendre.Layer4.InghamCayleyDensity
 public import Legendre.Layer4.Exponential.DiscreteFirstDerivative
 public import Legendre.Layer4.Exponential.DiscreteSecondDerivative
 public import Legendre.Layer4.Exponential.HalaszComplex

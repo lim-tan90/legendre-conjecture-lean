@@ -26,6 +26,80 @@ theorem integrableOn_mollifiedError_vertical (X : ℕ) (a : ℝ) {A B : ℝ} (hA
     linarith [ht.1]
   exact hm.norm.pow 2
 
+/-- Height integration of a continuously parametrized contour average is
+controlled by the uniform vertical moment on the enlarged rectangle. -/
+theorem integral_mollified_translatedAverage_le_vertical (X : ℕ) (q : ℝ → ℂ)
+    (hq : Continuous q) {H A B α β M : ℝ} (hA : H < A) (hAB : A ≤ B)
+    (ha : ∀ θ, (q θ).re ∈ Icc α β) (hd : ∀ θ, (q θ).im ∈ Icc (-H) H)
+    (hM : ∀ a ∈ Icc α β,
+      (∫ t in Icc (A-H) (B+H), ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2) ≤ M) :
+    let K := fun t : ℝ => (2*Real.pi)⁻¹*
+      ∫ θ in Icc 0 (2*Real.pi), ‖mollifiedError X (q θ+(t : ℂ)*I)‖^2
+    IntegrableOn K (Icc A B) ∧ (∫ t in Icc A B, K t) ≤ M := by
+  dsimp only
+  let width := 2*Real.pi
+  have hwidth : 0 < width := by dsimp [width]; positivity
+  let a := fun θ => (q θ).re
+  let d := fun θ => (q θ).im
+  let f := fun x y : ℝ => ‖mollifiedError X ((x : ℂ)+(y : ℂ)*I)‖^2
+  let g := fun t θ : ℝ => f (a θ) (t+d θ)
+  have hca : Continuous a := continuous_re.comp hq
+  have hcd : Continuous d := continuous_im.comp hq
+  have hg : Integrable (Function.uncurry g)
+      ((volume.restrict (Icc A B)).prod (volume.restrict (Icc 0 width))) := by
+    rw [Measure.prod_restrict]
+    apply ContinuousOn.integrableOn_compact (isCompact_Icc.prod isCompact_Icc)
+    let z := fun p : ℝ × ℝ => (a p.2 : ℂ) + ((p.1+d p.2 : ℝ) : ℂ)*I
+    have hc : Continuous z := by dsimp only [z]; fun_prop
+    have hm : ContinuousOn (fun p => mollifiedError X (z p)) (Icc A B ×ˢ Icc 0 width) := by
+      intro p hp
+      apply ContinuousAt.continuousWithinAt
+      refine (mollifiedError_analyticAt X ?_).continuousAt.comp hc.continuousAt
+      intro he
+      have him := congrArg Complex.im he
+      simp [z] at him
+      linarith [hp.1.1, (hd p.2).1]
+    exact hm.norm.pow 2
+  have havg (t : ℝ) :
+      width⁻¹*(∫ θ in Icc 0 width, ‖mollifiedError X (q θ+(t : ℂ)*I)‖^2) =
+        width⁻¹*(∫ θ in Icc 0 width, g t θ) := by
+    congr 1
+    apply integral_congr_ae
+    filter_upwards with θ
+    have he : q θ+(t : ℂ)*I = (a θ : ℂ)+((t+d θ : ℝ) : ℂ)*I := by
+      apply Complex.ext <;> simp [a,d,add_comm]
+    dsimp only [g,f]
+    rw [he]
+  have hupper (θ : ℝ) : (∫ t in Icc A B, g t θ) ≤ M := by
+    have hart : Icc (A+d θ) (B+d θ) ⊆ Icc (A-H) (B+H) := by
+      apply Icc_subset_Icc <;> linarith [(hd θ).1, (hd θ).2]
+    calc
+      _ = ∫ t in Icc (A+d θ) (B+d θ), f (a θ) t := by
+        rw [integral_Icc_eq_integral_Ioc, ← intervalIntegral.integral_of_le hAB,
+          integral_Icc_eq_integral_Ioc,
+          ← intervalIntegral.integral_of_le (add_le_add_left hAB (d θ))]
+        exact intervalIntegral.integral_comp_add_right (f (a θ)) (d θ)
+      _ ≤ ∫ t in Icc (A-H) (B+H), f (a θ) t :=
+        setIntegral_mono_set (integrableOn_mollifiedError_vertical X _ (sub_pos.mpr hA))
+          (Filter.Eventually.of_forall fun _ => sq_nonneg _) hart.eventuallySubset
+      _ ≤ M := hM _ (ha θ)
+  have hconst : Integrable (fun _ : ℝ => M) (volume.restrict (Icc 0 width)) := integrable_const _
+  have he : (fun t : ℝ => (2*Real.pi)⁻¹*
+      ∫ θ in Icc 0 (2*Real.pi), ‖mollifiedError X (q θ+(t : ℂ)*I)‖^2) =
+      (fun t : ℝ => width⁻¹*∫ θ in Icc 0 width, g t θ) := funext havg
+  rw [he]
+  constructor
+  · exact hg.integral_prod_left.const_mul _
+  · rw [integral_const_mul, integral_integral_swap hg]
+    calc
+      _ ≤ width⁻¹ * ∫ _ in Icc 0 width, M :=
+        mul_le_mul_of_nonneg_left (integral_mono hg.integral_prod_right hconst hupper)
+          (inv_nonneg.mpr hwidth.le)
+      _ = M := by
+        rw [setIntegral_const, measureReal_def, Real.volume_Icc, sub_zero,
+          ENNReal.toReal_ofReal hwidth.le, smul_eq_mul, ← mul_assoc, inv_mul_cancel₀ hwidth.ne',
+          one_mul]
+
 /-- Integrating the circle averages in height costs at most the uniform vertical
 second moment on the enlarged rectangle. -/
 theorem integral_mollified_circleAverage_le_vertical (X : ℕ) (b : ℝ)
@@ -37,78 +111,80 @@ theorem integral_mollified_circleAverage_le_vertical (X : ℕ) (b : ℝ)
       (Icc A B) ∧
     (∫ t in Icc A B,
       Real.circleAverage (fun z => ‖mollifiedError X z‖^2) ((b : ℂ) + (t : ℂ)*I) R) ≤ M := by
-  let width := 2*Real.pi
-  have hwidth : 0 < width := by dsimp [width]; positivity
-  let a := fun θ => b+R*Real.cos θ
-  let d := fun θ => R*Real.sin θ
-  let f := fun x y : ℝ => ‖mollifiedError X ((x : ℂ) + (y : ℂ)*I)‖^2
-  let g := fun t θ : ℝ => f (a θ) (t+d θ)
-  have ha (θ : ℝ) : a θ ∈ Icc (b-R) (b+R) := by
-    constructor <;> dsimp [a]
-    · linarith [mul_le_mul_of_nonneg_left (Real.neg_one_le_cos θ) hR]
-    · linarith [mul_le_mul_of_nonneg_left (Real.cos_le_one θ) hR]
-  have hd (θ : ℝ) : d θ ∈ Icc (-R) R := by
-    constructor <;> dsimp [d]
-    · linarith [mul_le_mul_of_nonneg_left (Real.neg_one_le_sin θ) hR]
-    · linarith [mul_le_mul_of_nonneg_left (Real.sin_le_one θ) hR]
-  have hg : Integrable (Function.uncurry g)
-      ((volume.restrict (Icc A B)).prod (volume.restrict (Icc 0 width))) := by
-    rw [Measure.prod_restrict]
-    apply ContinuousOn.integrableOn_compact (isCompact_Icc.prod isCompact_Icc)
-    let q := fun p : ℝ × ℝ => (a p.2 : ℂ) + ((p.1+d p.2 : ℝ) : ℂ)*I
-    have hc : Continuous q := by dsimp only [q,a,d]; fun_prop
-    have hm : ContinuousOn (fun p => mollifiedError X (q p)) (Icc A B ×ˢ Icc 0 width) := by
-      intro p hp
-      apply ContinuousAt.continuousWithinAt
-      refine (mollifiedError_analyticAt X ?_).continuousAt.comp hc.continuousAt
-      intro he
-      have him := congrArg Complex.im he
-      simp [q] at him
-      linarith [hp.1.1, (hd p.2).1]
-    exact hm.norm.pow 2
-  have havg (t : ℝ) :
-      Real.circleAverage (fun z => ‖mollifiedError X z‖^2) ((b : ℂ) + (t : ℂ)*I) R =
-        width⁻¹ * ∫ θ in Icc 0 width, g t θ := by
-    have hmap (θ : ℝ) : circleMap ((b : ℂ) + (t : ℂ)*I) R θ =
-        (a θ : ℂ) + ((t+d θ : ℝ) : ℂ)*I := by
-      simp only [circleMap, exp_ofReal_mul_I, a, d, ofReal_add, ofReal_mul]
-      ring
-    rw [Real.circleAverage_def, smul_eq_mul, intervalIntegral.integral_of_le hwidth.le,
+  let q := fun θ => circleMap (b : ℂ) R θ
+  have hq : Continuous q := by dsimp only [q]; fun_prop [circleMap]
+  have hre (θ : ℝ) : (q θ).re = b+R*Real.cos θ := by
+    simp [q, circleMap, exp_ofReal_mul_I, mul_re, -Complex.ofReal_cos]
+  have him (θ : ℝ) : (q θ).im = R*Real.sin θ := by
+    simp [q, circleMap, exp_ofReal_mul_I, mul_im, -Complex.ofReal_sin]
+  have hb (θ : ℝ) : (q θ).re ∈ Icc (b-R) (b+R) := by
+    rw [hre]
+    exact ⟨by linarith [mul_le_mul_of_nonneg_left (Real.neg_one_le_cos θ) hR],
+      by linarith [mul_le_mul_of_nonneg_left (Real.cos_le_one θ) hR]⟩
+  have hi (θ : ℝ) : (q θ).im ∈ Icc (-R) R := by
+    rw [him]
+    exact ⟨by linarith [mul_le_mul_of_nonneg_left (Real.neg_one_le_sin θ) hR],
+      by linarith [mul_le_mul_of_nonneg_left (Real.sin_le_one θ) hR]⟩
+  have he : (fun t : ℝ =>
+      Real.circleAverage (fun z => ‖mollifiedError X z‖^2) ((b : ℂ)+(t : ℂ)*I) R) =
+      (fun t : ℝ => (2*Real.pi)⁻¹*
+        ∫ θ in Icc 0 (2*Real.pi), ‖mollifiedError X (q θ+(t : ℂ)*I)‖^2) := by
+    funext t
+    rw [Real.circleAverage_def, smul_eq_mul, intervalIntegral.integral_of_le (by positivity : 0 ≤ 2*Real.pi),
       ← integral_Icc_eq_integral_Ioc]
-    simp_rw [hmap]
-    rfl
-  have hupper (θ : ℝ) : (∫ t in Icc A B, g t θ) ≤ M := by
-    have hart : Icc (A+d θ) (B+d θ) ⊆ Icc (A-R) (B+R) := by
-      apply Icc_subset_Icc <;> linarith [(hd θ).1, (hd θ).2]
-    calc
-      _ = ∫ t in Icc (A+d θ) (B+d θ), f (a θ) t := by
-        rw [integral_Icc_eq_integral_Ioc, ← intervalIntegral.integral_of_le hAB,
-          integral_Icc_eq_integral_Ioc,
-          ← intervalIntegral.integral_of_le (add_le_add_left hAB (d θ))]
-        exact intervalIntegral.integral_comp_add_right (f (a θ)) (d θ)
-      _ ≤ ∫ t in Icc (A-R) (B+R), f (a θ) t :=
-        setIntegral_mono_set (integrableOn_mollifiedError_vertical X _ (sub_pos.mpr hA))
-          (Filter.Eventually.of_forall fun _ => sq_nonneg _) hart.eventuallySubset
-      _ ≤ M := hM _ (ha θ)
-  have hconst : Integrable (fun _ : ℝ => M) (volume.restrict (Icc 0 width)) := integrable_const _
-  constructor
-  · simp_rw [havg]
-    exact hg.integral_prod_left.const_mul _
-  · simp_rw [havg]
-    rw [integral_const_mul, integral_integral_swap hg]
-    calc
-      _ ≤ width⁻¹ * ∫ _ in Icc 0 width, M :=
-        mul_le_mul_of_nonneg_left (integral_mono hg.integral_prod_right hconst hupper)
-          (inv_nonneg.mpr hwidth.le)
-      _ = M := by
-        rw [setIntegral_const, measureReal_def, Real.volume_Icc, sub_zero,
-          ENNReal.toReal_ofReal hwidth.le, smul_eq_mul, ← mul_assoc, inv_mul_cancel₀ hwidth.ne',
-          one_mul]
+    congr 1
+    apply integral_congr_ae
+    filter_upwards with θ
+    dsimp [q, circleMap]
+    rw [add_right_comm]
+  rw [he]
+  exact integral_mollified_translatedAverage_le_vertical X q hq hA hAB hb hi hM
 
 private theorem integral_const_Icc_real {A B : ℝ} (hAB : A ≤ B) (c : ℝ) :
     (∫ _ in Icc A B, c) = (B-A)*c := by
   rw [setIntegral_const, measureReal_def, Real.volume_Icc, ENNReal.toReal_ofReal (sub_nonneg.mpr hAB),
     smul_eq_mul]
+
+/-- Integration over all centers counts each selected ordinate over a window
+of length (2h), with no spacing requirement. -/
+theorem sum_zeta_multiplicity_le_of_height_window_bound {U V h L : ℝ}
+    (hh : 0 < h) (S : Finset ℂ) (hS : ∀ z ∈ S, z.im ∈ Icc U V)
+    (f : ℝ → ℝ) (hi : IntegrableOn f (Icc (U-h) (V+h)))
+    (hpoint : ∀ t ∈ Icc (U-h) (V+h),
+      L*(∑ z ∈ S.filter (fun z => t ∈ Icc (z.im-h) (z.im+h)), (zeroMultiplicity z : ℝ)) ≤ f t) :
+    (2*h*L)*(∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤ ∫ t in Icc (U-h) (V+h), f t := by
+  classical
+  let A := U-h
+  let B := V+h
+  let w := fun z : ℂ => (zeroMultiplicity z : ℝ)
+  let window := fun z : ℂ => Icc (z.im-h) (z.im+h)
+  let weight := fun z : ℂ => (window z).indicator (fun _ => w z)
+  let count := fun t : ℝ => ∑ z ∈ S, weight z t
+  have hweight (z : ℂ) : IntegrableOn (weight z) (Icc A B) :=
+    (integrable_const _).indicator measurableSet_Icc
+  have hcount : IntegrableOn count (Icc A B) := integrable_finsetSum S (fun z _ => hweight z)
+  have hint : (∫ t in Icc A B, count t) = (2*h)*(∑ z ∈ S, w z) := by
+    change (∫ t in Icc A B, ∑ z ∈ S, weight z t) = _
+    rw [integral_finsetSum S (fun z _ => hweight z), Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro z hz
+    have hwindow : window z ⊆ Icc A B := by
+      exact Icc_subset_Icc (sub_le_sub_right (hS z hz).1 h) (add_le_add_left (hS z hz).2 h)
+    change (∫ t in Icc A B, (window z).indicator (fun _ => w z) t) = _
+    rw [setIntegral_indicator measurableSet_Icc, inter_eq_right.mpr hwindow, setIntegral_const,
+      measureReal_def, Real.volume_Icc, ENNReal.toReal_ofReal (sub_nonneg.mpr
+        (show z.im-h ≤ z.im+h by linarith)), smul_eq_mul]
+    ring
+  have hcountEq (t : ℝ) : count t = ∑ z ∈ S.filter (fun z => t ∈ window z), w z := by
+    change (∑ z ∈ S, weight z t) = _
+    rw [Finset.sum_filter]
+    simp only [weight, indicator_apply]
+  have hb : (∫ t in Icc A B, L*count t) ≤ ∫ t in Icc A B, f t :=
+    setIntegral_mono_on (hcount.const_mul L) hi measurableSet_Icc (fun t ht => by
+      rw [hcountEq]
+      exact hpoint t ht)
+  rw [integral_const_mul, hint] at hb
+  exact (by ring : (2*h*L)*(∑ z ∈ S, w z) = L*((2*h)*(∑ z ∈ S, w z))).trans_le hb
 
 /-- A sweep of centers of constant real part bounds the total analytic
 multiplicity by separate vertical and center second moments. -/
@@ -130,39 +206,18 @@ theorem sum_zeta_multiplicity_le_mollified_vertical_center_moment (X : ℕ)
   have hAB : A ≤ B := by dsimp [A,B]; linarith
   have hR := hr.trans hrR
   have hL : 0 < L := Real.log_pos ((one_lt_div hr).mpr hrR)
-  let w := fun z : ℂ => (zeroMultiplicity z : ℝ)
-  let window := fun z : ℂ => Icc (z.im-h) (z.im+h)
-  let weight := fun z : ℂ => (window z).indicator (fun _ => w z)
-  let count := fun t : ℝ => ∑ z ∈ S, weight z t
   let avg := fun t : ℝ =>
     Real.circleAverage (fun z => ‖mollifiedError X z‖^2) ((b : ℂ)+(t : ℂ)*I) R
   let center := fun t : ℝ => ‖mollifiedError X ((b : ℂ)+(t : ℂ)*I)‖^2
   have hcenter : IntegrableOn center (Icc A B) :=
     integrableOn_mollifiedError_vertical X b (hR.trans hU)
-  have hweight (z : ℂ) : IntegrableOn (weight z) (Icc A B) :=
-    (integrable_const _).indicator measurableSet_Icc
-  have hcount : IntegrableOn count (Icc A B) := integrable_finsetSum S (fun z _ => hweight z)
   have havg := integral_mollified_circleAverage_le_vertical X b hR.le hU hAB hM
-  have hint : (∫ t in Icc A B, count t) = (2*h)*(∑ z ∈ S, w z) := by
-    change (∫ t in Icc A B, ∑ z ∈ S, weight z t) = _
-    rw [integral_finsetSum S (fun z _ => hweight z), Finset.mul_sum]
-    apply Finset.sum_congr rfl
-    intro z hz
-    have hwindow : window z ⊆ Icc A B := by
-      apply Icc_subset_Icc <;> dsimp [A,B]
-      · linarith [(hS z hz).2.1]
-      · linarith [(hS z hz).2.2]
-    change (∫ t in Icc A B, (window z).indicator (fun _ => w z) t) = _
-    rw [setIntegral_indicator measurableSet_Icc, inter_eq_right.mpr hwindow,
-      integral_const_Icc_real (show z.im-h ≤ z.im+h by linarith)]
-    ring
-  have hpoint (t : ℝ) (ht : t ∈ Icc A B) : L*count t ≤ avg t+(4/3 : ℝ)*center t := by
+  let f := fun t : ℝ => avg t+(4/3 : ℝ)*center t
+  have hfi : IntegrableOn f (Icc A B) := havg.1.add (hcenter.const_mul _)
+  have hpoint (t : ℝ) (ht : t ∈ Icc A B) :
+      L*(∑ z ∈ S.filter (fun z => t ∈ Icc (z.im-h) (z.im+h)), (zeroMultiplicity z : ℝ)) ≤ f t := by
     let c := (b : ℂ)+(t : ℂ)*I
-    let Sₜ := S.filter (fun z => t ∈ window z)
-    have hcountEq : count t = ∑ z ∈ Sₜ, w z := by
-      change (∑ z ∈ S, weight z t) = _
-      rw [Finset.sum_filter]
-      simp [weight, indicator_apply]
+    let Sₜ := S.filter (fun z => t ∈ Icc (z.im-h) (z.im+h))
     have hball (z : ℂ) (hz : z ∈ Sₜ) : z ∈ closedBall c r := by
       have hzS := Finset.mem_filter.mp hz
       have hre := (hS z hzS.1).1
@@ -191,19 +246,16 @@ theorem sum_zeta_multiplicity_le_mollified_vertical_center_moment (X : ℕ)
     have hcountBound :=
       sum_zeta_multiplicity_le_mollified_circle_with_center_error X c (hErr t ht) r R hr hrR
         hpole Sₜ hball
-    rw [hcountEq, mul_comm]
+    rw [mul_comm]
     exact (le_div_iff₀ hL).mp hcountBound
-  have hIntLe : (∫ t in Icc A B, L*count t) ≤
-      ∫ t in Icc A B, avg t+(4/3 : ℝ)*center t :=
-    setIntegral_mono_on (hcount.const_mul L) (havg.1.add (hcenter.const_mul _)) measurableSet_Icc hpoint
-  rw [integral_const_mul, hint, integral_add havg.1 (hcenter.const_mul (4/3 : ℝ)),
-    integral_const_mul] at hIntLe
-  calc
-    _ = L*(2*h*(∑ z ∈ S, w z)) := by ring
-    _ ≤ (∫ t in Icc A B, avg t)+(4/3 : ℝ)*(∫ t in Icc A B, center t) := hIntLe
-    _ ≤ _ := add_le_add havg.2 (mul_le_mul_of_nonneg_left hC (by norm_num))
+  apply (sum_zeta_multiplicity_le_of_height_window_bound hh S (fun z hz => (hS z hz).2) f hfi hpoint).trans
+  dsimp only [f]
+  rw [integral_add havg.1 (hcenter.const_mul (4/3 : ℝ)), integral_const_mul]
+  exact add_le_add havg.2 (mul_le_mul_of_nonneg_left hC (by norm_num))
 
-private theorem zeroDensityCount_le_of_multiplicity_sweep {σ U V B : ℝ} (hUV : U ≤ V)
+/-- A multiplicity estimate on the upper-height zeros gives the increment
+of the actual density count. -/
+theorem zeroDensityCount_le_of_multiplicity_sweep {σ U V B : ℝ} (hUV : U ≤ V)
     (hsweep : ∀ S : Finset ℂ, (∀ z ∈ S, z.re ∈ Icc σ 1 ∧ z.im ∈ Icc U V) →
       (∑ z ∈ S, (zeroMultiplicity z : ℝ)) ≤ B) :
     (zeroDensityCount σ V : ℝ) ≤ (zeroDensityCount σ U : ℝ)+B := by

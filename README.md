@@ -327,11 +327,18 @@ its `X²` term.
 height-integrated critical term and the smoothed tail give
 `∫_{T/2}^T |ζM_X−1|² ≪ T^(3(1−α))(log T)^4` uniformly on real lines
 `α≤a≤7/6`, with `3/4≤α≤1`, `T≥16`, and one choice of
-`T≤X≤2T` for each height. If `(1−α)^2 log T≤1), the height exponent
+`T≤X≤2T` for each height. If `(1−α)^2 log T≤1`, the height exponent
 is `3(1−α)/(2−α)`.
 [Exact hypotheses and comparisons](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells).
 
-Current validation (2026-11-27) covers **4,399 build jobs**, **8,822 audited theorem declarations**, **386 Lean files** and **233 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Uniform fifth-log Ingham density (2026-11-27).** A single absolute
+constant gives `N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) (log T)^5` for all
+`σ∈[1/2,1]` and `T≥2`, with analytic multiplicities. A second moment on
+`[T^(2/3)/2,T]` supplies the vertical input at every real part
+`a≥α≥3/4`, and the Cayley disk gives the height increment using a center
+at real part 4. [Exact statement and proof](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound).
+
+Current validation (2026-11-27) covers **4,403 build jobs**, **8,887 audited theorem declarations**, **390 Lean files** and **235 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -691,13 +698,16 @@ short-interval transmission; that source obligation remains open.
 
 ## Historical progress at a glance
 
-**Repository status (2026-11-24).** Layer 3's classical PNT, Ingham 1940,
-the full curved Huxley and Guth–Maynard zero-density bounds, and the
-combined global `30/13` density bound are proved. The curves are uniform
-on σ∈[1/2,1] for every T≥2 with analytic multiplicities and arbitrary
-positive ε. The sharp fourth-moment bound `O(T log^4 T)` also holds for all
-`T≥2`. The nine historical short-interval exponent results below have
-statement-level formalizations. [Fourth-moment proof](docs/layer4-sharp-fourth-moment.md).
+**Repository status (2026-11-27).** Layer 3's classical PNT and
+the Ingham 1940, Huxley and Guth–Maynard zero-density curves are proved.
+Ingham's exact exponent now has a uniform `(log T)^5` factor. The Huxley
+and Guth–Maynard curves and the combined global `30/13` bound allow
+arbitrary positive height losses. All cover `σ∈[1/2,1]`, `T≥2` and
+analytic multiplicities. The sharp fourth-moment bound `O(T log^4 T)`
+holds for every `T≥2`. The nine historical short-interval exponent results
+below have statement-level formalizations.
+[Ingham density](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)
+[Fourth-moment proof](docs/layer4-sharp-fourth-moment.md).
 
 <!-- comparator:legendre1808 -->
 **Target.** Legendre's conjecture (A.-M. Legendre, *Essai sur la théorie des
@@ -759,7 +769,7 @@ The completed analytic milestones supporting this program are:
 | Full curved Huxley density (Layer 4) | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ Proved**: [`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) and closed [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean); one coefficient for σ∈[1/2,1], all T≥2 and analytic multiplicities. The `7/12+ε` prime-gap result remains open. |
 | Upper-range actual Type I branch (Layer 4) | `R ≪ T^(3(1−σ)/(3σ−1)+ε)` on `σ∈[5/6+η,1]` | **✅ Proved** for each fixed η>0, Y=T, T≥128 and T^δ≤X≤2T^δ with 0<δ≤η/16; closed [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean). The full zero-density assembly is now proved below. |
 | Classical PNT (Layer 3) | Common error scale `x exp(−c√log x)` for ψ, θ and π; corresponding eventual prime intervals | **✅ Proved**: [`layer3_pnt_package`](Legendre/Layer3.lean). This error scale does not give a fixed prime-gap exponent `θ<1`. |
-| Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` for every `ε>0` | **✅ Proved**: [`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) and the closed [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean), uniformly for σ∈[1/2,1], T≥2, with analytic multiplicities. The cumulative form has `log^7 T` uniformly, `log^5 T` for a fixed upper endpoint below one, and `log^4 T` on fixed inner strips. [Logarithmic bounds](docs/layer4-ingham-shell-log-five.md#cumulative-density). |
+| Ingham 1940 zero density (Layer 4), [original DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪ T^(3(1−σ)/(2−σ)) (log T)^5` | **✅ Proved** for all `σ∈[1/2,1]`, `T≥2`, with analytic multiplicities. The bound improves to `log^4 T` on fixed inner strips. [Proof](Legendre/Layer4/InghamCayleyDensity.lean) and [literal comparator](Legendre/Literature/LayerCoverage.lean). |
 | Global Huxley density (Layer 4) | `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` for every `ε>0` | **✅ Proved**: [`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean), closed [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean); uniform σ∈[1/2,1], T≥2, all analytic multiplicities. A stronger intermediate bound holds on σ∈[3/4,1]. The full curved exponent benchmark is now proved below. |
 | Restricted curved Huxley density (Layer 4) | For every `ε>0`, `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`, σ∈[1/2,5/6] | **✅ Proved**: [`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) and closed [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean); all T≥2 and analytic multiplicities. The full benchmark is now also proved, as listed below. |
 | Critical-line fourth moment (Layer 4) | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^4 T` | **✅ Proved** for all `T≥2`. [Proof and literal comparator](docs/layer4-sharp-fourth-moment.md). |
@@ -904,7 +914,7 @@ This table is the roadmap, not a claim that the work is done.
 | 1 | Bertrand's postulate, Chebyshev functions `ψ(x)`, `θ(x)`, elementary prime-counting bounds | historical base case and quantitative intuition | **complete (Nagura)** in **[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** and **[Nagura.lean](Legendre/Nagura.lean)**: `HasPrimeIn`, prime in `(x,2x]`, Chebyshev `θ` bridge, explicit `θ/ψ/π` bounds, **Nagura's `(x, 6x/5]` for `x ≥ 25`**, and explicit `ψ` bounds; Dusart-type PNT-strength constants remain open |
 | 2 | Riemann zeta: Euler product, analytic continuation, functional equation, zero-free region, argument principle, logarithmic derivative | every zero-density and short-interval theorem starts here | **documented scope complete**: zeta foundations, explicit c=1/2000000 zero-free region (height≥3), local argument principle, global multiplicity-weighted N(T)=O(T log T), truncated Perron with error and audit |
 | 3 | Prime-counting foundations: `π(x)`, `ψ(x)`, partial summation, Perron's formula, truncated explicit formula, PNT with error term | turns zeta information into prime-counting information | **documented scope complete**: half-weighted Perron inversion/error, partial summation, classical ψ/θ/π PNT error terms, a finite multiplicity-weighted zero-sum formula with fixed negative edge, evaluated origin residue and uniform full-contour bound, and sublinear classical-rate prime intervals; [exact uniform formula](docs/perron-uniform-explicit-formula.md) |
-| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **roadmap acceptance complete**: Ingham 1940 and global Huxley `12/5` proved, with actual large-value input; full curved Huxley, Guth–Maynard and global `30/13` are proved; sharp `log^4` fourth moment proved. [Density scope](docs/layer4-guth-central-density.md), [moment scope](docs/layer4-sharp-fourth-moment.md) |
+| 4 | Zero-density theory: `N(σ,T)`, Ingham's zero-density estimate, Huxley's `12/5` estimate, large sieve, mean-value estimates for Dirichlet polynomials (including Guth–Maynard-type large-value estimates) | supplies the density input for short intervals | **proved here**: uniform density-exponent convention, near-one count, `O(N)` Dirichlet-polynomial mean-square error from a proved Hilbert inequality; continuous large-value measure, finite additive large sieve, optimized separated samples, actual two-branch zero detection and varying-real-part sample bounds **proved**; **roadmap acceptance complete**: uniform fifth-log Ingham 1940 density and global Huxley `12/5` proved, with actual large-value input; full curved Huxley, Guth–Maynard and global `30/13` are proved; sharp `log^4` fourth moment proved. [Density scope](docs/layer4-guth-central-density.md), [moment scope](docs/layer4-sharp-fourth-moment.md) |
 | 5 | Short-interval theorems: Ingham 1937, Huxley 1972, weighted zero-density + sieve for Baker–Harman 1996 and Baker–Harman–Pintz 2001 | gives `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **statement level formalized here** in **[Layer5.lean](Legendre/Layer5.lean)**: normalized exponent `+ε`, constant and threshold conventions, interval ↔ gap equivalence, and equivalence to the coarse `Prop`s in **[Conditional.lean L70](Legendre/Conditional.lean#L70)**; the deep proofs are **not in mathlib** |
 | 6 | Explicit/computational layer: interval arithmetic, verified primality certificates, segmented-sieve checker, reflection or `native_decide`-style verified computation | covers the finite range `n ≤ 7.05 × 10¹³` (and the older `n ≤ 2 × 10⁹` record) | **not formalized**; the published computation is external |
 | 7 | Sieve theory for almost primes: sieve weights, Chen's `P₂` theorem, `P_k` estimates, Buchstab/linear sieve | formalizes the almost-prime route (`P₄` for all `n`, `P₂` eventually) | mathlib has `Nat.IsAtMostAlmostPrime` and `Ω`; **no sieve theory**; `P₁` equivalence in **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |

@@ -6,6 +6,7 @@ module
 public import Legendre.Layer4.SmoothedDivisorMoment
 public import Legendre.Layer4.MollifiedZetaSmoothedMoment
 public import Legendre.Layer4.DensityBalance
+public import Legendre.Layer4.MollifiedZetaRightMoment
 
 @[expose] public section
 namespace Legendre.Density.Moment
@@ -231,5 +232,132 @@ theorem smoothed_mollifiedError_shell_ingham_power :
         (show 0 ≤ (Real.log T)^4 by positivity)
       convert h using 1
       ring
+
+/-- On a vertical window extending down to half the two-thirds height,
+the fourth-log moment is uniform on the entire right half-plane. -/
+theorem mollifiedError_two_thirds_window_log_four :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 16 ≤ T →
+      ∃ X : ℕ, 1 ≤ X ∧ T ≤ X ∧ (X : ℝ) ≤ 2*T ∧
+      ∀ α a : ℝ, 3/4 ≤ α → α ≤ 1 → α ≤ a →
+      (∫ t in Icc ((1/2 : ℝ)*T^(2/3 : ℝ)) T,
+        ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2) ≤ C*(T^(3*(1-α))*(Real.log T)^4) := by
+  obtain ⟨P,hP,hp⟩ := smoothed_mollifiedError_window_second_moment
+  obtain ⟨Q,hQ,hq⟩ := mollifiedError_right_second_moment
+  let D := 2/(1-(2 : ℝ)^(-(1/2 : ℝ)))
+  have hD : 0 < D := div_pos (by norm_num) (sub_pos.mpr
+    (Real.rpow_lt_one_of_one_lt_of_neg (by norm_num) (by norm_num)))
+  let C := P*(D*7^3+3^4+2048+2+256)+64*Q
+  have hC : 0 < C := by dsimp [C]; positivity
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  obtain ⟨X,hX,hTX,hXT,_,hlogX⟩ := balanced_detector_cutoff T (by linarith)
+  refine ⟨X,hX,hTX,hXT,?_⟩
+  intro α a hα hα₁ hαa
+  let A := (1/2 : ℝ)*T^(2/3 : ℝ)
+  let Y := T^(3/2 : ℝ)
+  let W := T^(3*(1-α))*(Real.log T)^4
+  have hT₀ : 0 < T := by linarith
+  have hT₁ : 1 ≤ T := by linarith
+  have hL : 1 ≤ Real.log T := by
+    have hh := Real.log_le_log (by norm_num : 0 < (4 : ℝ)) (by linarith : 4 ≤ T)
+    have he : Real.log 4 = 2*Real.log 2 := by
+      simpa only [show (2 : ℝ)^2 = 4 by norm_num, Nat.cast_ofNat] using Real.log_pow (2 : ℝ) 2
+    rw [he] at hh
+    exact (one_le_two_log 2 le_rfl).trans hh
+  have hW : 1 ≤ W := one_le_mul_of_one_le_of_one_le
+    (Real.one_le_rpow hT₁ (by linarith)) (one_le_pow₀ hL)
+  have hA : 0 < A := by dsimp [A]; positivity
+  have hAT : A ≤ T := by
+    have hh := Real.rpow_le_rpow_of_exponent_le hT₁ (by norm_num : (2/3 : ℝ) ≤ 1)
+    rw [Real.rpow_one] at hh
+    dsimp [A]
+    linarith
+  change _ ≤ C*W
+  by_cases ha : a ≤ 7/6
+  · have hY : 1 ≤ Y := Real.one_le_rpow hT₁ (by norm_num)
+    have hY₀ : 0 < Y := by linarith
+    have hA3 : A^3 = T^2/8 := by
+      dsimp only [A]
+      rw [mul_pow, ← Real.rpow_mul_natCast hT₀.le, Nat.cast_ofNat,
+        show (2/3 : ℝ)*3 = 2 by norm_num, Real.rpow_two]
+      ring
+    have hYs : Y^(1-a) ≤ √T := by
+      calc
+        _ ≤ Y^(1/4 : ℝ) := Real.rpow_le_rpow_of_exponent_le hY (by linarith)
+        _ ≤ (T^2)^(1/4 : ℝ) := Real.rpow_le_rpow hY₀.le
+          (by rw [← Real.rpow_two]; exact Real.rpow_le_rpow_of_exponent_le hT₁ (by norm_num))
+          (by norm_num)
+        _ = √T := by
+          rw [← Real.rpow_two, ← Real.rpow_mul hT₀.le,
+            show (2 : ℝ)*(1/4 : ℝ) = 1/2 by norm_num, Real.sqrt_eq_rpow]
+    have hK (t : ℝ) (ht : t ∈ Icc A T) :
+        ‖detectorPrincipalPole X ((a : ℂ)+(t : ℂ)*I) Y‖ ≤ 16/√T := by
+      let s := (a : ℂ)+(t : ℂ)*I
+      have hsre : s.re = a := by simp [s]
+      have hsim : s.im = t := by simp [s]
+      have htt : 0 < t := hA.trans_le ht.1
+      have hs : 0 < |s.im| := by rw [hsim, abs_of_pos htt]; exact htt
+      have ht3 : T^2/8 ≤ t^3 := hA3 ▸ pow_le_pow_left₀ hA.le ht.1 3
+      have h := norm_detectorPrincipalPole_le X s hY₀ hs
+      rw [hsre,hsim,abs_of_pos htt, ← div_eq_mul_inv] at h
+      apply h.trans
+      calc
+        _ ≤ (2*T*√T)/(T^2/8) := div_le_div₀
+          (by positivity) (mul_le_mul hXT hYs (by positivity) (by positivity))
+          (by positivity) ht3
+        _ = _ := by
+          have hsq := Real.sq_sqrt hT₀.le
+          field_simp
+          nlinarith [congrArg (fun z : ℝ => T*z) hsq]
+    have hK2 : T*(16/√T)^2 = 256 := by
+      rw [div_pow, Real.sq_sqrt hT₀.le]
+      field_simp
+      ring
+    have hnumeric := three_halves_moment_bound hX hT hTX hXT hlogX hα hα₁
+    change smoothedMollifiedMomentBound X T α Y ≤ (D*7^3+3^4+2048+2)*T^(3*(1-α))*(Real.log T)^4 at hnumeric
+    have hbody := hp X hX T (by linarith) A hA hAT α a Y (by linarith) hαa ha hY _ hK
+    rw [hK2] at hbody
+    apply hbody.trans
+    have hs := mul_le_mul_of_nonneg_left
+      (add_le_add hnumeric (show (256 : ℝ) ≤ 256*W by linarith)) hP.le
+    have hR : P*((D*7^3+3^4+2048+2)*T^(3*(1-α))*(Real.log T)^4+256*W)
+        = P*(D*7^3+3^4+2048+2+256)*W := by dsimp only [W]; ring
+    exact (hs.trans_eq hR).trans (mul_le_mul_of_nonneg_right
+      (by dsimp only [C]; linarith) (by linarith))
+  · let f := fun t : ℝ => ‖mollifiedError X ((a : ℂ)+(t : ℂ)*I)‖^2
+    have hf : IntegrableOn f (Icc (-T) T) := by
+      apply ContinuousOn.integrableOn_Icc
+      apply Continuous.continuousOn
+      have hc : Continuous (fun t : ℝ => (a : ℂ)+(t : ℂ)*I) := by fun_prop
+      have hm : Continuous (fun t : ℝ => mollifiedError X ((a : ℂ)+(t : ℂ)*I)) :=
+        continuous_iff_continuousAt.mpr (fun t =>
+          (mollifiedError_analyticAt X (by
+            intro he
+            have he' := congrArg Complex.re he
+            simp at he'
+            linarith)).continuousAt.comp hc.continuousAt)
+      exact hm.norm.pow 2
+    have hsub : Icc A T ⊆ Icc (-T) T := Icc_subset_Icc (by linarith) le_rfl
+    have hmono := setIntegral_mono_set hf (Filter.Eventually.of_forall (fun _ => sq_nonneg _))
+      hsub.eventuallySubset
+    have hlog : 0 ≤ 1+Real.log X := by
+      have hXr : (1 : ℝ) ≤ X := by exact_mod_cast hX
+      linarith [Real.log_nonneg hXr]
+    have hlog3 := pow_le_pow_left₀ hlog hlogX 3
+    have hlog4 := pow_le_pow_right₀ hL (by norm_num : (3 : ℕ) ≤ 4)
+    calc
+      _ ≤ ∫ t in Icc (-T) T, f t := hmono
+      _ ≤ Q*(1+Real.log X)^3 := hq X hX T hT₁ hTX a (le_of_not_ge ha)
+      _ ≤ 64*Q*(Real.log T)^4 := by
+        have h := mul_le_mul_of_nonneg_left hlog3 hQ.le
+        rw [mul_pow] at h
+        nlinarith [mul_le_mul_of_nonneg_left hlog4 (show 0 ≤ 64*Q by positivity)]
+      _ ≤ 64*Q*W := by
+        apply mul_le_mul_of_nonneg_left _ (by positivity)
+        exact le_mul_of_one_le_left (by positivity) (Real.one_le_rpow hT₁ (by linarith))
+      _ ≤ _ := by
+        apply mul_le_mul_of_nonneg_right _ (by linarith)
+        dsimp only [C]
+        linarith [show 0 ≤ P*(D*7^3+3^4+2048+2+256) by positivity]
 
 end Legendre.Density.Moment

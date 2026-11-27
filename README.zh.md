@@ -256,7 +256,14 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 `T≤X≤2T`。若 `(1−α)^2 log T≤1`，高度指数可取 `3(1−α)/(2−α)`。
 [精确条件与比较器](docs/layer4-mollified-jensen.md#fourth-log-smoothed-second-moment-on-high-shells)。
 
-当前验证（2026-11-27）包括 **4,399 项构建**、**8,822 个定理的公理审计**、**386 个 Lean 文件**和 **233 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**全条带的 Ingham 五次对数零密度界（2026-11-27）。** 对
+`σ∈[1/2,1]` 和 `T≥2`，同一个绝对常数满足
+`N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) (log T)^5`，保留解析重数。
+区间 `[T^(2/3)/2,T]` 上的二阶矩覆盖所有实部 `a≥α≥3/4`，
+Cayley 圆盘将圆心固定在实部 4，给出高度增量界。
+[精确陈述与证明](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)。
+
+当前验证（2026-11-27）包括 **4,403 项构建**、**8,887 个定理的公理审计**、**390 个 Lean 文件**和 **235 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -535,11 +542,12 @@ Sorenson–Webster 期刊最终版范围为 `7.05×10^13`，arXiv v1 仅为 `3.3
 <!-- comparator:legendre1808 -->
 ## 历史进展总览
 
-**仓库当前状态（2026-11-24）：** Layer 3 的经典 PNT、Ingham 1940、完整的
-Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 界均已证明。
-曲线对 σ∈[1/2,1]、全部 T≥2 统一，保留解析重数并允许任意正 ε。
-尖锐四阶矩界 `O(T log^4 T)` 已对全部 `T≥2` 证明。下表九项历史短区间指数结果
-仍仅完成陈述形式化；解析密度结果尚未闭合 Ingham 1937 或 Huxley 1972 的素数间隙证明。
+**仓库当前状态（2026-11-27）。** Layer 3 的经典 PNT 与 Ingham 1940、
+Huxley、Guth–Maynard 三条零密度曲线均已证明。Ingham 界保留精确高度指数，
+统一只带 `(log T)^5`。Huxley、Guth–Maynard 与合并得到的全局 `30/13` 界
+允许任意正的高度指数损失。上述估计均覆盖 `σ∈[1/2,1]`、`T≥2` 和解析重数。
+尖锐四阶矩界 `O(T log^4 T)` 覆盖全部 `T≥2`，下表九项历史短区间指数结果
+已完成陈述形式化。[Ingham 密度](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)。
 
 **目标.** 勒让德猜想（A.-M. Legendre, *Essai sur la théorie des nombres*,
 第 2 版, Courcier, Paris, 1808）：开区间 `(n²,(n+1)²)` 中有素数。`θ < 1/2` 足以推出最终成立；
@@ -596,7 +604,7 @@ Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 
 | 完整 Huxley 曲线密度（Layer 4） | `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)` | **✅ 已证明**：[`huxley_curved_density_epsilon`](Legendre/Layer4/HuxleyFullDensity.lean) 与闭合的 [`layer4_huxley_comparator`](Legendre/Literature/LayerCoverage.lean)；同一系数覆盖 σ∈[1/2,1]、全部 T≥2 与解析重数；`7/12+ε` 素数间隙结论仍开放。 |
 | 高实部实际 Type I 分支（Layer 4） | `R ≪ T^(3(1−σ)/(3σ−1)+ε)`，σ∈[5/6+η,1] | **✅ 已证明**；固定 η>0，Y=T，T≥128，T^δ≤X≤2T^δ 且 0<δ≤η/16；闭合的 [`layer4_upper_typeI_comparator`](Legendre/Literature/LayerCoverage.lean)。完整高实部密度组装现已完成。 |
 | 经典 PNT（Layer 3） | ψ、θ、π 共用误差尺度 `x exp(−c√log x)`，并给出相应的最终素数区间 | **✅ 已证明**：[`layer3_pnt_package`](Legendre/Layer3.lean)。该误差尺度尚不能给出固定的素数间隙指数 `θ<1`。 |
-| Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(2−σ)+ε)` | **✅ 已证明**：[`ingham_density_epsilon`](Legendre/Layer4/InghamDensity.lean) 及闭合的 [`layer4_ingham_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留解析重数。累计界统一带 `log^7 T`，任意固定上端点低于 1 时带 `log^5 T`，固定内部条带上带 `log^4 T`。[对数估计](docs/layer4-ingham-shell-log-five.md#cumulative-density)。 |
+| Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪ T^(3(1−σ)/(2−σ)) (log T)^5` | **✅ 已证明**，对全部 `σ∈[1/2,1]`、`T≥2` 统一，保留解析重数。固定内部条带上可改进至 `log^4 T`。[证明](Legendre/Layer4/InghamCayleyDensity.lean)与[字面比较器](Legendre/Literature/LayerCoverage.lean)。 |
 | 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；完整曲线指数 benchmark 现已证明，见下文。 |
 | 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 现已包含 σ>5/6，见下文。 |
 | 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^4 T` | **✅ 已证明**，覆盖全部 `T≥2`。[证明与字面比较器](docs/layer4-sharp-fourth-moment.md)。 |
@@ -736,7 +744,7 @@ Huxley 与 Guth–Maynard 零密度曲线，以及合并得到的全局 `30/13` 
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 与全局 Huxley `12/5` 及实际大值输入均已证明；完整 Huxley 与 Guth–Maynard 曲线以及全局 `30/13` 已证明；尖锐四阶矩 `log^4` 已证明。[密度范围](docs/layer4-guth-central-density.md)、[四阶矩范围](docs/layer4-sharp-fourth-moment.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 的统一五次对数界、全局 Huxley `12/5` 及实际大值输入均已证明；完整 Huxley 与 Guth–Maynard 曲线以及全局 `30/13` 已证明；尖锐四阶矩 `log^4` 已证明。[密度范围](docs/layer4-guth-central-density.md)、[四阶矩范围](docs/layer4-sharp-fourth-moment.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含指数规范化的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |

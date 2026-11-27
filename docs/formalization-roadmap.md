@@ -457,10 +457,15 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-15): roadmap acceptance and the full curved Huxley exponent are proved.**
-Ingham curved density, global Huxley 12/5 and the full curve on [1/2,1],
-all T>=2 with analytic multiplicities, are proved. Guth–Maynard and sharp
-log^4 targets remain explicitly open; the acceptance criteria below permit clearly labelled stronger open Props.
+**Current state (2026-11-27).** The Ingham curve has a uniform fifth-log
+bound. Global Huxley `12/5`, the full curved Huxley and Guth–Maynard
+estimates, and the combined `30/13` bound cover all real parts in
+`[1/2,1]`, all `T≥2`, and analytic multiplicities. The zeta fourth moment
+has the sharp upper bound `O(T (log T)^4)`.
+[Ingham density](layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)
+[Curved Huxley](layer4-full-curved-huxley.md)
+[Guth–Maynard](layer4-guth-central-density.md)
+[Fourth moment](layer4-sharp-fourth-moment.md)
 `import Legendre.Layer4` exports the multiplicity-weighted counting convention,
 `HasZeroDensityEstimate b` with a coefficient uniform in σ∈[1/2,1], exponent
 weakening, and a proved transfer from a hypothesized power/log density bound.
@@ -511,9 +516,9 @@ See [initial mean values](layer4-mean-values.md),
 |---|---|
 | Definition of N(σ,T) | Already proved finite, multiplicity-weighted in Layer 2 |
 | Density exponent convention | `HasZeroDensityEstimate`, uniform in σ; definition, no exponent value asserted |
-| Ingham zero-density theorem | **proved**: uniform curved exponent 3(1−σ)/(2−σ)+ε, all analytic multiplicities and T≥2; uniform log^7 bound and log^5 on each fixed strip ending below one |
+| Ingham zero-density theorem | **proved** with exact curved exponent `3(1−σ)/(2−σ)` and `(log T)^5`, all analytic multiplicities and `T≥2` |
 | Huxley b=12/5 | **proved**: `Zeta.hasZeroDensityEstimate_twelve_fifths`; closed independent `layer4_huxley_global_comparator`; uniform sigma and all T≥2 |
-| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts and both balanced detector branches **proved**; full curved Huxley also **proved**; Guth–Maynard remains explicitly **open**, as permitted below |
+| Mean-value/large-value input | `O(N)` mean-square error and real-line Hilbert inequality **proved**; continuous large-value measure, finite additive large sieve, optimized separated-point bounds, actual two-branch detection and varying-real-part sample bounds **proved**; actual Halasz two-term counts, both balanced detector branches and Guth–Maynard’s literal large-value estimate **proved** |
 
 Full validation (2026-11-15): 4,345 build jobs, all 6,688 project theorem
 declarations audited with exactly matching independent inventories, 326 Lean
