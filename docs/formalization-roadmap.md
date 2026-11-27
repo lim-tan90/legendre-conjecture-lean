@@ -646,6 +646,8 @@ The sharp fourth-moment logarithm remains open.
 
 **Critical-line Weyl bound (2026-11-27).** The zeta function satisfies
 `|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)` for both signs and `|t|≥2`.
+The closed-strip exponents are `1/2−2σ/3` for `σ≤1/2` and
+`(1−σ)/3` for `σ≥1/2`.
 [Statement and proof](layer4-weyl-short-sums.md#zeta-on-the-critical-line).
 
 **Acceptance criteria.**

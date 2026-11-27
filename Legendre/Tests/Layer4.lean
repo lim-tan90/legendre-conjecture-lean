@@ -564,6 +564,38 @@ theorem layer4_weyl_maximum_block_endpoint_consumer :
   simpa only [Complex.ofReal_ofNat] using
     h 2 (by norm_num) 8 16 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
 
+/-- The strip bound restores the logarithmic edge at real part one and the
+square-root exponent at real part zero with the same constant. -/
+theorem layer4_zeta_weyl_closed_strip_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 2 ≤ |t| →
+      ‖riemannZeta ((t : ℂ)*Complex.I)‖ ≤ C*|t|^(1/2 : ℝ)*(1+Real.log |t|) ∧
+      ‖riemannZeta (1+(t : ℂ)*Complex.I)‖ ≤ C*(1+Real.log |t|) := by
+  obtain ⟨C,hC,h⟩ := Zeta.riemannZeta_weyl_full_strip
+  refine ⟨C,hC,?_⟩
+  intro t ht
+  constructor
+  · have hh := h 0 (by norm_num [Set.mem_Icc]) t ht
+    have he : max ((1-(0 : ℝ))/3) (1/2-2*0/3) = 1/2 := by norm_num
+    rw [he] at hh
+    simpa only [Complex.ofReal_zero,zero_add] using hh
+  · have hh := h 1 (by norm_num [Set.mem_Icc]) t ht
+    have he : max ((1-(1 : ℝ))/3) (1/2-2*1/3) = 0 := by norm_num
+    rw [he] at hh
+    simpa only [Real.rpow_zero,mul_one,Complex.ofReal_one] using hh
+
+/-- First differentiation on the critical line retains the Weyl exponent
+and adds exactly one logarithmic factor. -/
+theorem layer4_zeta_weyl_first_derivative_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 3 ≤ |t| →
+      ‖deriv riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖ ≤
+        C*|t|^(1/6 : ℝ)*(1+Real.log |t|)^2 := by
+  obtain ⟨C,hC,h⟩ := Zeta.riemannZeta_critical_iteratedDeriv_weyl
+  refine ⟨8*C,by positivity,?_⟩
+  intro t ht
+  have hh := h t ht 1
+  rw [iteratedDeriv_one, Nat.factorial_one, Nat.cast_one, mul_one, pow_one] at hh
+  exact hh.trans_eq (by ring)
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

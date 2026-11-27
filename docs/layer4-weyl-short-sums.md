@@ -114,3 +114,41 @@ covers negative ordinates with the same constant.
 [Critical blocks](../Legendre/Layer4/Exponential/CriticalWeylBlocks.lean)
 [Zeta bound](../Legendre/Layer4/ZetaWeyl.lean)
 [Literal comparator](../Legendre/Literature/LayerCoverage.lean)
+
+
+## The closed critical strip
+
+For every `0≤σ≤1` and `|t|≥2`, one absolute constant satisfies
+`|ζ(σ+it)| ≤ C |t|^E(σ) (1+log |t|)`, where
+`E(σ)=1/2−2σ/3` on `[0,1/2]` and `E(σ)=(1−σ)/3` on
+`[1/2,1]`.
+
+At real part one, the finite Euler formula with cutoff `⌈|t|⌉` gives
+a logarithmic bound via the harmonic sum. To interpolate with the
+critical-line Weyl bound, remove the pole and multiply by the shifted
+Gaussian `exp((s−it)^2)`. This gives a bounded function on the closed
+strip. The boundary estimates use the inequalities
+`1+|v|≤(1+|t|)(1+|v−t|)` and
+`(1+r)^3 exp(−r²)≤8`. Hadamard's three-lines theorem yields the
+right-hand exponent, with both endpoints included.
+
+The completed functional equation gives the left-hand estimate from
+the exact Gamma quotient power `1/2−σ` and the right-hand estimate
+at `1−σ`. To include `σ=0`, shift both Gamma arguments by one.
+The quotient introduced by this shift has norm at most one.
+[Right-hand proof](../Legendre/Layer4/ZetaWeylStrip.lean)
+[Reflection](../Legendre/Layer4/ZetaWeylReflection.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)
+
+
+## Critical-line derivatives
+
+For every nonnegative integer `k` and `|t|≥3), one absolute constant gives
+`|ζ⁽ᵏ⁾(1/2+it)| ≤ C k! |t|^(1/6) (1+log |t|) [8(1+log |t|)]^k`.
+The Cauchy circle of radius `1/[8(1+log |t|)]` stays in the critical
+strip and avoids the pole. The Weyl exponent varies by at most two
+thirds of the radius, so the extra power of the height costs at most
+`exp(1/12)`. Cauchy's derivative estimate gives the factorial and the
+inverse radius to the power `k`.
+[Derivative estimates](../Legendre/Layer4/ZetaWeylDerivatives.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)

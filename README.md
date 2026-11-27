@@ -342,10 +342,14 @@ at real part 4. [Exact statement and proof](docs/layer4-ingham-shell-log-five.md
 `|t|≥2`, an absolute constant gives `|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)`.
 An inverse-square-root lag sum extends the weighted Weyl bound to
 blocks of length `|t|^(2/3)`. The first- and second-derivative bounds
-cover the blocks up to the finite Euler cutoff.
+cover the blocks up to the finite Euler cutoff. On the closed strip
+`0≤σ≤1`, the exponent is `1/2−2σ/3` for `σ≤1/2` and `(1−σ)/3`
+for `σ≥1/2`, with the same single logarithmic factor. On the critical
+line, Cauchy estimates retain exponent `1/6` for every derivative order.
+The additional factor at order `k` is `k! [8(1+log |t|)]^k` for `|t|≥3`.
 [Proof and literal comparator](docs/layer4-weyl-short-sums.md#zeta-on-the-critical-line).
 
-Current validation (2026-11-27) covers **4,406 build jobs**, **8,950 audited theorem declarations**, **393 Lean files** and **237 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+Current validation (2026-11-27) covers **4,410 build jobs**, **8,978 audited theorem declarations**, **396 Lean files** and **239 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**

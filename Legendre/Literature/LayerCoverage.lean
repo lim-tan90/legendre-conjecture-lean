@@ -380,6 +380,24 @@ def ZetaWeylBenchmark : Prop :=
 theorem layer4_zeta_weyl_comparator : ZetaWeylBenchmark :=
   Zeta.riemannZeta_critical_weyl_bound
 
+/-- The Weyl growth exponents on both halves of the closed critical strip. -/
+def ZetaWeylStripBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ σ ∈ Icc (0 : ℝ) 1, ∀ t : ℝ, 2 ≤ |t| →
+    ‖riemannZeta ((σ : ℂ)+(t : ℂ)*Complex.I)‖ ≤
+      C*|t|^(max ((1-σ)/3) (1/2-2*σ/3))*(1+Real.log |t|)
+
+theorem layer4_zeta_weyl_strip_comparator : ZetaWeylStripBenchmark :=
+  Zeta.riemannZeta_weyl_full_strip
+
+/-- The critical-line Weyl bound for all complex derivatives, with one absolute constant. -/
+def ZetaWeylDerivativeBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 3 ≤ |t| → ∀ k : ℕ,
+    ‖iteratedDeriv k riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖ ≤
+      C*(k.factorial : ℝ)*|t|^(1/6 : ℝ)*(1+Real.log |t|)*(8*(1+Real.log |t|))^k
+
+theorem layer4_zeta_weyl_derivative_comparator : ZetaWeylDerivativeBenchmark :=
+  Zeta.riemannZeta_critical_iteratedDeriv_weyl
+
 /-- Closed actual short-sum bound, with the square-root-length hypothesis explicit. -/
 theorem layer4_weyl_short_sum_comparator : WeylShortSumBenchmark := by
   refine ⟨Density.Oscillation.logarithmicWeylConstant,

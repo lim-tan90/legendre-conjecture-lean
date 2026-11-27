@@ -424,6 +424,9 @@ import all Legendre.Layer4.InghamCayleyDensity
 import all Legendre.Layer4.Exponential.InverseSqrtDifferencing
 import all Legendre.Layer4.Exponential.CriticalWeylBlocks
 import all Legendre.Layer4.ZetaWeyl
+import all Legendre.Layer4.ZetaWeylStrip
+import all Legendre.Layer4.ZetaWeylReflection
+import all Legendre.Layer4.ZetaWeylDerivatives
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -9670,3 +9673,33 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.zeta_critical_finite_euler_square_error._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_maximum_block_endpoint_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_two_signed_endpoints_consumer"
+
+-- Closed strip Weyl growth and all critical-line complex derivatives.
+#print axioms Legendre.Literature.ZetaWeylDerivativeBenchmark._proof_1
+#print axioms Legendre.Literature.layer4_zeta_weyl_derivative_comparator
+#print axioms Legendre.Literature.layer4_zeta_weyl_strip_comparator
+#print axioms Legendre.Zeta.poleRemovedZeta_weyl_boundary
+#print axioms Legendre.Zeta.riemannZeta_critical_iteratedDeriv_weyl
+#print axioms Legendre.Zeta.riemannZeta_one_line_log_bound
+#print axioms Legendre.Zeta.riemannZeta_weyl_full_strip
+#print axioms Legendre.Zeta.riemannZeta_weyl_strip
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.gamma_norm_nonzero_of_nonnegative"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.gamma_norm_ratio_on_strip"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.gamma_norm_ratio_on_strip._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.gamma_real_factor_ratio_left"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylReflection.0.Legendre.Zeta.riemannZeta_weyl_left._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylStrip.0.Legendre.Zeta.cubic_gaussian_le"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylStrip.0.Legendre.Zeta.gaussian_localize_weyl_weight"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylStrip.0.Legendre.Zeta.norm_poleRemovedZeta_localized"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylStrip.0.Legendre.Zeta.norm_poleRemovedZeta_strip"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeylStrip.0.Legendre.Zeta.riemannZeta_one_line_log_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_closed_strip_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_closed_strip_consumer._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_first_derivative_consumer"
