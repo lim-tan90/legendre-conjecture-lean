@@ -133,6 +133,9 @@ public import Legendre.Layer4.Exponential.WeightedLogWeyl
 public import Legendre.Layer4.Exponential.GeneralLogWeyl
 public import Legendre.Layer4.LongDetectorTypeII
 public import Legendre.Layer4.Exponential.WeightedLogBlocks
+public import Legendre.Layer4.Exponential.InverseSqrtDifferencing
+public import Legendre.Layer4.Exponential.CriticalWeylBlocks
+public import Legendre.Layer4.ZetaWeyl
 public import Legendre.Layer4.DetectorMonotoneWeight
 public import Legendre.Layer4.DetectorDivisorBlocks
 public import Legendre.Layer4.DetectorDividedPrefixes

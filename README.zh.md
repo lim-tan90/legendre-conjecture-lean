@@ -263,7 +263,13 @@ Gaussian Mellin 反演给出极点项的统一界。减去极点后，余项在�
 Cayley 圆盘将圆心固定在实部 4，给出高度增量界。
 [精确陈述与证明](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)。
 
-当前验证（2026-11-27）包括 **4,403 项构建**、**8,887 个定理的公理审计**、**390 个 Lean 文件**和 **235 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**临界线上的 ζ Weyl 次凸界（2026-11-27）。** 对每个 `|t|≥2`，
+同一个绝对常数满足 `|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)`。
+对移位相关项的逆平方根代价求和后，加权 Weyl 界覆盖到块长 `|t|^(2/3)`。
+再用一阶和二阶导数估计覆盖有限 Euler 截断前的长块。
+[证明与字面比较器](docs/layer4-weyl-short-sums.md#zeta-on-the-critical-line)。
+
+当前验证（2026-11-27）包括 **4,406 项构建**、**8,950 个定理的公理审计**、**393 个 Lean 文件**和 **237 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -1117,9 +1123,9 @@ namespace and module visibility are adapted. Retained license:
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
 | [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
-| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) and [InverseSqrtDifferencing.lean](Legendre/Layer4/Exponential/InverseSqrtDifferencing.lean) |
 
-Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
+新增的区间差分适配按实际间距累加逆平方根相关代价。间距求和、自然数下标的重叠恒等式及对数移位相位估计均在本仓库证明。
 
 #### 多项式幂所需的除数函数增长界
 

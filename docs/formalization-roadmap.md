@@ -644,6 +644,10 @@ combining with Ingham proves the global 30/13 density coefficient.
 The sharp fourth-moment logarithm remains open.
 [Proof scope](layer4-guth-central-density.md).
 
+**Critical-line Weyl bound (2026-11-27).** The zeta function satisfies
+`|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)` for both signs and `|t|≥2`.
+[Statement and proof](layer4-weyl-short-sums.md#zeta-on-the-critical-line).
+
 **Acceptance criteria.**
 
 * a formal definition of `N(σ,T)` and the zero-density exponent;

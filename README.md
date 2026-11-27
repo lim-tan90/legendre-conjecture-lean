@@ -338,7 +338,14 @@ constant gives `N(σ,T) ≤ C T^(3(1−σ)/(2−σ)) (log T)^5` for all
 `a≥α≥3/4`, and the Cayley disk gives the height increment using a center
 at real part 4. [Exact statement and proof](docs/layer4-ingham-shell-log-five.md#uniform-fifth-log-bound).
 
-Current validation (2026-11-27) covers **4,403 build jobs**, **8,887 audited theorem declarations**, **390 Lean files** and **235 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Zeta's Weyl bound on the critical line (2026-11-27).** For every
+`|t|≥2`, an absolute constant gives `|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)`.
+An inverse-square-root lag sum extends the weighted Weyl bound to
+blocks of length `|t|^(2/3)`. The first- and second-derivative bounds
+cover the blocks up to the finite Euler cutoff.
+[Proof and literal comparator](docs/layer4-weyl-short-sums.md#zeta-on-the-critical-line).
+
+Current validation (2026-11-27) covers **4,406 build jobs**, **8,950 audited theorem declarations**, **393 Lean files** and **237 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
@@ -1332,9 +1339,9 @@ namespace and module visibility are adapted. Retained license:
 | Upstream / 上游 | Destination / 本地文件 |
 |---|---|
 | [`FourierSecondMoment.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/FourierSecondMoment.lean) | [FourierSecondMoment.lean](Legendre/Layer4/Exponential/FourierSecondMoment.lean) |
-| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) |
+| [`VanDerCorput.lean`](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/OAI/NumberTheory/EgyptianFractions/VanDerCorput.lean) | [VanDerCorput.lean](Legendre/Layer4/Exponential/VanDerCorput.lean) and [InverseSqrtDifferencing.lean](Legendre/Layer4/Exponential/InverseSqrtDifferencing.lean) |
 
-Natural-index overlap identities and logarithmic shifted-phase estimates are local deductions.
+The additional interval adaptation sums inverse-square-root correlation costs over the actual lags. The lag estimate, natural-index overlap identities and shifted logarithmic phase estimates are local deductions.
 
 #### Divisor growth for polynomial powers
 

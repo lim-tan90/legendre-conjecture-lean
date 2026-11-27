@@ -421,6 +421,9 @@ import all Legendre.Layer4.CayleyDisk
 import all Legendre.Layer4.MollifiedZetaCayley
 import all Legendre.Layer4.MollifiedZetaRightMoment
 import all Legendre.Layer4.InghamCayleyDensity
+import all Legendre.Layer4.Exponential.InverseSqrtDifferencing
+import all Legendre.Layer4.Exponential.CriticalWeylBlocks
+import all Legendre.Layer4.ZetaWeyl
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -9602,3 +9605,68 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.SmoothedDivisorMoment.0.Legendre.Density.Moment.uniform_divisor_square_tail._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_two_thirds_right_half_plane_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_uniform_log_five_ingham_endpoints_consumer"
+
+-- Inverse-square-root differencing and the actual Weyl subconvex estimate.
+#print axioms Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt
+#print axioms Legendre.Density.Oscillation.critical_block_weyl_through_square
+#print axioms Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds
+#print axioms Legendre.Literature.layer4_zeta_weyl_comparator
+#print axioms Legendre.Zeta.riemannZeta_critical_weyl_bound
+#print axioms Legendre.Zeta.riemannZeta_critical_weyl_epsilon
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_block_weighted_weyl_two_thirds._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_prefix_weyl_two_thirds_sq"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_prefix_weyl_two_thirds_sq._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_prefix_weyl_two_thirds_sq._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_shift_correlation_lag"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_shift_correlation_lag._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_shift_correlation_lag._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.averaged_columns_row_bound"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_inverse_sqrt_le"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_12"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_10"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_11"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_12"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_13"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_14"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._proof_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_15"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_16"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_17"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_18"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_19"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_20"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_21"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Density.Oscillation.critical_block_weyl_through_square._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.riemannZeta_critical_weyl_bound._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.zeta_critical_finite_euler_square_error"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.zeta_critical_finite_euler_square_error._proof_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_maximum_block_endpoint_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_two_signed_endpoints_consumer"

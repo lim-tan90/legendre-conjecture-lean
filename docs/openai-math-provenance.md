@@ -482,7 +482,10 @@ small-cutoff choices and restricted curved-density proof are local deductions.
 namespace and module visibility are changed. The retained license is
 `licenses/openai-math-Apache-2.0.txt`; both READMEs list the exact source URLs.
 Natural-index overlap and shifted logarithmic-derivative estimates are local
-code. This port alone asserts no new density or zeta subconvexity theorem.
+code. `Exponential/InverseSqrtDifferencing.lean` further adapts the interval
+and column proofs from the same pinned `VanDerCorput.lean` to retain the
+inverse-square-root costs. It passes the row sum to the locally proved
+Weyl bound. [Critical-line result](layer4-weyl-short-sums.md#zeta-on-the-critical-line).
 
 Upper curved-density assembly (2026-11-15) locally reuses the finite branch
 split of `HuxleyCurvedShell.lean` in `UpperHuxleyShell.lean`. The original

@@ -89,3 +89,28 @@ standard axioms occur. All 300 Lean files have zero executable proof
 placeholders. All 156 standalone consumers pass (111 Layer 4, 9 Layer 3,
 36 literature). Removing the Weyl height/length hypotheses is rejected for
 the expected type mismatch.
+
+
+## Zeta on the critical line
+
+An absolute constant satisfies
+`|ζ(1/2+it)| ≤ C |t|^(1/6)(1+log |t|)` for every `|t|≥2`.
+The corresponding `|t|^(1/6+ε)` bound holds for every positive `ε`.
+
+The new differencing estimate retains the inverse-square-root dependence
+on each separation. The sum of the costs in any row is at most
+`4√H`, by summing `1/√h ≤ 2(√h−√(h−1))` on either side of
+the diagonal. Taking the shift length near `U/|t|^(1/3)) gives the
+weighted cost `O(|t|^(1/6))` for `U≤|t|^(2/3)).
+The second-derivative estimate gives the same cost through `U≤|t|`.
+For `|t|≤U≤2t²`, the weighted first-derivative bound is
+`O(√U/|t|)=O(1)`.
+
+A power of two between `t²` and `2t²` makes the pole correction and
+the Euler remainder bounded by an absolute constant.
+Summing the dyadic blocks contributes one logarithm. Conjugation
+covers negative ordinates with the same constant.
+[Interval differencing](../Legendre/Layer4/Exponential/InverseSqrtDifferencing.lean)
+[Critical blocks](../Legendre/Layer4/Exponential/CriticalWeylBlocks.lean)
+[Zeta bound](../Legendre/Layer4/ZetaWeyl.lean)
+[Literal comparator](../Legendre/Literature/LayerCoverage.lean)

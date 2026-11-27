@@ -545,6 +545,25 @@ theorem layer4_two_thirds_right_half_plane_consumer :
   intro a ha
   simpa using hb 1 a (by norm_num) le_rfl ha
 
+/-- One Weyl constant bounds both signs at the smallest covered height. -/
+theorem layer4_zeta_weyl_two_signed_endpoints_consumer :
+    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, |t| = 2 →
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖ ≤ C*(2 : ℝ)^(1/6 : ℝ)*(1+Real.log 2) := by
+  obtain ⟨C,hC,h⟩ := Zeta.riemannZeta_critical_weyl_bound
+  refine ⟨C,hC,?_⟩
+  intro t ht
+  simpa only [ht] using h t (ge_of_eq ht)
+
+/-- The critical block estimate includes the largest permitted lower endpoint. -/
+theorem layer4_weyl_maximum_block_endpoint_consumer :
+    ∃ C : ℝ, 0 < C ∧
+      ‖∑ n ∈ Finset.Ioc (8 : ℕ) 16,
+        (n : ℂ)^(-((1/2 : ℂ)+(2 : ℂ)*Complex.I))‖ ≤ C*(2 : ℝ)^(1/6 : ℝ) := by
+  obtain ⟨C,hC,h⟩ := Oscillation.critical_block_weyl_through_square
+  refine ⟨C,hC,?_⟩
+  simpa only [Complex.ofReal_ofNat] using
+    h 2 (by norm_num) 8 16 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=
