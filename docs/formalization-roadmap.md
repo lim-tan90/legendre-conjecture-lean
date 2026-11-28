@@ -651,7 +651,7 @@ The closed-strip exponents are `1/2−2σ/3` for `σ≤1/2` and
 [Statement and proof](layer4-weyl-short-sums.md#zeta-on-the-critical-line).
 
 **Critical-line second moment (2026-11-28).** The leading term is
-`T log T` with absolute error `O(T√(1+log T))` for all `T≥2`.
+`T log T` with absolute error `O(T)` for all `T≥2`.
 [Statement and proof](layer4-zeta-second-moment.md).
 
 **Acceptance criteria.**

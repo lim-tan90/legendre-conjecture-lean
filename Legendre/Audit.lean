@@ -430,6 +430,9 @@ import all Legendre.Layer4.ZetaWeylDerivatives
 import all Legendre.Layer4.CriticalPolynomialMean
 import all Legendre.Layer4.ZetaLinearEuler
 import all Legendre.Layer4.ZetaSecondMoment
+import all Legendre.Layer4.ZetaEulerFourierMode
+import all Legendre.Layer4.ZetaEulerBernoulli
+import all Legendre.Layer4.ZetaEulerSharpTail
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -9746,7 +9749,61 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.continuous_critical_euler_sum._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.integral_Icc_le_sqrt_length_mul_sqrt_square._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.integral_Icc_le_sqrt_length_mul_sqrt_square._simp_1_2"
-#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.log_sq_le_sixteen_sqrt"
-#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_main_term._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_linear_euler_cutoff_endpoints_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_second_moment_eventually_ge_consumer"
+
+-- Bernoulli Fourier modes, sharp Euler truncation, and the linear zeta second-moment remainder.
+#print axioms Legendre.Literature.layer4_zeta_finite_euler_sharp_comparator
+#print axioms Legendre.Literature.layer4_zeta_second_moment_linear_error_comparator
+#print axioms Legendre.Zeta.eulerBernoulliCoefficient.eq_1
+#print axioms Legendre.Zeta.eulerBernoulliCoefficient_summable_norm
+#print axioms Legendre.Zeta.eulerBernoulliCoefficient_zero
+#print axioms Legendre.Zeta.eulerBernoulliScale._proof_1
+#print axioms Legendre.Zeta.eulerFourierMode._proof_1
+#print axioms Legendre.Zeta.eulerFourierMode.eq_1
+#print axioms Legendre.Zeta.eulerFourierMode_hasDerivAt
+#print axioms Legendre.Zeta.hasSum_eulerBernoulli
+#print axioms Legendre.Zeta.norm_eulerFourierMode
+#print axioms Legendre.Zeta.norm_integral_eulerBernoulli_cpow_sub_constant_le
+#print axioms Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le
+#print axioms Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power
+#print axioms Legendre.Zeta.zetaEulerTail_eq_eulerPrimitive
+#print axioms Legendre.Zeta.zeta_second_moment_linear_error
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.eulerFourierMode_eq_fourier"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.eulerFourierMode_fract"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerBernoulli.0.Legendre.Zeta.hasSum_eulerBernoulli._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerFourierMode.0.Legendre.Zeta.norm_integral_eulerFourierMode_cpow_le._simp_1_9"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.critical_euler_error_on_long_window"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.critical_euler_error_on_long_window._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_linear_error._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_7"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_finite_euler_unit_cutoff_consumer"

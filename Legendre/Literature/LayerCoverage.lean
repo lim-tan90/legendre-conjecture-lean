@@ -72,6 +72,24 @@ theorem layer4_hardy_littlewood_second_moment_comparator :
     HardyLittlewoodSecondMoment ∧ ZetaSecondMomentError :=
   ⟨Zeta.zeta_second_moment_tendsto_one,Zeta.zeta_second_moment_main_term⟩
 
+/-- A linear remainder in the critical-line second moment. -/
+def ZetaSecondMomentLinearError : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+    |(∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2)-T*Real.log T| ≤ C*T
+
+theorem layer4_zeta_second_moment_linear_error_comparator : ZetaSecondMomentLinearError :=
+  Zeta.zeta_second_moment_linear_error
+
+/-- Finite truncation at or beyond the ordinate retains the exact pole term. -/
+def ZetaFiniteEulerSharpBenchmark : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ), 1 ≤ N → ∀ s : ℂ, 0 < s.re → s.re ≤ 1 →
+    s ≠ 1 → |s.im| ≤ N →
+    ‖riemannZeta s-(∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-s))-
+      (N : ℂ)^(1-s)/(s-1)‖ ≤ C*(N : ℝ)^(-s.re)
+
+theorem layer4_zeta_finite_euler_sharp_comparator : ZetaFiniteEulerSharpBenchmark :=
+  Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power
+
 /-- Whole-line cubic-weight fourth moment, including actual integrability. -/
 def WeightedFourthMomentBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →

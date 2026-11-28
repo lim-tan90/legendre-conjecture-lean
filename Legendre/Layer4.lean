@@ -141,6 +141,9 @@ public import Legendre.Layer4.ZetaWeylReflection
 public import Legendre.Layer4.ZetaWeylDerivatives
 public import Legendre.Layer4.ZetaLinearEuler
 public import Legendre.Layer4.CriticalPolynomialMean
+public import Legendre.Layer4.ZetaEulerFourierMode
+public import Legendre.Layer4.ZetaEulerBernoulli
+public import Legendre.Layer4.ZetaEulerSharpTail
 public import Legendre.Layer4.ZetaSecondMoment
 public import Legendre.Layer4.DetectorMonotoneWeight
 public import Legendre.Layer4.DetectorDivisorBlocks

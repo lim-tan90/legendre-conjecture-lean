@@ -617,6 +617,17 @@ theorem layer4_zeta_linear_euler_cutoff_endpoints_consumer :
     simpa only [Complex.ofReal_ofNat] using
       Zeta.zeta_critical_finite_euler_linear_error _ 2 (by norm_num) (by norm_num) (by norm_num)
 
+/-- The sharp finite Euler bound includes a zero ordinate at the unit cutoff. -/
+theorem layer4_zeta_finite_euler_unit_cutoff_consumer :
+    ∃ C : ℝ, 0 < C ∧ ‖riemannZeta (1/2) + 1‖ ≤ C := by
+  obtain ⟨C,hC,h⟩ := Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power
+  refine ⟨C,hC,?_⟩
+  have hb := h 1 le_rfl (1/2) (by norm_num [Complex.div_re])
+    (by norm_num [Complex.div_re]) (by norm_num) (by norm_num [Complex.div_im])
+  norm_num [Finset.Icc_self] at hb ⊢
+  convert hb using 2
+  ring
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

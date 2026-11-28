@@ -4,7 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Legendre.Layer4.CriticalPolynomialMean
-public import Legendre.Layer4.ZetaLinearEuler
+public import Legendre.Layer4.ZetaEulerSharpTail
+public import Legendre.ZeroDensity
 public import Legendre.Layer4.ZetaFourthMomentSharp
 public import Legendre.Layer4.MomentDyadic
 
@@ -85,37 +86,74 @@ namespace Legendre.Zeta
 open Complex MeasureTheory Set Filter Density Density.Moment
 open scoped Topology
 
-private theorem log_sq_le_sixteen_sqrt {T : ℝ} (hT : 1 ≤ T) :
-    (Real.log T)^2 ≤ 16*√T := by
-  let U := T^(1/4 : ℝ)
-  have hp : 0 < T := by linarith only [hT]
-  have hU : 0 < U := by dsimp [U]; positivity
-  have hlog : Real.log T ≤ 4*U := by
-    have h := Real.log_le_sub_one_of_pos hU
-    rw [show Real.log U = (1/4)*Real.log T by exact Real.log_rpow hp _] at h
-    linarith only [h]
-  have hU2 : U^2 = √T := by
-    dsimp only [U]
-    rw [Real.sqrt_eq_rpow, ← Real.rpow_mul_natCast hp.le, Nat.cast_ofNat]
-    norm_num
-  exact (pow_le_pow_left₀ (Real.log_nonneg hT) hlog 2).trans_eq (by rw [mul_pow,hU2]; ring)
+private theorem critical_euler_error_on_long_window :
+    ∃ D : ℝ, 0 < D ∧ ∀ T : ℝ, 4 ≤ T → ∀ t ∈ Icc (T^(2/3 : ℝ)) T,
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)-
+        ∑ n ∈ Finset.Icc 1 ⌈T⌉₊, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))‖ ≤
+      D*T^(-(1/6 : ℝ)) := by
+  obtain ⟨P,hP,hb⟩ := norm_riemannZeta_sub_finite_euler_le_cutoff_power
+  refine ⟨P+2,by positivity,?_⟩
+  intro T hT t ht
+  let N := ⌈T⌉₊
+  let s := (1/2 : ℂ)+(t : ℂ)*I
+  let q := (N : ℂ)^(1-s)/(s-1)
+  let p := ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-s)
+  have hT₀ : 0 < T := by linarith only [hT]
+  have hT₁ : 1 ≤ T := by linarith only [hT]
+  have ht₀ : 0 < t := (Real.rpow_pos_of_pos hT₀ _).trans_le ht.1
+  have hNlo : T ≤ N := Nat.le_ceil _
+  have hNhi : (N : ℝ) ≤ 2*T := (Nat.ceil_lt_add_one hT₀.le).le.trans (by linarith only [hT₁])
+  have hN₁ : 1 ≤ N := by exact_mod_cast hT₁.trans hNlo
+  have hSr : s.re = 1/2 := by norm_num [s]
+  have hSi : s.im = t := by norm_num [s]
+  have hS : s ≠ 1 := by
+    intro he
+    have hh := congrArg Complex.re he
+    rw [hSr,one_re] at hh
+    norm_num at hh
+  have hsN : |s.im| ≤ N := by rw [hSi,abs_of_pos ht₀]; exact ht.2.trans hNlo
+  have hE := hb N hN₁ s (by rw [hSr]; norm_num) (by rw [hSr]; norm_num) hS hsN
+  rw [hSr] at hE
+  have hpw : (N : ℝ)^(-(1/2 : ℝ)) ≤ T^(-(1/6 : ℝ)) :=
+    (Real.rpow_le_rpow_of_nonpos hT₀ hNlo (by norm_num)).trans
+      (Real.rpow_le_rpow_of_exponent_le hT₁ (by norm_num))
+  have hq : ‖q‖ ≤ 2*T^(-(1/6 : ℝ)) := by
+    dsimp only [q]
+    rw [norm_div,norm_natCast_cpow_of_pos (show 0 < N by omega),sub_re,one_re,hSr,
+      show (1 : ℝ)-1/2 = 1/2 by norm_num,← Real.sqrt_eq_rpow]
+    have htden : t ≤ ‖s-1‖ := by
+      simpa [hSi,abs_of_pos ht₀] using abs_im_le_norm (s-1)
+    have hNroot : √(N : ℝ) ≤ 2*√T := by
+      apply (Real.sqrt_le_iff).2 ⟨by positivity,?_⟩
+      rw [mul_pow,Real.sq_sqrt hT₀.le]
+      nlinarith only [hT₀,hNhi]
+    calc
+      _ ≤ (2*√T)/T^(2/3 : ℝ) :=
+        div_le_div₀ (by positivity) hNroot (by positivity) (ht.1.trans htden)
+      _ = _ := by
+        rw [mul_div_assoc,Real.sqrt_eq_rpow,← Real.rpow_sub hT₀,show (1/2-2/3 : ℝ) = -(1/6) by norm_num]
+  change ‖riemannZeta s-p‖ ≤ _
+  rw [show riemannZeta s-p = (riemannZeta s-p-q)+q by ring]
+  apply (norm_add_le _ _).trans
+  have hh := (hE.trans (mul_le_mul_of_nonneg_left hpw hP.le))
+  exact (add_le_add hh hq).trans_eq (by ring)
 
-/-- The zeta second moment has leading term (T log T) on the critical line. -/
-theorem zeta_second_moment_main_term :
+/-- The critical-line second moment differs from (T log T) by at most O(T). -/
+theorem zeta_second_moment_linear_error :
     ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
       |(∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)‖^2)-T*Real.log T| ≤
-        C*T*√(1+Real.log T) := by
+        C*T := by
   obtain ⟨Q,hQ,hquarter⟩ := zeta_fourth_moment_log_four
+  obtain ⟨P,hP,hPbound⟩ := exists_log_pow_le_rpow 2 (show (0 : ℝ) < 1/3 by norm_num)
+  obtain ⟨D,hD,hApprox⟩ := critical_euler_error_on_long_window
   let z := fun t : ℝ => riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)
   have hz : Continuous z := zeta_critical_continuous
   let Z := fun x : ℝ => ∫ t in Icc 0 x, ‖z t‖^2
   have hZ₀ (x : ℝ) : 0 ≤ Z x := integral_nonneg (fun _ => sq_nonneg _)
-  let D := 4+72*Real.pi
   let K := 4*(Real.pi+4)
-  let B := 16*√Q+2*D*√(K+2)+D^2+K+6
+  let B := √Q*P+2*D*√(K+2)*√(P+2)+D^2+K+(P+5)
   let F := Z 4+4*Real.log 4
   let C := B+F
-  have hD : 0 ≤ D := by dsimp [D]; positivity
   have hK : 0 ≤ K := by dsimp [K]; positivity
   have hB : 0 < B := by dsimp only [B]; positivity
   have hF : 0 ≤ F := by dsimp only [F]; positivity [hZ₀ 4, Real.log_nonneg (by norm_num : (1:ℝ) ≤ 4)]
@@ -126,26 +164,40 @@ theorem zeta_second_moment_main_term :
   have hT₁ : 1 ≤ T := by linarith only [hT]
   have hlogT : 0 ≤ Real.log T := Real.log_nonneg hT₁
   have hL : 1 ≤ L := by dsimp only [L]; linarith only [hlogT]
-  have hLs : 1 ≤ √L := Real.one_le_sqrt.2 hL
-  have hTL : T ≤ T*√L := le_mul_of_one_le_right hT₀.le hLs
-  have hTL₁ : 1 ≤ T*√L := hT₁.trans hTL
   have hZ : (∫ t : ℝ in 0..T, ‖z t‖^2) = Z T := by
     rw [intervalIntegral.integral_of_le hT₀.le,← integral_Icc_eq_integral_Ioc]
-  change |(∫ t : ℝ in 0..T, ‖z t‖^2)-T*Real.log T| ≤ C*T*√L
+  change |(∫ t : ℝ in 0..T, ‖z t‖^2)-T*Real.log T| ≤ C*T
   rw [hZ]
   by_cases htlarge : 4 ≤ T
-  · let A := √T
+  · let A := T^(2/3 : ℝ)
     let N := ⌈T⌉₊
     let H := (harmonic N : ℝ)
     let p := fun t : ℝ => ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))
     let Ip := ∫ t in Icc A T, ‖p t‖^2
     let Iz := ∫ t in Icc A T, ‖z t‖^2
-    have hA : 2 ≤ A := (Real.le_sqrt (by norm_num) hT₀.le).2 (by norm_num; exact htlarge)
+    have hA : 2 ≤ A := by
+      have hh : (2 : ℝ) ≤ √T := (Real.le_sqrt (by norm_num) hT₀.le).2 (by norm_num; exact htlarge)
+      rw [Real.sqrt_eq_rpow] at hh
+      exact hh.trans (Real.rpow_le_rpow_of_exponent_le hT₁ (by norm_num))
     have hA₀ : 0 ≤ A := by linarith only [hA]
-    have hAsq : A^2 = T := Real.sq_sqrt hT₀.le
     have hAT : A ≤ T := by
-      have h := (Real.sqrt_le_iff).2 ⟨hT₀.le,by nlinarith only [hT₁,mul_nonneg hT₀.le (sub_nonneg.mpr hT₁)]⟩
-      exact h
+      simpa only [A,Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hT₁
+        (by norm_num : (2/3 : ℝ) ≤ 1)
+    have hAP : A*T^(1/3 : ℝ) = T := by
+      dsimp only [A]
+      rw [← Real.rpow_add hT₀,show (2/3+1/3 : ℝ) = 1 by norm_num,Real.rpow_one]
+    have hlogabs : Real.log T ≤ (P+1)*T^(1/3 : ℝ) := by
+      have hu := Real.one_le_rpow hT₁ (by norm_num : (0 : ℝ) ≤ 1/3)
+      nlinarith only [hPbound T hT,hu,sq_nonneg (Real.log T-1/2)]
+    have hLroot : √L ≤ √(P+2)*T^(1/6 : ℝ) := by
+      have hu := Real.one_le_rpow hT₁ (by norm_num : (0 : ℝ) ≤ 1/3)
+      have hh : L ≤ (P+2)*T^(1/3 : ℝ) := by dsimp only [L]; nlinarith only [hlogabs,hu]
+      apply (Real.sqrt_le_sqrt hh).trans_eq
+      rw [Real.sqrt_mul (by positivity : 0 ≤ P+2),Real.sqrt_eq_rpow (T^(1/3 : ℝ)),
+        ← Real.rpow_mul hT₀.le,show (1/3*(1/2) : ℝ) = 1/6 by norm_num]
+    have hunit : T^(-(1/6 : ℝ))*T^(1/6 : ℝ) = 1 := by
+      rw [← Real.rpow_add hT₀,neg_add_cancel,Real.rpow_zero]
+    have hdecay : T^(-(1/6 : ℝ)) ≤ 1 := Real.rpow_le_one_of_one_le_of_nonpos hT₁ (by norm_num)
     have hNlo : T ≤ N := Nat.le_ceil _
     have hNhi : (N : ℝ) ≤ 2*T := (Nat.ceil_lt_add_one hT₀.le).le.trans (by linarith only [hT₁])
     have hN₀ : (0 : ℝ) < N := hT₀.trans_le hNlo
@@ -179,21 +231,22 @@ theorem zeta_second_moment_main_term :
       have h₂ := Real.sqrt_le_sqrt hIp
       apply (mul_le_mul h₁ h₂ (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)).trans_eq
       rw [Real.sqrt_mul (show 0 ≤ (K+2)*T by positivity),Real.sqrt_mul (show 0 ≤ K+2 by positivity)]
-      dsimp only [A] at hAsq
-      nlinarith only [congrArg (fun x : ℝ => x*(√(K+2)*√L)) hAsq]
-    have hcmp : |Iz-Ip| ≤ (2*D*√(K+2)+D^2)*(T*√L) := by
-      have hpoint (t : ℝ) (ht : t ∈ Icc A T) : ‖z t-p t‖ ≤ D := by
-        have ht₂ : 2 ≤ t := hA.trans ht.1
-        have hts : T ≤ t^2 := hAsq ▸ pow_le_pow_left₀ hA₀ ht.1 2
-        exact zeta_critical_finite_euler_linear_error N t ht₂ (ht.2.trans hNlo)
-          (hNhi.trans (by linarith only [hts]))
-      have h := abs_integral_Icc_norm_sq_sub_le_of_pointwise hAT hD hz hp hpoint
+      nlinarith only [congrArg (fun x : ℝ => x*(√(K+2)*√L)) (Real.sq_sqrt hT₀.le)]
+    have hcmp : |Iz-Ip| ≤ (2*D*√(K+2)*√(P+2)+D^2)*T := by
+      have hpos : 0 ≤ D*T^(-(1/6 : ℝ)) := by positivity
+      have h := abs_integral_Icc_norm_sq_sub_le_of_pointwise hAT hpos hz hp (hApprox T htlarge)
       apply h.trans
-      have h₁ := mul_le_mul_of_nonneg_left hfirst (show 0 ≤ 2*D by positivity)
-      have h₂ := mul_le_mul_of_nonneg_left
-        (show T-A ≤ T*√L by linarith only [hTL,hA]) (sq_nonneg D)
-      exact (add_le_add h₁ h₂).trans_eq (by ring)
-    have hζlow : Z A ≤ 16*√Q*T := by
+      have hfirst' := hfirst.trans (mul_le_mul_of_nonneg_left hLroot
+        (show 0 ≤ √(K+2)*T by positivity))
+      have h₁ := mul_le_mul_of_nonneg_left hfirst' (show 0 ≤ 2*(D*T^(-(1/6 : ℝ))) by positivity)
+      have h₁' : 2*(D*T^(-(1/6 : ℝ)))*(∫ t in Icc A T, ‖p t‖) ≤ 2*D*√(K+2)*√(P+2)*T :=
+        h₁.trans_eq (by
+          linear_combination (2*D*√(K+2)*T*√(P+2))*hunit)
+      have h₂ := mul_le_mul
+        (pow_le_pow_left₀ hpos ((mul_le_mul_of_nonneg_left hdecay hD.le).trans_eq (mul_one _)) 2)
+        (show T-A ≤ T by linarith only [hA]) (sub_nonneg.mpr hAT) (sq_nonneg D)
+      exact (add_le_add h₁' h₂).trans_eq (by ring)
+    have hζlow : Z A ≤ √Q*P*T := by
       have hlogA : 0 ≤ Real.log A := Real.log_nonneg (by linarith only [hA])
       have hf := hquarter A hA
       rw [intervalIntegral.integral_of_le hA₀,← integral_Icc_eq_integral_Ioc] at hf
@@ -211,22 +264,20 @@ theorem zeta_second_moment_main_term :
         nlinarith only [h]
       rw [hx]
       have hsq := (pow_le_pow_left₀ hlogA (Real.log_le_log (by linarith only [hA]) hAT) 2).trans
-        (log_sq_le_sixteen_sqrt hT₁)
+        (hPbound T hT)
       exact (mul_le_mul_of_nonneg_left hsq (show 0 ≤ √Q*A by positivity)).trans_eq
-        (by nlinarith only [congrArg (fun x : ℝ => 16*√Q*x) hAsq])
-    have hdiag : |(T-A)*H-T*Real.log T| ≤ 6*T := by
-      have hlog : Real.log T ≤ 2*A := by
-        have h := Real.log_le_sub_one_of_pos (show 0 < A by linarith only [hA])
-        have he := Real.log_pow A 2
-        rw [hAsq, Nat.cast_ofNat] at he
-        linarith only [h,he]
+        (by linear_combination (√Q*P)*hAP)
+    have hdiag : |(T-A)*H-T*Real.log T| ≤ (P+5)*T := by
       have hTdif : 0 ≤ T*(H-Real.log T) := mul_nonneg hT₀.le (sub_nonneg.mpr hHlo)
       have hAH : 0 ≤ A*H := mul_nonneg hA₀ hH
       have h₁ := mul_le_mul_of_nonneg_left (show H-Real.log T ≤ 2 by linarith only [hHhi]) hT₀.le
-      have h₂ := mul_le_mul_of_nonneg_left (show H ≤ 2*A+2 by linarith only [hlog,hHhi]) hA₀
+      have h₂ := mul_le_mul_of_nonneg_left
+        (show H ≤ (P+1)*T^(1/3 : ℝ)+2 by linarith only [hHhi,hlogabs]) hA₀
+      have h₃ := congrArg (fun x : ℝ => (P+1)*x) hAP
+      have h₄ := mul_nonneg hP.le hT₀.le
       rw [show (T-A)*H-T*Real.log T = T*(H-Real.log T)-A*H by ring]
       apply abs_le.mpr
-      constructor <;> nlinarith only [hTdif,hAH,h₁,h₂,hAsq,hAT,hT₀]
+      constructor <;> nlinarith only [hTdif,hAH,h₁,h₂,h₃,h₄,hAT,hT₀]
     have hsplit : Z T = Z A+Iz := by
       have h := intervalIntegral.integral_add_adjacent_intervals
         ((hz.norm.pow 2).intervalIntegrable (μ := volume) 0 A) ((hz.norm.pow 2).intervalIntegrable (μ := volume) A T)
@@ -240,12 +291,9 @@ theorem zeta_second_moment_main_term :
         ((abs_add_le _ _).trans (add_le_add ((abs_of_nonneg (hZ₀ A)).trans_le hζlow) hcmp)) hpoly))
       hdiag)
     apply hb.trans
-    have h₁ := mul_le_mul_of_nonneg_left hTL (show 0 ≤ 16*√Q by positivity)
-    have h₂ := mul_le_mul_of_nonneg_left hTL hK
-    have h₃ := mul_le_mul_of_nonneg_left hTL (by norm_num : (0 : ℝ) ≤ 6)
-    have h₄ := mul_nonneg hF (show 0 ≤ T*√L by positivity)
+    have hFT := mul_nonneg hF hT₀.le
     dsimp only [C,B]
-    nlinarith only [h₁,h₂,h₃,h₄]
+    nlinarith only [hFT]
   · have hZmono : Z T ≤ Z 4 :=
       setIntegral_mono_set ((hz.norm.pow 2).continuousOn.integrableOn_Icc)
         (Filter.Eventually.of_forall fun _ => sq_nonneg _)
@@ -257,41 +305,37 @@ theorem zeta_second_moment_main_term :
     rw [abs_of_nonneg (hZ₀ T),abs_of_nonneg (mul_nonneg hT₀.le hlogT)] at h
     apply (h.trans (add_le_add hZmono hsmall)).trans
     change F ≤ _
-    rw [mul_assoc]
-    exact (le_mul_of_one_le_right hF hTL₁).trans
+    exact (le_mul_of_one_le_right hF hT₁).trans
       (mul_le_mul_of_nonneg_right (show F ≤ C by dsimp only [C]; linarith only [hB]) (by positivity))
+
+/-- The leading-term estimate with a square-root logarithmic remainder follows
+from the linear remainder. -/
+theorem zeta_second_moment_main_term :
+    ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+      |(∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)‖^2)-T*Real.log T| ≤
+        C*T*√(1+Real.log T) := by
+  obtain ⟨C,hC,hb⟩ := zeta_second_moment_linear_error
+  refine ⟨C,hC,?_⟩
+  intro T hT
+  have hL : 1 ≤ √(1+Real.log T) := Real.one_le_sqrt.2 (by
+    linarith only [Real.log_nonneg (show 1 ≤ T by linarith only [hT])])
+  exact (hb T hT).trans (le_mul_of_one_le_right (by positivity) hL)
 
 /-- The normalized critical-line zeta second moment tends to one. -/
 theorem zeta_second_moment_tendsto_one :
     Tendsto (fun T : ℝ => (∫ t : ℝ in 0..T,
       ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)‖^2)/(T*Real.log T)) atTop (𝓝 1) := by
-  obtain ⟨C,hC,hb⟩ := zeta_second_moment_main_term
+  obtain ⟨C,_,hb⟩ := zeta_second_moment_linear_error
   rw [tendsto_iff_norm_sub_tendsto_zero]
-  have hs := Real.tendsto_sqrt_atTop.comp Real.tendsto_log_atTop
-  have hl := tendsto_inv_atTop_zero.comp hs
-  have hlim : Tendsto (fun T : ℝ => (2*C)*(√(Real.log T))⁻¹) atTop (𝓝 0) := by
+  have hlim : Tendsto (fun T : ℝ => C*(Real.log T)⁻¹) atTop (𝓝 0) := by
     simpa only [Function.comp_apply,mul_zero] using
-      (tendsto_const_nhds (x := 2*C)).mul hl
+      (tendsto_const_nhds (x := C)).mul (tendsto_inv_atTop_zero.comp Real.tendsto_log_atTop)
   apply squeeze_zero' (Eventually.of_forall (fun _ => norm_nonneg _)) _ hlim
-  filter_upwards [eventually_ge_atTop (2 : ℝ),eventually_ge_atTop (Real.exp 1)] with T hT hT'
-  have ht : 0 < T := by linarith only [hT]
-  have hl₁ : 1 ≤ Real.log T := by
-    simpa only [Real.log_exp] using Real.log_le_log (Real.exp_pos 1) hT'
-  have hlog : 0 < Real.log T := by linarith only [hl₁]
-  have hroot : √(1+Real.log T) ≤ 2*√(Real.log T) := by
-    apply (Real.sqrt_le_iff).2 ⟨by positivity,?_⟩
-    rw [mul_pow,Real.sq_sqrt hlog.le]
-    linarith only [hl₁]
-  rw [Real.norm_eq_abs,div_sub_one (mul_pos ht hlog).ne',abs_div,
-    abs_of_pos (mul_pos ht hlog)]
-  have h := div_le_div_of_nonneg_right (hb T hT) (mul_nonneg ht.le hlog.le)
-  apply h.trans
-  have hu := div_le_div_of_nonneg_right
-    (mul_le_mul_of_nonneg_left hroot (show 0 ≤ C*T by positivity)) (mul_nonneg ht.le hlog.le)
-  apply hu.trans_eq
+  filter_upwards [eventually_ge_atTop (2 : ℝ)] with T hT
+  have hp : 0 < T*Real.log T := mul_pos (by linarith only [hT]) (Real.log_pos (by linarith only [hT]))
+  rw [Real.norm_eq_abs,div_sub_one hp.ne',abs_div,abs_of_pos hp]
+  apply (div_le_div_of_nonneg_right (hb T hT) hp.le).trans_eq
   rw [← div_eq_mul_inv]
-  field_simp [ht.ne',hlog.ne',(Real.sqrt_pos.2 hlog).ne']
-  ring_nf
-  rw [Real.sq_sqrt hlog.le]
+  field_simp [show T ≠ 0 by linarith only [hT], (Real.log_pos (by linarith only [hT] : 1 < T)).ne']
 
 end Legendre.Zeta
