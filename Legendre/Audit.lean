@@ -438,6 +438,13 @@ import all Legendre.Layer4.FourthMoment.TruncatedZetaSquare
 import all Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial
 import all Legendre.Layer4.FourthMoment.FourthMomentApproximation
 import all Legendre.Layer4.ZetaFourthMomentLower
+import all Legendre.Layer4.FourthMoment.HarmonicLogIntegral
+import all Legendre.Layer4.FourthMoment.HarmonicFactorTuples
+import all Legendre.Layer4.FourthMoment.HarmonicConvolution
+import all Legendre.Layer4.FourthMoment.DivisorSquareEuler
+import all Legendre.Layer4.FourthMoment.DivisorSquareRecurrence
+import all Legendre.Layer4.FourthMoment.DivisorSquareScale
+import all Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic
 import all Legendre.Layer4.ZetaEulerFourierMode
 import all Legendre.Layer4.ZetaEulerBernoulli
 import all Legendre.Layer4.ZetaEulerSharpTail
@@ -4336,7 +4343,6 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.Density.Detector.Smooth.zeta_strip_away_bound
 #print axioms Legendre.Literature.CompensatedDetectorBenchmark._proof_1
 #print axioms Legendre.Literature.CompensatedDetectorBenchmark._proof_2
-#print axioms Legendre.Literature.CompensatedDetectorBenchmark._proof_3
 #print axioms Legendre.Literature.layer4_compensated_detector_comparator
 #audit_private_axioms "_private.Legendre.Layer4.DetectorAnalytic.0.Legendre.Density.Detector.Smooth.detectorIntegrand_regularized._simp_1_3"
 #audit_private_axioms "_private.Legendre.Layer4.DetectorAnalytic.0.Legendre.Density.Detector.Smooth.detectorIntegrand_regularized._simp_1_4"
@@ -9853,7 +9859,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_3"
-#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le"
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le._proof_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorEnergyLower.0.Legendre.Density.Moment.divisor_square_harmonic_fourth_lower._simp_1_1"
@@ -9888,3 +9893,87 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.ZetaFourthMomentLower.0.Legendre.Zeta.norm_weighted_pairing_sq_le._simp_1_3"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_cubic_scale_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_divisor_energy_consumer"
+
+-- Leading harmonic divisor-square coefficient and its logarithmic error.
+#print axioms Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le
+#print axioms Legendre.Density.Moment.abs_harmonicFactorTuples_sub_log_main_le
+#print axioms Legendre.Density.Moment.abs_inverse_log_sum_sub_main_le
+#print axioms Legendre.Density.Moment.abs_square_scaled_log_four_sub_basel_le
+#print axioms Legendre.Density.Moment.divisorCountSquare.eq_1
+#print axioms Legendre.Density.Moment.divisorCountSquare_apply
+#print axioms Legendre.Density.Moment.harmonicDivisorSquare.eq_1
+#print axioms Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four
+#print axioms Legendre.Density.Moment.harmonicFactorTuples.eq_1
+#print axioms Legendre.Density.Moment.harmonicFactorTuples.eq_2
+#print axioms Legendre.Density.Moment.harmonicFactorTuples.eq_def
+#print axioms Legendre.Density.Moment.harmonicFactorTuples_eq_zeta_pow
+#print axioms Legendre.Density.Moment.harmonicFactorTuples_four_eq_square_sum
+#print axioms Legendre.Density.Moment.isMultiplicative_positiveSquareIndicator
+#print axioms Legendre.Density.Moment.positiveSquareIndicator._proof_1
+#print axioms Legendre.Density.Moment.positiveSquareIndicator_apply
+#print axioms Legendre.Density.Moment.sum_Icc_floor_sub_integral_le
+#print axioms Legendre.Density.Moment.sum_harmonic_convolution
+#print axioms Legendre.Density.Moment.sum_inv_square_from_two_le
+#print axioms Legendre.Density.Moment.zeta_pow_four_eq_divisorCountSquare_mul_positiveSquareIndicator
+#print axioms Legendre.Literature.HarmonicDivisorSquareMainTerm._proof_1
+#print axioms Legendre.Literature.layer4_harmonic_divisor_square_main_term_comparator
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic.0.Legendre.Density.Moment.harmonicDivisorSquare_tendsto_log_four._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.isSquare_mul_iff_of_coprime"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.isSquare_mul_iff_of_coprime._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.positiveSquareIndicator_prime_pow"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.sum_range_cast_add_one"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.sum_range_consecutive_product"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.sum_range_even_squares"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.sum_range_even_squares._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.sum_range_even_squares._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.zeta_pow_four_eq_divisorCountSquare_mul_positiveSquareIndicator._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareEuler.0.Legendre.Density.Moment.zeta_pow_two_apply"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareRecurrence.0.Legendre.Density.Moment.harmonicFactorTuples_four_eq_square_sum._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.abs_square_scaled_log_four_sub_basel_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.abs_square_scaled_log_four_sub_basel_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.abs_square_scaled_log_four_sub_basel_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.abs_square_scaled_log_four_sub_basel_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.summable_log_div_sq"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.summable_log_div_sq._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorSquareScale.0.Legendre.Density.Moment.summable_log_div_sq._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicFactorTuples.0.Legendre.Density.Moment.harmonicFactorTuples.match_1.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicFactorTuples.0.Legendre.Density.Moment.harmonicFactorTuples.match_1.eq_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicFactorTuples.0.Legendre.Density.Moment.log_sum_scaled_error"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicFactorTuples.0.Legendre.Density.Moment.log_sum_scaled_error._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicFactorTuples.0.Legendre.Density.Moment.sum_inv_floor_le"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.integral_inverse_mul_log_div_pow._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._proof_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._proof_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._proof_1_8"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_eq_first_add_sum_Ico_succ._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_floor_sub_integral_le._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_floor_sub_integral_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_floor_sub_integral_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.HarmonicLogIntegral.0.Legendre.Density.Moment.sum_Icc_floor_sub_integral_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Density.Moment.harmonicDivisorSquare.eq_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_harmonic_divisor_square_fractional_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_harmonic_divisor_square_integer_limit_consumer"

@@ -86,3 +86,28 @@ division by `T (log T)⁴`. The literal proposition
    zeta square cost `O(1)` in the pairing. Cauchy–Schwarz and the upper
    divisor energy bound then give the fourth-moment lower bound.
    [Euler comparison](../Legendre/Layer4/FourthMoment/FourthMomentApproximation.lean)
+
+## Leading term of the divisor-square diagonal
+
+For every real cutoff `x≥1`,
+
+```text
+∑_{1≤n≤x} d(n)²/n = (log x)⁴/(4π²) + O((1+log x)³).
+```
+
+The uniform bound and the normalized limit are exported by
+`abs_harmonicDivisorSquare_sub_log_main_le` and
+`harmonicDivisorSquare_tendsto_log_four`. The literal diagonal comparator
+expands the sum through the integer part of the real cutoff.
+[Proof](../Legendre/Layer4/FourthMoment/DivisorSquareAsymptotic.lean)
+[Comparator](../Legendre/Literature/LayerCoverage.lean)
+
+The fourth convolution power of the constant-one arithmetic function is
+the convolution of `d(n)²` with the positive-square indicator. Its weighted
+sum has leading term `(log x)⁴/24` by integral comparison. Square scales
+have total weight `ζ(2)=π²/6`, so the diagonal coefficient is
+`1/(24ζ(2))=1/(4π²)`. The square scales beyond one have total weight
+at most `3/4`, which lets induction absorb their errors. Ingham’s
+zeta-integral coefficient remains an open refinement.
+[Convolution identity](../Legendre/Layer4/FourthMoment/DivisorSquareEuler.lean)
+[Harmonic convolution estimate](../Legendre/Layer4/FourthMoment/HarmonicFactorTuples.lean)

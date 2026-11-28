@@ -9,7 +9,8 @@ public import Legendre.Layer4.DivisorEnergy
 namespace Legendre.Density.Moment
 open scoped BigOperators
 
-private theorem sum_inv_square_from_two_le (N : ℕ) :
+/-- The reciprocal-square mass beyond one is uniformly at most three quarters. -/
+theorem sum_inv_square_from_two_le (N : ℕ) :
     (∑ k ∈ Finset.Icc 2 N, ((k : ℝ)⁻¹)^2) ≤ 3/4 := by
   suffices h : ∀ N : ℕ, 2 ≤ N →
       (∑ k ∈ Finset.Icc 2 N, ((k : ℝ)⁻¹)^2) ≤ 3/4-(N : ℝ)⁻¹ by

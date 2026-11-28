@@ -1879,4 +1879,18 @@ theorem layer4_fourth_moment_cubic_scale_consumer :
   convert h T hT using 1
   ring
 
+/-- A cutoff between one and two includes exactly the first divisor coefficient. -/
+theorem layer4_harmonic_divisor_square_fractional_consumer :
+    Moment.harmonicDivisorSquare (3/2) = 1 := by
+  have h : ⌊(3/2 : ℝ)⌋₊ = 1 := (Nat.floor_eq_iff (by norm_num)).2 (by norm_num)
+  norm_num [Moment.harmonicDivisorSquare,h]
+
+/-- The normalized diagonal has the same exact coefficient at integer heights. -/
+theorem layer4_harmonic_divisor_square_integer_limit_consumer :
+    Tendsto (fun N : ℕ => (∑ n ∈ Finset.Icc 1 N, (n.divisors.card : ℝ)^2/(n : ℝ))/
+      (Real.log N)^4) atTop (𝓝 (1/(4*Real.pi^2))) := by
+  simpa only [Function.comp_def,Moment.harmonicDivisorSquare,Nat.floor_natCast] using
+    Moment.harmonicDivisorSquare_tendsto_log_four.comp
+      (tendsto_natCast_atTop_atTop : Tendsto (fun n : ℕ => (n : ℝ)) atTop atTop)
+
 end Legendre.Tests

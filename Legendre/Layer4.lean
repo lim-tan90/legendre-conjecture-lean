@@ -27,6 +27,7 @@ public import Legendre.XiSquareContour
 public import Legendre.Layer4.ZetaFourthMoment
 public import Legendre.Layer4.ZetaFourthMomentSharp
 public import Legendre.Layer4.ZetaFourthMomentLower
+public import Legendre.Layer4.FourthMoment.DivisorSquareAsymptotic
 public import Legendre.Layer4.DetectorIntegral
 public import Legendre.Layer4.DetectorKernelLeft
 public import Legendre.Layer4.DetectorCriticalMass

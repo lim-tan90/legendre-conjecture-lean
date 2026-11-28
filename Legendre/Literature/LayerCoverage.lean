@@ -51,6 +51,15 @@ def ZetaFourthMomentOrder : Prop :=
 theorem layer4_fourth_moment_order_comparator : ZetaFourthMomentOrder :=
   Zeta.zeta_fourth_moment_order
 
+/-- The harmonic divisor-square diagonal has the Basel-normalized leading term. -/
+def HarmonicDivisorSquareMainTerm : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ x : ℝ, 1 ≤ x →
+    |(∑ n ∈ Finset.Icc 1 ⌊x⌋₊, (n.divisors.card : ℝ)^2/(n : ℝ)) -
+      (Real.log x)^4/(4*Real.pi^2)| ≤ C*(1+Real.log x)^3
+
+theorem layer4_harmonic_divisor_square_main_term_comparator : HarmonicDivisorSquareMainTerm :=
+  Density.Moment.abs_harmonicDivisorSquare_sub_log_main_le
+
 theorem layer4_fourth_moment_log_six_comparator : ZetaFourthMomentLogSix :=
   Zeta.zeta_fourth_moment_positive_log_six
 

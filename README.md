@@ -362,7 +362,12 @@ constant times `T log^4 T`. Together with the existing upper bound, this
 gives order `T log^4 T` for the integral on `[0,T]`.
 [Proof and comparator](docs/layer4-sharp-fourth-moment.md#matching-lower-bound).
 
-Current validation (2026-11-28) covers **4,424 build jobs**, **9,143 audited theorem declarations**, **410 Lean files** and **244 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+The harmonic divisor-square diagonal also has the exact coefficient
+`1/(4π²)` on `log^4 x`, with uniform error `O((1+log x)^3)` for every
+real cutoff `x≥1`. Ingham’s normalized zeta-integral limit remains open.
+[Diagonal proof and comparator](docs/layer4-sharp-fourth-moment.md#leading-term-of-the-divisor-square-diagonal).
+
+Current validation (2026-11-28) covers **4,431 build jobs**, **9,223 audited theorem declarations**, **417 Lean files** and **246 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**
