@@ -596,6 +596,27 @@ theorem layer4_zeta_weyl_first_derivative_consumer :
   rw [iteratedDeriv_one, Nat.factorial_one, Nat.cast_one, mul_one, pow_one] at hh
   exact hh.trans_eq (by ring)
 
+/-- The proved asymptotic gives a literal eventual lower bound for the second moment. -/
+theorem layer4_zeta_second_moment_eventually_ge_consumer :
+    ∀ᶠ T : ℝ in atTop, (1/2 : ℝ)*T*Real.log T ≤
+      ∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2 := by
+  have h := (tendsto_order.mp Zeta.zeta_second_moment_tendsto_one).1 (1/2) (by norm_num)
+  filter_upwards [h,eventually_ge_atTop (2 : ℝ)] with T hT h₂
+  have hs : 0 < T*Real.log T := mul_pos (by linarith) (Real.log_pos (by linarith))
+  have hh := ((lt_div_iff₀ hs).1 hT).le
+  simpa only [mul_assoc] using hh
+
+/-- The linear Euler cutoff includes both boundaries at height two. -/
+theorem layer4_zeta_linear_euler_cutoff_endpoints_consumer :
+    ∀ N : ℕ, N = 2 ∨ N = 8 →
+      ‖riemannZeta ((1/2 : ℂ)+(2 : ℂ)*Complex.I)-
+        ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-((1/2 : ℂ)+(2 : ℂ)*Complex.I))‖ ≤
+        4+72*Real.pi := by
+  intro N hN
+  obtain rfl | rfl := hN <;>
+    simpa only [Complex.ofReal_ofNat] using
+      Zeta.zeta_critical_finite_euler_linear_error _ 2 (by norm_num) (by norm_num) (by norm_num)
+
 /-- The compact smoothing weight vanishes exactly at its support endpoint. -/
 theorem layer4_compact_weight_endpoint_consumer :
     Detector.Smooth.detectorWeight 1 = 0 ∧ Detector.Smooth.detectorWeight 2 = 0 :=

@@ -427,6 +427,9 @@ import all Legendre.Layer4.ZetaWeyl
 import all Legendre.Layer4.ZetaWeylStrip
 import all Legendre.Layer4.ZetaWeylReflection
 import all Legendre.Layer4.ZetaWeylDerivatives
+import all Legendre.Layer4.CriticalPolynomialMean
+import all Legendre.Layer4.ZetaLinearEuler
+import all Legendre.Layer4.ZetaSecondMoment
 import all Legendre.Layer4.InghamShrinkingStrip
 import all Legendre.Layer4.PolynomialAlternativeSplit
 import all Legendre.Layer4.InghamMultiplicity
@@ -9632,7 +9635,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_shift_correlation_lag._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.CriticalWeylBlocks.0.Legendre.Density.Oscillation.logarithmic_shift_correlation_lag._proof_1_2"
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.averaged_columns_row_bound"
-#audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_inverse_sqrt_le"
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le"
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_10"
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.sum_lag_inverse_sqrt_le._proof_1_11"
@@ -9669,7 +9671,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.Exponential.InverseSqrtDifferencing.0.Legendre.Density.Oscillation.Tools.van_der_corput_nat_interval_inverse_sqrt._simp_1_21"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Density.Oscillation.critical_block_weyl_through_square._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.riemannZeta_critical_weyl_bound._proof_1_1"
-#audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.zeta_critical_finite_euler_square_error"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaWeyl.0.Legendre.Zeta.zeta_critical_finite_euler_square_error._proof_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_weyl_maximum_block_endpoint_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_two_signed_endpoints_consumer"
@@ -9703,3 +9704,49 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_closed_strip_consumer"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_closed_strip_consumer._simp_1_1"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_weyl_first_derivative_consumer"
+
+-- Harmonic diagonal, linear Euler cutoff, and the Hardy--Littlewood second moment.
+#print axioms Legendre.Density.Moment.abs_integral_Icc_norm_sq_sub_le_of_pointwise
+#print axioms Legendre.Density.Moment.continuous_critical_euler_sum
+#print axioms Legendre.Density.Moment.integral_Icc_le_sqrt_length_mul_sqrt_square
+#print axioms Legendre.Density.Oscillation.Tools.sum_inverse_sqrt_le
+#print axioms Legendre.Density.Oscillation.critical_block_first_derivative
+#print axioms Legendre.Density.abs_integral_critical_euler_sum_sub_harmonic
+#print axioms Legendre.Density.abs_log_reciprocal_sub_scaled_linear_le
+#print axioms Legendre.Literature.layer4_hardy_littlewood_second_moment_comparator
+#print axioms Legendre.Zeta.zeta_critical_finite_euler_linear_error
+#print axioms Legendre.Zeta.zeta_critical_finite_euler_square_error
+#print axioms Legendre.Zeta.zeta_second_moment_main_term
+#print axioms Legendre.Zeta.zeta_second_moment_tendsto_one
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.critical_half_weight_mul_sqrt"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.norm_critical_hilbertPhaseSum_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.Exponential.WeightedLogBlocks.0.Legendre.Density.Oscillation.critical_block_first_derivative._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaLinearEuler.0.Legendre.Zeta.exists_dyadic_euler_cutoff"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaLinearEuler.0.Legendre.Zeta.sum_sqrt_dyadic_cutoffs"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaLinearEuler.0.Legendre.Zeta.zeta_critical_finite_euler_linear_error._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaLinearEuler.0.Legendre.Zeta.zeta_critical_finite_euler_linear_error._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.continuous_critical_euler_sum._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.integral_Icc_le_sqrt_length_mul_sqrt_square._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Density.Moment.integral_Icc_le_sqrt_length_mul_sqrt_square._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.log_sq_le_sixteen_sqrt"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_main_term._simp_1_1"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_linear_euler_cutoff_endpoints_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_second_moment_eventually_ge_consumer"

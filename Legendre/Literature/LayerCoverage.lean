@@ -57,6 +57,21 @@ def LinearMeanSquareBenchmark : Prop :=
 theorem layer4_mean_comparator : LinearMeanSquareBenchmark :=
   Density.abs_integral_dirichletPolynomial_sub_diagonal_le_linear
 
+/-- The leading Hardy--Littlewood second-moment asymptotic on the critical line. -/
+def HardyLittlewoodSecondMoment : Prop :=
+  Tendsto (fun T : ℝ => (∫ t : ℝ in 0..T,
+    ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2)/(T*Real.log T)) atTop (𝓝 1)
+
+/-- The leading term also has a uniform quantitative error for all T ≥ 2. -/
+def ZetaSecondMomentError : Prop :=
+  ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →
+    |(∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^2)-T*Real.log T| ≤
+      C*T*√(1+Real.log T)
+
+theorem layer4_hardy_littlewood_second_moment_comparator :
+    HardyLittlewoodSecondMoment ∧ ZetaSecondMomentError :=
+  ⟨Zeta.zeta_second_moment_tendsto_one,Zeta.zeta_second_moment_main_term⟩
+
 /-- Whole-line cubic-weight fourth moment, including actual integrability. -/
 def WeightedFourthMomentBenchmark : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ T : ℝ, 2 ≤ T →

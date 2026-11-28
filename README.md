@@ -349,7 +349,12 @@ line, Cauchy estimates retain exponent `1/6` for every derivative order.
 The additional factor at order `k` is `k! [8(1+log |t|)]^k` for `|t|≥3`.
 [Proof and literal comparator](docs/layer4-weyl-short-sums.md#zeta-on-the-critical-line).
 
-Current validation (2026-11-27) covers **4,410 build jobs**, **8,978 audited theorem declarations**, **396 Lean files** and **239 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
+**Hardy–Littlewood second moment (2026-11-28).** The critical-line integral
+has leading term `T log T` with uniform error `O(T√(1+log T))`
+for every `T≥2`. Its ratio to `T log T` tends to one.
+[Proof and literal comparator](docs/layer4-zeta-second-moment.md).
+
+Current validation (2026-11-28) covers **4,413 build jobs**, **9,020 audited theorem declarations**, **399 Lean files** and **241 independent consumers**. The audit allows only the three standard axioms and the placeholder scan is clean.
 
 Validation (2026-11-17): **4,362 build jobs**, all **8,268 project theorem
 declarations** audited with only the three standard axioms, and **351 Lean files**

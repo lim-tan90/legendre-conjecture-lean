@@ -71,23 +71,15 @@ theorem critical_block_weyl_through_square :
     have hb := mul_le_mul_of_nonneg_left (add_le_add hleft hright) hCs.le
     nlinarith only [hb, mul_nonneg hCw.le (show 0 ≤ q by positivity),
       mul_nonneg hCl.le (show 0 ≤ q by positivity)]
-  · have h := norm_complex_block_of_prefix U V hU hUV (1/2) t (12*Real.pi*u/t)
-      (by norm_num) (by positivity)
-      (fun W _ hWV => logarithmic_block_first U W hU (hWV.trans hV) t htp (le_of_not_ge hmid))
-    rw [hc] at h
-    change _ ≤ (12*Real.pi*u/t)*u^(-(1/2 : ℝ)) at h
-    rw [he] at h
+  · have h := critical_block_first_derivative U V hU hUV hV t htp (le_of_not_ge hmid)
     have hs : √u ≤ 2*t := by
       apply Real.sqrt_le_iff.mpr ⟨by positivity,?_⟩
       change u ≤ 2*t^2 at hUt
       nlinarith only [hUt,sq_nonneg t]
-    have hterm : (12*Real.pi*u/t)*(√u)⁻¹ = 12*Real.pi*(√u/t) := by
-      field_simp [hsu.ne',htp.ne']
-      rw [Real.sq_sqrt hu.le]
     have hbound : √u/t ≤ 2 := (div_le_iff₀ htp).2 (by linarith only [hs])
-    rw [hterm] at h
     calc
-      _ ≤ _ := h
+      _ ≤ 12*Real.pi*√u/t := h
+      _ = 12*Real.pi*(√u/t) := by ring
       _ ≤ Cl := (mul_le_mul_of_nonneg_left hbound (by positivity)).trans_eq (by dsimp [Cl]; ring)
       _ ≤ Cl*q := le_mul_of_one_le_right hCl.le hq
       _ ≤ _ := mul_le_mul_of_nonneg_right (by linarith only [hCw,hCs]) (by positivity)
@@ -97,7 +89,8 @@ end Legendre.Density.Oscillation
 namespace Legendre.Zeta
 open Complex Density.Moment Density.Oscillation
 
-private theorem zeta_critical_finite_euler_square_error {N : ℕ} (hN : 1 ≤ N)
+/-- Finite Euler summation at a squared-height cutoff has a bounded error. -/
+theorem zeta_critical_finite_euler_square_error {N : ℕ} (hN : 1 ≤ N)
     (t : ℝ) (ht : 1 ≤ t) (hNr : t^2 ≤ (N : ℝ)) (hNr' : (N : ℝ) ≤ 2*t^2) :
     ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)-
       ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))‖ ≤ 4 := by

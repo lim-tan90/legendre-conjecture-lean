@@ -8,6 +8,7 @@ second-derivative inputs. No arithmetic coefficient estimate is assumed.
 module
 public import Legendre.Layer4.Exponential.GeneralLogWeyl
 public import Legendre.Layer4.Exponential.LogKernel
+public import Legendre.Layer4.Exponential.LogFirstDerivative
 
 @[expose] public section
 namespace Legendre.Density.Oscillation
@@ -76,5 +77,21 @@ theorem logarithmic_block_second_weighted (U V : ℕ) (hU : 1 ≤ U) (hUV : U �
   have hC := logarithmicSecondConstant_pos
   exact norm_complex_block_of_prefix U V hU hUV β t _ hβ (by positivity)
     (fun W hUW hWV => logarithmic_block_sqrt U W hU hUW (hWV.trans hV) t ht)
+
+/-- The weighted first-derivative bound on a long critical-line block. -/
+theorem critical_block_first_derivative (U V : ℕ) (hU : 1 ≤ U) (hUV : U ≤ V)
+    (hV : V ≤ 2*U) (t : ℝ) (ht : 0 < t) (htU : t ≤ U) :
+    ‖∑ n ∈ Finset.Ioc U V, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))‖ ≤
+      12*Real.pi*√(U : ℝ)/t := by
+  have hU₀ : (0 : ℝ) < U := by exact_mod_cast (show 0 < U by omega)
+  have hsU : 0 < √(U : ℝ) := Real.sqrt_pos.2 hU₀
+  have h := norm_complex_block_of_prefix U V hU hUV (1/2) t (12*Real.pi*U/t)
+    (by norm_num) (by positivity)
+    (fun W _ hWV => logarithmic_block_first U W hU (hWV.trans hV) t ht htU)
+  have hc : (((1/2 : ℝ) : ℂ)) = (1/2 : ℂ) := by norm_num
+  rw [hc,Real.rpow_neg hU₀.le,← Real.sqrt_eq_rpow] at h
+  exact h.trans_eq (by
+    field_simp [hsU.ne',ht.ne']
+    rw [Real.sq_sqrt hU₀.le])
 
 end Legendre.Density.Oscillation

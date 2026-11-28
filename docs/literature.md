@@ -189,3 +189,9 @@ The final Sorenson–Webster journal article reports `7.05×10^13`; arXiv
 `2401.13753v1` reports only `3.33×10^13`. Its running-time estimates explicitly
 use a probabilistic model; they are not unconditional worst-case bounds. The
 computational certificate itself is still absent from this Lean project.
+
+## Layer 4 zeta moments
+
+| Result | Source | Lean coverage |
+|---|---|---|
+| Hardy–Littlewood critical-line second-moment asymptotic | G. H. Hardy and J. E. Littlewood, *Contributions to the theory of the Riemann zeta-function and the theory of the distribution of primes*, Acta Mathematica **41**, 119–196. [DOI 10.1007/BF02422942](https://doi.org/10.1007/BF02422942) | The normalized integral tends to one. The proof gives a uniform error of order (Tsqrt{1+log T}) for (Tge2). [Proof and comparator](layer4-zeta-second-moment.md) |

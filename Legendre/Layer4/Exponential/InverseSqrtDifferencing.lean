@@ -14,7 +14,8 @@ public import Legendre.Layer4.Exponential.NaturalDifferencing
 namespace Legendre.Density.Oscillation.Tools
 open Complex ComplexConjugate
 
-private theorem sum_inverse_sqrt_le (H : ℕ) :
+/-- The first H inverse square roots sum to at most twice the square root of H. -/
+theorem sum_inverse_sqrt_le (H : ℕ) :
     (∑ h ∈ Finset.range H, (√((h : ℝ)+1))⁻¹) ≤ 2*√(H : ℝ) := by
   induction H with
   | zero => simp
