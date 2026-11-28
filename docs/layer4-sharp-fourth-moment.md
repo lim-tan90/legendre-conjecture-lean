@@ -1,4 +1,4 @@
-# Sharp logarithmic upper bound for the zeta fourth moment
+# Sharp logarithmic order of the zeta fourth moment
 
 For every real `T ≥ 2` the same absolute constant `C > 0` satisfies
 
@@ -9,9 +9,8 @@ For every real `T ≥ 2` the same absolute constant `C > 0` satisfies
 The public theorem is `Legendre.Zeta.zeta_fourth_moment_log_four`. Its
 symmetric-interval form follows from conjugation, and the independent
 `Legendre.Literature.layer4_fourth_moment_log_four_comparator` has type
-`ZetaFourthMoment`. This is the moment upper bound used in the Layer 4
-roadmap. The fourth-moment asymptotic would additionally require a
-leading coefficient and an error term.
+`ZetaFourthMoment`. The Layer 4 roadmap uses this upper bound. The matching lower bound and
+the comparison with Ingham’s leading asymptotic appear below.
 [Proof](../Legendre/Layer4/ZetaFourthMomentSharp.lean)
 [Comparator](../Legendre/Literature/LayerCoverage.lean)
 
@@ -49,3 +48,41 @@ transform and its uniform remainder bound are proved locally. Independent
 consumers check the endpoint `T=2` and the invariance of the scalar pole
 coefficient when the positive Mellin width changes.
 [Consumers](../Legendre/Tests/Layer4.lean)
+
+## Matching lower bound
+
+For some absolute constants `c>0` and `T₀≥2`, every `T≥T₀` satisfies
+
+```text
+c T (log T)⁴ ≤ ∫_T^{2T} |ζ(1/2 + it)|⁴ dt.
+```
+
+Applying the shell estimate at `T/2` gives a lower bound of the same order
+on `[0,T]`. The public theorem `Legendre.Zeta.zeta_fourth_moment_order`
+combines this with the upper bound. The closed
+`layer4_fourth_moment_order_comparator` checks both bounds against the
+independent proposition `ZetaFourthMomentOrder`.
+[Proof](../Legendre/Layer4/ZetaFourthMomentLower.lean)
+[Comparators](../Legendre/Literature/LayerCoverage.lean)
+
+Ingham’s leading asymptotic gives the coefficient `1/(2π²)` after
+division by `T (log T)⁴`. The literal proposition
+`InghamFourthMomentMainTerm` records that limit as an open refinement.
+[Ingham, Proceedings of the London Mathematical Society](https://doi.org/10.1112/plms/s2-27.1.273)
+
+1. Embed quadruples `(a,b,c,d)` with `gcd(b,c)=1` into ordered divisor
+   pairs `(ab,ac)` of `abcd`. The gcd of the two divisors recovers `a`.
+   The harmonic coprime-pair sum is at least one quarter of the unrestricted
+   sum, yielding four logarithms in the divisor-square energy.
+   [Divisor energy](../Legendre/Layer4/FourthMoment/DivisorEnergyLower.lean)
+2. On `[T,2T]`, truncate the Euler sum at `⌈2T⌉` and pair its square with
+   a divisor polynomial of length `M=⌊T^(1/32)⌋⁴`. Their coefficients
+   agree through `M`. After rescaling, the weight `((x−1)(2−x))²`
+   has integral `1/30` and a Fourier transform bounded by `6/|u|²`
+   for `u≠0`. The off-diagonal pairing is bounded uniformly in `T`.
+   [Weighted pairing](../Legendre/Layer4/FourthMoment/FourthMomentTestPolynomial.lean)
+3. The uniform Euler error is `O(T^(−1/2))`. The Weyl bound and the
+   short divisor polynomial bound make the replacement by the actual
+   zeta square cost `O(1)` in the pairing. Cauchy–Schwarz and the upper
+   divisor energy bound then give the fourth-moment lower bound.
+   [Euler comparison](../Legendre/Layer4/FourthMoment/FourthMomentApproximation.lean)

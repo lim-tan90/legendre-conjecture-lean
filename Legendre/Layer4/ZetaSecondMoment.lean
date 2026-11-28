@@ -91,52 +91,31 @@ private theorem critical_euler_error_on_long_window :
       ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)-
         ∑ n ∈ Finset.Icc 1 ⌈T⌉₊, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))‖ ≤
       D*T^(-(1/6 : ℝ)) := by
-  obtain ⟨P,hP,hb⟩ := norm_riemannZeta_sub_finite_euler_le_cutoff_power
+  obtain ⟨P,hP,hb⟩ := norm_critical_euler_error_le
   refine ⟨P+2,by positivity,?_⟩
   intro T hT t ht
   let N := ⌈T⌉₊
-  let s := (1/2 : ℂ)+(t : ℂ)*I
-  let q := (N : ℂ)^(1-s)/(s-1)
-  let p := ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-s)
   have hT₀ : 0 < T := by linarith only [hT]
   have hT₁ : 1 ≤ T := by linarith only [hT]
   have ht₀ : 0 < t := (Real.rpow_pos_of_pos hT₀ _).trans_le ht.1
   have hNlo : T ≤ N := Nat.le_ceil _
   have hNhi : (N : ℝ) ≤ 2*T := (Nat.ceil_lt_add_one hT₀.le).le.trans (by linarith only [hT₁])
   have hN₁ : 1 ≤ N := by exact_mod_cast hT₁.trans hNlo
-  have hSr : s.re = 1/2 := by norm_num [s]
-  have hSi : s.im = t := by norm_num [s]
-  have hS : s ≠ 1 := by
-    intro he
-    have hh := congrArg Complex.re he
-    rw [hSr,one_re] at hh
-    norm_num at hh
-  have hsN : |s.im| ≤ N := by rw [hSi,abs_of_pos ht₀]; exact ht.2.trans hNlo
-  have hE := hb N hN₁ s (by rw [hSr]; norm_num) (by rw [hSr]; norm_num) hS hsN
-  rw [hSr] at hE
   have hpw : (N : ℝ)^(-(1/2 : ℝ)) ≤ T^(-(1/6 : ℝ)) :=
     (Real.rpow_le_rpow_of_nonpos hT₀ hNlo (by norm_num)).trans
       (Real.rpow_le_rpow_of_exponent_le hT₁ (by norm_num))
-  have hq : ‖q‖ ≤ 2*T^(-(1/6 : ℝ)) := by
-    dsimp only [q]
-    rw [norm_div,norm_natCast_cpow_of_pos (show 0 < N by omega),sub_re,one_re,hSr,
-      show (1 : ℝ)-1/2 = 1/2 by norm_num,← Real.sqrt_eq_rpow]
-    have htden : t ≤ ‖s-1‖ := by
-      simpa [hSi,abs_of_pos ht₀] using abs_im_le_norm (s-1)
+  have hq : √(N : ℝ)/t ≤ 2*T^(-(1/6 : ℝ)) := by
     have hNroot : √(N : ℝ) ≤ 2*√T := by
       apply (Real.sqrt_le_iff).2 ⟨by positivity,?_⟩
       rw [mul_pow,Real.sq_sqrt hT₀.le]
       nlinarith only [hT₀,hNhi]
     calc
-      _ ≤ (2*√T)/T^(2/3 : ℝ) :=
-        div_le_div₀ (by positivity) hNroot (by positivity) (ht.1.trans htden)
+      _ ≤ (2*√T)/T^(2/3 : ℝ) := div_le_div₀ (by positivity) hNroot (by positivity) ht.1
       _ = _ := by
-        rw [mul_div_assoc,Real.sqrt_eq_rpow,← Real.rpow_sub hT₀,show (1/2-2/3 : ℝ) = -(1/6) by norm_num]
-  change ‖riemannZeta s-p‖ ≤ _
-  rw [show riemannZeta s-p = (riemannZeta s-p-q)+q by ring]
-  apply (norm_add_le _ _).trans
-  have hh := (hE.trans (mul_le_mul_of_nonneg_left hpw hP.le))
-  exact (add_le_add hh hq).trans_eq (by ring)
+        rw [mul_div_assoc,Real.sqrt_eq_rpow,← Real.rpow_sub hT₀,
+          show (1/2-2/3 : ℝ) = -(1/6) by norm_num]
+  exact (hb N t hN₁ ht₀ (ht.2.trans hNlo)).trans
+    ((add_le_add (mul_le_mul_of_nonneg_left hpw hP.le) hq).trans_eq (by ring))
 
 /-- The critical-line second moment differs from (T log T) by at most O(T). -/
 theorem zeta_second_moment_linear_error :

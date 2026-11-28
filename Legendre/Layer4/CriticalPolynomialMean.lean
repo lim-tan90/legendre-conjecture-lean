@@ -55,7 +55,8 @@ theorem abs_log_reciprocal_sub_scaled_linear_le {x y : ℝ} (hx : 0 < x) (hy : 0
     rwa [show Real.log y-Real.log x = -(Real.log x-Real.log y) by ring,
       show y-x = -(x-y) by ring,inv_neg,inv_neg,mul_comm y x,mul_neg,neg_sub_neg,abs_sub_comm] at hb
 
-private theorem sum_inv_sqrt_Icc_le (N : ℕ) :
+/-- Reciprocal square roots up to the cutoff total at most twice its square root. -/
+theorem sum_inv_sqrt_Icc_le (N : ℕ) :
     (∑ n ∈ Finset.Icc 1 N, (√(n : ℝ))⁻¹) ≤ 2*√(N : ℝ) := by
   have h := sum_range_offset_eq_Ioc 0 N (fun n => (√(n : ℝ))⁻¹)
   rw [show Finset.Ioc (0 : ℕ) (0+N) = Finset.Icc 1 N by

@@ -167,4 +167,38 @@ theorem norm_riemannZeta_sub_finite_euler_le_cutoff_power :
   dsimp only [C]
   linarith only [hbound,show 0 ≤ a^(-s.re) by positivity]
 
+/-- On the critical line the explicit pole term costs at most the square
+root of the cutoff divided by the positive height. -/
+theorem norm_critical_euler_error_le :
+    ∃ P : ℝ, 0 < P ∧ ∀ (N : ℕ) (t : ℝ), 1 ≤ N → 0 < t → t ≤ N →
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*I)-
+        ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-((1/2 : ℂ)+(t : ℂ)*I))‖ ≤
+      P*(N : ℝ)^(-(1/2 : ℝ))+√(N : ℝ)/t := by
+  obtain ⟨P,hP,hb⟩ := norm_riemannZeta_sub_finite_euler_le_cutoff_power
+  refine ⟨P,hP,?_⟩
+  intro N t hN ht htN
+  let s := (1/2 : ℂ)+(t : ℂ)*I
+  let q := (N : ℂ)^(1-s)/(s-1)
+  let p := ∑ n ∈ Finset.Icc 1 N, (n : ℂ)^(-s)
+  have hSr : s.re = 1/2 := by norm_num [s]
+  have hSi : s.im = t := by norm_num [s]
+  have hS : s ≠ 1 := by
+    intro he
+    have hh := congrArg Complex.re he
+    rw [hSr,one_re] at hh
+    norm_num at hh
+  have hsN : |s.im| ≤ N := by rwa [hSi,abs_of_pos ht]
+  have hE := hb N hN s (by rw [hSr]; norm_num) (by rw [hSr]; norm_num) hS hsN
+  rw [hSr] at hE
+  have htden : t ≤ ‖s-1‖ := by
+    simpa [hSi,abs_of_pos ht] using abs_im_le_norm (s-1)
+  have hq : ‖q‖ ≤ √(N : ℝ)/t := by
+    dsimp only [q]
+    rw [norm_div,norm_natCast_cpow_of_pos (show 0 < N from hN),sub_re,one_re,hSr,
+      show (1 : ℝ)-1/2 = 1/2 by norm_num,← Real.sqrt_eq_rpow]
+    exact div_le_div_of_nonneg_left (by positivity) ht htden
+  change ‖riemannZeta s-p‖ ≤ _
+  rw [show riemannZeta s-p = (riemannZeta s-p-q)+q by ring]
+  exact (norm_add_le _ _).trans (add_le_add hE hq)
+
 end Legendre.Zeta

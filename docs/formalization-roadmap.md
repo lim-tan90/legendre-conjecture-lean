@@ -457,11 +457,12 @@ sieve, and mean-value/large-value estimates for Dirichlet polynomials
 
 **Why.** This is the input that makes short intervals possible.
 
-**Current state (2026-11-27).** The Ingham curve has a uniform fifth-log
+**Current state (2026-11-28).** The Ingham curve has a uniform fifth-log
 bound. Global Huxley `12/5`, the full curved Huxley and Guth–Maynard
 estimates, and the combined `30/13` bound cover all real parts in
 `[1/2,1]`, all `T≥2`, and analytic multiplicities. The zeta fourth moment
-has the sharp upper bound `O(T (log T)^4)`.
+has order `T (log T)^4` at sufficiently large heights, with the upper bound
+valid for every `T≥2`.
 [Ingham density](layer4-ingham-shell-log-five.md#uniform-fifth-log-bound)
 [Curved Huxley](layer4-full-curved-huxley.md)
 [Guth–Maynard](layer4-guth-central-density.md)
@@ -530,8 +531,9 @@ Type II count and powered Type I short-block count now combine to prove
 N(σ,T) <= C_epsilon T^(3(1−σ)/(3σ−1)+epsilon), uniformly for
 σ∈[1/2,5/6] and all T>=2, retaining analytic multiplicities. Ingham covers
 the lower real parts. The independent restricted comparator is closed.
-The full curve now also covers σ>5/6, as documented below; Guth–Maynard
-and the sharp fourth moment remain open. See [the proof](layer4-small-mollifier-powers.md).
+The full curve now also covers σ>5/6, as documented below. The current
+Layer 4 summary records the later Guth–Maynard and fourth-moment results.
+[Restricted proof](layer4-small-mollifier-powers.md)
 
 **Further short-sum input (2026-11-14).** Actual logarithmic sums on every
 subinterval of a dyadic block now satisfy C sqrt(U) abs(t)^(1/6) when

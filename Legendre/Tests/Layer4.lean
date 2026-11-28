@@ -1856,4 +1856,27 @@ theorem layer4_gm_central_three_quarters_consumer (ε : ℝ) (hε : 0 < ε) :
     norm_num at hh ⊢
     exact hh⟩
 
+/-- The boundary and the first nontrivial cutoff exercise the divisor energy bridge. -/
+theorem layer4_fourth_moment_divisor_energy_consumer :
+    (∑ n ∈ Finset.Icc (1 : ℕ) (0^4), (n.divisors.card : ℝ)^2/n) = 0 ∧
+      (1 : ℝ)/4 ≤ ∑ n ∈ Finset.Icc (1 : ℕ) (1^4), (n.divisors.card : ℝ)^2/n := by
+  refine ⟨by simp,?_⟩
+  simpa [harmonic] using Moment.divisor_square_harmonic_fourth_lower 1
+
+/-- The cumulative fourth moment dominates every smaller logarithm power
+after dividing by the height. -/
+theorem layer4_fourth_moment_cubic_scale_consumer :
+    Tendsto (fun T : ℝ => (∫ t : ℝ in 0..T,
+      ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4)/(T*(Real.log T)^3)) atTop atTop := by
+  obtain ⟨c,T₀,hc,hT₀,h⟩ := Zeta.zeta_fourth_moment_log_four_lower
+  have hcLog : Tendsto (fun T : ℝ => c*Real.log T) atTop atTop :=
+    tendsto_const_nhds.pos_mul_atTop hc Real.tendsto_log_atTop
+  apply tendsto_atTop_mono' atTop _ hcLog
+  filter_upwards [eventually_ge_atTop T₀] with T hT
+  have hT₁ : 1 < T := lt_of_lt_of_le (by norm_num : (1 : ℝ) < 2) (hT₀.trans hT)
+  have hlog : 0 < Real.log T := Real.log_pos hT₁
+  apply (le_div_iff₀ (mul_pos (zero_lt_one.trans hT₁) (pow_pos hlog _))).2
+  convert h T hT using 1
+  ring
+
 end Legendre.Tests

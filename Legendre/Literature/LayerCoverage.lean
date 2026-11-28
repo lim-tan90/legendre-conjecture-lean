@@ -36,6 +36,21 @@ theorem layer3_comparator : ClassicalPNTError := PNT.pnt_eventual_bound
 theorem layer4_fourth_moment_log_four_comparator : ZetaFourthMoment :=
   Zeta.zeta_fourth_moment_log_four
 
+/-- The leading coefficient in Ingham's critical-line fourth-moment asymptotic. -/
+def InghamFourthMomentMainTerm : Prop :=
+  Tendsto (fun T : ℝ => (∫ t : ℝ in 0..T,
+    ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4)/(T*(Real.log T)^4))
+    atTop (𝓝 ((1 : ℝ)/(2*Real.pi^2)))
+
+/-- The proved upper and lower bounds have Ingham's height and logarithm powers. -/
+def ZetaFourthMomentOrder : Prop :=
+  ∃ c C T₀ : ℝ, 0 < c ∧ 0 < C ∧ 2 ≤ T₀ ∧ ∀ T : ℝ, T₀ ≤ T →
+    c*T*(Real.log T)^4 ≤ (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ∧
+    (∫ t : ℝ in 0..T, ‖riemannZeta ((1/2 : ℂ)+(t : ℂ)*Complex.I)‖^4) ≤ C*T*(Real.log T)^4
+
+theorem layer4_fourth_moment_order_comparator : ZetaFourthMomentOrder :=
+  Zeta.zeta_fourth_moment_order
+
 theorem layer4_fourth_moment_log_six_comparator : ZetaFourthMomentLogSix :=
   Zeta.zeta_fourth_moment_positive_log_six
 

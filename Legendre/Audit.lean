@@ -430,6 +430,14 @@ import all Legendre.Layer4.ZetaWeylDerivatives
 import all Legendre.Layer4.CriticalPolynomialMean
 import all Legendre.Layer4.ZetaLinearEuler
 import all Legendre.Layer4.ZetaSecondMoment
+import all Legendre.Layer4.FourthMoment.CoprimeHarmonic
+import all Legendre.Layer4.FourthMoment.DivisorEnergyLower
+import all Legendre.Layer4.FourthMoment.FourthMomentKernel
+import all Legendre.Layer4.FourthMoment.FourthMomentPairing
+import all Legendre.Layer4.FourthMoment.TruncatedZetaSquare
+import all Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial
+import all Legendre.Layer4.FourthMoment.FourthMomentApproximation
+import all Legendre.Layer4.ZetaFourthMomentLower
 import all Legendre.Layer4.ZetaEulerFourierMode
 import all Legendre.Layer4.ZetaEulerBernoulli
 import all Legendre.Layer4.ZetaEulerSharpTail
@@ -3988,7 +3996,6 @@ elab "#audit_private_axioms " target:str : command => do
 #print axioms Legendre.Literature.Ingham1940Density._proof_1
 #print axioms Legendre.Literature.IwaniecPintz1984Progress._proof_1
 #print axioms Legendre.Literature.IwaniecPintz1984Progress._proof_2
-#print axioms Legendre.Literature.LinearMeanSquareBenchmark._proof_1
 #print axioms Legendre.Literature.Mozzochi1986Progress._proof_1
 #print axioms Legendre.Literature.Nagura1952._proof_1
 #print axioms Legendre.Literature.Nagura1952._proof_2
@@ -9737,7 +9744,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_5"
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.ordered_log_kernel_comparison._simp_1_7"
-#audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le"
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._proof_1_3"
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.CriticalPolynomialMean.0.Legendre.Density.sum_inv_sqrt_Icc_le._simp_1_2"
@@ -9797,7 +9803,6 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaEulerSharpTail.0.Legendre.Zeta.norm_riemannZeta_sub_finite_euler_le_cutoff_power._simp_1_7"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.critical_euler_error_on_long_window"
-#audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.critical_euler_error_on_long_window._proof_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_linear_error._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_1"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_2"
@@ -9807,3 +9812,79 @@ elab "#audit_private_axioms " target:str : command => do
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_6"
 #audit_private_axioms "_private.Legendre.Layer4.ZetaSecondMoment.0.Legendre.Zeta.zeta_second_moment_tendsto_one._simp_1_7"
 #audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_zeta_finite_euler_unit_cutoff_consumer"
+
+-- Critical-line fourth moment lower bound, divisor energy and weighted pairing.
+#print axioms Legendre.Density.Detector.euler_sum_sq_eq_finiteSeries
+#print axioms Legendre.Density.Detector.sum_norm_truncatedZetaSquare_vertical_le
+#print axioms Legendre.Density.Detector.truncatedZetaSquare.eq_1
+#print axioms Legendre.Density.Detector.truncatedZetaSquare_apply
+#print axioms Legendre.Density.Detector.truncatedZetaSquare_eq_divisorCard
+#print axioms Legendre.Density.Detector.truncatedZetaSquare_support
+#print axioms Legendre.Density.Moment.continuous_fourthMomentWeight
+#print axioms Legendre.Density.Moment.coprime_harmonic_pairs_lower
+#print axioms Legendre.Density.Moment.criticalDivisorCoefficient._proof_1
+#print axioms Legendre.Density.Moment.criticalDivisorCoefficient.eq_1
+#print axioms Legendre.Density.Moment.divisor_square_harmonic_fourth_lower
+#print axioms Legendre.Density.Moment.divisor_square_harmonic_log_four_lower
+#print axioms Legendre.Density.Moment.fourthMomentKernel.eq_1
+#print axioms Legendre.Density.Moment.fourthMomentKernel_zero
+#print axioms Legendre.Density.Moment.fourthMomentWeight._proof_1
+#print axioms Legendre.Density.Moment.fourthMomentWeight.eq_1
+#print axioms Legendre.Density.Moment.fourthMomentWeight_le_one
+#print axioms Legendre.Density.Moment.fourthMomentWeight_nonneg
+#print axioms Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le
+#print axioms Legendre.Density.Moment.norm_criticalDivisorCoefficient_sq
+#print axioms Legendre.Density.Moment.norm_fourthMomentKernel_le
+#print axioms Legendre.Density.Moment.norm_weighted_euler_square_sub_divisor_diagonal_le
+#print axioms Legendre.Density.Moment.norm_weighted_polynomial_pairing_sub_diagonal_le
+#print axioms Legendre.Density.Moment.subsetPolynomial.eq_1
+#print axioms Legendre.Density.Moment.sum_norm_criticalDivisorCoefficient_le
+#print axioms Legendre.Density.sum_inv_sqrt_Icc_le
+#print axioms Legendre.Literature.InghamFourthMomentMainTerm._proof_1
+#print axioms Legendre.Literature.layer4_fourth_moment_order_comparator
+#print axioms Legendre.Zeta.critical_euler_error_on_dyadic_window
+#print axioms Legendre.Zeta.norm_critical_euler_error_le
+#print axioms Legendre.Zeta.norm_weighted_zeta_square_sub_euler_pairing_le
+#print axioms Legendre.Zeta.zeta_fourth_moment_log_four_lower
+#print axioms Legendre.Zeta.zeta_fourth_moment_log_four_lower_dyadic
+#print axioms Legendre.Zeta.zeta_fourth_moment_order
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._proof_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._proof_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.coprime_harmonic_pairs_lower._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.CoprimeHarmonic.0.Legendre.Density.Moment.sum_inv_square_from_two_le._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.DivisorEnergyLower.0.Legendre.Density.Moment.divisor_square_harmonic_fourth_lower._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.abs_weightSecond_le"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightFirst._proof_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightFirst.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightFirst_hasDerivAt"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightSecond._proof_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightSecond.eq_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weight_hasDerivAt"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentKernel.0.Legendre.Density.Moment.weightedPhase_integration_by_parts"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentPairing.0.Legendre.Density.Moment.log_gap_of_small_index"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentPairing.0.Legendre.Density.Moment.log_gap_of_small_index._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentPairing.0.Legendre.Density.Moment.log_gap_of_small_index._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentPairing.0.Legendre.Density.Moment.norm_weighted_polynomial_pairing_sub_diagonal_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentPairing.0.Legendre.Density.Moment.weighted_polynomial_pairing_eq"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_4"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_5"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_6"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.integral_scaled_criticalDivisorPolynomial_norm_sq_le._simp_1_7"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.FourthMomentTestPolynomial.0.Legendre.Density.Moment.norm_weighted_euler_square_sub_divisor_diagonal_le._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.TruncatedZetaSquare.0.Legendre.Density.Detector.eulerHalfCoefficient_eq_real"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.TruncatedZetaSquare.0.Legendre.Density.Detector.euler_sum_sq_eq_finiteSeries._proof_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.TruncatedZetaSquare.0.Legendre.Density.Detector.truncatedZetaSquare_apply._proof_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.FourthMoment.TruncatedZetaSquare.0.Legendre.Density.Detector.truncatedZetaSquare_apply._proof_1_3"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaFourthMomentLower.0.Legendre.Zeta.norm_weighted_pairing_sq_le"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaFourthMomentLower.0.Legendre.Zeta.norm_weighted_pairing_sq_le._simp_1_1"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaFourthMomentLower.0.Legendre.Zeta.norm_weighted_pairing_sq_le._simp_1_2"
+#audit_private_axioms "_private.Legendre.Layer4.ZetaFourthMomentLower.0.Legendre.Zeta.norm_weighted_pairing_sq_le._simp_1_3"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_cubic_scale_consumer"
+#audit_private_axioms "_private.Legendre.Tests.Layer4.0.Legendre.Tests.layer4_fourth_moment_divisor_energy_consumer"

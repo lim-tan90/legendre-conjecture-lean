@@ -278,7 +278,12 @@ Cayley 圆盘将圆心固定在实部 4，给出高度增量界。
 给出扣除精确极点项后的 `O(N^(−Re s))` 界。
 [证明与字面比较器](docs/layer4-zeta-second-moment.md)。
 
-当前验证（2026-11-28）包括 **4,416 项构建**、**9,072 个定理的公理审计**、**402 个 Lean 文件**和 **242 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
+**临界线四阶矩的量级（2026-11-28）。** 在充分高的每个 `[T,2T]` 上，
+临界线四阶矩都有常数倍 `T log^4 T` 的下界。结合已有上界，
+`[0,T]` 上的累积四阶矩量级为 `T log^4 T`。
+[证明与比较器](docs/layer4-sharp-fourth-moment.md#matching-lower-bound)。
+
+当前验证（2026-11-28）包括 **4,424 项构建**、**9,143 个定理的公理审计**、**410 个 Lean 文件**和 **244 项独立使用检查**。审计只涉及三项标准公理，占位检查通过。
 
 验证（2026-11-17）：**4,362 项构建**、**全部 8,268 个项目定理声明**
 的公理审计通过，仅依赖三项标准公理；**351 个 Lean 文件**的实际
@@ -622,7 +627,7 @@ Huxley、Guth–Maynard 三条零密度曲线均已证明。Ingham 界保留精�
 | Ingham 1940 零密度（Layer 4），[原文 DOI](https://doi.org/10.1093/qmath/os-11.1.201) | `N(σ,T) ≪ T^(3(1−σ)/(2−σ)) (log T)^5` | **✅ 已证明**，对全部 `σ∈[1/2,1]`、`T≥2` 统一，保留解析重数。固定内部条带上可改进至 `log^4 T`。[证明](Legendre/Layer4/InghamCayleyDensity.lean)与[字面比较器](Legendre/Literature/LayerCoverage.lean)。 |
 | 全局 Huxley 密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^((12/5)(1−σ)+ε)` | **✅ 已证明**：[`hasZeroDensityEstimate_twelve_fifths`](Legendre/Layer4/HuxleyDensity.lean) 及闭合的 [`layer4_huxley_global_comparator`](Legendre/Literature/LayerCoverage.lean)；对 σ∈[1/2,1]、T≥2 统一，保留全部解析重数。σ∈[3/4,1] 上还得到更强的中间界；完整曲线指数 benchmark 现已证明，见下文。 |
 | 受限 Huxley 曲线密度（Layer 4） | 每个 `ε>0` 均有 `N(σ,T) ≪_ε T^(3(1−σ)/(3σ−1)+ε)`，σ∈[1/2,5/6] | **✅ 已证明**：[`huxley_curved_restricted_density_epsilon`](Legendre/Layer4/HuxleyCurvedDensity.lean) 与闭合的 [`layer4_huxley_restricted_comparator`](Legendre/Literature/LayerCoverage.lean)；全部 T≥2、解析重数。完整 benchmark 现已包含 σ>5/6，见下文。 |
-| 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≪ T log^4 T` | **✅ 已证明**，覆盖全部 `T≥2`。[证明与字面比较器](docs/layer4-sharp-fourth-moment.md)。 |
+| 临界线四阶矩（Layer 4） | `∫₀ᵀ ‖ζ(1/2+it)‖⁴ dt ≍ T log^4 T` | **✅ 已证明**，双边界适用于充分大的 `T`，上界覆盖全部 `T≥2`。[证明与比较器](docs/layer4-sharp-fourth-moment.md)。 |
 | Halász 解析输入（Layer 4） | 二进块相关核 `≪ sqrt(abs(t))+U/abs(t)`；含显式 `R sqrt(T)` 项的能量界，并允许混合实部 | **✅ 已证明**：[`HalaszComplex.lean`](Legendre/Layer4/Exponential/HalaszComplex.lean)。区间细分、两项大值计数和实际 Möbius／临界质量矩的加强界均已证明；完整 Huxley 曲线指数现已证明。 |
 | 解析大值计数及实际 Möbius 矩（Layer 4） | `R ≪ log^6(2U) log(2T)(UE/W²+UTE³/W⁶)`；实际 Möbius 二阶矩中的加强项 `R^(2/3)(AT)^(1/3)` | **✅ 已证明**：闭合的 [`layer4_actual_halasz_large_values_comparator`](Legendre/Literature/LayerCoverage.lean)、[加权 Möbius 矩](Legendre/Layer4/HalaszMollifierMoment.lean) 及[实际临界质量矩](Legendre/Layer4/HalaszCriticalMass.lean)。全局 12/5 现已证明；完整 Huxley 曲线指数现已证明。 |
 
@@ -696,6 +701,7 @@ Huxley、Guth–Maynard 三条零密度曲线均已证明。Ingham 界保留精�
 | `Legendre.Zeta.ingham_density_epsilon` / `Literature.layer4_ingham_comparator` | Ingham 1940 曲线密度指数 `3(1−σ)/(2−σ)+ε`，保留所有解析重数 | **已证明**，σ∈[1/2,1] 统一且 T≥2；并非 1937 素数间隙结论 | [Layer4/InghamDensity.lean](Legendre/Layer4/InghamDensity.lean) |
 | `Legendre.Density.Moment.weighted_zeta_fourth_moment` / `packed_critical_mass_fourth` / `integral_alternative_count` | 整线带权矩、间隔采样临界线质量的四次幂界，以及积分分支的三次幂计数界 | **已证明**，使用实际积分；现已与多项式分支共同导出 Ingham 密度 | [Layer4/WeightedZetaMoment.lean](Legendre/Layer4/WeightedZetaMoment.lean) · [IntegralAlternative.lean](Legendre/Layer4/IntegralAlternative.lean) |
 | `Legendre.Zeta.zeta_fourth_moment_log_four` / `zeta_fourth_moment_symmetric_log_four` | `[0,T]` 与 `[-T,T]` 上临界线四阶矩 `O(T log^4 T)` | **已证明**，覆盖全部 `T≥2` | [Layer4/ZetaFourthMomentSharp.lean](Legendre/Layer4/ZetaFourthMomentSharp.lean) |
+| `Legendre.Zeta.zeta_fourth_moment_log_four_lower_dyadic` / `zeta_fourth_moment_order` | `[T,2T]` 上的下界和 `[0,T]` 上的 `T log^4 T` 双边量级 | **已证明**，适用于充分大的 `T` | [Layer4/ZetaFourthMomentLower.lean](Legendre/Layer4/ZetaFourthMomentLower.lean) |
 
 每一行都直接链接到 GitHub 源码中的精确声明；点击 `Lnn` 锚点即可跳到对应行。
 
@@ -759,7 +765,7 @@ Huxley、Guth–Maynard 三条零密度曲线均已证明。Ingham 界保留精�
 | 1 | Bertrand 公设、Chebyshev 函数 `ψ(x)`、`θ(x)`、初等素数计数界 | 历史起点与定量直觉 | **已完成（Nagura）**：**[ExplicitBounds.lean](Legendre/ExplicitBounds.lean)** 与 **[Nagura.lean](Legendre/Nagura.lean)** 包含 `HasPrimeIn`、`(x,2x]` 素数定理、Chebyshev `θ` 桥、`θ/ψ/π` 显式界、**Nagura 的 `(x, 6x/5]`（`x ≥ 25`）** 以及显式 `ψ` 界；Dusart 型 PNT 强度常数仍未形式化 |
 | 2 | Riemann ζ 函数：Euler 乘积、解析延拓、函数方程、无零点区域、辐角原理、对数导数 | 所有零密度与短区间定理的起点 | **文档所列完整范围完成**：ζ 基础、显式 c=1/2000000 无零区域（高度≥3）、局部辐角原理、保留重数的全局 N(T)=O(T log T)、带误差截断 Perron 公式及公理审计 |
 | 3 | 素数计数基础：`π(x)`、`ψ(x)`、部分求和、Perron 公式、截断显式公式、带误差项的 PNT | 把 ζ 的信息转成素数计数信息 | **文档所列范围已完成**：半权 Perron 反演及截断误差、部分求和、ψ/θ/π 的经典 PNT 误差项、固定负左边界、精确原点留数及完整轮廓统一余项界的有限零点和式，以及经典误差尺度的次线性素数区间；[完整公式](docs/perron-uniform-explicit-formula.md) |
-| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 的统一五次对数界、全局 Huxley `12/5` 及实际大值输入均已证明；完整 Huxley 与 Guth–Maynard 曲线以及全局 `30/13` 已证明；尖锐四阶矩 `log^4` 已证明。[密度范围](docs/layer4-guth-central-density.md)、[四阶矩范围](docs/layer4-sharp-fourth-moment.md) |
+| 4 | 零密度理论：`N(σ,T)`、Ingham 零密度估计、Huxley 的 `12/5` 估计、大筛法、Dirichlet 多项式均值估计（含 Guth–Maynard 型大值估计） | 为短区间提供密度输入 | **基础已有证明**：统一零密度指数接口、近 1 计数界、由 Hilbert 不等式推出的 Dirichlet 多项式 `O(N)` 均方误差；连续大值测度、有限加法大筛、优化间隔采样、实际两分支零点检测及实部可变样本界**已有证明**；**路线图验收齐备**：Ingham 1940 的统一五次对数界、全局 Huxley `12/5` 及实际大值输入均已证明；完整 Huxley 与 Guth–Maynard 曲线以及全局 `30/13` 已证明；四阶矩的 `T log^4 T` 双边量级已证明。[密度范围](docs/layer4-guth-central-density.md)、[四阶矩范围](docs/layer4-sharp-fourth-moment.md) |
 | 5 | 短区间定理：Ingham 1937、Huxley 1972、Baker–Harman 1996 的加权零密度 + 筛法、Baker–Harman–Pintz 2001 | 给出 `p_{n+1} - p_n ≪ p_n^{θ+ε}` | **陈述级已在本仓库形式化**：**[Layer5.lean](Legendre/Layer5.lean)** 含指数规范化的 `+ε`、常数与阈值约定、区间 ↔ 间隙等价，以及到 **[Conditional.lean L70](Legendre/Conditional.lean#L70)** 中粗粒度 `Prop` 的等价；深层证明 **mathlib 中没有** |
 | 6 | 显式计算层：区间算术、可验证素性证书、分段筛检查器、reflection / `native_decide` 风格的验证计算 | 覆盖有限范围 `n ≤ 7.05 × 10¹³`（以及旧纪录 `n ≤ 2 × 10⁹`） | **未形式化**；已发表计算是外部计算 |
 | 7 | 几乎素数筛法：筛权重、Chen 的 `P₂` 定理、`P_k` 估计、Buchstab/线性筛 | 形式化几乎素数路线（所有 `n` 的 `P₄`、最终 `P₂`） | mathlib 有 `Nat.IsAtMostAlmostPrime` 与 `Ω`；**没有筛法**；`P₁` 等价性见 **[Conditional.lean L190](Legendre/Conditional.lean#L190)** |
